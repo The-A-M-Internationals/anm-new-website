@@ -38,6 +38,9 @@ const Navbar = () => {
 
   const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
 
+  // 1. REF FOR TIMEOUT
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const navItems: Record<NavKey, NavItem> = {
     Resources: {
       labelKey: 'resources',
@@ -104,14 +107,39 @@ const Navbar = () => {
     }
   }
 
-  // Handle click logic
+  // 2. TIMEOUT LOGIC
+  const cancelClose = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  }
+
+  // MODIFIED: Accepts a duration parameter (default 150)
+  const scheduleClose = (duration = 250) => {
+    cancelClose();
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsModalOpen(false);
+      setActiveNavKey(null);
+    }, duration);
+  }
+
+  const handleNavMouseEnter = (navKey: NavKey) => {
+    cancelClose(); // Stop any pending closing
+    setActiveNavKey(navKey);
+    setIsModalOpen(true);
+  }
+
+  // Used for Mobile click logic
   const handleNavClick = (navKey: NavKey) => {
-    if (activeNavKey === navKey && isModalOpen) {
-      setIsModalOpen(false)
-      setActiveNavKey(null)
-    } else {
+    if (isModalOpen && activeNavKey !== navKey) {
+      setActiveNavKey(navKey)
+    } else if (!isModalOpen) {
       setActiveNavKey(navKey)
       setIsModalOpen(true)
+    } else if (activeNavKey === navKey) {
+      setIsModalOpen(false)
+      setActiveNavKey(null)
     }
     setIsMobileMenuOpen(false)
   }
@@ -127,7 +155,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white shadow-sm  w-full z-50 lg:relative">
+      <nav className="bg-white shadow-sm w-full z-50 sticky top-0">
         <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex justify-between items-center h-16">
 
@@ -140,19 +168,21 @@ const Navbar = () => {
             <div className="hidden lg:block">
               <div className="ms-10 flex items-baseline gap-3">
 
-                {/* Iterate through keys to apply logic */}
+                {/* Iterate through keys to reduce repetition and apply logic */}
                 {(['Resources', 'Media', 'Company', 'Career'] as const).map((key) => (
                   <button
                     key={key}
-                    onClick={() => handleNavClick(key)}
-                    className={`text-[#6B7280] cursor-pointer ${activeNavKey === key ? 'border-b border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-2 text-sm font-semibold`}
+                    onMouseEnter={() => handleNavMouseEnter(key)}
+                    // 👇 HIGH DELAY: 500ms for the top row to bridge the gap
+                    onMouseLeave={() => scheduleClose(500)}
+                    className={`text-[#6B7280] cursor-pointer ${activeNavKey === key ? 'border-b border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-2 text-sm font-semibold transition-all`}
                   >
-                    {content[navItems[key].labelKey]}
+                    {content[navItems[key].labelKey].value}
                   </button>
                 ))}
 
                 <button onClick={() => router.push(getLocalizedLink("/contact#form"))} className="bg-[#D4AF37] hover:bg-yellow-600 text-black px-4 py-2 rounded-full text-sm font-semibold cursor-pointer">
-                  {content.bookConsultation}
+                  {content.bookConsultation.value}
                 </button>
                 <LanguageSwitcher />
 
@@ -165,7 +195,7 @@ const Navbar = () => {
                 onClick={() => router.push(getLocalizedLink("/contact#form"))}
                 className="hidden md:block bg-[#D4AF37] hover:bg-yellow-600 text-black px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap"
               >
-                {content.bookConsultation}
+                {content.bookConsultation.value}
               </button>
 
               {/* Language Switcher for mobile/tab */}
@@ -191,28 +221,18 @@ const Navbar = () => {
           {/* MOBILE MENU */}
           <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} pb-4`}>
             <div className="flex flex-col space-y-2">
-              {(['Resources', 'Media', 'Company', 'Career'] as const).map((key) => (
-                <button
-                  key={key}
-                  onClick={() => handleNavClick(key)}
-                  className={`text-[#6B7280] ${activeNavKey === key ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}
-                >
-                  {content[navItems[key].labelKey]}
-                </button>
-              ))}
-              <button onClick={() => router.push(getLocalizedLink("/contact#form"))} className="md:hidden bg-[#D4AF37] hover:bg-yellow-600 text-black px-4 py-3 rounded-full text-sm font-semibold mx-3 mt-2">{content.bookConsultation}</button>
+              <button onClick={() => handleNavClick('Resources')} className={`text-[#6B7280] ${activeNavKey === 'Resources' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Resources.labelKey].value}</button>
+              <button onClick={() => handleNavClick('Media')} className={`text-[#6B7280] ${activeNavKey === 'Media' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Media.labelKey].value}</button>
+              <button onClick={() => handleNavClick('Company')} className={`text-[#6B7280] ${activeNavKey === 'Company' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Company.labelKey].value}</button>
+              <button onClick={() => handleNavClick('Career')} className={`text-[#6B7280] ${activeNavKey === 'Career' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Career.labelKey].value}</button>
+              <button onClick={() => router.push(getLocalizedLink("/contact#form"))} className="md:hidden bg-[#D4AF37] hover:bg-yellow-600 text-black px-4 py-3 rounded-full text-sm font-semibold mx-3 mt-2">{content.bookConsultation.value}</button>
             </div>
             <div className="bg-[#D4AF37] mt-4 py-2 rounded-lg">
               <div className="flex flex-row flex-wrap gap-2 px-3 md:justify-center">
-                {(['Services', 'About Us', 'How we work', 'Make an Impact'] as const).map((key) => (
-                  <button
-                    key={key}
-                    onClick={() => handleNavClick(key)}
-                    className={`text-white hover:text-yellow-100 ${activeNavKey === key ? 'bg-[#897122]' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}
-                  >
-                    {content[navItems[key].labelKey]}
-                  </button>
-                ))}
+                <button onClick={() => handleNavClick('Services')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'Services' ? 'bg-[#897122]' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems.Services.labelKey].value}</button>
+                <button onClick={() => handleNavClick('About Us')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'About Us' ? 'bg-yellow-600' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems['About Us'].labelKey].value}</button>
+                <button onClick={() => handleNavClick('How we work')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'How we work' ? 'bg-yellow-600' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems['How we work'].labelKey].value}</button>
+                <button onClick={() => handleNavClick('Make an Impact')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'Make an Impact' ? 'bg-yellow-600' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems['Make an Impact'].labelKey].value}</button>
               </div>
             </div>
           </div>
@@ -222,15 +242,40 @@ const Navbar = () => {
         <div className="bg-[#D4AF37] hidden lg:block">
           <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-6">
             <div className="flex gap-8 py-3">
-              {(['Services', 'About Us', 'How we work', 'Make an Impact'] as const).map((key) => (
-                <button
-                  key={key}
-                  onClick={() => handleNavClick(key)}
-                  className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === key ? 'border-b border-white' : ''} py-2 text-sm font-bold text-white transition-all`}
-                >
-                  {content[navItems[key].labelKey]}
-                </button>
-              ))}
+
+              <button
+                onMouseEnter={() => handleNavMouseEnter('Services')}
+                // 👇 LOW DELAY: 150ms for bottom row (closer to modal)
+                onMouseLeave={() => scheduleClose(150)}
+                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'Services' ? 'border-b border-white' : ''} py-2 text-sm font-bold text-white transition-all`}
+              >
+                {content[navItems.Services.labelKey].value}
+              </button>
+
+              <button
+                onMouseEnter={() => handleNavMouseEnter('About Us')}
+                onMouseLeave={() => scheduleClose(150)}
+                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'About Us' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
+              >
+                {content[navItems['About Us'].labelKey].value}
+              </button>
+
+              <button
+                onMouseEnter={() => handleNavMouseEnter('How we work')}
+                onMouseLeave={() => scheduleClose(150)}
+                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'How we work' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
+              >
+                {content[navItems['How we work'].labelKey].value}
+              </button>
+
+              <button
+                onMouseEnter={() => handleNavMouseEnter('Make an Impact')}
+                onMouseLeave={() => scheduleClose(150)}
+                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'Make an Impact' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
+              >
+                {content[navItems['Make an Impact'].labelKey].value}
+              </button>
+
             </div>
           </div>
         </div>
@@ -241,10 +286,10 @@ const Navbar = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         rightSideButtons={activeNavKey ? navItems[activeNavKey].rightSideButtons : []}
-        // Props kept for compatibility
-        onMouseEnter={() => {}}
-        onMouseLeave={() => {}}
+        onMouseEnter={cancelClose}
+        onMouseLeave={() => scheduleClose(150)}
       />
+
     </>
   )
 }
