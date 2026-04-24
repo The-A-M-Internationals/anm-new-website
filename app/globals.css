@@ -60,9 +60,15 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    scroll-snap-type: y mandatory;
-    scroll-padding-top: 64px;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 112px;
     height: 100%;
+}
+
+@media (max-width: 1024px) {
+    html {
+        scroll-padding-top: 64px;
+    }
 }
 
 body {

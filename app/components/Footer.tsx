@@ -59,7 +59,7 @@ const Footer = () => {
     const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
 
     return (
-        <div>
+        <div className="snap-section min-h-fit">
             <div className="bg-[#09132F] w-full min-h-[600px] flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
 
                 {/* LEFT */}

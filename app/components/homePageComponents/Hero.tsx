@@ -20,6 +20,7 @@ const Hero = () => {
    const [isZoomed, setIsZoomed] = useState(false);
 
    useEffect(() => {
+      window.scrollTo(0, 0);
       const interval = setInterval(() => {
          setIsZoomed(true);
          const timeout = setTimeout(() => setIsZoomed(false), 700);

@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import NavbarModal from './NavbarModal'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -37,9 +37,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
-
-  // 1. REF FOR TIMEOUT
-  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const navItems: Record<NavKey, NavItem> = {
     Resources: {
@@ -107,39 +104,13 @@ const Navbar = () => {
     }
   }
 
-  // 2. TIMEOUT LOGIC
-  const cancelClose = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-  }
-
-  // MODIFIED: Accepts a duration parameter (default 150)
-  const scheduleClose = (duration = 250) => {
-    cancelClose();
-    closeTimeoutRef.current = setTimeout(() => {
-      setIsModalOpen(false);
-      setActiveNavKey(null);
-    }, duration);
-  }
-
-  const handleNavMouseEnter = (navKey: NavKey) => {
-    cancelClose(); // Stop any pending closing
-    setActiveNavKey(navKey);
-    setIsModalOpen(true);
-  }
-
-  // Used for Mobile click logic
   const handleNavClick = (navKey: NavKey) => {
-    if (isModalOpen && activeNavKey !== navKey) {
-      setActiveNavKey(navKey)
-    } else if (!isModalOpen) {
-      setActiveNavKey(navKey)
-      setIsModalOpen(true)
-    } else if (activeNavKey === navKey) {
+    if (activeNavKey === navKey) {
       setIsModalOpen(false)
       setActiveNavKey(null)
+    } else {
+      setActiveNavKey(navKey)
+      setIsModalOpen(true)
     }
     setIsMobileMenuOpen(false)
   }
@@ -149,12 +120,24 @@ const Navbar = () => {
     setActiveNavKey(null)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('.navbar-container')) {
+        closeModal();
+      }
+    };
+    if (isModalOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isModalOpen]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
   return (
-    <>
+    <div className="navbar-container">
       <nav className="bg-white shadow-sm w-full z-50 sticky top-0">
         <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex justify-between items-center h-16">
@@ -172,9 +155,7 @@ const Navbar = () => {
                 {(['Resources', 'Media', 'Company', 'Career'] as const).map((key) => (
                   <button
                     key={key}
-                    onMouseEnter={() => handleNavMouseEnter(key)}
-                    // 👇 HIGH DELAY: 500ms for the top row to bridge the gap
-                    onMouseLeave={() => scheduleClose(500)}
+                    onClick={() => handleNavClick(key)}
                     className={`text-[#6B7280] cursor-pointer ${activeNavKey === key ? 'border-b border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-2 text-sm font-semibold transition-all`}
                   >
                     {content[navItems[key].labelKey].value}
@@ -244,33 +225,28 @@ const Navbar = () => {
             <div className="flex gap-8 py-3">
 
               <button
-                onMouseEnter={() => handleNavMouseEnter('Services')}
-                // 👇 LOW DELAY: 150ms for bottom row (closer to modal)
-                onMouseLeave={() => scheduleClose(150)}
+                onClick={() => handleNavClick('Services')}
                 className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'Services' ? 'border-b border-white' : ''} py-2 text-sm font-bold text-white transition-all`}
               >
                 {content[navItems.Services.labelKey].value}
               </button>
 
               <button
-                onMouseEnter={() => handleNavMouseEnter('About Us')}
-                onMouseLeave={() => scheduleClose(150)}
+                onClick={() => handleNavClick('About Us')}
                 className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'About Us' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
               >
                 {content[navItems['About Us'].labelKey].value}
               </button>
 
               <button
-                onMouseEnter={() => handleNavMouseEnter('How we work')}
-                onMouseLeave={() => scheduleClose(150)}
+                onClick={() => handleNavClick('How we work')}
                 className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'How we work' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
               >
                 {content[navItems['How we work'].labelKey].value}
               </button>
 
               <button
-                onMouseEnter={() => handleNavMouseEnter('Make an Impact')}
-                onMouseLeave={() => scheduleClose(150)}
+                onClick={() => handleNavClick('Make an Impact')}
                 className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'Make an Impact' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
               >
                 {content[navItems['Make an Impact'].labelKey].value}
@@ -286,11 +262,9 @@ const Navbar = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         rightSideButtons={activeNavKey ? navItems[activeNavKey].rightSideButtons : []}
-        onMouseEnter={cancelClose}
-        onMouseLeave={() => scheduleClose(150)}
       />
 
-    </>
+    </div>
   )
 }
 

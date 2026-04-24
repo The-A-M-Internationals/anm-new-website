@@ -40,9 +40,9 @@ export default function FinanceTransformationPage() {
                 />
             </section>
 
-            <section className="snap-section"><Listings /></section>
-            <section className="snap-section"><WhyChooseUs /></section>
-            <section className="snap-section"><Innovation /></section>
+            <Listings />
+            <WhyChooseUs />
+            <Innovation />
         </div>
     );
 }

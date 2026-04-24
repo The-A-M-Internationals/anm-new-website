@@ -21,17 +21,12 @@ interface NavbarModalProps {
   isOpen: boolean
   onClose: () => void
   rightSideButtons: RightSideButton[]
-  // New props for the bridge logic
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 }
 
 const NavbarModal = ({
   isOpen,
   onClose,
   rightSideButtons,
-  onMouseEnter,
-  onMouseLeave
 }: NavbarModalProps) => {
   const { locale } = useLocale();
   const currentLocale = locale as AppLocale;
@@ -48,12 +43,10 @@ const NavbarModal = ({
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
     }
   }, [isOpen, onClose])
 
@@ -61,23 +54,20 @@ const NavbarModal = ({
 
   return (
     <div
-      // Changed top-20 to top-16 to physically touch the navbar
       className="fixed start-0 top-16 md:-top-55 lg:top-[120px] w-full z-50 md:h-screen md:flex md:items-center md:justify-center lg:block lg:h-auto"
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/20 md:hidden transition-opacity"
+        className="fixed inset-0 bg-black/20 lg:bg-transparent transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Container */}
       <div className="w-[95%] md:w-[85%] lg:w-[90%] mx-auto md:max-h-[85vh] md:overflow-y-auto p-2 md:p-4">
 
-        {/* CONTENT CARD - This is where we apply the Mouse Logic */}
+        {/* CONTENT CARD */}
         <div
-          onMouseEnter={onMouseEnter} // Keep open when hovering the content
-          onMouseLeave={onMouseLeave} // Close when leaving the content
-          className="relative bg-[#F9F9F9] rounded-2xl md:rounded-4xl border border-gray-300 w-full h-fit overflow-hidden p-4 md:p-8"
+          className="relative bg-[#F9F9F9] rounded-2xl md:rounded-4xl border border-gray-300 w-full h-fit overflow-hidden p-4 md:p-8 shadow-2xl animate-fadeIn"
         >
           {/* Close button */}
           <button
@@ -166,6 +156,15 @@ const NavbarModal = ({
           </div>
         </div>
       </div>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+      `}</style>
     </div>
   )
 }
