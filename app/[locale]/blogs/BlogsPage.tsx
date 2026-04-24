@@ -1,0 +1,40 @@
+'use client';
+
+import PageHero from "@/app/components/PageHero";
+import Article from "./components/Article";
+import BlogArticleList from "./components/BlogArticleList";
+import SuggestTopicSection from "./components/SuggestTopicSection";
+import { useIntlayer, useLocale } from "next-intlayer";
+
+export default function BlogsPage() {
+    const content = useIntlayer("blogsPage");
+    const { locale } = useLocale();
+    const heroImage =
+        locale === "ar" ? "/blogs/hero-image-ar.png" : "/blogs/hero-image.png";
+
+    const heroImageMobile =
+        locale === "ar" ? "/contactmo-ar.png" : "/contactm.png";
+
+    const heroImageTablet =
+        locale === "ar" ? "/blogs/tab-hero-ar.png" : "/blogs/tab-hero.png";
+
+    const heroButtonImage =
+        locale === "ar" ? "/blogs/button-heroo-ar.png" : "/blogs/button-hero.png";
+    return (
+        <div>
+            <PageHero
+                title={content.heroTitle}
+                description={content.heroDescription}
+                button={content.heroButton}
+                link={`/${locale}/contact#form`}
+                image={heroImage}
+                image2={heroImageMobile}
+                image3={heroImageTablet}
+                buttonImage={heroButtonImage}
+            />
+            <Article />
+            <BlogArticleList />
+            <SuggestTopicSection />
+        </div>
+    );
+}
