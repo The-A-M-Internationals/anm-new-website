@@ -5,6 +5,7 @@ import PageHero from "../../components/PageHero";
 import Apps from "./components/Apps";
 import EPM from "./components/EPM";
 import FeaturesList from "./components/FeaturesList";
+import Results from "./components/Results";
 
 export default function FeaturesPage() {
     const content = useIntlayer("featuresPage");
@@ -39,6 +40,7 @@ export default function FeaturesPage() {
 
             <FeaturesList />
             <Apps />
+            <Results />
             <EPM />
         </div>
     );

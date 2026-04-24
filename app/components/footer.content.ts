@@ -69,7 +69,7 @@ export const footerContent = {
     // How we work section
     howWeWork: t({ en: "How we work", ar: "كيف نعمل" }),
     successStories: t({ en: "Success Stories", ar: "قصص النجاح" }),
-    whatSetsApart: t({ en: "What Set's apart", ar: "ما يميزنا" }),
+    whatSetsApart: t({ en: "What Sets Us Apart", ar: "ما يميزنا" }),
     methodology: t({ en: "Methodology", ar: "المنهجية" }),
 
     // Newsletter section
@@ -98,8 +98,8 @@ export const footerContent = {
 
     // Copyright
     copyright: t({
-      en: "© 2025 A&M International. All rights reserved. | Privacy | Terms",
-      ar: "© 2025 A&M الدولية. جميع الحقوق محفوظة. | الخصوصية | الشروط",
+      en: "© 2026 A&M International. All rights reserved. | Privacy | Terms",
+      ar: "© 2026 A&M الدولية. جميع الحقوق محفوظة. | الخصوصية | الشروط",
     }),
   },
 };

@@ -68,7 +68,7 @@ const Open = () => {
     return (
         <div
             id="open-positions"
-            className="flex flex-col min-h-screen items-center justify-center gap-6 px-4 text-center"
+            className="flex flex-col items-center justify-center gap-6 py-12 md:py-20 lg:py-24 px-4 text-center"
         >
             <p className="font-semibold text-3xl md:text-[48px]">
                 {content.titlePrefix} <span className="text-[#D4AF37]">{content.titleHighlight}</span>

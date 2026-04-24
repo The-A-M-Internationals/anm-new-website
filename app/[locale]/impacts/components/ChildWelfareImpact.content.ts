@@ -13,7 +13,7 @@ const impactsChildWelfareContent = {
     }),
     stats: [
       {
-        value: t({ en: "₹15M+", ar: "١٥ مليون+ روبية" }),
+        value: t({ en: "$15M+", ar: "١٥ مليون+ درهم" }),
         title: t({ en: "Impact Contributions", ar: "مساهمات الأثر" }),
         description: t({
           en: "Funds donated to vetted partners to support long-term programs in education, health, and shelter.",

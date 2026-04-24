@@ -130,7 +130,7 @@ const Events = () => {
     }
 
     return (
-        <div className="bg-gradient-to-r from-[#EED689]/10 to-white py-8 sm:py-10 md:py-0">
+        <div className="bg-gradient-to-r from-[#EED689]/10 to-white py-12 md:py-20 lg:py-24">
             <div className="max-w-7xl mx-auto w-full">
                 {/* HEADER */}
                 <h2 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[48px] text-center">

@@ -100,7 +100,7 @@ export default function EPM() {
 
 
     return (
-        <div id='epm-suites' className="bg-[#0F1E4D] flex items-center justify-center p-6 relative overflow-hidden">
+        <div id='epm-suites' className="bg-[#0F1E4D] flex items-center justify-center py-12 md:py-20 lg:py-24 px-6 relative overflow-hidden">
             {/* Decorative background elements */}
 
             <div className='absolute left-0 top-0'>
@@ -216,6 +216,11 @@ export default function EPM() {
                             <option value="pcm">{content.optionPcm}</option>
                             <option value="enterprise-data-management">{content.optionEnterpriseDataManagement}</option>
                             <option value="narrative-reporting">{content.optionNarrativeReporting}</option>
+                            <option value="tax-reporting">{content.optionTaxReporting}</option>
+                            <option value="consulting-as-a-service">{content.optionConsultingAsService}</option>
+                            <option value="epm-solution-management">{content.optionEpmSolutionManagement}</option>
+                            <option value="version-upgrade-patching">{content.optionVersionUpgrade}</option>
+                            <option value="monthly-maintenance-administration">{content.optionMonthlyMaintenance}</option>
                         </select>
 
                         <button

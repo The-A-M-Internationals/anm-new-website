@@ -9,7 +9,7 @@ const Innovation = () => {
     const content = useIntlayer("innovation");
     const { locale } = useLocale();
     return (
-        <div className={`${path === '/events' || path === '/success-stories' ? 'hidden' : ''} relative bg-gradient-to-br bg-[#0F1E4D] min-h-[200px] overflow-hidden py-12 sm:py-16 md:py-20`}>
+        <div className={`${path === '/events' || path === '/success-stories' ? 'hidden' : ''} relative bg-gradient-to-br bg-[#0F1E4D] min-h-[200px] overflow-hidden py-12 md:py-20 lg:py-24`}>
             {/* Left decorative icon */}
             <div className="absolute -top-3 -start-4 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
                 <Image

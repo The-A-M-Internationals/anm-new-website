@@ -38,7 +38,7 @@ const FAQ = () => {
         <div>
             {/* FAQ Section */}
             <div
-                className="relative py-20 px-4 overflow-hidden bg-[#0F1E4D]"
+                className="relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden bg-[#0F1E4D]"
                 style={{
                     backgroundImage: "url('/whychooseus.svg')",
                     backgroundRepeat: "no-repeat",
@@ -110,7 +110,7 @@ const FAQ = () => {
                 </p>
                 <button onClick={() => router.push(`/${locale}/careers#open-positions`)} className='bg-[#D4AF37] w-[300px] flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer'>
                     {content.joinButton}
-                    <ArrowRight className='w-5 h-5' />
+                    <ArrowRight className='w-5 h-5 rtl:rotate-180' />
                 </button>
                 <div className='absolute right-0 bottom-0'>
                     <Image src='/right.svg' alt='side image' width={150} height={150} />

@@ -9,14 +9,11 @@ const SuccessStories: React.FC = () => {
   const router = useRouter();
   const content = useIntlayer("success-stories");
   const { locale } = useLocale();
-  const [activeTab, setActiveTab] = useState('All');
-  const [poppedId, setPoppedId] = useState<string | null>(null);
-
   const tabs = [
-    { key: 'All', label: content.tabs.all.value },
-    { key: 'Automotive', label: content.tabs.automotive.value },
-    { key: 'Healthcare', label: content.tabs.healthcare.value },
-    { key: 'Insurance', label: content.tabs.insurance.value },
+    { key: 'all', label: content.tabs.all.value },
+    { key: 'automotive', label: content.tabs.automotive.value },
+    { key: 'healthcare', label: content.tabs.healthcare.value },
+    { key: 'insurance', label: content.tabs.insurance.value },
   ];
 
   const s = content.caseStudies;
@@ -24,7 +21,7 @@ const SuccessStories: React.FC = () => {
   const caseStudies = [
     {
       id: '1',
-      industryKey: 'Automotive',
+      industryKey: 'automotive',
       industry: s.study1.industry.value,
       companyName: s.study1.companyName.value,
       metric1: s.study1.metric1.value,
@@ -38,7 +35,7 @@ const SuccessStories: React.FC = () => {
     },
     {
       id: '2',
-      industryKey: 'Insurance',
+      industryKey: 'insurance',
       industry: s.study2.industry.value,
       companyName: s.study2.companyName.value,
       metric1: s.study2.metric1.value,
@@ -52,7 +49,7 @@ const SuccessStories: React.FC = () => {
     },
     {
       id: '3',
-      industryKey: 'Healthcare',
+      industryKey: 'healthcare',
       industry: s.study3.industry.value,
       companyName: s.study3.companyName.value,
       metric1: s.study3.metric1.value,
@@ -66,7 +63,10 @@ const SuccessStories: React.FC = () => {
     },
   ];
 
-  const filteredStudies = activeTab === 'All'
+  const [activeTab, setActiveTab] = useState('all');
+  const [poppedId, setPoppedId] = useState<string | null>(null);
+
+  const filteredStudies = activeTab === 'all'
     ? caseStudies
     : caseStudies.filter(study => study.industryKey === activeTab);
 
@@ -128,7 +128,7 @@ const SuccessStories: React.FC = () => {
                     onClick={() => handlePop(study.id)}
                   >
                     {content.readFullStory.value}
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                   </button>
                 </div>
               </div>
@@ -175,13 +175,13 @@ const SuccessStories: React.FC = () => {
             onClick={() => router.push(`/${locale}/features#epm-suites`)}
             className='bg-[#D4AF37] flex items-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer w-full sm:w-auto justify-center'>
             {content.cta.seeEpm.value}
-            <ArrowRight className='w-5 h-5' />
+            <ArrowRight className='w-5 h-5 rtl:rotate-180' />
           </button>
           <button
             onClick={() => router.push(`/${locale}/contact#form`)}
             className='bg-white border border-[#D4AF37] flex items-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer w-full sm:w-auto justify-center'>
             {content.cta.scheduleConsultation.value}
-            <ArrowRight className='w-5 h-5' />
+            <ArrowRight className='w-5 h-5 rtl:rotate-180' />
           </button>
         </div>
         <div className='absolute right-0 bottom-0 hidden md:block'>

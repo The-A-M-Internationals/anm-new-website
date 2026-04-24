@@ -45,7 +45,7 @@ const officesContent = {
     }),
     usaAddress: t({
       en: "8736 Outlets Blvd, Charlotte, NC 28278",
-      ar: "8736 Outlets Blvd, Charlotte, NC 28278",
+      ar: "8736 أويلتس بوليفارد، شارلوت، كارولاينا الشمالية 28278",
     }),
   },
 };

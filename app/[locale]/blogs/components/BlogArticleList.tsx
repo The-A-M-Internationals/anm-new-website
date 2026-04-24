@@ -33,16 +33,16 @@ const BlogArticleList = () => {
     const [showMobileFilter, setShowMobileFilter] = useState(false);
     const [showMobileTags, setShowMobileTags] = useState(false);
 
-    // Use filter labels from content, but keep filter values in English for Firestore matching
-    const filters: string[] = [
-        "All Post",
-        "EPM Strategy",
-        "Cloud",
-        "Data Analytics",
-        "Cybersecurity",
-        "AI & Machine Learning",
-        "CSR",
-        "Company News",
+    // Define filters with fixed keys for matching and localized labels
+    const filterOptions = [
+        { key: "All Post", label: content.filters.allPost },
+        { key: "EPM Strategy", label: content.filters.epmStrategy },
+        { key: "Cloud", label: content.filters.cloud },
+        { key: "Data Analytics", label: content.filters.dataAnalytics },
+        { key: "Cybersecurity", label: content.filters.cybersecurity },
+        { key: "AI & Machine Learning", label: content.filters.aiMl },
+        { key: "CSR", label: content.filters.csr },
+        { key: "Company News", label: content.filters.companyNews },
     ];
 
     const [articles, setArticles] = useState<Article[]>([]);
@@ -112,7 +112,7 @@ const BlogArticleList = () => {
 
 
     return (
-        <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
 
                 {/* HEADING */}
@@ -166,16 +166,16 @@ const BlogArticleList = () => {
                             </button>
                             <div className="font-bold text-lg mb-2 text-center">{content.modalFiltersTitle}</div>
                             <div className="flex flex-wrap gap-2 justify-center">
-                                {filters.map((filter) => (
+                                {filterOptions.map((filter) => (
                                     <button
-                                        key={filter}
+                                        key={filter.key}
                                         onClick={() => {
-                                            setActiveFilter(filter);
+                                            setActiveFilter(filter.key);
                                             setShowMobileFilter(false);
                                         }}
-                                        className={`px-4 py-2 rounded-full text-sm font-medium border border-[#D9D9D9] transition-all ${activeFilter === filter ? 'bg-[#D4AF37] text-white shadow-md' : 'bg-white text-black'}`}
+                                        className={`px-4 py-2 rounded-full text-sm font-medium border border-[#D9D9D9] transition-all ${activeFilter === filter.key ? 'bg-[#D4AF37] text-white shadow-md' : 'bg-white text-black'}`}
                                     >
-                                        {filter}
+                                        {filter.label}
                                     </button>
                                 ))}
                             </div>
@@ -196,16 +196,16 @@ const BlogArticleList = () => {
                             </button>
                             <div className="font-bold text-lg mb-2 text-center">{content.modalPopularTagsTitle}</div>
                             <div className="flex flex-wrap gap-2 justify-center">
-                                {filters.map((tag) => (
+                                {filterOptions.map((tag) => (
                                     <button
-                                        key={tag}
+                                        key={tag.key}
                                         onClick={() => {
-                                            setActiveFilter(tag);
+                                            setActiveFilter(tag.key);
                                             setShowMobileTags(false);
                                         }}
-                                        className={`px-4 py-2 rounded-full text-sm font-medium border border-[#D9D9D9] transition-all ${activeFilter === tag ? 'bg-[#D4AF37] text-white shadow-md' : 'bg-white text-black'}`}
+                                        className={`px-4 py-2 rounded-full text-sm font-medium border border-[#D9D9D9] transition-all ${activeFilter === tag.key ? 'bg-[#D4AF37] text-white shadow-md' : 'bg-white text-black'}`}
                                     >
-                                        {tag}
+                                        {tag.label}
                                     </button>
                                 ))}
                             </div>
@@ -215,16 +215,16 @@ const BlogArticleList = () => {
 
                 {/* DESKTOP/TABLET FILTER BUTTONS */}
                 <div className="hidden md:flex flex-wrap w-fit mx-auto gap-3 mb-12 rounded-3xl md:rounded-3xl p-2 border border-gray-200 shadow items-center justify-center">
-                    {filters.map((filter) => (
+                    {filterOptions.map((filter) => (
                         <button
-                            key={filter}
-                            onClick={() => setActiveFilter(filter)}
-                            className={`px-6 py-2 cursor-pointer rounded-full text-sm font-medium transition-all ${activeFilter === filter
+                            key={filter.key}
+                            onClick={() => setActiveFilter(filter.key)}
+                            className={`px-6 py-2 cursor-pointer rounded-full text-sm font-medium transition-all ${activeFilter === filter.key
                                 ? "bg-[#D4AF37] text-white shadow-md"
                                 : "bg-[#F6F6F6] text-black"
                                 }`}
                         >
-                            {filter}
+                            {filter.label}
                         </button>
                     ))}
                 </div>
@@ -300,7 +300,7 @@ const BlogArticleList = () => {
                                                 style={{ pointerEvents: article.externalLink ? 'auto' : 'none', opacity: article.externalLink ? 1 : 0.5 }}
                                             >
                                                 {content.readMoreButton}
-                                                <ArrowRight size={18} />
+                                                <ArrowRight size={18} className="rtl:rotate-180" />
                                             </a>
                                         </div>
                                     </div>
@@ -323,13 +323,13 @@ const BlogArticleList = () => {
                                     </h3>
 
                                     <div className="flex flex-wrap gap-3 cursor-pointer">
-                                        {filters.map((tag, i) => (
+                                        {filterOptions.map((tag, i) => (
                                             <button
                                                 key={i}
-                                                onClick={() => setActiveFilter(tag)}
-                                                className={`px-4 py-2 cursor-pointer border border-[#D9D9D9] text-black rounded-full text-sm transition-all ${activeFilter === tag ? 'bg-[#D4AF37] text-white shadow-md' : 'bg-white'}`}
+                                                onClick={() => setActiveFilter(tag.key)}
+                                                className={`px-4 py-2 cursor-pointer border border-[#D9D9D9] text-black rounded-full text-sm transition-all ${activeFilter === tag.key ? 'bg-[#D4AF37] text-white shadow-md' : 'bg-white'}`}
                                             >
-                                                {tag}
+                                                {tag.label}
                                             </button>
                                         ))}
                                     </div>

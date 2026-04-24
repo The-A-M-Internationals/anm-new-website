@@ -10,13 +10,24 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from 'recharts';
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 
 export default function DrivingImpactDashboard() {
+    const { locale } = useLocale();
     const content = useIntlayer("drivingimpactsDashboard");
     const goal = 1000000;
     const currentAmount = 420500;
     const progressPercentage = Math.round((currentAmount / goal) * 100);
+
+    const formatCurrency = (value: number) => {
+        const isArabic = locale === 'ar';
+        return new Intl.NumberFormat(isArabic ? 'ar-AE' : 'en-US', {
+            style: 'currency',
+            currency: isArabic ? 'AED' : 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(value);
+    };
 
     const chartData = [
         { month: 'Jan 25', amount: 75000, cumulative: 75000 },
@@ -53,9 +64,9 @@ export default function DrivingImpactDashboard() {
         cumulative: number;
     }
 
-    const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: readonly { payload: ChartDataType }[] }) => {
+    const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: readonly any[] }) => {
         if (active && payload && payload.length) {
-            const data = payload[0].payload;
+            const data = payload[0].payload as ChartDataType;
             const charitableAmount = Math.round(data.amount * 0.1);
 
             return (
@@ -65,19 +76,19 @@ export default function DrivingImpactDashboard() {
                         <div className="flex justify-between">
                             <span className="text-gray-600">{content.raised}</span>
                             <span className="font-semibold text-gray-900">
-                                ₹{data.amount.toLocaleString('en-IN')}
+                                {formatCurrency(data.amount)}
                             </span>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-gray-600">{content.cumulative}</span>
                             <span className="font-semibold text-yellow-600">
-                                ₹{data.cumulative.toLocaleString('en-IN')}
+                                {formatCurrency(data.cumulative)}
                             </span>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-gray-600">{content.charitable}</span>
                             <span className="font-semibold text-gray-900">
-                                ₹{charitableAmount.toLocaleString('en-IN')}
+                                {formatCurrency(charitableAmount)}
                             </span>
                         </div>
                     </div>
@@ -88,7 +99,7 @@ export default function DrivingImpactDashboard() {
     };
 
     return (
-        <section className="bg-white py-4 px-6 md:px-12">
+        <section className="bg-white py-12 md:py-20 lg:py-24 px-6 md:px-12">
             <div className="max-w-6xl mx-auto">
 
                 {/* Header */}
@@ -135,8 +146,8 @@ export default function DrivingImpactDashboard() {
 
                             {/* Labels Under Bar – Mobile Only */}
                             <div className="flex justify-between text-sm text-gray-600 w-full md:hidden mt-2">
-                                <span>₹0</span>
-                                <span>₹{goal.toLocaleString('en-IN')}</span>
+                                <span>{formatCurrency(0)}</span>
+                                <span>{formatCurrency(goal)}</span>
                             </div>
                         </div>
 
@@ -152,7 +163,7 @@ export default function DrivingImpactDashboard() {
         `}
                         >
                             <div className="flex items-center justify-center text-2xl font-bold text-transparent bg-clip-text bg-[#D4AF37]">
-                                ₹{currentAmount.toLocaleString('en-IN')} ↑
+                                {formatCurrency(currentAmount)} ↑
                             </div>
                         </div>
 
@@ -162,11 +173,11 @@ export default function DrivingImpactDashboard() {
                     <div className="hidden md:block relative w-full md:max-w-4xl mt-2">
 
                         {/* ₹0 on left */}
-                        <span className="absolute left-0 text-sm text-gray-600">₹0</span>
+                        <span className="absolute left-0 text-sm text-gray-600">{formatCurrency(0)}</span>
 
                         {/* Goal at bar end */}
                         <span className="absolute right-0 text-sm text-gray-600">
-                            ₹{goal.toLocaleString('en-IN')}
+                            {formatCurrency(goal)}
                         </span>
 
                     </div>
@@ -189,7 +200,7 @@ export default function DrivingImpactDashboard() {
                             <XAxis dataKey="month" tick={{ fill: '#666', fontSize: 14 }} />
                             <YAxis
                                 tick={{ fill: '#666', fontSize: 14 }}
-                                tickFormatter={(value) => `₹${value / 1000}K`}
+                                tickFormatter={(value) => `${locale === 'ar' ? 'د.إ' : '$'}${value / 1000}K`}
                                 domain={[0, 600000]}
                                 ticks={[0, 150000, 300000, 450000, 600000]}
                             />

@@ -73,11 +73,11 @@ const Footer = () => {
                     />
 
                     <div className="text-[16px] md:text-lg lg:text-[20px]">
-                        {content.companyDescription}
+                        {content.companyDescription.value}
                     </div>
 
                     <div className="text-[#D4AF37] text-lg sm:text-xl md:text-2xl">
-                        {content.followUs}
+                        {content.followUs.value}
                         <div className="flex gap-2 mt-2">
                             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -136,52 +136,52 @@ const Footer = () => {
 
                 <div className="flex flex-col flex-1 lg:ml-20 gap-4 sm:gap-5">
                     <div className="text-[#D4AF37] text-[20px] md:text-2xl lg:text-[24px]">
-                        {content.financeTransformation}
+                        <Link href={getLocalizedLink("/finance-transformation")} className="hover:underline transition-all">{content.financeTransformation.value}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <p>{content.financialConsolidation}</p>
-                        <p>{content.planningBudgeting}</p>
-                        <p>{content.accountReconciliation}</p>
-                        <p>{content.profitabilityCost}</p>
-                        <p>{content.enterpriseData}</p>
-                        <p>{content.narrativeReporting}</p>
-                        <p>{content.taxReporting}</p>
+                        <Link href={getLocalizedLink("/finance-transformation#financial-consolidation")}><p className="hover:text-[#D4AF37] transition-colors">{content.financialConsolidation.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#planning-budgeting")}><p className="hover:text-[#D4AF37] transition-colors">{content.planningBudgeting.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#account-reconciliation")}><p className="hover:text-[#D4AF37] transition-colors">{content.accountReconciliation.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#profitability-cost")}><p className="hover:text-[#D4AF37] transition-colors">{content.profitabilityCost.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#enterprise-data")}><p className="hover:text-[#D4AF37] transition-colors">{content.enterpriseData.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")}><p className="hover:text-[#D4AF37] transition-colors">{content.narrativeReporting.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#tax-reporting")}><p className="hover:text-[#D4AF37] transition-colors">{content.taxReporting.value}</p></Link>
                     </div>
                     <div className="text-[#D4AF37] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
-                        {content.managedServices}
+                        <Link href={getLocalizedLink("/finance-transformation#managed-services")} className="hover:underline transition-all">{content.managedServices.value}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <p>{content.consultingAsService}</p>
-                        <p>{content.epmSolutionManagement}</p>
-                        <p>{content.versionUpgrade}</p>
-                        <p>{content.monthlyMaintenance}</p>
+                        <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")}><p className="hover:text-[#D4AF37] transition-colors">{content.consultingAsService.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")}><p className="hover:text-[#D4AF37] transition-colors">{content.epmSolutionManagement.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")}><p className="hover:text-[#D4AF37] transition-colors">{content.versionUpgrade.value}</p></Link>
+                        <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")}><p className="hover:text-[#D4AF37] transition-colors">{content.monthlyMaintenance.value}</p></Link>
                     </div>
                 </div>
 
                 <div className="flex flex-col flex-1 lg:ml-20 gap-4 sm:gap-5">
                     <div className="text-[#D4AF37] text-[20px] md:text-2xl lg:text-[24px]">
-                        {content.resources}
+                        {content.resources.value}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
-                        {content.amInternational}
+                        {content.amInternational.value}
                     </div>
                     <div className="text-[#D4AF37] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
-                        {content.howWeWork}
+                        {content.howWeWork.value}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/success-stories")}><p>{content.successStories}</p></Link>
-                        <Link href={getLocalizedLink("/features")}><p>{content.whatSetsApart}</p></Link>
-                        <Link href={getLocalizedLink("/methodology")}><p>{content.methodology}</p></Link>
+                        <Link href={getLocalizedLink("/success-stories")}><p className="hover:text-[#D4AF37] transition-colors">{content.successStories.value}</p></Link>
+                        <Link href={getLocalizedLink("/features")}><p className="hover:text-[#D4AF37] transition-colors">{content.whatSetsApart.value}</p></Link>
+                        <Link href={getLocalizedLink("/methodology")}><p className="hover:text-[#D4AF37] transition-colors">{content.methodology.value}</p></Link>
                     </div>
                 </div>
 
                 <div className="flex flex-col flex-1 gap-4 sm:gap-5">
                     <div className="text-[#D4AF37] text-lg sm:text-xl md:text-2xl">
-                        {content.stayConnected}
+                        {content.stayConnected.value}
                     </div>
 
                     <div className="text-xs sm:text-sm md:text-base">
-                        {content.newsletterDescription}
+                        {content.newsletterDescription.value}
                     </div>
 
                     <div className="mt-4 flex flex-col gap-4 w-full max-w-[276px]">
@@ -202,7 +202,7 @@ const Footer = () => {
                             disabled={!email || loading}
                         >
                             <span className="text-black ml-2">
-                                {loading ? content.subscribing : content.subscribe}
+                                {loading ? content.subscribing.value : content.subscribe.value}
                             </span>
                         </button>
 
@@ -215,7 +215,7 @@ const Footer = () => {
                                         : "text-red-400"
                                     }`}
                             >
-                                {message.textKey ? content[message.textKey] : message.text}
+                                {message.textKey ? String(content[message.textKey].value) : message.text}
                             </p>
                         )}
                     </div>
@@ -225,7 +225,7 @@ const Footer = () => {
             <div className="w-full h-px bg-white" />
 
             <div className="bg-[#09132F] text-center text-white py-4 text-xs sm:text-sm flex items-center justify-center px-4">
-                {content.copyright}
+                {content.copyright.value}
             </div>
         </div>
     );

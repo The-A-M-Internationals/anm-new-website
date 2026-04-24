@@ -25,7 +25,7 @@ const ChildWelfareImpact = () => {
     ];
 
     return (
-        <section className="mt-15 md:mt-20 py-12 px-6 md:px-12 bg-[#FFFBED]">
+        <section className="py-12 md:py-20 lg:py-24 px-6 md:px-12 bg-[#FFFBED]">
             <div className="max-w-6xl mx-auto ">
 
                 {/* Header */}

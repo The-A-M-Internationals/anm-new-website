@@ -1,7 +1,9 @@
 'use client';
 
 import ServiceCard from "./ServiceCard";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
+import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
 interface ServiceData {
     title: string;
@@ -147,11 +149,31 @@ const managedServiceIcons = [
     ),
 ];
 
+const serviceIds = [
+    "planning-budgeting",
+    "profitability-cost",
+    "financial-consolidation",
+    "account-reconciliation",
+    "enterprise-data",
+    "narrative-reporting",
+    "tax-reporting",
+];
+
+const managedServiceIds = [
+    "consulting-as-service",
+    "epm-solution-management",
+    "version-upgrade",
+    "monthly-maintenance",
+];
+
 const Listings = () => {
     const content = useIntlayer("financeTransformationListings");
+    const cardContent = useIntlayer("financeTransformationServiceCard");
+    const { locale } = useLocale();
+    const router = useRouter();
 
     return (
-        <div className="bg-[#FFFBED] mt-12 md:mt-30 pb-12 md:pb-24">
+        <div className="bg-[#FFFBED] py-12 md:py-20 lg:py-24">
             <div
                 className="flex items-center justify-center px-4 text-center"
             >
@@ -161,6 +183,7 @@ const Listings = () => {
             {content.services.map((service: ServiceData, index: number) => (
                 <ServiceCard
                     key={`service-${index}`}
+                    id={serviceIds[index]}
                     title={service.title}
                     description={service.description}
                     tags={service.tags}
@@ -178,14 +201,26 @@ const Listings = () => {
             {content.managedServices.map((service: ServiceData, index: number) => (
                 <ServiceCard
                     key={`managed-${index}`}
+                    id={managedServiceIds[index]}
                     title={service.title}
                     description={service.description}
                     tags={service.tags}
                     svgIcon={managedServiceIcons[index]}
                 />
             ))}
+
+            {/* UNIFIED CTA */}
+            <div className="mt-16 flex justify-center">
+                <button
+                    onClick={() => router.push(`/${locale}/features#epm-suites`)}
+                    className="flex items-center gap-2 px-8 py-4 rounded-full border border-[#D4AF37] text-xl font-bold bg-[#D4AF37] text-black transition-transform duration-300 hover:scale-105 cursor-pointer shadow-lg"
+                >
+                    {cardContent.exploreCta}
+                    <ArrowRight className="w-6 h-6 rtl:rotate-180" />
+                </button>
+            </div>
         </div >
     )
 }
 
-export default Listings;    
+export default Listings;

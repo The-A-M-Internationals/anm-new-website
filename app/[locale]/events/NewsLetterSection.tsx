@@ -25,11 +25,11 @@ const NewsLetter = () => {
 
         if (result.status === 'success') {
             setEmail('');
-            setMessage({ type: 'success', text: content.newsletter.successMessage });
+            setMessage({ type: 'success', text: String(content.newsletter.successMessage) });
         }
 
         if (result.status === 'already_subscribed') {
-            setMessage({ type: 'info', text: content.newsletter.alreadySubscribedMessage });
+            setMessage({ type: 'info', text: String(content.newsletter.alreadySubscribedMessage) });
         }
 
         if (result.status === 'error') {
@@ -43,16 +43,16 @@ const NewsLetter = () => {
     return (
         <div id='subscribe' className="flex flex-col gap-5 items-center py-12 md:py-20 bg-[#0F1E4D] relative px-4">
             <h2 className="text-3xl md:text-5xl text-white text-center">
-                {content.newsletter.heading}
+                {content.newsletter.heading.value}
             </h2>
 
             <p className="text-white text-base md:text-lg text-center w-full md:w-[50%]">
-                {content.newsletter.description}
+                {content.newsletter.description.value}
             </p>
 
             <input
                 type="email"
-                placeholder={content.newsletter.emailPlaceholder}
+                placeholder={content.newsletter.emailPlaceholder.value}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
@@ -66,8 +66,8 @@ const NewsLetter = () => {
           ${(!email || loading) ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}
         `}
             >
-                {loading ? content.newsletter.subscribingButton : content.newsletter.subscribeButton}
-                <ArrowRight className="w-5 h-5" />
+                {loading ? content.newsletter.subscribingButton.value : content.newsletter.subscribeButton.value}
+                <ArrowRight className="w-5 h-5 rtl:rotate-180" />
             </button>
 
             {message && (

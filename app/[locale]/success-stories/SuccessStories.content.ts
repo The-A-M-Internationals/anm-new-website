@@ -39,7 +39,7 @@ const successStoriesContent = {
           ar: "شركة التصنيع العالمية",
         }),
         metric1: t({ en: "87% faster", ar: "أسرع بنسبة 87٪" }),
-        metric2: t({ en: "₹2.5M saved", ar: "توفير 2.5 مليون روبية" }),
+        metric2: t({ en: "$2.5M saved", ar: "توفير 2.5 مليون درهم" }),
         challenge: t({
           en: "Modernize and standardize financial consolidation and cash-flow reporting by eliminating Excel dependency, strengthening controls, and unifying budgeting and forecasting across all entities.",
           ar: "تحديث وتوحيد التوحيد المالي وتقارير التدفق النقدي من خلال التخلص من الاعتماد على Excel وتعزيز الضوابط وتوحيد الميزانية والتنبؤ عبر جميع الكيانات.",
@@ -124,8 +124,8 @@ const successStoriesContent = {
             ar: "تقارير أسرع بنسبة 87٪ (من 5 أيام إلى 8 ساعات)",
           }),
           r2: t({
-            en: "₹2.5M annual cost savings from improved efficiency.",
-            ar: "توفير سنوي في التكاليف بقيمة 2.5 مليون روبية من تحسين الكفاءة.",
+            en: "$2.5M annual cost savings from improved efficiency.",
+            ar: "توفير سنوي في التكاليف بقيمة 2.5 مليون درهم من تحسين الكفاءة.",
           }),
           r3: t({
             en: "100% executive team adoption within 3 months.",

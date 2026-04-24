@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { useIntlayer, useLocale } from "next-intlayer";
+import { useLocale } from "next-intlayer";
 
 interface PageHeroProps {
    badge?: string
@@ -31,13 +31,12 @@ const PageHero: React.FC<PageHeroProps> = ({
    image3,
    buttonImage
 }) => {
-   const content = useIntlayer("financeHero");
    const { locale } = useLocale();
    const router = useRouter();
    const [isZoomed, setIsZoomed] = useState(false);
 
    useEffect(() => {
-      // Trigger zoom every 10 seconds
+      // Trigger zoom every 3 seconds
       const interval = setInterval(() => {
          setIsZoomed(true);
 
@@ -51,6 +50,26 @@ const PageHero: React.FC<PageHeroProps> = ({
 
       return () => clearInterval(interval);
    }, []);
+
+   const handleNavigation = (e: React.MouseEvent) => {
+      const isAnchor = link.includes('#');
+      if (isAnchor && typeof window !== 'undefined') {
+         const [path, hash] = link.split('#');
+         const currentPath = window.location.pathname;
+
+         // Check if we're already on the same page
+         // We check if currentPath contains the path (to handle locale prefix)
+         if (currentPath.includes(path) && hash) {
+            e.preventDefault();
+            const targetElement = document.getElementById(hash);
+            if (targetElement) {
+               targetElement.scrollIntoView({ behavior: 'smooth' });
+               return;
+            }
+         }
+      }
+      router.push(link);
+   };
 
    return (
       <div className='relative w-[90%] mx-auto mt-6 md:mt-1 lg:mt-6'>
@@ -67,7 +86,7 @@ const PageHero: React.FC<PageHeroProps> = ({
                   src={image}
                   alt="Hero Desktop"
                   fill
-               // className={`object-cover transition-transform duration-700 ease-out ${isZoomed ? "scale-105" : "scale-100"}`}
+                  className='object-cover'
                />
             </div>
 
@@ -78,7 +97,6 @@ const PageHero: React.FC<PageHeroProps> = ({
                   alt="Hero Tablet"
                   fill
                   className='object-contain'
-               // className={`object-contain transition-transform duration-700 ease-out ${isZoomed ? "scale-105" : "scale-100"}`}
                />
             </div>
 
@@ -88,19 +106,19 @@ const PageHero: React.FC<PageHeroProps> = ({
                   src={image2}
                   alt="Hero Mobile"
                   fill
-               // className={`object-cover transition-transform duration-700 ease-out ${isZoomed ? "scale-105" : "scale-100"}`}
+                  className='object-cover'
                />
             </div>
 
             {/* Text */}
-            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-4 sm:start-6 md:start-8 flex w-fit sm:w-[90%] md:w-[90%] flex-col gap-2 md:gap-1 lg:gap-2 pe-4'>
+            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-4 sm:start-6 md:start-8 flex w-fit sm:w-[90%] md:w-[90%] flex-col gap-2 md:gap-1 lg:gap-2 pe-6'>
                {badge && (
                   <h4 className='w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
                      {badge}
                   </h4>
                )}
 
-               <h3 className='text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight md:w-[80%]'>
+               <h3 className='text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight md:w-[90%]'>
                   {title}
                </h3>
 
@@ -127,10 +145,10 @@ const PageHero: React.FC<PageHeroProps> = ({
                justifyContent: 'center',
                alignItems: 'center',
             }}
-            className='absolute p-4 md:p-0 lg:p-8 w-[83.5%] h-[13%] md:w-[34.5%] md:h-[16%] lg:h-[18%] lg:w-[34.5%] end-0 bottom-0 md:end-0 md:bottom-4.75 lg:end-0 lg:bottom-0 rounded-full'
+            className='absolute p-4 md:p-0 lg:p-8 w-[80%] h-[12%] md:w-[32%] md:h-[15%] lg:h-[17%] lg:w-[32%] end-[-1%] bottom-0 md:end-[-1%] md:bottom-2 lg:end-[-1%] lg:bottom-0 rounded-full'
          >
             <button
-               onClick={() => router.push(link)}
+               onClick={handleNavigation}
                className='cursor-pointer text-sm md:text-[15px] lg:text-xl bg-[#D4AF37] rounded-full px-4 py-2 md:px-3 md:py-1 lg:px-8 lg:py-4 flex items-center gap-2 text-black font-semibold whitespace-nowrap hover:scale-105 transition-transform'
             >
                {button}
@@ -142,4 +160,4 @@ const PageHero: React.FC<PageHeroProps> = ({
    )
 }
 
-export default PageHero
+export default PageHero;

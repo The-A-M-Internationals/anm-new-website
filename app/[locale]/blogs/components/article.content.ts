@@ -3,16 +3,16 @@ import { t } from "intlayer";
 const articleContent = {
   key: "blogsFeatureArticle",
   content: {
-    sectionTitlePrefix: t({ en: "Feature", ar: "مقال" }),
+    sectionTitlePrefix: t({ en: "Featured", ar: "مقال" }),
     sectionTitleHighlight: t({ en: "Article", ar: "مميز" }),
 
     loading: t({
-      en: "Loading feature article...",
+      en: "Loading featured article...",
       ar: "جارٍ تحميل المقال المميز...",
     }),
 
     noneFound: t({
-      en: "No feature article found.",
+      en: "No featured article found.",
       ar: "لم يتم العثور على مقال مميز.",
     }),
 

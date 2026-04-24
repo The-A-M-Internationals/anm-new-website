@@ -70,6 +70,26 @@ const featuresEpmContent = {
       en: "Narrative Reporting",
       ar: "التقارير السردية",
     }),
+    optionTaxReporting: t({
+      en: "Tax Reporting",
+      ar: "تقارير الضرائب",
+    }),
+    optionConsultingAsService: t({
+      en: "Consulting-as-a-Service",
+      ar: "الاستشارات كخدمة",
+    }),
+    optionEpmSolutionManagement: t({
+      en: "EPM Solution Management",
+      ar: "إدارة حلول EPM",
+    }),
+    optionVersionUpgrade: t({
+      en: "Version Upgrade & Patching",
+      ar: "ترقية الإصدارات والتحديثات",
+    }),
+    optionMonthlyMaintenance: t({
+      en: "Monthly Maintenance & Administration",
+      ar: "الصيانة والإدارة الشهرية",
+    }),
 
     submitButton: t({ en: "Submit Request", ar: "إرسال الطلب" }),
     submittingButton: t({ en: "Submitting...", ar: "جارٍ الإرسال..." }),

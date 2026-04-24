@@ -33,7 +33,7 @@ export default function OurOffices() {
   ];
 
   return (
-    <div className="-mt-8 bg-linear-to-b from-[#FFFFFF] to-[#FFFBED] py-16 px-4 lg:px-14">
+    <div className="bg-linear-to-b from-[#FFFFFF] to-[#FFFBED] py-12 md:py-20 lg:py-24 px-4 lg:px-14">
       <div className="mx-auto">
 
         {/* Header */}

@@ -68,7 +68,7 @@ const Article = () => {
     }
 
     return (
-        <div id="article" className="bg-[#FFFBED] flex flex-col items-center justify-center gap-10 py-16 px-4 md:px-4">
+        <div id="article" className="bg-[#FFFBED] flex flex-col items-center justify-center gap-10 py-12 md:py-20 lg:py-24 px-4 md:px-4">
             {/* Title */}
             <div className="text-center">
                 <h2 className="text-4xl md:text-5xl font-semibold text-black">
