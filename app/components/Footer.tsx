@@ -224,23 +224,24 @@ const Footer = () => {
 
             <div className="w-full h-px bg-white" />
 
-            <div className="bg-[#09132F] text-center text-white py-6 text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center px-4 gap-2 md:gap-4">
+            <div className="bg-[#09132F] text-center text-white py-6 text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center px-4 gap-2 md:gap-1">
                 <span>{content.copyright.value}</span>
-                <span className="hidden md:inline">|</span>
-                <div className="flex gap-4">
+                <span className="hidden md:inline mx-2">|</span>
+                <div className="flex items-center gap-1">
                     <a 
                         href="https://privacy-policy.theaminternationals.com/" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="hover:text-[#D4AF37] transition-colors underline underline-offset-4"
+                        className="hover:text-[#D4AF37] transition-colors"
                     >
                         {content.privacy.value}
                     </a>
+                    <span className="mx-1">|</span>
                     <a 
                         href="https://privacy-policy.theaminternationals.com/" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="hover:text-[#D4AF37] transition-colors underline underline-offset-4"
+                        className="hover:text-[#D4AF37] transition-colors"
                     >
                         {content.terms.value}
                     </a>

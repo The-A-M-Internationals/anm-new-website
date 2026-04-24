@@ -9,13 +9,13 @@ import Innovation from "../components/Innovation";
 export default function Home() {
   return (
     <div >
-      <Hero />
-      <Services />
-      <AboutUs />
+      <section className="snap-section"><Hero /></section>
+      <section className="snap-section"><Services /></section>
+      <section className="snap-section"><AboutUs /></section>
       {/* <PartnerShipCard /> */}
-      <SuccessStory />
-      <Events />
-      <Innovation />
+      <section className="snap-section"><SuccessStory /></section>
+      <section className="snap-section"><Events /></section>
+      <section className="snap-section"><Innovation /></section>
     </div>
   );
 }

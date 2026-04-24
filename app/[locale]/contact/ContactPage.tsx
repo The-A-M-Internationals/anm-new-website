@@ -26,20 +26,22 @@ const ContactPage = () => {
 
     return (
         <div className='flex flex-col gap-8'>
-            <PageHero
-                title={content.heroTitle}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/contact#form`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle}
+                    description={content.heroDescription}
+                    button={content.heroButton}
+                    link={`/${locale}/contact#form`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
 
-            <ContactForm />
-            <OurOffices />
-            <FAQ />
+            <section className="snap-section"><ContactForm /></section>
+            <section className="snap-section"><OurOffices /></section>
+            <section className="snap-section"><FAQ /></section>
         </div>
     );
 };

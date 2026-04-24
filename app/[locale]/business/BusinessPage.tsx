@@ -25,21 +25,23 @@ export default function BusinessPage() {
 
     return (
         <div>
-            <PageHero
-                title={content.heroTitle}
-                title2={content.heroTitle2}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/business#about-us`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
-            <EmpoweringSection />
-            <JourneyTimeline />
-            <LeadershipTeam />
-            <Innovation />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle}
+                    title2={content.heroTitle2}
+                    description={content.heroDescription}
+                    button={content.heroButton}
+                    link={`/${locale}/business#about-us`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
+            <section className="snap-section"><EmpoweringSection /></section>
+            <section className="snap-section"><JourneyTimeline /></section>
+            <section className="snap-section"><LeadershipTeam /></section>
+            <section className="snap-section"><Innovation /></section>
         </div>
     );
 }

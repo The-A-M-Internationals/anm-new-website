@@ -101,8 +101,8 @@ export const footerContent = {
       en: "© 2026 A&M International. All rights reserved.",
       ar: "© 2026 A&M الدولية. جميع الحقوق محفوظة.",
     }),
-    privacy: t({ en: "Privacy", ar: "الخصوصية" }),
-    terms: t({ en: "Terms", ar: "الشروط" }),
+    privacy: t({ en: "Privacy", ar: "سياسة الخصوصية" }),
+    terms: t({ en: "Terms", ar: "الأحكام والشروط" }),
   },
 };
 

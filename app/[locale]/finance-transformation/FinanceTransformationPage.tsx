@@ -26,21 +26,23 @@ export default function FinanceTransformationPage() {
 
     return (
         <div>
-            <PageHero
-                title={content.heroTitle}
-                title2={content.heroTitle2}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/contact#form`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle}
+                    title2={content.heroTitle2}
+                    description={content.heroDescription}
+                    button={content.heroButton}
+                    link={`/${locale}/contact#form`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
 
-            <Listings />
-            <WhyChooseUs />
-            <Innovation />
+            <section className="snap-section"><Listings /></section>
+            <section className="snap-section"><WhyChooseUs /></section>
+            <section className="snap-section"><Innovation /></section>
         </div>
     );
 }

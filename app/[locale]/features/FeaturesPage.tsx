@@ -26,22 +26,24 @@ export default function FeaturesPage() {
 
     return (
         <div>
-            <PageHero
-                title={content.heroTitle}
-                title2={content.heroTitle2}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/features#epm-suites`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle}
+                    title2={content.heroTitle2}
+                    description={content.heroDescription}
+                    button={content.heroButton}
+                    link={`/${locale}/features#epm-suites`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
 
-            <FeaturesList />
-            <Apps />
-            <Results />
-            <EPM />
+            <section className="snap-section"><FeaturesList /></section>
+            <section className="snap-section"><Apps /></section>
+            <section className="snap-section"><Results /></section>
+            <section className="snap-section"><EPM /></section>
         </div>
     );
 }

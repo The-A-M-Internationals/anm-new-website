@@ -97,62 +97,23 @@ const NavbarModal = ({
           </button>
 
           <div className="flex flex-col md:flex-row justify-start gap-4 md:gap-0">
-            {/* Left side - Static content */}
-            <div className="items-center flex flex-col gap-2 w-full md:w-[50%]">
-              <div className="w-full md:w-fit bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-[15px] md:rounded-[20px] shadow-md px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 border border-gray-100">
-                {/* Title */}
-                <h2 className="text-lg md:text-2xl font-semibold text-gray-900">
-                  {t.masterclassTitle}
-                </h2>
+          {/* LEFT side - Static content */}
+          <div className="flex flex-col gap-0 w-full md:w-[460px] shrink-0 px-2">
+            <div className="flex flex-row items-center justify-between border-b border-gray-100 pb-1">
+              {/* Title */}
+              <h2 className="text-[16px] md:text-[17px] font-bold text-gray-900 leading-tight">
+                {t.masterclassTitle}
+              </h2>
 
-                {/* Date & Time */}
-                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 md:gap-3">
-                  {/* Date */}
-                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
-                    <CalendarDays className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassDateMain}</span>
-                    <span className="text-gray-500 font-medium text-sm md:text-base">{t.masterclassDateSub}</span>
-                  </div>
-
-                  {/* Time */}
-                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
-                    <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassTime}</span>
-                  </div>
-                </div>
-
-                {/* Button */}
-                <a href={t.masterclassRegisterUrl} target="_blank" onClick={onClose}>
-                  <div className='flex w-full justify-center items-center'>
-                    <button className="bg-[#D4AF37] text-black font-semibold px-4 md:px-7 py-2 md:py-3 rounded-full flex items-center gap-2 w-fit text-sm md:text-base cursor-pointer hover:scale-105 transition">
-                      {t.masterclassRegisterBtn}
-                      <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
-                    </button>
-                  </div>
-                </a>
-              </div>
-
-              <div className="w-full md:w-fit bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-[15px] md:rounded-[20px] shadow-md px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 border border-gray-100">
-                {/* Title */}
-                <h2 className="text-lg md:text-2xl font-semibold text-gray-900">
-                  {t.signsTitle}
-                </h2>
-
-                {/* Date & Time */}
-                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 md:gap-3">
-                  {/* Time */}
-                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
-                    <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.signsReadTime}</span>
-                  </div>
-
-                  <button onClick={() => { onClose(); router.push(`/${currentLocale}/blogs#article`) }} className="text-[#D4AF37] font-semibold flex items-center gap-2 w-fit transition text-sm md:text-base cursor-pointer hover:scale-105 transition">
-                    {t.signsReadBtn}
-                    <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
-                  </button>
-                </div>
-              </div>
+              {/* Button */}
+              <a href={t.masterclassRegisterUrl} target="_blank" onClick={onClose} className="shrink-0">
+                <button className="bg-[#D4AF37] text-black font-bold h-7 px-4 rounded-full flex items-center gap-1 text-[11px] md:text-[12px] cursor-pointer hover:scale-105 transition">
+                  Register
+                  <ArrowRight className='w-3.5 h-3.5 rtl:rotate-180' />
+                </button>
+              </a>
             </div>
+          </div>
 
             {/* Right side - Dynamic content from props */}
             <div className="flex flex-row content-start flex-wrap w-full md:w-[50%] gap-2 md:gap-4 mt-4 md:mt-6 md:ms-4">

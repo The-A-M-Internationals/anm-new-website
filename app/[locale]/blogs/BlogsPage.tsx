@@ -22,19 +22,21 @@ export default function BlogsPage() {
         locale === "ar" ? "/blogs/button-heroo-ar.png" : "/blogs/button-hero.png";
     return (
         <div>
-            <PageHero
-                title={content.heroTitle}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/contact#form`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
-            <Article />
-            <BlogArticleList />
-            <SuggestTopicSection />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle}
+                    description={content.heroDescription}
+                    button={content.heroButton}
+                    link={`/${locale}/contact#form`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
+            <section className="snap-section"><Article /></section>
+            <section className="snap-section"><BlogArticleList /></section>
+            <section className="snap-section"><SuggestTopicSection /></section>
         </div>
     );
 }

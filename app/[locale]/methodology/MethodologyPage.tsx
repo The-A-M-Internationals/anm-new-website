@@ -26,22 +26,24 @@ export default function MethodologyPage() {
 
     return (
         <div>
-            <PageHero
-                title={content.heroTitle}
-                title2={content.heroTitle2}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/features#epm-suites`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle}
+                    title2={content.heroTitle2}
+                    description={content.heroDescription}
+                    button={content.heroButton}
+                    link={`/${locale}/features#epm-suites`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
 
-            <MethodologySection />
-            <ProcessMatters />
+            <section className="snap-section"><MethodologySection /></section>
+            <section className="snap-section"><ProcessMatters /></section>
             {/* <PartnerShip /> */}
-            <Innovation />
+            <section className="snap-section"><Innovation /></section>
         </div>
     );
 }
