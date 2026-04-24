@@ -98,9 +98,11 @@ export const footerContent = {
 
     // Copyright
     copyright: t({
-      en: "© 2026 A&M International. All rights reserved. | Privacy | Terms",
-      ar: "© 2026 A&M الدولية. جميع الحقوق محفوظة. | الخصوصية | الشروط",
+      en: "© 2026 A&M International. All rights reserved.",
+      ar: "© 2026 A&M الدولية. جميع الحقوق محفوظة.",
     }),
+    privacy: t({ en: "Privacy", ar: "الخصوصية" }),
+    terms: t({ en: "Terms", ar: "الشروط" }),
   },
 };
 

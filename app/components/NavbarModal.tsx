@@ -2,7 +2,7 @@
 import { ArrowRight, CalendarDays, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import '../components/navbarModal.content'
 import { useIntlayer } from "next-intlayer";
 import { useLocale } from "next-intlayer";
@@ -21,6 +21,7 @@ interface NavbarModalProps {
   isOpen: boolean
   onClose: () => void
   rightSideButtons: RightSideButton[]
+  // New props for the bridge logic
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }
@@ -37,7 +38,6 @@ const NavbarModal = ({
   const router = useRouter();
   const navbarContent = useIntlayer("navbar");
   const t = useIntlayer("navbarModal");
-  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -46,23 +46,13 @@ const NavbarModal = ({
       }
     }
 
-    const handleClickOutside = (e: MouseEvent) => {
-        if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-            onClose();
-        }
-    }
-
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
-      setTimeout(() => {
-          document.addEventListener('click', handleClickOutside)
-      }, 100);
       document.body.style.overflow = 'hidden'
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape)
-      document.removeEventListener('click', handleClickOutside)
       document.body.style.overflow = 'unset'
     }
   }, [isOpen, onClose])
@@ -71,108 +61,111 @@ const NavbarModal = ({
 
   return (
     <div
-      className="fixed start-0 top-16 lg:top-[120px] w-full z-50 px-4"
+      // Changed top-20 to top-16 to physically touch the navbar 
+      className="fixed start-0 top-16 md:-top-55 lg:top-[120px] w-full z-50 md:h-screen md:flex md:items-center md:justify-center lg:block lg:h-auto"
     >
-      {/* Backdrop for click outside - hidden visually but captures clicks */}
-      <div className="fixed inset-0 -z-10" onClick={onClose} />
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/20 md:hidden transition-opacity"
+        onClick={onClose}
+      />
 
       {/* Modal Container */}
-      <div 
-        ref={modalRef}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        className="w-full max-w-[95%] md:max-w-[85%] lg:max-w-[1200px] mx-auto bg-[#F9F9F9] rounded-2xl md:rounded-4xl border border-gray-300 shadow-2xl overflow-hidden p-4 md:p-8 relative animate-fadeIn"
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          aria-label="Close dialog"
-          className="absolute top-2 end-2 md:top-4 md:end-4 text-gray-400 hover:text-gray-600 z-10 p-2 cursor-pointer transition-colors"
+      <div className="w-[95%] md:w-[85%] lg:w-[90%] mx-auto md:max-h-[85vh] md:overflow-y-auto p-2 md:p-4">
+
+        {/* CONTENT CARD - This is where we apply the Mouse Logic */}
+        <div
+          onMouseEnter={onMouseEnter} // Keep open when hovering the content
+          onMouseLeave={onMouseLeave} // Close when leaving the content
+          className="relative bg-[#F9F9F9] rounded-2xl md:rounded-4xl border border-gray-300 w-full h-fit overflow-hidden p-4 md:p-8"
         >
-          <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            aria-label="Close dialog"
+            className="absolute top-2 end-2 md:top-4 md:end-4 text-gray-400 hover:text-gray-600 z-10 p-2 cursor-pointer"
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
 
-        <div className="flex flex-col md:flex-row justify-start gap-6 md:gap-8 mt-4">
-          {/* Left side - Static content */}
-          <div className="flex flex-col gap-4 w-full md:w-1/2">
-            <div className="w-full bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-2xl shadow-sm px-6 py-5 md:py-8 flex flex-col gap-4 border border-gray-100">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                {t.masterclassTitle}
-              </h2>
+          <div className="flex flex-col md:flex-row justify-start gap-4 md:gap-0">
+            {/* Left side - Static content */}
+            <div className="items-center flex flex-col gap-2 w-full md:w-[50%]">
+              <div className="w-full md:w-fit bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-[15px] md:rounded-[20px] shadow-md px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 border border-gray-100">
+                {/* Title */}
+                <h2 className="text-lg md:text-2xl font-semibold text-gray-900">
+                  {t.masterclassTitle}
+                </h2>
 
-              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <CalendarDays className='w-5 h-5 text-[#D4AF37]' />
-                  <span className="text-gray-900 font-semibold text-sm md:text-base">{t.masterclassDateMain}</span>
-                  <span className="text-gray-500 text-sm md:text-base">{t.masterclassDateSub}</span>
+                {/* Date & Time */}
+                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 md:gap-3">
+                  {/* Date */}
+                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
+                    <CalendarDays className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
+                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassDateMain}</span>
+                    <span className="text-gray-500 font-medium text-sm md:text-base">{t.masterclassDateSub}</span>
+                  </div>
+
+                  {/* Time */}
+                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
+                    <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
+                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassTime}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Clock className='w-5 h-5 text-[#D4AF37]' />
-                  <span className="text-gray-900 font-semibold text-sm md:text-base">{t.masterclassTime}</span>
-                </div>
+
+                {/* Button */}
+                <a href={t.masterclassRegisterUrl} target="_blank" onClick={onClose}>
+                  <div className='flex w-full justify-center items-center'>
+                    <button className="bg-[#D4AF37] text-black font-semibold px-4 md:px-7 py-2 md:py-3 rounded-full flex items-center gap-2 w-fit text-sm md:text-base cursor-pointer hover:scale-105 transition">
+                      {t.masterclassRegisterBtn}
+                      <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
+                    </button>
+                  </div>
+                </a>
               </div>
 
-              <a href={t.masterclassRegisterUrl} target="_blank" onClick={onClose} className="w-fit">
-                <button className="bg-[#D4AF37] text-black font-bold px-6 md:px-8 py-2.5 md:py-3 rounded-full flex items-center gap-2 text-sm md:text-base cursor-pointer hover:scale-105 transition shadow-sm">
-                  {t.masterclassRegisterBtn}
-                  <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
-                </button>
-              </a>
+              <div className="w-full md:w-fit bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-[15px] md:rounded-[20px] shadow-md px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 border border-gray-100">
+                {/* Title */}
+                <h2 className="text-lg md:text-2xl font-semibold text-gray-900">
+                  {t.signsTitle}
+                </h2>
+
+                {/* Date & Time */}
+                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 md:gap-3">
+                  {/* Time */}
+                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
+                    <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
+                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.signsReadTime}</span>
+                  </div>
+
+                  <button onClick={() => { onClose(); router.push(`/${currentLocale}/blogs#article`) }} className="text-[#D4AF37] font-semibold flex items-center gap-2 w-fit transition text-sm md:text-base cursor-pointer hover:scale-105 transition">
+                    {t.signsReadBtn}
+                    <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <div className="w-full bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-2xl shadow-sm px-6 py-5 md:py-8 flex flex-col gap-4 border border-gray-100">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                {t.signsTitle}
-              </h2>
-
-              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Clock className='w-5 h-5 text-[#D4AF37]' />
-                  <span className="text-gray-900 font-semibold text-sm md:text-base">{t.signsReadTime}</span>
-                </div>
-
-                <button 
-                  onClick={() => { onClose(); router.push(`/${currentLocale}/blogs#article`) }} 
-                  className="text-[#D4AF37] font-bold flex items-center gap-2 w-fit hover:scale-105 transition text-sm md:text-base cursor-pointer"
+            {/* Right side - Dynamic content from props */}
+            <div className="flex flex-row content-start flex-wrap w-full md:w-[50%] gap-2 md:gap-4 mt-4 md:mt-6 md:ms-4">
+              {rightSideButtons.map((button, index) => (
+                <Link
+                  href={button.link}
+                  scroll={true}
+                  onClick={onClose}
+                  key={index}
+                  className="flex items-center gap-2 bg-white px-3 md:px-4 py-2 rounded-xl border border-[#D4AF37] shadow hover:shadow-md transition w-full sm:w-auto"
                 >
-                  {t.signsReadBtn}
-                  <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
-                </button>
-              </div>
+                  <img src={button.icon} alt="Bottom Icon" className='w-6 h-5 md:w-8 md:h-6' />
+                  <span className="text-base md:text-xl font-semibold">{navbarContent[button.textKey]}</span>
+                </Link>
+              ))}
             </div>
-          </div>
-
-          {/* Right side - Dynamic content from props */}
-          <div className="flex flex-row content-start flex-wrap w-full md:w-1/2 gap-3 md:gap-4">
-            {rightSideButtons.map((button, index) => (
-              <Link
-                href={button.link}
-                scroll={true}
-                onClick={onClose}
-                key={index}
-                className="flex items-center gap-3 bg-white px-5 md:px-6 py-3 rounded-2xl border border-gray-200 shadow-sm hover:border-[#D4AF37] hover:shadow-md transition-all group w-full sm:w-[calc(50%-8px)] lg:w-full"
-              >
-                <div className="p-2 bg-yellow-50 rounded-lg group-hover:bg-[#D4AF37]/10 transition-colors">
-                  <img src={button.icon} alt="Icon" className='w-6 h-6 md:w-8 md:h-8' />
-                </div>
-                <span className="text-lg md:text-xl font-bold text-gray-800 group-hover:text-[#D4AF37] transition-colors">{navbarContent[button.textKey]}</span>
-              </Link>
-            ))}
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-      `}</style>
     </div>
   )
 }
