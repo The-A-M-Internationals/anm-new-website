@@ -2,7 +2,7 @@
 import { ArrowRight, CalendarDays, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import '../components/navbarModal.content'
 import { useIntlayer } from "next-intlayer";
 import { useLocale } from "next-intlayer";
@@ -21,7 +21,6 @@ interface NavbarModalProps {
   isOpen: boolean
   onClose: () => void
   rightSideButtons: RightSideButton[]
-  // New props for the bridge logic
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }
@@ -30,14 +29,13 @@ const NavbarModal = ({
   isOpen,
   onClose,
   rightSideButtons,
-  onMouseEnter,
-  onMouseLeave
 }: NavbarModalProps) => {
   const { locale } = useLocale();
   const currentLocale = locale as AppLocale;
   const router = useRouter();
   const navbarContent = useIntlayer("navbar");
   const t = useIntlayer("navbarModal");
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -46,13 +44,23 @@ const NavbarModal = ({
       }
     }
 
+    const handleClickOutside = (e: MouseEvent) => {
+        if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+            onClose();
+        }
+    }
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
+      setTimeout(() => {
+          document.addEventListener('mousedown', handleClickOutside)
+      }, 100);
       document.body.style.overflow = 'hidden'
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape)
+      document.removeEventListener('mousedown', handleClickOutside)
       document.body.style.overflow = 'unset'
     }
   }, [isOpen, onClose])
@@ -61,22 +69,20 @@ const NavbarModal = ({
 
   return (
     <div
-      // Changed top-20 to top-16 to physically touch the navbar 
       className="fixed start-0 top-16 md:-top-55 lg:top-[120px] w-full z-50 md:h-screen md:flex md:items-center md:justify-center lg:block lg:h-auto"
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/20 md:hidden transition-opacity"
+        className="fixed inset-0 bg-black/20 transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Container */}
       <div className="w-[95%] md:w-[85%] lg:w-[90%] mx-auto md:max-h-[85vh] md:overflow-y-auto p-2 md:p-4">
 
-        {/* CONTENT CARD - This is where we apply the Mouse Logic */}
+        {/* CONTENT CARD */}
         <div
-          onMouseEnter={onMouseEnter} // Keep open when hovering the content
-          onMouseLeave={onMouseLeave} // Close when leaving the content
+          ref={modalRef}
           className="relative bg-[#F9F9F9] rounded-2xl md:rounded-4xl border border-gray-300 w-full h-fit overflow-hidden p-4 md:p-8"
         >
           {/* Close button */}
