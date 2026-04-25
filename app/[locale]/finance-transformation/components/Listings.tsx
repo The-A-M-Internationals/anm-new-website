@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import ServiceCard from "./ServiceCard";
 import { useIntlayer } from "next-intlayer";
 
@@ -147,45 +148,83 @@ const managedServiceIcons = [
     ),
 ];
 
-const Listings = () => {
+export type Tab = 'transformational' | 'managed';
+
+interface ListingsProps {
+    initialTab?: Tab;
+}
+
+const Listings = ({ initialTab = 'transformational' }: ListingsProps) => {
     const content = useIntlayer("financeTransformationListings");
+    const [activeTab, setActiveTab] = useState<Tab>(initialTab);
 
     return (
         <div className="bg-[#FFFBED] mt-12 md:mt-30 pb-12 md:pb-24">
-            <div
-                className="flex items-center justify-center px-4 text-center"
-            >
-                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold md:mt-15 mb-8 md:mb-12">{content.sectionTitle}</p>
+
+            {/* Page title */}
+            <div className="flex items-center justify-center px-4 text-center">
+                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold md:mt-15 mb-8 md:mb-12">
+                    {content.sectionTitle}
+                </p>
             </div>
 
-            {content.services.map((service: ServiceData, index: number) => (
-                <ServiceCard
-                    key={`service-${index}`}
-                    title={service.title}
-                    description={service.description}
-                    tags={service.tags}
-                    svgIcon={serviceIcons[index]}
-                />
-            ))}
-
-            <div
-                id="managed-services"
-                className="flex items-center justify-center px-4 text-center mt-12 md:mt-24"
-            >
-                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold mb-8 md:mb-12">{content.managedServiceTitle}</p>
+            {/* ── Tab switcher ── */}
+            <div className="flex justify-center px-4 mb-10 md:mb-14">
+                <div className="flex bg-white border border-[#D4AF37]/40 rounded-full p-1 gap-1 shadow-sm">
+                    <button
+                        onClick={() => setActiveTab('transformational')}
+                        className={`px-5 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-semibold transition-all duration-200 cursor-pointer ${
+                            activeTab === 'transformational'
+                                ? 'bg-[#D4AF37] text-white shadow'
+                                : 'text-[#ab8d2b] hover:bg-[#D4AF37]/10'
+                        }`}
+                    >
+                        Transformational Services
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('managed')}
+                        className={`px-5 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-semibold transition-all duration-200 cursor-pointer ${
+                            activeTab === 'managed'
+                                ? 'bg-[#D4AF37] text-white shadow'
+                                : 'text-[#ab8d2b] hover:bg-[#D4AF37]/10'
+                        }`}
+                    >
+                        {content.managedServiceTitle}
+                    </button>
+                </div>
             </div>
 
-            {content.managedServices.map((service: ServiceData, index: number) => (
-                <ServiceCard
-                    key={`managed-${index}`}
-                    title={service.title}
-                    description={service.description}
-                    tags={service.tags}
-                    svgIcon={managedServiceIcons[index]}
-                />
-            ))}
-        </div >
-    )
-}
+            {/* ── Transformational Services tab ── */}
+            {activeTab === 'transformational' && (
+                <>
+                    {content.services.map((service: ServiceData, index: number) => (
+                        <ServiceCard
+                            key={`service-${index}`}
+                            title={service.title}
+                            description={service.description}
+                            tags={service.tags}
+                            svgIcon={serviceIcons[index]}
+                        />
+                    ))}
+                </>
+            )}
 
-export default Listings;    
+            {/* ── Managed Services tab ── */}
+            {activeTab === 'managed' && (
+                <div id="managed-services">
+                    {content.managedServices.map((service: ServiceData, index: number) => (
+                        <ServiceCard
+                            key={`managed-${index}`}
+                            title={service.title}
+                            description={service.description}
+                            tags={service.tags}
+                            svgIcon={managedServiceIcons[index]}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Listings;

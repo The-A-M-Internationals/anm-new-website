@@ -1,198 +1,375 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import Link from "next/link";
-import Card from "./Card";
 import { useLocale } from "next-intlayer";
+import { useRouter } from "next/navigation";
 import servicesContent from "./services.content";
 import type { AppLocale } from "@/types/locale";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 
-const SERVICES = [
-    {
-        title: "Financial Consolidation & Close (FCC)",
-        description:
-            "Unlock multidimensional analysis and reporting to adapt to changing business needs and cover full end-to end close tasks",
-        icon: (
-            <svg className="w-20 h-20 md:w-[120px] md:h-[120px]" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M30 82.5L15 97.2V55H30M55 73.3L47.15 66.6L40 73.2V35H55M80 65L65 80V15H80M94.05 64.05L85 55H110V80L101.05 71.05L65 106.8L47.65 91.7L28.75 110H15L47.35 78.3L65 93.2" fill="currentColor" />
-            </svg>
-        ),
-    },
-    {
-        title: "Planning and Budgeting",
-        description:
-            "Exceed your organization’s planning, budgeting and forecasting needs with improved planning accuracy and automation.",
-        icon: (
-            <svg className="w-20 h-20 md:w-[120px] md:h-[120px]" viewBox="0 0 120 120" fill="currentColor" >
-                <path d="M16.25 25C16.25 21.3533 17.6987 17.8559 20.2773 15.2773C22.8559 12.6987 26.3533 11.25 30 11.25H80C83.6467 11.25 87.1441 12.6987 89.7227 15.2773C92.3013 17.8559 93.75 21.3533 93.75 25V52.5C93.75 53.4946 93.3549 54.4484 92.6517 55.1516C91.9484 55.8549 90.9946 56.25 90 56.25C89.0054 56.25 88.0516 55.8549 87.3483 55.1516C86.6451 54.4484 86.25 53.4946 86.25 52.5V25C86.25 21.55 83.45 18.75 80 18.75H30C26.55 18.75 23.75 21.55 23.75 25V95C23.75 98.45 26.55 101.25 30 101.25H67.5C68.4946 101.25 69.4484 101.645 70.1516 102.348C70.8549 103.052 71.25 104.005 71.25 105C71.25 105.995 70.8549 106.948 70.1516 107.652C69.4484 108.355 68.4946 108.75 67.5 108.75H30C26.3533 108.75 22.8559 107.301 20.2773 104.723C17.6987 102.144 16.25 98.6467 16.25 95V25Z" />
-                <path d="M90 66.25C90.9946 66.25 91.9484 66.6451 92.6517 67.3484C93.3549 68.0516 93.75 69.0054 93.75 70V72.09C98.885 72.28 103.75 76.065 103.75 81.665C103.75 82.6596 103.355 83.6134 102.652 84.3167C101.948 85.0199 100.995 85.415 100 85.415C99.0054 85.415 98.0516 85.0199 97.3483 84.3167C96.6451 83.6134 96.25 82.6596 96.25 81.665C96.25 80.955 95.44 79.585 93.345 79.585H85.815C85.2173 79.569 84.6337 79.7676 84.17 80.145C83.83 80.445 83.75 80.73 83.75 80.915C83.7423 81.1665 83.7727 81.4176 83.84 81.66C83.9063 81.709 83.9765 81.7525 84.05 81.79C84.25 81.89 84.55 82.01 85.015 82.15L97.105 85.655C98.485 86.065 100.255 86.745 101.645 88.22C103.145 89.82 103.75 91.87 103.75 94.085C103.75 99.42 98.97 102.915 94.185 102.915H93.75V105C93.75 105.995 93.3549 106.948 92.6517 107.652C91.9484 108.355 90.9946 108.75 90 108.75C89.0054 108.75 88.0516 108.355 87.3483 107.652C86.6451 106.948 86.25 105.995 86.25 105V102.91C81.115 102.72 76.25 98.935 76.25 93.335C76.25 92.3404 76.6451 91.3866 77.3484 90.6833C78.0516 89.9801 79.0054 89.585 80 89.585C80.9946 89.585 81.9484 89.9801 82.6517 90.6833C83.3549 91.3866 83.75 92.3404 83.75 93.335C83.75 94.045 84.56 95.415 86.655 95.415H94.185C94.7827 95.431 95.3663 95.2324 95.83 94.855C96.17 94.555 96.25 94.27 96.25 94.085C96.2577 93.8335 96.2273 93.5824 96.16 93.34C96.0937 93.291 96.0235 93.2475 95.95 93.21C95.75 93.11 95.45 92.99 94.985 92.85L82.895 89.345C81.515 88.935 79.745 88.255 78.355 86.78C76.855 85.18 76.25 83.13 76.25 80.915C76.25 75.58 81.03 72.085 85.815 72.085H86.25V70C86.25 69.0054 86.6451 68.0516 87.3483 67.3484C88.0516 66.6451 89.0054 66.25 90 66.25ZM31.25 55C31.25 54.0054 31.6451 53.0516 32.3483 52.3484C33.0516 51.6451 34.0054 51.25 35 51.25H37.5C38.4946 51.25 39.4484 51.6451 40.1516 52.3484C40.8549 53.0516 41.25 54.0054 41.25 55C41.25 55.9946 40.8549 56.9484 40.1516 57.6516C39.4484 58.3549 38.4946 58.75 37.5 58.75H35C34.0054 58.75 33.0516 58.3549 32.3483 57.6516C31.6451 56.9484 31.25 55.9946 31.25 55ZM46.25 55C46.25 54.0054 46.6451 53.0516 47.3484 52.3484C48.0516 51.6451 49.0054 51.25 50 51.25H75C75.9946 51.25 76.9484 51.6451 77.6516 52.3484C78.3549 53.0516 78.75 54.0054 78.75 55C78.75 55.9946 78.3549 56.9484 77.6516 57.6516C76.9484 58.3549 75.9946 58.75 75 58.75H50C49.0054 58.75 48.0516 58.3549 47.3484 57.6516C46.6451 56.9484 46.25 55.9946 46.25 55ZM31.25 70C31.25 69.0054 31.6451 68.0516 32.3483 67.3484C33.0516 66.6451 34.0054 66.25 35 66.25H37.5C38.4946 66.25 39.4484 66.6451 40.1516 67.3484C40.8549 68.0516 41.25 69.0054 41.25 70C41.25 70.9946 40.8549 71.9484 40.1516 72.6516C39.4484 73.3549 38.4946 73.75 37.5 73.75H35C34.0054 73.75 33.0516 73.3549 32.3483 72.6516C31.6451 71.9484 31.25 70.9946 31.25 70ZM46.25 70C46.25 69.0054 46.6451 68.0516 47.3484 67.3484C48.0516 66.6451 49.0054 66.25 50 66.25H67.5C68.4946 66.25 69.4484 66.6451 70.1516 67.3484C70.8549 68.0516 71.25 69.0054 71.25 70C71.25 70.9946 70.8549 71.9484 70.1516 72.6516C69.4484 73.3549 68.4946 73.75 67.5 73.75H50C49.0054 73.75 48.0516 73.3549 47.3484 72.6516C46.6451 71.9484 46.25 70.9946 46.25 70ZM31.25 85C31.25 84.0054 31.6451 83.0516 32.3483 82.3483C33.0516 81.6451 34.0054 81.25 35 81.25H37.5C38.4946 81.25 39.4484 81.6451 40.1516 82.3483C40.8549 83.0516 41.25 84.0054 41.25 85C41.25 85.9946 40.8549 86.9484 40.1516 87.6517C39.4484 88.3549 38.4946 88.75 37.5 88.75H35C34.0054 88.75 33.0516 88.3549 32.3483 87.6517C31.6451 86.9484 31.25 85.9946 31.25 85ZM46.25 85C46.25 84.0054 46.6451 83.0516 47.3484 82.3483C48.0516 81.6451 49.0054 81.25 50 81.25H60C60.9946 81.25 61.9484 81.6451 62.6516 82.3483C63.3549 83.0516 63.75 84.0054 63.75 85C63.75 85.9946 63.3549 86.9484 62.6516 87.6517C61.9484 88.3549 60.9946 88.75 60 88.75H50C49.0054 88.75 48.0516 88.3549 47.3484 87.6517C46.6451 86.9484 46.25 85.9946 46.25 85ZM30 32.5C30 30.17 30 29.005 30.38 28.085C30.8885 26.8623 31.8614 25.8913 33.085 25.385C34.005 25 35.17 25 37.5 25H72.5C74.83 25 75.995 25 76.915 25.38C78.1377 25.8885 79.1087 26.8614 79.615 28.085C80 29.005 80 30.17 80 32.5C80 34.83 80 35.995 79.62 36.915C79.1115 38.1377 78.1386 39.1087 76.915 39.615C75.995 40 74.83 40 72.5 40H37.5C35.17 40 34.005 40 33.085 39.62C31.8623 39.1115 30.8913 38.1386 30.385 36.915C30 35.995 30 34.83 30 32.5Z" />
-            </svg>
-
-        ),
-    },
-    {
-        title: "Account Reconciliation",
-        description:
-            "Automate account reconciliations and transaction matching and minimize risk for efficient and accurate financial statements.",
-        icon: (
-            <svg className="w-20 h-20 md:w-[120px] md:h-[120px]" viewBox="0 0 120 120" fill="currentColor" >
-                <path d="M100 20C102.652 20 105.196 21.0536 107.071 22.9289C108.946 24.8043 110 27.3478 110 30V80C110 85.55 105.55 90 100 90H120V100H0V90H20C17.3478 90 14.8043 88.9464 12.9289 87.0711C11.0536 85.1957 10 82.6522 10 80V30C10 24.45 14.45 20 20 20H100ZM100 30H20V80H100V30ZM60 60C71.05 60 80 64.5 80 70V75H40V70C40 64.5 48.95 60 60 60ZM60 35C62.6522 35 65.1957 36.0536 67.0711 37.9289C68.9464 39.8043 70 42.3478 70 45C70 47.6522 68.9464 50.1957 67.0711 52.0711C65.1957 53.9464 62.6522 55 60 55C54.45 55 50 50.55 50 45C50 39.45 54.5 35 60 35Z" />
-            </svg>
-        ),
-    },
-    {
-        title: "Profitability & Cost Management (PCM)",
-        description:
-            "Achieve precision in cost allocation and enhance profitability with PCMCS.",
-        icon: (
-            <svg className="w-20 h-20 md:w-[120px] md:h-[120px]" viewBox="0 0 120 120" fill="currentColor" >
-                <path d="M7.5 82.5H112.5V90H7.5V82.5ZM7.5 97.5H112.5V105H7.5V97.5ZM90 37.5C88.5166 37.5 87.0666 37.9399 85.8332 38.764C84.5999 39.5881 83.6386 40.7594 83.0709 42.1299C82.5032 43.5003 82.3547 45.0083 82.6441 46.4632C82.9335 47.918 83.6478 49.2544 84.6967 50.3033C85.7456 51.3522 87.082 52.0665 88.5368 52.3559C89.9917 52.6453 91.4997 52.4968 92.8701 51.9291C94.2406 51.3614 95.4119 50.4002 96.236 49.1668C97.0601 47.9334 97.5 46.4834 97.5 45C97.5 43.0109 96.7098 41.1032 95.3033 39.6967C93.8968 38.2902 91.9891 37.5 90 37.5ZM60 60C57.0333 60 54.1332 59.1203 51.6664 57.4721C49.1997 55.8238 47.2771 53.4812 46.1418 50.7403C45.0065 47.9994 44.7094 44.9834 45.2882 42.0737C45.867 39.1639 47.2956 36.4912 49.3934 34.3934C51.4912 32.2956 54.1639 30.867 57.0736 30.2882C59.9834 29.7094 62.9994 30.0065 65.7402 31.1418C68.4811 32.2771 70.8238 34.1997 72.472 36.6665C74.1203 39.1332 75 42.0333 75 45C74.995 48.9767 73.4131 52.7892 70.6011 55.6011C67.7892 58.4131 63.9767 59.995 60 60ZM60 37.5C58.5166 37.5 57.0666 37.9399 55.8332 38.764C54.5999 39.5881 53.6386 40.7594 53.0709 42.1299C52.5032 43.5003 52.3547 45.0083 52.6441 46.4632C52.9335 47.918 53.6478 49.2544 54.6967 50.3033C55.7456 51.3522 57.082 52.0665 58.5368 52.3559C59.9917 52.6453 61.4997 52.4968 62.8701 51.9291C64.2406 51.3614 65.4119 50.4002 66.236 49.1668C67.0601 47.9334 67.5 46.4834 67.5 45C67.5 43.0109 66.7098 41.1032 65.3033 39.6967C63.8968 38.2902 61.9891 37.5 60 37.5ZM30 37.5C28.5166 37.5 27.0666 37.9399 25.8332 38.764C24.5999 39.5881 23.6386 40.7594 23.0709 42.1299C22.5032 43.5003 22.3547 45.0083 22.6441 46.4632C22.9335 47.918 23.6478 49.2544 24.6967 50.3033C25.7456 51.3522 27.082 52.0665 28.5368 52.3559C29.9917 52.6453 31.4997 52.4968 32.8701 51.9291C34.2406 51.3614 35.4119 50.4002 36.236 49.1668C37.0601 47.9334 37.5 46.4834 37.5 45C37.5 43.0109 36.7098 41.1032 35.3033 39.6967C33.8968 38.2902 31.9891 37.5 30 37.5Z" />
-                <path d="M105 75H15C13.0124 74.995 11.1076 74.2033 9.70217 72.7978C8.29672 71.3924 7.50495 69.4876 7.5 67.5V22.5C7.50495 20.5124 8.29672 18.6076 9.70217 17.2022C11.1076 15.7967 13.0124 15.005 15 15H105C106.988 15.005 108.892 15.7967 110.298 17.2022C111.703 18.6076 112.495 20.5124 112.5 22.5V67.5C112.497 69.4882 111.706 71.3941 110.3 72.8C108.894 74.2059 106.988 74.997 105 75ZM105 22.5H15V67.5H105V22.5Z" />
-            </svg>
-
-        ),
-    },
-    {
-        title: "Enterprise Data Management",
-        description:
-            "Optimize data integration, governance, and quality with EDM.",
-        icon: (
-            <svg className="w-20 h-20 md:w-[120px] md:h-[120px]" viewBox="0 0 120 120" fill="currentColor" >
-                <g clipPath="url(#clip0_196_4654)">
-                    <path d="M85 49.5852C83.7343 50.0208 82.3769 50.119 81.0617 49.87C79.7464 49.621 78.5189 49.0334 77.5 48.1652V81.3502L77.535 81.8452C77.785 83.6252 79.35 84.9952 81.25 84.9952C82.2305 85.0086 83.1762 84.6322 83.8793 83.9487C84.5824 83.2653 84.9855 82.3307 85 81.3502V49.5852ZM97.5 67.6602V91.2302C97.5 94.6802 94.7 97.4802 91.25 97.4802H28.75C25.3 97.4802 22.5 94.6802 22.5 91.2302V28.7302C22.5 25.2802 25.3 22.4802 28.75 22.4802H55C54.998 20.8832 55.4926 19.3252 56.4153 18.0218C57.338 16.7183 58.6432 15.7341 60.15 15.2052L60.215 15.1802L60.835 14.9802H28.75C25.1033 14.9802 21.6059 16.4289 19.0273 19.0075C16.4487 21.5861 15 25.0835 15 28.7302V91.2302C15 94.8769 16.4487 98.3743 19.0273 100.953C21.6059 103.532 25.1033 104.98 28.75 104.98H91.25C94.8967 104.98 98.3941 103.532 100.973 100.953C103.551 98.3743 105 94.8769 105 91.2302V69.5002C103.717 70.0356 102.297 70.1459 100.947 69.8147C99.5973 69.4836 98.3891 68.7284 97.5 67.6602ZM42.465 48.2252C42.3396 47.3293 41.8944 46.5089 41.2117 45.9153C40.529 45.3217 39.6547 44.9949 38.75 44.9952C37.758 44.9952 36.8065 45.3882 36.1036 46.0882C35.4008 46.7883 35.004 47.7382 35 48.7302V81.2652L35.035 81.7702C35.285 83.5902 36.85 84.9952 38.75 84.9952C40.82 84.9952 42.5 83.3252 42.5 81.2652V48.7302L42.465 48.2252ZM63.75 63.0852C63.5955 62.207 63.1332 61.4126 62.446 60.8445C61.7587 60.2764 60.8916 59.9717 60 59.9852C57.98 60.0002 56.23 61.6452 56.25 63.6502V81.8752C56.4034 82.7543 56.8653 83.5499 57.5526 84.119C58.2399 84.6881 59.1077 84.9935 60 84.9802C62.02 84.9602 63.77 83.3202 63.75 81.3152V63.0852ZM75.44 32.0602C73.7175 29.8366 71.3734 28.1747 68.705 27.2852L61.815 25.0452C61.286 24.8569 60.8283 24.5095 60.5046 24.0507C60.1809 23.5919 60.0071 23.0442 60.0071 22.4827C60.0071 21.9212 60.1809 21.3735 60.5046 20.9147C60.8283 20.4559 61.286 20.1085 61.815 19.9202L68.705 17.6802C70.7438 16.9761 72.5955 15.8168 74.1194 14.2903C75.6433 12.7638 76.7994 10.9102 77.5 8.8702L77.555 8.7002L79.795 1.8152C79.9812 1.28277 80.3283 0.821397 80.7883 0.494959C81.2483 0.168521 81.7984 -0.00683594 82.3625 -0.00683594C82.9266 -0.00683594 83.4767 0.168521 83.9367 0.494959C84.3967 0.821397 84.7438 1.28277 84.93 1.8152L87.165 8.7002C87.8637 10.7929 89.0403 12.694 90.6017 14.2528C92.163 15.8115 94.0661 16.985 96.16 17.6802L103.045 19.9202L103.185 19.9552C103.714 20.1435 104.172 20.4909 104.495 20.9497C104.819 21.4085 104.993 21.9562 104.993 22.5177C104.993 23.0792 104.819 23.6269 104.495 24.0857C104.172 24.5445 103.714 24.8919 103.185 25.0802L96.295 27.3202C94.2021 28.016 92.3 29.1898 90.7395 30.7485C89.1791 32.3072 88.0032 34.208 87.305 36.3002L85.065 43.1852L85 43.3552C84.784 43.8583 84.4211 44.2845 83.9589 44.5781C83.4967 44.8716 82.9567 45.0188 82.4094 45.0005C81.8622 44.9821 81.3332 44.799 80.8918 44.4751C80.4503 44.1513 80.1168 43.7017 79.935 43.1852L77.695 36.3002C77.1947 34.7679 76.4285 33.3335 75.44 32.0602ZM113.92 51.0652L110.09 49.8252C108.928 49.4367 107.872 48.7831 107.006 47.9162C106.14 47.0493 105.487 45.9928 105.1 44.8302L103.85 41.0102C103.746 40.7149 103.554 40.459 103.298 40.2779C103.043 40.0969 102.738 39.9997 102.425 39.9997C102.112 39.9997 101.807 40.0969 101.552 40.2779C101.296 40.459 101.104 40.7149 101 41.0102L99.76 44.8302C99.3797 45.9853 98.7379 47.037 97.8845 47.9034C97.0311 48.7698 95.9892 49.4275 94.84 49.8252L91.015 51.0652C90.7197 51.1687 90.4638 51.3614 90.2827 51.6167C90.1017 51.872 90.0045 52.1772 90.0045 52.4902C90.0045 52.8032 90.1017 53.1084 90.2827 53.3637C90.4638 53.6189 90.7197 53.8117 91.015 53.9152L94.84 55.1602C96.0056 55.5489 97.0645 56.2042 97.9325 57.0739C98.8005 57.9436 99.4536 59.0038 99.84 60.1702L101.08 63.9902C101.184 64.2855 101.376 64.5414 101.632 64.7225C101.887 64.9035 102.192 65.0007 102.505 65.0007C102.818 65.0007 103.123 64.9035 103.378 64.7225C103.634 64.5414 103.826 64.2855 103.93 63.9902L105.175 60.1702C105.563 59.0071 106.216 57.9503 107.083 57.0833C107.95 56.2163 109.007 55.5631 110.17 55.1752L113.995 53.9352C114.29 53.8317 114.546 53.639 114.727 53.3837C114.908 53.1284 115.006 52.8232 115.006 52.5102C115.006 52.1972 114.908 51.892 114.727 51.6367C114.546 51.3814 114.29 51.1887 113.995 51.0852L113.92 51.0652Z" />
-                </g>
-                <defs>
-                    <clipPath id="clip0_196_4654">
-                        <rect width="120" height="120" fill="white" />
-                    </clipPath>
-                </defs>
-            </svg>
-
-        ),
-    },
-    {
-        title: "Narrative Reporting",
-        description:
-            "Manage all reporting package needs with collaborative authoring and publishing",
-        icon: (
-            <svg className="w-20 h-20 md:w-[120px] md:h-[120px]" viewBox="0 0 120 120" fill="currentColor">
-                <path d="M20 18.205L48.89 10V41.795L20 50V18.205ZM20 64.1875L48.89 55.9825V87.7775L20 95.9825V64.1875ZM62.2225 52.69L91.11 45.555V102.865L62.225 110L62.2225 52.69Z" stroke="#D4AF37" />
-            </svg>
-        ),
-    },
-];
-
 const Services = () => {
-
     const { locale } = useLocale();
     const currentLocale = locale as AppLocale;
     const content = servicesContent.content;
-
-    const [page, setPage] = useState(0);
-    const [view, setView] = useState("desktop");
-
-    /**
-     * ✅ Merge translations INTO your UI data
-     * UI stays untouched, only text is injected.
-     */
-    const localizedServices = useMemo(() => {
-        return SERVICES.map((service, index) => ({
-            ...service,
-            title: content.items[index].title[currentLocale],
-            description: content.items[index].description[currentLocale],
-        }));
-    }, [currentLocale, content]);
-
-    useEffect(() => {
-        const checkView = () => {
-            if (window.innerWidth < 640) setView("mobile");
-            else if (window.innerWidth < 1024) setView("tab");
-            else setView("desktop");
-        };
-
-        checkView();
-        window.addEventListener("resize", checkView);
-        return () => window.removeEventListener("resize", checkView);
-    }, []);
-
-    let ITEMS_PER_PAGE = 3;
-    let totalPages = Math.ceil(localizedServices.length / ITEMS_PER_PAGE);
-
-    if (view === "mobile") {
-        ITEMS_PER_PAGE = 2;
-        totalPages = Math.ceil(localizedServices.length / ITEMS_PER_PAGE);
-    } else if (view === "tab") {
-        ITEMS_PER_PAGE = 2;
-        totalPages = 3;
-    }
-
-    const visibleServices =
-        view === "tab"
-            ? localizedServices.slice(page * 2, page * 2 + 2)
-            : localizedServices.slice(
-                page * ITEMS_PER_PAGE,
-                page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-            );
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setPage((prev) => (prev + 1) % totalPages);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [totalPages]);
+    const router = useRouter();
 
     return (
-        <div id="services" className="flex flex-col items-center justify-center px-4 py-8 md:py-0">
-            {/* ✅ Heading translated */}
-            <h3 className="text-black mt-7 md:mt-10 text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold text-center">
-                {content.heading[currentLocale]}{" "}
-                <span className="text-[#D4AF37]">
-                    {content.headingHighlight[currentLocale]}
-                </span>{" "}
-                {content.headingEnd[currentLocale]}
-            </h3>
+        <>
+            <style>{`
+                @keyframes am-bar-up {
+                    from { transform: scaleY(0); }
+                    to   { transform: scaleY(1); }
+                }
+                @keyframes am-draw-line {
+                    from { stroke-dashoffset: 400; }
+                    to   { stroke-dashoffset: 0; }
+                }
+                @keyframes am-link-flow {
+                    0%   { stroke-dashoffset: 40; }
+                    100% { stroke-dashoffset: 0; }
+                }
+                @keyframes am-brain-line {
+                    0%,100% { opacity: .15; }
+                    50%     { opacity: .8; }
+                }
+                @keyframes am-float-icon {
+                    0%,100% { transform: translateY(0); }
+                    50%     { transform: translateY(-5px); }
+                }
+                .am-svc-card {
+                    background: #fff;
+                    border-radius: 20px;
+                    border: 1px solid #E8E4D8;
+                    overflow: hidden;
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+                }
+                .am-svc-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 18px 44px rgba(12,31,74,.1);
+                    border-color: #C9A84C;
+                }
+                .am-icon-box {
+                    animation: am-float-icon 3.5s ease-in-out infinite;
+                    width: 40px; height: 40px;
+                    background: #fff;
+                    border: 1.5px solid #E8D99A;
+                    border-radius: 11px;
+                    display: flex; align-items: center; justify-content: center;
+                    box-shadow: 0 3px 10px rgba(201,168,76,.2);
+                }
+                .am-arr { transition: transform .2s ease; }
+                .am-svc-card:hover .am-arr { transform: translateX(4px); }
+            `}</style>
 
-            {/* ✅ Subheading translated */}
-            <p className="text-[#6B7280] text-base sm:text-[14px] md:text-base text-center px-4">
-                {content.subheading[currentLocale]}
-            </p>
+            <section id="services" className="px-4 py-14 md:py-20">
+                <div className="w-[90%] mx-auto">
 
-            {/* SERVICES GRID — unchanged */}
-            <div className={`mt-8 grid grid-cols-1 sm:grid-cols-2 ${view === 'desktop' ? 'lg:grid-cols-3' : ''} gap-6 w-full lg:max-w-7xl md:max-w-5xl`}>
-                {visibleServices.map((service, index) => (
-                    <Card
-                        key={page * ITEMS_PER_PAGE + index}
-                        icon={service.icon}
-                        title={service.title}
-                        description={service.description}
-                    />
-                ))}
-            </div>
+                    {/* Heading — unchanged from original */}
+                    <div className="text-center mb-10 md:mb-14">
+                        <h3 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold">
+                            {content.heading[currentLocale]}{" "}
+                            <span className="text-[#D4AF37]">
+                                {content.headingHighlight[currentLocale]}
+                            </span>{" "}
+                            {content.headingEnd[currentLocale]}
+                        </h3>
+                        <p className="text-[#6B7280] text-sm md:text-base mt-3 max-w-2xl mx-auto">
+                            {content.subheading[currentLocale]}
+                        </p>
+                    </div>
 
-            {/* DOTS unchanged */}
-            <div className="flex justify-center mt-2 gap-2">
-                <div className="flex gap-2 bg-[#FFFBED] rounded-full px-4 py-2">
-                    {Array.from({ length: totalPages }).map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setPage(index)}
-                            className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300 ${page === index
-                                ? "bg-[#D4AF37] scale-125"
-                                : "bg-gray-300 hover:bg-gray-400"
-                                }`}
-                        />
-                    ))}
+                    {/* 3-column grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+
+                        {/* ── Finance ── */}
+                        <div
+                            className="am-svc-card"
+                            onClick={() => router.push(getLocalizedPath(currentLocale, "/finance-transformation"))}
+                        >
+                            {/* Animated header: rising bar chart */}
+                            <div style={{ background: "#FFFBED", padding: "20px 20px 14px", position: "relative", overflow: "hidden", borderBottom: "1px solid #EDE0A8", height: 172 }}>
+                                <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} viewBox="0 0 220 172" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                                    {/* Grid lines */}
+                                    <line x1="0" y1="43" x2="220" y2="43" stroke="#C9A84C" strokeWidth=".4" strokeDasharray="3 4" opacity=".25" />
+                                    <line x1="0" y1="86" x2="220" y2="86" stroke="#C9A84C" strokeWidth=".4" strokeDasharray="3 4" opacity=".25" />
+                                    <line x1="0" y1="129" x2="220" y2="129" stroke="#C9A84C" strokeWidth=".4" strokeDasharray="3 4" opacity=".25" />
+                                    {/* Bars */}
+                                    {[
+                                        { x: 20, y: 118, h: 44, o: 0.2, d: 0.2 },
+                                        { x: 40, y: 100, h: 62, o: 0.32, d: 0.35 },
+                                        { x: 60, y: 112, h: 50, o: 0.28, d: 0.5 },
+                                        { x: 80, y: 82, h: 80, o: 0.44, d: 0.65 },
+                                        { x: 100, y: 62, h: 100, o: 0.58, d: 0.8 },
+                                        { x: 120, y: 45, h: 117, o: 0.72, d: 0.95 },
+                                        { x: 140, y: 30, h: 132, o: 0.86, d: 1.1 },
+                                        { x: 160, y: 18, h: 144, o: 1, d: 1.25 },
+                                        { x: 180, y: 10, h: 152, o: 1, d: 1.4 },
+                                    ].map((b, i) => (
+                                        <rect key={i} x={b.x} y={b.y} width="13" height={b.h} rx="2"
+                                            fill={`rgba(201,168,76,${b.o})`}
+                                            style={{ transformOrigin: `${b.x}px 162px`, animation: `am-bar-up .6s ease-out ${b.d}s both` }}
+                                        />
+                                    ))}
+                                    {/* Trend line */}
+                                    <polyline points="26,122 46,104 66,116 86,86 106,66 126,50 146,34 166,22 186,14"
+                                        fill="none" stroke="#0C1F4A" strokeWidth="2"
+                                        strokeDasharray="400" strokeDashoffset="400"
+                                        style={{ animation: "am-draw-line 1.6s ease-out 1.5s forwards" }}
+                                        strokeLinecap="round" strokeLinejoin="round" />
+                                    <circle r="4" fill="#0C1F4A">
+                                        <animateMotion dur="2.8s" begin="3.2s" repeatCount="indefinite"
+                                            path="M26,122 C46,104 66,116 86,86 106,66 126,50 146,34 166,22 186,14" />
+                                    </circle>
+                                    <text x="190" y="11" fontSize="8" fill="#0C1F4A" fontWeight="800" opacity=".85">▲24%</text>
+                                </svg>
+                                <div style={{ position: "relative", zIndex: 2 }}>
+                                    <div className="am-icon-box">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M3 17l4-4 4 4 4-8 4 3" /><path d="M3 21h18" />
+                                        </svg>
+                                    </div>
+                                    <p style={{ fontSize: 8.5, fontWeight: 800, color: "#92660A", letterSpacing: ".1em", textTransform: "uppercase", margin: "8px 0 2px" }}>Financial Transformation</p>
+                                    <h3 style={{ fontSize: 15, fontWeight: 800, color: "#0C1F4A", margin: 0, fontFamily: "Lora,Georgia,serif", lineHeight: 1.2 }}>Oracle EPM Solutions</h3>
+                                </div>
+                            </div>
+
+                            {/* Body */}
+                            <div style={{ padding: "14px 18px", flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
+                                <p style={{ fontSize: 11.5, color: "#6B7280", margin: 0, lineHeight: 1.65 }}>
+                                    Enterprise performance management unifying planning, consolidation and reporting across your organisation.
+                                </p>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                                    {["Planning & Budgeting", "Financial Consolidation", "Account Reconciliation", "Managed Services"].map(c => (
+                                        <div key={c} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                            <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#C9A84C", flexShrink: 0 }} />
+                                            <span style={{ fontSize: 11, color: "#374151", fontWeight: 500 }}>{c}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5, marginTop: "auto" }}>
+                                    {[{ v: "40%", l: "faster close" }, { v: "150+", l: "implementations" }].map(m => (
+                                        <div key={m.l} style={{ background: "#FFFBED", border: "1px solid #EDE0A8", borderRadius: 9, padding: "8px 10px" }}>
+                                            <p style={{ fontSize: 17, fontWeight: 800, color: "#C9A84C", margin: 0, lineHeight: 1 }}>{m.v}</p>
+                                            <p style={{ fontSize: 9.5, color: "#92660A", margin: "2px 0 0" }}>{m.l}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Footer */}
+                            <div style={{ padding: "9px 18px 13px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #F0EAD6" }}>
+                                <div style={{ display: "flex", gap: 4 }}>
+                                    {["Oracle EPM", "SAP"].map(t => (
+                                        <span key={t} style={{ fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 999, background: "rgba(201,168,76,.12)", color: "#92660A", border: "1px solid rgba(201,168,76,.28)" }}>{t}</span>
+                                    ))}
+                                </div>
+                                <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 700, color: "#C9A84C" }}>
+                                    Explore <span className="am-arr">→</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ── Digital ── */}
+                        <div
+                            className="am-svc-card"
+                            onClick={() => router.push(getLocalizedPath(currentLocale, "/digital-transformation"))}
+                        >
+                            {/* Animated header: network graph */}
+                            <div style={{ background: "#F5F3EE", padding: "20px 20px 14px", position: "relative", overflow: "hidden", borderBottom: "1px solid #E2DAC8", height: 172 }}>
+                                <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} viewBox="0 0 220 172" xmlns="http://www.w3.org/2000/svg">
+                                    {/* Connection lines */}
+                                    {[
+                                        { x1: 110, y1: 86, x2: 52, y2: 38, d: 0 },
+                                        { x1: 110, y1: 86, x2: 172, y2: 42, d: 0.7 },
+                                        { x1: 110, y1: 86, x2: 48, y2: 138, d: 1.4 },
+                                        { x1: 110, y1: 86, x2: 176, y2: 132, d: 0.35 },
+                                        { x1: 110, y1: 86, x2: 110, y2: 18, d: 1 },
+                                    ].map((l, i) => (
+                                        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+                                            stroke="#0C1F4A" strokeWidth="1" strokeDasharray="8 4" opacity=".2"
+                                            style={{ animation: `am-link-flow 2.2s linear infinite ${l.d}s` }} />
+                                    ))}
+                                    {/* Gold data packets */}
+                                    <circle r="3.5" fill="#C9A84C"><animateMotion dur="1.7s" repeatCount="indefinite" path="M110,86 L52,38" /></circle>
+                                    <circle r="3.5" fill="#C9A84C"><animateMotion dur="1.9s" begin=".6s" repeatCount="indefinite" path="M110,86 L172,42" /></circle>
+                                    <circle r="3.5" fill="#C9A84C"><animateMotion dur="1.8s" begin="1.2s" repeatCount="indefinite" path="M110,86 L48,138" /></circle>
+                                    <circle r="3.5" fill="#C9A84C"><animateMotion dur="2s" begin=".3s" repeatCount="indefinite" path="M110,86 L176,132" /></circle>
+                                    {/* Hub */}
+                                    <circle cx="110" cy="86" r="14" fill="rgba(12,31,74,.08)" stroke="#0C1F4A" strokeWidth="1.5" />
+                                    <circle cx="110" cy="86" r="7" fill="#0C1F4A" />
+                                    <circle cx="110" cy="86" fill="none" stroke="#C9A84C" strokeWidth="1.2" opacity=".6">
+                                        <animate attributeName="r" from="14" to="32" dur="2.4s" repeatCount="indefinite" />
+                                        <animate attributeName="opacity" from=".6" to="0" dur="2.4s" repeatCount="indefinite" />
+                                    </circle>
+                                    {/* Satellite nodes */}
+                                    {[
+                                        { cx: 52, cy: 38, label: "Cloud", ly: 26, d: 0 },
+                                        { cx: 172, cy: 42, label: "ERP", ly: 30, d: 0.5 },
+                                        { cx: 48, cy: 138, label: "API", ly: 156, d: 1 },
+                                        { cx: 176, cy: 132, label: "Data", ly: 150, d: 0.8 },
+                                        { cx: 110, cy: 18, label: "", ly: 0, d: 0.3 },
+                                    ].map((n, i) => (
+                                        <g key={i}>
+                                            <circle cx={n.cx} cy={n.cy} r="9" fill="rgba(12,31,74,.07)" stroke="#0C1F4A" strokeWidth="1.2" />
+                                            <circle cx={n.cx} cy={n.cy} r="5" fill="#0C1F4A">
+                                                <animate attributeName="opacity" values=".5;1;.5" dur={`${2.2 + i * 0.2}s`} begin={`${n.d}s`} repeatCount="indefinite" />
+                                            </circle>
+                                            {n.label && <text x={n.cx} y={n.ly} textAnchor="middle" fontSize="7" fill="#0C1F4A" fontWeight="700" opacity=".6">{n.label}</text>}
+                                        </g>
+                                    ))}
+                                </svg>
+                                <div style={{ position: "relative", zIndex: 2 }}>
+                                    <div className="am-icon-box" style={{ animationDelay: ".7s" }}>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /><path d="M7 10h2l2-3 2 6 2-3h2" />
+                                        </svg>
+                                    </div>
+                                    <p style={{ fontSize: 8.5, fontWeight: 800, color: "#92660A", letterSpacing: ".1em", textTransform: "uppercase", margin: "8px 0 2px" }}>Digital Transformation</p>
+                                    <h3 style={{ fontSize: 15, fontWeight: 800, color: "#0C1F4A", margin: 0, fontFamily: "Lora,Georgia,serif", lineHeight: 1.2 }}>Modern Technology Backbone</h3>
+                                </div>
+                            </div>
+
+                            {/* Body */}
+                            <div style={{ padding: "14px 18px", flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
+                                <p style={{ fontSize: 11.5, color: "#6B7280", margin: 0, lineHeight: 1.65 }}>
+                                    Cloud migration, ERP and data modernisation that transforms how your business operates and competes.
+                                </p>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                                    {["Cloud Migration", "ERP Implementation", "Data & Analytics", "API Integration"].map(c => (
+                                        <div key={c} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                            <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#C9A84C", flexShrink: 0 }} />
+                                            <span style={{ fontSize: 11, color: "#374151", fontWeight: 500 }}>{c}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5, marginTop: "auto" }}>
+                                    {[{ v: "60%", l: "less manual ops" }, { v: "3.2×", l: "time-to-market" }].map(m => (
+                                        <div key={m.l} style={{ background: "#FFFBED", border: "1px solid #EDE0A8", borderRadius: 9, padding: "8px 10px" }}>
+                                            <p style={{ fontSize: 17, fontWeight: 800, color: "#C9A84C", margin: 0, lineHeight: 1 }}>{m.v}</p>
+                                            <p style={{ fontSize: 9.5, color: "#92660A", margin: "2px 0 0" }}>{m.l}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Footer */}
+                            <div style={{ padding: "9px 18px 13px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #EAE4D4" }}>
+                                <div style={{ display: "flex", gap: 4 }}>
+                                    {["Cloud", "ERP"].map(t => (
+                                        <span key={t} style={{ fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 999, background: "rgba(201,168,76,.12)", color: "#92660A", border: "1px solid rgba(201,168,76,.28)" }}>{t}</span>
+                                    ))}
+                                </div>
+                                <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 700, color: "#C9A84C" }}>
+                                    Explore <span className="am-arr">→</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ── AI ── */}
+                        <div
+                            className="am-svc-card"
+                            onClick={() => router.push(getLocalizedPath(currentLocale, "/ai-automations"))}
+                        >
+                            {/* Animated header: neural network on navy */}
+                            <div style={{ background: "#0C1F4A", padding: "20px 20px 14px", position: "relative", overflow: "hidden", borderBottom: "1px solid #1A3570", height: 172 }}>
+                                <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} viewBox="0 0 220 172" xmlns="http://www.w3.org/2000/svg">
+                                    {/* Layer connections */}
+                                    {[
+                                        [28,36,88,26,0],[28,36,88,66,.3],[28,36,88,106,.6],
+                                        [28,86,88,26,.15],[28,86,88,66,.45],[28,86,88,106,.75],
+                                        [28,136,88,66,.9],[28,136,88,106,.2],
+                                        [88,26,152,46,.5],[88,66,152,46,.8],[88,66,152,96,.1],
+                                        [88,106,152,96,.4],[88,106,152,140,.7],
+                                        [152,46,198,66,1],[152,96,198,66,.55],
+                                        [152,96,198,118,.85],[152,140,198,118,.35],
+                                    ].map(([x1,y1,x2,y2,d],i) => (
+                                        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+                                            stroke="#C9A84C" strokeWidth=".9" opacity=".2"
+                                            style={{ animation: `am-brain-line 2s ease-in-out infinite ${d}s` }} />
+                                    ))}
+                                    {/* Signal pulses */}
+                                    <circle r="3" fill="#C9A84C" opacity=".9"><animateMotion dur="1.5s" repeatCount="indefinite" path="M28,86 L88,26 L152,46 L198,66" /></circle>
+                                    <circle r="3" fill="#C9A84C" opacity=".9"><animateMotion dur="1.7s" begin=".5s" repeatCount="indefinite" path="M28,36 L88,106 L152,96 L198,118" /></circle>
+                                    <circle r="3" fill="#C9A84C" opacity=".9"><animateMotion dur="1.6s" begin="1s" repeatCount="indefinite" path="M28,136 L88,66 L152,140 L198,118" /></circle>
+                                    {/* Layer 1 nodes */}
+                                    {[[28,36,0],[28,86,.35],[28,136,.7]].map(([cx,cy,d],i) => (
+                                        <circle key={i} cx={cx} cy={cy} r="6" fill="#C9A84C">
+                                            <animate attributeName="opacity" values=".45;1;.45" dur="1.9s" begin={`${d}s`} repeatCount="indefinite" />
+                                        </circle>
+                                    ))}
+                                    {/* Layer 2 nodes */}
+                                    {[[88,26,.2],[88,66,.55],[88,106,.9]].map(([cx,cy,d],i) => (
+                                        <circle key={i} cx={cx} cy={cy} r="7" fill="#C9A84C">
+                                            <animate attributeName="opacity" values=".35;1;.35" dur="2.1s" begin={`${d}s`} repeatCount="indefinite" />
+                                        </circle>
+                                    ))}
+                                    {/* Layer 3 nodes */}
+                                    {[[152,46,.4],[152,96,.75],[152,140,1.1]].map(([cx,cy,d],i) => (
+                                        <circle key={i} cx={cx} cy={cy} r="7" fill="#C9A84C">
+                                            <animate attributeName="opacity" values=".35;1;.35" dur="2s" begin={`${d}s`} repeatCount="indefinite" />
+                                        </circle>
+                                    ))}
+                                    {/* Output nodes */}
+                                    <circle cx="198" cy="66" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin=".6s" repeatCount="indefinite" /></circle>
+                                    <circle cx="198" cy="118" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin="1s" repeatCount="indefinite" /></circle>
+                                    {/* Labels */}
+                                    <text x="28" y="154" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">Input</text>
+                                    <text x="90" y="124" dy="12" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">Hidden</text>
+                                    <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">Output</text>
+                                </svg>
+                                <div style={{ position: "relative", zIndex: 2 }}>
+                                    <div style={{ animationDelay: "1.2s", width: 40, height: 40, background: "rgba(255,255,255,.1)", border: "1.5px solid rgba(201,168,76,.45)", borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", animation: "am-float-icon 3.5s ease-in-out infinite 1.2s" }}>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="9" y="7" width="6" height="10" rx="1" /><path d="M5 10H9M15 10H19M5 14H9M15 14H19M11 4V7M13 4V7M11 17V20M13 17V20" />
+                                        </svg>
+                                    </div>
+                                    <p style={{ fontSize: 8.5, fontWeight: 800, color: "rgba(201,168,76,.75)", letterSpacing: ".1em", textTransform: "uppercase", margin: "8px 0 2px" }}>AI Automations</p>
+                                    <h3 style={{ fontSize: 15, fontWeight: 800, color: "#fff", margin: 0, fontFamily: "Lora,Georgia,serif", lineHeight: 1.2 }}>Intelligent Automation at Scale</h3>
+                                </div>
+                            </div>
+
+                            {/* Body */}
+                            <div style={{ padding: "14px 18px", flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
+                                <p style={{ fontSize: 11.5, color: "#6B7280", margin: 0, lineHeight: 1.65 }}>
+                                    RPA, generative AI and machine learning that eliminate manual effort and create competitive advantage.
+                                </p>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                                    {["Robotic Process Automation", "Generative AI Integration", "AI-Powered Analytics", "Intelligent Doc Processing"].map(c => (
+                                        <div key={c} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                            <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#C9A84C", flexShrink: 0 }} />
+                                            <span style={{ fontSize: 11, color: "#374151", fontWeight: 500 }}>{c}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5, marginTop: "auto" }}>
+                                    {[{ v: "70%", l: "faster processing" }, { v: "90%", l: "fewer errors" }].map(m => (
+                                        <div key={m.l} style={{ background: "#FFFBED", border: "1px solid #EDE0A8", borderRadius: 9, padding: "8px 10px" }}>
+                                            <p style={{ fontSize: 17, fontWeight: 800, color: "#C9A84C", margin: 0, lineHeight: 1 }}>{m.v}</p>
+                                            <p style={{ fontSize: 9.5, color: "#92660A", margin: "2px 0 0" }}>{m.l}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Footer */}
+                            <div style={{ padding: "9px 18px 13px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #F0EAD6" }}>
+                                <div style={{ display: "flex", gap: 4 }}>
+                                    {["RPA", "GenAI"].map(t => (
+                                        <span key={t} style={{ fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 999, background: "rgba(201,168,76,.12)", color: "#92660A", border: "1px solid rgba(201,168,76,.28)" }}>{t}</span>
+                                    ))}
+                                </div>
+                                <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 700, color: "#C9A84C" }}>
+                                    Explore <span className="am-arr">→</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-
-            {/* CTA translated */}
-            <Link href={getLocalizedPath(currentLocale, "/finance-transformation")}>
-                <div className="mt-6 mb-5 rounded-3xl w-32 md:w-40 h-10 text-black bg-[#D4AF37] flex items-center justify-center text-sm md:text-[16px] font-medium cursor-pointer hover:scale-105 transition">
-                    {content.cta[currentLocale]}
-                </div>
-            </Link>
-        </div>
+            </section>
+        </>
     );
 };
 
