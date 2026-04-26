@@ -1,11 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useIntlayer } from "next-intlayer";
 import { useState } from "react";
 
 const DigitalMarketingServices = () => {
+    const router = useRouter();
     const content = useIntlayer("digitalMarketingServices");
     const [activeCard, setActiveCard] = useState<number | null>(null);
+
+    const serviceRoutes: { [key: number]: string } = {
+        1: "/services/video-production",
+        2: "/services/social-media",
+        3: "/services/branding-design",
+        4: "/services/web-development",
+        5: "/services/content-marketing",
+    };
 
     const services = [
         {
@@ -392,6 +403,7 @@ const DigitalMarketingServices = () => {
 
                                         {/* CTA Button */}
                                         <button 
+                                            onClick={() => router.push(getLocalizedPath("en", serviceRoutes[service.id]))}
                                             className="relative w-full py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-[1.02]"
                                             style={{ backgroundColor: service.accentColor }}
                                         >

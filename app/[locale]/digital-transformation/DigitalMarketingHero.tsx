@@ -31,7 +31,6 @@ const DigitalMarketingHero = () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Enhanced particle mesh with wave distortion
         const particles: Array<{
             x: number;
             y: number;
@@ -58,7 +57,6 @@ const DigitalMarketingHero = () => {
             time += 0.008;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Update particles with elegant wave motion
             particles.forEach((p) => {
                 const distance = Math.sqrt(
                     Math.pow(p.baseX - canvas.width / 2, 2) + 
@@ -70,7 +68,6 @@ const DigitalMarketingHero = () => {
                 p.y = p.baseY + wave2;
             });
 
-            // Draw connections with gradient
             particles.forEach((p, i) => {
                 particles.slice(i + 1).forEach((p2) => {
                     const dx = p.x - p2.x;
@@ -93,7 +90,6 @@ const DigitalMarketingHero = () => {
                     }
                 });
 
-                // Draw particle with glow
                 const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 3);
                 gradient.addColorStop(0, 'rgba(201, 168, 76, 0.6)');
                 gradient.addColorStop(1, 'rgba(201, 168, 76, 0)');
@@ -138,12 +134,6 @@ const DigitalMarketingHero = () => {
                         transform: translate(-20px, 20px) scale(0.9);
                     }
                 }
-                @keyframes travel-light {
-                    0% { offset-distance: 0%; opacity: 0; }
-                    10% { opacity: 1; }
-                    90% { opacity: 1; }
-                    100% { offset-distance: 100%; opacity: 0; }
-                }
                 @keyframes globe-rotate {
                     from { transform: perspective(1000px) rotateY(0deg); }
                     to { transform: perspective(1000px) rotateY(360deg); }
@@ -168,27 +158,90 @@ const DigitalMarketingHero = () => {
                     0% { transform: translateX(-100%) skewX(-15deg); }
                     100% { transform: translateX(200%) skewX(-15deg); }
                 }
+                @keyframes chart-grow {
+                    0% { transform: scaleY(0); transform-origin: bottom; }
+                    100% { transform: scaleY(1); transform-origin: bottom; }
+                }
+                @keyframes icon-float {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-20px) rotate(5deg); }
+                }
+                @keyframes pulse-glow {
+                    0%, 100% { filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.3)); }
+                    50% { filter: drop-shadow(0 0 25px rgba(201, 168, 76, 0.6)); }
+                }
             `}</style>
 
             <section className="relative overflow-hidden bg-gradient-to-br from-[#050A1E] via-[#0C1F4A] to-[#08111A] min-h-screen flex items-center">
-                {/* Enhanced particle mesh canvas */}
                 <canvas 
                     ref={canvasRef}
                     className="absolute inset-0 pointer-events-none"
                     style={{ opacity: 0.8 }}
                 />
 
-                {/* Animated gradient layers */}
                 <div 
                     className="absolute inset-0 opacity-40"
                     style={{
-                        backgroundImage: 'radial-gradient(ellipse at 30% 40%, rgba(201, 168, 76, 0.2) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(168, 85, 247, 0.15) 0%, transparent 50%)',
+                        backgroundImage: 'radial-gradient(ellipse at 30% 40%, rgba(201, 168, 76, 0.2) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)',
                         backgroundSize: '200% 200%',
                         animation: 'gradient-flow 25s ease infinite',
                     }}
                 />
 
-                {/* Morphing liquid blob - Right */}
+                {/* Animated Rising Chart - Left */}
+                <div 
+                    className="absolute left-[8%] top-1/3 w-32 h-32 pointer-events-none opacity-40"
+                    style={{ animation: 'icon-float 7s ease-in-out infinite' }}
+                >
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                        {[30, 50, 70, 90, 60].map((height, i) => (
+                            <rect
+                                key={i}
+                                x={10 + i * 16}
+                                y={95 - height}
+                                width="12"
+                                height={height}
+                                fill="#C9A84C"
+                                opacity={0.6 + i * 0.1}
+                                style={{ animation: `chart-grow 2s ease-out ${i * 0.2}s infinite` }}
+                            />
+                        ))}
+                    </svg>
+                </div>
+
+                {/* Hashtag - Top Right */}
+                <div 
+                    className="absolute top-[15%] right-[15%] w-24 h-24 pointer-events-none opacity-45"
+                    style={{ animation: 'icon-float 6s ease-in-out infinite 1s, pulse-glow 3s ease-in-out infinite' }}
+                >
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                        <line x1="30" y1="20" x2="20" y2="80" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round" />
+                        <line x1="60" y1="20" x2="50" y2="80" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round" />
+                        <line x1="70" y1="35" x2="10" y2="45" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round" />
+                        <line x1="90" y1="55" x2="30" y2="65" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round" />
+                    </svg>
+                </div>
+
+                {/* Cursor Click - Bottom Right */}
+                <div 
+                    className="absolute bottom-[20%] right-[10%] w-20 h-20 pointer-events-none opacity-50"
+                    style={{ animation: 'icon-float 8s ease-in-out infinite 2s' }}
+                >
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                        <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGrad)" stroke="#C9A84C" strokeWidth="2" />
+                        <circle cx="70" cy="40" r="8" fill="none" stroke="#C9A84C" strokeWidth="2" opacity="0.8">
+                            <animate attributeName="r" values="8;12;8" dur="1.5s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" repeatCount="indefinite" />
+                        </circle>
+                        <defs>
+                            <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(201, 168, 76, 0.3)" />
+                                <stop offset="100%" stopColor="rgba(201, 168, 76, 0.1)" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
                 <div 
                     className="absolute right-[8%] top-[25%] w-96 h-96 pointer-events-none opacity-30"
                     style={{
@@ -198,7 +251,6 @@ const DigitalMarketingHero = () => {
                     }}
                 />
 
-                {/* Interactive 3D Globe with traveling lights - Right Side */}
                 <div 
                     className="absolute right-[10%] top-1/2 -translate-y-1/2 w-96 h-96 pointer-events-none opacity-50"
                     style={{ 
@@ -209,18 +261,20 @@ const DigitalMarketingHero = () => {
                 >
                     <svg viewBox="0 0 200 200" className="w-full h-full">
                         <defs>
-                            {/* Path for traveling light */}
                             <path id="equatorPath" d="M 20,100 A 80,80 0 1,1 20,100.1" fill="none" />
                             <path id="meridianPath" d="M 100,20 Q 60,100 100,180 T 100,20" fill="none" />
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
                         </defs>
                         
-                        {/* Longitude line */}
                         <ellipse cx="100" cy="100" rx="40" ry="80" fill="none" stroke="rgba(201, 168, 76, 0.25)" strokeWidth="1" />
-                        
-                        {/* Equator */}
                         <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(201, 168, 76, 0.4)" strokeWidth="1.5" />
                         
-                        {/* Traveling light on equator */}
                         <circle r="3" fill="#C9A84C" filter="url(#glow)">
                             <animateMotion dur="6s" repeatCount="indefinite">
                                 <mpath href="#equatorPath" />
@@ -228,26 +282,15 @@ const DigitalMarketingHero = () => {
                             <animate attributeName="opacity" values="0;1;1;0" dur="6s" repeatCount="indefinite" />
                         </circle>
                         
-                        {/* Traveling light on meridian */}
-                        <circle r="3" fill="#A855F7" filter="url(#glow)">
+                        <circle r="3" fill="#3B82F6" filter="url(#glow)">
                             <animateMotion dur="5s" repeatCount="indefinite">
                                 <mpath href="#meridianPath" />
                             </animateMotion>
                             <animate attributeName="opacity" values="0;1;1;0" dur="5s" repeatCount="indefinite" />
                         </circle>
-                        
-                        {/* Glow filter */}
-                        <filter id="glow">
-                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                            <feMerge>
-                                <feMergeNode in="coloredBlur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
                     </svg>
                 </div>
 
-                {/* Floating concentric circles with shimmer - Top Left */}
                 <div 
                     className="absolute top-[20%] left-[15%] w-40 h-40 pointer-events-none opacity-25"
                     style={{ animation: 'float-elegant 10s ease-in-out infinite' }}
@@ -255,7 +298,7 @@ const DigitalMarketingHero = () => {
                     <svg viewBox="0 0 100 100" className="w-full h-full">
                         {[45, 35, 25].map((r, i) => (
                             <circle 
-                                key={`circle-${i}`} 
+                                key={i} 
                                 cx="50" 
                                 cy="50" 
                                 r={r} 
@@ -275,52 +318,36 @@ const DigitalMarketingHero = () => {
                     </svg>
                 </div>
 
-                {/* Expanding ripple effect - Bottom Left */}
                 <div className="absolute bottom-[20%] left-[20%] w-64 h-64 pointer-events-none">
                     {[0, 1, 2].map((i) => (
                         <div
-                            key={`ripple-${i}`}
+                            key={i}
                             className="absolute inset-0 rounded-full border-2 border-[#C9A84C]"
-                            style={{
-                                animation: `ripple-expand 4s ease-out infinite ${i * 1.3}s`,
-                            }}
+                            style={{ animation: `ripple-expand 4s ease-out infinite ${i * 1.3}s` }}
                         />
                     ))}
                 </div>
 
-                {/* Elegant light rays with shimmer - Right Side */}
-                <div className="absolute right-0 top-1/3 w-[600px] h-px pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-l from-[#C9A84C]/40 via-[#C9A84C]/20 to-transparent" />
-                    <div 
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent w-32"
-                        style={{ animation: 'shimmer 3s ease-in-out infinite' }}
-                    />
-                </div>
-                <div className="absolute right-0 top-1/2 w-[500px] h-px pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-l from-[#A855F7]/30 via-[#A855F7]/15 to-transparent" />
-                    <div 
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent w-32"
-                        style={{ animation: 'shimmer 4s ease-in-out infinite 1s' }}
-                    />
-                </div>
-                <div className="absolute right-0 top-2/3 w-[550px] h-px pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-l from-[#C9A84C]/35 via-[#C9A84C]/18 to-transparent" />
-                    <div 
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/55 to-transparent w-32"
-                        style={{ animation: 'shimmer 3.5s ease-in-out infinite 2s' }}
-                    />
-                </div>
+                {[
+                    { top: '33%', width: '600px', color: '#C9A84C', opacity: '40', delay: '0s' },
+                    { top: '50%', width: '500px', color: '#3B82F6', opacity: '30', delay: '1s' },
+                    { top: '67%', width: '550px', color: '#C9A84C', opacity: '35', delay: '2s' },
+                ].map((ray, i) => (
+                    <div key={i} className="absolute right-0 h-px pointer-events-none overflow-hidden" style={{ top: ray.top, width: ray.width }}>
+                        <div className="absolute inset-0" style={{ background: `linear-gradient(to left, rgba(${ray.color === '#C9A84C' ? '201, 168, 76' : '59, 130, 246'}, 0.${ray.opacity}), transparent)` }} />
+                        <div 
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent w-32"
+                            style={{ animation: `shimmer 3.5s ease-in-out infinite ${ray.delay}` }}
+                        />
+                    </div>
+                ))}
 
-                {/* Main content */}
                 <div 
                     className="relative z-10 w-[90%] max-w-6xl mx-auto text-center py-20"
                     style={{ animation: 'elegant-rise 1.2s ease-out' }}
                 >
-                    {/* Badge */}
                     <div className="inline-flex items-center gap-3 px-6 py-3 mb-10 rounded-full bg-white/5 border border-[#C9A84C]/20 backdrop-blur-xl relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-                            style={{ animation: 'shimmer 4s ease-in-out infinite' }}
-                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" style={{ animation: 'shimmer 4s ease-in-out infinite' }} />
                         <div className="relative w-2 h-2">
                             <div className="absolute inset-0 rounded-full bg-[#C9A84C]" />
                             <div className="absolute inset-0 rounded-full bg-[#C9A84C] animate-ping" />
@@ -328,17 +355,13 @@ const DigitalMarketingHero = () => {
                         <span className="relative text-[#C9A84C] text-sm font-semibold tracking-wide">Powered by Innovation</span>
                     </div>
 
-                    {/* Main heading */}
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "Lora, Georgia, serif" }}>
                         {content.heroTitle}
                         <br />
                         <span className="relative inline-block mt-4">
                             <span 
                                 className="bg-gradient-to-r from-[#C9A84C] via-[#D4AF37] to-[#C9A84C] bg-clip-text text-transparent"
-                                style={{
-                                    backgroundSize: '200% auto',
-                                    animation: 'gradient-flow 5s ease infinite',
-                                }}
+                                style={{ backgroundSize: '200% auto', animation: 'gradient-flow 5s ease infinite' }}
                             >
                                 {content.heroSubtitle}
                             </span>
@@ -351,12 +374,10 @@ const DigitalMarketingHero = () => {
                         </span>
                     </h1>
 
-                    {/* Description */}
                     <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-14 leading-relaxed font-light">
                         {content.heroDescription}
                     </p>
 
-                    {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
                             onClick={() => {
@@ -386,17 +407,13 @@ const DigitalMarketingHero = () => {
                         </button>
                     </div>
 
-                    {/* Stats */}
                     <div className="grid grid-cols-3 gap-12 max-w-4xl mx-auto">
                         {[
-                            { value: "500+", label: "Projects Delivered" },
+                            { value: "200%", label: "Return on Investment" },
                             { value: "98%", label: "Client Satisfaction" },
-                            { value: "50+", label: "Industry Awards" },
+                            { value: "300%", label: "Traffic Growth" },
                         ].map((stat, i) => (
-                            <div 
-                                key={`stat-${i}`}
-                                className="group relative"
-                            >
+                            <div key={i} className="group relative">
                                 <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-[#C9A84C] to-[#D4AF37] bg-clip-text text-transparent mb-3 transition-transform duration-300 group-hover:scale-110">
                                     {stat.value}
                                 </div>
@@ -409,7 +426,6 @@ const DigitalMarketingHero = () => {
                     </div>
                 </div>
 
-                {/* Scroll indicator */}
                 <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
                     <div className="flex flex-col items-center gap-3 animate-bounce">
                         <span className="text-[#C9A84C]/50 text-xs uppercase tracking-widest font-light">Scroll</span>
