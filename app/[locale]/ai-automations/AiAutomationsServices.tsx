@@ -1,11 +1,24 @@
 "use client";
 
+import { useRouter, useParams } from "next/navigation";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useIntlayer } from "next-intlayer";
 import { useState } from "react";
 
 const AiAutomationsServices = () => {
+    const router = useRouter();
+    const params = useParams();
+    const locale = (params?.locale as string) || "en";
     const content = useIntlayer("aiAutomations");
     const [activeCard, setActiveCard] = useState<number | null>(null);
+
+    const serviceRoutes: { [key: number]: string } = {
+        1: "/services/machine-learning",
+        2: "/services/rpa",
+        3: "/services/nlp",
+        4: "/services/computer-vision",
+        5: "/services/generative-ai",
+    };
 
     const services = [
         {
@@ -350,6 +363,7 @@ const AiAutomationsServices = () => {
 
                                         {/* Learn more button */}
                                         <button 
+                                            onClick={() => router.push(getLocalizedPath(locale, serviceRoutes[service.id]))}
                                             className="mt-6 px-6 py-3 rounded-xl text-sm font-semibold text-white relative overflow-hidden group/btn transition-all duration-300"
                                             style={{
                                                 background: `linear-gradient(135deg, ${service.accentColor}20 0%, ${service.accentColor}10 100%)`,
