@@ -9,39 +9,57 @@ const faqContent = {
     }),
 
     faq1Question: t({
-      en: "What is the typical timeline for an EPM implementation?",
-      ar: "ما المدة الزمنية المعتادة لتنفيذ نظام EPM؟",
+      en: "What services does The A&M International offer?",
+      ar: "What services does The A&M International offer?",
     }),
     faq1Answer: t({
-      en: "Most EPM implementations take 8-12 weeks from kickoff to go-live, depending on complexity and data sources. We'll provide a detailed timeline during the discovery phase.",
-      ar: "تستغرق معظم عمليات تنفيذ EPM من 8 إلى 12 أسبوعًا من بدء المشروع حتى الإطلاق، وذلك بحسب مستوى التعقيد ومصادر البيانات. سنقدم جدولًا زمنيًا مفصلًا خلال مرحلة الاستكشاف.",
+      en: "We offer Digital Marketing, UI/UX Design, Web Development, Branding, Enterprise Performance Management (EPM), and AI-powered solutions tailored to business needs.",
+      ar: "We offer Digital Marketing, UI/UX Design, Web Development, Branding, Enterprise Performance Management (EPM), and AI-powered solutions tailored to business needs.",
     }),
 
     faq2Question: t({
-      en: "How does the 10% donation program work?",
-      ar: "كيف يعمل برنامج التبرع بنسبة 10%؟",
+      en: "Do you work with clients outside India?",
+      ar: "Do you work with clients outside India?",
     }),
     faq2Answer: t({
-      en: "For every project we complete, we donate 10% of the profits to charitable organizations focused on education and community development. Our clients can also suggest causes they'd like us to support.",
-      ar: "لكل مشروع ننجزه، نتبرع بنسبة 10% من الأرباح لمنظمات خيرية تركز على التعليم وتنمية المجتمع. ويمكن لعملائنا أيضًا اقتراح الجهات التي يودون دعمها.",
+      en: "Yes. We work with clients globally, including the UAE, United States, and other international markets.",
+      ar: "Yes. We work with clients globally, including the UAE, United States, and other international markets.",
     }),
 
     faq3Question: t({
-      en: "Do you offer ongoing support after implementation?",
-      ar: "هل تقدمون دعمًا مستمرًا بعد التنفيذ؟",
+      en: "How long does a typical project take?",
+      ar: "How long does a typical project take?",
     }),
     faq3Answer: t({
-      en: "Yes, we provide comprehensive post-implementation support including technical assistance, user training, system updates, and regular health checks to ensure your EPM Suite continues to perform optimally.",
-      ar: "نعم، نوفر دعمًا شاملًا بعد التنفيذ يشمل المساندة الفنية، وتدريب المستخدمين، وتحديثات النظام، وفحوصات دورية لضمان استمرار عمل حزمة EPM بأفضل أداء ممكن.",
+      en: "Project timelines vary depending on scope, but most projects range between 2 to 8 weeks.",
+      ar: "Project timelines vary depending on scope, but most projects range between 2 to 8 weeks.",
     }),
 
     faq4Question: t({
-      en: "When was Webflow officially launched?",
-      ar: "متى تم إطلاق Webflow رسميًا؟",
+      en: "Do you provide ongoing support after project completion?",
+      ar: "Do you provide ongoing support after project completion?",
     }),
     faq4Answer: t({
-      en: "Webflow was officially launched in 2013 as a visual web design platform that enables designers to build responsive websites without writing code. It has since grown into a powerful platform used by thousands of businesses worldwide.",
-      ar: "تم إطلاق Webflow رسميًا في عام 2013 كمنصة تصميم مواقع مرئية تُمكّن المصممين من إنشاء مواقع متجاوبة دون كتابة كود. ومنذ ذلك الحين تطورت لتصبح منصة قوية تستخدمها آلاف الشركات حول العالم.",
+      en: "Yes, we offer maintenance, updates, and long-term support depending on client requirements.",
+      ar: "Yes, we offer maintenance, updates, and long-term support depending on client requirements.",
+    }),
+
+    faq5Question: t({
+      en: "How do I get started?",
+      ar: "How do I get started?",
+    }),
+    faq5Answer: t({
+      en: "You can reach out through our Contact page or email us at am@theaminternational.com.",
+      ar: "You can reach out through our Contact page or email us at am@theaminternational.com.",
+    }),
+
+    faq6Question: t({
+      en: "DO YOU OFFER ONGOING SUPPORT AFTER A PROJECT IS DELIVERED?",
+      ar: "DO YOU OFFER ONGOING SUPPORT AFTER A PROJECT IS DELIVERED?",
+    }),
+    faq6Answer: t({
+      en: "Yes. Most of our clients continue with us through monthly support and growth retainers — covering everything from website maintenance and security updates to design iterations, marketing optimization, and new feature development. We treat launch as a starting point, not a finish line, and our retention reflects that approach.",
+      ar: "Yes. Most of our clients continue with us through monthly support and growth retainers — covering everything from website maintenance and security updates to design iterations, marketing optimization, and new feature development. We treat launch as a starting point, not a finish line, and our retention reflects that approach.",
     }),
 
     joinTitle: t({

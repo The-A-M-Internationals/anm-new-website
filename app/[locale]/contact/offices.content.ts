@@ -22,12 +22,12 @@ const officesContent = {
     }),
 
     dubaiLocation: t({
-      en: "Dubai",
-      ar: "دبي",
+      en: "United Arab Emirates",
+      ar: "الإمارات العربية المتحدة",
     }),
     dubaiAddress: t({
-      en: "Office - C1 - 1F - SF6017, Ajman Free Zone C1 Building, Ajman Free Zone",
-      ar: "مكتب - C1 - 1F - SF6017، مبنى المنطقة الحرة بعجمان C1، المنطقة الحرة بعجمان",
+      en: "The A&M International, Ajman Free Zone, Ajman, United Arab Emirates",
+      ar: "A&M إنترناشيونال، منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة",
     }),
 
     indiaLocation: t({

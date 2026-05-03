@@ -4,13 +4,13 @@ const contactContent = {
   key: "contactPage",
   content: {
     heroTitle: t({
-      en: "Let’s Start the Conversation and Build Brilliance Together.",
-      ar: "لنبدأ الحوار ونبني التميز معًا.",
+      en: "Get in Touch",
+      ar: "تواصل معنا",
     }),
 
     heroDescription: t({
-      en: "Whether you're ready to transform your business with EPM, need expert IT consulting, or want to learn more about our social impact initiatives — we're here to help.",
-      ar: "سواء كنت مستعدًا لتحويل أعمالك باستخدام حلول EPM، أو تحتاج إلى استشارات تقنية متخصصة، أو ترغب في معرفة المزيد عن مبادراتنا المجتمعية — نحن هنا لمساعدتك.",
+      en: "Let's elevate your brand, elegantly. Whether you're starting a new project, exploring a partnership, or simply curious about what we do — we'd love to hear from you. Our team responds within one business day.",
+      ar: "دعنا نرفع من قيمة علامتك التجارية بأناقة. سواء كنت تبدأ مشروعًا جديدًا، أو تستكشف شراكة، أو مجرد فضول بشأن ما نقوم به — فنحن نحب أن نسمع منك. يرد فريقنا خلال يوم عمل واحد.",
     }),
 
     heroButton: t({

@@ -1,7 +1,7 @@
 import { t } from "intlayer";
 
 const contactFormContent = {
-  key: "contactForm",
+  key: "contactFormDetails",
   content: {
     formTitle: t({
       en: "Send Us a Message",
@@ -9,8 +9,8 @@ const contactFormContent = {
     }),
 
     fullName: t({
-      en: "Full Name",
-      ar: "الاسم الكامل",
+      en: "Full Name (required)",
+      ar: "الاسم الكامل (مطلوب)",
     }),
 
     fullNamePlaceholder: t({
@@ -19,8 +19,8 @@ const contactFormContent = {
     }),
 
     companyName: t({
-      en: "Company Name",
-      ar: "اسم الشركة",
+      en: "Company / Organization (optional)",
+      ar: "الشركة / المؤسسة (اختياري)",
     }),
 
     companyNamePlaceholder: t({
@@ -29,23 +29,28 @@ const contactFormContent = {
     }),
 
     workEmail: t({
-      en: "Work Email",
-      ar: "البريد الإلكتروني للعمل",
+      en: "Email Address (required)",
+      ar: "عنوان البريد الإلكتروني (مطلوب)",
     }),
 
     phoneNumber: t({
-      en: "Phone Number",
-      ar: "رقم الهاتف",
+      en: "Phone Number (optional)",
+      ar: "رقم الهاتف (اختياري)",
+    }),
+
+    phoneNumberPlaceholder: t({
+      en: "+971 50 123 4567",
+      ar: "+971 50 123 4567",
     }),
 
     interestedIn: t({
-      en: "I'm interested in",
-      ar: "أنا مهتم بـ",
+      en: "Service of Interest",
+      ar: "الخدمة المهتم بها",
     }),
 
     vision: t({
-      en: "Tell us about your vision (optional)",
-      ar: "أخبرنا عن رؤيتك (اختياري)",
+      en: "Your Message (required)",
+      ar: "رسالتك (مطلوب)",
     }),
 
     howHeard: t({
@@ -54,23 +59,23 @@ const contactFormContent = {
     }),
 
     submit: t({
-      en: "Submit Request",
-      ar: "إرسال الطلب",
+      en: "Send Message",
+      ar: "إرسال الرسالة",
     }),
 
     submitting: t({
-      en: "Submitting...",
-      ar: "جارٍ الإرسال...",
+      en: "Sending...",
+      ar: "جاري الإرسال...",
     }),
 
     success: t({
-      en: "Thank you! We will get back to you within 24 hours.",
-      ar: "شكرًا لك! سنعود إليك خلال 24 ساعة.",
+      en: "Thank you for reaching out. We've received your message and will get back to you within one business day.",
+      ar: "شكرًا لتواصلك معنا. لقد استلمنا رسالتك وسنقوم بالرد عليك خلال يوم عمل واحد.",
     }),
 
     footerNote: t({
-      en: "We'll be in touch within 24 hours. Together we can create impact.",
-      ar: "سنتواصل معك خلال 24 ساعة. معًا يمكننا إحداث تأثير.",
+      en: "Elevating the World, Elegantly.",
+      ar: "الارتقاء بالعالم، بأناقة.",
     }),
 
     demoTitle: t({
@@ -89,28 +94,28 @@ const contactFormContent = {
     }),
 
     emailUs: t({
-      en: "Email Us",
-      ar: "راسلنا عبر البريد",
+      en: "Email",
+      ar: "البريد الإلكتروني",
     }),
 
     callUs: t({
-      en: "Call Us",
-      ar: "اتصل بنا",
+      en: "Phone & WhatsApp",
+      ar: "الهاتف واتساب",
     }),
 
     callTime: t({
-      en: "Monday - Friday, 9 AM - 6 PM IST",
-      ar: "من الاثنين إلى الجمعة، من الساعة 9 صباحاً إلى 6 مساءً بتوقيت الهند",
+      en: "Available Monday – Saturday, 9:00 AM – 6:00 PM (GST)",
+      ar: "متاح من الاثنين إلى السبت، من 9:00 صباحاً إلى 6:00 مساءً (بتوقيت الخليج)",
     }),
 
     visitOffice: t({
-      en: "Visit Our Office",
-      ar: "زر مكتبنا",
+      en: "Office",
+      ar: "المكتب",
     }),
 
     office: t({
-      en: "123 Business Park, Mumbai 400001",
-      ar: "123 بيزنس بارك، مومباي 400001",
+      en: "The A&M International, Ajman Free Zone, Ajman, United Arab Emirates",
+      ar: "A&M إنترناشيونال، منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة",
     }),
 
     appointment: t({
@@ -119,60 +124,74 @@ const contactFormContent = {
     }),
 
     businessHours: t({
-      en: "Business Hours",
+      en: "Working Hours",
       ar: "ساعات العمل",
     }),
 
     businessHoursTime: t({
-      en: "9:00 AM - 6:00 PM IST",
-      ar: "من الساعة 9:00 صباحًا إلى الساعة 6:00 مساءً بتوقيت الهند",
+      en: "9:00 AM – 6:00 PM (GST)",
+      ar: "9:00 صباحاً – 6:00 مساءً (بتوقيت الخليج)",
     }),
 
     responseTime: t({
-      en: "We'll respond within 24 hours",
-      ar: "سنرد خلال 24 ساعة",
+      en: "Our team responds within one business day.",
+      ar: "يرد فريقنا خلال يوم عمل واحد.",
     }),
 
     workingDays: t({
-      en: "Monday through Friday",
-      ar: "من الاثنين إلى الجمعة",
+      en: "Monday – Saturday",
+      ar: "الاثنين – السبت",
     }),
 
-    services: t({
-      en: {
-        placeholder: "Select a service",
-        epm: "EPM Solutions",
-        consulting: "Consulting",
-        training: "Training",
-        support: "Support",
-      },
-      ar: {
-        placeholder: "اختر الخدمة",
-        epm: "حلول EPM",
-        consulting: "الاستشارات",
-        training: "التدريب",
-        support: "الدعم",
-      },
-    }),
+    services: {
+      placeholder: t({
+        en: "Select a service",
+        ar: "اختر الخدمة",
+      }),
+      epm: t({
+        en: "EPM",
+        ar: "EPM",
+      }),
+      consulting: t({
+        en: "Consulting",
+        ar: "استشارات",
+      }),
+      training: t({
+        en: "Training",
+        ar: "تدريب",
+      }),
+      support: t({
+        en: "Support",
+        ar: "دعم",
+      }),
+    },
 
-    heardFrom: t({
-      en: {
-        placeholder: "Select an option",
-        search: "Search Engine",
-        social: "Social Media",
-        referral: "Referral",
-        event: "Event",
-        other: "Other",
-      },
-      ar: {
-        placeholder: "اختر خيارًا",
-        search: "محرك البحث",
-        social: "وسائل التواصل الاجتماعي",
-        referral: "إحالة",
-        event: "فعالية",
-        other: "أخرى",
-      },
-    }),
+    heardFrom: {
+      placeholder: t({
+        en: "Select an option",
+        ar: "اختر خيارًا",
+      }),
+      search: t({
+        en: "Search Engine",
+        ar: "محرك البحث",
+      }),
+      social: t({
+        en: "Social Media",
+        ar: "وسائل التواصل الاجتماعي",
+      }),
+      referral: t({
+        en: "Referral",
+        ar: "إحالة",
+      }),
+      event: t({
+        en: "Event",
+        ar: "فعالية",
+      }),
+      other: t({
+        en: "Other",
+        ar: "أخرى",
+      }),
+    },
   },
 };
 

@@ -27,6 +27,14 @@ const FAQ = () => {
         {
             question: content.faq4Question,
             answer: content.faq4Answer,
+        },
+        {
+            question: content.faq5Question,
+            answer: content.faq5Answer,
+        },
+        {
+            question: content.faq6Question,
+            answer: content.faq6Answer,
         }
     ];
 

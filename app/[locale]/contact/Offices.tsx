@@ -11,22 +11,22 @@ export default function OurOffices() {
   const offices = [
     {
       location: content.dubaiLocation,
-      phone: '+91 730-610-9679',
-      email: 'AM@theaminternational.com',
+      phone: '+91 73061 09679',
+      email: 'am@theaminternational.com',
       address: content.dubaiAddress,
       link: 'https://maps.app.goo.gl/PSJeoPD7X4DXwESL6'
     },
     {
       location: content.indiaLocation,
-      phone: '+91 730-610-9679',
-      email: 'AM@theaminternational.com',
+      phone: '+91 73061 09679',
+      email: 'am@theaminternational.com',
       address: content.indiaAddress,
       link: 'https://maps.app.goo.gl/EscTXF4iXqh6MkES9'
     },
     {
       location: content.usaLocation,
-      phone: '+91 730-610-9679',
-      email: 'AM@theaminternational.com',
+      phone: '+91 73061 09679',
+      email: 'am@theaminternational.com',
       address: content.usaAddress,
       link: 'https://maps.app.goo.gl/BJ4Y4nvvAKApaWju8'
     }

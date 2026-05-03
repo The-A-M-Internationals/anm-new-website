@@ -9,7 +9,7 @@ import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect } from 'react';
 
 const ContactForm: React.FC = () => {
-  const content = useIntlayer("contactForm");
+  const content = useIntlayer("contactFormDetails");
   const { locale } = useLocale();
   const router = useRouter();
 
