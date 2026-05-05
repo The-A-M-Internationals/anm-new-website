@@ -28,10 +28,10 @@ export default function FinanceTransformationPage() {
         <div>
             <section className="snap-section">
                 <PageHero
-                    title={content.heroTitle}
-                    title2={content.heroTitle2}
-                    description={content.heroDescription}
-                    button={content.heroButton}
+                    title={content.heroTitle.value}
+                    title2={content.heroTitle2.value}
+                    description={content.heroDescription.value}
+                    button={content.heroButton.value}
                     link={`/${locale}/contact#form`}
                     image={heroImage}
                     image2={heroImageMobile}

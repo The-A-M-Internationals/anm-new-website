@@ -27,7 +27,7 @@ const officesContent = {
     }),
     dubaiAddress: t({
       en: "The A&M International, Ajman Free Zone, Ajman, United Arab Emirates",
-      ar: "A&M إنترناشيونال، منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة",
+      ar: "A&M الدولية، منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة",
     }),
 
     indiaLocation: t({

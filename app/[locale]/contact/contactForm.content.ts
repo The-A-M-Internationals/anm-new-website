@@ -30,7 +30,7 @@ const contactFormContent = {
 
     workEmail: t({
       en: "Email Address (required)",
-      ar: "عنوان البريد الإلكتروني (مطلوب)",
+      ar: "البريد الإلكتروني (مطلوب)",
     }),
 
     phoneNumber: t({
@@ -45,11 +45,11 @@ const contactFormContent = {
 
     interestedIn: t({
       en: "Service of Interest",
-      ar: "الخدمة المهتم بها",
+      ar: "الخدمة المطلوبة",
     }),
 
     vision: t({
-      en: "Your Message (required)",
+      en: "Message (required)",
       ar: "رسالتك (مطلوب)",
     }),
 
@@ -70,12 +70,12 @@ const contactFormContent = {
 
     success: t({
       en: "Thank you for reaching out. We've received your message and will get back to you within one business day.",
-      ar: "شكرًا لتواصلك معنا. لقد استلمنا رسالتك وسنقوم بالرد عليك خلال يوم عمل واحد.",
+      ar: "شكرًا لتواصلك معنا. لقد استلمنا رسالتك وسنعود إليك خلال يوم عمل واحد.",
     }),
 
     footerNote: t({
       en: "Elevating the World, Elegantly.",
-      ar: "الارتقاء بالعالم، بأناقة.",
+      ar: "بأناقة ،بالعالم نرتقي",
     }),
 
     demoTitle: t({
@@ -99,13 +99,13 @@ const contactFormContent = {
     }),
 
     callUs: t({
-      en: "Phone & WhatsApp",
-      ar: "الهاتف واتساب",
+      en: "WhatsApp",
+      ar: "واتساب",
     }),
 
     callTime: t({
       en: "Available Monday – Saturday, 9:00 AM – 6:00 PM (GST)",
-      ar: "متاح من الاثنين إلى السبت، من 9:00 صباحاً إلى 6:00 مساءً (بتوقيت الخليج)",
+      ar: "متاحون من الإثنين إلى السبت، ٩:٠٠ صباحًا – ٦:٠٠ مساءً (بتوقيت الخليج)",
     }),
 
     visitOffice: t({
@@ -115,7 +115,7 @@ const contactFormContent = {
 
     office: t({
       en: "The A&M International, Ajman Free Zone, Ajman, United Arab Emirates",
-      ar: "A&M إنترناشيونال، منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة",
+      ar: "The A&M International\nمنطقة عجمان الحرة\nعجمان، الإمارات العربية المتحدة",
     }),
 
     appointment: t({
@@ -130,17 +130,17 @@ const contactFormContent = {
 
     businessHoursTime: t({
       en: "9:00 AM – 6:00 PM (GST)",
-      ar: "9:00 صباحاً – 6:00 مساءً (بتوقيت الخليج)",
+      ar: "٩:٠٠ صباحًا – ٦:٠٠ مساءً (بتوقيت الخليج)",
     }),
 
     responseTime: t({
       en: "Our team responds within one business day.",
-      ar: "يرد فريقنا خلال يوم عمل واحد.",
+      ar: "يستجيب فريقنا خلال يوم عمل واحد.",
     }),
 
     workingDays: t({
       en: "Monday – Saturday",
-      ar: "الاثنين – السبت",
+      ar: "الإثنين – السبت",
     }),
 
     services: {
@@ -148,21 +148,25 @@ const contactFormContent = {
         en: "Select a service",
         ar: "اختر الخدمة",
       }),
+      digitalMarketing: t({
+        en: "Digital Marketing",
+        ar: "التسويق الرقمي",
+      }),
+      uiux: t({
+        en: "UI/UX Design",
+        ar: "تصميم تجربة المستخدم",
+      }),
+      webDev: t({
+        en: "Web Development",
+        ar: "تطوير المواقع",
+      }),
       epm: t({
         en: "EPM",
-        ar: "EPM",
+        ar: "إدارة الأداء المؤسسي",
       }),
-      consulting: t({
-        en: "Consulting",
-        ar: "استشارات",
-      }),
-      training: t({
-        en: "Training",
-        ar: "تدريب",
-      }),
-      support: t({
-        en: "Support",
-        ar: "دعم",
+      other: t({
+        en: "Other",
+        ar: "أخرى",
       }),
     },
 

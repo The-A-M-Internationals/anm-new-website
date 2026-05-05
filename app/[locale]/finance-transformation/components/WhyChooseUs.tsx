@@ -28,7 +28,7 @@ const WhyChooseUs = () => {
 
                 {/* RIGHT-SIDE CARDS */}
                 <div className={`flex flex-col gap-6 w-full lg:translate-x-25 lg:w-1/2 items-center lg:items-start ${isArabic ? "lg:ml-12" : ""}`}>
-                    {content.features.map((feature: any, index: number) => (
+                    {content.features.map((feature: { title: { value: string }; description: { value: string }; highlight: boolean }, index: number) => (
                         <div
                             key={index}
                             className={`
@@ -39,10 +39,10 @@ const WhyChooseUs = () => {
                             `}
                         >
                             <p className="text-2xl md:text-[30px] text-black mb-1">
-                                {feature.title}
+                                {feature.title.value}
                             </p>
                             <p className="text-black text-[18px]">
-                                {feature.description}
+                                {feature.description.value}
                             </p>
                         </div>
                     ))}

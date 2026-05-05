@@ -28,9 +28,10 @@ const ContactPage = () => {
         <div className='flex flex-col gap-8'>
             <section className="snap-section">
                 <PageHero
-                    title={content.heroTitle}
-                    description={content.heroDescription}
-                    button={content.heroButton}
+                    title={content.heroTitle.value}
+                    title2={content.heroSubheading.value}
+                    description={content.heroIntro.value}
+                    button={content.heroButton.value}
                     link={`/${locale}/contact#form`}
                     image={heroImage}
                     image2={heroImageMobile}

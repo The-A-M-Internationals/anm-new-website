@@ -12,6 +12,24 @@ export const footerContent = {
     // Social section
     followUs: t({ en: "Follow us", ar: "تابعنا" }),
 
+    // Social links
+    instagramLink: t({
+      en: "https://www.instagram.com/the.am.epm/",
+      ar: "https://www.instagram.com/the.am.epm/",
+    }),
+    linkedinLink: t({
+      en: "https://www.linkedin.com/company/the-am-international/",
+      ar: "https://www.linkedin.com/company/the-am-international/",
+    }),
+    twitterLink: t({
+      en: "https://x.com/the_am_epm",
+      ar: "https://x.com/the_am_epm",
+    }),
+    youtubeLink: t({
+      en: "https://www.youtube.com/@the_am_epm",
+      ar: "https://www.youtube.com/@the_am_epm",
+    }),
+
     // Finance Transformation section
     financeTransformation: t({
       en: "Finance Transformation",
@@ -65,6 +83,12 @@ export const footerContent = {
     // Resources section
     resources: t({ en: "Resources", ar: "الموارد" }),
     amInternational: t({ en: "A&M International", ar: "A&M الدولية" }),
+
+    // Contact Us section
+    contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
+    phoneLabel: t({ en: "+91 73061 09679 (WhatsApp & Calls)", ar: "+91 73061 09679 (واتساب ومكالمات)" }),
+    emailLabel: t({ en: "am@theaminternational.com", ar: "am@theaminternational.com" }),
+    websiteLabel: t({ en: "theaminternational.com", ar: "theaminternational.com" }),
 
     // How we work section
     howWeWork: t({ en: "How we work", ar: "كيف نعمل" }),

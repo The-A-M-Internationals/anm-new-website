@@ -10,25 +10,11 @@ export default function OurOffices() {
 
   const offices = [
     {
-      location: content.dubaiLocation,
+      location: content.dubaiLocation.value,
       phone: '+91 73061 09679',
       email: 'am@theaminternational.com',
-      address: content.dubaiAddress,
+      address: content.dubaiAddress.value,
       link: 'https://maps.app.goo.gl/PSJeoPD7X4DXwESL6'
-    },
-    {
-      location: content.indiaLocation,
-      phone: '+91 73061 09679',
-      email: 'am@theaminternational.com',
-      address: content.indiaAddress,
-      link: 'https://maps.app.goo.gl/EscTXF4iXqh6MkES9'
-    },
-    {
-      location: content.usaLocation,
-      phone: '+91 73061 09679',
-      email: 'am@theaminternational.com',
-      address: content.usaAddress,
-      link: 'https://maps.app.goo.gl/BJ4Y4nvvAKApaWju8'
     }
   ];
 
@@ -39,10 +25,10 @@ export default function OurOffices() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-3">
-            {content.titlePrefix} <span className="text-[#D4AF37]">{content.titleHighlight}</span>
+            {content.titlePrefix.value} <span className="text-[#D4AF37]">{content.titleHighlight.value}</span>
           </h1>
           <p className="text-gray-600 text-xl">
-            {content.subtitle}
+            {content.subtitle.value}
           </p>
         </div>
 
@@ -96,7 +82,7 @@ export default function OurOffices() {
                 {/* Get Direction Button */}
                 <a href={office.link} target="_blank" rel="noopener noreferrer">
                   <button className="w-full py-3 px-6 border-2 border-[#D4AF37] text-[#D4AF37] rounded-full font-medium hover:scale-105 transition-all cursor-pointer">
-                    {content.getDirection}
+                    {content.getDirection.value}
                   </button>
                 </a>
               </div>

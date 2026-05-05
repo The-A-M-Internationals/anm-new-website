@@ -3,3 +3,5 @@ node_modules
 .intlayer
 next-env.d.ts
 screenshots
+anm-website-legacy
+tsconfig.tsbuildinfo

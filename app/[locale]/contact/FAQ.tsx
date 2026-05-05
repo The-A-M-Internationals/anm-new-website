@@ -13,28 +13,36 @@ const FAQ = () => {
     const content = useIntlayer("faq");
     const faqs = [
         {
-            question: content.faq1Question,
-            answer: content.faq1Answer,
+            question: content.faq1Question.value,
+            answer: content.faq1Answer.value,
         },
         {
-            question: content.faq2Question,
-            answer: content.faq2Answer,
+            question: content.faq2Question.value,
+            answer: content.faq2Answer.value,
         },
         {
-            question: content.faq3Question,
-            answer: content.faq3Answer,
+            question: content.faq3Question.value,
+            answer: content.faq3Answer.value,
         },
         {
-            question: content.faq4Question,
-            answer: content.faq4Answer,
+            question: content.faq4Question.value,
+            answer: content.faq4Answer.value,
         },
         {
-            question: content.faq5Question,
-            answer: content.faq5Answer,
+            question: content.faq5Question.value,
+            answer: content.faq5Answer.value,
         },
         {
-            question: content.faq6Question,
-            answer: content.faq6Answer,
+            question: content.faq6Question.value,
+            answer: content.faq6Answer.value,
+        },
+        {
+            question: content.faq7Question.value,
+            answer: content.faq7Answer.value,
+        },
+        {
+            question: content.faq8Question.value,
+            answer: content.faq8Answer.value,
         }
     ];
 
@@ -46,7 +54,7 @@ const FAQ = () => {
         <div>
             {/* FAQ Section */}
             <div
-                className="relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden bg-[#0F1E4D]"
+                className="relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden bg-[#0D1B3E]"
                 style={{
                     backgroundImage: "url('/whychooseus.svg')",
                     backgroundRepeat: "no-repeat",
@@ -60,9 +68,12 @@ const FAQ = () => {
                 </div>
 
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl md:text-5xl font-bold text-white text-center mb-12 md:mb-24">
-                        {content.title}
+                    <h2 className="text-3xl md:text-5xl font-bold text-white text-center mb-4">
+                        {content.title.value}
                     </h2>
+                    <p className="text-lg md:text-xl text-[#C9A84C] text-center mb-12 md:mb-24">
+                        {content.subheading.value}
+                    </p>
 
                     <div className="space-y-4">
                         {faqs.map((faq, index) => (
@@ -109,15 +120,15 @@ const FAQ = () => {
             </div>
 
             {/* Join Our Team Section */}
-            <div className='flex flex-col gap-5 items-center py-12 md:py-20 bg-[#0F1E4D] relative px-4'>
+            <div className='flex flex-col gap-5 items-center py-12 md:py-20 bg-[#0D1B3E] relative px-4'>
                 <h2 className='text-3xl md:text-5xl text-white font-bold text-center'>
-                    {content.joinTitle}
+                    {content.joinTitle.value}
                 </h2>
                 <p className='text-white text-base md:text-lg text-center w-full md:w-[60%]'>
-                    {content.joinDescription}
+                    {content.joinDescription.value}
                 </p>
-                <button onClick={() => router.push(`/${locale}/careers#open-positions`)} className='bg-[#D4AF37] w-[300px] flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer'>
-                    {content.joinButton}
+                <button onClick={() => router.push(`/${locale}/careers#open-positions`)} className='bg-[#C9A84C] w-[300px] flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer'>
+                    {content.joinButton.value}
                     <ArrowRight className='w-5 h-5 rtl:rotate-180' />
                 </button>
                 <div className='absolute right-0 bottom-0'>

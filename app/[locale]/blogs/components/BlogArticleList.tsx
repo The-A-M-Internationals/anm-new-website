@@ -117,7 +117,7 @@ const BlogArticleList = () => {
 
                 {/* HEADING */}
                 <h1 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12">
-                    {content.headingPrefix} <span className="text-[#D4AF37]">{content.headingHighlight}</span>
+                    {content.headingPrefix.value} <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>
                 </h1>
 
 
@@ -131,7 +131,7 @@ const BlogArticleList = () => {
                             className=" text-black  flex items-center gap-2"
                             onClick={() => setShowMobileFilter(true)}
                         >
-                            {content.filtersButton}
+                            {content.filtersButton.value}
                         </button>
 
 
@@ -144,7 +144,7 @@ const BlogArticleList = () => {
                             className="text-black flex items-center gap-2"
                             onClick={() => setShowMobileTags(true)}
                         >
-                            {content.popularTagsButton}
+                            {content.popularTagsButton.value}
                         </button>
 
 
@@ -164,7 +164,7 @@ const BlogArticleList = () => {
                             >
                                 &times;
                             </button>
-                            <div className="font-bold text-lg mb-2 text-center">{content.modalFiltersTitle}</div>
+                            <div className="font-bold text-lg mb-2 text-center">{content.modalFiltersTitle.value}</div>
                             <div className="flex flex-wrap gap-2 justify-center">
                                 {filterOptions.map((filter) => (
                                     <button
@@ -194,7 +194,7 @@ const BlogArticleList = () => {
                             >
                                 &times;
                             </button>
-                            <div className="font-bold text-lg mb-2 text-center">{content.modalPopularTagsTitle}</div>
+                            <div className="font-bold text-lg mb-2 text-center">{content.modalPopularTagsTitle.value}</div>
                             <div className="flex flex-wrap gap-2 justify-center">
                                 {filterOptions.map((tag) => (
                                     <button

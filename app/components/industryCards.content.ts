@@ -19,42 +19,42 @@ const industryCardsContent = {
       {
         title: t({ en: "Hospitality", ar: "الضيافة" }),
         description: t({
-          en: "Designing seamless digital experiences for hotels and resorts.",
-          ar: "تصميم تجارب رقمية سلسة للفنادق والمنتجعات.",
+          en: "Crafting guest-first digital journeys that turn every visit into a lasting memory.",
+          ar: "صياغة رحلات رقمية تركز على الضيف وتحول كل زيارة إلى ذكرى دائمة.",
         }),
-        icon: "hospitality",
+        icon: t({ en: "hospitality", ar: "hospitality" }),
       },
       {
         title: t({ en: "Real Estate", ar: "العقارات" }),
         description: t({
-          en: "Creating high-conversion platforms for property businesses.",
-          ar: "إنشاء منصات عالية التحويل لشركات العقارات.",
+          en: "Building high-performance platforms that bring property visions and architectural dreams to life.",
+          ar: "بناء منصات عالية الأداء تجسد رؤى العقارات والأحلام المعمارية على أرض الواقع.",
         }),
-        icon: "real-estate",
+        icon: t({ en: "real-estate", ar: "real-estate" }),
       },
       {
         title: t({ en: "E-Commerce", ar: "التجارة الإلكترونية" }),
         description: t({
-          en: "Building scalable and user-friendly online stores.",
-          ar: "بناء متاجر إلكترونية قابلة للتوسع وسهلة الاستخدام.",
+          en: "Creating frictionless shopping experiences that connect brands with customers across the globe.",
+          ar: "إنشاء تجارب تسوق سلسة تربط العلامات التجارية بالعملاء في جميع أنحاء العالم.",
         }),
-        icon: "ecommerce",
+        icon: t({ en: "ecommerce", ar: "ecommerce" }),
       },
       {
         title: t({ en: "Enterprise", ar: "المؤسسات" }),
         description: t({
-          en: "Delivering robust solutions for complex business needs.",
-          ar: "تقديم حلول قوية لاحتياجات الأعمال المعقدة.",
+          en: "Architecting robust digital systems that empower large-scale operations with precision and ease.",
+          ar: "هندسة أنظمة رقمية قوية تمكن العمليات واسعة النطاق بدقة وسهولة.",
         }),
-        icon: "enterprise",
+        icon: t({ en: "enterprise", ar: "enterprise" }),
       },
       {
-        title: t({ en: "Service-Based Businesses", ar: "الشركات القائمة على الخدمات" }),
+        title: t({ en: "Professional Services", ar: "الخدمات المهنية" }),
         description: t({
-          en: "Helping service brands grow with digital transformation.",
-          ar: "مساعدة العلامات التجارية الخدمية على النمو من خلال التحول الرقمي.",
+          en: "Transforming professional services through elegant design that prioritizes human connection and trust.",
+          ar: "تحويل الخدمات المهنية من خلال تصميم أنيق يعطي الأورووية للتواصل الإنساني والثقة.",
         }),
-        icon: "services",
+        icon: t({ en: "services", ar: "services" }),
       },
     ],
   },

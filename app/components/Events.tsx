@@ -122,11 +122,11 @@ const Events = () => {
     );
 
     if (loading) {
-        return <div className="w-full flex justify-center py-10">Loading events...</div>;
+        return <div className="w-full flex justify-center py-10">{content.loading.value}</div>;
     }
 
     if (error) {
-        return <div className="w-full flex justify-center py-10 text-red-500">{error}</div>;
+        return <div className="w-full flex justify-center py-10 text-red-500">{content.error.value}</div>;
     }
 
     return (
@@ -134,10 +134,10 @@ const Events = () => {
             <div className="max-w-7xl mx-auto w-full">
                 {/* HEADER */}
                 <h2 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[48px] text-center">
-                    {content.header}
+                    {content.header.value}
                 </h2>
                 <p className="font-semibold text-[#6B7280] text-xs sm:text-sm md:text-base text-center px-4 lg:mb-10">
-                    {content.subHeader}
+                    {content.subHeader.value}
                 </p>
 
                 {/* LIVE EVENT */}
@@ -154,7 +154,7 @@ const Events = () => {
                     />
                 ) : (
                     <div className="w-full text-center text-gray-500 text-lg font-medium mb-6">
-                        {content.noLiveEvents}
+                        {content.noLiveEvents.value}
                     </div>
                 )}
             </div>
@@ -163,20 +163,20 @@ const Events = () => {
             <div className="max-w-7xl mx-auto px-4 mt-8 flex flex-col gap-6 pb-5 md:pb-20">
                 <div className="flex justify-between items-center">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">
-                        {content.upcomingHeader}
+                        {content.upcomingHeader.value}
                     </h2>
 
                     <button
                         onClick={() => router.push(`/${locale}/events#upcoming-events`)}
                         className="bg-[#D4AF37] cursor-pointer text-sm sm:text-base font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full hover:scale-105 transition"
                     >
-                        {content.viewAll}
+                        {content.viewAll.value}
                     </button>
                 </div>
 
                 {visibleEvents.length === 0 ? (
                     <p className="text-center text-gray-500 mb-8 md:mb-15">
-                        {content.noUpcomingEvents}
+                        {content.noUpcomingEvents.value}
                     </p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -212,7 +212,7 @@ const Events = () => {
                                         onClick={() => router.push(`/${locale}/register?eventId=${event.id}`)}
                                         className="text-[#D4AF37] hover:text-yellow-700 cursor-pointer font-semibold flex items-center gap-2"
                                     >
-                                        {content.registerNow}
+                                        {content.registerNow.value}
                                         <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                                     </button>
                                 </div>

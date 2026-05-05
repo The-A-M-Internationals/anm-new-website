@@ -35,10 +35,10 @@ const SuccessStory = () => {
   const localizedServices = useMemo(() => {
     return imageSource.map((service, index) => ({
       ...service,
-      title: content.items[index]?.title ?? '',
-      description: content.items[index]?.description ?? '',
-      industry: content.items[index]?.industry ?? '',
-      badge: content.items[index]?.badge,
+      title: content.items[index]?.title.value ?? '',
+      description: content.items[index]?.description.value ?? '',
+      industry: content.items[index]?.industry.value ?? '',
+      badge: content.items[index]?.badge?.value,
     }));
   }, [imageSource, content.items]);
 
@@ -72,14 +72,14 @@ const SuccessStory = () => {
       {/* Heading */}
       <h3 className="text-[#000000] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold text-center">
         <span className="text-[#ab8d2b]">
-          {content.headingStart}{' '}
+          {content.headingStart.value}{' '}
         </span>
-        {content.headingEnd}
+        {content.headingEnd.value}
       </h3>
 
       {/* Subheading */}
       <p className="text-[#6B7280] text-sm sm:text-base md:text-lg lg:text-xl text-center">
-        {content.subheading}
+        {content.subheading.value}
       </p>
 
       {/* Cards */}
@@ -119,7 +119,7 @@ const SuccessStory = () => {
         onClick={() => router.push(`/${locale}/success-stories`)}
         className='bg-[#D4AF37] text-black px-4 py-2 sm:px-6 sm:py-3 flex items-center gap-2 rounded-full text-sm sm:text-base font-semibold hover:scale-105 transition cursor-pointer mt-4 sm:mt-8 md:mt-10 mb-1 sm:mb-5 md:mb-5'
       >
-        {content.cta}
+        {content.cta.value}
         <ArrowRight className='w-4 h-4 rtl:rotate-180' />
       </button>
     </div>

@@ -7,13 +7,13 @@ const articleContent = {
     sectionTitleHighlight: t({ en: "Article", ar: "مميز" }),
 
     title: t({
-      en: "The Future of Digital Transformation",
-      ar: "مستقبل التحول الرقمي",
+      en: "5 Signs Your Website Needs a Redesign",
+      ar: "٥ علامات تدل على أن موقعك الإلكتروني بحاجة إلى إعادة تصميم",
     }),
 
     description: t({
-      en: "Digital transformation is no longer optional—it's the backbone of modern business strategy. From AI-driven automation to data-centric decision-making, companies that embrace digital change are outperforming their competitors.",
-      ar: "لم يعد التحول الرقمي خيارًا، بل أصبح أساس استراتيجيات الأعمال الحديثة. من الأتمتة المدعومة بالذكاء الاصطناعي إلى اتخاذ القرارات المبنية على البيانات، الشركات التي تتبنى هذا التحول تتفوق على منافسيها.",
+      en: "Is your website failing to convert visitors into customers? Discover the five critical signs that indicate it's time for a professional redesign to improve performance and user engagement.",
+      ar: "هل موقعك الإلكتروني بطيء أو لا يحقق أهدافك؟ إليك ٥ علامات تدل على أن موقعك بحاجة إلى إعادة تصميم شاملة لتحسين تجربة المستخدم وزيادة التفاعل.",
     }),
 
     loading: t({

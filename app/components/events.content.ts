@@ -35,6 +35,18 @@ export const eventsContent = {
       en: "Register Now",
       ar: "سجل الآن",
     }),
+    inPerson: t({
+      en: "In person",
+      ar: "حضورياً",
+    }),
+    loading: t({
+      en: "Loading events...",
+      ar: "جاري تحميل الفعاليات...",
+    }),
+    error: t({
+      en: "Failed to load events",
+      ar: "فشل في تحميل الفعاليات",
+    }),
     events: [
       {
         id: "1",

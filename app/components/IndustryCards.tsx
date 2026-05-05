@@ -1,10 +1,17 @@
 "use client";
 
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import { Hotel, Building2, ShoppingCart, Briefcase, Users } from "lucide-react";
 import Card from "./Card";
 
+interface IndustryItem {
+    title: { value: string };
+    description: { value: string };
+    icon: { value: string };
+}
+
 const IndustryCards = () => {
+    const { locale } = useLocale();
     const content = useIntlayer("industryCards");
 
     const getIcon = (iconName: string) => {
@@ -14,7 +21,7 @@ const IndustryCards = () => {
             case "ecommerce": return <ShoppingCart className="w-8 h-8" />;
             case "enterprise": return <Briefcase className="w-8 h-8" />;
             case "services": return <Users className="w-8 h-8" />;
-            default: return <Briefcase className="w-8 h-8" />;
+            default: return <Hotel className="w-8 h-8" />;
         }
     };
 
@@ -24,21 +31,21 @@ const IndustryCards = () => {
                 {/* Heading Section */}
                 <div className="text-center mb-10 md:mb-14">
                     <h3 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold">
-                        {content.heading} <span className="text-[#D4AF37]">{content.headingHighlight}</span>
+                        {content.heading.value} <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>
                     </h3>
                     <p className="text-[#6B7280] text-sm md:text-base mt-3 max-w-2xl mx-auto">
-                        {content.subheading}
+                        {content.subheading.value}
                     </p>
                 </div>
 
                 {/* Grid Section */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                    {content.items.map((item, index) => (
+                    {content.items.map((item: IndustryItem, index: number) => (
                         <Card 
                             key={index} 
-                            icon={getIcon(item.icon as unknown as string)}
-                            title={item.title as unknown as string}
-                            description={item.description as unknown as string}
+                            icon={getIcon(item.icon.value)}
+                            title={item.title.value}
+                            description={item.description.value}
                         />
                     ))}
                 </div>
