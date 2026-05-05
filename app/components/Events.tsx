@@ -122,11 +122,11 @@ const Events = () => {
     );
 
     if (loading) {
-        return <div className="w-full flex justify-center py-10">{content.loading.value}</div>;
+        return <div className="w-full flex justify-center py-10">{content.loading?.value || "Loading..."}</div>;
     }
 
     if (error) {
-        return <div className="w-full flex justify-center py-10 text-red-500">{content.error.value}</div>;
+        return <div className="w-full flex justify-center py-10 text-red-500">{content.error?.value || "An error occurred while loading events."}</div>;
     }
 
     return (

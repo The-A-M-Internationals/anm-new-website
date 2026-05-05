@@ -74,11 +74,11 @@ const Footer = () => {
                     />
 
                     <div className="text-[16px] md:text-lg lg:text-[20px]">
-                        {content.companyDescription.value}
+                        {content.companyDescription?.value || ""}
                     </div>
 
                     <div className="flex flex-col gap-3 text-sm sm:text-base text-gray-300">
-                        <div className="font-semibold text-white mb-1 uppercase tracking-wider text-xs opacity-80">{content.contactUs.value}</div>
+                        <div className="font-semibold text-white mb-1 uppercase tracking-wider text-xs opacity-80">{content.contactUs?.value || "Contact Us"}</div>
                         
                         <a href="tel:+917306109679" className="flex items-start gap-3 hover:text-[#C9A84C] transition-colors group" dir="ltr">
                             <Phone className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" />
@@ -94,19 +94,19 @@ const Footer = () => {
 
                         <a href="mailto:am@theaminternational.com" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">
                             <Mail className="w-5 h-5 text-[#C9A84C] shrink-0" />
-                            <span className="truncate">{content.emailLabel.value}</span>
+                            <span className="truncate">{content.emailLabel?.value || "Email"}</span>
                         </a>
 
                         <a href="https://theaminternational.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">
                             <Globe className="w-5 h-5 text-[#C9A84C] shrink-0" />
-                            <span>{content.websiteLabel.value}</span>
+                            <span>{content.websiteLabel?.value || "Website"}</span>
                         </a>
                     </div>
 
                     <div className="text-[#C9A84C] text-lg sm:text-xl md:text-2xl mt-2">
-                        {content.followUs.value}
+                        {content.followUs?.value || "Follow Us"}
                         <div className="flex gap-2 mt-2">
-                            <a href={content.instagramLink.value} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                            <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -119,7 +119,7 @@ const Footer = () => {
                                 </svg>
                             </a>
 
-                            <a href={content.linkedinLink.value} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                            <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     viewBox="0 0 24 24">
@@ -131,7 +131,7 @@ const Footer = () => {
                                 </svg>
                             </a>
 
-                            <a href={content.twitterLink.value} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                            <a href={content.twitterLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                                 <svg width="20" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_196_4828)">
@@ -154,7 +154,7 @@ const Footer = () => {
                                 </svg>
                             </a>
 
-                            <a href={content.youtubeLink.value} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                            <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     viewBox="0 0 24 24">
@@ -171,67 +171,67 @@ const Footer = () => {
 
                 <div className="flex flex-col flex-1 lg:ml-20 gap-4 sm:gap-5">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
-                        <Link href={getLocalizedLink("/finance-transformation")} className="hover:underline transition-all">{content.financeTransformation.value}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation")} className="hover:underline transition-all">{content.financeTransformation?.value || "Finance Transformation"}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/finance-transformation#financial-consolidation")} className="hover:text-[#C9A84C] transition-colors">{content.financialConsolidation.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#planning-budgeting")} className="hover:text-[#C9A84C] transition-colors">{content.planningBudgeting.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#account-reconciliation")} className="hover:text-[#C9A84C] transition-colors">{content.accountReconciliation.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#profitability-cost")} className="hover:text-[#C9A84C] transition-colors">{content.profitabilityCost.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} className="hover:text-[#C9A84C] transition-colors">{content.enterpriseData.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} className="hover:text-[#C9A84C] transition-colors">{content.narrativeReporting.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} className="hover:text-[#C9A84C] transition-colors">{content.taxReporting.value}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#financial-consolidation")} className="hover:text-[#C9A84C] transition-colors">{content.financialConsolidation?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#planning-budgeting")} className="hover:text-[#C9A84C] transition-colors">{content.planningBudgeting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#account-reconciliation")} className="hover:text-[#C9A84C] transition-colors">{content.accountReconciliation?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#profitability-cost")} className="hover:text-[#C9A84C] transition-colors">{content.profitabilityCost?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} className="hover:text-[#C9A84C] transition-colors">{content.enterpriseData?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} className="hover:text-[#C9A84C] transition-colors">{content.narrativeReporting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} className="hover:text-[#C9A84C] transition-colors">{content.taxReporting?.value || ""}</Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
-                        <Link href={getLocalizedLink("/finance-transformation#managed-services")} className="hover:underline transition-all">{content.managedServices.value}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#managed-services")} className="hover:underline transition-all">{content.managedServices?.value || "Managed Services"}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} className="hover:text-[#C9A84C] transition-colors">{content.consultingAsService.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} className="hover:text-[#C9A84C] transition-colors">{content.epmSolutionManagement.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} className="hover:text-[#C9A84C] transition-colors">{content.versionUpgrade.value}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} className="hover:text-[#C9A84C] transition-colors">{content.monthlyMaintenance.value}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} className="hover:text-[#C9A84C] transition-colors">{content.consultingAsService?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} className="hover:text-[#C9A84C] transition-colors">{content.epmSolutionManagement?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} className="hover:text-[#C9A84C] transition-colors">{content.versionUpgrade?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} className="hover:text-[#C9A84C] transition-colors">{content.monthlyMaintenance?.value || ""}</Link>
                     </div>
                 </div>
 
                 <div className="flex flex-col flex-1 lg:ml-20 gap-4 sm:gap-5">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
-                        {content.resources.value}
+                        {content.resources?.value || "Resources"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
                         <Link href={getLocalizedLink("/")} className="hover:text-[#C9A84C] transition-colors">
-                            {content.amInternational.value}
+                            {content.amInternational?.value || "AM International"}
                         </Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
-                        {content.howWeWork.value}
+                        {content.howWeWork?.value || "How We Work"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
                         <Link href={getLocalizedLink("/success-stories")} className="hover:text-[#C9A84C] transition-colors">
-                            {content.successStories.value}
+                            {content.successStories?.value || "Success Stories"}
                         </Link>
                         <Link href={getLocalizedLink("/features")} className="hover:text-[#C9A84C] transition-colors">
-                            {content.whatSetsApart.value}
+                            {content.whatSetsApart?.value || "What Sets Us Apart"}
                         </Link>
                         <Link href={getLocalizedLink("/methodology")} className="hover:text-[#C9A84C] transition-colors">
-                            {content.methodology.value}
+                            {content.methodology?.value || "Methodology"}
                         </Link>
                     </div>
                 </div>
 
                 <div className="flex flex-col flex-1 gap-4 sm:gap-5">
                     <div className="text-[#C9A84C] text-lg sm:text-xl md:text-2xl">
-                        {content.stayConnected.value}
+                        {content.stayConnected?.value || "Stay Connected"}
                     </div>
 
                     <div className="text-xs sm:text-sm md:text-base">
-                        {content.newsletterDescription.value}
+                        {content.newsletterDescription?.value || ""}
                     </div>
 
                     <div className="mt-4 flex flex-col gap-4 w-full max-w-[276px]">
 
                         <input
                             type="email"
-                            placeholder={content.emailPlaceholder.value}
+                            placeholder={content.emailPlaceholder?.value || "Your email address"}
                             className={`bg-[#222B44] p-2 text-sm sm:text-base outline-none border ${message?.type === 'error' ? 'border-red-400' : 'border-[#FFFFFF8A]'} rounded-[40px] w-full`}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
@@ -245,7 +245,7 @@ const Footer = () => {
                             disabled={!email || loading}
                         >
                             <span className="text-black ml-2">
-                                {loading ? content.subscribing.value : content.subscribe.value}
+                                {loading ? (content.subscribing?.value || "Subscribing...") : (content.subscribe?.value || "Subscribe")}
                             </span>
                         </button>
 
@@ -258,7 +258,7 @@ const Footer = () => {
                                         : "text-red-400"
                                     }`}
                             >
-                                {message.textKey ? String(content[message.textKey].value) : message.text}
+                                {message.textKey ? String(content[message.textKey]?.value || "") : message.text}
                             </p>
                         )}
                     </div>
@@ -268,7 +268,7 @@ const Footer = () => {
             <div className="w-full h-px bg-white" />
 
             <div className="bg-[#0D1B3E] text-center text-white py-6 text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center px-4 gap-2 md:gap-1">
-                <span>{content.copyright.value}</span>
+                <span>{content.copyright?.value || ""}</span>
                 <span className="hidden md:inline mx-2">|</span>
                 <div className="flex items-center gap-1">
                     <a 
@@ -277,7 +277,7 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         className="hover:text-[#C9A84C] transition-colors"
                     >
-                        {content.privacy.value}
+                        {content.privacy?.value || "Privacy Policy"}
                     </a>
                     <span className="mx-1">|</span>
                     <a 
@@ -286,7 +286,7 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         className="hover:text-[#C9A84C] transition-colors"
                     >
-                        {content.terms.value}
+                        {content.terms?.value || "Terms of Service"}
                     </a>
                 </div>
             </div>
