@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import ServiceCard from "./ServiceCard";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
+import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
 interface ServiceData {
     title: string;
@@ -148,83 +149,78 @@ const managedServiceIcons = [
     ),
 ];
 
-export type Tab = 'transformational' | 'managed';
+const serviceIds = [
+    "planning-budgeting",
+    "profitability-cost",
+    "financial-consolidation",
+    "account-reconciliation",
+    "enterprise-data",
+    "narrative-reporting",
+    "tax-reporting",
+];
 
-interface ListingsProps {
-    initialTab?: Tab;
-}
+const managedServiceIds = [
+    "consulting-as-service",
+    "epm-solution-management",
+    "version-upgrade",
+    "monthly-maintenance",
+];
 
-const Listings = ({ initialTab = 'transformational' }: ListingsProps) => {
+const Listings = () => {
     const content = useIntlayer("financeTransformationListings");
-    const [activeTab, setActiveTab] = useState<Tab>(initialTab);
+    const cardContent = useIntlayer("financeTransformationServiceCard");
+    const { locale } = useLocale();
+    const router = useRouter();
 
     return (
-        <div className="bg-[#FFFBED] mt-12 md:mt-30 pb-12 md:pb-24">
-
-            {/* Page title */}
-            <div className="flex items-center justify-center px-4 text-center">
-                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold md:mt-15 mb-8 md:mb-12">
-                    {content.sectionTitle}
-                </p>
+        <div className="bg-[#FFFBED] py-12 md:py-20 lg:py-24">
+            <div
+                className="flex items-center justify-center px-4 text-center"
+            >
+                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold md:mt-15 mb-8 md:mb-12">{content.sectionTitle}</p>
             </div>
 
-            {/* ── Tab switcher ── */}
-            <div className="flex justify-center px-4 mb-10 md:mb-14">
-                <div className="flex bg-white border border-[#D4AF37]/40 rounded-full p-1 gap-1 shadow-sm">
-                    <button
-                        onClick={() => setActiveTab('transformational')}
-                        className={`px-5 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-semibold transition-all duration-200 cursor-pointer ${
-                            activeTab === 'transformational'
-                                ? 'bg-[#D4AF37] text-white shadow'
-                                : 'text-[#ab8d2b] hover:bg-[#D4AF37]/10'
-                        }`}
-                    >
-                        Transformational Services
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('managed')}
-                        className={`px-5 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-semibold transition-all duration-200 cursor-pointer ${
-                            activeTab === 'managed'
-                                ? 'bg-[#D4AF37] text-white shadow'
-                                : 'text-[#ab8d2b] hover:bg-[#D4AF37]/10'
-                        }`}
-                    >
-                        {content.managedServiceTitle}
-                    </button>
-                </div>
+            {content.services.map((service: ServiceData, index: number) => (
+                <ServiceCard
+                    key={`service-${index}`}
+                    id={serviceIds[index]}
+                    title={service.title}
+                    description={service.description}
+                    tags={service.tags}
+                    svgIcon={serviceIcons[index]}
+                />
+            ))}
+
+            <div
+                id="managed-services"
+                className="flex items-center justify-center px-4 text-center mt-12 md:mt-24"
+            >
+                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold mb-8 md:mb-12">{content.managedServiceTitle}</p>
             </div>
 
-            {/* ── Transformational Services tab ── */}
-            {activeTab === 'transformational' && (
-                <>
-                    {content.services.map((service: ServiceData, index: number) => (
-                        <ServiceCard
-                            key={`service-${index}`}
-                            title={service.title}
-                            description={service.description}
-                            tags={service.tags}
-                            svgIcon={serviceIcons[index]}
-                        />
-                    ))}
-                </>
-            )}
+            {content.managedServices.map((service: ServiceData, index: number) => (
+                <ServiceCard
+                    key={`managed-${index}`}
+                    id={managedServiceIds[index]}
+                    title={service.title}
+                    description={service.description}
+                    tags={service.tags}
+                    svgIcon={managedServiceIcons[index]}
+                />
+            ))}
 
-            {/* ── Managed Services tab ── */}
-            {activeTab === 'managed' && (
-                <div id="managed-services">
-                    {content.managedServices.map((service: ServiceData, index: number) => (
-                        <ServiceCard
-                            key={`managed-${index}`}
-                            title={service.title}
-                            description={service.description}
-                            tags={service.tags}
-                            svgIcon={managedServiceIcons[index]}
-                        />
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-};
+            {/* UNIFIED CTA */}
+            <div className="mt-16 flex justify-center">
+                <button
+                    onClick={() => router.push(`/${locale}/features#epm-suites`)}
+                    className="flex items-center gap-2 px-8 py-4 rounded-full border border-[#D4AF37] text-xl font-bold bg-[#D4AF37] text-black transition-transform duration-300 hover:scale-105 cursor-pointer shadow-lg"
+                >
+                    {cardContent.exploreCta}
+                    <ArrowRight className="w-6 h-6 rtl:rotate-180" />
+                </button>
+            </div>
+        </div >
+    )
+}
 
 export default Listings;

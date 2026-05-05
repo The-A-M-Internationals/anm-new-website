@@ -1,0 +1,57 @@
+"use client";
+
+import { useIntlayer, useLocale } from "next-intlayer";
+import { Hotel, Building2, ShoppingCart, Briefcase, Users } from "lucide-react";
+import Card from "./Card";
+
+interface IndustryItem {
+    title: { value: string };
+    description: { value: string };
+    icon: { value: string };
+}
+
+const IndustryCards = () => {
+    const { locale } = useLocale();
+    const content = useIntlayer("industryCards");
+
+    const getIcon = (iconName: string) => {
+        switch (iconName) {
+            case "hospitality": return <Hotel className="w-8 h-8" />;
+            case "real-estate": return <Building2 className="w-8 h-8" />;
+            case "ecommerce": return <ShoppingCart className="w-8 h-8" />;
+            case "enterprise": return <Briefcase className="w-8 h-8" />;
+            case "services": return <Users className="w-8 h-8" />;
+            default: return <Hotel className="w-8 h-8" />;
+        }
+    };
+
+    return (
+        <section className="snap-section py-14 md:py-20 bg-white">
+            <div className="w-[90%] max-w-7xl mx-auto">
+                {/* Heading Section */}
+                <div className="text-center mb-10 md:mb-14">
+                    <h3 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold">
+                        {content.heading.value} <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>
+                    </h3>
+                    <p className="text-[#6B7280] text-sm md:text-base mt-3 max-w-2xl mx-auto">
+                        {content.subheading.value}
+                    </p>
+                </div>
+
+                {/* Grid Section */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    {content.items.map((item: IndustryItem, index: number) => (
+                        <Card 
+                            key={index} 
+                            icon={getIcon(item.icon.value)}
+                            title={item.title.value}
+                            description={item.description.value}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default IndustryCards;

@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
 
 interface CardProps {
+    id?: string;
     title: string;
     description: string;
     tags: string[];
@@ -13,6 +14,7 @@ interface CardProps {
 }
 
 export const ServiceCard: React.FC<CardProps> = ({
+    id,
     title,
     description,
     svgIcon,
@@ -25,7 +27,7 @@ export const ServiceCard: React.FC<CardProps> = ({
     const visibleTags = tags.filter(Boolean);
 
     return (
-        <div className="bg-[#FFFBED] flex justify-center items-center">
+        <div id={id} className="bg-[#FFFBED] flex justify-center items-center">
 
             {/* 📱 MOBILE VERSION */}
             <div className="w-full md:hidden flex justify-center">
@@ -63,21 +65,13 @@ export const ServiceCard: React.FC<CardProps> = ({
                                 {description}
                             </p>
 
-                            <div className="flex flex-wrap gap-2 mt-3 mb-4">
+                            <div className="flex flex-wrap gap-2 mt-3">
                                 {visibleTags.map((tag, i) => (
                                     <span key={i} className="px-3 py-1 rounded-full bg-yellow-50 text-[#D4AF37] text-xs font-medium">
                                         {tag}
                                     </span>
                                 ))}
                             </div>
-
-                            <button
-                                onClick={() => router.push(`/${locale}/features`)}
-                                className="mt-auto flex items-center gap-2 px-4 py-2 rounded-full border border-[#D4AF37] text-black font-medium bg-[#D4AF37] w-fit"
-                            >
-                                {content.exploreCta}
-                                <ArrowRight className="w-4 h-4 rtl:rotate-180" />
-                            </button>
 
                         </div>
                     </div>
@@ -116,21 +110,13 @@ export const ServiceCard: React.FC<CardProps> = ({
                             {description}
                         </p>
 
-                        <div className="flex flex-wrap gap-3 mt-8 mb-6">
+                        <div className="flex flex-wrap gap-3 mt-8">
                             {visibleTags.map((tag, i) => (
                                 <span key={i} className="px-4 py-2 rounded-full bg-yellow-50 text-yellow-700 text-sm font-medium hover:bg-[#0F1E4D] hover:text-white">
                                     {tag}
                                 </span>
                             ))}
                         </div>
-
-                        <button
-                            onClick={() => router.push(`/${locale}/features`)}
-                            className="flex items-center gap-2 px-6 py-3 rounded-full border border-[#D4AF37] text-[#897122] font-medium bg-white transition-transform duration-300 group-hover:scale-105 hover:bg-[#D4AF37] hover:text-black"
-                        >
-                            {content.exploreCta}
-                            <ArrowRight className="rtl:rotate-180" />
-                        </button>
 
                     </div>
                 </div>

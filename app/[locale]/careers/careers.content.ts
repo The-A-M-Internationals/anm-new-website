@@ -15,7 +15,7 @@ const careersContent = {
 
     heroDescription: t({
       en: "At A&M International, you’ll work with passionate engineers and architects who value collaboration, continuous learning, and meaningful impact. Here, your ideas matter, your growth is prioritized, and the work you do creates real change — for businesses and for the world around us.",
-      ar: "في A&M International، ستعمل مع مهندسين ومعماريين شغوفين يقدّرون التعاون والتعلّم المستمر والأثر الحقيقي. هنا، لأفكارك قيمة، ولنموّك أولوية، والعمل الذي تقوم به يصنع تغييرًا ملموسًا — للشركات وللعالم من حولنا.",
+      ar: "في A&M الدولية، ستعمل مع مهندسين ومعماريين شغوفين يقدّرون التعاون والتعلّم المستمر والأثر الحقيقي. هنا، لأفكارك قيمة، ولنموّك أولوية، والعمل الذي تقوم به يصنع تغييرًا ملموسًا — للشركات وللعالم من حولنا.",
     }),
 
     heroButton: t({
@@ -30,7 +30,7 @@ const careersContent = {
 
     cultureDescription: t({
       en: "A&M International fosters a work environment built on ownership, transparency, continuous learning, innovation, and mutual respect. We believe great companies are built by great people — and we invest in the growth of every individual.",
-      ar: "تعزز A&M International بيئة عمل قائمة على تحمل المسؤولية والشفافية والتعلّم المستمر والابتكار والاحترام المتبادل. نؤمن أن الشركات العظيمة تُبنى بأشخاص عظماء — لذلك نستثمر في نمو كل فرد.",
+      ar: "تعزز A&M الدولية بيئة عمل قائمة على تحمل المسؤولية والشفافية والتعلّم المستمر والابتكار والاحترام المتبادل. نؤمن أن الشركات العظيمة تُبنى بأشخاص عظماء — لذلك نستثمر في نمو كل فرد.",
     }),
 
     cultureValue1Title: t({

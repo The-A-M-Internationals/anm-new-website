@@ -38,7 +38,7 @@ const FeaturesList = () => {
     ];
 
     return (
-        <div className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+        <div className="bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
             <div className="w-full mx-auto p-2 md:p-7">
                 {/* Header */}
                 <div className="mb-12">

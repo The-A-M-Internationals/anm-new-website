@@ -2,14 +2,18 @@
 
 import Image from "next/image";
 import { Calendar, Clock } from "lucide-react";
-import { useIntlayer } from "next-intlayer";
+import { useRouter } from "next/navigation";
+import { useIntlayer, useLocale } from "next-intlayer";
 
 const Event = () => {
     const content = useIntlayer("impactsEvent");
+    const { locale } = useLocale();
+    const router = useRouter();
+
     return (
-        <div id="donate" className="flex flex-col items-center justify-center gap-10 mt-15 px-4 md:px-6 lg:px-2">
-            <div>
-                <div className="mt-4 bg-white rounded-[40px] md:rounded-[60px] shadow-md border border-gray-200 overflow-hidden flex flex-col md:gap-8 lg:flex-row  lg:w-[1410px] gap-[58px] p-4">
+        <div id="donate" className="flex flex-col items-center justify-center gap-10 py-12 md:py-20 lg:py-24 px-4 md:px-6">
+            <div className="w-full max-w-7xl">
+                <div className="mt-4 bg-white rounded-[40px] md:rounded-[60px] shadow-md border border-gray-200 overflow-hidden flex flex-col md:gap-8 lg:flex-row gap-[58px] p-4">
 
                     {/* Image Section */}
                     <div className="w-full lg:w-[650px]">
@@ -81,9 +85,12 @@ const Event = () => {
                         </div>
 
                         {/* Button */}
-                        <button className="w-44 text-center bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition">
+                        <button
+                            onClick={() => router.push(`/${locale}/contact#form`)}
+                            className="w-44 text-center bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition"
+                        >
                             <p>{content.button}</p>
-                            <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
+                            <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 rtl:rotate-180" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </button>

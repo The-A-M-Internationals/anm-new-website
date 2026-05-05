@@ -179,7 +179,7 @@ const PastEvents: React.FC = () => {
                     className="inline-flex cursor-pointer items-center text-[#D4AF37] font-semibold hover:text-yellow-600 transition-colors group"
                   >
                     {content.past.watchRecording}
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
                   </button>
                 </div>
               ))}

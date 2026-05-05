@@ -9,8 +9,8 @@ const Results = () => {
         <div
             id="results"
             className="
-                relative py-20 px-4 overflow-hidden 
-                bg-[#0F1E4D] mt-12 md:mt-20
+                relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden 
+                bg-[#0F1E4D]
             "
             style={{
                 backgroundImage: "url('/whychooseus.svg')",

@@ -24,6 +24,7 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
     timeRange,
     imageSrc,
 }) => {
+    const content = useIntlayer("events");
     const router = useRouter();
     const { locale } = useLocale();
 
@@ -52,7 +53,7 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
                             <path d="M1.33203 7.33268C1.33203 5.13268 1.33203 4.03268 2.01536 3.34935C2.6987 2.66602 3.7987 2.66602 5.9987 2.66602H6.66536C8.86536 2.66602 9.96537 2.66602 10.6487 3.34935C11.332 4.03268 11.332 5.13268 11.332 7.33268V8.66602C11.332 10.866 11.332 11.966 10.6487 12.6493C9.96537 13.3327 8.86536 13.3327 6.66536 13.3327H5.9987C3.7987 13.3327 2.6987 13.3327 2.01536 12.6493C1.33203 11.966 1.33203 10.866 1.33203 8.66602V7.33268Z" stroke="#D4AF37" strokeWidth="1.5" />
                             <path d="M11.332 5.93606L11.416 5.86672C12.8267 4.70272 13.532 4.12072 14.0987 4.40206C14.6654 4.68272 14.6654 5.61472 14.6654 7.47739V8.52006C14.6654 10.3827 14.6654 11.3147 14.0987 11.5954C13.532 11.8761 12.8267 11.2947 11.416 10.1307L11.332 10.0614" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" />
                         </svg>
-                        <span>In personal</span>
+                        <span>{content.inPerson.value}</span>
                     </div>
 
                     {/* Title */}
@@ -88,8 +89,8 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
 
                     {/* Button */}
                     <button onClick={() => router.push(`/${locale}/register?eventId=${id}`)} className="bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full flex items-center gap-2 transition text-sm sm:text-base">
-                        Register Now
-                        <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
+                        {content.registerNow.value}
+                        <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 rtl:rotate-180" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                     </button>

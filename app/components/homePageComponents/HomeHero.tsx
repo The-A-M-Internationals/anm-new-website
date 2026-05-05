@@ -1,12 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect, useRef } from "react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import type { AppLocale } from "@/types/locale";
 
 const HomeHero = () => {
     const router = useRouter();
+    const { locale } = useLocale();
     const content = useIntlayer("homeHero");
 
     // Animated counter refs
@@ -204,10 +206,9 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
-                                // @ts-ignore
                                 "--dx": p.dx,
                                 "--dy": p.dy,
-                            }}
+                            } as React.CSSProperties}
                         />
                     ))}
                     {[
@@ -226,10 +227,9 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
-                                // @ts-ignore
                                 "--dx": p.dx,
                                 "--dy": p.dy,
-                            }}
+                            } as React.CSSProperties}
                         />
                     ))}
                 </div>
@@ -267,8 +267,8 @@ const HomeHero = () => {
                         <div className="space-y-1.5 font-mono text-[9px]">
                             <div className="text-purple-400">const</div>
                             <div className="text-[#C9A84C] ml-2">transform =</div>
-                            <div className="text-blue-400 ml-4">"elevate"</div>
-                        </div>
+                            <div className="text-blue-400 ml-4">&quot;elevate&quot;</div>
+                            </div>
                     </div>
                 </div>
 
@@ -511,28 +511,35 @@ const HomeHero = () => {
                                 className="text-4xl md:text-5xl lg:text-[54px] font-bold text-white mb-5 leading-tight"
                                 style={{ fontFamily: "Lora, Georgia, serif" }}
                             >
-                                {content.tagline} <span className="text-[#C9A84C]">{content.taglineHighlight}</span>
+                                {content.tagline.value} <span className="text-[#C9A84C]">{content.taglineHighlight.value}</span>
                             </h1>
                             <p className="text-base md:text-lg text-white/70 mb-8 leading-relaxed">
-                                {content.description}
+                                {content.description.value}
                             </p>
-                            
+
                             {/* CTAs */}
                             <div className="flex flex-col sm:flex-row gap-4 mb-10">
                                 <button
-                                    onClick={() => router.push(getLocalizedPath("en", "/contact"))}
-                                    className="px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#D4AF37] transition-colors"
+                                    onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact"))}
+                                    className="px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#C9A84C] transition-colors"
                                 >
-                                    {content.bookConsultation}
+                                    {content.bookConsultation.value}
                                 </button>
                                 <button
-                                    onClick={() => router.push(getLocalizedPath("en", "/#services"))}
+                                    onClick={() => {
+                                        const element = document.getElementById('services');
+                                        if (element) {
+                                            element.scrollIntoView({ behavior: 'smooth' });
+                                        } else {
+                                            router.push(getLocalizedPath(locale as AppLocale, "/#services"));
+                                        }
+                                    }}
                                     className="px-7 py-3.5 bg-transparent text-[#C9A84C] border-2 border-[#C9A84C] rounded-lg text-[15px] font-bold hover:bg-[#C9A84C] hover:text-[#0C1F4A] transition-colors"
                                 >
-                                    {content.exploreServices}
+                                    {content.exploreServices.value}
                                 </button>
                             </div>
-                            
+
                             {/* Metrics */}
                             <div className="grid grid-cols-3 gap-6">
                                 <div>
@@ -544,7 +551,7 @@ const HomeHero = () => {
                                         0+
                                     </div>
                                     <div className="text-xs md:text-[13px] text-white/60 uppercase tracking-wider mt-1">
-                                        {content.clients}
+                                        {content.clients.value}
                                     </div>
                                 </div>
                                 <div>
@@ -556,7 +563,7 @@ const HomeHero = () => {
                                         0+
                                     </div>
                                     <div className="text-xs md:text-[13px] text-white/60 uppercase tracking-wider mt-1">
-                                        {content.countries}
+                                        {content.countries.value}
                                     </div>
                                 </div>
                                 <div>
@@ -568,7 +575,7 @@ const HomeHero = () => {
                                         0+
                                     </div>
                                     <div className="text-xs md:text-[13px] text-white/60 uppercase tracking-wider mt-1">
-                                        {content.years}
+                                        {content.years.value}
                                     </div>
                                 </div>
                             </div>
@@ -576,7 +583,7 @@ const HomeHero = () => {
 
                         {/* Right: Globe + Service Cards */}
                         <div className="hidden lg:block relative" style={{ height: 450 }}>
-                            
+
                             {/* Orbital rings */}
                             <div className="absolute" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
                                 <div 
@@ -600,7 +607,7 @@ const HomeHero = () => {
                                     }}
                                 />
                             </div>
-                            
+
                             {/* Globe */}
                             <svg 
                                 className="absolute" 
@@ -623,7 +630,7 @@ const HomeHero = () => {
                                     <ellipse cx="100" cy="100" rx="20" ry="80" fill="none" stroke="rgba(201,168,76,.25)" strokeWidth=".8" />
                                     <ellipse cx="100" cy="100" rx="40" ry="80" fill="none" stroke="rgba(201,168,76,.2)" strokeWidth=".8" />
                                 </g>
-                                
+
                                 {/* Animated connection lines to center */}
                                 <line x1="57" y1="67" x2="100" y2="100" stroke="url(#connectionGrad)" strokeWidth="1.5" strokeDasharray="3 3">
                                     <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" />
@@ -637,12 +644,12 @@ const HomeHero = () => {
                                     <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" begin="1.4s" />
                                     <animate attributeName="stroke-dashoffset" from="0" to="-6" dur="1s" repeatCount="indefinite" />
                                 </line>
-                                
+
                                 {/* Outer nodes */}
                                 <circle cx="57" cy="67" r="6" fill="#C9A84C" style={{ transformOrigin: "57px 67px", animation: "am-node-expand 2s ease-in-out infinite" }} />
                                 <circle cx="157" cy="103" r="6" fill="#4AADDA" style={{ transformOrigin: "157px 103px", animation: "am-node-expand 2s ease-in-out infinite .7s" }} />
                                 <circle cx="66" cy="150" r="6" fill="#9B79E0" style={{ transformOrigin: "66px 150px", animation: "am-node-expand 2s ease-in-out infinite 1.4s" }} />
-                                
+
                                 {/* Center hub with pulsing ring */}
                                 <circle cx="100" cy="100" r="12" fill="rgba(201,168,76,0.2)" opacity="0.5">
                                     <animate attributeName="r" values="12;16;12" dur="2s" repeatCount="indefinite" />
@@ -666,9 +673,9 @@ const HomeHero = () => {
                                 }}
                             >
                                 <div className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: "rgba(201,168,76,.9)" }}>
-                                    {content.financeLabel}
+                                    {content.financeLabel.value}
                                 </div>
-                                <div className="text-[15px] font-bold text-white mb-3">{content.financeTitle}</div>
+                                <div className="text-[15px] font-bold text-white mb-3">{content.financeTitle.value}</div>
                                 <div className="flex items-end gap-[4px]" style={{ height: 28 }}>
                                     {[10, 16, 12, 22, 28].map((h, i) => (
                                         <div 
@@ -700,9 +707,9 @@ const HomeHero = () => {
                                 }}
                             >
                                 <div className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: "rgba(74,173,218,.9)" }}>
-                                    {content.digitalLabel}
+                                    {content.digitalLabel.value}
                                 </div>
-                                <div className="text-[15px] font-bold text-white mb-3">{content.digitalTitle}</div>
+                                <div className="text-[15px] font-bold text-white mb-3">{content.digitalTitle.value}</div>
                                 <div className="relative" style={{ width: 48, height: 28 }}>
                                     <div className="absolute rounded-full" style={{ left: 0, top: "50%", width: 10, height: 10, background: "#4AADDA", transform: "translateY(-50%)", animation: "am-node-pulse 1.8s ease-in-out infinite" }} />
                                     <div className="absolute rounded-full" style={{ left: -5, top: "50%", width: 20, height: 20, border: "2px solid rgba(74,173,218,.5)", transform: "translateY(-50%)", animation: "am-ring-pulse 1.8s ease-in-out infinite" }} />
@@ -725,9 +732,9 @@ const HomeHero = () => {
                                 }}
                             >
                                 <div className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: "rgba(155,121,224,.9)" }}>
-                                    {content.aiLabel}
+                                    {content.aiLabel.value}
                                 </div>
-                                <div className="text-[15px] font-bold text-white mb-3">{content.aiTitle}</div>
+                                <div className="text-[15px] font-bold text-white mb-3">{content.aiTitle.value}</div>
                                 <div className="grid grid-cols-6 gap-[4px]">
                                     {[0, .3, .6, .9, .15, .45].map((delay, i) => (
                                         <div 
@@ -743,8 +750,7 @@ const HomeHero = () => {
                                     ))}
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>                    </div>
                 </div>
             </section>
         </>

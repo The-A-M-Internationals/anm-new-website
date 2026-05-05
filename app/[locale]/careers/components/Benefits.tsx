@@ -7,7 +7,7 @@ const Benefits = () => {
     const content = useIntlayer("careersBenefits");
 
     return (
-        <div className="min-h-screen flex flex-col justify-center items-center gap-5 mt-12 md:mt-20 px-4">
+        <div className="flex flex-col justify-center items-center gap-5 py-12 md:py-20 lg:py-24 px-4">
             <div className="flex flex-col justify-center items-center text-center">
                 <p className="text-3xl md:text-[48px] font-semibold text-[#000000]">
                     <span className="text-[#D4AF37]">{content.titleHighlight} </span>

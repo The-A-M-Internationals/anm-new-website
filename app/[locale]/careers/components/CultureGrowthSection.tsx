@@ -27,7 +27,7 @@ const CultureGrowthSection = () => {
     ];
 
     return (
-        <div className="bg-[#FFFBED] min-h-screen mt-10 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#FFFBED] py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto flex flex-col gap-10 md:gap-16">
 
                 {/* ROW 1 — Title + Description */}

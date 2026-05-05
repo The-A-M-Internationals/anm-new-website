@@ -38,7 +38,7 @@ const MethodologySection = () => {
     }]
 
     return (
-        <section className="bg-white py-20 px-6 md:px-12">
+        <section className="bg-white py-12 md:py-20 lg:py-24 px-6 md:px-12">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="mb-16">
