@@ -230,7 +230,7 @@ const BlogArticleList = () => {
                 </div>
 
                 {loading ? (
-                    <p className="text-gray-500 text-center text-lg">{content.loading}</p>
+                    <p className="text-gray-500 text-center text-lg">{content.loading.value}</p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] lg:grid-cols-3 gap-8 md:gap-2 md:mx-auto">
 
@@ -303,24 +303,23 @@ const BlogArticleList = () => {
                                                 <ArrowRight size={18} className={`${locale === 'ar' ? 'rotate-180' : ''}`} />
                                             </a>
                                         </div>
-                                    {loading ? (
-                                        <p className="text-gray-500 text-center text-lg">{content.loading.value}</p>
-                                    ) : (
-                                    ...
-                                                {filteredArticles.length === 0 && (
-                                                    <div className="bg-white rounded-2xl p-12 text-center">
-                                                        {content.emptyCategory.value}
-                                                    </div>
-                                                )}
-                                            </div>
+                                    </div>
+                                );
+                            })}
+                            {filteredArticles.length === 0 && (
+                                <div className="bg-white rounded-2xl p-12 text-center">
+                                    {content.emptyCategory.value}
+                                </div>
+                            )}
+                        </div>
 
-                                            {/* POPULAR TAGS SIDEBAR */}
-                                            <div className="hidden md:block lg:col-span-1 md:mt-2 lg:mt-2">
-                                                <div className="sticky top-24">
-                                                    <div className="bg-white rounded-4xl p-8 shadow-xl border border-[#D9D9D9]">
-                                                        <h3 className="text-xl font-bold text-gray-900 mb-6">
-                                                            {content.popularTags.value}
-                                                        </h3>
+                        {/* POPULAR TAGS SIDEBAR */}
+                        <div className="hidden md:block lg:col-span-1 md:mt-2 lg:mt-2">
+                            <div className="sticky top-24">
+                                <div className="bg-white rounded-4xl p-8 shadow-xl border border-[#D9D9D9]">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-6">
+                                        {content.popularTags.value}
+                                    </h3>
 
                                     <div className="flex flex-wrap gap-3 cursor-pointer">
                                         {filterOptions.map((tag, i) => (

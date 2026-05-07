@@ -93,14 +93,14 @@ const PageHero: React.FC<PageHeroProps> = ({
             </div>
 
             {/* Text */}
-            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-4 sm:start-6 md:start-8 flex w-fit sm:w-[90%] md:w-[90%] flex-col gap-2 md:gap-1 lg:gap-2 pe-4'>
+            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 lg:start-5 flex w-fit sm:w-[95%] md:w-[95%] flex-col gap-2 md:gap-1 lg:gap-2 pe-10'>
                {badge && (
                   <h4 className='w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
                      {badge}
                   </h4>
                )}
 
-               <h3 className='text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight md:w-[80%]'>
+               <h3 className='text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight md:w-[90%] lg:w-[98%]'>
                   {title}
                </h3>
 
