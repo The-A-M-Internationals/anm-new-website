@@ -1,4 +1,6 @@
 
+'use client';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import { useIntlayer } from "next-intlayer";
@@ -11,23 +13,23 @@ const LeadershipTeam = () => {
     // Only one leader for now
     const Services = [
         {
-            title: content.leader1Name,
-            image: '/business/Subtract.png',
-            description: content.leader1CardDescription,
-            position: content.leader1PositionBadge,
-            fullBio: content.leader1FullBio,
-            role: content.leader1RoleLine
+            title: content.leader1Name.value,
+            image: '/business/anusha.jpg',
+            description: content.leader1CardDescription.value,
+            position: content.leader1PositionBadge.value,
+            fullBio: content.leader1FullBio.value,
+            role: content.leader1RoleLine.value
         }
     ];
 
     return (
         <div id="team" className='flex flex-col items-center justify-center px-4 py-12 md:py-20 lg:py-24'>
             <h3 className="text-[#000000] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold text-center">
-                <span className="text-[#ab8d2b]">{content.title}</span>
+                <span className="text-[#ab8d2b]">{content.title.value}</span>
             </h3>
 
             <p className="text-[#6B7280] text-[18px] md:text-lg lg:text-xl text-center">
-                {content.subtitle}
+                {content.subtitle.value}
             </p>
 
             {/* IMAGES WITH TEXT OVERLAY */}

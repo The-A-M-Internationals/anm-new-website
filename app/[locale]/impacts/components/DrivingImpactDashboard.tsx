@@ -13,14 +13,14 @@ export default function DrivingImpactDashboard() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        {content.header}
+                        {content.header.value}
                     </h2>
                     <p className="text-[#C9A84C] font-semibold text-xl mb-8">
-                        {content.subheader}
+                        {content.subheader.value}
                     </p>
                     <div className="text-gray-700 text-lg max-w-4xl mx-auto space-y-6 leading-relaxed text-left md:text-center">
-                        <p>{content.intro1}</p>
-                        <p>{content.intro2}</p>
+                        <p>{content.intro1.value}</p>
+                        <p>{content.intro2.value}</p>
                     </div>
                 </div>
 

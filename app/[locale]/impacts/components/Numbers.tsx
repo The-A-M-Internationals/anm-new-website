@@ -11,37 +11,37 @@ const Numbers = () => {
     return (
         <div className="md:px-5 lg:px-[50px] py-12 md:py-20 lg:py-24">
             <div className="text-center">
-                <p className="text-base lg:text-lg leading-relaxed max-w-4xl mx-auto">{content.intro}
+                <p className="text-base lg:text-lg leading-relaxed max-w-4xl mx-auto">{content.intro.value}
                 </p>
             </div>
             <div className="flex flex-col items-center justify-center mt-10 max-w-full md:hidden lg:block lg:w-full lg:max-w-full mx-auto">
                 <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">
                     <Card
                         icon="/careers/growth.svg"
-                        title={content.target}
+                        title={content.target.value}
                         description={locale === 'ar' ? "١٬٠٠٠٬٠٠٠ درهم" : "$1,000,000"}
                     />
                     <Card
                         icon="/careers/culture.svg"
-                        title={content.raisedToDate}
+                        title={content.raisedToDate.value}
                         description={locale === 'ar' ? "٤٢٠٬٥٠٠ درهم" : "$420,500"}
                     />
                     <Card
                         icon="/careers/hybrid.svg"
-                        title={content.archievedPercentage}
+                        title={content.archievedPercentage.value}
                         description="42%"
                     />
                 </div>
                 <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap mt-6">
                     <FancyCard
                         icon="/careers/growth.svg"
-                        title={content.totalDoanted}
+                        title={content.totalDoanted.value}
                         description={locale === 'ar' ? "٤٢٬٠٥٠ درهم" : "$42,050"}
                     />
                     <FancyCard
                         icon="/careers/growth.svg"
-                        title={content.beneficiariesSupported}
-                        description={content.students}
+                        title={content.beneficiariesSupported.value}
+                        description={content.students.value}
                     />
                 </div>
             </div>
@@ -51,25 +51,25 @@ const Numbers = () => {
 
                     <Card
                         icon="/careers/growth.svg"
-                        title={content.target}
+                        title={content.target.value}
                         description={locale === 'ar' ? "١٬٠٠٠٬٠٠٠ درهم" : "$1,000,000"}
                     />
 
                     <Card
                         icon="/careers/culture.svg"
-                        title={content.raisedToDate}
+                        title={content.raisedToDate.value}
                         description={locale === 'ar' ? "٤٢٠٬٥٠٠ درهم" : "$420,500"}
                     />
 
                     <Card
                         icon="/careers/hybrid.svg"
-                        title={content.archievedPercentage}
+                        title={content.archievedPercentage.value}
                         description="42%"
                     />
 
                     <Card
                         icon="/careers/growth.svg"
-                        title={content.totalDoanted}
+                        title={content.totalDoanted.value}
                         description={locale === 'ar' ? "٤٢٬٠٥٠ درهم" : "$42,050"}
                     />
 
@@ -77,7 +77,7 @@ const Numbers = () => {
                     <div className="md:col-span-2 flex justify-center">
                         <Card
                             icon="/careers/growth.svg"
-                            title={content.beneficiariesSupported}
+                            title={content.beneficiariesSupported.value}
                             description={locale === 'ar' ? "١٢٠ طفل" : "120 children"}
                         />
                     </div>

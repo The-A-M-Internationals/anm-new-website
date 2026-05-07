@@ -35,14 +35,14 @@ const BlogArticleList = () => {
 
     // Define filters with fixed keys for matching and localized labels
     const filterOptions = [
-        { key: "All Post", label: content.filters.allPost },
-        { key: "EPM Strategy", label: content.filters.epmStrategy },
-        { key: "Cloud", label: content.filters.cloud },
-        { key: "Data Analytics", label: content.filters.dataAnalytics },
-        { key: "Cybersecurity", label: content.filters.cybersecurity },
-        { key: "AI & Machine Learning", label: content.filters.aiMl },
-        { key: "CSR", label: content.filters.csr },
-        { key: "Company News", label: content.filters.companyNews },
+        { key: "All Post", label: content.filters.allPost.value },
+        { key: "EPM Strategy", label: content.filters.epmStrategy.value },
+        { key: "Cloud", label: content.filters.cloud.value },
+        { key: "Data Analytics", label: content.filters.dataAnalytics.value },
+        { key: "Cybersecurity", label: content.filters.cybersecurity.value },
+        { key: "AI & Machine Learning", label: content.filters.aiMl.value },
+        { key: "CSR", label: content.filters.csr.value },
+        { key: "Company News", label: content.filters.companyNews.value },
     ];
 
     const [articles, setArticles] = useState<Article[]>([]);
@@ -303,24 +303,24 @@ const BlogArticleList = () => {
                                                 <ArrowRight size={18} className={`${locale === 'ar' ? 'rotate-180' : ''}`} />
                                             </a>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    {loading ? (
+                                        <p className="text-gray-500 text-center text-lg">{content.loading.value}</p>
+                                    ) : (
+                                    ...
+                                                {filteredArticles.length === 0 && (
+                                                    <div className="bg-white rounded-2xl p-12 text-center">
+                                                        {content.emptyCategory.value}
+                                                    </div>
+                                                )}
+                                            </div>
 
-                            {filteredArticles.length === 0 && (
-                                <div className="bg-white rounded-2xl p-12 text-center">
-                                    {content.emptyCategory}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* POPULAR TAGS SIDEBAR */}
-                        <div className="hidden md:block lg:col-span-1 md:mt-2 lg:mt-2">
-                            <div className="sticky top-24">
-                                <div className="bg-white rounded-4xl p-8 shadow-xl border border-[#D9D9D9]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-6">
-                                        {content.popularTags}
-                                    </h3>
+                                            {/* POPULAR TAGS SIDEBAR */}
+                                            <div className="hidden md:block lg:col-span-1 md:mt-2 lg:mt-2">
+                                                <div className="sticky top-24">
+                                                    <div className="bg-white rounded-4xl p-8 shadow-xl border border-[#D9D9D9]">
+                                                        <h3 className="text-xl font-bold text-gray-900 mb-6">
+                                                            {content.popularTags.value}
+                                                        </h3>
 
                                     <div className="flex flex-wrap gap-3 cursor-pointer">
                                         {filterOptions.map((tag, i) => (

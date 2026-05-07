@@ -22,7 +22,7 @@ const WhyChooseUs = () => {
                 {/* LEFT TITLE */}
                 <div className={`flex items-center justify-center text-center lg:text-left lg:w-1/2 ${isArabic ? "lg:mr-12" : ""}`}>
                     <p className="text-4xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight">
-                        {content.titleLine1} <br /> {content.titleLine2}
+                        {content.titleLine1.value} <br /> {content.titleLine2.value}
                     </p>
                 </div>
 

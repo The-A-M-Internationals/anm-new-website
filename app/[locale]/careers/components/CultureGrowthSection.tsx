@@ -9,20 +9,20 @@ const CultureGrowthSection = () => {
 
     const values = [
         {
-            title: content.value1Title,
-            description: content.value1Description,
+            title: content.value1Title.value,
+            description: content.value1Description.value,
         },
         {
-            title: content.value2Title,
-            description: content.value2Description,
+            title: content.value2Title.value,
+            description: content.value2Description.value,
         },
         {
-            title: content.value3Title,
-            description: content.value3Description,
+            title: content.value3Title.value,
+            description: content.value3Description.value,
         },
         {
-            title: content.value4Title,
-            description: content.value4Description,
+            title: content.value4Title.value,
+            description: content.value4Description.value,
         }
     ];
 
@@ -33,11 +33,11 @@ const CultureGrowthSection = () => {
                 {/* ROW 1 — Title + Description */}
                 <div id="culture" className="flex flex-col lg:flex-row justify-between items-start gap-6">
                     <h2 className="text-3xl md:text-[48px] font-semibold text-black leading-tight">
-                        {content.title}
+                        {content.title.value}
                     </h2>
 
                     <p className="text-gray-600 leading-relaxed w-full lg:w-[550px] text-base md:text-lg">
-                        {content.description}
+                        {content.description.value}
                     </p>
                 </div>
 

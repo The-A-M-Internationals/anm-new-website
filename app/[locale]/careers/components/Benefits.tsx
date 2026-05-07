@@ -10,45 +10,45 @@ const Benefits = () => {
         <div className="flex flex-col justify-center items-center gap-5 py-12 md:py-20 lg:py-24 px-4">
             <div className="flex flex-col justify-center items-center text-center">
                 <p className="text-3xl md:text-[48px] font-semibold text-[#000000]">
-                    <span className="text-[#D4AF37]">{content.titleHighlight} </span>
-                    {content.titleRest}
+                    <span className="text-[#D4AF37]">{content.titleHighlight.value} </span>
+                    {content.titleRest.value}
                 </p>
-                <p className="text-[#6B7280] text-lg md:text-[24px] mt-2">{content.subtitle}</p>
+                <p className="text-[#6B7280] text-lg md:text-[24px] mt-2">{content.subtitle.value}</p>
             </div>
             <div className="flex flex-col gap-6 max-w-[95%] md:w-full md:max-w-full items-center">
                 <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">
                     <FancyCard
                         icon="/careers/growth.svg"
-                        title={content.card1Title}
-                        description={content.card1Description}
+                        title={content.card1Title.value}
+                        description={content.card1Description.value}
                     />
                     <FancyCard
                         icon="/careers/culture.svg"
-                        title={content.card2Title}
-                        description={content.card2Description}
+                        title={content.card2Title.value}
+                        description={content.card2Description.value}
                     />
                     <FancyCard
                         icon="/careers/hybrid.svg"
-                        title={content.card3Title}
-                        description={content.card3Description}
+                        title={content.card3Title.value}
+                        description={content.card3Description.value}
                     />
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">
                     <FancyCard
                         icon="/careers/comp.svg"
-                        title={content.card4Title}
-                        description={content.card4Description}
+                        title={content.card4Title.value}
+                        description={content.card4Description.value}
                     />
                     <FancyCard
                         icon="/careers/balance.svg"
-                        title={content.card5Title}
-                        description={content.card5Description}
+                        title={content.card5Title.value}
+                        description={content.card5Description.value}
                     />
                     <FancyCard
                         icon="/careers/impact.svg"
-                        title={content.card6Title}
-                        description={content.card6Description}
+                        title={content.card6Title.value}
+                        description={content.card6Description.value}
                     />
                 </div>
             </div>

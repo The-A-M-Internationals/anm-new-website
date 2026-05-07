@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import Hero from "../../components/homePageComponents/Hero";
-import Services from "../../components/Services";
+import AIAutomationsHero from "./AiAutomationsHero";
+import AiAutomationsServices from "./AiAutomationsServices";
 import Events from "../../components/Events";
 import Innovation from "../../components/Innovation";
 
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 export default function AIAutomationsPage() {
     return (
         <div>
-            <Hero />
-            <Services />
+            <AIAutomationsHero />
+            <AiAutomationsServices />
             <Events />
             <Innovation />
         </div>

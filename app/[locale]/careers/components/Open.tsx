@@ -54,7 +54,7 @@ const Open = () => {
                 });
                 setJobs(list);
             } catch {
-                setError(content.loadError);
+                setError(content.loadError.value);
             } finally {
                 setLoading(false);
             }

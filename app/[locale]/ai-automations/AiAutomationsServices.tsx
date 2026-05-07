@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useIntlayer } from "next-intlayer";
@@ -23,13 +24,13 @@ const AiAutomationsServices = () => {
     const services = [
         {
             id: 1,
-            title: content.mlTitle,
-            description: content.mlDescription,
+            title: content.mlTitle.value,
+            description: content.mlDescription.value,
             services: [
-                content.mlService1,
-                content.mlService2,
-                content.mlService3,
-                content.mlService4,
+                content.mlService1.value,
+                content.mlService2.value,
+                content.mlService3.value,
+                content.mlService4.value,
             ],
             gradient: "from-blue-900/20 via-blue-800/20 to-blue-700/20",
             accentColor: "#2563EB",
@@ -43,13 +44,13 @@ const AiAutomationsServices = () => {
         },
         {
             id: 2,
-            title: content.rpaTitle,
-            description: content.rpaDescription,
+            title: content.rpaTitle.value,
+            description: content.rpaDescription.value,
             services: [
-                content.rpaService1,
-                content.rpaService2,
-                content.rpaService3,
-                content.rpaService4,
+                content.rpaService1.value,
+                content.rpaService2.value,
+                content.rpaService3.value,
+                content.rpaService4.value,
             ],
             gradient: "from-indigo-900/20 via-indigo-800/20 to-blue-900/20",
             accentColor: "#3B82F6",
@@ -64,13 +65,13 @@ const AiAutomationsServices = () => {
         },
         {
             id: 3,
-            title: content.nlpTitle,
-            description: content.nlpDescription,
+            title: content.nlpTitle.value,
+            description: content.nlpDescription.value,
             services: [
-                content.nlpService1,
-                content.nlpService2,
-                content.nlpService3,
-                content.nlpService4,
+                content.nlpService1.value,
+                content.nlpService2.value,
+                content.nlpService3.value,
+                content.nlpService4.value,
             ],
             gradient: "from-sky-900/20 via-blue-900/20 to-indigo-900/20",
             accentColor: "#1E40AF",
@@ -82,13 +83,13 @@ const AiAutomationsServices = () => {
         },
         {
             id: 4,
-            title: content.cvTitle,
-            description: content.cvDescription,
+            title: content.cvTitle.value,
+            description: content.cvDescription.value,
             services: [
-                content.cvService1,
-                content.cvService2,
-                content.cvService3,
-                content.cvService4,
+                content.cvService1.value,
+                content.cvService2.value,
+                content.cvService3.value,
+                content.cvService4.value,
             ],
             gradient: "from-cyan-900/20 via-sky-900/20 to-blue-900/20",
             accentColor: "#0EA5E9",
@@ -101,13 +102,13 @@ const AiAutomationsServices = () => {
         },
         {
             id: 5,
-            title: content.genAITitle,
-            description: content.genAIDescription,
+            title: content.genAITitle.value,
+            description: content.genAIDescription.value,
             services: [
-                content.genAIService1,
-                content.genAIService2,
-                content.genAIService3,
-                content.genAIService4,
+                content.genAIService1.value,
+                content.genAIService2.value,
+                content.genAIService3.value,
+                content.genAIService4.value,
             ],
             gradient: "from-blue-800/20 via-indigo-900/20 to-blue-900/20",
             accentColor: "#60A5FA",
@@ -287,10 +288,10 @@ const AiAutomationsServices = () => {
                     {/* Section header */}
                     <div className="text-center mb-20">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ fontFamily: "Lora, Georgia, serif" }}>
-                            {content.servicesTitle}
+                            {content.servicesTitle.value}
                         </h2>
                         <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto">
-                            {content.servicesSubtitle}
+                            {content.servicesSubtitle.value}
                         </p>
                     </div>
 
@@ -361,10 +362,10 @@ const AiAutomationsServices = () => {
                                             ))}
                                         </ul>
 
-                                        {/* Learn more button */}
-                                        <button 
-                                            onClick={() => router.push(getLocalizedPath(locale, serviceRoutes[service.id]))}
-                                            className="mt-6 px-6 py-3 rounded-xl text-sm font-semibold text-white relative overflow-hidden group/btn transition-all duration-300"
+                                        {/* Learn more link */}
+                                        <Link 
+                                            href={getLocalizedPath(locale as any, serviceRoutes[service.id])}
+                                            className="mt-6 px-6 py-3 rounded-xl text-sm font-semibold text-white relative overflow-hidden group/btn transition-all duration-300 inline-block text-center"
                                             style={{
                                                 background: `linear-gradient(135deg, ${service.accentColor}20 0%, ${service.accentColor}10 100%)`,
                                                 border: `1px solid ${service.accentColor}30`,
@@ -375,7 +376,7 @@ const AiAutomationsServices = () => {
                                                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover/btn:opacity-100"
                                                 style={{ animation: 'shine-sweep 2s ease-in-out infinite' }}
                                             />
-                                        </button>
+                                        </Link>
 
                                         {/* Corner accent */}
                                         <div className="absolute top-4 right-4 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity">

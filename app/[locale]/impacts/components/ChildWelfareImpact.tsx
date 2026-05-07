@@ -108,19 +108,19 @@ const ChildWelfareImpact = () => {
 
     const stats = [
         {
-            value: content.stats[0].value,
-            title: content.stats[0].title,
-            description: content.stats[0].description
+            value: content.stats[0].value.value,
+            title: content.stats[0].title.value,
+            description: content.stats[0].description.value
         },
         {
-            value: content.stats[1].value,
-            title: content.stats[1].title,
-            description: content.stats[1].description
+            value: content.stats[1].value.value,
+            title: content.stats[1].title.value,
+            description: content.stats[1].description.value
         },
         {
-            value: content.stats[2].value,
-            title: content.stats[2].title,
-            description: content.stats[2].description
+            value: content.stats[2].value.value,
+            title: content.stats[2].title.value,
+            description: content.stats[2].description.value
         }
     ];
 

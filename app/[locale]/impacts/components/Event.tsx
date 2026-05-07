@@ -41,17 +41,17 @@ const Event = () => {
                                 <path d="M2.33203 12C2.88432 12 3.33203 11.5523 3.33203 11C3.33203 10.4477 2.88432 10 2.33203 10C1.77975 10 1.33203 10.4477 1.33203 11C1.33203 11.5523 1.77975 12 2.33203 12Z" stroke="#D4AF37" strokeLinejoin="round" />
                                 <path d="M7.9974 6.5L9.33073 7.25V8.75L7.9974 9.5L6.66406 8.75V7.25L7.9974 6.5Z" stroke="#D4AF37" strokeLinejoin="round" />
                             </svg>
-                            <span>{content.badge}</span>
+                            <span>{content.badge.value}</span>
                         </div>
 
                         {/* Title */}
                         <p className="text-2xl md:text-3xl font-semibold text-[#000000] mb-4">
-                            {content.title}
+                            {content.title.value}
                         </p>
 
                         {/* Description */}
                         <p className="text-[#6B7280] text-xl mb-6">
-                            {content.description}
+                            {content.description.value}
                         </p>
 
                         {/* Location */}
@@ -62,7 +62,7 @@ const Event = () => {
                                     <path d="M15.4824 11.35C15.805 11.4493 16.144 11.4993 16.4994 11.5M16.4994 11.5C17.1767 11.4999 17.8394 11.3033 18.4071 10.934C18.9749 10.5647 19.4233 10.0386 19.698 9.41957C19.9727 8.80049 20.0619 8.115 19.9547 7.44624C19.8476 6.77748 19.5487 6.15418 19.0943 5.65193C18.6399 5.14967 18.0496 4.79004 17.3949 4.61664C16.7402 4.44325 16.0492 4.46354 15.4058 4.67506C14.7624 4.88657 14.1941 5.28023 13.77 5.80828C13.3459 6.33634 13.0841 6.97611 13.0164 7.65M16.4994 11.5C19.5374 11.5 21.9994 13.739 21.9994 16.5M10.9824 7.65C10.9101 6.93242 10.6179 6.2547 10.1457 5.70952C9.67359 5.16434 9.04455 4.77832 8.34466 4.60427C7.64477 4.43022 6.90819 4.47663 6.23568 4.73716C5.56317 4.99769 4.98756 5.4596 4.58758 6.05974C4.1876 6.65987 3.98278 7.36891 4.00113 8.08989C4.01949 8.81086 4.26012 9.50857 4.69011 10.0876C5.12011 10.6666 5.71847 11.0986 6.40337 11.3246C7.08826 11.5506 7.82624 11.5594 8.51637 11.35M17.4994 19.5C17.4994 16.739 15.0374 14.5 11.9994 14.5C8.96137 14.5 6.49937 16.739 6.49937 19.5" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     <path d="M7.5 11.5C4.462 11.5 2 13.739 2 16.5" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                                <span className="font-medium">{content.seats}</span>
+                                <span className="font-medium">{content.seats.value}</span>
                             </div>
 
                         </div>
@@ -73,13 +73,13 @@ const Event = () => {
                                 <Calendar className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
                                 <span className="text-[#000000] font-medium text-sm md:text-base">
                                     20
-                                    <span className="text-[#6B7280] ml-2">{content.month} {content.day}</span>
+                                    <span className="text-[#6B7280] ml-2">{content.month.value} {content.day.value}</span>
                                 </span>
                             </div>
                             <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
                                 <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
                                 <span className="text-[#000000] font-medium text-sm md:text-base">
-                                    {content.time}
+                                    {content.time.value}
                                 </span>
                             </div>
                         </div>
@@ -89,7 +89,7 @@ const Event = () => {
                             onClick={() => router.push(`/${locale}/contact#form`)}
                             className="w-44 text-center bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition"
                         >
-                            <p>{content.button}</p>
+                            <p>{content.button.value}</p>
                             <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 rtl:rotate-180" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>

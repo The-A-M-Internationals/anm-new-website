@@ -78,11 +78,11 @@ export default function JobApplyPage() {
         const file = e.target.files?.[0];
         if (file) {
             if (file.type !== 'application/pdf') {
-                setFormError(content.formErrorPdf);
+                setFormError(content.formErrorPdf.value);
                 return;
             }
             if (file.size > 5 * 1024 * 1024) { // 5MB limit
-                setFormError(content.formErrorSize);
+                setFormError(content.formErrorSize.value);
                 return;
             }
             setForm({ ...form, resumeFile: file });
@@ -112,7 +112,7 @@ export default function JobApplyPage() {
         e.preventDefault();
 
         if (!form.name || !form.email || !form.phone || !form.resumeFile) {
-            setFormError(content.formErrorRequired);
+            setFormError(content.formErrorRequired.value);
             return;
         }
 
@@ -133,21 +133,21 @@ export default function JobApplyPage() {
                 submittedAt: new Date().toISOString(),
             });
 
-            setSuccess(content.success);
+            setSuccess(content.success.value);
             setForm({ name: '', email: '', phone: '', experience: '', resumeFile: null });
         } catch {
-            setFormError(content.formErrorSubmit);
+            setFormError(content.formErrorSubmit.value);
         } finally {
             setSubmitting(false);
         }
     };
 
     if (loading) {
-        return <div className="min-h-screen flex items-center justify-center">{content.loading}</div>;
+        return <div className="min-h-screen flex items-center justify-center">{content.loading.value}</div>;
     }
 
     if (error || !job) {
-        const errMsg = error === 'Job not found' ? content.notFound : error === 'Failed to load job' ? content.loadError : error;
+        const errMsg = error === 'Job not found' ? content.notFound.value : error === 'Failed to load job' ? content.loadError.value : error;
         return <div className="min-h-screen flex items-center justify-center text-red-600">{errMsg}</div>;
     }
 

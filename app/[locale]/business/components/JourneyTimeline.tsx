@@ -7,27 +7,27 @@ const JourneyTimeline = () => {
     const milestones = [
         {
             image: "/business/image1.jpg",
-            text: content.milestone1,
+            text: content.milestone1.value,
             position: "right"
         },
         {
             image: "/business/image2.jpg",
-            text: content.milestone2,
+            text: content.milestone2.value,
             position: "left"
         },
         {
             image: "/business/image3.jpg",
-            text: content.milestone3,
+            text: content.milestone3.value,
             position: "right"
         },
         {
             image: "/business/image4.jpg",
-            text: content.milestone4,
+            text: content.milestone4.value,
             position: "left"
         },
         {
             image: "/business/image5.jpg",
-            text: content.milestone5,
+            text: content.milestone5.value,
             position: "right"
         }
     ];
@@ -38,7 +38,7 @@ const JourneyTimeline = () => {
 
                 {/* HEADER */}
                 <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-10">
-                    {content.title}
+                    {content.title.value}
                 </h2>
 
                 {/* MAIN IMAGE WITH YELLOW BOX */}

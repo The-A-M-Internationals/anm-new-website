@@ -75,7 +75,7 @@ const EventRegister = () => {
 
     const handleSubmit = async () => {
         if (!eventId || !form.name || !form.email) {
-            setMessage(content.requiredError);
+            setMessage(content.requiredError.value);
             return;
         }
 
@@ -91,7 +91,7 @@ const EventRegister = () => {
                 registeredAt: Timestamp.now(),
             });
 
-            setMessage(content.successMessage);
+            setMessage(content.successMessage.value);
             setForm({ name: '', email: '', phone: '' });
 
             setRedirecting(true);
@@ -103,7 +103,7 @@ const EventRegister = () => {
                 }
             }, 3000);
         } catch {
-            setMessage(content.errorMessage);
+            setMessage(content.errorMessage.value);
         } finally {
             setLoading(false);
         }
@@ -134,35 +134,35 @@ const EventRegister = () => {
                                 <div className="flex gap-2">
                                     <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" />
                                     <p>
-                                        <strong>{content.locationLabel}:</strong> {event.location}
+                                        <strong>{content.locationLabel.value}:</strong> {event.location}
                                     </p>
                                 </div>
 
                                 <div className="flex gap-2">
                                     <CalendarDays className="w-4 h-4 md:w-6 md:h-6 text-[#D4AF37]" />
                                     <p>
-                                        <strong>{content.dateLabel}:</strong> {event.dateRange} {event.month}
+                                        <strong>{content.dateLabel.value}:</strong> {event.dateRange} {event.month}
                                     </p>
                                 </div>
 
                                 <div className="flex gap-2">
                                     <Clock className="w-4 h-4 md:w-6 md:h-6 text-[#D4AF37]" />
                                     <p>
-                                        <strong>{content.timeLabel}:</strong> {event.timeRange}
+                                        <strong>{content.timeLabel.value}:</strong> {event.timeRange}
                                     </p>
                                 </div>
                             </div>
                         </>
                     ) : (
-                        <p className="text-gray-500">{content.loadingEvent}</p>
+                        <p className="text-gray-500">{content.loadingEvent.value}</p>
                     )}
                 </div>
 
                 {/* RIGHT — FORM */}
                 <div className="p-6 md:p-8 flex flex-col">
-                    <h1 className="text-2xl font-semibold mb-4 text-center">{content.registration}</h1>
+                    <h1 className="text-2xl font-semibold mb-4 text-center">{content.registration.value}</h1>
 
-                    <label className="text-sm font-medium mb-1">{content.fullName}</label>
+                    <label className="text-sm font-medium mb-1">{content.fullName.value}</label>
                     <input
                         name="name"
                         placeholder={content.namePlaceholder.value}
@@ -171,7 +171,7 @@ const EventRegister = () => {
                         className="w-full border rounded-lg px-4 py-2 mb-3"
                     />
 
-                    <label className="text-sm font-medium mb-1">{content.email}</label>
+                    <label className="text-sm font-medium mb-1">{content.email.value}</label>
                     <input
                         name="email"
                         type="email"
@@ -182,7 +182,7 @@ const EventRegister = () => {
                     />
 
                     <label className="text-sm font-medium mb-1">
-                        {content.phone} <span className="text-gray-400">{content.optional}</span>
+                        {content.phone.value} <span className="text-gray-400">{content.optional.value}</span>
                     </label>
                     <input
                         name="phone"
@@ -197,12 +197,12 @@ const EventRegister = () => {
                         disabled={loading}
                         className="w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:scale-105 transition"
                     >
-                        {loading ? content.submitting : content.register}
+                        {loading ? content.submitting.value : content.register.value}
                     </button>
 
                     {message && (
                         <p className="text-center text-sm mt-3 text-gray-700">
-                            {message} {redirecting && <span>{content.redirecting}</span>}
+                            {message} {redirecting && <span>{content.redirecting.value}</span>}
                         </p>
                     )}
                 </div>

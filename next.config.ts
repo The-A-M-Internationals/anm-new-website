@@ -3,6 +3,10 @@ import type { NextConfig } from "next";
 import { withIntlayer } from "next-intlayer/server";
 
 const nextConfig: NextConfig = {
+  // @ts-ignore - Turbopack root configuration for Next.js 16
+  turbopack: {
+    root: ".",
+  },
   images: {
     unoptimized: true,
 

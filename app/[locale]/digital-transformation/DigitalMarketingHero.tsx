@@ -1,12 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef, useState } from "react";
 
 const DigitalMarketingHero = () => {
     const router = useRouter();
+    const { locale } = useLocale();
     const content = useIntlayer("digitalMarketingServices");
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -356,14 +357,14 @@ const DigitalMarketingHero = () => {
                     </div>
 
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "Lora, Georgia, serif" }}>
-                        {content.heroTitle}
+                        {content.heroTitle.value}
                         <br />
                         <span className="relative inline-block mt-4">
                             <span 
                                 className="bg-gradient-to-r from-[#C9A84C] via-[#D4AF37] to-[#C9A84C] bg-clip-text text-transparent"
                                 style={{ backgroundSize: '200% auto', animation: 'gradient-flow 5s ease infinite' }}
                             >
-                                {content.heroSubtitle}
+                                {content.heroSubtitle.value}
                             </span>
                             <div className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent overflow-hidden">
                                 <div 
@@ -375,7 +376,7 @@ const DigitalMarketingHero = () => {
                     </h1>
 
                     <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-14 leading-relaxed font-light">
-                        {content.heroDescription}
+                        {content.heroDescription.value}
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
@@ -392,18 +393,18 @@ const DigitalMarketingHero = () => {
                                 style={{ animation: 'shimmer 3s ease-in-out infinite' }}
                             />
                             <span className="relative z-10 flex items-center gap-3">
-                                {content.exploreServices}
+                                {content.exploreServices.value}
                                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
                             </span>
                         </button>
                         <button
-                            onClick={() => router.push(getLocalizedPath("en", "/contact"))}
+                            onClick={() => router.push(getLocalizedPath(locale as any, "/contact"))}
                             className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#C9A84C]/50 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                            <span className="relative z-10">{content.bookConsultation}</span>
+                            <span className="relative z-10">{content.bookConsultation.value}</span>
                         </button>
                     </div>
 

@@ -177,16 +177,16 @@ const Listings = () => {
             <div
                 className="flex items-center justify-center px-4 text-center"
             >
-                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold md:mt-15 mb-8 md:mb-12">{content.sectionTitle}</p>
+                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold md:mt-15 mb-8 md:mb-12">{content.sectionTitle.value}</p>
             </div>
 
-            {content.services.map((service: ServiceData, index: number) => (
+            {content.services.map((service: any, index: number) => (
                 <ServiceCard
                     key={`service-${index}`}
                     id={serviceIds[index]}
-                    title={service.title}
-                    description={service.description}
-                    tags={service.tags}
+                    title={service.title.value}
+                    description={service.description.value}
+                    tags={service.tags.map((tag: any) => tag.value)}
                     svgIcon={serviceIcons[index]}
                 />
             ))}
@@ -195,16 +195,16 @@ const Listings = () => {
                 id="managed-services"
                 className="flex items-center justify-center px-4 text-center mt-12 md:mt-24"
             >
-                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold mb-8 md:mb-12">{content.managedServiceTitle}</p>
+                <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold mb-8 md:mb-12">{content.managedServiceTitle.value}</p>
             </div>
 
-            {content.managedServices.map((service: ServiceData, index: number) => (
+            {content.managedServices.map((service: any, index: number) => (
                 <ServiceCard
                     key={`managed-${index}`}
                     id={managedServiceIds[index]}
-                    title={service.title}
-                    description={service.description}
-                    tags={service.tags}
+                    title={service.title.value}
+                    description={service.description.value}
+                    tags={service.tags.map((tag: any) => tag.value)}
                     svgIcon={managedServiceIcons[index]}
                 />
             ))}
@@ -215,7 +215,7 @@ const Listings = () => {
                     onClick={() => router.push(`/${locale}/features#epm-suites`)}
                     className="flex items-center gap-2 px-8 py-4 rounded-full border border-[#D4AF37] text-xl font-bold bg-[#D4AF37] text-black transition-transform duration-300 hover:scale-105 cursor-pointer shadow-lg"
                 >
-                    {cardContent.exploreCta}
+                    {cardContent.exploreCta.value}
                     <ArrowRight className="w-6 h-6 rtl:rotate-180" />
                 </button>
             </div>
