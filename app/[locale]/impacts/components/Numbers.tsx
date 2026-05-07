@@ -2,13 +2,14 @@
 
 import Card from "./Card";
 import FancyCard from "./FancyCard";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 
 const Numbers = () => {
     const content = useIntlayer("impactsNumbers");
+    const { locale } = useLocale();
 
     return (
-        <div className="md:px-5 lg:px-[50px]">
+        <div className="md:px-5 lg:px-[50px] py-12 md:py-20 lg:py-24">
             <div className="text-center">
                 <p className="text-base lg:text-lg leading-relaxed max-w-4xl mx-auto">{content.intro}
                 </p>
@@ -18,12 +19,12 @@ const Numbers = () => {
                     <Card
                         icon="/careers/growth.svg"
                         title={content.target}
-                        description="₹1,000,000"
+                        description={locale === 'ar' ? "١٬٠٠٠٬٠٠٠ درهم" : "$1,000,000"}
                     />
                     <Card
                         icon="/careers/culture.svg"
                         title={content.raisedToDate}
-                        description="₹420,500"
+                        description={locale === 'ar' ? "٤٢٠٬٥٠٠ درهم" : "$420,500"}
                     />
                     <Card
                         icon="/careers/hybrid.svg"
@@ -35,7 +36,7 @@ const Numbers = () => {
                     <FancyCard
                         icon="/careers/growth.svg"
                         title={content.totalDoanted}
-                        description="₹42,050"
+                        description={locale === 'ar' ? "٤٢٬٠٥٠ درهم" : "$42,050"}
                     />
                     <FancyCard
                         icon="/careers/growth.svg"
@@ -51,13 +52,13 @@ const Numbers = () => {
                     <Card
                         icon="/careers/growth.svg"
                         title={content.target}
-                        description="₹1,000,000"
+                        description={locale === 'ar' ? "١٬٠٠٠٬٠٠٠ درهم" : "$1,000,000"}
                     />
 
                     <Card
                         icon="/careers/culture.svg"
                         title={content.raisedToDate}
-                        description="₹420,500"
+                        description={locale === 'ar' ? "٤٢٠٬٥٠٠ درهم" : "$420,500"}
                     />
 
                     <Card
@@ -69,7 +70,7 @@ const Numbers = () => {
                     <Card
                         icon="/careers/growth.svg"
                         title={content.totalDoanted}
-                        description="₹42,050"
+                        description={locale === 'ar' ? "٤٢٬٠٥٠ درهم" : "$42,050"}
                     />
 
                     {/* LAST CARD — CENTERED */}
@@ -77,7 +78,7 @@ const Numbers = () => {
                         <Card
                             icon="/careers/growth.svg"
                             title={content.beneficiariesSupported}
-                            description="120 children"
+                            description={locale === 'ar' ? "١٢٠ طفل" : "120 children"}
                         />
                     </div>
 

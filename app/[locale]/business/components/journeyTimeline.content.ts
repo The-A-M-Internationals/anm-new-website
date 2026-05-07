@@ -16,8 +16,8 @@ const journeyTimelineContent = {
     }),
 
     milestone3: t({
-      en: "Achieved ₹10M+ in social contributions for children's welfare.",
-      ar: "حققنا مساهمات مجتمعية بأكثر من ₹10M لدعم رفاه الأطفال.",
+      en: "Achieved $10M+ in social contributions for children's welfare.",
+      ar: "حققنا مساهمات مجتمعية بأكثر من ١٠ مليون درهم لدعم رفاه الأطفال.",
     }),
 
     milestone4: t({

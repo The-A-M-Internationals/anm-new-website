@@ -3,7 +3,6 @@ import Innovation from "../../components/Innovation";
 import ChildWelfareImpact from "./components/ChildWelfareImpact";
 import DrivingImpactDashboard from "./components/DrivingImpactDashboard";
 import Event from "./components/Event";
-import Numbers from "./components/Numbers";
 
 export const metadata: Metadata = {
     title: "Impacts | A&M International",
@@ -13,11 +12,10 @@ export const metadata: Metadata = {
 export default function ImpactsPage() {
     return (
         <div>
-            <DrivingImpactDashboard />
-            <Numbers />
-            <Event />
-            <ChildWelfareImpact />
-            <Innovation />
+            <section className="snap-section"><DrivingImpactDashboard /></section>
+            <section className="snap-section"><Event /></section>
+            <section className="snap-section"><ChildWelfareImpact /></section>
+            <section className="snap-section"><Innovation /></section>
         </div>
     )
 }

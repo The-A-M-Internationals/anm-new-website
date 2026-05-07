@@ -13,7 +13,7 @@ const impactsChildWelfareContent = {
     }),
     stats: [
       {
-        value: t({ en: "₹15M+", ar: "١٥ مليون+ روبية" }),
+        value: t({ en: "$15M+", ar: "١٥ مليون+ درهم" }),
         title: t({ en: "Impact Contributions", ar: "مساهمات الأثر" }),
         description: t({
           en: "Funds donated to vetted partners to support long-term programs in education, health, and shelter.",
@@ -40,6 +40,55 @@ const impactsChildWelfareContent = {
         }),
       },
     ],
+    // Graph labels
+    goal: t({ en: "AED 1,000,000 Goal", ar: "هدف ١٬٠٠٠٬٠٠٠ درهم" }),
+    raised: t({ en: "Raised this month", ar: "المبلغ المجموع هذا الشهر" }),
+    cumulative: t({ en: "Cumulative total", ar: "الإجمالي التراكمي" }),
+    charitable: t({
+      en: "Charitable Contribution (10%)",
+      ar: "المساهمة الخيرية (١٠٪)",
+    }),
+    subheader: t({
+      en: "Help us reach our target to support children's futures — every partnership moves us forward.",
+      ar: "ساعدنا في تحقيق هدفنا لدعم مستقبل الأطفال — كل شراكة تدفعنا للأمام.",
+    }),
+
+    // New CSR Content from PDF merged
+    csrTitle: t({
+      en: "Corporate Social Responsibility",
+      ar: "المسؤولية الاجتماعية للمؤسسات",
+    }),
+    csrDescription: t({
+      en: "At The A&M International, we believe that elevating brands also means elevating communities. As we grow, so does our commitment to giving back — through pro bono work for purpose-driven organizations, technology partnerships with educational initiatives, and CSR programs that reflect our values.",
+      ar: "في The A&M International، نؤمن بأن الارتقاء بالعلامات التجارية يعني أيضًا الارتقاء بالمجتمعات. ومع نمونا، يكبر معنا التزامنا بالعطاء — من خلال المشاريع التطوعية للمؤسسات ذات الرسالة، والشراكات التقنية مع المبادرات التعليمية، وبرامج المسؤولية الاجتماعية التي تعكس قيمنا.",
+    }),
+    csrPillars: [
+      {
+        title: t({ en: "Education", ar: "التعليم" }),
+        description: t({
+          en: "Focusing on education and digital literacy across the regions we serve.",
+          ar: "التركيز على التعليم ومحو الأمية الرقمية في المناطق التي نخدمها.",
+        }),
+      },
+      {
+        title: t({ en: "Sustainability", ar: "الاستدامة" }),
+        description: t({
+          en: "Commitment to sustainable growth and long-term community impact.",
+          ar: "الالتزام بالنمو المستدام والأثر المجتمعي طويل الأمد.",
+        }),
+      },
+      {
+        title: t({ en: "Community", ar: "المجتمع" }),
+        description: t({
+          en: "Empowering small businesses and supporting purpose-driven organizations.",
+          ar: "تمكين الأعمال الصغيرة ودعم المؤسسات ذات الرسالة.",
+        }),
+      },
+    ],
+    getInTouch: t({
+      en: "Get in touch: am@theaminternational.com",
+      ar: "تواصلوا معنا: am@theaminternational.com",
+    }),
   },
 };
 

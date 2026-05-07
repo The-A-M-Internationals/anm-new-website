@@ -1,15 +1,14 @@
 "use client";
 
-import { useLocale } from "next-intlayer";
+import { useLocale, useIntlayer } from "next-intlayer";
 import { useRouter } from "next/navigation";
-import servicesContent from "./services.content";
 import type { AppLocale } from "@/types/locale";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 
 const Services = () => {
     const { locale } = useLocale();
     const currentLocale = locale as AppLocale;
-    const content = servicesContent.content;
+    const content = useIntlayer("services");
     const router = useRouter();
 
     return (
@@ -66,17 +65,17 @@ const Services = () => {
             <section id="services" className="px-4 py-14 md:py-20">
                 <div className="w-[90%] mx-auto">
 
-                    {/* Heading — unchanged from original */}
+                    {/* Heading */}
                     <div className="text-center mb-10 md:mb-14">
                         <h3 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold">
-                            {content.heading[currentLocale]}{" "}
+                            {content.heading.value}{" "}
                             <span className="text-[#D4AF37]">
-                                {content.headingHighlight[currentLocale]}
+                                {content.headingHighlight.value}
                             </span>{" "}
-                            {content.headingEnd[currentLocale]}
+                            {content.headingEnd.value}
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base mt-3 max-w-2xl mx-auto">
-                            {content.subheading[currentLocale]}
+                            {content.subheading.value}
                         </p>
                     </div>
 
@@ -320,7 +319,7 @@ const Services = () => {
                                     <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">Output</text>
                                 </svg>
                                 <div style={{ position: "relative", zIndex: 2 }}>
-                                    <div style={{ animationDelay: "1.2s", width: 40, height: 40, background: "rgba(255,255,255,.1)", border: "1.5px solid rgba(201,168,76,.45)", borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", animation: "am-float-icon 3.5s ease-in-out infinite 1.2s" }}>
+                                    <div style={{ animationDelay: "1.2s", width: 40, height: 40, background: "rgba(255,255,255,.1)", border: "1.5px solid rgba(201,168,76,.45)", borderRadius: 11, display: "flex", alignItems: "center", justifyCenter: "center", animation: "am-float-icon 3.5s ease-in-out infinite 1.2s" }}>
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                             <rect x="9" y="7" width="6" height="10" rx="1" /><path d="M5 10H9M15 10H19M5 14H9M15 14H19M11 4V7M13 4V7M11 17V20M13 17V20" />
                                         </svg>

@@ -68,17 +68,17 @@ const Open = () => {
     return (
         <div
             id="open-positions"
-            className="flex flex-col min-h-screen items-center justify-center gap-6 px-4 text-center"
+            className="flex flex-col items-center justify-center gap-6 py-12 md:py-20 lg:py-24 px-4 text-center"
         >
             <p className="font-semibold text-3xl md:text-[48px]">
-                {content.titlePrefix} <span className="text-[#D4AF37]">{content.titleHighlight}</span>
+                {content.titlePrefix.value} <span className="text-[#D4AF37]">{content.titleHighlight.value}</span>
             </p>
 
             <p className="text-[#6B7280] text-lg md:text-[20px]">
-                {content.subtitle}
+                {content.subtitle.value}
             </p>
 
-            {loading && <p className="text-[#6B7280]">{content.loading}</p>}
+            {loading && <p className="text-[#6B7280]">{content.loading.value}</p>}
 
             {!hasJobs && !loading && (
                 <>
@@ -90,9 +90,9 @@ const Open = () => {
                         className="mt-2 rounded-lg w-full max-w-[400px] h-auto hover:scale-105 transition"
                     />
                     <p className="text-black text-lg md:text-[24px] max-w-2xl">
-                        {content.emptyLine1}
+                        {content.emptyLine1.value}
                         <br className="hidden md:block" />
-                        {content.emptyLine2}
+                        {content.emptyLine2.value}
                     </p>
                 </>
             )}
@@ -108,20 +108,20 @@ const Open = () => {
                         return (
                             <div
                                 key={job.id}
-                                className="border border-gray-300 rounded-2xl p-5 text-left shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                                className="border border-gray-300 rounded-2xl p-5 text-left rtl:text-right shadow-sm hover:shadow-md transition flex flex-col justify-between"
                             >
                                 <div>
                                     <p className="font-semibold text-xl">{title}</p>
 
                                     <div className="mt-1 text-sm text-[#6B7280]">
                                         <div className="flex flex-wrap gap-3">
-                                            {department && <span>{content.deptLabel}: {department}</span>}
-                                            {location && <span>{content.locationLabel}: {location}</span>}
+                                            {department && <span>{content.deptLabel.value}: {department}</span>}
+                                            {location && <span>{content.locationLabel.value}: {location}</span>}
                                         </div>
 
                                         {type && (
                                             <div className="mt-1">
-                                                <span>{content.typeLabel}: {type}</span>
+                                                <span>{content.typeLabel.value}: {type}</span>
                                             </div>
                                         )}
                                     </div>
@@ -149,7 +149,7 @@ const Open = () => {
                                     className="mt-4 bg-[#D4AF37] cursor-pointer text-black px-4 py-2 rounded-full font-medium hover:scale-105 transition"
                                     onClick={() => router.push(`/${locale}/careers/${job.id}`)}
                                 >
-                                    {content.apply}
+                                    {content.apply.value}
                                 </button>
                             </div>
                         );

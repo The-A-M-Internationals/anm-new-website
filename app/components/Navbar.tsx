@@ -193,7 +193,7 @@ const Navbar = () => {
           `}
         >
           <span className="flex items-center gap-1">
-            {content[navItems[navKey].labelKey]}
+            {content[navItems[navKey].labelKey].value}
             <svg
               className={`w-3.5 h-3.5 mt-0.5 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
               fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -210,7 +210,7 @@ const Navbar = () => {
         onClick={() => router.push(directLinks[navKey]!)}
         className="text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:text-gray-900"
       >
-        {content[navItems[navKey].labelKey]}
+        {content[navItems[navKey].labelKey].value}
       </button>
     );
   };
@@ -230,7 +230,7 @@ const Navbar = () => {
           ${isActive ? 'bg-yellow-50 border-l-4 border-[#C9A84C] text-gray-900' : 'hover:bg-gray-50'}
         `}
       >
-        <span>{content[navItems[navKey].labelKey]}</span>
+        <span>{content[navItems[navKey].labelKey].value}</span>
         {hasDropdown && (
           <svg
             className={`w-4 h-4 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
@@ -284,7 +284,7 @@ const Navbar = () => {
                 onClick={() => router.push(getLocalizedLink("/contact#form"))}
                 className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-white px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap"
               >
-                {content.bookConsultation}
+                {content.bookConsultation.value}
               </button>
             </div>
 
@@ -294,7 +294,7 @@ const Navbar = () => {
                 onClick={() => router.push(getLocalizedLink("/contact#form"))}
                 className="hidden md:block bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-colors duration-150"
               >
-                {content.bookConsultation}
+                {content.bookConsultation.value}
               </button>
 
               <div className="md:block lg:hidden">
@@ -337,7 +337,7 @@ const Navbar = () => {
                   }}
                   className="w-full bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-3 rounded-full text-sm font-semibold transition-colors duration-150"
                 >
-                  {content.bookConsultation}
+                  {content.bookConsultation.value}
                 </button>
               </div>
             </div>

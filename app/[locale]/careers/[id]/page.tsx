@@ -6,14 +6,19 @@ import { db } from '@/lib/firebaseConfig';
 import { doc, getDoc, addDoc, collection } from 'firebase/firestore';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 
 type Job = {
     title: string;
+    titleAr?: string;
     department?: string;
+    departmentAr?: string;
     location?: string;
+    locationAr?: string;
     type?: string;
+    typeAr?: string;
     description?: string;
+    descriptionAr?: string;
 };
 
 type FormState = {
@@ -26,6 +31,7 @@ type FormState = {
 
 export default function JobApplyPage() {
     const { id } = useParams() as { id: string };
+    const { locale } = useLocale();
 
     const [job, setJob] = useState<Job | null>(null);
     const [loading, setLoading] = useState(true);
@@ -145,31 +151,38 @@ export default function JobApplyPage() {
         return <div className="min-h-screen flex items-center justify-center text-red-600">{errMsg}</div>;
     }
 
+    // Determine displayed text based on locale
+    const title = locale === "ar" ? job.titleAr || job.title : job.title;
+    const department = locale === "ar" ? job.departmentAr || job.department : job.department;
+    const location = locale === "ar" ? job.locationAr || job.location : job.location;
+    const type = locale === "ar" ? job.typeAr || job.type : job.type;
+    const description = locale === "ar" ? job.descriptionAr || job.description : job.description;
+
     return (
         <div className="bg-[#F9FAFB] flex items-center justify-center px-4 py-10">
             <div className="w-full max-w-6xl bg-white rounded-3xl shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden">
 
                 {/* LEFT — SCROLLABLE JOB DETAILS */}
-                <div className="p-6 md:p-8 bg-[#FFFBED] max-h-[80vh] overflow-y-auto">
-                    <h1 className="text-2xl md:text-3xl font-bold mb-3">{job.title}</h1>
+                <div className="p-6 md:p-8 bg-[#FFFBED] max-h-[80vh] overflow-y-auto text-left rtl:text-right">
+                    <h1 className="text-2xl md:text-3xl font-bold mb-3">{title}</h1>
 
                     <div className="text-sm text-gray-600 flex flex-wrap gap-3 mb-4">
-                        {job.department && <span>{content.deptLabel}: <span className='font-bold'>{job.department}</span></span>}
-                        {job.location && <span>{content.locationLabel}: <span className='font-bold'>{job.location}</span></span>}
-                        {job.type && <span>{content.typeLabel}: <span className='font-bold'>{job.type}</span></span>}
+                        {department && <span>{content.deptLabel.value}: <span className='font-bold'>{department}</span></span>}
+                        {location && <span>{content.locationLabel.value}: <span className='font-bold'>{location}</span></span>}
+                        {type && <span>{content.typeLabel.value}: <span className='font-bold'>{type}</span></span>}
                     </div>
 
                     <div className="prose max-w-none text-gray-800">
-                        <h2 className="text-lg font-semibold mb-2">{content.jobDescriptionTitle}</h2>
+                        <h2 className="text-lg font-semibold mb-2">{content.jobDescriptionTitle.value}</h2>
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {job.description || ""}
+                            {description || ""}
                         </ReactMarkdown>
                     </div>
                 </div>
 
                 {/* RIGHT — FIXED FORM */}
-                <div className="p-6 md:p-8 flex flex-col">
-                    <h2 className="text-xl font-semibold mb-4 text-center">{content.applyTitle}</h2>
+                <div className="p-6 md:p-8 flex flex-col text-left rtl:text-right">
+                    <h2 className="text-xl font-semibold mb-4 text-center">{content.applyTitle.value}</h2>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                         <input
@@ -177,7 +190,7 @@ export default function JobApplyPage() {
                             placeholder={`${content.nameLabel.value}*`}
                             value={form.name}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2"
+                            className="border rounded px-3 py-2 rtl:text-right"
                         />
 
                         <input
@@ -186,7 +199,7 @@ export default function JobApplyPage() {
                             placeholder={`${content.emailLabel.value}*`}
                             value={form.email}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2"
+                            className="border rounded px-3 py-2 rtl:text-right"
                         />
 
                         <input
@@ -194,7 +207,7 @@ export default function JobApplyPage() {
                             placeholder={`${content.phoneLabel.value}*`}
                             value={form.phone}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2"
+                            className="border rounded px-3 py-2 rtl:text-right"
                         />
 
                         <textarea
@@ -202,11 +215,11 @@ export default function JobApplyPage() {
                             placeholder={content.experienceLabel.value}
                             value={form.experience}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 min-h-24"
+                            className="border rounded px-3 py-2 min-h-24 rtl:text-right"
                         />
 
                         <div className="border rounded px-3 py-2">
-                            <label className="block text-sm text-gray-600 mb-1">{content.resumeLabel}</label>
+                            <label className="block text-sm text-gray-600 mb-1">{content.resumeLabel.value}</label>
                             <input
                                 type="file"
                                 accept=".pdf"
@@ -226,7 +239,7 @@ export default function JobApplyPage() {
                             disabled={submitting}
                             className="bg-[#D4AF37] text-black px-4 py-2 rounded-full font-semibold hover:scale-105 transition disabled:opacity-60"
                         >
-                            {submitting ? content.submitting : content.submitButton}
+                            {submitting ? content.submitting.value : content.submitButton.value}
                         </button>
                     </form>
                 </div>

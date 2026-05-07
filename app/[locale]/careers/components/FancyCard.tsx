@@ -25,33 +25,33 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon }) => {
 
 
 
-                {/* TOP LEFT BITTEN CORNER */}
+                {/* TOP START BITTEN CORNER */}
                 <div
                     className="
-            absolute -top-6 -left-6 size-24 
-            rounded-br-4xl border-2 border-gray-200 
+            absolute -top-6 -start-6 size-24 
+            rounded-be-4xl border-2 border-gray-200 
             bg-white
             transition-colors duration-300
           "
                 >
-                    <div className="absolute top-5.5 -right-6 h-6 w-6 bg-white transition-colors duration-300"></div>
+                    <div className="absolute top-5.5 -end-6 h-6 w-6 bg-white transition-colors duration-300"></div>
 
                     <div
                         className="
-              absolute top-5.5 -right-6 h-6 w-6 rounded-tl-full
-              border-t-2 border-l-2 border-gray-200 
+              absolute top-5.5 -end-6 h-6 w-6 rounded-ts-full
+              border-t-2 border-s-2 border-gray-200 
               bg-white
               transition-colors duration-300
               group-hover:bg-[#D4AF37]
             "
                     ></div>
 
-                    <div className="absolute -bottom-6 left-5.5 h-6 w-6 bg-white transition-colors duration-300"></div>
+                    <div className="absolute -bottom-6 start-5.5 h-6 w-6 bg-white transition-colors duration-300"></div>
 
                     <div
                         className="
-              absolute -bottom-6 left-5.5 h-6 w-6 rounded-tl-full
-              border-t-2 border-l-2 border-gray-200 
+              absolute -bottom-6 start-5.5 h-6 w-6 rounded-ts-full
+              border-t-2 border-s-2 border-gray-200 
               bg-white
               transition-colors duration-300
               group-hover:bg-[#D4AF37]
@@ -61,8 +61,8 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon }) => {
 
 
 
-                {/* TOP LEFT GOLD CIRCLE */}
-                <div className="absolute top-0 left-0 w-16 h-16 rounded-full bg-white z-30 flex items-center justify-center shadow-md">
+                {/* TOP START GOLD CIRCLE */}
+                <div className="absolute top-0 start-0 w-16 h-16 rounded-full bg-white z-30 flex items-center justify-center shadow-md">
                     <div className="w-full h-full rounded-full bg-[#D4AF37] flex items-center justify-center">
                         <Image
                             src={icon}

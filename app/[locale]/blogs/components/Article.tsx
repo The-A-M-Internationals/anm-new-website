@@ -68,7 +68,7 @@ const Article = () => {
     }
 
     return (
-        <div id="article" className="bg-[#FFFBED] flex flex-col items-center justify-center gap-10 py-16 px-4 md:px-4">
+        <div id="article" className="bg-[#FFFBED] flex flex-col items-center justify-center gap-10 py-12 md:py-20 lg:py-24 px-4 md:px-4">
             {/* Title */}
             <div className="text-center">
                 <h2 className="text-4xl md:text-5xl font-semibold text-black">
@@ -123,9 +123,9 @@ const Article = () => {
                             <div className="flex flex-wrap gap-3 mb-6">
                                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M15 10C15 9.20435 14.6839 8.44129 14.1213 7.87868C13.5587 7.31607 12.7956 7 12 7C11.2044 7 10.4413 7.31607 9.87868 7.87868C9.31607 8.44129 9 9.20435 9 10C9 10.7956 9.31607 11.5587 9.87868 12.1213C10.4413 12.6839 11.2044 13 12 13C12.7956 13 13.5587 12.6839 14.1213 12.1213C14.6839 11.5587 15 10.7956 15 10Z" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M17 18C17 16.6739 16.4732 15.4021 15.5355 14.4645C14.5979 13.5268 13.3261 13 12 13C10.6739 13 9.40215 13.5268 8.46447 14.4645C7.52678 15.4021 7 16.6739 7 18" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M21 13V11C21 7.229 21 5.343 19.828 4.172C18.656 3.001 16.771 3 13 3H11C7.229 3 5.343 3 4.172 4.172C3.001 5.344 3 7.229 3 11V13C3 16.771 3 18.657 4.172 19.828C5.344 20.999 7.229 21 11 21H13C16.771 21 18.657 21 19.828 19.828C20.999 18.656 21 16.771 21 13Z" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" />
+                                        <path d="M15 10C15 9.20435 14.6839 8.44129 14.1213 7.87868C13.5587 7.31607 12.7956 7 12 7C11.2044 7 10.4413 7.31607 9.87868 7.87868C9.31607 8.44129 9 9.20435 9 10C9 10.7956 9.31607 11.5587 9.87868 12.1213C10.4413 12.6839 11.2044 13 12 13C12.7956 13 13.5587 12.6839 14.1213 12.1213C14.6839 11.5587 15 10.7956 15 10Z" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M17 18C17 16.6739 16.4732 15.4021 15.5355 14.4645C14.5979 13.5268 13.3261 13 12 13C10.6739 13 9.40215 13.5268 8.46447 14.4645C7.52678 15.4021 7 16.6739 7 18" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M21 13V11C21 7.229 21 5.343 19.828 4.172C18.656 3.001 16.771 3 13 3H11C7.229 3 5.343 3 4.172 4.172C3.001 5.344 3 7.229 3 11V13C3 16.771 3 18.657 4.172 19.828C5.344 20.999 7.229 21 11 21H13C16.771 21 18.657 21 19.828 19.828C20.999 18.656 21 16.771 21 13Z" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="round" />
                                     </svg>
 
                                     <span className="text-black text-[16px]">
@@ -135,7 +135,7 @@ const Article = () => {
                                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white">
                                     <Clock className="w-5 h-5 text-[#D4AF37]" />
                                     <span className="text-black font-medium">
-                                        {article.readTime || "9 am - 6 pm"}
+                                        {getLocalizedContent('readTime') || (locale === 'ar' ? "9 صباحًا - 6 مساءً" : "9 am - 6 pm")}
                                     </span>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@ const Article = () => {
                                         fill="none"
                                         stroke="currentColor"
                                         strokeWidth="2.5"
-                                        className="w-5 h-5"
+                                        className={`w-5 h-5 ${locale === 'ar' ? 'rotate-180' : ''}`}
                                         viewBox="0 0 24 24"
                                     >
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

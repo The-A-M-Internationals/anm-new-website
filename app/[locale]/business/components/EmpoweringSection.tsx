@@ -29,7 +29,7 @@ const EmpoweringSection = () => {
     ];
 
     return (
-        <section id="mission" className="bg-white py-20 px-6 md:px-12 lg:px-20 lg:mt-15">
+        <section id="mission" className="bg-white py-12 md:py-20 lg:py-24 px-6 md:px-12 lg:px-20">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-8">
 
                 {/* TOP: Title + Description */}
