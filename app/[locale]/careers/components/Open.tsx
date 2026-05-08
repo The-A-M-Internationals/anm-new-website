@@ -70,11 +70,11 @@ const Open = () => {
             id="open-positions"
             className="flex flex-col items-center justify-center gap-6 py-12 md:py-20 lg:py-24 px-4 text-center"
         >
-            <p className="font-semibold text-3xl md:text-[48px]">
+            <p className="font-semibold text-xl md:text-2xl">
                 {content.titlePrefix.value} <span className="text-[#D4AF37]">{content.titleHighlight.value}</span>
             </p>
 
-            <p className="text-[#6B7280] text-lg md:text-[20px]">
+            <p className="text-[#6B7280] text-sm md:text-base">
                 {content.subtitle.value}
             </p>
 
@@ -89,7 +89,7 @@ const Open = () => {
                         height={400}
                         className="mt-2 rounded-lg w-full max-w-[400px] h-auto hover:scale-105 transition"
                     />
-                    <p className="text-black text-lg md:text-[24px] max-w-2xl">
+                    <p className="text-black text-sm md:text-base max-w-2xl">
                         {content.emptyLine1.value}
                         <br className="hidden md:block" />
                         {content.emptyLine2.value}

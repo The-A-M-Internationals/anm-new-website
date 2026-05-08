@@ -154,7 +154,10 @@ const SuccessStories: React.FC = () => {
                   <div className="text-sm md:text-base text-gray-900 hover:text-[#C9A84C] transition-colors cursor-pointer mt-4">
                     <a href="mailto:am@theaminternational.com">
                       <span className="font-semibold">
-                        {study.link.split('am@theaminternational.com')[0]}
+                        {study.link.split(/->|<-|→|←/)[0].trimEnd()}
+                      </span>
+                      <span className="font-normal mx-2">
+                        {study.link.match(/->|<-|→|←/)?.[0]}
                       </span>
                       <span className="font-normal">
                         {study.link.includes('am@theaminternational.com') && 'am@theaminternational.com'}

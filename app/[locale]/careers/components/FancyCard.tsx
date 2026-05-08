@@ -79,7 +79,7 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon }) => {
                     {/* TITLE */}
                     <h3
                         className="
-              text-2xl font-bold text-black
+              text-xl font-bold text-black
               transition-colors duration-300
               group-hover:text-white mt-13 md:mt-16
             "
@@ -90,7 +90,7 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon }) => {
                     {/* DESCRIPTION */}
                     <p
                         className="
-              text-[16px] md:text-xl text-[#6B7280] max-w-[90%] mt-0 md:mt-2
+              text-sm md:text-base text-[#6B7280] max-w-[90%] mt-0 md:mt-2
               transition-colors duration-300
               group-hover:text-white
             "

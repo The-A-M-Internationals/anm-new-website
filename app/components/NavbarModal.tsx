@@ -99,22 +99,6 @@ const NavbarModal = ({
                   {t.masterclassTitle.value}
                 </h2>
 
-                {/* Date & Time */}
-                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 md:gap-3">
-                  {/* Date */}
-                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
-                    <CalendarDays className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassDateMain.value}</span>
-                    <span className="text-gray-500 font-medium text-sm md:text-base">{t.masterclassDateSub.value}</span>
-                  </div>
-
-                  {/* Time */}
-                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
-                    <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassTime.value}</span>
-                  </div>
-                </div>
-
                 {/* Button */}
                 <a href={t.masterclassRegisterUrl.value} target="_blank" onClick={onClose}>
                   <div className='flex w-full justify-center items-center'>

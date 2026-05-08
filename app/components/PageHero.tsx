@@ -100,17 +100,17 @@ const PageHero: React.FC<PageHeroProps> = ({
                   </h4>
                )}
 
-               <h3 className='text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight md:w-[90%] lg:w-[98%]'>
+               <h3 className='text-xl md:text-2xl lg:text-3xl font-bold text-white leading-tight md:w-[90%] lg:w-[98%]'>
                   {title}
                </h3>
 
                {title2 && (
-                  <h3 className='text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight'>
+                  <h3 className='text-xl md:text-2xl lg:text-3xl font-bold text-white leading-tight'>
                      {title2}
                   </h3>
                )}
 
-               <p className='text-[20px] md:text-[18px] lg:text-xl text-white w-full md:w-[70%] lg:w-[70%] leading-relaxed'>
+               <p className='text-[16px] md:text-base lg:text-lg text-white w-full md:w-[70%] lg:w-[70%] leading-relaxed'>
                   {description}
                </p>
             </div>
@@ -131,10 +131,10 @@ const PageHero: React.FC<PageHeroProps> = ({
          >
             <button
                onClick={() => router.push(link)}
-               className='cursor-pointer text-sm md:text-[15px] lg:text-xl bg-[#D4AF37] rounded-full px-4 py-2 md:px-3 md:py-1 lg:px-8 lg:py-4 flex items-center gap-2 text-black font-semibold whitespace-nowrap hover:scale-105 transition-transform'
+               className='cursor-pointer text-xs md:text-sm lg:text-base bg-[#D4AF37] rounded-full px-4 py-2 md:px-3 md:py-1 lg:px-6 lg:py-3 flex items-center gap-2 text-black font-semibold whitespace-nowrap hover:scale-105 transition-transform'
             >
                {button}
-               <ArrowRight className='w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 rtl:rotate-180' />
+               <ArrowRight strokeWidth={1.5} className='w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 rtl:rotate-180' />
             </button>
          </div>
 

@@ -32,11 +32,11 @@ const CultureGrowthSection = () => {
 
                 {/* ROW 1 — Title + Description */}
                 <div id="culture" className="flex flex-col lg:flex-row justify-between items-start gap-6">
-                    <h2 className="text-3xl md:text-[48px] font-semibold text-black leading-tight">
+                    <h2 className="text-xl md:text-2xl font-semibold text-black leading-tight">
                         {content.title.value}
                     </h2>
 
-                    <p className="text-gray-600 leading-relaxed w-full lg:w-[550px] text-base md:text-lg">
+                    <p className="text-gray-600 leading-relaxed w-full lg:w-[550px] text-sm md:text-base">
                         {content.description.value}
                     </p>
                 </div>
@@ -61,10 +61,10 @@ const CultureGrowthSection = () => {
                                 key={index}
                                 className="bg-white border border-[#D9D9D9] shadow-xl flex flex-col gap-3 rounded-[40px] p-6 md:p-8 h-auto md:h-[197px]"
                             >
-                                <h3 className="text-xl md:text-[24px] font-bold text-[#D4AF37]">
+                                <h3 className="text-lg md:text-xl font-bold text-[#D4AF37]">
                                     {value.title}
                                 </h3>
-                                <p className="text-gray-600 leading-normal text-sm md:text-[17px]">
+                                <p className="text-gray-600 leading-normal text-xs md:text-sm">
                                     {value.description}
                                 </p>
                             </div>

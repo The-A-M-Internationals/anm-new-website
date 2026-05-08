@@ -9,11 +9,11 @@ const Benefits = () => {
     return (
         <div className="flex flex-col justify-center items-center gap-5 py-12 md:py-20 lg:py-24 px-4">
             <div className="flex flex-col justify-center items-center text-center">
-                <p className="text-3xl md:text-[48px] font-semibold text-[#000000]">
+                <p className="text-xl md:text-2xl font-semibold text-[#000000]">
                     <span className="text-[#D4AF37]">{content.titleHighlight.value} </span>
                     {content.titleRest.value}
                 </p>
-                <p className="text-[#6B7280] text-lg md:text-[24px] mt-2">{content.subtitle.value}</p>
+                <p className="text-[#6B7280] text-sm md:text-base mt-2">{content.subtitle.value}</p>
             </div>
             <div className="flex flex-col gap-6 max-w-[95%] md:w-full md:max-w-full items-center">
                 <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">
