@@ -188,7 +188,7 @@ const financeTransformationListingsContent = {
           ar: "الاستشارات كخدمة",
         }),
         description: t({
-          en: "A&M Internationals delivers tailored Enterprise Performance Management solutions that seamlessly align business processes with modern technology improving financial performance, operational accuracy, and long-term strategic success.",
+          en: "The A&M internationals delivers tailored Enterprise Performance Management solutions that seamlessly align business processes with modern technology improving financial performance, operational accuracy, and long-term strategic success.",
           ar: "تقدم A&M الدولية حلولًا مخصصة لإدارة أداء المؤسسات تُوائم عمليات الأعمال مع التقنية الحديثة لتحسين الأداء المالي ودقة التشغيل والنجاح الاستراتيجي على المدى الطويل.",
         }),
         tags: [
@@ -220,7 +220,7 @@ const financeTransformationListingsContent = {
           ar: "إدارة حلول EPM",
         }),
         description: t({
-          en: "A&M Internationals enhances Enterprise Performance Management systems by optimizing workflows, strengthening financial efficiency, and enabling data-driven decision-making through customized, insight-focused strategies.",
+          en: "The A&M internationals enhances Enterprise Performance Management systems by optimizing workflows, strengthening financial efficiency, and enabling data-driven decision-making through customized, insight-focused strategies.",
           ar: "تعزز A&M الدولية أنظمة إدارة أداء المؤسسات عبر تحسين سير العمل ورفع الكفاءة المالية وتمكين اتخاذ القرار القائم على البيانات من خلال استراتيجيات مخصصة تركز على الرؤى.",
         }),
         tags: [
@@ -244,7 +244,7 @@ const financeTransformationListingsContent = {
           ar: "ترقية الإصدارات والتحديثات",
         }),
         description: t({
-          en: "A&M Internationals ensures seamless version upgrades, patching, and stability improvements for Enterprise Performance Management platforms minimizing operational disruption, improving reliability, and maximizing overall system performance.",
+          en: "The A&M internationals ensures seamless version upgrades, patching, and stability improvements for Enterprise Performance Management platforms minimizing operational disruption, improving reliability, and maximizing overall system performance.",
           ar: "تضمن A&M الدولية ترقية الإصدارات والتحديثات وتحسين الاستقرار لمنصات إدارة أداء المؤسسات مع تقليل تعطل التشغيل وتحسين الاعتمادية وتعظيم أداء النظام.",
         }),
         tags: [
@@ -280,7 +280,7 @@ const financeTransformationListingsContent = {
           ar: "الصيانة والإدارة الشهرية",
         }),
         description: t({
-          en: "A&M Internationals provides comprehensive Managed Services for ongoing EPM maintenance and administration. Our team manages data loads, reporting cycles, consolidations, and other critical monthly processes ensuring every task is completed accurately, consistently, and on schedule.",
+          en: "The A&M internationals provides comprehensive Managed Services for ongoing EPM maintenance and administration. Our team manages data loads, reporting cycles, consolidations, and other critical monthly processes ensuring every task is completed accurately, consistently, and on schedule.",
           ar: "تقدم A&M الدولية خدمات مُدارة شاملة لصيانة وإدارة حلول EPM بشكل مستمر. يدير فريقنا تحميل البيانات ودورات التقارير والتوحيدات وغيرها من العمليات الشهرية الحرجة لضمان إنجاز كل مهمة بدقة وبشكل متسق وفي الوقت المحدد.",
         }),
         tags: [

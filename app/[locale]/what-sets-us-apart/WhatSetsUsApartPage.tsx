@@ -8,10 +8,11 @@ import WhatSetsUsApartList from "./components/WhatSetsUsApartList";
 import Results from "../features/components/Results";
 
 export default function WhatSetsUsApartPage() {
-    const content = useIntlayer("whatSetsUsApartPage");
+    // 99% Features Page replica - using featuresPage content for everything except the list
+    const content = useIntlayer("featuresPage");
     const { locale } = useLocale();
 
-    // 🔥 Locale-based images (Reusing from features for exact replica structure)
+    // 🔥 Exact replica of Features Page images
     const heroImage =
         locale === "ar" ? "/features/hero-image-ar.png" : "/features/hero-image.png";
 
@@ -32,7 +33,7 @@ export default function WhatSetsUsApartPage() {
                     title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={`/${locale}/what-sets-us-apart#epm-suites`}
+                    link={`/${locale}/features#epm-suites`}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}
@@ -40,7 +41,9 @@ export default function WhatSetsUsApartPage() {
                 />
             </section>
 
+            {/* The 1% unique content: WhatSetsUsApartList instead of FeaturesList */}
             <section className="snap-section"><WhatSetsUsApartList /></section>
+            
             <section className="snap-section"><Apps /></section>
             <section className="snap-section"><Results /></section>
             <section className="snap-section"><EPM /></section>

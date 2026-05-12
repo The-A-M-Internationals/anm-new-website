@@ -3,8 +3,8 @@ import MethodologyPage from "./MethodologyPage";
 
 
 export const metadata: Metadata = {
-    title: "Methodology | A&M Internationals",
-    description: "Explore A&M Internationals's proven methodology for delivering safe, fast, and measurable transformation in the global market.",
+    title: "Methodology | The A&M internationals",
+    description: "Explore The A&M internationals's proven methodology for delivering safe, fast, and measurable transformation in the global market.",
 }
 
 export default function Page() {

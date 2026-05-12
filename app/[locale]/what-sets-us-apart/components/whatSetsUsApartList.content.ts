@@ -12,8 +12,8 @@ const whatSetsUsApartListContent = {
       ar: "يُميِّزنا",
     }),
     subtitle: t({
-      en: "Six reasons brands choose The A&M Internationals.",
-      ar: "ستة أسباب تجعل العلامات التجارية تختار The A&M Internationals.",
+      en: "Six reasons brands choose The A&M internationals.",
+      ar: "ستة أسباب تجعل العلامات التجارية تختار A&M الدولية.",
     }),
     feature1Title: t({
       en: "1. Global Reach, Local Understanding",

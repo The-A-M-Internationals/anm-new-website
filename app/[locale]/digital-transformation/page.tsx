@@ -3,10 +3,21 @@ import DigitalMarketingHero from "./DigitalMarketingHero";
 import DigitalMarketingServices from "./DigitalMarketingServices";
 import Events from "../../components/Events";
 import Innovation from "../../components/Innovation";
+import { t } from "intlayer";
 
-export const metadata: Metadata = {
-    title: "Digital Transformation | The A&M Internationals",
-    description: "Cloud migration, ERP implementation, and data modernisation that transforms how your business operates and competes globally.",
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    
+    return {
+        title: t({
+            en: "Digital Transformation | The A&M internationals",
+            ar: "التحول الرقمي | A&M الدولية",
+        })[locale as 'en' | 'ar'],
+        description: t({
+            en: "Cloud migration, ERP implementation, and data modernisation that transforms how your business operates and competes globally.",
+            ar: "ترحيل السحابة وتحديث تخطيط موارد المؤسسات وتحديث البيانات الذي يحول طريقة عمل عملك ومنافسته عالميًا.",
+        })[locale as 'en' | 'ar'],
+    };
 }
 
 export default function DigitalTransformationPage() {

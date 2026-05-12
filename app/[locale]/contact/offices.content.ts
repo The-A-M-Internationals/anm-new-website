@@ -26,7 +26,7 @@ const officesContent = {
       ar: "الإمارات العربية المتحدة",
     }),
     dubaiAddress: t({
-      en: "The A&M Internationals, Ajman Free Zone, Ajman, United Arab Emirates",
+      en: "The A&M internationals, Ajman Free Zone, Ajman, United Arab Emirates",
       ar: "A&M الدولية، منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة",
     }),
 

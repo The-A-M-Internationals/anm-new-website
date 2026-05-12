@@ -178,14 +178,14 @@ const AiAutomationsServices = () => {
 
                 {/* Brain/AI Icon - Top Left */}
                 <div 
-                    className="absolute top-[15%] left-[8%] w-20 h-20 pointer-events-none opacity-50"
+                    className="absolute top-[15%] start-[8%] w-20 h-20 pointer-events-none opacity-50"
                     style={{ 
                         animation: 'float-3d-1 8s ease-in-out infinite',
                         transformStyle: 'preserve-3d',
                         filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         <path d="M 50 20 Q 65 20 75 35 Q 80 45 78 55 Q 75 65 68 72 Q 58 80 50 78 Q 42 80 32 72 Q 25 65 22 55 Q 20 45 25 35 Q 35 20 50 20" 
                             fill="rgba(37, 99, 235, 0.2)" 
                             stroke="#2563EB" 
@@ -201,14 +201,14 @@ const AiAutomationsServices = () => {
 
                 {/* Circuit Chip Icon - Top Right */}
                 <div 
-                    className="absolute top-[18%] right-[12%] w-18 h-18 pointer-events-none opacity-45"
+                    className="absolute top-[18%] end-[12%] w-18 h-18 pointer-events-none opacity-45"
                     style={{ 
                         animation: 'float-3d-2 7s ease-in-out infinite 1s',
                         transformStyle: 'preserve-3d',
                         filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         <rect x="30" y="30" width="40" height="40" rx="4" fill="rgba(30, 64, 175, 0.2)" stroke="#1E40AF" strokeWidth="2" />
                         <line x1="40" y1="30" x2="40" y2="20" stroke="#2563EB" strokeWidth="2" />
                         <line x1="50" y1="30" x2="50" y2="20" stroke="#2563EB" strokeWidth="2" />
@@ -222,14 +222,14 @@ const AiAutomationsServices = () => {
 
                 {/* Robot Icon - Left Side */}
                 <div 
-                    className="absolute top-[45%] left-[5%] w-24 h-24 pointer-events-none opacity-40"
+                    className="absolute top-[45%] start-[5%] w-24 h-24 pointer-events-none opacity-40"
                     style={{ 
                         animation: 'float-3d-3 9s ease-in-out infinite 2s',
                         transformStyle: 'preserve-3d',
                         filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         <rect x="30" y="35" width="40" height="40" rx="6" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" strokeWidth="2" />
                         <circle cx="42" cy="50" r="4" fill="#60A5FA" />
                         <circle cx="58" cy="50" r="4" fill="#60A5FA" />
@@ -243,14 +243,14 @@ const AiAutomationsServices = () => {
 
                 {/* Neural Network Icon - Right Side */}
                 <div 
-                    className="absolute top-[50%] right-[8%] w-20 h-20 pointer-events-none opacity-50"
+                    className="absolute top-[50%] end-[8%] w-20 h-20 pointer-events-none opacity-50"
                     style={{ 
                         animation: 'float-3d-1 8.5s ease-in-out infinite 1.5s',
                         transformStyle: 'preserve-3d',
                         filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         {/* Left layer */}
                         <circle cx="20" cy="50" r="5" fill="#2563EB" opacity="0.8" />
                         {/* Middle layer */}
@@ -271,14 +271,14 @@ const AiAutomationsServices = () => {
 
                 {/* Code Brackets Icon - Bottom Right */}
                 <div 
-                    className="absolute bottom-[25%] right-[15%] w-16 h-16 pointer-events-none opacity-45"
+                    className="absolute bottom-[25%] end-[15%] w-16 h-16 pointer-events-none opacity-45"
                     style={{ 
                         animation: 'float-3d-2 7.5s ease-in-out infinite 0.5s',
                         transformStyle: 'preserve-3d',
                         filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         <path d="M 30 30 L 20 50 L 30 70" stroke="#2563EB" strokeWidth="3" fill="none" strokeLinecap="round" />
                         <path d="M 70 30 L 80 50 L 70 70" stroke="#2563EB" strokeWidth="3" fill="none" strokeLinecap="round" />
                         <line x1="55" y1="25" x2="45" y2="75" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" />
@@ -288,7 +288,7 @@ const AiAutomationsServices = () => {
                 <div className="relative z-10 w-[90%] max-w-7xl mx-auto">
                     {/* Section header */}
                     <div className="text-center mb-20">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ fontFamily: "Lora, Georgia, serif" }}>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ fontFamily: "var(--heading-font)" }}>
                             {content.servicesTitle.value}
                         </h2>
                         <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto">
@@ -342,7 +342,7 @@ const AiAutomationsServices = () => {
                                         </div>
 
                                         {/* Title */}
-                                        <h3 className="text-2xl font-bold text-white mb-3" style={{ fontFamily: "Lora, Georgia, serif" }}>
+                                        <h3 className="text-2xl font-bold text-white mb-3" style={{ fontFamily: "var(--heading-font)" }}>
                                             {service.title}
                                         </h3>
 
@@ -355,7 +355,7 @@ const AiAutomationsServices = () => {
                                         <ul className="space-y-3 mt-auto">
                                             {service.services.map((item, i) => (
                                                 <li key={i} className="flex items-start gap-3 text-white/70 group-hover:text-white/90 transition-colors">
-                                                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: service.accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0 rtl:rotate-180" style={{ color: service.accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                     </svg>
                                                     <span className="text-sm">{item}</span>
@@ -372,7 +372,7 @@ const AiAutomationsServices = () => {
                                                 border: `1px solid ${service.accentColor}30`,
                                             }}
                                         >
-                                            <span className="relative z-10">Learn More</span>
+                                            <span className="relative z-10">{content.learnMore.value}</span>
                                             <div 
                                                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover/btn:opacity-100"
                                                 style={{ animation: 'shine-sweep 2s ease-in-out infinite' }}
@@ -380,7 +380,7 @@ const AiAutomationsServices = () => {
                                         </Link>
 
                                         {/* Corner accent */}
-                                        <div className="absolute top-4 right-4 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity">
+                                        <div className="absolute top-4 end-4 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity">
                                             <div className="absolute inset-0 rounded-full" style={{ background: `radial-gradient(circle, ${service.accentColor} 0%, transparent 70%)` }} />
                                         </div>
                                     </div>

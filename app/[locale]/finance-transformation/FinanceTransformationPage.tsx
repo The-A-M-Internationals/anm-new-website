@@ -7,7 +7,7 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import PageHero from "../../components/PageHero";
 import Innovation from "../../components/Innovation";
 
-export default function FinanceTransformationPage() {
+export default function FinanceTransformationPage({ initialTab }: { initialTab?: string } = {}) {
     const content = useIntlayer("financeTransformationPage");
     const { locale } = useLocale();
 

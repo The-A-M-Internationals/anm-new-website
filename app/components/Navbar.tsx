@@ -11,6 +11,7 @@ type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
 type NavKey =
   | 'Services'
   | 'About Us'
+  | 'Features'
   | 'What Sets Us Apart'
   | 'Make an Impact'
   | 'Career';
@@ -131,6 +132,10 @@ const Navbar = () => {
         },
       ]
     },
+    Features: {
+      labelKey: 'features',
+      rightSideButtons: []
+    },
     'What Sets Us Apart': {
       labelKey: 'whatSetsUsApart',
       rightSideButtons: []
@@ -147,6 +152,7 @@ const Navbar = () => {
 
   // Direct-link URLs for non-dropdown items
   const directLinks: Partial<Record<NavKey, string>> = {
+    Features: getLocalizedLink('/features'),
     'What Sets Us Apart': getLocalizedLink('/what-sets-us-apart'),
     'Make an Impact': getLocalizedLink('/impacts'),
     Career: getLocalizedLink('/careers'),
@@ -238,6 +244,19 @@ const Navbar = () => {
               {/* About Us — dropdown */}
               <DesktopNavButton
                 navKey="About Us"
+                navItems={navItems}
+                activeNavKey={activeNavKey}
+                handleNavMouseEnter={handleNavMouseEnter}
+                scheduleClose={scheduleClose}
+                content={content}
+                router={router}
+                directLinks={directLinks}
+                handleHashLink={handleHashLink}
+              />
+
+              {/* Features — direct link */}
+              <DesktopNavButton
+                navKey="Features"
                 navItems={navItems}
                 activeNavKey={activeNavKey}
                 handleNavMouseEnter={handleNavMouseEnter}
@@ -354,6 +373,14 @@ const Navbar = () => {
                   content={content}
                 />
                 <MobileNavButton
+                  navKey="Features"
+                  navItems={navItems}
+                  activeNavKey={activeNavKey}
+                  isModalOpen={isModalOpen}
+                  handleNavClick={handleNavClick}
+                  content={content}
+                />
+                <MobileNavButton
                   navKey="What Sets Us Apart"
                   navItems={navItems}
                   activeNavKey={activeNavKey}
@@ -450,7 +477,7 @@ const DesktopNavButton = ({
         `}
       >
         <span className="flex items-center gap-1">
-          {content[navItems[navKey].labelKey].value}
+          {(content as any)[navItems[navKey].labelKey].value}
           <svg
             className={`w-3.5 h-3.5 mt-0.5 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
             fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -471,7 +498,7 @@ const DesktopNavButton = ({
       }}
       className="text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:text-gray-900"
     >
-      {content[navItems[navKey].labelKey].value}
+      {(content as any)[navItems[navKey].labelKey].value}
     </button>
   );
 };
@@ -507,7 +534,7 @@ const MobileNavButton = ({
         ${isActive ? 'bg-yellow-50 border-l-4 border-[#C9A84C] text-gray-900' : 'hover:bg-gray-50'}
       `}
     >
-      <span>{content[navItems[navKey].labelKey].value}</span>
+      <span>{(content as any)[navItems[navKey].labelKey].value}</span>
       {hasDropdown && (
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}

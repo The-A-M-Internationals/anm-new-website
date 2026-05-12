@@ -192,10 +192,10 @@ const DigitalMarketingHero = () => {
 
                 {/* Animated Rising Chart - Left */}
                 <div 
-                    className="absolute left-[8%] top-1/3 w-32 h-32 pointer-events-none opacity-40"
+                    className="absolute start-[8%] top-1/3 w-32 h-32 pointer-events-none opacity-40 rtl:scale-x-100"
                     style={{ animation: 'icon-float 7s ease-in-out infinite' }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         {[30, 50, 70, 90, 60].map((height, i) => (
                             <rect
                                 key={i}
@@ -213,10 +213,10 @@ const DigitalMarketingHero = () => {
 
                 {/* Hashtag - Top Right */}
                 <div 
-                    className="absolute top-[15%] right-[15%] w-24 h-24 pointer-events-none opacity-45"
+                    className="absolute top-[15%] end-[15%] w-24 h-24 pointer-events-none opacity-45"
                     style={{ animation: 'icon-float 6s ease-in-out infinite 1s, pulse-glow 3s ease-in-out infinite' }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         <line x1="30" y1="20" x2="20" y2="80" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round" />
                         <line x1="60" y1="20" x2="50" y2="80" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round" />
                         <line x1="70" y1="35" x2="10" y2="45" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round" />
@@ -226,10 +226,10 @@ const DigitalMarketingHero = () => {
 
                 {/* Cursor Click - Bottom Right */}
                 <div 
-                    className="absolute bottom-[20%] right-[10%] w-20 h-20 pointer-events-none opacity-50"
+                    className="absolute bottom-[20%] end-[10%] w-20 h-20 pointer-events-none opacity-50"
                     style={{ animation: 'icon-float 8s ease-in-out infinite 2s' }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGrad)" stroke="#C9A84C" strokeWidth="2" />
                         <circle cx="70" cy="40" r="8" fill="none" stroke="#C9A84C" strokeWidth="2" opacity="0.8">
                             <animate attributeName="r" values="8;12;8" dur="1.5s" repeatCount="indefinite" />
@@ -245,7 +245,7 @@ const DigitalMarketingHero = () => {
                 </div>
 
                 <div 
-                    className="absolute right-[8%] top-[25%] w-96 h-96 pointer-events-none opacity-30"
+                    className="absolute end-[8%] top-[25%] w-96 h-96 pointer-events-none opacity-30"
                     style={{
                         background: 'radial-gradient(circle, rgba(201, 168, 76, 0.4) 0%, rgba(201, 168, 76, 0.1) 50%, transparent 70%)',
                         filter: 'blur(40px)',
@@ -254,14 +254,14 @@ const DigitalMarketingHero = () => {
                 />
 
                 <div 
-                    className="absolute right-[10%] top-1/2 -translate-y-1/2 w-96 h-96 pointer-events-none opacity-50"
+                    className="absolute end-[10%] top-1/2 -translate-y-1/2 w-96 h-96 pointer-events-none opacity-50"
                     style={{ 
                         animation: 'globe-rotate 80s linear infinite',
                         transform: `perspective(1000px) rotateX(${mousePos.y * 3}deg) rotateY(${mousePos.x * 3}deg)`,
                         transition: 'transform 0.5s ease-out',
                     }}
                 >
-                    <svg viewBox="0 0 200 200" className="w-full h-full">
+                    <svg viewBox="0 0 200 200" className="w-full h-full rtl:-scale-x-100">
                         <defs>
                             <path id="equatorPath" d="M 20,100 A 80,80 0 1,1 20,100.1" fill="none" />
                             <path id="meridianPath" d="M 100,20 Q 60,100 100,180 T 100,20" fill="none" />
@@ -294,10 +294,10 @@ const DigitalMarketingHero = () => {
                 </div>
 
                 <div 
-                    className="absolute top-[20%] left-[15%] w-40 h-40 pointer-events-none opacity-25"
+                    className="absolute top-[20%] start-[15%] w-40 h-40 pointer-events-none opacity-25"
                     style={{ animation: 'float-elegant 10s ease-in-out infinite' }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
                         {[45, 35, 25].map((r, i) => (
                             <circle 
                                 key={i} 
@@ -320,7 +320,7 @@ const DigitalMarketingHero = () => {
                     </svg>
                 </div>
 
-                <div className="absolute bottom-[20%] left-[20%] w-64 h-64 pointer-events-none">
+                <div className="absolute bottom-[20%] start-[20%] w-64 h-64 pointer-events-none">
                     {[0, 1, 2].map((i) => (
                         <div
                             key={i}
@@ -335,8 +335,8 @@ const DigitalMarketingHero = () => {
                     { top: '50%', width: '500px', color: '#3B82F6', opacity: '30', delay: '1s' },
                     { top: '67%', width: '550px', color: '#C9A84C', opacity: '35', delay: '2s' },
                 ].map((ray, i) => (
-                    <div key={i} className="absolute right-0 h-px pointer-events-none overflow-hidden" style={{ top: ray.top, width: ray.width }}>
-                        <div className="absolute inset-0" style={{ background: `linear-gradient(to left, rgba(${ray.color === '#C9A84C' ? '201, 168, 76' : '59, 130, 246'}, 0.${ray.opacity}), transparent)` }} />
+                    <div key={i} className="absolute end-0 h-px pointer-events-none overflow-hidden" style={{ top: ray.top, width: ray.width }}>
+                        <div className="absolute inset-0" style={{ background: `linear-gradient(to ${locale === 'ar' ? 'right' : 'left'}, rgba(${ray.color === '#C9A84C' ? '201, 168, 76' : '59, 130, 246'}, 0.${ray.opacity}), transparent)` }} />
                         <div 
                             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent w-32"
                             style={{ animation: `shimmer 3.5s ease-in-out infinite ${ray.delay}` }}
@@ -354,10 +354,10 @@ const DigitalMarketingHero = () => {
                             <div className="absolute inset-0 rounded-full bg-[#C9A84C]" />
                             <div className="absolute inset-0 rounded-full bg-[#C9A84C] animate-ping" />
                         </div>
-                        <span className="relative text-[#C9A84C] text-sm font-semibold tracking-wide">Powered by Innovation</span>
+                        <span className="relative text-[#C9A84C] text-sm font-semibold tracking-wide">{content.heroBadge.value}</span>
                     </div>
 
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "Lora, Georgia, serif" }}>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "var(--heading-font)" }}>
                         {content.heroTitle.value}
                         <br />
                         <span className="relative inline-block mt-4">
@@ -392,7 +392,7 @@ const DigitalMarketingHero = () => {
                             />
                             <span className="relative z-10 flex items-center gap-3">
                                 {content.exploreServices.value}
-                                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
                             </span>
@@ -407,9 +407,9 @@ const DigitalMarketingHero = () => {
 
                     <div className="grid grid-cols-3 gap-12 max-w-4xl mx-auto">
                         {[
-                            { value: "200%", label: "Return on Investment" },
-                            { value: "98%", label: "Client Satisfaction" },
-                            { value: "300%", label: "Traffic Growth" },
+                            { value: content.stat1Value.value, label: content.stat1Label.value },
+                            { value: content.stat2Value.value, label: content.stat2Label.value },
+                            { value: content.stat3Value.value, label: content.stat3Label.value },
                         ].map((stat, i) => (
                             <div key={i} className="group relative">
                                 <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-[#C9A84C] to-[#D4AF37] bg-clip-text text-transparent mb-3 transition-transform duration-300 group-hover:scale-110">
@@ -426,7 +426,7 @@ const DigitalMarketingHero = () => {
 
                 <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
                     <div className="flex flex-col items-center gap-3 animate-bounce">
-                        <span className="text-[#C9A84C]/50 text-xs uppercase tracking-widest font-light">Scroll</span>
+                        <span className="text-[#C9A84C]/50 text-xs uppercase tracking-widest font-light">{content.scroll.value}</span>
                         <div className="w-px h-12 bg-gradient-to-b from-[#C9A84C]/50 to-transparent" />
                     </div>
                 </div>

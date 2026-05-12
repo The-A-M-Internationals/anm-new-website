@@ -80,8 +80,8 @@ const Footer = () => {
                     <div className="flex flex-col gap-3 text-sm sm:text-base text-gray-300">
                         <div className="font-semibold text-white mb-1 uppercase tracking-wider text-xs opacity-80">{content.contactUs?.value || "Contact Us"}</div>
                         
-                        <a href="tel:+917306109679" className="flex items-start gap-3 hover:text-[#C9A84C] transition-colors group" dir="ltr">
-                            <Phone className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" />
+                        <a href="tel:+917306109679" className={`flex items-start gap-3 hover:text-[#C9A84C] transition-colors group ${locale === 'ar' ? '' : 'ltr'}`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                            <Phone className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                             <div className="flex flex-col">
                                 <span className="font-medium text-white group-hover:text-[#C9A84C] transition-colors">
                                     {locale === 'ar' ? '\u200E+91 73061 09679' : '+91 73061 09679'}
@@ -93,11 +93,12 @@ const Footer = () => {
                         </a>
 
                         <a href="mailto:am@theaminternational.com" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">
-                            <Mail className="w-5 h-5 text-[#C9A84C] shrink-0" />
+                            <Mail className={`w-5 h-5 text-[#C9A84C] shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                             <span className="truncate">{content.emailLabel?.value || "Email"}</span>
                         </a>
 
-                        <a href="https://theaminternationals.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">                            <Globe className="w-5 h-5 text-[#C9A84C] shrink-0" />
+                        <a href="https://theaminternational.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">
+                            <Globe className="w-5 h-5 text-[#C9A84C] shrink-0" />
                             <span>{content.websiteLabel?.value || "Website"}</span>
                         </a>
                     </div>
@@ -196,7 +197,7 @@ const Footer = () => {
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
                         <Link href={getLocalizedLink("/")} className="hover:text-[#C9A84C] transition-colors">
-                            {content.amInternational?.value || "AM Internationals"}
+                            {content.amInternational?.value || "The A&M internationals"}
                         </Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
@@ -205,9 +206,6 @@ const Footer = () => {
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
                         <Link href={getLocalizedLink("/features")} className="hover:text-[#C9A84C] transition-colors">
                             {content.features?.value || "Features"}
-                        </Link>
-                        <Link href={getLocalizedLink("/events")} className="hover:text-[#C9A84C] transition-colors">
-                            {content.events?.value || "Events"}
                         </Link>
                         <Link href={getLocalizedLink("/success-stories")} className="hover:text-[#C9A84C] transition-colors">
                             {content.successStories?.value || "Success Stories"}

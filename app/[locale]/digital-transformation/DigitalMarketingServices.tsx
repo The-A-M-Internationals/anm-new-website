@@ -169,8 +169,8 @@ const DigitalMarketingServices = () => {
                 </div>
 
                 {/* Ambient gradient orbs */}
-                <div className="absolute top-20 right-20 w-96 h-96 bg-[#C9A84C]/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 25s ease-in-out infinite' }} />
-                <div className="absolute bottom-20 left-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 30s ease-in-out infinite reverse' }} />
+                <div className="absolute top-20 end-20 w-96 h-96 bg-[#C9A84C]/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 25s ease-in-out infinite' }} />
+                <div className="absolute bottom-20 start-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 30s ease-in-out infinite reverse' }} />
 
                 {/* Floating 3D Marketing Icons */}
                 <style>{`
@@ -190,13 +190,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Camera Icon - Top Left */}
                 <div 
-                    className="absolute top-[15%] left-[8%] w-20 h-20 pointer-events-none opacity-60"
+                    className="absolute top-[15%] start-[8%] w-20 h-20 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-1 8s ease-in-out infinite',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <rect x="15" y="35" width="70" height="45" rx="8" fill="url(#camGrad)" stroke="#C9A84C" strokeWidth="2" />
                         <circle cx="50" cy="57" r="15" fill="none" stroke="#C9A84C" strokeWidth="2.5" />
                         <circle cx="50" cy="57" r="10" fill="rgba(201, 168, 76, 0.3)" />
@@ -213,13 +213,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Hashtag Icon - Top Right */}
                 <div 
-                    className="absolute top-[18%] right-[12%] w-16 h-16 pointer-events-none opacity-60"
+                    className="absolute top-[18%] end-[12%] w-16 h-16 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-2 7s ease-in-out infinite 1s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <line x1="30" y1="20" x2="20" y2="80" stroke="#A855F7" strokeWidth="8" strokeLinecap="round" />
                         <line x1="60" y1="20" x2="50" y2="80" stroke="#A855F7" strokeWidth="8" strokeLinecap="round" />
                         <line x1="70" y1="35" x2="10" y2="45" stroke="#A855F7" strokeWidth="8" strokeLinecap="round" />
@@ -229,13 +229,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Play Button Icon - Left Side */}
                 <div 
-                    className="absolute top-[45%] left-[5%] w-24 h-24 pointer-events-none opacity-50"
+                    className="absolute top-[45%] start-[5%] w-24 h-24 pointer-events-none opacity-50"
                     style={{ 
                         animation: 'float-3d-3 9s ease-in-out infinite 2s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <circle cx="50" cy="50" r="40" fill="url(#playGrad)" stroke="#FF6B9D" strokeWidth="2.5" />
                         <polygon points="40,35 40,65 65,50" fill="#FF6B9D" />
                         <defs>
@@ -249,13 +249,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Chart/Analytics Icon - Right Side */}
                 <div 
-                    className="absolute top-[50%] right-[8%] w-20 h-20 pointer-events-none opacity-55"
+                    className="absolute top-[50%] end-[8%] w-20 h-20 pointer-events-none opacity-55"
                     style={{ 
                         animation: 'float-3d-1 8.5s ease-in-out infinite 1.5s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <rect x="15" y="65" width="15" height="20" rx="2" fill="#10B981" opacity="0.8" />
                         <rect x="35" y="50" width="15" height="35" rx="2" fill="#10B981" opacity="0.9" />
                         <rect x="55" y="35" width="15" height="50" rx="2" fill="#10B981" opacity="1" />
@@ -266,13 +266,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Cursor/Click Icon - Bottom Right */}
                 <div 
-                    className="absolute bottom-[25%] right-[15%] w-16 h-16 pointer-events-none opacity-60"
+                    className="absolute bottom-[25%] end-[15%] w-16 h-16 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-2 7.5s ease-in-out infinite 0.5s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGrad)" stroke="#C9A84C" strokeWidth="2" />
                         <defs>
                             <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -290,7 +290,7 @@ const DigitalMarketingServices = () => {
                             <div className="w-2 h-2 rounded-full bg-[#C9A84C] relative">
                                 <div className="absolute inset-0 rounded-full bg-[#C9A84C] animate-ping" />
                             </div>
-                            <span className="text-[#C9A84C] text-sm font-semibold uppercase tracking-wider">Our Expertise</span>
+                            <span className="text-[#C9A84C] text-sm font-semibold uppercase tracking-wider">{content.expertiseBadge.value}</span>
                         </div>
                         
                         <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6" style={{ fontFamily: "Lora, Georgia, serif" }}>
@@ -365,7 +365,7 @@ const DigitalMarketingServices = () => {
                                                     style={{
                                                         backgroundColor: service.accentColor,
                                                         top: `${20 + i * 20}%`,
-                                                        left: `${15 + i * 18}%`,
+                                                        start: `${15 + i * 18}%`,
                                                         animation: activeCard === service.id ? `orb-drift ${3 + i}s ease-in-out infinite ${i * 0.3}s` : 'none',
                                                     }}
                                                 />
@@ -373,7 +373,7 @@ const DigitalMarketingServices = () => {
                                         </div>
 
                                         {/* Title */}
-                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center transition-colors duration-300" style={{ fontFamily: "Lora, Georgia, serif" }}>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center transition-colors duration-300" style={{ fontFamily: "var(--heading-font)" }}>
                                             <span className="group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/80 group-hover:bg-clip-text group-hover:text-transparent">
                                                 {service.title}
                                             </span>
@@ -413,7 +413,7 @@ const DigitalMarketingServices = () => {
                                             <span className="relative z-10 flex items-center justify-center gap-2">
                                                 {content.learnMore.value}
                                                 <svg 
-                                                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" 
+                                                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2 rtl:-rotate-180" 
                                                     fill="none" 
                                                     stroke="currentColor" 
                                                     viewBox="0 0 24 24"
@@ -432,11 +432,11 @@ const DigitalMarketingServices = () => {
 
                                     {/* Corner glow accents */}
                                     <div 
-                                        className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
+                                        className="absolute top-0 end-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
                                         style={{ backgroundColor: service.accentColor }}
                                     />
                                     <div 
-                                        className="absolute bottom-0 left-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
+                                        className="absolute bottom-0 start-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
                                         style={{ backgroundColor: service.accentColor }}
                                     />
                                 </div>

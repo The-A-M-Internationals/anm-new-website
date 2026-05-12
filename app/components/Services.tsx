@@ -212,10 +212,10 @@ const Services = () => {
                                                 <animate attributeName="opacity" from=".6" to="0" dur="2.4s" repeatCount="indefinite" />
                                             </circle>
                                             {[
-                                                { cx: 52, cy: 38, label: "Cloud", ly: 26, d: 0 },
-                                                { cx: 172, cy: 42, label: "ERP", ly: 30, d: 0.5 },
-                                                { cx: 48, cy: 138, label: "API", ly: 156, d: 1 },
-                                                { cx: 176, cy: 132, label: "Data", ly: 150, d: 0.8 },
+                                                { cx: 52, cy: 38, label: idx === 1 ? content.cloudLabel.value : "", ly: 26, d: 0 },
+                                                { cx: 172, cy: 42, label: idx === 1 ? content.erpLabel.value : "", ly: 30, d: 0.5 },
+                                                { cx: 48, cy: 138, label: idx === 1 ? content.apiLabel.value : "", ly: 156, d: 1 },
+                                                { cx: 176, cy: 132, label: idx === 1 ? content.dataLabel.value : "", ly: 150, d: 0.8 },
                                                 { cx: 110, cy: 18, label: "", ly: 0, d: 0.3 },
                                             ].map((n, i) => (
                                                 <g key={i}>
@@ -255,21 +255,21 @@ const Services = () => {
                                             ))}
                                             <circle cx="198" cy="66" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin=".6s" repeatCount="indefinite" /></circle>
                                             <circle cx="198" cy="118" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin="1s" repeatCount="indefinite" /></circle>
-                                            <text x="28" y="154" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">Input</text>
-                                            <text x="90" y="124" dy="12" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">Hidden</text>
-                                            <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">Output</text>
+                                            <text x="28" y="154" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.inputLabel.value}</text>
+                                            <text x="90" y="124" dy="12" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.hiddenLabel.value}</text>
+                                            <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.outputLabel.value}</text>
                                         </svg>
                                     )}
 
                                     <div style={{ position: "relative", zIndex: 2 }}>
                                         <div className="am-icon-box" style={{ animationDelay: idx === 1 ? ".7s" : idx === 2 ? "1.2s" : "0s" }}>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="rtl:-scale-x-100">
                                                 {idx === 0 && <><path d="M3 17l4-4 4 4 4-8 4 3" /><path d="M3 21h18" /></>}
                                                 {idx === 1 && <><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /><path d="M7 10h2l2-3 2 6 2-3h2" /></>}
                                                 {idx === 2 && <><rect x="9" y="7" width="6" height="10" rx="1" /><path d="M5 10H9M15 10H19M5 14H9M15 14H19M11 4V7M13 4V7M11 17V20M13 17V20" /></>}
                                             </svg>
                                         </div>
-                                        <p style={{ fontSize: 8.5, fontWeight: 800, color: idx === 2 ? "rgba(201,168,76,.75)" : "#92660A", letterSpacing: ".1em", textTransform: "uppercase", margin: "8px 0 2px" }}>
+                                        <p style={{ fontSize: 8.5, fontWeight: 800, color: idx === 2 ? "rgba(201,168,76,.75)" : "#92660A", letterSpacing: locale === 'ar' ? 'normal' : ".1em", textTransform: locale === 'ar' ? 'none' : "uppercase", margin: "8px 0 2px" }}>
                                             {svc.category}
                                         </p>
                                         <h3 style={{ fontSize: 15, fontWeight: 800, color: idx === 2 ? "#fff" : "#0C1F4A", margin: 0, fontFamily: "Lora,Georgia,serif", lineHeight: 1.2 }}>
@@ -309,7 +309,7 @@ const Services = () => {
                                         ))}
                                     </div>
                                     <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 700, color: "#C9A84C" }}>
-                                        {content.explore.value} <span className="am-arr">→</span>
+                                        {content.explore.value} <span className="am-arr rtl:rotate-180">→</span>
                                     </div>
                                 </div>
                             </div>

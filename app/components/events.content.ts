@@ -35,6 +35,10 @@ export const eventsContent = {
       en: "Register Now",
       ar: "سجل الآن",
     }),
+    inPerson: t({
+      en: "In Person",
+      ar: "حضوريًا",
+    }),
     events: [
       {
         id: "1",
