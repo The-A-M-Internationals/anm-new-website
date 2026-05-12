@@ -93,30 +93,29 @@ const PageHero: React.FC<PageHeroProps> = ({
             </div>
 
             {/* Text */}
-            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 lg:start-5 flex w-fit sm:w-[95%] md:w-[95%] flex-col gap-2 md:gap-1 lg:gap-2 pe-10'>
+            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-4 md:start-6 flex w-fit sm:w-[90%] flex-col gap-2 md:gap-1 lg:gap-2 pe-6'>
                {badge && (
                   <h4 className='w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
                      {badge}
                   </h4>
                )}
 
-               <h3 className='text-xl md:text-2xl lg:text-3xl font-bold text-white leading-tight md:w-[90%] lg:w-[98%]'>
+               <h3 className='text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight md:w-full'>
                   {title}
                </h3>
 
                {title2 && (
-                  <h3 className='text-xl md:text-2xl lg:text-3xl font-bold text-white leading-tight'>
+                  <h3 className='text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight'>
                      {title2}
                   </h3>
                )}
 
-               <p className='text-[16px] md:text-base lg:text-lg text-white w-full md:w-[70%] lg:w-[70%] leading-relaxed'>
+               <p className='text-[20px] md:text-lg lg:text-xl text-white w-full md:w-[70%] lg:w-[70%] leading-relaxed'>
                   {description}
                </p>
             </div>
          </div>
 
-         {/* Button bubble */}
          <div
             style={{
                backgroundImage: `url(${buttonImage})`,
@@ -130,7 +129,26 @@ const PageHero: React.FC<PageHeroProps> = ({
             className='absolute p-4 md:p-0 lg:p-8 w-[83.5%] h-[13%] md:w-[34.5%] md:h-[16%] lg:h-[18%] lg:w-[34.5%] end-0 bottom-0 md:end-0 md:bottom-4.75 lg:end-0 lg:bottom-0 rounded-full'
          >
             <button
-               onClick={() => router.push(link)}
+               onClick={(e) => {
+                  if (link.includes('#')) {
+                     const [path, hash] = link.split('#');
+                     const currentPath = window.location.pathname;
+                     // Check if path matches or if it's just a hash
+                     if (currentPath === path || (path === '' && hash)) {
+                        const element = document.getElementById(hash);
+                        if (element) {
+                           e.preventDefault();
+                           const yOffset = -112; // Standard navbar offset
+                           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                           window.scrollTo({ top: y, behavior: 'smooth' });
+                           // Update URL hash without reload
+                           window.history.pushState(null, '', `#${hash}`);
+                           return;
+                        }
+                     }
+                  }
+                  router.push(link);
+               }}
                className='cursor-pointer text-xs md:text-sm lg:text-base bg-[#D4AF37] rounded-full px-4 py-2 md:px-3 md:py-1 lg:px-6 lg:py-3 flex items-center gap-2 text-black font-semibold whitespace-nowrap hover:scale-105 transition-transform'
             >
                {button}

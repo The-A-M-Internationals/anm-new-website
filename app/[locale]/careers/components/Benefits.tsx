@@ -14,8 +14,7 @@ const Benefits = () => {
                     {content.titleRest.value}
                 </p>
                 <p className="text-[#6B7280] text-sm md:text-base mt-2">{content.subtitle.value}</p>
-            </div>
-            <div className="flex flex-col gap-6 max-w-[95%] md:w-full md:max-w-full items-center">
+            </div>            <div className="flex flex-col gap-6 max-w-[95%] md:w-full md:max-w-full items-center">
                 <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">
                     <FancyCard
                         icon="/careers/growth.svg"

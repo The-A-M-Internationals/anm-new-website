@@ -93,11 +93,11 @@ const Hero = () => {
         flex flex-col gap-2 sm:gap-4 md:gap-4 lg:gap-6 z-10
       '>
 
-            <h3 className='text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white md:text-black text-left rtl:text-right'>
+            <h3 className='text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white md:text-black text-left rtl:text-right'>
                {elevatingWorld}
             </h3>
 
-            <h3 className='text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-[#D4AF37] text-left rtl:text-right'>
+            <h3 className='text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-[#D4AF37] text-left rtl:text-right'>
                {dataToDecision}
             </h3>
 

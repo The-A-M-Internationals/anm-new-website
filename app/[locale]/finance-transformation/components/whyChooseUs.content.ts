@@ -9,7 +9,7 @@ const financeTransformationWhyChooseUsContent = {
     }),
 
     titleLine2: t({
-      en: "A&M International?",
+      en: "A&M Internationals?",
       ar: "A&M الدولية؟",
     }),
 

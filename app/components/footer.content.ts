@@ -82,7 +82,7 @@ export const footerContent = {
 
     // Resources section
     resources: t({ en: "Resources", ar: "الموارد" }),
-    amInternational: t({ en: "A&M International", ar: "A&M الدولية" }),
+    amInternational: t({ en: "A&M Internationals", ar: "A&M الدولية" }),
 
     // Contact Us section
     contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
@@ -92,6 +92,7 @@ export const footerContent = {
 
     // How we work section
     howWeWork: t({ en: "How we work", ar: "كيف نعمل" }),
+    features: t({ en: "Features", ar: "الميزات" }),
     successStories: t({ en: "Success Stories", ar: "قصص النجاح" }),
     whatSetsApart: t({ en: "What Sets Us Apart", ar: "ما يميزنا" }),
     methodology: t({ en: "Methodology", ar: "المنهجية" }),
@@ -126,7 +127,7 @@ export const footerContent = {
       ar: "— نرتقي بالعالم، بأناقة —",
     }),
     copyright: t({
-      en: "© 2026 A&M International. All rights reserved.",
+      en: "© 2026 A&M Internationals. All rights reserved.",
       ar: "© 2026 A&M الدولية. جميع الحقوق محفوظة.",
     }),
     privacy: t({ en: "Privacy", ar: "سياسة الخصوصية" }),

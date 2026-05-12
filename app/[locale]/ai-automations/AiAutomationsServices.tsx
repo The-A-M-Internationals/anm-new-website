@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useIntlayer } from "next-intlayer";
 import { useState } from "react";
+import { AppLocale } from "@/types/locale";
 
 const AiAutomationsServices = () => {
     const router = useRouter();
@@ -364,7 +365,7 @@ const AiAutomationsServices = () => {
 
                                         {/* Learn more link */}
                                         <Link 
-                                            href={getLocalizedPath(locale as any, serviceRoutes[service.id])}
+                                            href={getLocalizedPath(locale as AppLocale, serviceRoutes[service.id])}
                                             className="mt-6 px-6 py-3 rounded-xl text-sm font-semibold text-white relative overflow-hidden group/btn transition-all duration-300 inline-block text-center"
                                             style={{
                                                 background: `linear-gradient(135deg, ${service.accentColor}20 0%, ${service.accentColor}10 100%)`,

@@ -4,7 +4,7 @@ const blogsContent = {
   key: "blogsPage",
   content: {
     heroTitle: t({
-      en: "The A&M International Blog",
+      en: "The A&M Internationals Blog",
       ar: "مدونة A&M الدولية",
     }),
 

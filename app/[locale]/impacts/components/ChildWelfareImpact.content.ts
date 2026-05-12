@@ -29,7 +29,7 @@ const impactsChildWelfareContent = {
         }),
       },
       {
-        value: t({ en: "25", ar: "٢٥" }),
+        value: t({ en: "26", ar: "٢٦" }),
         title: t({
           en: "Verified NGO Partners",
           ar: "شركاء منظمات غير حكومية موثوقون",
@@ -59,8 +59,8 @@ const impactsChildWelfareContent = {
       ar: "المسؤولية الاجتماعية للمؤسسات",
     }),
     csrDescription: t({
-      en: "At The A&M International, we believe that elevating brands also means elevating communities. As we grow, so does our commitment to giving back — through pro bono work for purpose-driven organizations, technology partnerships with educational initiatives, and CSR programs that reflect our values.",
-      ar: "في The A&M International، نؤمن بأن الارتقاء بالعلامات التجارية يعني أيضًا الارتقاء بالمجتمعات. ومع نمونا، يكبر معنا التزامنا بالعطاء — من خلال المشاريع التطوعية للمؤسسات ذات الرسالة، والشراكات التقنية مع المبادرات التعليمية، وبرامج المسؤولية الاجتماعية التي تعكس قيمنا.",
+      en: "At The A&M Internationals, we believe that elevating brands also means elevating communities. As we grow, so does our commitment to giving back — through pro bono work for purpose-driven organizations, technology partnerships with educational initiatives, and CSR programs that reflect our values.",
+      ar: "في The A&M Internationals، نؤمن بأن الارتقاء بالعلامات التجارية يعني أيضًا الارتقاء بالمجتمعات. ومع نمونا، يكبر معنا التزامنا بالعطاء — من خلال المشاريع التطوعية للمؤسسات ذات الرسالة، والشراكات التقنية مع المبادرات التعليمية، وبرامج المسؤولية الاجتماعية التي تعكس قيمنا.",
     }),
     csrPillars: [
       {

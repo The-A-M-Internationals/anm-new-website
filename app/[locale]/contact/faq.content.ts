@@ -13,8 +13,8 @@ const faqContent = {
     }),
 
     faq1Question: t({
-      en: "1. WHAT SERVICES DOES THE A&M INTERNATIONAL OFFER?",
-      ar: "١. ما الخدمات التي تقدّمها THE A&M INTERNATIONAL؟",
+      en: "1. WHAT SERVICES DOES THE A&M INTERNATIONALS OFFER?",
+      ar: "١. ما الخدمات التي تقدّمها THE A&M INTERNATIONALS؟",
     }),
     faq1Answer: t({
       en: "We offer four core services: Digital Marketing, UI/UX Design, Web Development, and Enterprise Performance Management (EPM). Most of our engagements combine two or more of these — for example, a brand might come to us for a website redesign and stay on for ongoing digital marketing. We work as an integrated team rather than siloed departments, which means your project benefits from every discipline working together from day one.",

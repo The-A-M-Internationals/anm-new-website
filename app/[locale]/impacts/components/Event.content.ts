@@ -14,7 +14,7 @@ const impactsEventContent = {
     }),
     seats: t({ en: "150 seats available", ar: "١٥٠ مقعد متاح" }),
     month: t({ en: "April", ar: "أبريل" }),
-    day: t({ en: "25", ar: "٢٠" }),
+    day: t({ en: "26", ar: "٢٦" }),
     time: t({ en: "9 am - 6 pm", ar: "٩ صباحاً - ٦ مساءً" }),
     button: t({ en: "Get Tickets", ar: "احجز تذكرتك" }),
   },

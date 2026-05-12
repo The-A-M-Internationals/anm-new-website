@@ -12,8 +12,8 @@ const impactsDashboardContent = {
       ar: "نتائج حقيقية. عملاء حقيقيون. إنجازات ملموسة.",
     }),
     intro1: t({
-      en: "At The A&M International, every number tells a story — of a client trusted, a vision delivered, and a brand elevated. From boutique hospitality brands to enterprise solutions, our work spans continents, industries, and ambitions — serving clients across India, the UAE, and the United States.",
-      ar: "في The A&M International، كل رقم يروي قصة — قصة عميل وثق بنا، ورؤية تحققت، وعلامة تجارية ارتقت. من علامات الضيافة البوتيكية إلى الحلول المؤسسية، يمتد عملنا عبر القارات والقطاعات والطموحات — خدمةً لعملائنا في الهند والإمارات العربية المتحدة والولايات المتحدة الأمريكية.",
+      en: "At The A&M Internationals, every number tells a story — of a client trusted, a vision delivered, and a brand elevated. From boutique hospitality brands to enterprise solutions, our work spans continents, industries, and ambitions — serving clients across India, the UAE, and the United States.",
+      ar: "في The A&M Internationals، كل رقم يروي قصة — قصة عميل وثق بنا، ورؤية تحققت، وعلامة تجارية ارتقت. من علامات الضيافة البوتيكية إلى الحلول المؤسسية، يمتد عملنا عبر القارات والقطاعات والطموحات — خدمةً لعملائنا في الهند والإمارات العربية المتحدة والولايات المتحدة الأمريكية.",
     }),
     intro2: t({
       en: "We measure our success not just in projects completed, but in the lasting partnerships we build and the impact we create globally. The figures below reflect our journey so far — and we're just getting started.",
@@ -22,7 +22,7 @@ const impactsDashboardContent = {
     stats: [
       {
         label: t({ en: "Clients Served", ar: "العملاء الذين خدمناهم" }),
-        value: t({ en: "25+", ar: "٢٥+" }),
+        value: t({ en: "26+", ar: "٢٦+" }),
       },
       {
         label: t({ en: "Projects Delivered", ar: "المشاريع المُنجزة" }),

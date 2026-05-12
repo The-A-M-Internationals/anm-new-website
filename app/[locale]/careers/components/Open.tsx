@@ -82,22 +82,22 @@ const Open = () => {
 
             {!hasJobs && !loading && (
                 <>
-                    <Image
-                        src="/careers/open.png"
-                        alt="Open Positions"
-                        width={400}
-                        height={400}
-                        className="mt-2 rounded-lg w-full max-w-[400px] h-auto hover:scale-105 transition"
-                    />
-                    <p className="text-black text-sm md:text-base max-w-2xl">
-                        {content.emptyLine1.value}
-                        <br className="hidden md:block" />
-                        {content.emptyLine2.value}
-                    </p>
-                </>
-            )}
-
-            {hasJobs && (
+                    <div className="flex flex-col items-center gap-4">
+                        <Image
+                            src="/careers/empty.png"
+                            alt="No positions"
+                            width={400}
+                            height={400}
+                            className="mt-2 rounded-lg w-full max-w-[400px] h-auto hover:scale-105 transition"
+                        />
+                        <p className="text-black text-sm md:text-base max-w-2xl">
+                            {content.emptyLine1.value}
+                            <br className="hidden md:block" />
+                            {content.emptyLine2.value}
+                        </p>
+                    </div>
+                    </>
+                    )}            {hasJobs && (
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
                     {jobs.map((job) => {
                         const title = locale === "ar" ? job.titleAr || job.title : job.title;

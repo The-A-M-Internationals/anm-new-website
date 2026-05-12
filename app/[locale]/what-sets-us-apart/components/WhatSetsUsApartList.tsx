@@ -2,8 +2,8 @@
 
 import { useIntlayer } from "next-intlayer";
 
-const FeaturesList = () => {
-    const content = useIntlayer("featuresList");
+const WhatSetsUsApartList = () => {
+    const content = useIntlayer("whatSetsUsApartList");
     const features = [
         {
             number: '01',
@@ -38,7 +38,7 @@ const FeaturesList = () => {
     ];
 
     return (
-        <div id="features" className="bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-[112px]">
+        <div id="what-sets-us-apart" className="bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-[112px]">
             <div className="w-full mx-auto p-2 md:p-7">
                 {/* Header */}
                 <div className="mb-12">
@@ -65,9 +65,6 @@ const FeaturesList = () => {
                                     {feature.description}
                                 </p>
                             </div>
-                            {/* <div className="text-4xl md:text-5xl font-bold text-[#D4AF37] opacity-90 shrink-0 order-1 md:order-2">
-                                {feature.number}
-                            </div> */}
                         </div>
                     ))}
                 </div>
@@ -76,4 +73,4 @@ const FeaturesList = () => {
     );
 };
 
-export default FeaturesList;
+export default WhatSetsUsApartList;

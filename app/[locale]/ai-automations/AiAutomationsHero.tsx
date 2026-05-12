@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef, useState } from "react";
+import { AppLocale } from "@/types/locale";
 
 const AIAutomationsHero = () => {
     const router = useRouter();
@@ -365,10 +366,9 @@ const AIAutomationsHero = () => {
                             </span>
                         </button>
                         <button
-                            onClick={() => router.push(getLocalizedPath(locale as any, "/contact"))}
+                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
                             className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#1E40AF]/50 hover:-translate-y-1"
-                        >
-                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        >                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             <span className="relative z-10">{content.bookConsultation.value}</span>
                         </button>
                     </div>

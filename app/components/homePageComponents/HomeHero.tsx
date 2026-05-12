@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect, useRef } from "react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import Link from "next/link";
+import { AppLocale } from "@/types/locale";
 
 const HomeHero = () => {
     const router = useRouter();
@@ -205,7 +207,7 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
-                                // @ts-ignore
+                                // @ts-expect-error
                                 "--dx": p.dx,
                                 "--dy": p.dy,
                             }}
@@ -227,7 +229,7 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
-                                // @ts-ignore
+                                // @ts-expect-error
                                 "--dx": p.dx,
                                 "--dy": p.dy,
                             }}
@@ -268,7 +270,7 @@ const HomeHero = () => {
                         <div className="space-y-1.5 font-mono text-[9px]">
                             <div className="text-purple-400">const</div>
                             <div className="text-[#C9A84C] ml-2">transform =</div>
-                            <div className="text-blue-400 ml-4">"elevate"</div>
+                            <div className="text-blue-400 ml-4">&quot;elevate&quot;</div>
                         </div>
                     </div>
                 </div>
@@ -520,14 +522,14 @@ const HomeHero = () => {
                             
                             {/* CTAs */}
                             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                                <button
-                                    onClick={() => router.push(getLocalizedPath(locale as any, "/contact"))}
-                                    className="px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#D4AF37] transition-colors"
+                                <Link
+                                    href={getLocalizedPath(locale as AppLocale, "/contact#form")}
+                                    className="flex items-center justify-center px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#D4AF37] transition-colors"
                                 >
                                     {content.bookConsultation.value}
-                                </button>
+                                </Link>
                                 <button
-                                    onClick={() => router.push(getLocalizedPath(locale as any, "/#services"))}
+                                    onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/#services"))}
                                     className="px-7 py-3.5 bg-transparent text-[#C9A84C] border-2 border-[#C9A84C] rounded-lg text-[15px] font-bold hover:bg-[#C9A84C] hover:text-[#0C1F4A] transition-colors"
                                 >
                                     {content.exploreServices.value}
@@ -654,7 +656,7 @@ const HomeHero = () => {
 
                             {/* Finance card */}
                             <div 
-                                onClick={() => router.push(getLocalizedPath(locale as any, "/finance-transformation"))}
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/finance-transformation"))}
                                 className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     top: 30,
@@ -688,7 +690,7 @@ const HomeHero = () => {
 
                             {/* Digital card */}
                             <div 
-                                onClick={() => router.push(getLocalizedPath(locale as any, "/digital-transformation"))}
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/digital-transformation"))}
                                 className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     top: "50%",
@@ -715,7 +717,7 @@ const HomeHero = () => {
 
                             {/* AI card */}
                             <div 
-                                onClick={() => router.push(getLocalizedPath(locale as any, "/ai-automations"))}
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/ai-automations"))}
                                 className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     bottom: 40,

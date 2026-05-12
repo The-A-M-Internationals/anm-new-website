@@ -97,8 +97,7 @@ const Footer = () => {
                             <span className="truncate">{content.emailLabel?.value || "Email"}</span>
                         </a>
 
-                        <a href="https://theaminternational.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">
-                            <Globe className="w-5 h-5 text-[#C9A84C] shrink-0" />
+                        <a href="https://theaminternationals.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">                            <Globe className="w-5 h-5 text-[#C9A84C] shrink-0" />
                             <span>{content.websiteLabel?.value || "Website"}</span>
                         </a>
                     </div>
@@ -197,17 +196,23 @@ const Footer = () => {
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
                         <Link href={getLocalizedLink("/")} className="hover:text-[#C9A84C] transition-colors">
-                            {content.amInternational?.value || "AM International"}
+                            {content.amInternational?.value || "AM Internationals"}
                         </Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
                         {content.howWeWork?.value || "How We Work"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
+                        <Link href={getLocalizedLink("/features")} className="hover:text-[#C9A84C] transition-colors">
+                            {content.features?.value || "Features"}
+                        </Link>
+                        <Link href={getLocalizedLink("/events")} className="hover:text-[#C9A84C] transition-colors">
+                            {content.events?.value || "Events"}
+                        </Link>
                         <Link href={getLocalizedLink("/success-stories")} className="hover:text-[#C9A84C] transition-colors">
                             {content.successStories?.value || "Success Stories"}
                         </Link>
-                        <Link href={getLocalizedLink("/features#what-sets-us-apart")} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/what-sets-us-apart")} className="hover:text-[#C9A84C] transition-colors">
                             {content.whatSetsApart?.value || "What Sets Us Apart"}
                         </Link>
                         <Link href={getLocalizedLink("/methodology")} className="hover:text-[#C9A84C] transition-colors">
@@ -274,7 +279,7 @@ const Footer = () => {
                     <span className="hidden md:inline mx-2">|</span>
                     <div className="flex items-center gap-1">
                         <a 
-                            href="https://privacy-policy.theaminternationals.com/" 
+                            href="https://privacy-policy.theaminternational.com/" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="hover:text-[#C9A84C] transition-colors"
@@ -283,7 +288,7 @@ const Footer = () => {
                         </a>
                         <span className="mx-1">|</span>
                         <a 
-                            href="https://privacy-policy.theaminternationals.com/" 
+                            href="https://privacy-policy.theaminternational.com/" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="hover:text-[#C9A84C] transition-colors"
@@ -298,3 +303,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

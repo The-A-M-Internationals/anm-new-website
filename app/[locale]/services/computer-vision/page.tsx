@@ -217,7 +217,7 @@ const ComputerVisionHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
-                            onClick={() => router.push(getLocalizedPath("en", "/contact"))}
+                            onClick={() => router.push(getLocalizedPath("en", "/contact#form"))}
                             className="group relative px-12 py-5 bg-[#0EA5E9] text-white rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#0EA5E9]/40 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6] to-[#0EA5E9] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -305,18 +305,11 @@ const ComputerVisionServices = () => {
                                     {service.title}
                                 </h3>
 
-                                <p className="text-white/60 leading-relaxed">
+                                <p className="text-white/60 leading-relaxed text-center text-sm px-4">
                                     {service.description}
                                 </p>
-
-                                <div className="mt-6 flex items-center gap-2 text-[#0EA5E9] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                    <span className="text-sm font-semibold">Learn More</span>
-                                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
                                 </div>
-                            </div>
-                        </div>
+                                </div>
                     ))}
                 </div>
             </div>

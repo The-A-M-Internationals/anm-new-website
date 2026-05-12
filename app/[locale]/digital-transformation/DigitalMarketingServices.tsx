@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useState } from "react";
+import { AppLocale } from "@/types/locale";
 
 const DigitalMarketingServices = () => {
     const router = useRouter();
@@ -405,7 +406,7 @@ const DigitalMarketingServices = () => {
 
                                         {/* CTA Link */}
                                         <Link 
-                                            href={getLocalizedPath(locale as any, serviceRoutes[service.id])}
+                                            href={getLocalizedPath(locale as AppLocale, serviceRoutes[service.id])}
                                             className="relative w-full py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-[1.02] block text-center"
                                             style={{ backgroundColor: service.accentColor }}
                                         >

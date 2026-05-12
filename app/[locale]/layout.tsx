@@ -32,8 +32,8 @@ import type { AppLocale } from "@/types/locale";
 // import type { Locales } from "intlayer";
 
 export const metadata: Metadata = {
-    title: "A&M International",
-    description: "A&M International provides services to help businesses thrive in the global market.",
+    title: "A&M Internationals",
+    description: "A&M Internationals provides services to help businesses thrive in the global market.",
 };
 
 export default async function RootLayout({

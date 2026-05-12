@@ -3,6 +3,7 @@
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useRouter } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import { AppLocale } from "@/types/locale";
 
 const Services = () => {
     const router = useRouter();
@@ -152,7 +153,7 @@ const Services = () => {
                             <div
                                 key={svc.key}
                                 className="am-svc-card"
-                                onClick={() => router.push(getLocalizedPath(locale as any, svc.path))}
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, svc.path))}
                             >
                                 {/* Animated header */}
                                 <div style={{ 

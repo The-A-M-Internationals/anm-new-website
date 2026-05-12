@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef, useState } from "react";
+import { AppLocale } from "@/types/locale";
 
 const DigitalMarketingHero = () => {
     const router = useRouter();
@@ -356,7 +357,7 @@ const DigitalMarketingHero = () => {
                         <span className="relative text-[#C9A84C] text-sm font-semibold tracking-wide">Powered by Innovation</span>
                     </div>
 
-                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "Lora, Georgia, serif" }}>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "Lora, Georgia, serif" }}>
                         {content.heroTitle.value}
                         <br />
                         <span className="relative inline-block mt-4">
@@ -381,10 +382,7 @@ const DigitalMarketingHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
-                            onClick={() => {
-                                const servicesSection = document.getElementById('digital-marketing-services');
-                                servicesSection?.scrollIntoView({ behavior: 'smooth' });
-                            }}
+                            onClick={() => router.push(`/${locale}/features#features`)}
                             className="group relative px-12 py-5 bg-[#C9A84C] text-[#0C1F4A] rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#C9A84C]/40 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -400,10 +398,9 @@ const DigitalMarketingHero = () => {
                             </span>
                         </button>
                         <button
-                            onClick={() => router.push(getLocalizedPath(locale as any, "/contact"))}
+                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
                             className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#C9A84C]/50 hover:-translate-y-1"
-                        >
-                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        >                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             <span className="relative z-10">{content.bookConsultation.value}</span>
                         </button>
                     </div>

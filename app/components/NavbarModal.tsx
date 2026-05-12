@@ -24,6 +24,7 @@ interface NavbarModalProps {
   // New props for the bridge logic
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  handleHashLink: (e: React.MouseEvent, link: string) => boolean;
 }
 
 const NavbarModal = ({
@@ -31,7 +32,8 @@ const NavbarModal = ({
   onClose,
   rightSideButtons,
   onMouseEnter,
-  onMouseLeave
+  onMouseLeave,
+  handleHashLink
 }: NavbarModalProps) => {
   const { locale } = useLocale();
   const currentLocale = locale as AppLocale;
@@ -124,7 +126,15 @@ const NavbarModal = ({
                     <span className="text-gray-900 font-medium text-sm md:text-base">{t.signsReadTime.value}</span>
                   </div>
 
-                  <button onClick={() => { onClose(); router.push(`/${currentLocale}/blogs#article`) }} className="text-[#D4AF37] font-semibold flex items-center gap-2 w-fit transition text-sm md:text-base cursor-pointer hover:scale-105 transition">
+                  <button 
+                    onClick={(e) => { 
+                      onClose(); 
+                      if (!handleHashLink(e, `/${currentLocale}/blogs#article`)) {
+                        router.push(`/${currentLocale}/blogs#article`);
+                      }
+                    }} 
+                    className="text-[#D4AF37] font-semibold flex items-center gap-2 w-fit transition text-sm md:text-base cursor-pointer hover:scale-105 transition"
+                  >
                     {t.signsReadBtn.value}
                     <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
                   </button>
@@ -138,7 +148,10 @@ const NavbarModal = ({
                 <Link
                   href={button.link}
                   scroll={true}
-                  onClick={onClose}
+                  onClick={(e) => {
+                    onClose();
+                    handleHashLink(e, button.link);
+                  }}
                   key={index}
                   className="flex items-center gap-2 bg-white px-3 md:px-4 py-2 rounded-xl border border-[#D4AF37] shadow hover:shadow-md transition w-full sm:w-auto"
                 >

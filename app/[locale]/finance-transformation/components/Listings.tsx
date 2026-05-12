@@ -180,13 +180,13 @@ const Listings = () => {
                 <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold md:mt-15 mb-8 md:mb-12">{content.sectionTitle.value}</p>
             </div>
 
-            {content.services.map((service: any, index: number) => (
+            {content.services.map((service: Record<string, any>, index: number) => (
                 <ServiceCard
                     key={`service-${index}`}
                     id={serviceIds[index]}
                     title={service.title.value}
                     description={service.description.value}
-                    tags={service.tags.map((tag: any) => tag.value)}
+                    tags={service.tags.map((tag: Record<string, any>) => tag.value)}
                     svgIcon={serviceIcons[index]}
                 />
             ))}
@@ -198,13 +198,13 @@ const Listings = () => {
                 <p className="text-[#ab8d2b] text-3xl md:text-5xl font-semibold mb-8 md:mb-12">{content.managedServiceTitle.value}</p>
             </div>
 
-            {content.managedServices.map((service: any, index: number) => (
+            {content.managedServices.map((service: Record<string, any>, index: number) => (
                 <ServiceCard
                     key={`managed-${index}`}
                     id={managedServiceIds[index]}
                     title={service.title.value}
                     description={service.description.value}
-                    tags={service.tags.map((tag: any) => tag.value)}
+                    tags={service.tags.map((tag: Record<string, any>) => tag.value)}
                     svgIcon={managedServiceIcons[index]}
                 />
             ))}
@@ -212,7 +212,7 @@ const Listings = () => {
             {/* UNIFIED CTA */}
             <div className="mt-16 flex justify-center">
                 <button
-                    onClick={() => router.push(`/${locale}/features#epm-suites`)}
+                    onClick={() => router.push(`/${locale}/features#features`)}
                     className="flex items-center gap-2 px-8 py-4 rounded-full border border-[#D4AF37] text-xl font-bold bg-[#D4AF37] text-black transition-transform duration-300 hover:scale-105 cursor-pointer shadow-lg"
                 >
                     {cardContent.exploreCta.value}

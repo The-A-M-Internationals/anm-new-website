@@ -25,11 +25,11 @@ const NewsLetter = () => {
 
         if (result.status === 'success') {
             setEmail('');
-            setMessage({ type: 'success', text: String(content.newsletter.successMessage) });
+            setMessage({ type: 'success', text: String(content.newsletter.successMessage.value) });
         }
 
         if (result.status === 'already_subscribed') {
-            setMessage({ type: 'info', text: String(content.newsletter.alreadySubscribedMessage) });
+            setMessage({ type: 'info', text: String(content.newsletter.alreadySubscribedMessage.value) });
         }
 
         if (result.status === 'error') {

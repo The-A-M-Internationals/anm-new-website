@@ -267,7 +267,7 @@ const BrandingDesignHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
-                            onClick={() => router.push(getLocalizedPath("en", "/contact"))}
+                            onClick={() => router.push(getLocalizedPath("en", "/contact#form"))}
                             className="group relative px-12 py-5 bg-[#C9A84C] text-[#0C1F4A] rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#C9A84C]/40 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -358,13 +358,6 @@ const BrandingServices = () => {
                                 <p className="text-white/60 leading-relaxed">
                                     {service.description}
                                 </p>
-
-                                <div className="mt-6 flex items-center gap-2 text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                    <span className="text-sm font-semibold">Learn More</span>
-                                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </div>
                             </div>
                         </div>
                     ))}

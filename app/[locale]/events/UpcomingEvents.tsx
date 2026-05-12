@@ -150,7 +150,6 @@ const UpcomingEvents = () => {
             )}
         </div>
     );
-    );
 };
 
 export default UpcomingEvents;
