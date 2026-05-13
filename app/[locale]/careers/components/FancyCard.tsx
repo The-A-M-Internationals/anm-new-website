@@ -42,7 +42,6 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon }) => {
               border-t-2 border-s-2 border-gray-200 
               bg-white
               transition-colors duration-300
-              group-hover:bg-[#D4AF37]
             "
                     ></div>
 
@@ -54,7 +53,6 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon }) => {
               border-t-2 border-s-2 border-gray-200 
               bg-white
               transition-colors duration-300
-              group-hover:bg-[#D4AF37]
             "
                     ></div>
                 </div>

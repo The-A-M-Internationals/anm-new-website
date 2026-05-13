@@ -30,6 +30,14 @@ const notoTabsArabic = Noto_Sans_Arabic({
 
 import type { AppLocale } from "@/types/locale";
 // import type { Locales } from "intlayer";
+import type { Viewport } from 'next';
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+};
 
 export const metadata: Metadata = {
     title: "The A&M internationals",

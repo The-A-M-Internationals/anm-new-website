@@ -144,7 +144,7 @@ const BrandingDesignHero = () => {
                         </span>
                     </div>
 
-                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "var(--heading-font)" }}>
+                    <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "var(--heading-font)" }}>
                         {content.heroTitleLine1.value}
                         <br />
                         <span className="relative inline-block mt-4">
@@ -185,17 +185,17 @@ const BrandingDesignHero = () => {
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-12 max-w-4xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 max-w-4xl mx-auto">
                         {[
                             { value: content.stat1Value.value, label: content.stat1Label.value },
                             { value: content.stat2Value.value, label: content.stat2Label.value },
                             { value: content.stat3Value.value, label: content.stat3Label.value },
                         ].map((stat, i) => (
                             <div key={i} className="group relative">
-                                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-[#C9A84C] to-[#E5C17C] bg-clip-text text-transparent mb-3 transition-transform duration-300 group-hover:scale-110">
+                                <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-br from-[#C9A84C] to-[#E5C17C] bg-clip-text text-transparent mb-3 transition-transform duration-300 group-hover:scale-110">
                                     {stat.value}
                                 </div>
-                                <div className="text-sm text-white/50 uppercase tracking-widest font-light">
+                                <div className="text-xs sm:text-sm text-white/50 uppercase tracking-widest font-light">
                                     {stat.label}
                                 </div>
                                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-[#C9A84C] group-hover:w-full transition-all duration-500" />

@@ -48,7 +48,7 @@ export const ServiceCard: React.FC<CardProps> = ({
                         </div>
 
                         {/* Icon */}
-                        <div className="absolute top-0 end-0 w-12 h-12 flex items-center justify-center text-black">
+                        <div className="absolute top-0 end-0 w-12 h-12 flex items-center justify-center text-black group-hover:text-white fill-current transition-colors duration-300 z-50">
                             <div className="w-8 h-8 flex items-center justify-center">
                                 {svgIcon}
                             </div>
@@ -93,7 +93,7 @@ export const ServiceCard: React.FC<CardProps> = ({
                     </div>
 
                     {/* Icon */}
-                    <div className="absolute -top-7 -right-9 w-16 h-16 md:w-24 md:h-24 z-50 text-[#111827] group-hover:text-[#D4AF37] fill-current flex items-center justify-center">
+                    <div className="absolute -top-7 -right-9 w-16 h-16 md:w-24 md:h-24 z-50 text-[#111827] group-hover:text-[#D4AF37] fill-current transition-colors duration-300 flex items-center justify-center">
                         <div className="w-16 h-16 md:w-13 md:h-13 flex items-center justify-center -translate-x-6 translate-y-4">
                             {svgIcon}
                         </div>
