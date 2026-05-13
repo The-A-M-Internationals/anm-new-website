@@ -38,10 +38,10 @@ const WhatSetsUsApartList = () => {
     ];
 
     return (
-        <div id="what-sets-us-apart" className="bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-[112px]">
+        <div id="what-sets-us-apart" className="bg-transparent pt-4 pb-12 md:pt-8 md:pb-20 lg:pt-10 lg:pb-24 px-4 sm:px-6 lg:px-8 scroll-mt-[112px]">
             <div className="w-full mx-auto p-2 md:p-7">
                 {/* Header */}
-                <div className="mb-12">
+                <div className="mb-8">
                     <h2 className="text-3xl md:text-4xl font-bold text-[#000000] mb-3">
                         {content.titlePrefix.value} <span className="text-[#ab8d2b]">{content.titleHighlight.value}</span>
                     </h2>

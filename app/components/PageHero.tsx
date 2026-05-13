@@ -17,6 +17,7 @@ interface PageHeroProps {
    image2: string
    image3: string
    buttonImage?: string
+   titleClassName?: string
 }
 
 const PageHero: React.FC<PageHeroProps> = ({
@@ -29,7 +30,8 @@ const PageHero: React.FC<PageHeroProps> = ({
    image,
    image2,
    image3,
-   buttonImage
+   buttonImage,
+   titleClassName
 }) => {
    const content = useIntlayer("financeHero");
    const { locale } = useLocale();
@@ -53,7 +55,7 @@ const PageHero: React.FC<PageHeroProps> = ({
    }, []);
 
    return (
-      <div className='relative w-[90%] mx-auto mt-6 md:mt-1 lg:mt-6'>
+      <div className='relative w-[90%] mx-auto'>
          <div
             className="
     relative w-full overflow-hidden
@@ -100,12 +102,12 @@ const PageHero: React.FC<PageHeroProps> = ({
                   </h4>
                )}
 
-               <h3 className='text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight md:w-full'>
+               <h3 className={`font-bold text-white leading-tight md:w-full ${titleClassName || 'text-3xl md:text-4xl lg:text-6xl'}`}>
                   {title}
                </h3>
 
                {title2 && (
-                  <h3 className='text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight'>
+                  <h3 className={`font-bold text-white leading-tight ${titleClassName || 'text-3xl md:text-4xl lg:text-6xl'}`}>
                      {title2}
                   </h3>
                )}

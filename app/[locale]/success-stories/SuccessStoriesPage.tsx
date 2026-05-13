@@ -28,6 +28,7 @@ const SuccessStoriesPage = () => {
                 image2={heroImageMobile}
                 image3={heroImageTablet}
                 buttonImage={heroButtonImage}
+                titleClassName="text-2xl md:text-3xl lg:text-5xl"
             />
             <SuccessStories />
         </div>

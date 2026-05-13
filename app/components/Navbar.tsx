@@ -11,7 +11,6 @@ type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
 type NavKey =
   | 'Services'
   | 'About Us'
-  | 'Features'
   | 'What Sets Us Apart'
   | 'Make an Impact'
   | 'Career';
@@ -132,10 +131,6 @@ const Navbar = () => {
         },
       ]
     },
-    Features: {
-      labelKey: 'features',
-      rightSideButtons: []
-    },
     'What Sets Us Apart': {
       labelKey: 'whatSetsUsApart',
       rightSideButtons: []
@@ -152,7 +147,6 @@ const Navbar = () => {
 
   // Direct-link URLs for non-dropdown items
   const directLinks: Partial<Record<NavKey, string>> = {
-    Features: getLocalizedLink('/features'),
     'What Sets Us Apart': getLocalizedLink('/what-sets-us-apart'),
     'Make an Impact': getLocalizedLink('/impacts'),
     Career: getLocalizedLink('/careers'),
@@ -244,19 +238,6 @@ const Navbar = () => {
               {/* About Us — dropdown */}
               <DesktopNavButton
                 navKey="About Us"
-                navItems={navItems}
-                activeNavKey={activeNavKey}
-                handleNavMouseEnter={handleNavMouseEnter}
-                scheduleClose={scheduleClose}
-                content={content}
-                router={router}
-                directLinks={directLinks}
-                handleHashLink={handleHashLink}
-              />
-
-              {/* Features — direct link */}
-              <DesktopNavButton
-                navKey="Features"
                 navItems={navItems}
                 activeNavKey={activeNavKey}
                 handleNavMouseEnter={handleNavMouseEnter}
@@ -366,14 +347,6 @@ const Navbar = () => {
                 />
                 <MobileNavButton
                   navKey="About Us"
-                  navItems={navItems}
-                  activeNavKey={activeNavKey}
-                  isModalOpen={isModalOpen}
-                  handleNavClick={handleNavClick}
-                  content={content}
-                />
-                <MobileNavButton
-                  navKey="Features"
                   navItems={navItems}
                   activeNavKey={activeNavKey}
                   isModalOpen={isModalOpen}

@@ -54,6 +54,22 @@ const Event = () => {
                             {content.description.value}
                         </p>
 
+                        {/* Date + Time */}
+                        <div className="flex flex-wrap gap-3 sm:gap-4 mb-4 sm:mb-6">
+                            <div className="flex items-center gap-2 border border-gray-200 px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-sm">
+                                <Calendar className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
+                                <span className="text-gray-900 font-medium text-sm md:text-base">
+                                    {content.day?.value}
+                                    <span className="text-[#6B7280] ms-2">{content.month?.value}, {content.eventYear?.value}</span>
+                                </span>
+                            </div>
+                            {/* Time */}
+                            <div className="flex items-center gap-2 border border-gray-200 px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-sm">
+                                <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
+                                <span className="text-gray-900 font-medium text-sm md:text-base">{content.time.value}</span>
+                            </div>
+                        </div>
+
                         {/* Seats */}
                         <div className="flex flex-row gap-5 mb-6">
                             <div className="flex items-center gap-2 text-[#000000]">

@@ -42,7 +42,7 @@ export default function WhatSetsUsApartPage() {
             </section>
 
             {/* The 1% unique content: WhatSetsUsApartList instead of FeaturesList */}
-            <section className="snap-section"><WhatSetsUsApartList /></section>
+            <section className="snap-section bg-[#f9f9f9]"><WhatSetsUsApartList /></section>
             
             <section className="snap-section"><Apps /></section>
             <section className="snap-section"><Results /></section>
