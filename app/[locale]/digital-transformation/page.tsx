@@ -9,14 +9,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
     
     return {
-        title: t({
+        title: (t({
             en: "Digital Transformation | The A&M internationals",
             ar: "التحول الرقمي | A&M الدولية",
-        })[locale as 'en' | 'ar'],
-        description: t({
+        }) as any)[locale],
+        description: (t({
             en: "Cloud migration, ERP implementation, and data modernisation that transforms how your business operates and competes globally.",
             ar: "ترحيل السحابة وتحديث تخطيط موارد المؤسسات وتحديث البيانات الذي يحول طريقة عمل عملك ومنافسته عالميًا.",
-        })[locale as 'en' | 'ar'],
+        }) as any)[locale],
     };
 }
 

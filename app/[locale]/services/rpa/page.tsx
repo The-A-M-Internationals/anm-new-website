@@ -6,14 +6,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
 
     return {
-        title: t({
+        title: (t({
             en: "Robotic Process Automation | The A&M internationals",
             ar: "أتمتة العمليات الروبوتية | A&M الدولية",
-        })[locale as 'en' | 'ar'],
-        description: t({
+        }) as any)[locale],
+        description: (t({
             en: "Advanced RPA solutions to automate repetitive tasks and enhance business productivity.",
             ar: "حلول أتمتة العمليات الروبوتية المتقدمة لأتمتة المهام المتكررة وتعزيز إنتاجية العمل.",
-        })[locale as 'en' | 'ar'],
+        }) as any)[locale],
     };
 }
 

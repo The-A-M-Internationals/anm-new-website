@@ -365,7 +365,7 @@ const DigitalMarketingServices = () => {
                                                     style={{
                                                         backgroundColor: service.accentColor,
                                                         top: `${20 + i * 20}%`,
-                                                        start: `${15 + i * 18}%`,
+                                                        left: `${15 + i * 18}%`,
                                                         animation: activeCard === service.id ? `orb-drift ${3 + i}s ease-in-out infinite ${i * 0.3}s` : 'none',
                                                     }}
                                                 />

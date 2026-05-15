@@ -6,14 +6,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
 
     return {
-        title: t({
+        title: (t({
             en: "Video Production | The A&M internationals",
             ar: "إنتاج الفيديو | A&M الدولية",
-        })[locale as 'en' | 'ar'],
-        description: t({
+        }) as any)[locale],
+        description: (t({
             en: "Professional video production services to tell your brand story through high-quality visuals.",
             ar: "خدمات إنتاج فيديو احترافية لسرد قصة علامتك التجارية من خلال مرئيات عالية الجودة.",
-        })[locale as 'en' | 'ar'],
+        }) as any)[locale],
     };
 }
 

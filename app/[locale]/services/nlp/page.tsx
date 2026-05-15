@@ -6,14 +6,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
 
     return {
-        title: t({
+        title: (t({
             en: "Natural Language Processing | The A&M internationals",
             ar: "معالجة اللغة الطبيعية | A&M الدولية",
-        })[locale as 'en' | 'ar'],
-        description: t({
+        }) as any)[locale],
+        description: (t({
             en: "Advanced NLP solutions for text analysis, sentiment detection, and automated language understanding.",
             ar: "حلول معالجة اللغة الطبيعية المتقدمة لتحليل النصوص وكشف المشاعر وفهم اللغة المؤتمت.",
-        })[locale as 'en' | 'ar'],
+        }) as any)[locale],
     };
 }
 

@@ -6,14 +6,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
 
     return {
-        title: t({
+        title: (t({
             en: "Web Development | The A&M internationals",
             ar: "تطوير الويب | A&M الدولية",
-        })[locale as 'en' | 'ar'],
-        description: t({
+        }) as any)[locale],
+        description: (t({
             en: "Custom web development services to create responsive, high-performance websites and web applications.",
             ar: "خدمات تطوير الويب المخصصة لإنشاء مواقع وتطبيقات ويب سريعة الاستجابة وعالية الأداء.",
-        })[locale as 'en' | 'ar'],
+        }) as any)[locale],
     };
 }
 

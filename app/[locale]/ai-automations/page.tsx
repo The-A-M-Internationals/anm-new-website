@@ -9,14 +9,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
 
     return {
-        title: t({
+        title: (t({
             en: "AI Automations | The A&M internationals",
             ar: "أتمتة الذكاء الاصطناعي | A&M الدولية",
-        })[locale as 'en' | 'ar'],
-        description: t({
+        }) as any)[locale],
+        description: (t({
             en: "RPA, generative AI, and machine learning that eliminate manual effort, accelerate decisions, and create competitive advantage.",
             ar: "أتمتة العمليات الروبوتية والذكاء الاصطناعي التوليدي والتعلم الآلي الذي يلغي الجهد اليدوي ويسرع القرارات ويخلق ميزة تنافسية.",
-        })[locale as 'en' | 'ar'],
+        }) as any)[locale],
     };
 }
 

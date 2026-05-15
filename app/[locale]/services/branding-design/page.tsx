@@ -6,14 +6,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
 
     return {
-        title: t({
+        title: (t({
             en: "Branding & Design | The A&M internationals",
             ar: "العلامة التجارية والتصميم | A&M الدولية",
-        })[locale as 'en' | 'ar'],
-        description: t({
+        }) as any)[locale],
+        description: (t({
             en: "Strategic branding and distinctive visual design to elevate your brand identity.",
             ar: "العلامة التجارية الاستراتيجية والتصميم البصري المميز للارتقاء بهوية علامتك التجارية.",
-        })[locale as 'en' | 'ar'],
+        }) as any)[locale],
     };
 }
 

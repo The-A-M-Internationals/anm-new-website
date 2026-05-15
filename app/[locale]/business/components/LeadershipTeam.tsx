@@ -9,6 +9,7 @@ import "./leadershipTeam.content";
 const LeadershipTeam = () => {
     const content = useIntlayer("businessLeadershipTeam");
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
 
     // Only one leader for now
     const Services = [
@@ -21,6 +22,10 @@ const LeadershipTeam = () => {
             role: content.leader1RoleLine.value
         }
     ];
+
+    const handleMobileClick = (idx: number) => {
+        setActiveMobileIndex(activeMobileIndex === idx ? null : idx);
+    };
 
     return (
         <div id="team" className='flex flex-col items-center justify-center px-4 py-12 md:py-20 lg:py-24'>
@@ -37,9 +42,10 @@ const LeadershipTeam = () => {
                 {Services.map((service, idx) => (
                     <div
                         key={idx}
-                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible"
+                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer"
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
+                        onClick={() => handleMobileClick(idx)}
                     >
                         {/* IMAGE CONTAINER */}
                         <div className="relative w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg">
@@ -47,18 +53,34 @@ const LeadershipTeam = () => {
                                 src={service.image}
                                 alt={service.title}
                                 fill
-                                className="object-cover rounded-2xl hover:scale-105 cursor-pointer transition-transform duration-300"
+                                className="object-cover rounded-2xl transition-transform duration-300 lg:group-hover:scale-105"
                             />
 
                             {/* POSITION BADGE */}
-                            <div className="absolute top-0 right-3 md:top-1 md:right-0 px-3 py-1 md:px-3 md:py-1.5 bg-[#FFFBED]/80 border border-[#D4AF37] text-[#D4AF37] text-xs sm:text-sm font-semibold rounded-full backdrop-blur-md">
+                            <div className="absolute top-0 right-3 md:top-1 md:right-0 px-3 py-1 md:px-3 md:py-1.5 bg-[#FFFBED]/80 border border-[#D4AF37] text-[#D4AF37] text-xs sm:text-sm font-semibold rounded-full backdrop-blur-md z-20">
                                 {service.position}
                             </div>
 
                             {/* NAME + DESCRIPTION */}
-                            <div className="absolute bottom-0 h-28 w-full px-4 py-3 text-white bg-black/40 backdrop-blur-xl">
+                            <div className={`absolute bottom-0 h-28 w-full px-4 py-3 text-white bg-black/40 backdrop-blur-xl transition-opacity duration-300 z-10 ${activeMobileIndex === idx ? 'opacity-0' : 'opacity-100'}`}>
                                 <h4 className="text-lg sm:text-xl font-semibold">{service.title}</h4>
                                 <p className="text-xs sm:text-sm mt-1 opacity-90">{service.description}</p>
+                            </div>
+
+                            {/* MOBILE OVERLAY BIO - Inside the image on click */}
+                            <div className={`absolute inset-0 bg-white/95 p-6 flex flex-col justify-center items-start transition-all duration-300 lg:hidden z-30 ${activeMobileIndex === idx ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}>
+                                <h4 className="text-xl font-bold text-[#D4AF37] mb-1">
+                                    {service.title}
+                                </h4>
+                                <p className="text-sm text-gray-600 font-semibold mb-3">
+                                    {service.role}
+                                </p>
+                                <p className="text-sm text-gray-700 leading-relaxed overflow-y-auto max-h-[70%]">
+                                    {service.fullBio}
+                                </p>
+                                <button className="mt-4 text-[#D4AF37] text-sm font-bold border-b border-[#D4AF37] pb-0.5">
+                                    Close Bio
+                                </button>
                             </div>
                         </div>
 
@@ -79,16 +101,6 @@ const LeadershipTeam = () => {
                                 </p>
                             </div>
                         )}
-
-                        {/* MOBILE BIO - Always visible below image to ensure accessibility */}
-                        <div className="mt-6 lg:hidden bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-gray-100 shadow-sm">
-                            <h4 className="text-lg font-bold text-[#D4AF37] mb-2">
-                                {service.role}
-                            </h4>
-                            <p className="text-sm text-gray-700 leading-relaxed text-left rtl:text-right">
-                                {service.fullBio}
-                            </p>
-                        </div>
                     </div>
                 ))}
             </div>

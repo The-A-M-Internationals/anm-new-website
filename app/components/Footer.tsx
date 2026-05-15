@@ -154,7 +154,7 @@ const Footer = () => {
 
     return (
         <div className="snap-section min-h-fit">
-            <div className="bg-[#0D1B3E] w-full min-h-150 flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
+            <div className="bg-[#0D1B3E] w-full min-h-fit flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
 
                 {/* LEFT - LOGO AND DESCRIPTION */}
                 <div className="flex flex-col flex-1 gap-6 sm:gap-8 md:gap-10 order-1">
@@ -245,7 +245,7 @@ const Footer = () => {
                         {content.newsletterDescription?.value || ""}
                     </div>
 
-                    <div className="mt-4 flex flex-col gap-4 w-full max-w-69">
+                    <div className="mt-4 flex flex-col gap-4 w-full max-w-xs">
 
                         <input
                             type="email"
