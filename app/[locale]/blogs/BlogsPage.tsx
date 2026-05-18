@@ -32,7 +32,6 @@ export default function BlogsPage() {
                     image2={heroImageMobile}
                     image3={heroImageTablet}
                     buttonImage={heroButtonImage}
-                    titleClassName="text-2xl md:text-3xl lg:text-5xl"
                 />
             </section>
             <section className="snap-section"><Article /></section>

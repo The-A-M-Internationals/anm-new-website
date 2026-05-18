@@ -153,11 +153,11 @@ const Footer = () => {
     );
 
     return (
-        <div className="snap-section min-h-fit">
-            <div className="bg-[#0D1B3E] w-full min-h-fit flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
+        <div className="">
+            <div className="bg-[#0D1B3E] w-full h-auto flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
 
                 {/* LEFT - LOGO AND DESCRIPTION */}
-                <div className="flex flex-col flex-1 gap-6 sm:gap-8 md:gap-10 order-1">
+                <div className="flex flex-col lg:flex-1 gap-6 sm:gap-8 md:gap-10 order-1">
                     <Image
                         src="/logo.png"
                         alt="Logo"
@@ -177,7 +177,7 @@ const Footer = () => {
                 </div>
 
                 {/* FINANCE TRANSFORMATION - Order 2 */}
-                <div className="flex flex-col flex-1 lg:ml-20 gap-4 sm:gap-5 order-2">
+                <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-2">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
                         <Link href={getLocalizedLink("/finance-transformation")} className="hover:underline transition-all">{content.financeTransformation?.value || "Finance Transformation"}</Link>
                     </div>
@@ -202,7 +202,7 @@ const Footer = () => {
                 </div>
 
                 {/* RESOURCES AND HOW WE WORK - Order 3 */}
-                <div className="flex flex-col flex-1 lg:ml-20 gap-4 sm:gap-5 order-3">
+                <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-3">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
                         {content.resources?.value || "Resources"}
                     </div>
@@ -236,7 +236,7 @@ const Footer = () => {
                 </div>
 
                 {/* STAY CONNECTED - Order 4 */}
-                <div className="flex flex-col flex-1 gap-4 sm:gap-5 order-4">
+                <div className="flex flex-col lg:flex-1 gap-4 sm:gap-5 order-4">
                     <div className="text-[#C9A84C] text-lg sm:text-xl md:text-2xl">
                         {content.stayConnected?.value || "Stay Connected"}
                     </div>
@@ -319,4 +319,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

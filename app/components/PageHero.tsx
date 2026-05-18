@@ -95,24 +95,24 @@ const PageHero: React.FC<PageHeroProps> = ({
             </div>
 
             {/* Text */}
-            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-4 md:start-6 flex w-fit sm:w-[90%] flex-col gap-2 md:gap-1 lg:gap-2 pe-6'>
+            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 flex w-[95%] flex-col gap-2 md:gap-1 lg:gap-2'>
                {badge && (
                   <h4 className='w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
                      {badge}
                   </h4>
                )}
 
-               <h3 className={`font-bold text-white leading-tight md:w-full ${titleClassName || 'text-3xl md:text-4xl lg:text-6xl'}`}>
+               <h3 className={`font-bold text-white leading-[1.2] w-[80%] md:w-[75%] ${titleClassName || 'text-[24px] md:text-[32px] lg:text-[48px]'}`}>
                   {title}
                </h3>
 
                {title2 && (
-                  <h3 className={`font-bold text-white leading-tight ${titleClassName || 'text-3xl md:text-4xl lg:text-6xl'}`}>
+                  <h3 className={`font-bold text-white leading-[1.2] w-[80%] md:w-[75%] ${titleClassName || 'text-[24px] md:text-[32px] lg:text-[48px]'}`}>
                      {title2}
                   </h3>
                )}
 
-               <p className='text-[20px] md:text-lg lg:text-xl text-white w-full md:w-[70%] lg:w-[70%] leading-relaxed'>
+               <p className='text-[18px] md:text-base lg:text-[19px] text-white w-[70%] md:w-[60%] lg:w-[65%] leading-relaxed'>
                   {description}
                </p>
             </div>
