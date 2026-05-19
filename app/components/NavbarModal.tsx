@@ -156,7 +156,7 @@ const NavbarModal = ({
                   className="flex items-center gap-2 bg-white px-3 md:px-4 py-2 rounded-xl border border-[#D4AF37] shadow hover:shadow-md transition w-full sm:w-auto"
                 >
                   <img src={button.icon} alt="Bottom Icon" className='w-6 h-5 md:w-8 md:h-6' />
-                  <span className="text-base md:text-xl font-semibold">{navbarContent[button.textKey].value}</span>
+                  <span className="text-base md:text-xl font-semibold">{(navbarContent as any)[button.textKey]?.value || (navbarContent as any)[button.textKey]}</span>
                 </Link>
               ))}
             </div>
