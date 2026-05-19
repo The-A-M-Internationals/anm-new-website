@@ -108,7 +108,7 @@ const GenerativeAIHero = () => {
                 }
             `}</style>
 
-            <section className="relative overflow-hidden bg-[#050A1E] min-h-screen flex items-center">
+            <section className="relative overflow-hidden bg-[#050A1E] min-h-[85vh] flex items-center">
                 <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
                 <div 
@@ -236,13 +236,13 @@ const GenAIServices = () => {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="group relative p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30 transition-all duration-500 hover:-translate-y-2"
+                            className="group relative p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#8B5CF6]/30 transition-all duration-500 hover:-translate-y-2"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
                             
                             <div className="relative">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center mb-6">
-                                    <div className="w-8 h-8 bg-white/20 rounded-lg group-hover:bg-white/40 transition-colors" />
+                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#8B5CF6]/20 to-[#EC4899]/10 flex items-center justify-center mb-6">
+                                    <div className="w-8 h-8 bg-[#8B5CF6] rounded-lg" />
                                 </div>
 
                                 <h3 className="text-2xl font-bold text-white mb-4" style={{ fontFamily: "var(--heading-font)" }}>

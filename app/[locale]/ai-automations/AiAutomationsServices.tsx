@@ -147,7 +147,7 @@ const AiAutomationsServices = () => {
                 }
             `}</style>
 
-            <section id="ai-automation-services" className="relative py-24 md:py-32 bg-gradient-to-b from-[#050A1E] via-[#0F1F3D] to-[#0A1628] overflow-hidden">
+            <section id="ai-automation-services" className="relative py-16 md:py-24 bg-gradient-to-b from-[#050A1E] via-[#0F1F3D] to-[#0A1628] overflow-hidden">
                 {/* Subtle grid */}
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute inset-0" style={{

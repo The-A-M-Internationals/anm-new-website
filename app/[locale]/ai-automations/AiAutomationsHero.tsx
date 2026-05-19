@@ -176,7 +176,7 @@ const AIAutomationsHero = () => {
                 }
             `}</style>
 
-            <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0F1F3D] to-[#050A1E] min-h-screen flex items-center">
+            <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0F1F3D] to-[#050A1E] min-h-[85vh] flex items-center">
                 {/* Neural network canvas */}
                 <canvas 
                     ref={canvasRef}
@@ -303,7 +303,7 @@ const AIAutomationsHero = () => {
 
                 {/* Main content */}
                 <div 
-                    className="relative z-10 w-[90%] max-w-6xl mx-auto text-center py-20"
+                    className="relative z-10 w-[90%] max-w-6xl mx-auto text-center py-24 md:py-32"
                     style={{ animation: 'elegant-rise 1.2s ease-out' }}
                 >
                     {/* Badge */}

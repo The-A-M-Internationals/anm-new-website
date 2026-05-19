@@ -133,7 +133,7 @@ const Services = () => {
                 }
             `}</style>
 
-            <section id="services" className="px-4 py-14 md:py-20">
+            <section id="services" className="px-4 py-8 md:py-10">
                 <div className="w-[90%] mx-auto">
                     {/* Heading */}
                     <div className="text-center mb-10 md:mb-14">
