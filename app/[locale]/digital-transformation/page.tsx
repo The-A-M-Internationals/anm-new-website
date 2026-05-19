@@ -1,21 +1,17 @@
 import type { Metadata } from 'next';
-import Hero from "../../components/homePageComponents/Hero";
-import Services from "../../components/Services";
-import Events from "../../components/Events";
-import Innovation from "../../components/Innovation";
+import DigitalMarketingHero from "./DigitalMarketingHero";
+import DigitalMarketingServices from "./DigitalMarketingServices";
 
 export const metadata: Metadata = {
-    title: "Digital Transformation | The A&M Internationals",
-    description: "Cloud migration, ERP implementation, and data modernisation that transforms how your business operates and competes globally.",
+    title: "Digital Marketing & Growth Services | The A&M Internationals",
+    description: "Elevate your brand with data-driven marketing strategies including video production, social media management, branding, web development, and photography.",
 }
 
-export default function DigitalTransformationPage() {
+export default function DigitalMarketingPage() {
     return (
         <div>
-            <Hero />
-            <Services />
-            <Events />
-            <Innovation />
+            <DigitalMarketingHero />
+            <DigitalMarketingServices />
         </div>
     );
 }

@@ -7,7 +7,7 @@ const servicesContent = {
       ar: "نحن",
     },
     headingHighlight: {
-      en: "Expertized",
+      en: "Specialized",
       ar: "متخصصون",
     },
     headingEnd: {

@@ -8,8 +8,8 @@ const cultureGrowthSectionContent = {
       ar: "ثقافة مصممة للنمو",
     }),
     description: t({
-      en: "A&M International fosters a work environment built on ownership, transparency, continuous learning, innovation, and mutual respect. We believe great companies are built by great people — and we invest in the growth of every individual.",
-      ar: "تعزز A&M International بيئة عمل قائمة على تحمل المسؤولية والشفافية والتعلّم المستمر والابتكار والاحترام المتبادل. نؤمن أن الشركات العظيمة تُبنى بأشخاص عظماء — لذلك نستثمر في نمو كل فرد.",
+      en: "The A&M internationals fosters a work environment built on ownership, transparency, continuous learning, innovation, and mutual respect. We believe great companies are built by great people — and we invest in the growth of every individual.",
+      ar: "تعزز A&M الدولية بيئة عمل قائمة على تحمل المسؤولية والشفافية والتعلّم المستمر والابتكار والاحترام المتبادل. نؤمن أن الشركات العظيمة تُبنى بأشخاص عظماء — لذلك نستثمر في نمو كل فرد.",
     }),
 
     value1Title: t({ en: "Ownership", ar: "تحمل المسؤولية" }),

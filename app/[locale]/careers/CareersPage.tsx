@@ -26,22 +26,25 @@ export default function CareersPage() {
 
     return (
         <div>
-            <PageHero
-                title={content.heroTitle}
-                title2={content.heroTitle2}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/careers#open-positions`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle.value}
+                    title2={content.heroTitle2.value}
+                    titleClassName="w-full text-[24px] md:text-[32px] lg:text-[48px]"
+                    description={content.heroDescription.value}
+                    button={content.heroButton.value}
+                    link={`/${locale}/careers#open-positions`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
 
-            <CultureGrowthSection />
-            <Benefits />
-            <Open />
-            <Innovation />
+            <section className="snap-section"><CultureGrowthSection /></section>
+            <section className="snap-section"><Benefits /></section>
+            <section className="snap-section"><Open /></section>
+            <section className="snap-section"><Innovation /></section>
         </div>
     );
 }

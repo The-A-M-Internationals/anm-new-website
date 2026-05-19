@@ -119,37 +119,39 @@ const PastEvents: React.FC = () => {
   return (
     <div className="py-4 px-4">
       <div className="w-[90%] mx-auto">
-        {/* Header */}
+        {/* Header - Fixed with .value */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {locale?.toLowerCase().startsWith("ar") ? (
               <>
-                <span className="text-[#D4AF37]">{content.eventsWord}</span> {content.past.headingPrefix}
+                <span className="text-[#D4AF37]">{content.eventsWord.value}</span>{" "}
+                {content.past.headingPrefix.value}
               </>
             ) : (
               <>
-                {content.past.headingPrefix} <span className="text-[#D4AF37]">{content.eventsWord}</span>
+                {content.past.headingPrefix.value}{" "}
+                <span className="text-[#D4AF37]">{content.eventsWord.value}</span>
               </>
             )}
           </h1>
           <p className="text-[#6B7280] text-xl md:text-[21px]">
-            {content.past.subheading}
+            {content.past.subheading.value}
           </p>
         </div>
 
-        {/* Loading */}
+        {/* Loading State - Fixed with .value */}
         {loading && (
-          <p className="text-center text-gray-500">{content.past.loading}</p>
+          <p className="text-center text-gray-500">{content.past.loading.value}</p>
         )}
 
-        {/* No Events */}
+        {/* Empty State - Fixed with .value */}
         {!loading && events.length === 0 && (
           <p className="text-center text-gray-500 text-lg">
-            {content.past.empty}
+            {content.past.empty.value}
           </p>
         )}
 
-        {/* Events */}
+        {/* Events Grid */}
         {!loading && events.length > 0 && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
@@ -158,28 +160,23 @@ const PastEvents: React.FC = () => {
                   key={event.id}
                   className="bg-white rounded-[20px] md:rounded-[40px] border border-gray-300 p-6 md:p-8 shadow-md hover:shadow-md transition-shadow duration-300"
                 >
-                  {/* Date Badge */}
-                  <div className="text-[#D4AF37] px-3 py-2 rounded-full w-fit font-semibold bg-[#FFFBED] text-xs mb-4">
-                    {event.dateRange} {event.month}
-                  </div>
+                  {/* REMOVED: Date Badge section was here */}
 
-                  {/* Title */}
                   <h2 className="text-2xl font-medium text-gray-900 mb-4">
                     {event.title}
                   </h2>
-
-                  {/* Description */}
                   <p className="text-gray-600 mb-6 leading-relaxed">
                     {event.description}
                   </p>
 
-                  {/* Fixed CTA */}
                   <button
-                    onClick={() => window.open(event.externalLink, "_blank", "noopener,noreferrer")}
+                    onClick={() =>
+                      window.open(event.externalLink, "_blank", "noopener,noreferrer")
+                    }
                     className="inline-flex cursor-pointer items-center text-[#D4AF37] font-semibold hover:text-yellow-600 transition-colors group"
                   >
-                    {content.past.watchRecording}
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    {content.past.watchRecording.value}
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
                   </button>
                 </div>
               ))}

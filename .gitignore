@@ -1,0 +1,7 @@
+node_modules
+.next
+.intlayer
+next-env.d.ts
+screenshots
+anm-website-legacy
+tsconfig.tsbuildinfo
