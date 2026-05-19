@@ -70,34 +70,13 @@ const Services = () => {
     return (
         <>
             <style>{`
-                @keyframes am-bar-up {
-                    from { transform: scaleY(0); }
-                    to { transform: scaleY(1); }
-                }
-                @keyframes am-draw-line {
-                    from { stroke-dashoffset: 400; }
-                    to { stroke-dashoffset: 0; }
-                }
-                @keyframes am-link-flow {
-                    0% { stroke-dashoffset: 40; }
-                    100% { stroke-dashoffset: 0; }
-                }
-                @keyframes am-brain-line {
-                    0%, 100% { opacity: .15; }
-                    50% { opacity: .8; }
-                }
-                @keyframes am-nd-fire {
-                    0%, 100% { opacity: .25; }
-                    50% { opacity: 1; }
-                }
-                @keyframes am-float-icon {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-5px); }
-                }
-                @keyframes am-pulse-out {
-                    0% { r: 7; opacity: .7; }
-                    100% { r: 22; opacity: 0; }
-                }
+                @keyframes am-bar-up { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+                @keyframes am-draw-line { from { stroke-dashoffset: 400; } to { stroke-dashoffset: 0; } }
+                @keyframes am-link-flow { 0% { stroke-dashoffset: 40; } 100% { stroke-dashoffset: 0; } }
+                @keyframes am-brain-line { 0%, 100% { opacity: .15; } 50% { opacity: .8; } }
+                @keyframes am-nd-fire { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+                @keyframes am-float-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+                @keyframes am-pulse-out { 0% { r: 7; opacity: .7; } 100% { r: 22; opacity: 0; } }
                 .am-svc-card {
                     background: #fff;
                     border-radius: 20px;
@@ -125,15 +104,11 @@ const Services = () => {
                     justify-content: center;
                     box-shadow: 0 3px 10px rgba(201,168,76,.2);
                 }
-                .am-arr {
-                    transition: transform .2s ease;
-                }
-                .am-svc-card:hover .am-arr {
-                    transform: translateX(4px);
-                }
+                .am-arr { transition: transform .2s ease; }
+                .am-svc-card:hover .am-arr { transform: translateX(4px); }
             `}</style>
 
-            <section id="services" className="px-4 py-14 md:py-20">
+            <section id="services" className="px-4 py-20">
                 <div className="w-[90%] mx-auto">
                     {/* Heading */}
                     <div className="text-center mb-10 md:mb-14">

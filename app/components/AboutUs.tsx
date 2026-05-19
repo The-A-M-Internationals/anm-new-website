@@ -17,14 +17,14 @@ const AboutUs = () => {
         <div
             id="about-us"
             className="
-        flex flex-col lg:flex-row
-        gap-8 md:gap-12 lg:gap-18
-        items-center justify-center
-        px-4 md:px-6 lg:px-8
-        py-2 md:py-12
-        overflow-hidden
-        bg-[linear-gradient(105.23deg,#FFFFFF_0%,#FFFBED_126.38%)]
-      "
+                flex flex-col lg:flex-row
+                gap-8 md:gap-12 lg:gap-18
+                items-center justify-center
+                px-4 md:px-6 lg:px-8
+                py-2 md:py-12
+                overflow-hidden
+                bg-[linear-gradient(105.23deg,#FFFFFF_0%,#FFFBED_126.38%)]
+            "
         >
             {/* IMAGE */}
             <div className="relative w-full max-w-[400px] md:max-w-[750px] lg:max-w-[525px] h-[420px] md:h-[820px] lg:h-[557px] rounded-3xl flex-shrink-0">
@@ -70,18 +70,18 @@ const AboutUs = () => {
                 <button
                     onClick={() => router.push(getLocalizedLink('/business'))}
                     className="
-            mt-4 sm:mt-7
-            rounded-3xl
-            w-36 sm:w-40
-            h-9 sm:h-10
-            text-black
-            bg-[#D4AF37]
-            flex items-center justify-center
-            text-sm sm:text-lg
-            font-medium
-            cursor-pointer
-            hover:scale-105 transition
-          "
+                        mt-4 sm:mt-7
+                        rounded-3xl
+                        w-36 sm:w-40
+                        h-9 sm:h-10
+                        text-black
+                        bg-[#D4AF37]
+                        flex items-center justify-center
+                        text-sm sm:text-lg
+                        font-medium
+                        cursor-pointer
+                        hover:scale-105 transition
+                    "
                 >
                     {content.cta.value}
                 </button>

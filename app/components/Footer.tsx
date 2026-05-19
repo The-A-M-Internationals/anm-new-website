@@ -11,7 +11,6 @@ import "./footer.content";
 const Footer = () => {
     const content = useIntlayer("footer");
 
-
     const { locale } = useLocale();
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
