@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "next/link"
 import { useRouter, useParams } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useIntlayer } from "next-intlayer";
@@ -72,7 +72,7 @@ const AiAutomationsServices = () => {
                 content.nlpService1.value,
                 content.nlpService2.value,
                 content.nlpService3.value,
-                content.nlpService4.value,
+                content.nlpService4.value,  
             ],
             gradient: "from-sky-900/20 via-blue-900/20 to-indigo-900/20",
             accentColor: "#1E40AF",

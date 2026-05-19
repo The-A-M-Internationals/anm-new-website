@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     };
 }
 
-export default function DigitalTransformationPage() {
+export default function DigitalMarketingPage() {
     return (
         <div>
             <DigitalMarketingHero />
