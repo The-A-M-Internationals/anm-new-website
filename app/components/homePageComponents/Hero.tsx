@@ -20,7 +20,6 @@ const Hero = () => {
    const [isZoomed, setIsZoomed] = useState(false);
 
    useEffect(() => {
-      window.scrollTo(0, 0);
       const interval = setInterval(() => {
          setIsZoomed(true);
          const timeout = setTimeout(() => setIsZoomed(false), 700);
@@ -71,18 +70,18 @@ const Hero = () => {
             }}
             className='
           absolute rounded-full
-          w-[80%] h-[12%]
-          right-[-1%] rtl:left-[-1%] rtl:right-auto bottom-0 p-4
+          w-[83.5%] h-[13%]
+          right-0 rtl:left-0 rtl:right-auto bottom-0 p-4
 
-          md:w-[32%] md:h-[15%]
-          md:right-[-1%] md:rtl:left-[-1%] md:rtl:right-auto md:p-6
+          md:w-[40%] md:h-[18%]
+          md:right-0 md:rtl:left-0 md:rtl:right-auto md:p-6
 
-          lg:w-[32%] lg:h-[16%]
-          lg:right-[-1%] lg:rtl:left-[-1%] lg:rtl:right-auto lg:p-8
+          lg:w-[35%] lg:h-[18%]
+          lg:right-0 lg:rtl:left-0 lg:rtl:right-auto lg:p-8
         '
          >
             <h3 className='text-[14px] md:text-[14px] lg:text-xl text-white flex items-center h-full text-left rtl:text-right'>
-               {empoweringText.value}
+               {empoweringText}
             </h3>
          </div>
 
@@ -94,12 +93,12 @@ const Hero = () => {
         flex flex-col gap-2 sm:gap-4 md:gap-4 lg:gap-6 z-10
       '>
 
-            <h3 className='text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white md:text-black text-left rtl:text-right'>
-               {elevatingWorld.value}
+            <h3 className='text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white md:text-black text-left rtl:text-right'>
+               {elevatingWorld}
             </h3>
 
-            <h3 className='text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-[#D4AF37] text-left rtl:text-right'>
-               {dataToDecision.value}
+            <h3 className='text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-[#D4AF37] text-left rtl:text-right'>
+               {dataToDecision}
             </h3>
 
             <div className='flex flex-col sm:flex-row gap-2 sm:gap-3 items-start sm:items-center rtl:items-start sm:rtl:items-center mt-2'>
@@ -107,14 +106,14 @@ const Hero = () => {
                   onClick={() => router.push(`/${locale}/features#epm-suites`)}
                   className='bg-[#D4AF37] text-black px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:scale-105 transition cursor-pointer'
                >
-                  {exploreEpmSuite.value}
+                  {exploreEpmSuite}
                </button>
 
                <button
                   onClick={() => router.push(`/${locale}/contact#form`)}
                   className='bg-white text-[#D4AF37] border border-[#D4AF37] px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:scale-105 transition cursor-pointer'
                >
-                  {bookConsultation.value}
+                  {bookConsultation}
                </button>
             </div>
          </div>

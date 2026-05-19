@@ -60,11 +60,11 @@ const Article = () => {
     }, []);
 
     if (loading) {
-        return <div className="text-center py-20">{content.loading}</div>;
+        return <div className="text-center py-20">{content.loading.value}</div>;
     }
 
     if (!article) {
-        return <div className="text-center py-20">{content.noneFound}</div>;
+        return <div className="text-center py-20">{content.noneFound.value}</div>;
     }
 
     return (
@@ -72,7 +72,7 @@ const Article = () => {
             {/* Title */}
             <div className="text-center">
                 <h2 className="text-4xl md:text-5xl font-semibold text-black">
-                    {content.sectionTitlePrefix} <span className="text-[#D4AF37]">{content.sectionTitleHighlight}</span>
+                    {content.sectionTitlePrefix.value} <span className="text-[#D4AF37]">{content.sectionTitleHighlight.value}</span>
                 </h2>
             </div>
 
@@ -148,12 +148,12 @@ const Article = () => {
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center gap-2 bg-[#D4AF37]   text-black font-semibold px-8 py-3.5 rounded-full transition-all hover:scale-105 shadow-md w-full md:w-auto"
                                 >
-                                    <span>{content.readFullArticle}</span>
+                                    <span>{content.readFullArticle.value}</span>
                                     <svg
                                         fill="none"
                                         stroke="currentColor"
                                         strokeWidth="2.5"
-                                        className="w-5 h-5"
+                                        className={`w-5 h-5 ${locale === 'ar' ? 'rotate-180' : ''}`}
                                         viewBox="0 0 24 24"
                                     >
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

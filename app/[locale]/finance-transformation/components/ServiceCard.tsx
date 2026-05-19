@@ -2,7 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { useState, ReactNode } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
 
 interface CardProps {
@@ -20,6 +20,7 @@ export const ServiceCard: React.FC<CardProps> = ({
     svgIcon,
     tags,
 }) => {
+    const [isActive, setIsActive] = useState(false);
     const router = useRouter();
     const { locale } = useLocale();
     const content = useIntlayer("financeTransformationServiceCard");
@@ -34,21 +35,24 @@ export const ServiceCard: React.FC<CardProps> = ({
                 {/* 🔁 Mirror entire card in RTL */}
                 <div className="m-2 group relative w-full max-w-[300px] md:max-w-[380px] mx-auto rtl:[transform:scaleX(-1)]">
 
-                    <div className="relative h-auto w-full overflow-hidden rounded-3xl bg-white transition-colors duration-300 group-hover:bg-[#D4AF37] cursor-pointer pb-8">
+                    <div
+                        onClick={() => setIsActive(!isActive)}
+                        className="relative h-auto w-full overflow-hidden rounded-3xl bg-white transition-colors duration-300 cursor-pointer pb-8"
+                    >
 
                         {/* Border */}
                         <div className="absolute inset-0 border-2 border-gray-200 rounded-3xl"></div>
 
                         {/* Decorative corner */}
-                        <div className="absolute -top-6 -end-6 size-20 rounded-be-4xl rtl:rounded-be-none rtl:rounded-bs-4xl border-2 border-gray-200 bg-white">
-                            <div className="absolute top-5 -start-5 h-5 w-5 bg-white"></div>
-                            <div className="absolute top-5 -start-5 h-5 w-5 rounded-te-full rtl:rounded-te-none rtl:rounded-ts-full border-t-2 border-e-2 border-gray-200"></div>
-                            <div className="absolute -bottom-5 end-5 h-5 w-5 bg-white"></div>
-                            <div className="absolute -bottom-5 end-5 h-5 w-5 rounded-te-full rtl:rounded-te-none rtl:rounded-ts-full border-t-2 border-e-2 border-gray-200"></div>
+                        <div className="absolute -top-6 -end-6 size-20 rounded-bs-4xl border-2 border-gray-200 bg-[#FFFBED]">
+                            <div className="absolute top-5 -start-5 h-5 w-5 bg-[#FFFBED]"></div>
+                            <div className="absolute top-5 -start-5 h-5 w-5 rounded-te-full border-t-2 border-e-2 border-gray-200 bg-white"></div>
+                            <div className="absolute -bottom-5 end-5 h-5 w-5 bg-[#FFFBED]"></div>
+                            <div className="absolute -bottom-5 end-5 h-5 w-5 rounded-te-full border-t-2 border-e-2 border-gray-200 bg-white"></div>
                         </div>
 
                         {/* Icon */}
-                        <div className="absolute top-0 end-0 w-12 h-12 flex items-center justify-center text-black">
+                        <div className={`absolute top-0 end-0 w-12 h-12 flex items-center justify-center fill-current transition-colors duration-300 z-50 ${isActive ? 'text-[#D4AF37]' : 'text-black'} group-hover:text-[#D4AF37]`}>
                             <div className="w-8 h-8 flex items-center justify-center">
                                 {svgIcon}
                             </div>
@@ -57,11 +61,11 @@ export const ServiceCard: React.FC<CardProps> = ({
                         {/* 🔁 Flip content back so text is readable */}
                         <div className="relative z-10 p-6 pt-12 flex flex-col rtl:[transform:scaleX(-1)]">
 
-                            <h3 className="text-xl font-bold text-[#111827] group-hover:text-white leading-tight">
+                            <h3 className={`text-xl font-bold transition-colors duration-300 leading-tight ${isActive ? 'text-[#D4AF37]' : 'text-[#111827]'} group-hover:text-[#D4AF37]`}>
                                 {title}
                             </h3>
 
-                            <p className="text-sm text-[#6B7280] group-hover:text-white mt-2 leading-snug">
+                            <p className="text-sm text-[#6B7280] mt-2 leading-snug">
                                 {description}
                             </p>
 
@@ -93,7 +97,7 @@ export const ServiceCard: React.FC<CardProps> = ({
                     </div>
 
                     {/* Icon */}
-                    <div className="absolute -top-7 -right-9 w-16 h-16 md:w-24 md:h-24 z-50 text-[#111827] group-hover:text-[#D4AF37] fill-current flex items-center justify-center">
+                    <div className="absolute -top-7 -right-9 w-16 h-16 md:w-24 md:h-24 z-50 text-[#111827] group-hover:text-[#D4AF37] fill-current transition-colors duration-300 flex items-center justify-center">
                         <div className="w-16 h-16 md:w-13 md:h-13 flex items-center justify-center -translate-x-6 translate-y-4">
                             {svgIcon}
                         </div>

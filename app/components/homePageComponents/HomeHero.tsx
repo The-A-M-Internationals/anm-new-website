@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect, useRef } from "react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
-import type { AppLocale } from "@/types/locale";
+import Link from "next/link";
+import { AppLocale } from "@/types/locale";
 
 const HomeHero = () => {
     const router = useRouter();
@@ -206,9 +207,10 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
+                                // @ts-expect-error
                                 "--dx": p.dx,
                                 "--dy": p.dy,
-                            } as React.CSSProperties}
+                            }}
                         />
                     ))}
                     {[
@@ -227,9 +229,10 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
+                                // @ts-expect-error
                                 "--dx": p.dx,
                                 "--dy": p.dy,
-                            } as React.CSSProperties}
+                            }}
                         />
                     ))}
                 </div>
@@ -268,7 +271,7 @@ const HomeHero = () => {
                             <div className="text-purple-400">const</div>
                             <div className="text-[#C9A84C] ml-2">transform =</div>
                             <div className="text-blue-400 ml-4">&quot;elevate&quot;</div>
-                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -516,30 +519,23 @@ const HomeHero = () => {
                             <p className="text-base md:text-lg text-white/70 mb-8 leading-relaxed">
                                 {content.description.value}
                             </p>
-
+                            
                             {/* CTAs */}
                             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                                <button
-                                    onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact"))}
-                                    className="px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#C9A84C] transition-colors"
+                                <Link
+                                    href={getLocalizedPath(locale as AppLocale, "/contact#form")}
+                                    className="flex items-center justify-center px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#D4AF37] transition-colors"
                                 >
                                     {content.bookConsultation.value}
-                                </button>
+                                </Link>
                                 <button
-                                    onClick={() => {
-                                        const element = document.getElementById('services');
-                                        if (element) {
-                                            element.scrollIntoView({ behavior: 'smooth' });
-                                        } else {
-                                            router.push(getLocalizedPath(locale as AppLocale, "/#services"));
-                                        }
-                                    }}
+                                    onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/#services"))}
                                     className="px-7 py-3.5 bg-transparent text-[#C9A84C] border-2 border-[#C9A84C] rounded-lg text-[15px] font-bold hover:bg-[#C9A84C] hover:text-[#0C1F4A] transition-colors"
                                 >
                                     {content.exploreServices.value}
                                 </button>
                             </div>
-
+                            
                             {/* Metrics */}
                             <div className="grid grid-cols-3 gap-6">
                                 <div>
@@ -583,7 +579,7 @@ const HomeHero = () => {
 
                         {/* Right: Globe + Service Cards */}
                         <div className="hidden lg:block relative" style={{ height: 450 }}>
-
+                            
                             {/* Orbital rings */}
                             <div className="absolute" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
                                 <div 
@@ -607,7 +603,7 @@ const HomeHero = () => {
                                     }}
                                 />
                             </div>
-
+                            
                             {/* Globe */}
                             <svg 
                                 className="absolute" 
@@ -630,7 +626,7 @@ const HomeHero = () => {
                                     <ellipse cx="100" cy="100" rx="20" ry="80" fill="none" stroke="rgba(201,168,76,.25)" strokeWidth=".8" />
                                     <ellipse cx="100" cy="100" rx="40" ry="80" fill="none" stroke="rgba(201,168,76,.2)" strokeWidth=".8" />
                                 </g>
-
+                                
                                 {/* Animated connection lines to center */}
                                 <line x1="57" y1="67" x2="100" y2="100" stroke="url(#connectionGrad)" strokeWidth="1.5" strokeDasharray="3 3">
                                     <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" />
@@ -644,12 +640,12 @@ const HomeHero = () => {
                                     <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" begin="1.4s" />
                                     <animate attributeName="stroke-dashoffset" from="0" to="-6" dur="1s" repeatCount="indefinite" />
                                 </line>
-
+                                
                                 {/* Outer nodes */}
                                 <circle cx="57" cy="67" r="6" fill="#C9A84C" style={{ transformOrigin: "57px 67px", animation: "am-node-expand 2s ease-in-out infinite" }} />
                                 <circle cx="157" cy="103" r="6" fill="#4AADDA" style={{ transformOrigin: "157px 103px", animation: "am-node-expand 2s ease-in-out infinite .7s" }} />
                                 <circle cx="66" cy="150" r="6" fill="#9B79E0" style={{ transformOrigin: "66px 150px", animation: "am-node-expand 2s ease-in-out infinite 1.4s" }} />
-
+                                
                                 {/* Center hub with pulsing ring */}
                                 <circle cx="100" cy="100" r="12" fill="rgba(201,168,76,0.2)" opacity="0.5">
                                     <animate attributeName="r" values="12;16;12" dur="2s" repeatCount="indefinite" />
@@ -660,7 +656,8 @@ const HomeHero = () => {
 
                             {/* Finance card */}
                             <div 
-                                className="absolute rounded-xl"
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/finance-transformation"))}
+                                className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     top: 30,
                                     left: -40,
@@ -693,7 +690,8 @@ const HomeHero = () => {
 
                             {/* Digital card */}
                             <div 
-                                className="absolute rounded-xl"
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/digital-transformation"))}
+                                className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     top: "50%",
                                     right: -20,
@@ -719,7 +717,8 @@ const HomeHero = () => {
 
                             {/* AI card */}
                             <div 
-                                className="absolute rounded-xl"
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/ai-automations"))}
+                                className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     bottom: 40,
                                     left: -30,
@@ -750,7 +749,8 @@ const HomeHero = () => {
                                     ))}
                                 </div>
                             </div>
-                        </div>                    </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>

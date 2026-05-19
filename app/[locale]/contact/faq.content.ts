@@ -13,8 +13,8 @@ const faqContent = {
     }),
 
     faq1Question: t({
-      en: "1. WHAT SERVICES DOES THE A&M INTERNATIONAL OFFER?",
-      ar: "١. ما الخدمات التي تقدّمها THE A&M INTERNATIONAL؟",
+      en: "1. WHAT SERVICES DOES THE A&M INTERNATIONALS OFFER?",
+      ar: "١. ما الخدمات التي تقدّمها A&M الدولية؟",
     }),
     faq1Answer: t({
       en: "We offer four core services: Digital Marketing, UI/UX Design, Web Development, and Enterprise Performance Management (EPM). Most of our engagements combine two or more of these — for example, a brand might come to us for a website redesign and stay on for ongoing digital marketing. We work as an integrated team rather than siloed departments, which means your project benefits from every discipline working together from day one.",
@@ -76,8 +76,8 @@ const faqContent = {
     }),
 
     faq8Question: t({
-      en: "8. HOW DO I KNOW IF A&M IS THE RIGHT FIT FOR MY BRAND?",
-      ar: "٨. كيف أعرف إن كانت THE A&M مناسبة لعلامتي التجارية؟",
+      en: "8. HOW DO I KNOW IF THE A&M INTERNATIONALS IS THE RIGHT FIT FOR MY BRAND?",
+      ar: "٨. كيف أعرف إن كانت A&M الدولية مناسبة لعلامتي التجارية؟",
     }),
     faq8Answer: t({
       en: "The honest answer: a 15-minute discovery call will tell both of us more than any FAQ can. We're not the right partner for every brand, and we'd rather have that conversation early than oversell. If you're looking for a team that values craft over volume, prioritizes long-term partnerships, and treats your brand with the care it deserves — there's a good chance we'll work well together.",

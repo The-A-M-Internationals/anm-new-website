@@ -67,7 +67,7 @@ const ChildWelfareImpact = () => {
     
     // Graph Logic
     const goal = 1000000;
-    const currentAmount = 420500;
+    const currentAmount = 327000;
     const progressPercentage = Math.round((currentAmount / goal) * 100);
 
     const [animatedProgress, setAnimatedProgress] = useState<number>(0);
@@ -96,31 +96,28 @@ const ChildWelfareImpact = () => {
     };
 
     const chartData = [
-        { month: 'Jan 25', amount: 75000, cumulative: 75000 },
-        { month: 'Feb 25', amount: 52000, cumulative: 127000 },
-        { month: 'Mar 25', amount: 61000, cumulative: 206000 },
-        { month: 'Apr 25', amount: 58000, cumulative: 264000 },
-        { month: 'May 25', amount: 63000, cumulative: 327000 },
-        { month: 'Jun 25', amount: 55000, cumulative: 382000 },
-        { month: 'Jul 25', amount: 38500, cumulative: 420500 },
-        { month: 'Aug 25', amount: 0, cumulative: 420500 },
+        { month: 'Jan 26', amount: 75000, cumulative: 75000 },
+        { month: 'Feb 26', amount: 52000, cumulative: 127000 },
+        { month: 'Mar 26', amount: 61000, cumulative: 206000 },
+        { month: 'Apr 26', amount: 58000, cumulative: 264000 },
+        { month: 'May 26', amount: 63000, cumulative: 327000 },
     ];
 
     const stats = [
         {
-            value: content.stats[0].value,
-            title: content.stats[0].title,
-            description: content.stats[0].description
+            value: content.stats[0].value.value,
+            title: content.stats[0].title.value,
+            description: content.stats[0].description.value
         },
         {
-            value: content.stats[1].value,
-            title: content.stats[1].title,
-            description: content.stats[1].description
+            value: content.stats[1].value.value,
+            title: content.stats[1].title.value,
+            description: content.stats[1].description.value
         },
         {
-            value: content.stats[2].value,
-            title: content.stats[2].title,
-            description: content.stats[2].description
+            value: content.stats[2].value.value,
+            title: content.stats[2].title.value,
+            description: content.stats[2].description.value
         }
     ];
 

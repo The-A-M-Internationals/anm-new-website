@@ -161,17 +161,10 @@ const Events = () => {
 
             {/* UPCOMING EVENTS */}
             <div className="max-w-7xl mx-auto px-4 mt-8 flex flex-col gap-6 pb-5 md:pb-20">
-                <div className="flex justify-between items-center">
+                <div className="text-center">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">
                         {content.upcomingHeader.value}
                     </h2>
-
-                    <button
-                        onClick={() => router.push(`/${locale}/events#upcoming-events`)}
-                        className="bg-[#D4AF37] cursor-pointer text-sm sm:text-base font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full hover:scale-105 transition"
-                    >
-                        {content.viewAll.value}
-                    </button>
                 </div>
 
                 {visibleEvents.length === 0 ? (
@@ -218,6 +211,18 @@ const Events = () => {
                                 </div>
                             );
                         })}
+                    </div>
+                )}
+
+                {/* VIEW ALL BUTTON - Moved to bottom and centered */}
+                {visibleEvents.length > 0 && (
+                    <div className="flex justify-center mt-4">
+                        <button
+                            onClick={() => router.push(`/${locale}/events#upcoming-events`)}
+                            className="bg-[#D4AF37] cursor-pointer text-sm sm:text-base font-semibold px-8 py-3 rounded-full hover:scale-105 transition shadow-md"
+                        >
+                            {content.viewAll.value}
+                        </button>
                     </div>
                 )}
 

@@ -54,7 +54,7 @@ const Card: React.FC<CardProps> = ({ icon, title, description, link }) => {
                     </div>
 
                     {/* Arrow circle */}
-                    <Link href={link || "/features"} aria-label="Learn more about this service">
+                    <Link href={link || "/features#epm-suites"} aria-label="Learn more about this service">
                         <div className="absolute top-4 right-4 md:top-0 md:right-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white z-30 flex items-center justify-center shadow-md">
                             <div className="w-full h-full rounded-full bg-[#D4AF37] flex items-center justify-center">
                                 {/* flip arrow back */}

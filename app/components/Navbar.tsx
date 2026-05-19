@@ -9,14 +9,11 @@ import { LanguageSwitcher } from '../../components/LanguageSwitcher';
 type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
 
 type NavKey =
-  | 'Resources'
-  | 'Media'
-  | 'Company'
-  | 'Career'
   | 'Services'
   | 'About Us'
-  | 'How we work'
-  | 'Make an Impact';
+  | 'What Sets Us Apart'
+  | 'Make an Impact'
+  | 'Career';
 
 interface NavItem {
   labelKey: IntlayerKey
@@ -38,76 +35,124 @@ const Navbar = () => {
 
   const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
 
-  // 1. REF FOR TIMEOUT
+  const handleHashLink = (e: React.MouseEvent, link: string) => {
+    if (link.includes('#')) {
+      const [path, hash] = link.split('#');
+      const currentPath = window.location.pathname;
+
+      if (currentPath === path || (path === '' && hash)) {
+        const element = document.getElementById(hash);
+        if (element) {
+          e.preventDefault();
+          const yOffset = -112; // Adjusted for navbar height
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          window.history.pushState(null, '', `#${hash}`);
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // ─── NAV ITEMS ────────────────────────────────────────────────────────────
+  // Only "Services" and "About Us" open a modal dropdown.
+  // The remaining items are direct links rendered as plain buttons.
   const navItems: Record<NavKey, NavItem> = {
-    Resources: {
-      labelKey: 'resources',
-      rightSideButtons: [
-        { icon: '/resourcenav1.svg', textKey: 'amCommunity', type: 'primary' as const, link: getLocalizedLink('/') },
-      ]
-    },
-    Media: {
-      labelKey: 'media',
-      rightSideButtons: [
-        { icon: '/events.svg', textKey: 'events', type: 'primary' as const, link: getLocalizedLink('/events') },
-        { icon: '/blogs.svg', textKey: 'blogs', type: 'outline' as const, link: getLocalizedLink('/blogs') },
-        { icon: '/thumbsup.svg', textKey: 'subscribe', type: 'outline' as const, link: getLocalizedLink('/events#subscribe') }      
-      ]
-    },
-    Company: {
-      labelKey: 'company',
-      rightSideButtons: [
-        { icon: '/tick.svg', textKey: 'successStories', type: 'primary' as const, link: getLocalizedLink('/success-stories') },     
-        { icon: '/star.svg', textKey: 'whatSetsUsApart', type: 'outline' as const, link: getLocalizedLink('/features') },
-        { icon: '/method.svg', textKey: 'ourMethodology', type: 'outline' as const, link: getLocalizedLink('/methodology') }        
-      ]
-    },
-    Career: {
-      labelKey: 'career',
-      rightSideButtons: [
-        { icon: '/services/financial.svg', textKey: 'jobs', type: 'primary' as const, link: getLocalizedLink('/careers') },
-        { icon: '/method.svg', textKey: 'culture', type: 'outline' as const, link: getLocalizedLink('/careers#culture') },
-        { icon: '/thumbsup.svg', textKey: 'apply', type: 'outline' as const, link: getLocalizedLink('/careers#open-positions') }    
-      ]
-    },
     Services: {
       labelKey: 'services',
       rightSideButtons: [
         {
-          icon: '/services/financial.svg', textKey: 'financeTransformation', type: 'primary' as const, link: getLocalizedLink('/finance-transformation')
+          icon: '/services/financial.svg',
+          textKey: 'financeTransformation',
+          type: 'primary' as const,
+          link: getLocalizedLink('/finance-transformation')
         },
-        { icon: '/services/managed.svg', textKey: 'managedServices', type: 'outline' as const, link: getLocalizedLink('/finance-transformation#managed-services') },
+        {
+          icon: '/services/digital.svg',
+          textKey: 'digitalTransformation',
+          type: 'outline' as const,
+          link: getLocalizedLink('/digital-transformation')
+        },
+        {
+          icon: '/services/ai.svg',
+          textKey: 'aiAutomations',
+          type: 'outline' as const,
+          link: getLocalizedLink('/ai-automations')
+        },
       ]
     },
     'About Us': {
       labelKey: 'aboutUs',
       rightSideButtons: [
-        { icon: '/events.svg', textKey: 'about', type: 'primary' as const, link: getLocalizedLink('/business#about-us') },
-        { icon: '/services/financial.svg', textKey: 'mission', type: 'outline' as const, link: getLocalizedLink('/business#mission') },
-        { icon: '/blogs.svg', textKey: 'team', type: 'outline' as const, link: getLocalizedLink('/business#team') }
+        {
+          icon: '/services/financial.svg',
+          textKey: 'mission',
+          type: 'primary' as const,
+          link: getLocalizedLink('/business#mission')
+        },
+        {
+          icon: '/blogs.svg',
+          textKey: 'team',
+          type: 'outline' as const,
+          link: getLocalizedLink('/business#team')
+        },
+        {
+          icon: '/tick.svg',
+          textKey: 'successStories',
+          type: 'outline' as const,
+          link: getLocalizedLink('/success-stories')
+        },
+        {
+          icon: '/method.svg',
+          textKey: 'features',
+          type: 'outline' as const,
+          link: getLocalizedLink('/features')
+        },
+        {
+          icon: '/method.svg',
+          textKey: 'ourMethodology',
+          type: 'outline' as const,
+          link: getLocalizedLink('/methodology')
+        },
+        {
+          icon: '/events.svg',
+          textKey: 'events',
+          type: 'outline' as const,
+          link: getLocalizedLink('/events')
+        },
+        {
+          icon: '/blogs.svg',
+          textKey: 'media',
+          type: 'outline' as const,
+          link: getLocalizedLink('/blogs')
+        },
       ]
     },
-    'How we work': {
-      labelKey: 'howWeWork',
-      rightSideButtons: [
-        { icon: '/tick.svg', textKey: 'process', type: 'primary' as const, link: getLocalizedLink('/methodology#process') },        
-        { icon: '/blogs.svg', textKey: 'methods', type: 'outline' as const, link: getLocalizedLink('/methodology') },
-        { icon: '/events.svg', textKey: 'results', type: 'outline' as const, link: getLocalizedLink('/features#results') }
-      ]
+    'What Sets Us Apart': {
+      labelKey: 'whatSetsUsApart',
+      rightSideButtons: []
     },
     'Make an Impact': {
       labelKey: 'makeAnImpact',
-      rightSideButtons: [
-        { icon: '/blogs.svg', textKey: 'impact', type: 'primary' as const, link: getLocalizedLink('/impacts') },
-        { icon: '/events.svg', textKey: 'partners', type: 'outline' as const, link: getLocalizedLink('/') },
-        { icon: '/tick.svg', textKey: 'donate', type: 'outline' as const, link: getLocalizedLink('/impacts#donate') }
-      ]
-    }
+      rightSideButtons: []
+    },
+    Career: {
+      labelKey: 'career',
+      rightSideButtons: []
+    },
   }
 
-  // 2. TIMEOUT LOGIC
+  // Direct-link URLs for non-dropdown items
+  const directLinks: Partial<Record<NavKey, string>> = {
+    'What Sets Us Apart': getLocalizedLink('/what-sets-us-apart'),
+    'Make an Impact': getLocalizedLink('/impacts'),
+    Career: getLocalizedLink('/careers'),
+  }
+
+  // ─── HOVER / CLOSE HELPERS ────────────────────────────────────────────────
   const cancelClose = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -115,9 +160,7 @@ const Navbar = () => {
     }
   }
 
-  // MODIFIED: Accepts a duration parameter (default 150)
   const scheduleClose = (duration = 250) => {
-    cancelClose();
     closeTimeoutRef.current = setTimeout(() => {
       setIsModalOpen(false);
       setActiveNavKey(null);
@@ -125,38 +168,50 @@ const Navbar = () => {
   }
 
   const handleNavMouseEnter = (navKey: NavKey) => {
-    cancelClose(); // Stop any pending closing
+    // Only open a modal when there are dropdown items
+    if (navItems[navKey].rightSideButtons.length === 0) return;
+    cancelClose();
     setActiveNavKey(navKey);
     setIsModalOpen(true);
   }
 
-  // Used for Mobile click logic
+  // Mobile click logic
   const handleNavClick = (navKey: NavKey) => {
-    if (isModalOpen && activeNavKey !== navKey) {
-      setActiveNavKey(navKey)
-    } else if (!isModalOpen) {
-      setActiveNavKey(navKey)
-      setIsModalOpen(true)
-    } else if (activeNavKey === navKey) {
-      setIsModalOpen(false)
-      setActiveNavKey(null)
+    const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
+
+    if (!hasDropdown) {
+      const link = directLinks[navKey];
+      if (link) router.push(link);
+      setIsMobileMenuOpen(false);
+      return;
     }
-    setIsMobileMenuOpen(false)
+
+    if (isModalOpen && activeNavKey !== navKey) {
+      setActiveNavKey(navKey);
+    } else if (!isModalOpen) {
+      setActiveNavKey(navKey);
+      setIsModalOpen(true);
+    } else if (activeNavKey === navKey) {
+      setIsModalOpen(false);
+      setActiveNavKey(null);
+    }
+    setIsMobileMenuOpen(false);
   }
 
   const closeModal = () => {
-    setIsModalOpen(false)
-    setActiveNavKey(null)
+    setIsModalOpen(false);
+    setActiveNavKey(null);
   }
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   }
 
+  // ─── RENDER ───────────────────────────────────────────────────────────────
   return (
     <>
-      <nav className="bg-white shadow-sm w-full z-50 sticky top-0">
-        <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8 ">
+      <nav className="bg-white shadow-sm w-full z-50 lg:relative">
+        <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
 
             {/* Logo */}
@@ -164,41 +219,100 @@ const Navbar = () => {
               <img src="/Logo.svg" alt="Logo" className="h-12 md:h-auto" />
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:block">
-              <div className="ms-10 flex items-baseline gap-3">
+            {/* ── Desktop Navigation ── */}
+            <div className="hidden lg:flex items-center gap-1">
 
-                {/* Iterate through keys to reduce repetition and apply logic */}
-                {(['Resources', 'Media', 'Company', 'Career'] as const).map((key) => (
-                  <button
-                    key={key}
-                    onMouseEnter={() => handleNavMouseEnter(key)}
-                    // 👇 HIGH DELAY: 500ms for the top row to bridge the gap
-                    onMouseLeave={() => scheduleClose(500)}
-                    className={`text-[#6B7280] cursor-pointer ${activeNavKey === key ? 'border-b border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-2 text-sm font-semibold transition-all`}
-                  >
-                    {content[navItems[key].labelKey].value}
-                  </button>
-                ))}
+              {/* Services — dropdown */}
+              <DesktopNavButton
+                navKey="Services"
+                navItems={navItems}
+                activeNavKey={activeNavKey}
+                handleNavMouseEnter={handleNavMouseEnter}
+                scheduleClose={scheduleClose}
+                content={content}
+                router={router}
+                directLinks={directLinks}
+                handleHashLink={handleHashLink}
+              />
 
-                <button onClick={() => router.push(getLocalizedLink("/contact#form"))} className="bg-[#D4AF37] hover:bg-yellow-600 text-black px-4 py-2 rounded-full text-sm font-semibold cursor-pointer">
-                  {content.bookConsultation.value}
-                </button>
-                <LanguageSwitcher />
+              {/* About Us — dropdown */}
+              <DesktopNavButton
+                navKey="About Us"
+                navItems={navItems}
+                activeNavKey={activeNavKey}
+                handleNavMouseEnter={handleNavMouseEnter}
+                scheduleClose={scheduleClose}
+                content={content}
+                router={router}
+                directLinks={directLinks}
+                handleHashLink={handleHashLink}
+              />
 
-              </div>
-            </div>
+              {/* What Sets Us Apart — direct link */}
+              <DesktopNavButton
+                navKey="What Sets Us Apart"
+                navItems={navItems}
+                activeNavKey={activeNavKey}
+                handleNavMouseEnter={handleNavMouseEnter}
+                scheduleClose={scheduleClose}
+                content={content}
+                router={router}
+                directLinks={directLinks}
+                handleHashLink={handleHashLink}
+              />
 
-            {/* Tablet & Mobile menu buttons */}
-            <div className="lg:hidden flex items-center gap-3">
-              <button
-                onClick={() => router.push(getLocalizedLink("/contact#form"))}
-                className="hidden md:block bg-[#D4AF37] hover:bg-yellow-600 text-black px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap"
+              {/* Make an Impact — direct link */}
+              <DesktopNavButton
+                navKey="Make an Impact"
+                navItems={navItems}
+                activeNavKey={activeNavKey}
+                handleNavMouseEnter={handleNavMouseEnter}
+                scheduleClose={scheduleClose}
+                content={content}
+                router={router}
+                directLinks={directLinks}
+                handleHashLink={handleHashLink}
+              />
+
+              {/* Career — direct link */}
+              <DesktopNavButton
+                navKey="Career"
+                navItems={navItems}
+                activeNavKey={activeNavKey}
+                handleNavMouseEnter={handleNavMouseEnter}
+                scheduleClose={scheduleClose}
+                content={content}
+                router={router}
+                directLinks={directLinks}
+                handleHashLink={handleHashLink}
+              />
+
+              {/* Divider */}
+              <span className="mx-2 h-5 w-px bg-gray-200" aria-hidden />
+
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+
+              {/* CTA */}
+              <Link
+                href={getLocalizedLink("/contact#form")}
+                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"))}
+                className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-white px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
               >
                 {content.bookConsultation.value}
-              </button>
+              </Link>
+            </div>
 
-              {/* Language Switcher for mobile/tab */}
+            {/* ── Tablet & Mobile controls ── */}
+            <div className="lg:hidden flex items-center gap-3">
+              <Link
+                href={getLocalizedLink("/contact#form")}
+                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"))}
+                className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-colors duration-150"
+              >
+                {content.bookConsultation.value}
+              </Link>
+
               <div className="md:block lg:hidden">
                 <LanguageSwitcher />
               </div>
@@ -206,6 +320,7 @@ const Navbar = () => {
               <button
                 onClick={toggleMobileMenu}
                 className="text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700"
+                aria-label="Toggle menu"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   {isMobileMenuOpen ? (
@@ -218,80 +333,191 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* MOBILE MENU */}
-          <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} pb-4`}>
-            <div className="flex flex-col space-y-2">
-              <button onClick={() => handleNavClick('Resources')} className={`text-[#6B7280] ${activeNavKey === 'Resources' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Resources.labelKey].value}</button>
-              <button onClick={() => handleNavClick('Media')} className={`text-[#6B7280] ${activeNavKey === 'Media' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Media.labelKey].value}</button>
-              <button onClick={() => handleNavClick('Company')} className={`text-[#6B7280] ${activeNavKey === 'Company' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Company.labelKey].value}</button>
-              <button onClick={() => handleNavClick('Career')} className={`text-[#6B7280] ${activeNavKey === 'Career' ? 'bg-yellow-50 border-s-4 border-[#D4AF37]' : ''} hover:text-gray-900 px-3 py-3 text-sm font-semibold text-start`}>{content[navItems.Career.labelKey].value}</button>
-              <button onClick={() => router.push(getLocalizedLink("/contact#form"))} className="md:hidden bg-[#D4AF37] hover:bg-yellow-600 text-black px-4 py-3 rounded-full text-sm font-semibold mx-3 mt-2">{content.bookConsultation.value}</button>
-            </div>
-            <div className="bg-[#D4AF37] mt-4 py-2 rounded-lg">
-              <div className="flex flex-row flex-wrap gap-2 px-3 md:justify-center">
-                <button onClick={() => handleNavClick('Services')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'Services' ? 'bg-[#897122]' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems.Services.labelKey].value}</button>
-                <button onClick={() => handleNavClick('About Us')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'About Us' ? 'bg-yellow-600' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems['About Us'].labelKey].value}</button>
-                <button onClick={() => handleNavClick('How we work')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'How we work' ? 'bg-yellow-600' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems['How we work'].labelKey].value}</button>
-                <button onClick={() => handleNavClick('Make an Impact')} className={`text-white hover:text-yellow-100 ${activeNavKey === 'Make an Impact' ? 'bg-yellow-600' : ''} py-2 px-3 text-sm font-semibold text-start rounded`}>{content[navItems['Make an Impact'].labelKey].value}</button>
+          {/* ── Mobile Menu ── */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden pb-4 border-t border-gray-100 mt-1">
+              <div className="flex flex-col divide-y divide-gray-100">
+                <MobileNavButton
+                  navKey="Services"
+                  navItems={navItems}
+                  activeNavKey={activeNavKey}
+                  isModalOpen={isModalOpen}
+                  handleNavClick={handleNavClick}
+                  content={content}
+                />
+                <MobileNavButton
+                  navKey="About Us"
+                  navItems={navItems}
+                  activeNavKey={activeNavKey}
+                  isModalOpen={isModalOpen}
+                  handleNavClick={handleNavClick}
+                  content={content}
+                />
+                <MobileNavButton
+                  navKey="What Sets Us Apart"
+                  navItems={navItems}
+                  activeNavKey={activeNavKey}
+                  isModalOpen={isModalOpen}
+                  handleNavClick={handleNavClick}
+                  content={content}
+                />
+                <MobileNavButton
+                  navKey="Make an Impact"
+                  navItems={navItems}
+                  activeNavKey={activeNavKey}
+                  isModalOpen={isModalOpen}
+                  handleNavClick={handleNavClick}
+                  content={content}
+                />
+                <MobileNavButton
+                  navKey="Career"
+                  navItems={navItems}
+                  activeNavKey={activeNavKey}
+                  isModalOpen={isModalOpen}
+                  handleNavClick={handleNavClick}
+                  content={content}
+                />
+              </div>
+
+              {/* Mobile CTA */}
+              <div className="px-4 pt-4">
+                <Link
+                  href={getLocalizedLink("/contact#form")}
+                  onClick={(e) => {
+                    if (!handleHashLink(e, getLocalizedLink("/contact#form"))) {
+                      setIsMobileMenuOpen(false);
+                    }
+                  }}
+                  className="w-full flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-3 rounded-full text-sm font-semibold transition-colors duration-150"
+                >
+                  {content.bookConsultation.value}
+                </Link>
               </div>
             </div>
-          </div>
+          )}
         </div>
-
-        {/* DESKTOP SECONDARY NAV */}
-        <div className="bg-[#D4AF37] hidden lg:block">
-          <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-6">
-            <div className="flex gap-8 py-3">
-
-              <button
-                onMouseEnter={() => handleNavMouseEnter('Services')}
-                // 👇 LOW DELAY: 150ms for bottom row (closer to modal)
-                onMouseLeave={() => scheduleClose(150)}
-                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'Services' ? 'border-b border-white' : ''} py-2 text-sm font-bold text-white transition-all`}
-              >
-                {content[navItems.Services.labelKey].value}
-              </button>
-
-              <button
-                onMouseEnter={() => handleNavMouseEnter('About Us')}
-                onMouseLeave={() => scheduleClose(150)}
-                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'About Us' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
-              >
-                {content[navItems['About Us'].labelKey].value}
-              </button>
-
-              <button
-                onMouseEnter={() => handleNavMouseEnter('How we work')}
-                onMouseLeave={() => scheduleClose(150)}
-                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'How we work' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
-              >
-                {content[navItems['How we work'].labelKey].value}
-              </button>
-
-              <button
-                onMouseEnter={() => handleNavMouseEnter('Make an Impact')}
-                onMouseLeave={() => scheduleClose(150)}
-                className={`text-white hover:text-yellow-100 cursor-pointer ${activeNavKey === 'Make an Impact' ? 'border-b border-white' : ''} py-2 text-sm font-semibold transition-all`}
-              >
-                {content[navItems['Make an Impact'].labelKey].value}
-              </button>
-
-            </div>
-          </div>
-        </div>
-
       </nav>
 
+      {/* ── Dropdown Modal ── */}
       <NavbarModal
         isOpen={isModalOpen}
         onClose={closeModal}
         rightSideButtons={activeNavKey ? navItems[activeNavKey].rightSideButtons : []}
         onMouseEnter={cancelClose}
         onMouseLeave={() => scheduleClose(150)}
+        handleHashLink={handleHashLink}
       />
-
     </>
   )
 }
+
+// ─── DESKTOP NAV BUTTON RENDERER ─────────────────────────────────────────
+interface DesktopNavButtonProps {
+  navKey: NavKey
+  navItems: Record<NavKey, NavItem>
+  activeNavKey: NavKey | null
+  handleNavMouseEnter: (navKey: NavKey) => void
+  scheduleClose: (duration?: number) => void
+  content: Record<string, any>
+  router: ReturnType<typeof useRouter>
+  directLinks: Partial<Record<NavKey, string>>
+  handleHashLink: (e: React.MouseEvent, link: string) => boolean
+}
+
+const DesktopNavButton = ({
+  navKey,
+  navItems,
+  activeNavKey,
+  handleNavMouseEnter,
+  scheduleClose,
+  content,
+  router,
+  directLinks,
+  handleHashLink
+}: DesktopNavButtonProps) => {
+  const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
+  const isActive = activeNavKey === navKey;
+
+  if (hasDropdown) {
+    return (
+      <button
+        onMouseEnter={() => handleNavMouseEnter(navKey)}
+        onMouseLeave={() => scheduleClose(300)}
+        className={`
+          text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold
+          transition-colors duration-150 hover:text-gray-900
+          ${isActive ? 'border-b-2 border-[#C9A84C] text-gray-900' : ''}
+        `}
+      >
+        <span className="flex items-center gap-1">
+          {(content as any)[navItems[navKey].labelKey]?.value || (content as any)[navItems[navKey].labelKey]}
+          <svg
+            className={`w-3.5 h-3.5 mt-0.5 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
+            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </button>
+    );
+  }
+
+  return (
+    <button
+      onClick={(e) => {
+        if (!handleHashLink(e, directLinks[navKey]!)) {
+          router.push(directLinks[navKey]!)
+        }
+      }}
+      className="text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:text-gray-900"
+    >
+      {(content as any)[navItems[navKey].labelKey]?.value || (content as any)[navItems[navKey].labelKey]}
+    </button>
+  );
+};
+
+// ─── MOBILE NAV BUTTON RENDERER ──────────────────────────────────────────
+interface MobileNavButtonProps {
+  navKey: NavKey
+  navItems: Record<NavKey, NavItem>
+  activeNavKey: NavKey | null
+  isModalOpen: boolean
+  handleNavClick: (navKey: NavKey) => void
+  content: Record<string, any>
+}
+
+const MobileNavButton = ({
+  navKey,
+  navItems,
+  activeNavKey,
+  isModalOpen,
+  handleNavClick,
+  content
+}: MobileNavButtonProps) => {
+  const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
+  const isActive = activeNavKey === navKey && isModalOpen;
+
+  return (
+    <button
+      onClick={() => handleNavClick(navKey)}
+      className={`
+        w-full text-left text-[#4B5563] px-4 py-3 text-sm font-semibold
+        flex items-center justify-between
+        transition-colors duration-150
+        ${isActive ? 'bg-yellow-50 border-l-4 border-[#C9A84C] text-gray-900' : 'hover:bg-gray-50'}
+      `}
+    >
+      <span>{(content as any)[navItems[navKey].labelKey]?.value || (content as any)[navItems[navKey].labelKey]}</span>
+      {hasDropdown && (
+        <svg
+          className={`w-4 h-4 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
+          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      )}
+    </button>
+  );
+};
 
 export default Navbar

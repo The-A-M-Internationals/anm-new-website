@@ -7,46 +7,46 @@ const FeaturesList = () => {
     const features = [
         {
             number: '01',
-            title: content.feature1Title,
-            description: content.feature1Description
+            title: content.feature1Title.value,
+            description: content.feature1Description.value
         },
         {
             number: '02',
-            title: content.feature2Title,
-            description: content.feature2Description
+            title: content.feature2Title.value,
+            description: content.feature2Description.value
         },
         {
             number: '03',
-            title: content.feature3Title,
-            description: content.feature3Description
+            title: content.feature3Title.value,
+            description: content.feature3Description.value
         },
         {
             number: '04',
-            title: content.feature4Title,
-            description: content.feature4Description
+            title: content.feature4Title.value,
+            description: content.feature4Description.value
         },
         {
             number: '05',
-            title: content.feature5Title,
-            description: content.feature5Description
+            title: content.feature5Title.value,
+            description: content.feature5Description.value
         },
         {
             number: '06',
-            title: content.feature6Title,
-            description: content.feature6Description
+            title: content.feature6Title.value,
+            description: content.feature6Description.value
         }
     ];
 
     return (
-        <div className="bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div id="features" className="bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-[112px]">
             <div className="w-full mx-auto p-2 md:p-7">
                 {/* Header */}
                 <div className="mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-[#000000] mb-3">
-                        {content.titlePrefix} <span className="text-[#ab8d2b]">{content.titleHighlight}</span>
+                        {content.titlePrefix.value} <span className="text-[#ab8d2b]">{content.titleHighlight.value}</span>
                     </h2>
                     <p className="text-[#6B7280]">
-                        {content.subtitle}
+                        {content.subtitle.value}
                     </p>
                 </div>
 

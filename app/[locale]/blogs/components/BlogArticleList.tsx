@@ -35,14 +35,14 @@ const BlogArticleList = () => {
 
     // Define filters with fixed keys for matching and localized labels
     const filterOptions = [
-        { key: "All Post", label: content.filters.allPost },
-        { key: "EPM Strategy", label: content.filters.epmStrategy },
-        { key: "Cloud", label: content.filters.cloud },
-        { key: "Data Analytics", label: content.filters.dataAnalytics },
-        { key: "Cybersecurity", label: content.filters.cybersecurity },
-        { key: "AI & Machine Learning", label: content.filters.aiMl },
-        { key: "CSR", label: content.filters.csr },
-        { key: "Company News", label: content.filters.companyNews },
+        { key: "All Post", label: content.filters.allPost.value },
+        { key: "EPM Strategy", label: content.filters.epmStrategy.value },
+        { key: "Cloud", label: content.filters.cloud.value },
+        { key: "Data Analytics", label: content.filters.dataAnalytics.value },
+        { key: "Cybersecurity", label: content.filters.cybersecurity.value },
+        { key: "AI & Machine Learning", label: content.filters.aiMl.value },
+        { key: "CSR", label: content.filters.csr.value },
+        { key: "Company News", label: content.filters.companyNews.value },
     ];
 
     const [articles, setArticles] = useState<Article[]>([]);
@@ -230,7 +230,7 @@ const BlogArticleList = () => {
                 </div>
 
                 {loading ? (
-                    <p className="text-gray-500 text-center text-lg">{content.loading}</p>
+                    <p className="text-gray-500 text-center text-lg">{content.loading.value}</p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] lg:grid-cols-3 gap-8 md:gap-2 md:mx-auto">
 
@@ -299,17 +299,16 @@ const BlogArticleList = () => {
                                                 className="bg-[#D4AF37] text-black px-8 py-3 rounded-full font-medium w-full flex items-center justify-center gap-2 hover:scale-105 transition cursor-pointer text-center"
                                                 style={{ pointerEvents: article.externalLink ? 'auto' : 'none', opacity: article.externalLink ? 1 : 0.5 }}
                                             >
-                                                {content.readMoreButton}
-                                                <ArrowRight size={18} className="rtl:rotate-180" />
+                                                {content.readMoreButton.value}
+                                                <ArrowRight size={18} className={`${locale === 'ar' ? 'rotate-180' : ''}`} />
                                             </a>
                                         </div>
                                     </div>
                                 );
                             })}
-
                             {filteredArticles.length === 0 && (
                                 <div className="bg-white rounded-2xl p-12 text-center">
-                                    {content.emptyCategory}
+                                    {content.emptyCategory.value}
                                 </div>
                             )}
                         </div>
@@ -319,7 +318,7 @@ const BlogArticleList = () => {
                             <div className="sticky top-24">
                                 <div className="bg-white rounded-4xl p-8 shadow-xl border border-[#D9D9D9]">
                                     <h3 className="text-xl font-bold text-gray-900 mb-6">
-                                        {content.popularTags}
+                                        {content.popularTags.value}
                                     </h3>
 
                                     <div className="flex flex-wrap gap-3 cursor-pointer">

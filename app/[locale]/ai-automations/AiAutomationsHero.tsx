@@ -1,12 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef, useState } from "react";
+import { AppLocale } from "@/types/locale";
 
 const AIAutomationsHero = () => {
     const router = useRouter();
+    const { locale } = useLocale();
     const content = useIntlayer("aiAutomations");
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -51,6 +53,7 @@ const AIAutomationsHero = () => {
             }
 
             update() {
+                if (!canvas) return;
                 this.x += this.vx;
                 this.y += this.vy;
 
@@ -59,6 +62,7 @@ const AIAutomationsHero = () => {
             }
 
             draw() {
+                if (!ctx) return;
                 const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * 4);
                 gradient.addColorStop(0, this.color + 'CC');
                 gradient.addColorStop(1, this.color + '00');
@@ -192,10 +196,10 @@ const AIAutomationsHero = () => {
 
                 {/* Brain circuit pattern - Left Side */}
                 <div 
-                    className="absolute left-[8%] top-1/2 -translate-y-1/2 w-96 h-96 pointer-events-none opacity-40"
+                    className="absolute start-[8%] top-1/2 -translate-y-1/2 w-96 h-96 pointer-events-none opacity-40"
                     style={{ animation: 'ai-brain-pulse 4s ease-in-out infinite' }}
                 >
-                    <svg viewBox="0 0 200 200" className="w-full h-full">
+                    <svg viewBox="0 0 200 200" className="w-full h-full rtl:-scale-x-100">
                         {/* Brain outline */}
                         <path d="M 100 40 Q 140 40 160 70 Q 170 90 165 110 Q 160 130 150 145 Q 130 165 100 160 Q 70 165 50 145 Q 40 130 35 110 Q 30 90 40 70 Q 60 40 100 40" 
                             fill="none" 
@@ -242,7 +246,7 @@ const AIAutomationsHero = () => {
 
                 {/* Morphing AI orb - Right Side */}
                 <div 
-                    className="absolute right-[10%] top-[30%] w-80 h-80 pointer-events-none opacity-35"
+                    className="absolute end-[10%] top-[30%] w-80 h-80 pointer-events-none opacity-35"
                     style={{
                         background: 'radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(155, 121, 224, 0.2) 40%, transparent 70%)',
                         filter: 'blur(50px)',
@@ -251,21 +255,21 @@ const AIAutomationsHero = () => {
                 />
 
                 {/* Data stream visualizations - Right */}
-                <div className="absolute right-0 top-1/4 w-[500px] h-2 pointer-events-none overflow-hidden opacity-40">
+                <div className="absolute end-0 top-1/4 w-[500px] h-2 pointer-events-none overflow-hidden opacity-40">
                     <div className="absolute inset-0 bg-gradient-to-l from-[#1E40AF]/60 via-[#2563EB]/80 to-transparent" />
                     <div 
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/70 to-transparent w-40"
                         style={{ animation: 'ai-data-flow 3s ease-in-out infinite' }}
                     />
                 </div>
-                <div className="absolute right-0 top-1/2 w-[450px] h-2 pointer-events-none overflow-hidden opacity-35">
+                <div className="absolute end-0 top-1/2 w-[450px] h-2 pointer-events-none overflow-hidden opacity-35">
                     <div className="absolute inset-0 bg-gradient-to-l from-[#3B82F6]/50 via-[#1E40AF]/70 to-transparent" />
                     <div 
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent w-40"
                         style={{ animation: 'ai-data-flow 4s ease-in-out infinite 1s' }}
                     />
                 </div>
-                <div className="absolute right-0 top-2/3 w-[480px] h-2 pointer-events-none overflow-hidden opacity-38">
+                <div className="absolute end-0 top-2/3 w-[480px] h-2 pointer-events-none overflow-hidden opacity-38">
                     <div className="absolute inset-0 bg-gradient-to-l from-[#2563EB]/55 via-[#3B82F6]/75 to-transparent" />
                     <div 
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/65 to-transparent w-40"
@@ -274,7 +278,7 @@ const AIAutomationsHero = () => {
                 </div>
 
                 {/* Pulsing AI core rings - Bottom Left */}
-                <div className="absolute bottom-[20%] left-[15%] w-64 h-64 pointer-events-none">
+                <div className="absolute bottom-[20%] start-[15%] w-64 h-64 pointer-events-none">
                     {[0, 1, 2, 3].map((i) => (
                         <div
                             key={`ring-${i}`}
@@ -311,12 +315,12 @@ const AIAutomationsHero = () => {
                             <div className="absolute inset-0 rounded-full bg-[#1E40AF]" />
                             <div className="absolute inset-0 rounded-full bg-[#1E40AF] animate-ping" />
                         </div>
-                        <span className="relative text-[#93C5FD] text-sm font-semibold tracking-wide">Powered by Artificial Intelligence</span>
+                        <span className="relative text-[#93C5FD] text-sm font-semibold tracking-wide">{content.heroBadge.value}</span>
                     </div>
 
                     {/* Main heading */}
-                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "Lora, Georgia, serif" }}>
-                        Intelligent Automation
+                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "var(--heading-font)" }}>
+                        {content.heroTitle.value}
                         <br />
                         <span className="relative inline-block mt-4">
                             <span 
@@ -326,7 +330,7 @@ const AIAutomationsHero = () => {
                                     animation: 'gradient-flow 5s ease infinite',
                                 }}
                             >
-                                Elevated by AI
+                                {content.heroSubtitle.value}
                             </span>
                             <div className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1E40AF] to-transparent overflow-hidden">
                                 <div 
@@ -339,7 +343,7 @@ const AIAutomationsHero = () => {
 
                     {/* Description */}
                     <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-14 leading-relaxed font-light">
-                        Transform your business with cutting-edge AI and machine learning solutions. Automate workflows, enhance decision-making, and unlock unprecedented efficiency.
+                        {content.heroDescription.value}
                     </p>
 
                     {/* CTA Buttons */}
@@ -357,27 +361,26 @@ const AIAutomationsHero = () => {
                                 style={{ animation: 'shimmer 3s ease-in-out infinite' }}
                             />
                             <span className="relative z-10 flex items-center gap-3">
-                                Explore AI Solutions
-                                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {content.exploreServices.value}
+                                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
                             </span>
                         </button>
                         <button
-                            onClick={() => router.push(getLocalizedPath("en", "/contact"))}
+                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
                             className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#1E40AF]/50 hover:-translate-y-1"
-                        >
-                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                            <span className="relative z-10">Schedule Consultation</span>
+                        >                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                            <span className="relative z-10">{content.bookConsultation.value}</span>
                         </button>
                     </div>
 
                     {/* Stats */}
                     <div className="grid grid-cols-3 gap-12 max-w-4xl mx-auto">
                         {[
-                            { value: "85%", label: "Efficiency Increase" },
-                            { value: "10x", label: "Faster Processing" },
-                            { value: "24/7", label: "Automated Operations" },
+                            { value: content.stat1Value.value, label: content.stat1Label.value },
+                            { value: content.stat2Value.value, label: content.stat2Label.value },
+                            { value: content.stat3Value.value, label: content.stat3Label.value },
                         ].map((stat, i) => (
                             <div 
                                 key={`stat-${i}`}
@@ -398,7 +401,7 @@ const AIAutomationsHero = () => {
                 {/* Scroll indicator */}
                 <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
                     <div className="flex flex-col items-center gap-3 animate-bounce">
-                        <span className="text-[#1E40AF]/50 text-xs uppercase tracking-widest font-light">Scroll</span>
+                        <span className="text-[#1E40AF]/50 text-xs uppercase tracking-widest font-light">{content.scroll.value}</span>
                         <div className="w-px h-12 bg-gradient-to-b from-[#1E40AF]/50 to-transparent" />
                     </div>
                 </div>

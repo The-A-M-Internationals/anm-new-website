@@ -5,8 +5,8 @@ import DrivingImpactDashboard from "./components/DrivingImpactDashboard";
 import Event from "./components/Event";
 
 export const metadata: Metadata = {
-    title: "Impacts | A&M International",
-    description: "Discover the impactful initiatives of A&M International, showcasing our commitment to driving positive change in the global market.",
+    title: "Impacts | The A&M internationals",
+    description: "Discover the impactful initiatives of The A&M internationals, showcasing our commitment to driving positive change in the global market.",
 }
 
 export default function ImpactsPage() {

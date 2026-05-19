@@ -70,22 +70,16 @@ const SuccessStories: React.FC = () => {
   ];
 
   const [activeTab, setActiveTab] = useState('all');
-  const [poppedId, setPoppedId] = useState<string | null>(null);
 
   const filteredStudies = activeTab === 'all'
     ? caseStudies
     : caseStudies.filter(study => study.industryKey === activeTab);
 
-  const handlePop = (id: string) => {
-    setPoppedId(id);
-    setTimeout(() => setPoppedId(null), 2000);
-  };
-
   return (
-    <div className="min-h-screen py-0 px-0">
-      <div className="w-full lg:w-[1400px] mx-auto">
+    <div className="min-h-screen py-10">
+      <div className="w-[92%] max-w-[1400px] mx-auto">
         {/* Tabs */}
-        <div className="flex border border-[#F6F6F6] w-[95%] md:w-fit mx-auto rounded-3xl md:rounded-full shadow-sm p-2 flex-wrap justify-center gap-2 mb-12">
+        <div className="flex border border-[#F6F6F6] w-fit mx-auto rounded-3xl md:rounded-full shadow-sm p-2 flex-wrap justify-center gap-2 mb-12">
           {tabs.map((tab) => (
             <button
               key={tab.key}
@@ -101,14 +95,15 @@ const SuccessStories: React.FC = () => {
         </div>
 
         {/* Case Studies */}
-        <div className="space-y-8 w-[95%] mx-auto">
+        <div className="space-y-12 w-full">
           {filteredStudies.map((study) => (
             <div
               key={study.id}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-[95%] md:w-full mx-auto border border-gray-200 shadow-md rounded-[40px] p-4"
+              id={study.id}
+              className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full border border-gray-200 shadow-md rounded-[40px] p-4 md:p-6"
             >
               {/* Image Card */}
-              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[520px] md:min-h-[570px]">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[520px] md:min-h-[570px] lg:min-h-0">
                 <img
                   src={study.image}
                   alt={study.companyName}
@@ -134,7 +129,7 @@ const SuccessStories: React.FC = () => {
               </div>
 
               {/* Content Card */}
-              <div className="lg:col-span-2 relative p-4 flex flex-col justify-center">
+              <div className="lg:col-span-2 relative p-2 md:p-4 flex flex-col justify-center">
                 <div className="space-y-6">
                   <div>
                     <p className="text-gray-600 text-sm md:text-[18px] leading-relaxed">
@@ -156,8 +151,18 @@ const SuccessStories: React.FC = () => {
                       {study.p4}
                     </p>
                   </div>
-                  <div className="font-semibold text-sm md:text-base text-gray-900 hover:text-[#C9A84C] transition-colors cursor-pointer mt-4">
-                    <a href="mailto:am@theaminternational.com">{study.link}</a>
+                  <div className="text-sm md:text-base text-gray-900 hover:text-[#C9A84C] transition-colors cursor-pointer mt-4">
+                    <a href="mailto:am@theaminternational.com">
+                      <span className="font-semibold">
+                        {study.link.split(/->|<-|→|←/)[0].trimEnd()}
+                      </span>
+                      <span className="font-normal mx-2">
+                        {study.link.match(/->|<-|→|←/)?.[0]}
+                      </span>
+                      <span className="font-normal">
+                        {study.link.includes('am@theaminternational.com') && 'am@theaminternational.com'}
+                      </span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -165,14 +170,16 @@ const SuccessStories: React.FC = () => {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="bg-white w-[95%] md:w-full mx-auto my-12 border border-gray-200 rounded-[40px] p-8 md:p-12 shadow-sm text-center">
+        <div className="bg-white w-[95%] md:w-full mx-auto mt-16 mb-12 border border-gray-200 rounded-[40px] p-8 md:p-12 shadow-sm text-center">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-[#C9A84C]">{content.cta.title.value}</h2>
           <p className="text-gray-600 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
             {content.cta.description.value}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-[#C9A84C] text-black font-semibold cursor-pointer px-8 py-3 rounded-full hover:scale-105 transition-all w-full sm:w-auto">
+            <button 
+              onClick={() => router.push(`/${locale}/features#epm-suites`)}
+              className="bg-[#C9A84C] text-black font-semibold cursor-pointer px-8 py-3 rounded-full hover:scale-105 transition-all w-full sm:w-auto"
+            >
               {content.cta.seeEpm.value}
             </button>
             <button onClick={() => router.push(`/${locale}/contact#form`)} className="bg-black text-white font-semibold cursor-pointer px-8 py-3 rounded-full hover:scale-105 transition-all w-full sm:w-auto">

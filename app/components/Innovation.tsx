@@ -9,7 +9,7 @@ const Innovation = () => {
     const content = useIntlayer("innovation");
     const { locale } = useLocale();
     return (
-        <div className={`${path === '/events' || path === '/success-stories' ? 'hidden' : ''} relative bg-gradient-to-br bg-[#0F1E4D] min-h-[200px] overflow-hidden py-12 md:py-20 lg:py-24`}>
+        <div className={`${path === '/events' || path === '/success-stories' ? 'hidden' : ''} relative bg-gradient-to-br bg-[#0F1E4D] min-h-[200px] overflow-hidden py-12 sm:py-16 md:py-20`}>
             {/* Left decorative icon */}
             <div className="absolute -top-3 -start-4 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
                 <Image
@@ -21,12 +21,12 @@ const Innovation = () => {
             </div>
 
             {/* Main content */}
-            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-bold text-white mb-4 sm:mb-6">
+            <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
                     {content.heading.value}
                 </h1>
 
-                <p className="text-sm sm:text-base md:text-lg lg:text-[16px] text-white font-semibold mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto">
+                <p className="text-xs sm:text-sm md:text-base text-white font-semibold mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto">
                     {content.description.value}
                 </p>
 

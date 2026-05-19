@@ -78,11 +78,11 @@ export default function JobApplyPage() {
         const file = e.target.files?.[0];
         if (file) {
             if (file.type !== 'application/pdf') {
-                setFormError(content.formErrorPdf);
+                setFormError(content.formErrorPdf.value);
                 return;
             }
             if (file.size > 5 * 1024 * 1024) { // 5MB limit
-                setFormError(content.formErrorSize);
+                setFormError(content.formErrorSize.value);
                 return;
             }
             setForm({ ...form, resumeFile: file });
@@ -112,7 +112,7 @@ export default function JobApplyPage() {
         e.preventDefault();
 
         if (!form.name || !form.email || !form.phone || !form.resumeFile) {
-            setFormError(content.formErrorRequired);
+            setFormError(content.formErrorRequired.value);
             return;
         }
 
@@ -133,21 +133,21 @@ export default function JobApplyPage() {
                 submittedAt: new Date().toISOString(),
             });
 
-            setSuccess(content.success);
+            setSuccess(content.success.value);
             setForm({ name: '', email: '', phone: '', experience: '', resumeFile: null });
         } catch {
-            setFormError(content.formErrorSubmit);
+            setFormError(content.formErrorSubmit.value);
         } finally {
             setSubmitting(false);
         }
     };
 
     if (loading) {
-        return <div className="min-h-screen flex items-center justify-center">{content.loading}</div>;
+        return <div className="min-h-screen flex items-center justify-center">{content.loading.value}</div>;
     }
 
     if (error || !job) {
-        const errMsg = error === 'Job not found' ? content.notFound : error === 'Failed to load job' ? content.loadError : error;
+        const errMsg = error === 'Job not found' ? content.notFound.value : error === 'Failed to load job' ? content.loadError.value : error;
         return <div className="min-h-screen flex items-center justify-center text-red-600">{errMsg}</div>;
     }
 
@@ -163,17 +163,17 @@ export default function JobApplyPage() {
             <div className="w-full max-w-6xl bg-white rounded-3xl shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden">
 
                 {/* LEFT — SCROLLABLE JOB DETAILS */}
-                <div className="p-6 md:p-8 bg-[#FFFBED] max-h-[80vh] overflow-y-auto">
+                <div className="p-6 md:p-8 bg-[#FFFBED] max-h-[80vh] overflow-y-auto text-left rtl:text-right">
                     <h1 className="text-2xl md:text-3xl font-bold mb-3">{title}</h1>
 
                     <div className="text-sm text-gray-600 flex flex-wrap gap-3 mb-4">
-                        {department && <span>{content.deptLabel}: <span className='font-bold'>{department}</span></span>}
-                        {location && <span>{content.locationLabel}: <span className='font-bold'>{location}</span></span>}
-                        {type && <span>{content.typeLabel}: <span className='font-bold'>{type}</span></span>}
+                        {department && <span>{content.deptLabel.value}: <span className='font-bold'>{department}</span></span>}
+                        {location && <span>{content.locationLabel.value}: <span className='font-bold'>{location}</span></span>}
+                        {type && <span>{content.typeLabel.value}: <span className='font-bold'>{type}</span></span>}
                     </div>
 
                     <div className="prose max-w-none text-gray-800">
-                        <h2 className="text-lg font-semibold mb-2">{content.jobDescriptionTitle}</h2>
+                        <h2 className="text-lg font-semibold mb-2">{content.jobDescriptionTitle.value}</h2>
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {description || ""}
                         </ReactMarkdown>
@@ -181,8 +181,8 @@ export default function JobApplyPage() {
                 </div>
 
                 {/* RIGHT — FIXED FORM */}
-                <div className="p-6 md:p-8 flex flex-col">
-                    <h2 className="text-xl font-semibold mb-4 text-center">{content.applyTitle}</h2>
+                <div className="p-6 md:p-8 flex flex-col text-left rtl:text-right">
+                    <h2 className="text-xl font-semibold mb-4 text-center">{content.applyTitle.value}</h2>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                         <input
@@ -190,7 +190,7 @@ export default function JobApplyPage() {
                             placeholder={`${content.nameLabel.value}*`}
                             value={form.name}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2"
+                            className="border rounded px-3 py-2 rtl:text-right"
                         />
 
                         <input
@@ -199,7 +199,7 @@ export default function JobApplyPage() {
                             placeholder={`${content.emailLabel.value}*`}
                             value={form.email}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2"
+                            className="border rounded px-3 py-2 rtl:text-right"
                         />
 
                         <input
@@ -207,7 +207,7 @@ export default function JobApplyPage() {
                             placeholder={`${content.phoneLabel.value}*`}
                             value={form.phone}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2"
+                            className="border rounded px-3 py-2 rtl:text-right"
                         />
 
                         <textarea
@@ -215,11 +215,11 @@ export default function JobApplyPage() {
                             placeholder={content.experienceLabel.value}
                             value={form.experience}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 min-h-24"
+                            className="border rounded px-3 py-2 min-h-24 rtl:text-right"
                         />
 
                         <div className="border rounded px-3 py-2">
-                            <label className="block text-sm text-gray-600 mb-1">{content.resumeLabel}</label>
+                            <label className="block text-sm text-gray-600 mb-1">{content.resumeLabel.value}</label>
                             <input
                                 type="file"
                                 accept=".pdf"
@@ -239,7 +239,7 @@ export default function JobApplyPage() {
                             disabled={submitting}
                             className="bg-[#D4AF37] text-black px-4 py-2 rounded-full font-semibold hover:scale-105 transition disabled:opacity-60"
                         >
-                            {submitting ? content.submitting : content.submitButton}
+                            {submitting ? content.submitting.value : content.submitButton.value}
                         </button>
                     </form>
                 </div>
