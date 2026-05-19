@@ -4,13 +4,13 @@ const careersContent = {
   key: "careersPage",
   content: {
     heroTitle: t({
-      en: "Join a Team That Builds the Future with",
-      ar: "انضم إلى فريق يبني المستقبل بـ",
+      en: "Join a Team That Builds the Future",
+      ar: "انضم إلى فريق يبني المستقبل",
     }),
 
     heroTitle2: t({
-      en: "Purpose and Innovation",
-      ar: "هدف وابتكار",
+      en: "with Purpose and Innovation",
+      ar: "بـ هدف وابتكار",
     }),
 
     heroDescription: t({

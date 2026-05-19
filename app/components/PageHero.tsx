@@ -102,12 +102,12 @@ const PageHero: React.FC<PageHeroProps> = ({
                   </h4>
                )}
 
-               <h3 className={`font-bold text-white leading-[1.2] w-[80%] md:w-[75%] ${titleClassName || 'text-[24px] md:text-[32px] lg:text-[48px]'}`}>
+               <h3 className={`font-bold text-white leading-[1.2] ${titleClassName || 'w-[80%] md:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
                   {title}
                </h3>
 
                {title2 && (
-                  <h3 className={`font-bold text-white leading-[1.2] w-[80%] md:w-[75%] ${titleClassName || 'text-[24px] md:text-[32px] lg:text-[48px]'}`}>
+                  <h3 className={`font-bold text-white leading-[1.2] ${titleClassName || 'w-[80%] md:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
                      {title2}
                   </h3>
                )}

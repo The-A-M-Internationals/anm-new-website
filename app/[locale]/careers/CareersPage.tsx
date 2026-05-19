@@ -30,6 +30,7 @@ export default function CareersPage() {
                 <PageHero
                     title={content.heroTitle.value}
                     title2={content.heroTitle2.value}
+                    titleClassName="w-full text-[24px] md:text-[32px] lg:text-[48px]"
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
                     link={`/${locale}/careers#open-positions`}
