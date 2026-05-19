@@ -32,14 +32,6 @@ export const navbarContent = {
       en: "Finance Transformation",
       ar: "التحول المالي",
     }),
-    digitalTransformation: t({
-      en: "Digital Transformation",
-      ar: "التحول الرقمي",
-    }),
-    aiAutomations: t({
-      en: "AI Automations",
-      ar: "أتمتة الذكاء الاصطناعي",
-    }),
     managedServices: t({ en: "Managed Services", ar: "الخدمات المدارة" }),
     about: t({ en: "About", ar: "حول" }),
     mission: t({ en: "Mission", ar: "مهمة" }),

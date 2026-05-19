@@ -38,7 +38,7 @@ const SuccessStory = () => {
       title: content.items[index]?.title.value ?? '',
       description: content.items[index]?.description.value ?? '',
       industry: content.items[index]?.industry.value ?? '',
-      badge: content.items[index]?.badge.value,
+      badge: content.items[index]?.badge?.value,
     }));
   }, [imageSource, content.items]);
 
@@ -68,7 +68,7 @@ const SuccessStory = () => {
   }, [isTab, totalPages]);
 
   return (
-    <div className='flex flex-col items-center justify-center px-4 py-8'>
+    <div className='flex flex-col items-center justify-center px-4 py-12 md:py-20 lg:py-24'>
       {/* Heading */}
       <h3 className="text-[#000000] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold text-center">
         <span className="text-[#ab8d2b]">

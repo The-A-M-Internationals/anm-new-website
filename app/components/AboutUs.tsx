@@ -21,7 +21,7 @@ const AboutUs = () => {
         gap-8 md:gap-12 lg:gap-18
         items-center justify-center
         px-4 md:px-6 lg:px-8
-        py-2 md:py-12
+        py-12 md:py-20 lg:py-24
         overflow-hidden
         bg-[linear-gradient(105.23deg,#FFFFFF_0%,#FFFBED_126.38%)]
       "

@@ -122,15 +122,15 @@ const Events = () => {
     );
 
     if (loading) {
-        return <div className="w-full flex justify-center py-10">Loading events...</div>;
+        return <div className="w-full flex justify-center py-10">{content.loading?.value || "Loading..."}</div>;
     }
 
     if (error) {
-        return <div className="w-full flex justify-center py-10 text-red-500">{error}</div>;
+        return <div className="w-full flex justify-center py-10 text-red-500">{content.error?.value || "An error occurred while loading events."}</div>;
     }
 
     return (
-        <div className="bg-gradient-to-r from-[#EED689]/10 to-white py-8 sm:py-10 md:py-0">
+        <div className="bg-gradient-to-r from-[#EED689]/10 to-white py-12 md:py-20 lg:py-24">
             <div className="max-w-7xl mx-auto w-full">
                 {/* HEADER */}
                 <h2 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[48px] text-center">

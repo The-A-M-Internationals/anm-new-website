@@ -170,8 +170,7 @@ const SuccessStories: React.FC = () => {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="bg-white w-full mt-16 mb-12 border border-gray-200 rounded-[40px] p-8 md:p-12 shadow-sm text-center">
+        <div className="bg-white w-[95%] md:w-full mx-auto mt-16 mb-12 border border-gray-200 rounded-[40px] p-8 md:p-12 shadow-sm text-center">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-[#C9A84C]">{content.cta.title.value}</h2>
           <p className="text-gray-600 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
             {content.cta.description.value}

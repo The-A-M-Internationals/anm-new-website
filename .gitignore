@@ -16,6 +16,8 @@
 # misc
 .DS_Store
 *.pem
+screenshots
+anm-website-legacy
 
 # debug
 npm-debug.log*
@@ -30,10 +32,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+tsconfig.tsbuildinfo
+next-env.d.ts
 
 # intlayer
 .intlayer/
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts

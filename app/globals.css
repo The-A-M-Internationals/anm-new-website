@@ -65,6 +65,27 @@ html, body {
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 112px;
+    height: 100%;
+}
+
+@media (max-width: 1024px) {
+    html {
+        scroll-padding-top: 64px;
+    }
+}
+
+body {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
 }
 
 .font-sf {

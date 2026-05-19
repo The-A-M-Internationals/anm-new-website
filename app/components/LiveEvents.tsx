@@ -24,9 +24,9 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
     timeRange,
     imageSrc,
 }) => {
+    const content = useIntlayer("events");
     const router = useRouter();
     const { locale } = useLocale();
-    const content = useIntlayer("events");
 
     return (
         <div className="flex flex-col items-center mb-4 gap-2 px-4">
