@@ -382,7 +382,10 @@ const DigitalMarketingHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center sm:items-stretch mb-20 px-4">
                         <button
-                            onClick={() => router.push(`/${locale}/features#features`)}
+                            onClick={() => {
+                                const servicesSection = document.getElementById('digital-marketing-services');
+                                servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                            }}
                             className="group relative w-full sm:w-auto px-12 py-5 bg-[#C9A84C] text-[#0C1F4A] rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#C9A84C]/40 hover:-translate-y-1 flex justify-center"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
