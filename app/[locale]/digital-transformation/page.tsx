@@ -1,10 +1,23 @@
 import type { Metadata } from 'next';
 import DigitalMarketingHero from "./DigitalMarketingHero";
 import DigitalMarketingServices from "./DigitalMarketingServices";
+import Events from "../../components/Events";
+import Innovation from "../../components/Innovation";
+import { t } from "intlayer";
 
-export const metadata: Metadata = {
-    title: "Digital Marketing & Growth Services | The A&M Internationals",
-    description: "Elevate your brand with data-driven marketing strategies including video production, social media management, branding, web development, and photography.",
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    
+    return {
+        title: (t({
+            en: "Digital Transformation | The A&M internationals",
+            ar: "التحول الرقمي | A&M الدولية",
+        }) as any)[locale],
+        description: (t({
+            en: "Cloud migration, ERP implementation, and data modernisation that transforms how your business operates and competes globally.",
+            ar: "ترحيل السحابة وتحديث تخطيط موارد المؤسسات وتحديث البيانات الذي يحول طريقة عمل عملك ومنافسته عالميًا.",
+        }) as any)[locale],
+    };
 }
 
 export default function DigitalMarketingPage() {
@@ -12,6 +25,8 @@ export default function DigitalMarketingPage() {
         <div>
             <DigitalMarketingHero />
             <DigitalMarketingServices />
+            <Events />
+            <Innovation />
         </div>
     );
 }

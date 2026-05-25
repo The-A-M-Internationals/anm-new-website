@@ -8,28 +8,28 @@ const EmpoweringSection = () => {
     const values = [
         {
             icon: "/business/excellence.svg",
-            title: content.value1Title,
-            description: content.value1Description
+            title: content.value1Title.value,
+            description: content.value1Description.value
         },
         {
             icon: "/business/impact.svg",
-            title: content.value2Title,
-            description: content.value2Description
+            title: content.value2Title.value,
+            description: content.value2Description.value
         },
         {
             icon: "/business/partnership.svg",
-            title: content.value3Title,
-            description: content.value3Description
+            title: content.value3Title.value,
+            description: content.value3Description.value
         },
         {
             icon: "/business/innovation.svg",
-            title: content.value4Title,
-            description: content.value4Description
+            title: content.value4Title.value,
+            description: content.value4Description.value
         }
     ];
 
     return (
-        <section id="mission" className="bg-white py-20 px-6 md:px-12 lg:px-20 lg:mt-15">
+        <section id="mission" className="bg-white py-12 md:py-20 lg:py-24 px-6 md:px-12 lg:px-20">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-8">
 
                 {/* TOP: Title + Description */}
@@ -37,12 +37,12 @@ const EmpoweringSection = () => {
 
                     {/* Title */}
                     <h2 className="lg:max-w-[900px] text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 leading-tight flex-1">
-                        {content.title}
+                        {content.title.value}
                     </h2>
 
                     {/* Description */}
                     <p className="text-gray-600 text-lg lg:text-[20px] leading-relaxed lg:max-w-[510px] lg:-translate-y-8 lg:mt-15">
-                        {content.description}
+                        {content.description.value}
                     </p>
                 </div>
 

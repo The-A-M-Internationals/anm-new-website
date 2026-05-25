@@ -9,7 +9,7 @@ const WhyChooseUs = () => {
 
     return (
         <div
-            className="relative py-20 px-4 overflow-hidden bg-[#0F1E4D]"
+            className="relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden bg-[#0F1E4D]"
             style={{
                 backgroundImage: "url('/whychooseus.svg')",
                 backgroundRepeat: "no-repeat",
@@ -22,13 +22,13 @@ const WhyChooseUs = () => {
                 {/* LEFT TITLE */}
                 <div className={`flex items-center justify-center text-center lg:text-left lg:w-1/2 ${isArabic ? "lg:mr-12" : ""}`}>
                     <p className="text-4xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight">
-                        {content.titleLine1} <br /> {content.titleLine2}
+                        {content.titleLine1.value} <br /> {content.titleLine2.value}
                     </p>
                 </div>
 
                 {/* RIGHT-SIDE CARDS */}
                 <div className={`flex flex-col gap-6 w-full lg:translate-x-25 lg:w-1/2 items-center lg:items-start ${isArabic ? "lg:ml-12" : ""}`}>
-                    {content.features.map((feature: any, index: number) => (
+                    {content.features.map((feature: { title: { value: string }; description: { value: string }; highlight: boolean }, index: number) => (
                         <div
                             key={index}
                             className={`
@@ -39,10 +39,10 @@ const WhyChooseUs = () => {
                             `}
                         >
                             <p className="text-2xl md:text-[30px] text-black mb-1">
-                                {feature.title}
+                                {feature.title.value}
                             </p>
                             <p className="text-black text-[18px]">
-                                {feature.description}
+                                {feature.description.value}
                             </p>
                         </div>
                     ))}

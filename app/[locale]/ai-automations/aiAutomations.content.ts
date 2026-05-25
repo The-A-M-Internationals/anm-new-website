@@ -24,6 +24,18 @@ const aiAutomationsContent = {
             en: "Schedule Consultation",
             ar: "حدد موعد استشارة",
         }),
+        heroBadge: t({
+            en: "Powered by Artificial Intelligence",
+            ar: "مدعوم بالذكاء الاصطناعي",
+        }),
+        stat1Value: t({ en: "85%", ar: "٨٥٪" }),
+        stat1Label: t({ en: "Efficiency Increase", ar: "زيادة الكفاءة" }),
+        stat2Value: t({ en: "10x", ar: "١٠ أضعاف" }),
+        stat2Label: t({ en: "Faster Processing", ar: "معالجة أسرع" }),
+        stat3Value: t({ en: "24/7", ar: "٢٤/٧" }),
+        stat3Label: t({ en: "Automated Operations", ar: "عمليات مؤتمتة" }),
+        scroll: t({ en: "Scroll", ar: "تمرير" }),
+        learnMore: t({ en: "Learn More", ar: "اعرف المزيد" }),
 
         // Services Section
         servicesTitle: t({

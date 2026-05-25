@@ -24,10 +24,10 @@ const EventsPage = () => {
     return (
         <div className="flex flex-col gap-8">
             <PageHero
-                title={content.heroTitle}
+                title={content.heroTitle.value}
                 title2=""
-                description={content.heroDescription}
-                button={content.heroButton}
+                description={content.heroDescription.value}
+                button={content.heroButton.value}
                 link={`/${locale}/contact#form`}
                 image={heroImage}
                 image2={heroImageMobile}

@@ -5,16 +5,16 @@ export const digitalMarketingServicesContent = {
   content: {
     // Hero section
     heroTitle: t({
-      en: "Digital Marketing",
-      ar: "التسويق الرقمي",
+      en: "Digital Transformation",
+      ar: "التحول الرقمي",
     }),
     heroSubtitle: t({
-      en: "& Growth Services",
-      ar: "وخدمات النمو",
+      en: "& Innovation Services",
+      ar: "وخدمات الابتكار",
     }),
     heroDescription: t({
-      en: "Elevate your brand with data-driven marketing strategies that deliver measurable results across every digital channel.",
-      ar: "ارتقِ بعلامتك التجارية من خلال استراتيجيات تسويق مبنية على البيانات تحقق نتائج قابلة للقياس عبر كل قناة رقمية.",
+      en: "Empower your business with cutting-edge digital transformation strategies that drive efficiency and growth in the modern era.",
+      ar: "مكن عملك باستراتيجيات التحول الرقمي المتطورة التي تعزز الكفاءة والنمو في العصر الحديث.",
     }),
     exploreServices: t({
       en: "Explore Services",
@@ -24,19 +24,31 @@ export const digitalMarketingServicesContent = {
       en: "Book a Consultation",
       ar: "احجز استشارة",
     }),
+    heroBadge: t({
+      en: "Powered by Innovation",
+      ar: "مدعوم بالابتكار",
+    }),
+    stat1Value: t({ en: "200%", ar: "٢٠٠٪" }),
+    stat1Label: t({ en: "Business Efficiency", ar: "كفاءة الأعمال" }),
+    stat2Value: t({ en: "98%", ar: "٩٨٪" }),
+    stat2Label: t({ en: "Client Satisfaction", ar: "رضا العملاء" }),
+    stat3Value: t({ en: "300%", ar: "٣٠٠٪" }),
+    stat3Label: t({ en: "Digital Adoption", ar: "التبني الرقمي" }),
+    scroll: t({ en: "Scroll", ar: "تمرير" }),
+    expertiseBadge: t({ en: "Our Expertise", ar: "خبراتنا" }),
 
     // Services section heading
     servicesTitle: t({
-      en: "Our Digital Marketing",
-      ar: "خدمات التسويق الرقمي",
+      en: "Our Digital Transformation",
+      ar: "خدمات التحول الرقمي",
     }),
     servicesTitleHighlight: t({
-      en: "Services",
+      en: "Expertise",
       ar: "لدينا",
     }),
     servicesSubtitle: t({
-      en: "Comprehensive digital solutions spanning content creation, social engagement, brand identity, web development, and visual storytelling.",
-      ar: "حلول رقمية شاملة تشمل إنشاء المحتوى والتفاعل الاجتماعي وهوية العلامة التجارية وتطوير الويب ورواية القصص المرئية.",
+      en: "Comprehensive digital solutions spanning strategy, implementation, and optimization to future-proof your organization.",
+      ar: "حلول رقمية شاملة تشمل الاستراتيجية والتنفيذ والتحسين لضمان مستقبل مؤسستك.",
     }),
 
     // Video Production

@@ -1,12 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import { useState } from "react";
+import { AppLocale } from "@/types/locale";
 
 const DigitalMarketingServices = () => {
     const router = useRouter();
+    const { locale } = useLocale();
     const content = useIntlayer("digitalMarketingServices");
     const [activeCard, setActiveCard] = useState<number | null>(null);
 
@@ -21,13 +24,13 @@ const DigitalMarketingServices = () => {
     const services = [
         {
             id: 1,
-            title: content.videoProductionTitle,
-            description: content.videoProductionDescription,
+            title: content.videoProductionTitle.value,
+            description: content.videoProductionDescription.value,
             services: [
-                content.videoProductionService1,
-                content.videoProductionService2,
-                content.videoProductionService3,
-                content.videoProductionService4,
+                content.videoProductionService1.value,
+                content.videoProductionService2.value,
+                content.videoProductionService3.value,
+                content.videoProductionService4.value,
             ],
             gradient: "from-pink-500/20 via-rose-500/20 to-red-500/20",
             accentColor: "#FF6B9D",
@@ -40,13 +43,13 @@ const DigitalMarketingServices = () => {
         },
         {
             id: 2,
-            title: content.socialMediaTitle,
-            description: content.socialMediaDescription,
+            title: content.socialMediaTitle.value,
+            description: content.socialMediaDescription.value,
             services: [
-                content.socialMediaService1,
-                content.socialMediaService2,
-                content.socialMediaService3,
-                content.socialMediaService4,
+                content.socialMediaService1.value,
+                content.socialMediaService2.value,
+                content.socialMediaService3.value,
+                content.socialMediaService4.value,
             ],
             gradient: "from-indigo-500/20 via-purple-500/20 to-pink-500/20",
             accentColor: "#4F46E5",
@@ -66,13 +69,13 @@ const DigitalMarketingServices = () => {
         },
         {
             id: 3,
-            title: content.brandingTitle,
-            description: content.brandingDescription,
+            title: content.brandingTitle.value,
+            description: content.brandingDescription.value,
             services: [
-                content.brandingService1,
-                content.brandingService2,
-                content.brandingService3,
-                content.brandingService4,
+                content.brandingService1.value,
+                content.brandingService2.value,
+                content.brandingService3.value,
+                content.brandingService4.value,
             ],
             gradient: "from-amber-500/20 via-yellow-500/20 to-orange-500/20",
             accentColor: "#C9A84C",
@@ -84,13 +87,13 @@ const DigitalMarketingServices = () => {
         },
         {
             id: 4,
-            title: content.webDesignTitle,
-            description: content.webDesignDescription,
+            title: content.webDesignTitle.value,
+            description: content.webDesignDescription.value,
             services: [
-                content.webDesignService1,
-                content.webDesignService2,
-                content.webDesignService3,
-                content.webDesignService4,
+                content.webDesignService1.value,
+                content.webDesignService2.value,
+                content.webDesignService3.value,
+                content.webDesignService4.value,
             ],
             gradient: "from-emerald-500/20 via-teal-500/20 to-cyan-500/20",
             accentColor: "#10B981",
@@ -105,13 +108,13 @@ const DigitalMarketingServices = () => {
         },
         {
             id: 5,
-            title: content.photographyTitle,
-            description: content.photographyDescription,
+            title: content.photographyTitle.value,
+            description: content.photographyDescription.value,
             services: [
-                content.photographyService1,
-                content.photographyService2,
-                content.photographyService3,
-                content.photographyService4,
+                content.photographyService1.value,
+                content.photographyService2.value,
+                content.photographyService3.value,
+                content.photographyService4.value,
             ],
             gradient: "from-orange-500/20 via-amber-500/20 to-yellow-500/20",
             accentColor: "#FB923C",
@@ -166,8 +169,8 @@ const DigitalMarketingServices = () => {
                 </div>
 
                 {/* Ambient gradient orbs */}
-                <div className="absolute top-20 right-20 w-96 h-96 bg-[#C9A84C]/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 25s ease-in-out infinite' }} />
-                <div className="absolute bottom-20 left-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 30s ease-in-out infinite reverse' }} />
+                <div className="absolute top-20 end-20 w-96 h-96 bg-[#C9A84C]/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 25s ease-in-out infinite' }} />
+                <div className="absolute bottom-20 start-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 30s ease-in-out infinite reverse' }} />
 
                 {/* Floating 3D Marketing Icons */}
                 <style>{`
@@ -187,13 +190,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Camera Icon - Top Left */}
                 <div 
-                    className="absolute top-[15%] left-[8%] w-20 h-20 pointer-events-none opacity-60"
+                    className="absolute top-[15%] start-[8%] w-20 h-20 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-1 8s ease-in-out infinite',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <rect x="15" y="35" width="70" height="45" rx="8" fill="url(#camGrad)" stroke="#C9A84C" strokeWidth="2" />
                         <circle cx="50" cy="57" r="15" fill="none" stroke="#C9A84C" strokeWidth="2.5" />
                         <circle cx="50" cy="57" r="10" fill="rgba(201, 168, 76, 0.3)" />
@@ -210,13 +213,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Hashtag Icon - Top Right */}
                 <div 
-                    className="absolute top-[18%] right-[12%] w-16 h-16 pointer-events-none opacity-60"
+                    className="absolute top-[18%] end-[12%] w-16 h-16 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-2 7s ease-in-out infinite 1s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <line x1="30" y1="20" x2="20" y2="80" stroke="#A855F7" strokeWidth="8" strokeLinecap="round" />
                         <line x1="60" y1="20" x2="50" y2="80" stroke="#A855F7" strokeWidth="8" strokeLinecap="round" />
                         <line x1="70" y1="35" x2="10" y2="45" stroke="#A855F7" strokeWidth="8" strokeLinecap="round" />
@@ -226,13 +229,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Play Button Icon - Left Side */}
                 <div 
-                    className="absolute top-[45%] left-[5%] w-24 h-24 pointer-events-none opacity-50"
+                    className="absolute top-[45%] start-[5%] w-24 h-24 pointer-events-none opacity-50"
                     style={{ 
                         animation: 'float-3d-3 9s ease-in-out infinite 2s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <circle cx="50" cy="50" r="40" fill="url(#playGrad)" stroke="#FF6B9D" strokeWidth="2.5" />
                         <polygon points="40,35 40,65 65,50" fill="#FF6B9D" />
                         <defs>
@@ -246,13 +249,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Chart/Analytics Icon - Right Side */}
                 <div 
-                    className="absolute top-[50%] right-[8%] w-20 h-20 pointer-events-none opacity-55"
+                    className="absolute top-[50%] end-[8%] w-20 h-20 pointer-events-none opacity-55"
                     style={{ 
                         animation: 'float-3d-1 8.5s ease-in-out infinite 1.5s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <rect x="15" y="65" width="15" height="20" rx="2" fill="#10B981" opacity="0.8" />
                         <rect x="35" y="50" width="15" height="35" rx="2" fill="#10B981" opacity="0.9" />
                         <rect x="55" y="35" width="15" height="50" rx="2" fill="#10B981" opacity="1" />
@@ -263,13 +266,13 @@ const DigitalMarketingServices = () => {
 
                 {/* Cursor/Click Icon - Bottom Right */}
                 <div 
-                    className="absolute bottom-[25%] right-[15%] w-16 h-16 pointer-events-none opacity-60"
+                    className="absolute bottom-[25%] end-[15%] w-16 h-16 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-2 7.5s ease-in-out infinite 0.5s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
+                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
                         <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGrad)" stroke="#C9A84C" strokeWidth="2" />
                         <defs>
                             <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -287,21 +290,21 @@ const DigitalMarketingServices = () => {
                             <div className="w-2 h-2 rounded-full bg-[#C9A84C] relative">
                                 <div className="absolute inset-0 rounded-full bg-[#C9A84C] animate-ping" />
                             </div>
-                            <span className="text-[#C9A84C] text-sm font-semibold uppercase tracking-wider">Our Expertise</span>
+                            <span className="text-[#C9A84C] text-sm font-semibold uppercase tracking-wider">{content.expertiseBadge.value}</span>
                         </div>
                         
                         <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6" style={{ fontFamily: "Lora, Georgia, serif" }}>
-                            {content.servicesTitle}{" "}
+                            {content.servicesTitle.value}{" "}
                             <span className="relative inline-block">
                                 <span className="bg-gradient-to-r from-[#C9A84C] via-[#D4AF37] to-[#C9A84C] bg-clip-text text-transparent">
-                                    {content.servicesTitleHighlight}
+                                    {content.servicesTitleHighlight.value}
                                 </span>
                                 <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
                             </span>
                         </h2>
                         
                         <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-                            {content.servicesSubtitle}
+                            {content.servicesSubtitle.value}
                         </p>
                     </div>
 
@@ -370,7 +373,7 @@ const DigitalMarketingServices = () => {
                                         </div>
 
                                         {/* Title */}
-                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center transition-colors duration-300" style={{ fontFamily: "Lora, Georgia, serif" }}>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center transition-colors duration-300" style={{ fontFamily: "var(--heading-font)" }}>
                                             <span className="group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/80 group-hover:bg-clip-text group-hover:text-transparent">
                                                 {service.title}
                                             </span>
@@ -401,16 +404,16 @@ const DigitalMarketingServices = () => {
                                             ))}
                                         </div>
 
-                                        {/* CTA Button */}
-                                        <button 
-                                            onClick={() => router.push(getLocalizedPath("en", serviceRoutes[service.id]))}
-                                            className="relative w-full py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-[1.02]"
+                                        {/* CTA Link */}
+                                        <Link 
+                                            href={getLocalizedPath(locale as AppLocale, serviceRoutes[service.id])}
+                                            className="relative w-full py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-[1.02] block text-center"
                                             style={{ backgroundColor: service.accentColor }}
                                         >
                                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                                {content.learnMore}
+                                                {content.learnMore.value}
                                                 <svg 
-                                                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" 
+                                                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2 rtl:-rotate-180" 
                                                     fill="none" 
                                                     stroke="currentColor" 
                                                     viewBox="0 0 24 24"
@@ -424,16 +427,16 @@ const DigitalMarketingServices = () => {
                                                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100"
                                                 style={{ animation: activeCard === service.id ? 'shine-sweep 2s ease-in-out infinite' : 'none' }}
                                             />
-                                        </button>
+                                        </Link>
                                     </div>
 
                                     {/* Corner glow accents */}
                                     <div 
-                                        className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
+                                        className="absolute top-0 end-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
                                         style={{ backgroundColor: service.accentColor }}
                                     />
                                     <div 
-                                        className="absolute bottom-0 left-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
+                                        className="absolute bottom-0 start-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500"
                                         style={{ backgroundColor: service.accentColor }}
                                     />
                                 </div>

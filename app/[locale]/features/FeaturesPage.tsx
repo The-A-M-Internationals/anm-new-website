@@ -5,6 +5,7 @@ import PageHero from "../../components/PageHero";
 import Apps from "./components/Apps";
 import EPM from "./components/EPM";
 import FeaturesList from "./components/FeaturesList";
+import Results from "./components/Results";
 
 export default function FeaturesPage() {
     const content = useIntlayer("featuresPage");
@@ -25,21 +26,24 @@ export default function FeaturesPage() {
 
     return (
         <div>
-            <PageHero
-                title={content.heroTitle}
-                title2={content.heroTitle2}
-                description={content.heroDescription}
-                button={content.heroButton}
-                link={`/${locale}/features#epm-suites`}
-                image={heroImage}
-                image2={heroImageMobile}
-                image3={heroImageTablet}
-                buttonImage={heroButtonImage}
-            />
+            <section className="snap-section">
+                <PageHero
+                    title={content.heroTitle.value}
+                    title2={content.heroTitle2.value}
+                    description={content.heroDescription.value}
+                    button={content.heroButton.value}
+                    link={`/${locale}/features#epm-suites`}
+                    image={heroImage}
+                    image2={heroImageMobile}
+                    image3={heroImageTablet}
+                    buttonImage={heroButtonImage}
+                />
+            </section>
 
-            <FeaturesList />
-            <Apps />
-            <EPM />
+            <section className="snap-section"><FeaturesList /></section>
+            <section className="snap-section"><Apps /></section>
+            <section className="snap-section"><Results /></section>
+            <section className="snap-section"><EPM /></section>
         </div>
     );
 }

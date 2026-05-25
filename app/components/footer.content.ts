@@ -12,6 +12,24 @@ export const footerContent = {
     // Social section
     followUs: t({ en: "Follow us", ar: "تابعنا" }),
 
+    // Social links
+    instagramLink: t({
+      en: "https://www.instagram.com/the.am.epm/",
+      ar: "https://www.instagram.com/the.am.epm/",
+    }),
+    linkedinLink: t({
+      en: "https://www.linkedin.com/company/the-am-international/",
+      ar: "https://www.linkedin.com/company/the-am-international/",
+    }),
+    twitterLink: t({
+      en: "https://x.com/the_am_epm",
+      ar: "https://x.com/the_am_epm",
+    }),
+    youtubeLink: t({
+      en: "https://www.youtube.com/@the_am_epm",
+      ar: "https://www.youtube.com/@the_am_epm",
+    }),
+
     // Finance Transformation section
     financeTransformation: t({
       en: "Finance Transformation",
@@ -64,12 +82,19 @@ export const footerContent = {
 
     // Resources section
     resources: t({ en: "Resources", ar: "الموارد" }),
-    amInternational: t({ en: "A&M International", ar: "A&M الدولية" }),
+    amInternational: t({ en: "The A&M internationals", ar: "A&M الدولية" }),
+
+    // Contact Us section
+    contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
+    phoneLabel: t({ en: "+91 73061 09679 (WhatsApp & Calls)", ar: "+91 73061 09679 (واتساب ومكالمات)" }),
+    emailLabel: t({ en: "am@theaminternational.com", ar: "am@theaminternational.com" }),
+    websiteLabel: t({ en: "theaminternational.com", ar: "theaminternational.com" }),
 
     // How we work section
     howWeWork: t({ en: "How we work", ar: "كيف نعمل" }),
+    features: t({ en: "Features", ar: "الميزات" }),
     successStories: t({ en: "Success Stories", ar: "قصص النجاح" }),
-    whatSetsApart: t({ en: "What Set's apart", ar: "ما يميزنا" }),
+    whatSetsApart: t({ en: "What Sets Us Apart", ar: "ما يميزنا" }),
     methodology: t({ en: "Methodology", ar: "المنهجية" }),
 
     // Newsletter section
@@ -97,10 +122,16 @@ export const footerContent = {
     }),
 
     // Copyright
-    copyright: t({
-      en: "© 2025 A&M International. All rights reserved. | Privacy | Terms",
-      ar: "© 2025 A&M الدولية. جميع الحقوق محفوظة. | الخصوصية | الشروط",
+    tagline: t({
+      en: "— Elevating the World, Elegantly —",
+      ar: "— نرتقي بالعالم، بأناقة —",
     }),
+    copyright: t({
+      en: "© 2026 The A&M internationals. All rights reserved.",
+      ar: "© 2026 A&M الدولية. جميع الحقوق محفوظة.",
+    }),
+    privacy: t({ en: "Privacy", ar: "سياسة الخصوصية" }),
+    terms: t({ en: "Terms", ar: "الأحكام والشروط" }),
   },
 };
 

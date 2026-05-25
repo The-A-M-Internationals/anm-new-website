@@ -12,8 +12,8 @@ export const navbarModalContent = {
       ar: "١٥ – ١٨",
     }),
     masterclassDateSub: t({
-      en: "Mar, 25",
-      ar: "مارس، ٢٥",
+      en: "Mar, 26",
+      ar: "مارس، ٢٦",
     }),
     masterclassTime: t({
       en: "9 am – 6 pm",

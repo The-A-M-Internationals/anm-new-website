@@ -3,8 +3,8 @@ import BlogsPage from "./BlogsPage";
 
 
 export const metadata: Metadata = {
-    title: "Blogs | A&M International",
-    description: "Read the latest blogs and insights from A&M International.",
+    title: "Blogs | The A&M internationals",
+    description: "Read the latest blogs and insights from The A&M internationals.",
 };
 
 export default function Page() {
