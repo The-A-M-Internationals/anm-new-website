@@ -4,66 +4,67 @@ import { useIntlayer, useLocale } from "next-intlayer";
 import { useRouter } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
+import "./services.content"; // registers dictionary
 
 const Services = () => {
     const router = useRouter();
     const { locale } = useLocale();
-    const content = useIntlayer("services");
+    const content = useIntlayer("services_content");
 
     const services = [
         {
             key: "finance",
             path: "/finance-transformation",
-            category: content.financeCategory.value,
-            title: content.financeTitle.value,
-            description: content.financeDescription.value,
+            category: content.financeCategory?.value,
+            title: content.financeTitle?.value,
+            description: content.financeDescription?.value,
             capabilities: [
-                content.financeCapability1.value,
-                content.financeCapability2.value,
-                content.financeCapability3.value,
-                content.financeCapability4.value,
+                content.financeCapability1?.value,
+                content.financeCapability2?.value,
+                content.financeCapability3?.value,
+                content.financeCapability4?.value,
             ],
             metrics: [
-                { value: content.financeMetric1Value.value, label: content.financeMetric1Label.value },
-                { value: content.financeMetric2Value.value, label: content.financeMetric2Label.value },
+                { value: content.financeMetric1Value?.value, label: content.financeMetric1Label?.value },
+                { value: content.financeMetric2Value?.value, label: content.financeMetric2Label?.value },
             ],
-            tags: [content.financeTag1.value, content.financeTag2.value],
+            tags: [content.financeTag1?.value, content.financeTag2?.value],
         },
         {
             key: "digital",
             path: "/digital-transformation",
-            category: content.digitalCategory.value,
-            title: content.digitalTitle.value,
-            description: content.digitalDescription.value,
+            category: content.digitalCategory?.value,
+            title: content.digitalTitle?.value,
+            description: content.digitalDescription?.value,
             capabilities: [
-                content.digitalCapability1.value,
-                content.digitalCapability2.value,
-                content.digitalCapability3.value,
-                content.digitalCapability4.value,
+                content.digitalCapability1?.value,
+                content.digitalCapability2?.value,
+                content.digitalCapability3?.value,
+                content.digitalCapability4?.value,
             ],
             metrics: [
-                { value: content.digitalMetric1Value.value, label: content.digitalMetric1Label.value },
-                { value: content.digitalMetric2Value.value, label: content.digitalMetric2Label.value },
+                { value: content.digitalMetric1Value?.value, label: content.digitalMetric1Label?.value },
+                { value: content.digitalMetric2Value?.value, label: content.digitalMetric2Label?.value },
             ],
-            tags: [content.digitalTag1.value, content.digitalTag2.value],
+            tags: [content.digitalTag1?.value, content.digitalTag2?.value],
         },
         {
             key: "ai",
             path: "/ai-automations",
-            category: content.aiCategory.value,
-            title: content.aiTitle.value,
-            description: content.aiDescription.value,
+            category: content.aiCategory?.value,
+            title: content.aiTitle?.value,
+            description: content.aiDescription?.value,
             capabilities: [
-                content.aiCapability1.value,
-                content.aiCapability2.value,
-                content.aiCapability3.value,
-                content.aiCapability4.value,
+                content.aiCapability1?.value,
+                content.aiCapability2?.value,
+                content.aiCapability3?.value,
+                content.aiCapability4?.value,
             ],
             metrics: [
-                { value: content.aiMetric1Value.value, label: content.aiMetric1Label.value },
-                { value: content.aiMetric2Value.value, label: content.aiMetric2Label.value },
+                { value: content.aiMetric1Value?.value, label: content.aiMetric1Label?.value },
+                { value: content.aiMetric2Value?.value, label: content.aiMetric2Label?.value },
             ],
-            tags: [content.aiTag1.value, content.aiTag2.value],
+            tags: [content.aiTag1?.value, content.aiTag2?.value],
         },
     ];
 
@@ -138,12 +139,12 @@ const Services = () => {
                     {/* Heading */}
                     <div className="text-center mb-10 md:mb-14">
                         <h3 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold">
-                            {content.heading.value}{" "}
-                            <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>{" "}
-                            {content.headingEnd.value}
+                            {content.heading?.value}{" "}
+                            <span className="text-[#D4AF37]">{content.headingHighlight?.value}</span>{" "}
+                            {content.headingEnd?.value}
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base mt-3 max-w-2xl mx-auto">
-                            {content.subheading.value}
+                            {content.subheading?.value}
                         </p>
                     </div>
 
@@ -212,10 +213,10 @@ const Services = () => {
                                                 <animate attributeName="opacity" from=".6" to="0" dur="2.4s" repeatCount="indefinite" />
                                             </circle>
                                             {[
-                                                { cx: 52, cy: 38, label: idx === 1 ? content.cloudLabel.value : "", ly: 26, d: 0 },
-                                                { cx: 172, cy: 42, label: idx === 1 ? content.erpLabel.value : "", ly: 30, d: 0.5 },
-                                                { cx: 48, cy: 138, label: idx === 1 ? content.apiLabel.value : "", ly: 156, d: 1 },
-                                                { cx: 176, cy: 132, label: idx === 1 ? content.dataLabel.value : "", ly: 150, d: 0.8 },
+                                                { cx: 52, cy: 38, label: idx === 1 ? content.cloudLabel?.value : "", ly: 26, d: 0 },
+                                                { cx: 172, cy: 42, label: idx === 1 ? content.erpLabel?.value : "", ly: 30, d: 0.5 },
+                                                { cx: 48, cy: 138, label: idx === 1 ? content.apiLabel?.value : "", ly: 156, d: 1 },
+                                                { cx: 176, cy: 132, label: idx === 1 ? content.dataLabel?.value : "", ly: 150, d: 0.8 },
                                                 { cx: 110, cy: 18, label: "", ly: 0, d: 0.3 },
                                             ].map((n, i) => (
                                                 <g key={i}>
@@ -255,9 +256,9 @@ const Services = () => {
                                             ))}
                                             <circle cx="198" cy="66" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin=".6s" repeatCount="indefinite" /></circle>
                                             <circle cx="198" cy="118" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin="1s" repeatCount="indefinite" /></circle>
-                                            <text x="28" y="154" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.inputLabel.value}</text>
-                                            <text x="90" y="124" dy="12" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.hiddenLabel.value}</text>
-                                            <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.outputLabel.value}</text>
+                                            <text x="28" y="154" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.inputLabel?.value}</text>
+                                            <text x="90" y="124" dy="12" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.hiddenLabel?.value}</text>
+                                            <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content.outputLabel?.value}</text>
                                         </svg>
                                     )}
 
@@ -309,7 +310,7 @@ const Services = () => {
                                         ))}
                                     </div>
                                     <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 700, color: "#C9A84C" }}>
-                                        {content.explore.value} <span className="am-arr rtl:rotate-180">→</span>
+                                        {content.explore?.value} <span className="am-arr rtl:rotate-180">→</span>
                                     </div>
                                 </div>
                             </div>

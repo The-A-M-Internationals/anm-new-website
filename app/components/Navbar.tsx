@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
+import "./navbar.content";
 
 type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
 
@@ -437,6 +438,8 @@ const DesktopNavButton = ({
 }: DesktopNavButtonProps) => {
   const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
   const isActive = activeNavKey === navKey;
+  const labelKey = navItems[navKey].labelKey;
+  const label = (content as any)[labelKey]?.value;
 
   if (hasDropdown) {
     return (
@@ -450,7 +453,7 @@ const DesktopNavButton = ({
         `}
       >
         <span className="flex items-center gap-1">
-          {(content as any)[navItems[navKey].labelKey]?.value || (content as any)[navItems[navKey].labelKey]}
+          {typeof label === 'string' ? label : navKey}
           <svg
             className={`w-3.5 h-3.5 mt-0.5 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
             fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -471,7 +474,7 @@ const DesktopNavButton = ({
       }}
       className="text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:text-gray-900"
     >
-      {(content as any)[navItems[navKey].labelKey]?.value || (content as any)[navItems[navKey].labelKey]}
+      {typeof label === 'string' ? label : navKey}
     </button>
   );
 };
@@ -496,6 +499,8 @@ const MobileNavButton = ({
 }: MobileNavButtonProps) => {
   const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
   const isActive = activeNavKey === navKey && isModalOpen;
+  const labelKey = navItems[navKey].labelKey;
+  const label = (content as any)[labelKey]?.value;
 
   return (
     <button
@@ -507,7 +512,7 @@ const MobileNavButton = ({
         ${isActive ? 'bg-yellow-50 border-l-4 border-[#C9A84C] text-gray-900' : 'hover:bg-gray-50'}
       `}
     >
-      <span>{(content as any)[navItems[navKey].labelKey]?.value || (content as any)[navItems[navKey].labelKey]}</span>
+      <span>{typeof label === 'string' ? label : navKey}</span>
       {hasDropdown && (
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}

@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import LiveEvents from "./LiveEvents";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
+import "./events.content";
 
 interface EventType {
     id: string;
