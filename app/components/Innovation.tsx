@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
+import "./innovation.content";
 
 const Innovation = () => {
     const router = useRouter();
