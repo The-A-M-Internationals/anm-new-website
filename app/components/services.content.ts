@@ -1,7 +1,7 @@
 import { t } from "intlayer";
 
-export const servicesContent = {
-  key: "services",
+const servicesContent = {
+  key: "services_content",
   content: {
     heading: t({
       en: "Transforming businesses through",
