@@ -24,19 +24,19 @@ const Innovation = () => {
             {/* Main content */}
             <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
-                    {content.heading.value}
+                    {content?.heading?.value}
                 </h1>
 
                 <p className="text-xs sm:text-sm md:text-base text-white font-semibold mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto">
-                    {content.description.value}
+                    {content?.description?.value}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
                     <button onClick={() => router.push(`/${locale}/features#epm-suites`)} className="px-6 py-2.5 sm:px-8 sm:py-3 bg-[#D4AF37] cursor-pointer hover:scale-105 text-[#000000] text-sm sm:text-base font-semibold rounded-full transition-all duration-200 w-full sm:w-auto">
-                        {content.epmButton.value}
+                        {content?.epmButton?.value}
                     </button>
                     <button onClick={() => router.push(`/${locale}/contact#form`)} className="px-6 py-2.5 sm:px-8 sm:py-3 bg-white text-[#897122] text-sm sm:text-base font-semibold cursor-pointer hover:scale-105 rounded-full transition-all duration-200 w-full sm:w-auto">
-                        {content.contactButton.value}
+                        {content?.contactButton?.value}
                     </button>
                 </div>
             </div>

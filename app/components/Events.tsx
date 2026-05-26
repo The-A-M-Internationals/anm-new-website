@@ -135,10 +135,10 @@ const Events = () => {
             <div className="max-w-7xl mx-auto w-full">
                 {/* HEADER */}
                 <h2 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[48px] text-center">
-                    {content.header.value}
+                    {content?.header?.value}
                 </h2>
                 <p className="font-semibold text-[#6B7280] text-xs sm:text-sm md:text-base text-center px-4 lg:mb-10">
-                    {content.subHeader.value}
+                    {content?.subHeader?.value}
                 </p>
 
                 {/* LIVE EVENT */}
@@ -155,7 +155,7 @@ const Events = () => {
                     />
                 ) : (
                     <div className="w-full text-center text-gray-500 text-lg font-medium mb-6">
-                        {content.noLiveEvents.value}
+                        {content?.noLiveEvents?.value}
                     </div>
                 )}
             </div>
@@ -164,13 +164,13 @@ const Events = () => {
             <div className="max-w-7xl mx-auto px-4 mt-8 flex flex-col gap-6 pb-5 md:pb-12">
                 <div className="text-center">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">
-                        {content.upcomingHeader.value}
+                        {content?.upcomingHeader?.value}
                     </h2>
                 </div>
 
                 {visibleEvents.length === 0 ? (
                     <p className="text-center text-gray-500 mb-8 md:mb-15">
-                        {content.noUpcomingEvents.value}
+                        {content?.noUpcomingEvents?.value}
                     </p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -206,7 +206,7 @@ const Events = () => {
                                         onClick={() => router.push(`/${locale}/register?eventId=${event.id}`)}
                                         className="text-[#D4AF37] hover:text-yellow-700 cursor-pointer font-semibold flex items-center gap-2"
                                     >
-                                        {content.registerNow.value}
+                                        {content?.registerNow?.value}
                                         <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                                     </button>
                                 </div>
@@ -222,7 +222,7 @@ const Events = () => {
                             onClick={() => router.push(`/${locale}/events#upcoming-events`)}
                             className="bg-[#D4AF37] cursor-pointer text-sm sm:text-base font-semibold px-8 py-3 rounded-full hover:scale-105 transition shadow-md"
                         >
-                            {content.viewAll.value}
+                            {content?.viewAll?.value}
                         </button>
                     </div>
                 )}
