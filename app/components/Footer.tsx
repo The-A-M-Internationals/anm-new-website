@@ -287,10 +287,10 @@ const Footer = () => {
 
             <div className="bg-[#0D1B3E] text-center text-white py-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
                 <div className="text-[#C9A84C] text-sm sm:text-base md:text-lg font-medium tracking-wide">
-                    {content.tagline?.value}
+                    {content?.tagline?.value}
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-1 opacity-80">
-                    <span>{content.copyright?.value || ""}</span>
+                    <span>{content?.copyright?.value || ""}</span>
                     <span className="hidden md:inline mx-2">|</span>
                     <div className="flex items-center gap-1">
                         <a 
