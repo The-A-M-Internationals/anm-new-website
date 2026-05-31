@@ -131,8 +131,8 @@ const digitalTransformationListingsContent = {
           ar: "إدارة البرامج الرقمية",
         }),
         description: t({
-          en: "A&M International provides end-to-end programme management for complex digital transformation initiatives, ensuring on-time delivery, stakeholder alignment, and measurable business outcomes.",
-          ar: "تقدم A&M International إدارة برامج شاملة لمبادرات التحول الرقمي المعقدة، مع ضمان التسليم في الوقت المحدد وتوافق أصحاب المصلحة وتحقيق نتائج أعمال قابلة للقياس.",
+          en: "The A&M internationals provides end-to-end programme management for complex digital transformation initiatives, ensuring on-time delivery, stakeholder alignment, and measurable business outcomes.",
+          ar: "تقدم A&M الدولية إدارة برامج شاملة لمبادرات التحول الرقمي المعقدة، مع ضمان التسليم في الوقت المحدد وتوافق أصحاب المصلحة وتحقيق نتائج أعمال قابلة للقياس.",
         }),
         tags: [
           t({ en: "Programme Governance & Reporting", ar: "حوكمة البرنامج والتقارير" }),
@@ -148,8 +148,8 @@ const digitalTransformationListingsContent = {
           ar: "إدارة عمليات السحابة",
         }),
         description: t({
-          en: "A&M International manages your cloud environment on an ongoing basis — monitoring performance, controlling costs, applying patches, and ensuring availability so your teams can focus on business outcomes.",
-          ar: "تدير A&M International بيئتك السحابية باستمرار — مراقبة الأداء والتحكم في التكاليف وتطبيق التحديثات وضمان التوفر حتى تتمكن فرقك من التركيز على نتائج الأعمال.",
+          en: "The A&M internationals manages your cloud environment on an ongoing basis — monitoring performance, controlling costs, applying patches, and ensuring availability so your teams can focus on business outcomes.",
+          ar: "تدير A&M الدولية بيئتك السحابية باستمرار — مراقبة الأداء والتحكم في التكاليف وتطبيق التحديثات وضمان التوفر حتى تتمكن فرقك من التركيز على نتائج الأعمال.",
         }),
         tags: [
           t({ en: "Infrastructure Monitoring", ar: "مراقبة البنية التحتية" }),
@@ -166,8 +166,8 @@ const digitalTransformationListingsContent = {
           ar: "دعم التطبيقات وتطورها",
         }),
         description: t({
-          en: "A&M International provides ongoing support and continuous enhancement for business-critical applications, managing incidents, releases, and improvements to keep your systems performing at their best.",
-          ar: "تقدم A&M International دعمًا مستمرًا وتحسينات متواصلة للتطبيقات الحيوية للأعمال، وإدارة الحوادث والإصدارات والتحسينات للحفاظ على أداء أنظمتك بأفضل مستوى.",
+          en: "The A&M internationals provides ongoing support and continuous enhancement for business-critical applications, managing incidents, releases, and improvements to keep your systems performing at their best.",
+          ar: "تقدم A&M الدولية دعمًا مستمرًا وتحسينات متواصلة للتطبيقات الحيوية للأعمال، وإدارة الحوادث والإصدارات والتحسينات للحفاظ على أداء أنظمتك بأفضل مستوى.",
         }),
         tags: [
           t({ en: "Incident & Problem Management", ar: "إدارة الحوادث والمشكلات" }),
@@ -184,8 +184,8 @@ const digitalTransformationListingsContent = {
           ar: "إدارة التغيير والتبني",
         }),
         description: t({
-          en: "A&M International helps organisations navigate the human side of digital transformation — driving adoption, building capability, and embedding new ways of working across all levels of the business.",
-          ar: "تساعد A&M International المؤسسات على التعامل مع الجانب البشري للتحول الرقمي — تعزيز التبني وبناء القدرات وترسيخ أساليب عمل جديدة عبر جميع مستويات الأعمال.",
+          en: "The A&M internationals helps organisations navigate the human side of digital transformation — driving adoption, building capability, and embedding new ways of working across all levels of the business.",
+          ar: "تساعد A&M الدولية المؤسسات على التعامل مع الجانب البشري للتحول الرقمي — تعزيز التبني وبناء القدرات وترسيخ أساليب عمل جديدة عبر جميع مستويات الأعمال.",
         }),
         tags: [
           t({ en: "Stakeholder Impact Assessment", ar: "تقييم أثر أصحاب المصلحة" }),

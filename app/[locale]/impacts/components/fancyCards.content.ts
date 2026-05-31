@@ -7,7 +7,7 @@ const impactsFancyCardsContent = {
       {
         icon: "/careers/growth.svg",
         title: t({ en: "Total Donated", ar: "إجمالي التبرعات" }),
-        description: t({ en: "₹42,050", ar: "٤٢٬٠٥٠ روبية" }),
+        description: t({ en: "AED 42,050", ar: "٤٢٬٠٥٠ درهم" }),
       },
       {
         icon: "/careers/growth.svg",

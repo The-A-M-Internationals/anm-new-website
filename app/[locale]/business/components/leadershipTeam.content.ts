@@ -1,32 +1,57 @@
-import { t } from "intlayer";
+import { Locales, type Dictionary } from "intlayer";
 
-const leadershipTeamContent = {
+const leadershipTeamContent: Dictionary = {
   key: "businessLeadershipTeam",
   content: {
-    title: t({ en: "Leadership Team", ar: "فريق القيادة" }),
-
-    subtitle: t({
-      en: "Experienced leaders committed to excellence and social impact",
-      ar: "قادة خبراء ملتزمون بالتميّز والأثر الاجتماعي",
-    }),
-
-    leader1Name: t({ en: "ANUSHA ANALA", ar: "أنوشا أنالا" }),
-    leader1CardDescription: t({
-      en: "Where Elevation Meets Elegance.",
-      ar: "حيث يلتقي الارتقاء بالرقي.",
-    }),
-    leader1PositionBadge: t({
-      en: "Founder & CEO",
-      ar: "المؤسس والرئيس التنفيذي",
-    }),
-    leader1RoleLine: t({
-      en: "CEO & Co-Founder, A&M International",
-      ar: "الرئيس التنفيذي والشريك المؤسس، A&M International",
-    }),
-    leader1FullBio: t({
-      en: "تقود أنوشا أنالا، بصفتها قائدةً رائدةً في مجال التحول المالي والابتكار القائم على الأداء، مهمة شركة A&M International في مساعدة المؤسسات العالمية على العمل بكفاءة أكبر والتوسع بوتيرة أسرع. بخبرة تزيد عن 15 عامًا في مجالات أداء المؤسسات، والتحليلات، والعمليات المالية الحديثة، تُحوّل أنوشا التعقيد إلى وضوح، مقدمةً عمليات مبسطة، وحلولًا قابلة للتطوير، ونتائج أعمال قابلة للقياس. تتميز أنوشا بالدقة الاستراتيجية والابتكار والتزامها الراسخ بنجاح عملائها.",
-      ar: "قائدة طموحة في التحول المالي والابتكار القائم على الأداء، تقود أنوشا أنالا مهمة A&M International لمساعدة المؤسسات العالمية على العمل بذكاء أكبر والتوسع بسرعة أكبر. وبخبرة تزيد عن 15 عامًا في أداء المؤسسات والتحليلات وعمليات التمويل الحديثة، تحوّل التعقيد إلى وضوح — عبر تقديم عمليات مبسطة وحلول قابلة للتوسع ونتائج أعمال قابلة للقياس. تقود أنوشا بدقة استراتيجية وابتكار والتزام ثابت بنجاح العملاء.",
-    }),
+    title: {
+      nodeType: "translation",
+      translation: {
+        [Locales.ENGLISH]: "Leadership Team",
+        [Locales.ARABIC]: "فريق القيادة",
+      },
+    },
+    subtitle: {
+      nodeType: "translation",
+      translation: {
+        [Locales.ENGLISH]: "Experienced leaders committed to excellence and social impact",
+        [Locales.ARABIC]: "قادة خبراء ملتزمون بالتميّز والأثر الاجتماعي",
+      },
+    },
+    leader1Name: {
+      nodeType: "translation",
+      translation: {
+        [Locales.ENGLISH]: "ANUSHA ANALA",
+        [Locales.ARABIC]: "أنوشا أنالا",
+      },
+    },
+    leader1CardDescription: {
+      nodeType: "translation",
+      translation: {
+        [Locales.ENGLISH]: "Where Elevation Meets Elegance.",
+        [Locales.ARABIC]: "حيث يلتقي الارتقاء بالرقي.",
+      },
+    },
+    leader1PositionBadge: {
+      nodeType: "translation",
+      translation: {
+        [Locales.ENGLISH]: "Founder & CEO",
+        [Locales.ARABIC]: "المؤسس والرئيس التنفيذي",
+      },
+    },
+    leader1RoleLine: {
+      nodeType: "translation",
+      translation: {
+        [Locales.ENGLISH]: "CEO & Co-Founder, The A&M internationals",
+        [Locales.ARABIC]: "الرئيس التنفيذي والشريك المؤسس، A&M الدولية",
+      },
+    },
+    leader1FullBio: {
+      nodeType: "translation",
+      translation: {
+        [Locales.ENGLISH]: "An ambitious leader in financial transformation and performance-driven innovation, Anusha Anala leads The A&M internationals's mission to help global organizations work smarter and scale faster. With over 15 years of experience in enterprise performance, analytics, and modern finance operations, she turns complexity into clarity—delivering streamlined processes, scalable solutions, and measurable business results. Anusha leads with strategic precision, innovation, and an unwavering commitment to client success.",
+        [Locales.ARABIC]: "قائدة طموحة في التحول المالي والابتكار القائم على الأداء، تقود أنوشا أنالا مهمة A&M الدولية لمساعدة المؤسسات العالمية على العمل بذكاء أكبر والتوسع بسرعة أكبر. وبخبرة تزيد عن 15 عامًا في أداء المؤسسات والتحليلات وعمليات التمويل الحديثة، تحوّل التعقيد إلى وضوح — عبر تقديم عمليات مبسطة وحلول قابلة للتوسع ونتائج أعمال قابلة للقياس. تقود أنوشا بدقة استراتيجية وابتكار والتزام ثابت بنجاح العملاء.",
+      },
+    },
   },
 };
 

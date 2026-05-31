@@ -50,20 +50,20 @@ const AboutUs = () => {
             <div className="flex flex-col gap-3 w-full lg:max-w-[750px] px-1 md:px-0">
 
                 <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-semibold leading-tight">
-                    {content.titleBefore} <span className="text-[#D4AF37]">{content.titleHighlight}</span>
+                    {content.titleBefore.value} <span className="text-[#D4AF37]">{content.titleHighlight.value}</span>
                 </p>
 
                 <div className="lg:w-[90%] lg:text-justify">
                     <p className="font-semibold text-[20px] md:text-[26px] lg:text-[24px]">
-                        {content.tagline}
+                        {content.tagline.value}
                     </p>
 
                     <p className="mt-1 md:mt-2 text-[18px] md:text-[22px] lg:text-[22px]">
-                        {content.paragraph1}
+                        {content.paragraph1.value}
                     </p>
 
                     <p className="mt-1 md:mt-2 text-[18px] md:text-[22px] lg:text-[22px]">
-                        {content.paragraph2}
+                        {content.paragraph2.value}
                     </p>
                 </div>
 
@@ -83,7 +83,7 @@ const AboutUs = () => {
             hover:scale-105 transition
           "
                 >
-                    {content.cta}
+                    {content.cta.value}
                 </button>
             </div>
         </div>

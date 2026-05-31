@@ -1,12 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect, useRef } from "react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import Link from "next/link";
+import { AppLocale } from "@/types/locale";
 
 const HomeHero = () => {
     const router = useRouter();
+    const { locale } = useLocale();
     const content = useIntlayer("homeHero");
 
     // Animated counter refs
@@ -204,7 +207,7 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
-                                // @ts-ignore
+                                // @ts-expect-error
                                 "--dx": p.dx,
                                 "--dy": p.dy,
                             }}
@@ -226,7 +229,7 @@ const HomeHero = () => {
                                 height: p.size,
                                 background: `rgba(201,168,76,${p.opacity})`,
                                 animation: `am-float-particle ${p.dur} ease-in-out infinite ${p.delay}`,
-                                // @ts-ignore
+                                // @ts-expect-error
                                 "--dx": p.dx,
                                 "--dy": p.dy,
                             }}
@@ -267,7 +270,7 @@ const HomeHero = () => {
                         <div className="space-y-1.5 font-mono text-[9px]">
                             <div className="text-purple-400">const</div>
                             <div className="text-[#C9A84C] ml-2">transform =</div>
-                            <div className="text-blue-400 ml-4">"elevate"</div>
+                            <div className="text-blue-400 ml-4">&quot;elevate&quot;</div>
                         </div>
                     </div>
                 </div>
@@ -511,25 +514,25 @@ const HomeHero = () => {
                                 className="text-4xl md:text-5xl lg:text-[54px] font-bold text-white mb-5 leading-tight"
                                 style={{ fontFamily: "Lora, Georgia, serif" }}
                             >
-                                {content.tagline} <span className="text-[#C9A84C]">{content.taglineHighlight}</span>
+                                {content.tagline.value} <span className="text-[#C9A84C]">{content.taglineHighlight.value}</span>
                             </h1>
                             <p className="text-base md:text-lg text-white/70 mb-8 leading-relaxed">
-                                {content.description}
+                                {content.description.value}
                             </p>
                             
                             {/* CTAs */}
                             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                                <button
-                                    onClick={() => router.push(getLocalizedPath("en", "/contact"))}
-                                    className="px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#D4AF37] transition-colors"
+                                <Link
+                                    href={getLocalizedPath(locale as AppLocale, "/contact#form")}
+                                    className="flex items-center justify-center px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#D4AF37] transition-colors"
                                 >
-                                    {content.bookConsultation}
-                                </button>
+                                    {content.bookConsultation.value}
+                                </Link>
                                 <button
-                                    onClick={() => router.push(getLocalizedPath("en", "/#services"))}
+                                    onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/#services"))}
                                     className="px-7 py-3.5 bg-transparent text-[#C9A84C] border-2 border-[#C9A84C] rounded-lg text-[15px] font-bold hover:bg-[#C9A84C] hover:text-[#0C1F4A] transition-colors"
                                 >
-                                    {content.exploreServices}
+                                    {content.exploreServices.value}
                                 </button>
                             </div>
                             
@@ -544,7 +547,7 @@ const HomeHero = () => {
                                         0+
                                     </div>
                                     <div className="text-xs md:text-[13px] text-white/60 uppercase tracking-wider mt-1">
-                                        {content.clients}
+                                        {content.clients.value}
                                     </div>
                                 </div>
                                 <div>
@@ -556,7 +559,7 @@ const HomeHero = () => {
                                         0+
                                     </div>
                                     <div className="text-xs md:text-[13px] text-white/60 uppercase tracking-wider mt-1">
-                                        {content.countries}
+                                        {content.countries.value}
                                     </div>
                                 </div>
                                 <div>
@@ -568,7 +571,7 @@ const HomeHero = () => {
                                         0+
                                     </div>
                                     <div className="text-xs md:text-[13px] text-white/60 uppercase tracking-wider mt-1">
-                                        {content.years}
+                                        {content.years.value}
                                     </div>
                                 </div>
                             </div>
@@ -653,7 +656,8 @@ const HomeHero = () => {
 
                             {/* Finance card */}
                             <div 
-                                className="absolute rounded-xl"
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/finance-transformation"))}
+                                className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     top: 30,
                                     left: -40,
@@ -666,9 +670,9 @@ const HomeHero = () => {
                                 }}
                             >
                                 <div className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: "rgba(201,168,76,.9)" }}>
-                                    {content.financeLabel}
+                                    {content.financeLabel.value}
                                 </div>
-                                <div className="text-[15px] font-bold text-white mb-3">{content.financeTitle}</div>
+                                <div className="text-[15px] font-bold text-white mb-3">{content.financeTitle.value}</div>
                                 <div className="flex items-end gap-[4px]" style={{ height: 28 }}>
                                     {[10, 16, 12, 22, 28].map((h, i) => (
                                         <div 
@@ -686,7 +690,8 @@ const HomeHero = () => {
 
                             {/* Digital card */}
                             <div 
-                                className="absolute rounded-xl"
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/digital-transformation"))}
+                                className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     top: "50%",
                                     right: -20,
@@ -700,9 +705,9 @@ const HomeHero = () => {
                                 }}
                             >
                                 <div className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: "rgba(74,173,218,.9)" }}>
-                                    {content.digitalLabel}
+                                    {content.digitalLabel.value}
                                 </div>
-                                <div className="text-[15px] font-bold text-white mb-3">{content.digitalTitle}</div>
+                                <div className="text-[15px] font-bold text-white mb-3">{content.digitalTitle.value}</div>
                                 <div className="relative" style={{ width: 48, height: 28 }}>
                                     <div className="absolute rounded-full" style={{ left: 0, top: "50%", width: 10, height: 10, background: "#4AADDA", transform: "translateY(-50%)", animation: "am-node-pulse 1.8s ease-in-out infinite" }} />
                                     <div className="absolute rounded-full" style={{ left: -5, top: "50%", width: 20, height: 20, border: "2px solid rgba(74,173,218,.5)", transform: "translateY(-50%)", animation: "am-ring-pulse 1.8s ease-in-out infinite" }} />
@@ -712,7 +717,8 @@ const HomeHero = () => {
 
                             {/* AI card */}
                             <div 
-                                className="absolute rounded-xl"
+                                onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/ai-automations"))}
+                                className="absolute rounded-xl cursor-pointer hover:scale-105 transition-transform duration-300"
                                 style={{
                                     bottom: 40,
                                     left: -30,
@@ -725,9 +731,9 @@ const HomeHero = () => {
                                 }}
                             >
                                 <div className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: "rgba(155,121,224,.9)" }}>
-                                    {content.aiLabel}
+                                    {content.aiLabel.value}
                                 </div>
-                                <div className="text-[15px] font-bold text-white mb-3">{content.aiTitle}</div>
+                                <div className="text-[15px] font-bold text-white mb-3">{content.aiTitle.value}</div>
                                 <div className="grid grid-cols-6 gap-[4px]">
                                     {[0, .3, .6, .9, .15, .45].map((delay, i) => (
                                         <div 

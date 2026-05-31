@@ -124,24 +124,24 @@ const UpcomingEvents = () => {
             <h3 className="text-3xl md:text-5xl text-center text-black font-semibold">
                 {locale?.toLowerCase().startsWith('ar') ? (
                     <>
-                        <span className="text-[#D4AF37]">{content.eventsWord}</span> {content.upcoming.headingPrefix}
+                        <span className="text-[#D4AF37]">{content.eventsWord.value}</span> {content.upcoming.headingPrefix.value}
                     </>
                 ) : (
                     <>
-                        {content.upcoming.headingPrefix} <span className="text-[#D4AF37]">{content.eventsWord}</span>
+                        {content.upcoming.headingPrefix.value} <span className="text-[#D4AF37]">{content.eventsWord.value}</span>
                     </>
                 )}
             </h3>
 
             <p className="text-center text-[#6B7280] text-lg md:text-xl mb-6">
-                {content.upcoming.subheading}
+                {content.upcoming.subheading.value}
             </p>
 
             {loading ? (
-                <div className="text-center">{content.upcoming.loading}</div>
+                <div className="text-center">{content.upcoming.loading.value}</div>
             ) : events.length === 0 ? (
                 <div className="text-center text-gray-500">
-                    {content.upcoming.empty}
+                    {content.upcoming.empty.value}
                 </div>
             ) : (
                 events.map(event => (

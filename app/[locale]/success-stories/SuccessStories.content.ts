@@ -10,9 +10,6 @@ const successStoriesContent = {
       insurance: t({ en: "Insurance", ar: "التأمين" }),
     },
     readFullStory: t({ en: "Read Full Story", ar: "اقرأ القصة كاملة" }),
-    theChallenge: t({ en: "The Challenge", ar: "التحدي" }),
-    theSolution: t({ en: "The Solution", ar: "الحل" }),
-    theResults: t({ en: "The Results", ar: "النتائج" }),
     primaryImpact: t({ en: "Primary Impact", ar: "التأثير الرئيسي" }),
     additionalBenefit: t({ en: "Additional Benefit", ar: "فائدة إضافية" }),
     additionalSavings: t({ en: "Additional savings", ar: "مدخرات إضافية" }),
@@ -33,109 +30,91 @@ const successStoriesContent = {
     },
     caseStudies: {
       study1: {
-        industry: t({ en: "Automotive", ar: "السيارات" }),
+        industry: t({ en: "Automotive & Mobility", ar: "السيارات والتنقل" }),
         companyName: t({
-          en: "Global Manufacturing Corp",
-          ar: "شركة التصنيع العالمية",
+          en: "Automotive & Mobility",
+          ar: "السيارات والتنقّل",
         }),
-        metric1: t({ en: "87% faster", ar: "أسرع بنسبة 87٪" }),
-        metric2: t({ en: "₹2.5M saved", ar: "توفير 2.5 مليون روبية" }),
-        challenge: t({
-          en: "Modernize and standardize financial consolidation and cash-flow reporting by eliminating Excel dependency, strengthening controls, and unifying budgeting and forecasting across all entities.",
-          ar: "تحديث وتوحيد التوحيد المالي وتقارير التدفق النقدي من خلال التخلص من الاعتماد على Excel وتعزيز الضوابط وتوحيد الميزانية والتنبؤ عبر جميع الكيانات.",
+        metric1: t({ en: "Seamless Experience", ar: "تجربة سلسة" }),
+        metric2: t({ en: "Future Ready", ar: "جاهز للمستقبل" }),
+        p1: t({
+          en: "The automotive industry is in the middle of its biggest transformation in a century — and the brands that win the next decade will be the ones whose digital experiences match the quality of their physical products.",
+          ar: "يمرّ قطاع السيارات بأكبر تحوّل في تاريخه منذ قرن — والعلامات التي ستنتصر في العقد القادم هي تلك التي ستتطابق تجاربها الرقمية مع جودة منتجاتها المادية.",
         }),
-        solution: t({
-          en: "Implemented FCCS for automated consolidation and cash-flow reporting, integrated Enterprise Planning for budgeting and forecasting, and standardized reporting through a unified chart of accounts.",
-          ar: "تم تطبيق FCCS للتوحيد الآلي وتقارير التدفق النقدي، ودمج التخطيط المؤسسي للميزانية والتنبؤ، وتوحيد التقارير من خلال دليل حسابات موحد.",
+        p2: t({
+          en: "We work with automotive and mobility brands to design the digital layer of their customer journey: dealership websites that make discovery effortless, configuration tools that turn browsing into buying, service portals that respect the customer's time, and brand identity systems that translate craftsmanship into pixels.",
+          ar: "نعمل مع علامات السيارات والتنقّل لتصميم الطبقة الرقمية من رحلة العميل: مواقع المعارض التي تجعل الاكتشاف سلسًا، وأدوات التهيئة التي تُحوّل التصفّح إلى شراء، وبوابات الخدمة التي تحترم وقت العميل، وأنظمة الهوية التي تُترجم الحرفية إلى بكسلات.",
         }),
-        results: {
-          r1: t({
-            en: "Automated cash-flow reporting in FCCS, replacing manual Excel processes.",
-            ar: "تقارير التدفق النقدي الآلية في FCCS، تحل محل عمليات Excel اليدوية.",
-          }),
-          r2: t({
-            en: "FCCS now consolidates actuals for accurate, timely close and reporting cycles.",
-            ar: "يوحّد FCCS الآن الأرقام الفعلية لدورات إغلاق وإعداد تقارير دقيقة وفي الوقت المناسب.",
-          }),
-          r3: t({
-            en: "Enterprise Planning fully leveraged for detailed budgeting and forecasting.",
-            ar: "تم استخدام التخطيط المؤسسي بشكل كامل للميزانية التفصيلية والتنبؤ.",
-          }),
-          r4: t({
-            en: "Custom multi-entity reports delivered, enabling dynamic, organization-wide financial visibility.",
-            ar: "تم تسليم تقارير مخصصة متعددة الكيانات، مما يتيح رؤية مالية ديناميكية على مستوى المنظمة.",
-          }),
-        },
+        p3: t({
+          en: "Whether it's a traditional dealership modernizing its presence, an EV brand defining its visual language, or a mobility startup building from scratch, our focus stays the same — make the digital experience as considered as the engineering behind the product.",
+          ar: "سواء كان معرضًا تقليديًا يُحدّث حضوره، أو علامة سيارات كهربائية تُعرّف لغتها البصرية، أو شركة تنقّل ناشئة تبني من الصفر — يبقى تركيزنا واحدًا: جعل التجربة الرقمية بنفس مستوى التفكير الهندسي وراء المنتج.",
+        }),
+        p4: t({
+          en: "We work with: automotive dealerships, EV brands, mobility startups, fleet management platforms, and aftermarket service providers.",
+          ar: "نعمل مع: معارض السيارات، علامات السيارات الكهربائية، شركات التنقّل الناشئة، منصات إدارة الأساطيل، ومقدّمي خدمات ما بعد البيع.",
+        }),
+        link: t({
+          en: "Open to automotive partnerships -> am@theaminternational.com",
+          ar: "نرحب بشراكات في قطاع السيارات <- am@theaminternational.com",
+        }),
       },
       study2: {
-        industry: t({ en: "Insurance", ar: "التأمين" }),
+        industry: t({ en: "Insurance & Financial Services", ar: "التأمين والخدمات المالية" }),
         companyName: t({
-          en: "Financial Services Leader",
-          ar: "رائد الخدمات المالية",
+          en: "Insurance & Financial Services",
+          ar: "التأمين والخدمات المالية",
         }),
-        metric1: t({ en: "3x faster", ar: "أسرع 3 مرات" }),
-        metric2: t({ en: "60% cost cut", ar: "خفض التكاليف بنسبة 60٪" }),
-        challenge: t({
-          en: "Streamline global financial consolidation by eliminating manual Excel processes, integrating data automatically, and creating a standardized, scalable platform that reduces IT dependency.",
-          ar: "تبسيط التوحيد المالي العالمي من خلال التخلص من عمليات Excel اليدوية، ودمج البيانات تلقائيًا، وإنشاء منصة موحدة وقابلة للتوسع تقلل الاعتماد على تقنية المعلومات.",
+        metric1: t({ en: "User Centric", ar: "محورها المستخدم" }),
+        metric2: t({ en: "Trusted Flow", ar: "تدفق موثوق" }),
+        p1: t({
+          en: "Insurance and financial services live or die by trust — and trust today is built (or broken) in the first thirty seconds someone spends on your website.",
+          ar: "التأمين والخدمات المالية يعيشان أو يسقطان بناءً على الثقة — والثقة اليوم تُبنى (أو تنهار) خلال أول ثلاثين ثانية يقضيها العميل على موقعك الإلكتروني.",
         }),
-        solution: t({
-          en: "We built and deployed a user-friendly financial platform with automated SAP HANA integration, standardized global workflows, enhanced security, and unified reporting across all business units.",
-          ar: "قمنا ببناء ونشر منصة مالية سهلة الاستخدام مع تكامل SAP HANA الآلي وسير عمل عالمية موحدة وأمان محسّن وتقارير موحدة عبر جميع وحدات الأعمال.",
+        p2: t({
+          en: "We help insurance and financial services brands translate complex products into clear digital experiences. That means websites that explain coverage without jargon, comparison tools that respect the customer's intelligence, claims journeys that reduce anxiety instead of adding to it, and brand systems that signal stability across every touchpoint.",
+          ar: "نساعد علامات التأمين والخدمات المالية على ترجمة منتجاتها المعقّدة إلى تجارب رقمية واضحة. وهذا يعني مواقع تشرح التغطية دون مصطلحات معقّدة، وأدوات مقارنة تحترم ذكاء العميل، ورحلات مطالبات تُقلّل القلق بدلاً من زيادته، وأنظمة هوية تنقل الاستقرار في كل نقطة تواصل.",
         }),
-        results: {
-          r1: t({
-            en: "Centralized single source of truth with unified data entry, reporting, and standardized global processes.",
-            ar: "مصدر حقيقة مركزي واحد مع إدخال بيانات موحد وتقارير وعمليات عالمية موحدة.",
-          }),
-          r2: t({
-            en: "Automated SAP HANA integrations enabling seamless, reliable real-time data flows.",
-            ar: "تكاملات SAP HANA الآلية التي تتيح تدفقات بيانات في الوقت الفعلي سلسة وموثوقة.",
-          }),
-          r3: t({
-            en: "Strengthened security, audit controls, and version management for higher compliance and system integrity.",
-            ar: "تعزيز الأمان وضوابط التدقيق وإدارة الإصدارات لتحقيق امتثال أعلى ونزاهة النظام.",
-          }),
-          r4: t({
-            en: "Advanced dashboards and reporting delivering deeper insights and faster decision-making.",
-            ar: "لوحات معلومات وتقارير متقدمة توفر رؤى أعمق واتخاذ قرارات أسرع.",
-          }),
-        },
+        p3: t({
+          en: "Our design approach for this sector emphasizes transparency, hierarchy, and trust signals — clear pricing structures, visible accreditations, plain-language policy summaries, and interfaces that don't hide behind fine print. Because in financial services, the design is the product promise.",
+          ar: "نهجنا التصميمي لهذا القطاع يُركّز على الشفافية والتسلسل ومؤشرات الثقة — هياكل تسعير واضحة، واعتمادات ظاهرة، وملخصات وثائق بلغة بسيطة، وواجهات لا تختبئ خلف البنود الدقيقة. لأن التصميم في الخدمات المالية هو وعد المنتج ذاته.",
+        }),
+        p4: t({
+          en: "We work with: general insurance providers, health insurance brands, InsurTech startups, financial advisory firms, and brokerages.",
+          ar: "نعمل مع: شركات التأمين العام، علامات التأمين الصحي، شركات التقنية التأمينية الناشئة، مكاتب الاستشارات المالية، والوسطاء.",
+        }),
+        link: t({
+          en: "Open to insurance partnerships -> am@theaminternational.com",
+          ar: "نرحب بشراكات في قطاع التأمين <- am@theaminternational.com",
+        }),
       },
       study3: {
-        industry: t({ en: "Healthcare", ar: "الرعاية الصحية" }),
+        industry: t({ en: "Healthcare & Wellness", ar: "الرعاية الصحية والعافية" }),
         companyName: t({
-          en: "Regional Healthcare Network",
-          ar: "شبكة الرعاية الصحية الإقليمية",
+          en: "Healthcare & Wellness",
+          ar: "الرعاية الصحية والعافية",
         }),
-        metric1: t({ en: "100%", ar: "100٪" }),
-        metric2: t({ en: "75% saved", ar: "توفير 75٪" }),
-        challenge: t({
-          en: "Manual compliance tracking across 8 hospitals with inconsistent documentation and audit failures.",
-          ar: "تتبع الامتثال اليدوي عبر 8 مستشفيات مع توثيق غير متسق وإخفاقات في التدقيق.",
+        metric1: t({ en: "Empathetic Design", ar: "تصميم رحيم" }),
+        metric2: t({ en: "Wellness First", ar: "العافية أولاً" }),
+        p1: t({
+          en: "Healthcare is one of the most demanding industries for digital design — every interface decision affects how patients access care, how providers manage information, and how trust is built between them.",
+          ar: "تُعدّ الرعاية الصحية من أكثر القطاعات تطلّبًا في التصميم الرقمي — فكل قرار تصميمي يؤثر على كيفية وصول المرضى إلى الرعاية، وكيفية إدارة مقدّمي الخدمة للمعلومات، وكيفية بناء الثقة بينهما.",
         }),
-        solution: t({
-          en: "Deployed automated compliance management system with real-time monitoring and documentation workflows.",
-          ar: "تم نشر نظام إدارة الامتثال الآلي مع المراقبة في الوقت الفعلي وسير عمل التوثيق.",
+        p2: t({
+          en: "We work with healthcare and wellness brands to create digital experiences that prioritize clarity above all else. From patient-facing websites and appointment booking systems to wellness brand identities and clinic portals, our approach is grounded in three principles: information hierarchy that respects the user's emotional state, design systems that scale across departments and services, and visual language that communicates competence without coldness.",
+          ar: "نعمل مع علامات الرعاية الصحية والعافية لإنشاء تجارب رقمية تُعطي الأولوية للوضوح قبل كل شيء. من المواقع الموجّهة للمرضى وأنظمة حجز المواعيد إلى هويات علامات العافية وبوابات العيادات، يستند نهجنا إلى ثلاثة مبادئ: تسلسل معلوماتي يحترم الحالة النفسية للمستخدم، وأنظمة تصميم قابلة للتوسّع عبر الأقسام والخدمات، ولغة بصرية تنقل الكفاءة دون برود.",
         }),
-        results: {
-          r1: t({
-            en: "87% faster reporting (5 days to 8 hours)",
-            ar: "تقارير أسرع بنسبة 87٪ (من 5 أيام إلى 8 ساعات)",
-          }),
-          r2: t({
-            en: "₹2.5M annual cost savings from improved efficiency.",
-            ar: "توفير سنوي في التكاليف بقيمة 2.5 مليون روبية من تحسين الكفاءة.",
-          }),
-          r3: t({
-            en: "100% executive team adoption within 3 months.",
-            ar: "اعتماد 100٪ من فريق الإدارة التنفيذية خلال 3 أشهر.",
-          }),
-          r4: t({
-            en: "Real-time visibility across 12 manufacturing plants.",
-            ar: "رؤية في الوقت الفعلي عبر 12 مصنعًا.",
-          }),
-        },
+        p3: t({
+          en: "We understand the responsibilities that come with this sector — data sensitivity, accessibility standards, and the need for interfaces that serve patients, families, and practitioners with equal care.",
+          ar: "نُدرك المسؤوليات التي يحملها هذا القطاع — حساسية البيانات، ومعايير سهولة الوصول، والحاجة إلى واجهات تخدم المرضى وذويهم والممارسين بعناية متساوية.",
+        }),
+        p4: t({
+          en: "We work with: hospitals, clinics, telemedicine platforms, wellness brands, health-tech startups, and individual practitioners.",
+          ar: "نعمل مع: المستشفيات، العيادات، منصات الطب عن بُعد، علامات العافية، شركات التقنية الصحية الناشئة، والممارسين المستقلّين.",
+        }),
+        link: t({
+          en: "Open to healthcare partnerships -> am@theaminternational.com",
+          ar: "نرحب بشراكات في قطاع الرعاية الصحية <- am@theaminternational.com",
+        }),
       },
     },
   },

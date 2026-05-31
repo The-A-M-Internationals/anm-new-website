@@ -5,24 +5,24 @@ import { useIntlayer } from "next-intlayer";
 const Apps = () => {
     const content = useIntlayer("featuresApps");
     const topRowApps = [
-        content.app1,
-        content.app2,
-        content.app3,
-        content.app4
+        content.app1.value,
+        content.app2.value,
+        content.app3.value,
+        content.app4.value
     ];
 
     const bottomRowApps = [
-        content.app5,
-        content.app6,
-        content.app7,
-        content.app8
+        content.app5.value,
+        content.app6.value,
+        content.app7.value,
+        content.app8.value
     ];
 
     return (
         <div
             className="
-        relative py-20 px-4 overflow-hidden 
-        bg-[#0F1E4D] mt-12 md:mt-20
+        relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden 
+        bg-[#0F1E4D]
       "
             style={{
                 backgroundImage: "url('/whychooseus.svg')",
@@ -34,10 +34,10 @@ const Apps = () => {
             <div className="max-w-6xl mx-auto text-center">
                 {/* Header */}
                 <h2 className="text-4xl md:text-[48px] font-bold text-white mb-3">
-                    {content.titlePrefix} <span className="text-yellow-500">{content.titleHighlight}</span>
+                    {content.titlePrefix.value} <span className="text-yellow-500">{content.titleHighlight.value}</span>
                 </h2>
                 <p className="text-gray-300 mb-12 text-lg">
-                    {content.subtitle}
+                    {content.subtitle.value}
                 </p>
 
                 {/* Integration Pills */}

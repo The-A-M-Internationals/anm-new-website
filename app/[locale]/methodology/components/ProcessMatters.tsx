@@ -25,7 +25,7 @@ const ProcessMatters = () => {
     ];
 
     return (
-        <section id="process" className="bg-[#FFFBED] py-20 px-6 md:px-12">
+        <section id="process" className="bg-[#FFFBED] py-12 md:py-20 lg:py-24 px-6 md:px-12">
             <div className="max-w-7xl mx-auto">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
 

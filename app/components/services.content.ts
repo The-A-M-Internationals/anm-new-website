@@ -1,7 +1,7 @@
 import { t } from "intlayer";
 
-export const servicesContent = {
-  key: "services",
+const servicesContent = {
+  key: "services_content",
   content: {
     heading: t({
       en: "Transforming businesses through",
@@ -178,6 +178,34 @@ export const servicesContent = {
     explore: t({
       en: "Explore",
       ar: "استكشف",
+    }),
+    cloudLabel: t({
+      en: "Cloud",
+      ar: "سحابي",
+    }),
+    erpLabel: t({
+      en: "ERP",
+      ar: "ERP",
+    }),
+    apiLabel: t({
+      en: "API",
+      ar: "API",
+    }),
+    dataLabel: t({
+      en: "Data",
+      ar: "بيانات",
+    }),
+    inputLabel: t({
+      en: "Input",
+      ar: "مدخلات",
+    }),
+    hiddenLabel: t({
+      en: "Hidden",
+      ar: "مخفي",
+    }),
+    outputLabel: t({
+      en: "Output",
+      ar: "مخرجات",
     }),
   },
 };

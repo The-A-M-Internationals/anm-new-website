@@ -8,6 +8,7 @@ export const navbarContent = {
     company: t({ en: "Company", ar: "الشركة" }),
     career: t({ en: "Career", ar: "الوظائف" }),
     services: t({ en: "Services", ar: "خدمات" }),
+    features: t({ en: "Features", ar: "الميزات" }),
     aboutUs: t({ en: "About Us", ar: "معلومات عنا" }),
     howWeWork: t({ en: "How we work", ar: "كيف نعمل" }),
     makeAnImpact: t({ en: "Make an Impact", ar: "اصنع تأثيراً" }),
@@ -15,7 +16,7 @@ export const navbarContent = {
 
     // Submenu items
     amCommunity: t({
-      en: "A&M International community",
+      en: "The A&M internationals community",
       ar: "مجتمع A&M الدولي",
     }),
     events: t({ en: "Events", ar: "أحداث" }),

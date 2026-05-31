@@ -1,18 +1,32 @@
 import type { Metadata } from 'next';
-import AiAutomationsHero from "./AiAutomationsHero";
+import AIAutomationsHero from "./AiAutomationsHero";
 import AiAutomationsServices from "./AiAutomationsServices";
+import Events from "../../components/Events";
+import Innovation from "../../components/Innovation";
+import { t } from "intlayer";
 
-export const metadata: Metadata = {
-    title: "AI Automations | The A&M Internationals",
-    description: "Transform your business with cutting-edge AI and machine learning solutions. Automate workflows, enhance decision-making, and unlock unprecedented efficiency.",
-    keywords: "AI automation, artificial intelligence, machine learning, business automation, intelligent workflows, RPA, generative AI",
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+
+    return {
+        title: (t({
+            en: "AI Automations | The A&M internationals",
+            ar: "أتمتة الذكاء الاصطناعي | A&M الدولية",
+        }) as any)[locale],
+        description: (t({
+            en: "RPA, generative AI, and machine learning that eliminate manual effort, accelerate decisions, and create competitive advantage.",
+            ar: "أتمتة العمليات الروبوتية والذكاء الاصطناعي التوليدي والتعلم الآلي الذي يلغي الجهد اليدوي ويسرع القرارات ويخلق ميزة تنافسية.",
+        }) as any)[locale],
+    };
 }
 
 export default function AIAutomationsPage() {
     return (
-        <main>
-            <AiAutomationsHero />
+        <div>
+            <AIAutomationsHero />
             <AiAutomationsServices />
-        </main>
+            <Events />
+            <Innovation />
+        </div>
     );
 }

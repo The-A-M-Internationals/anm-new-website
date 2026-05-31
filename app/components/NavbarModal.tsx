@@ -24,6 +24,7 @@ interface NavbarModalProps {
   // New props for the bridge logic
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  handleHashLink: (e: React.MouseEvent, link: string) => boolean;
 }
 
 const NavbarModal = ({
@@ -31,7 +32,8 @@ const NavbarModal = ({
   onClose,
   rightSideButtons,
   onMouseEnter,
-  onMouseLeave
+  onMouseLeave,
+  handleHashLink
 }: NavbarModalProps) => {
   const { locale } = useLocale();
   const currentLocale = locale as AppLocale;
@@ -96,30 +98,14 @@ const NavbarModal = ({
               <div className="w-full md:w-fit bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-[15px] md:rounded-[20px] shadow-md px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 border border-gray-100">
                 {/* Title */}
                 <h2 className="text-lg md:text-2xl font-semibold text-gray-900">
-                  {t.masterclassTitle}
+                  {t?.masterclassTitle?.value}
                 </h2>
 
-                {/* Date & Time */}
-                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 md:gap-3">
-                  {/* Date */}
-                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
-                    <CalendarDays className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassDateMain}</span>
-                    <span className="text-gray-500 font-medium text-sm md:text-base">{t.masterclassDateSub}</span>
-                  </div>
-
-                  {/* Time */}
-                  <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
-                    <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.masterclassTime}</span>
-                  </div>
-                </div>
-
                 {/* Button */}
-                <a href={t.masterclassRegisterUrl} target="_blank" onClick={onClose}>
+                <a href={t?.masterclassRegisterUrl?.value} target="_blank" onClick={onClose}>
                   <div className='flex w-full justify-center items-center'>
                     <button className="bg-[#D4AF37] text-black font-semibold px-4 md:px-7 py-2 md:py-3 rounded-full flex items-center gap-2 w-fit text-sm md:text-base cursor-pointer hover:scale-105 transition">
-                      {t.masterclassRegisterBtn}
+                      {t?.masterclassRegisterBtn?.value}
                       <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
                     </button>
                   </div>
@@ -129,7 +115,7 @@ const NavbarModal = ({
               <div className="w-full md:w-fit bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-[15px] md:rounded-[20px] shadow-md px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 border border-gray-100">
                 {/* Title */}
                 <h2 className="text-lg md:text-2xl font-semibold text-gray-900">
-                  {t.signsTitle}
+                  {t?.signsTitle?.value}
                 </h2>
 
                 {/* Date & Time */}
@@ -137,11 +123,19 @@ const NavbarModal = ({
                   {/* Time */}
                   <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
                     <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
-                    <span className="text-gray-900 font-medium text-sm md:text-base">{t.signsReadTime}</span>
+                    <span className="text-gray-900 font-medium text-sm md:text-base">{t?.signsReadTime?.value}</span>
                   </div>
 
-                  <button onClick={() => { onClose(); router.push(`/${currentLocale}/blogs#article`) }} className="text-[#D4AF37] font-semibold flex items-center gap-2 w-fit transition text-sm md:text-base cursor-pointer hover:scale-105 transition">
-                    {t.signsReadBtn}
+                  <button 
+                    onClick={(e) => { 
+                      onClose(); 
+                      if (!handleHashLink(e, `/${currentLocale}/blogs#article`)) {
+                        router.push(`/${currentLocale}/blogs#article`);
+                      }
+                    }} 
+                    className="text-[#D4AF37] font-semibold flex items-center gap-2 w-fit transition text-sm md:text-base cursor-pointer hover:scale-105 transition"
+                  >
+                    {t?.signsReadBtn?.value}
                     <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
                   </button>
                 </div>
@@ -154,12 +148,15 @@ const NavbarModal = ({
                 <Link
                   href={button.link}
                   scroll={true}
-                  onClick={onClose}
+                  onClick={(e) => {
+                    onClose();
+                    handleHashLink(e, button.link);
+                  }}
                   key={index}
                   className="flex items-center gap-2 bg-white px-3 md:px-4 py-2 rounded-xl border border-[#D4AF37] shadow hover:shadow-md transition w-full sm:w-auto"
                 >
                   <img src={button.icon} alt="Bottom Icon" className='w-6 h-5 md:w-8 md:h-6' />
-                  <span className="text-base md:text-xl font-semibold">{navbarContent[button.textKey]}</span>
+                  <span className="text-base md:text-xl font-semibold">{(navbarContent as any)?.[button.textKey]?.value || (navbarContent as any)?.[button.textKey]}</span>
                 </Link>
               ))}
             </div>
