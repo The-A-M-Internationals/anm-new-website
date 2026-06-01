@@ -294,7 +294,7 @@ const Footer = () => {
                     <span className="hidden md:inline mx-2">|</span>
                     <div className="flex items-center gap-1">
                         <a 
-                            href="https://privacy-policy.theaminternational.com/" 
+                            href="https://privacy-policy.theaminternationals.com/" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="hover:text-[#C9A84C] transition-colors"
@@ -303,7 +303,7 @@ const Footer = () => {
                         </a>
                         <span className="mx-1">|</span>
                         <a 
-                            href="https://privacy-policy.theaminternational.com/" 
+                            href="https://privacy-policy.theaminternationals.com/" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="hover:text-[#C9A84C] transition-colors"
