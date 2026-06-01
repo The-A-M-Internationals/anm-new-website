@@ -10,6 +10,7 @@ const SuccessStories: React.FC = () => {
   const searchParams = useSearchParams();
   const content = useIntlayer("success-stories");
   const { locale } = useLocale();
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const [activeTab, setActiveTab] = useState('all');
 
@@ -22,15 +23,14 @@ const SuccessStories: React.FC = () => {
 
   // Manually handle hash scroll to ensure it bypasses the hero image
   useEffect(() => {
-    if (window.location.hash === '#story-content') {
-      const element = document.getElementById('story-content');
-      if (element) {
-        setTimeout(() => {
-          const yOffset = -100; // Adjusted for fixed navbar
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    if (window.location.hash === '#story-content' || searchParams.get('tab')) {
+      setTimeout(() => {
+        if (containerRef.current) {
+          const yOffset = -80; // Buffer for fixed navbar
+          const y = containerRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
-        }, 100);
-      }
+        }
+      }, 500); // Increased timeout to ensure layout is stable
     }
   }, []);
 
@@ -99,7 +99,7 @@ const SuccessStories: React.FC = () => {
     : caseStudies.filter(study => study.industryKey === activeTab);
 
   return (
-    <div className="min-h-screen py-10" id="story-content">
+    <div className="min-h-screen py-10" id="story-content" ref={containerRef}>
       <div className="w-[92%] max-w-[1400px] mx-auto">
         {/* Tabs */}
         <div className="flex border border-[#F6F6F6] w-fit mx-auto rounded-3xl md:rounded-full shadow-sm p-2 flex-wrap justify-center gap-2 mb-12">
