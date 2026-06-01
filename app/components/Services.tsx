@@ -8,7 +8,7 @@ import { AppLocale } from "@/types/locale";
 const Services = () => {
     const router = useRouter();
     const { locale } = useLocale();
-    const content = useIntlayer("services");
+    const content = useIntlayer("services_content");
 
     const services = [
         {
