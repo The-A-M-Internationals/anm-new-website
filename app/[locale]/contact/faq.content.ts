@@ -34,7 +34,7 @@ const faqContent = {
       en: "3. HOW DO I GET STARTED WITH A PROJECT?",
       ar: "٣. كيف أبدأ مشروعًا معكم؟",
     }),
-    answer: t({
+    faq3Answer: t({
       en: "The simplest way is to send us a message through our contact form or email us directly at am@theaminternational.com. We'll schedule a discovery call within one business day to understand your goals, timeline, and budget. From there, we share a tailored proposal with scope, deliverables, and pricing — usually within 3–5 working days. No upfront commitment is needed until you're ready to move forward.",
       ar: "أبسط طريقة هي إرسال رسالة عبر نموذج التواصل أو البريد الإلكتروني am@theaminternational.com. سنُحدّد مكالمة تعارف خلال يوم عمل واحد لفهم أهدافك وجدولك الزمني وميزانيتك. بعد ذلك، نُقدّم لك عرضًا مُخصّصًا يشمل النطاق والتسليمات والتسعير — عادةً خلال ٣ إلى ٥ أيام عمل. لا يوجد التزام مُسبق حتى تكون مستعدًا للمضيّ قدمًا.",
     }),
