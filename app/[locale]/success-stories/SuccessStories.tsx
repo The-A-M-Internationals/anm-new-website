@@ -87,7 +87,7 @@ const SuccessStories: React.FC = () => {
     : caseStudies.filter(study => study.industryKey === activeTab);
 
   return (
-    <div className="min-h-screen py-10">
+    <div className="min-h-screen py-10" id="story-content">
       <div className="w-[92%] max-w-[1400px] mx-auto">
         {/* Tabs */}
         <div className="flex border border-[#F6F6F6] w-fit mx-auto rounded-3xl md:rounded-full shadow-sm p-2 flex-wrap justify-center gap-2 mb-12">

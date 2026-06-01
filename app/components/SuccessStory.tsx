@@ -94,7 +94,7 @@ const SuccessStory = () => {
             image={service.image}
             industry={service.industry}
             badge={service.badge}
-            onClick={() => router.push(`/${locale}/success-stories?tab=${service.tabKey}`)}
+            onClick={() => router.push(`/${locale}/success-stories?tab=${service.tabKey}#story-content`)}
           />
         ))}
       </div>
