@@ -17,10 +17,22 @@ const SuccessStories: React.FC = () => {
     const tab = searchParams.get('tab');
     if (tab && ['automotive', 'healthcare', 'insurance', 'all'].includes(tab)) {
       setActiveTab(tab);
-      // Scroll to top when tab changes via URL
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [searchParams]);
+
+  // Manually handle hash scroll to ensure it bypasses the hero image
+  useEffect(() => {
+    if (window.location.hash === '#story-content') {
+      const element = document.getElementById('story-content');
+      if (element) {
+        setTimeout(() => {
+          const yOffset = -100; // Adjusted for fixed navbar
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
 
   const tabs = [
     { key: 'all', label: content.tabs.all.value },
