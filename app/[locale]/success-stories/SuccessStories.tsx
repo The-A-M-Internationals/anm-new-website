@@ -1,14 +1,27 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useIntlayer, useLocale } from 'next-intlayer';
 
 const SuccessStories: React.FC = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const content = useIntlayer("success-stories");
   const { locale } = useLocale();
+
+  const [activeTab, setActiveTab] = useState('all');
+
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab && ['automotive', 'healthcare', 'insurance', 'all'].includes(tab)) {
+      setActiveTab(tab);
+      // Scroll to top when tab changes via URL
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [searchParams]);
+
   const tabs = [
     { key: 'all', label: content.tabs.all.value },
     { key: 'automotive', label: content.tabs.automotive.value },
@@ -68,8 +81,6 @@ const SuccessStories: React.FC = () => {
       link: s.study3.link.value,
     },
   ];
-
-  const [activeTab, setActiveTab] = useState('all');
 
   const filteredStudies = activeTab === 'all'
     ? caseStudies
@@ -152,7 +163,7 @@ const SuccessStories: React.FC = () => {
                     </p>
                   </div>
                   <div className="text-sm md:text-base text-gray-900 hover:text-[#C9A84C] transition-colors cursor-pointer mt-4">
-                    <a href="mailto:am@theaminternational.com">
+                    <a href="mailto:am@theaminternationals.com">
                       <span className="font-semibold">
                         {study.link.split(/->|<-|→|←/)[0].trimEnd()}
                       </span>
@@ -160,7 +171,7 @@ const SuccessStories: React.FC = () => {
                         {study.link.match(/->|<-|→|←/)?.[0]}
                       </span>
                       <span className="font-normal">
-                        {study.link.includes('am@theaminternational.com') && 'am@theaminternational.com'}
+                        {study.link.includes('am@theaminternationals.com') && 'am@theaminternationals.com'}
                       </span>
                     </a>
                   </div>
