@@ -7,9 +7,12 @@ import Link from "next/link";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { Phone, Mail, Globe } from "lucide-react";
 import "./footer.content";
+import { useRouter } from "next/navigation";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 const Footer = () => {
     const content = useIntlayer("footer");
+    const router = useRouter();
 
 
     const { locale } = useLocale();
@@ -179,25 +182,25 @@ const Footer = () => {
                 {/* FINANCE TRANSFORMATION - Order 2 */}
                 <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-2">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
-                        <Link href={getLocalizedLink("/finance-transformation")} className="hover:underline transition-all">{content.financeTransformation?.value || "Finance Transformation"}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation"), router)} className="hover:underline transition-all">{content.financeTransformation?.value || "Finance Transformation"}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/finance-transformation#financial-consolidation")} className="hover:text-[#C9A84C] transition-colors">{content.financialConsolidation?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#planning-budgeting")} className="hover:text-[#C9A84C] transition-colors">{content.planningBudgeting?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#account-reconciliation")} className="hover:text-[#C9A84C] transition-colors">{content.accountReconciliation?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#profitability-cost")} className="hover:text-[#C9A84C] transition-colors">{content.profitabilityCost?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} className="hover:text-[#C9A84C] transition-colors">{content.enterpriseData?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} className="hover:text-[#C9A84C] transition-colors">{content.narrativeReporting?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} className="hover:text-[#C9A84C] transition-colors">{content.taxReporting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#financial-consolidation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#financial-consolidation"), router)} className="hover:text-[#C9A84C] transition-colors">{content.financialConsolidation?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#planning-budgeting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#planning-budgeting"), router)} className="hover:text-[#C9A84C] transition-colors">{content.planningBudgeting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#account-reconciliation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#account-reconciliation"), router)} className="hover:text-[#C9A84C] transition-colors">{content.accountReconciliation?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#profitability-cost")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#profitability-cost"), router)} className="hover:text-[#C9A84C] transition-colors">{content.profitabilityCost?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#enterprise-data"), router)} className="hover:text-[#C9A84C] transition-colors">{content.enterpriseData?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#narrative-reporting"), router)} className="hover:text-[#C9A84C] transition-colors">{content.narrativeReporting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#tax-reporting"), router)} className="hover:text-[#C9A84C] transition-colors">{content.taxReporting?.value || ""}</Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
-                        <Link href={getLocalizedLink("/finance-transformation#managed-services")} className="hover:underline transition-all">{content.managedServices?.value || "Managed Services"}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#managed-services")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#managed-services"), router)} className="hover:underline transition-all">{content.managedServices?.value || "Managed Services"}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} className="hover:text-[#C9A84C] transition-colors">{content.consultingAsService?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} className="hover:text-[#C9A84C] transition-colors">{content.epmSolutionManagement?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} className="hover:text-[#C9A84C] transition-colors">{content.versionUpgrade?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} className="hover:text-[#C9A84C] transition-colors">{content.monthlyMaintenance?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#consulting-as-service"), router)} className="hover:text-[#C9A84C] transition-colors">{content.consultingAsService?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#epm-solution-management"), router)} className="hover:text-[#C9A84C] transition-colors">{content.epmSolutionManagement?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#version-upgrade"), router)} className="hover:text-[#C9A84C] transition-colors">{content.versionUpgrade?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#monthly-maintenance"), router)} className="hover:text-[#C9A84C] transition-colors">{content.monthlyMaintenance?.value || ""}</Link>
                     </div>
                 </div>
 
@@ -207,7 +210,7 @@ const Footer = () => {
                         {content.resources?.value || "Resources"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
-                        <Link href={getLocalizedLink("/")} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/")} onClick={(e) => handleHashLink(e, getLocalizedLink("/"), router)} className="hover:text-[#C9A84C] transition-colors">
                             {content.amInternational?.value || "The A&M internationals"}
                         </Link>
                     </div>
@@ -215,16 +218,16 @@ const Footer = () => {
                         {content.howWeWork?.value || "How We Work"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/features")} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/features")} onClick={(e) => handleHashLink(e, getLocalizedLink("/features"), router)} className="hover:text-[#C9A84C] transition-colors">
                             {content.features?.value || "Features"}
                         </Link>
-                        <Link href={getLocalizedLink("/success-stories")} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/success-stories")} onClick={(e) => handleHashLink(e, getLocalizedLink("/success-stories"), router)} className="hover:text-[#C9A84C] transition-colors">
                             {content.successStories?.value || "Success Stories"}
                         </Link>
-                        <Link href={getLocalizedLink("/what-sets-us-apart")} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/what-sets-us-apart")} onClick={(e) => handleHashLink(e, getLocalizedLink("/what-sets-us-apart"), router)} className="hover:text-[#C9A84C] transition-colors">
                             {content.whatSetsApart?.value || "What Sets Us Apart"}
                         </Link>
-                        <Link href={getLocalizedLink("/methodology")} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/methodology")} onClick={(e) => handleHashLink(e, getLocalizedLink("/methodology"), router)} className="hover:text-[#C9A84C] transition-colors">
                             {content.methodology?.value || "Methodology"}
                         </Link>
                     </div>
