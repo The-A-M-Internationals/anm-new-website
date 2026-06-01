@@ -105,19 +105,19 @@ const ChildWelfareImpact = () => {
 
     const stats = [
         {
-            value: content.stats[0].value.value,
-            title: content.stats[0].title.value,
-            description: content.stats[0].description.value
+            value: content?.stats?.[0]?.value?.value,
+            title: content?.stats?.[0]?.title?.value,
+            description: content?.stats?.[0]?.description?.value
         },
         {
-            value: content.stats[1].value.value,
-            title: content.stats[1].title.value,
-            description: content.stats[1].description.value
+            value: content?.stats?.[1]?.value?.value,
+            title: content?.stats?.[1]?.title?.value,
+            description: content?.stats?.[1]?.description?.value
         },
         {
-            value: content.stats[2].value.value,
-            title: content.stats[2].title.value,
-            description: content.stats[2].description.value
+            value: content?.stats?.[2]?.value?.value,
+            title: content?.stats?.[2]?.title?.value,
+            description: content?.stats?.[2]?.description?.value
         }
     ];
 
@@ -128,13 +128,13 @@ const ChildWelfareImpact = () => {
                 {/* Header - Original Donation Info */}
                 <div className="text-center mb-12">
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        {content.headerTitle.value} —{' '}
+                        {content?.headerTitle?.value} —{' '}
                         <span className="text-transparent bg-clip-text bg-[#C9A84C]">
-                            {content.goal.value}
+                            {content?.goal?.value}
                         </span>
                     </h2>
                     <p className="text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed">
-                        {content.subheader.value}
+                        {content?.subheader?.value}
                     </p>
                 </div>
 
@@ -189,7 +189,7 @@ const ChildWelfareImpact = () => {
                                 domain={[0, 600000]}
                                 ticks={[0, 150000, 300000, 450000, 600000]}
                             />
-                            <Tooltip content={<CustomTooltip raised={content.raised.value} cumulative={content.cumulative.value} charitable={content.charitable.value} locale={locale} />} />
+                            <Tooltip content={<CustomTooltip raised={content?.raised?.value} cumulative={content?.cumulative?.value} charitable={content?.charitable?.value} locale={locale} />} />
                             <Area
                                 type="monotone"
                                 dataKey="cumulative"
@@ -205,7 +205,7 @@ const ChildWelfareImpact = () => {
                 {/* Header 2 - Description for Stats */}
                 <div className="text-center mb-12">
                      <p className="text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed italic">
-                        {content.headerDescription.value}
+                        {content?.headerDescription?.value}
                     </p>
                 </div>
 
@@ -233,26 +233,26 @@ const ChildWelfareImpact = () => {
                 <div className="border-t border-gray-200 pt-16">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 uppercase tracking-tight">
-                            {content.csrTitle.value}
+                            {content?.csrTitle?.value}
                         </h2>
                         <p className="text-gray-600 text-lg max-w-4xl mx-auto leading-relaxed italic">
-                            {content.csrDescription.value}
+                            {content?.csrDescription?.value}
                         </p>
                     </div>
 
                     {/* CSR Pillars */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {content.csrPillars.map((pillar: { title: { value: string }; description: { value: string } }, index: number) => (
+                        {content?.csrPillars?.map((pillar: any, index: number) => (
                             <div key={index} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm shadow-sm border border-gray-100">
-                                <h4 className="text-[#C9A84C] font-bold text-xl mb-3">{pillar.title.value}</h4>
-                                <p className="text-gray-600 text-sm">{pillar.description.value}</p>
+                                <h4 className="text-[#C9A84C] font-bold text-xl mb-3">{pillar?.title?.value}</h4>
+                                <p className="text-gray-600 text-sm">{pillar?.description?.value}</p>
                             </div>
                         ))}
                     </div>
 
                     <div className="mt-12 text-center">
                         <p className="text-[#C9A84C] font-semibold text-lg">
-                            {content.getInTouch.value}
+                            {content?.contactText?.value}
                         </p>
                     </div>
                 </div>
