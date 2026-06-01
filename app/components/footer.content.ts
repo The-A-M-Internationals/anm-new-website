@@ -87,7 +87,7 @@ export const footerContent = {
     // Contact Us section
     contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
     phoneLabel: t({ en: "+91 73061 09679 (WhatsApp & Calls)", ar: "+91 73061 09679 (واتساب ومكالمات)" }),
-    emailLabel: t({ en: "am@theaminternationals.com", ar: "am@theaminternationals.com" }),
+    emailLabel: t({ en: "am@theaminternational.com", ar: "am@theaminternational.com" }),
     websiteLabel: t({ en: "theaminternationals.com", ar: "theaminternationals.com" }),
 
     // How we work section

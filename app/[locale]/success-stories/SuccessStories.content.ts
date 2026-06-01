@@ -54,8 +54,8 @@ const successStoriesContent = {
           ar: "نعمل مع: معارض السيارات، علامات السيارات الكهربائية، شركات التنقّل الناشئة، منصات إدارة الأساطيل، ومقدّمي خدمات ما بعد البيع.",
         }),
         link: t({
-          en: "Open to automotive partnerships -> am@theaminternationals.com",
-          ar: "نرحب بشراكات في قطاع السيارات <- am@theaminternationals.com",
+          en: "Open to automotive partnerships -> am@theaminternational.com",
+          ar: "نرحب بشراكات في قطاع السيارات <- am@theaminternational.com",
         }),
       },
       study2: {
@@ -83,8 +83,8 @@ const successStoriesContent = {
           ar: "نعمل مع: شركات التأمين العام، علامات التأمين الصحي، شركات التقنية التأمينية الناشئة، مكاتب الاستشارات المالية، والوسطاء.",
         }),
         link: t({
-          en: "Open to insurance partnerships -> am@theaminternationals.com",
-          ar: "نرحب بشراكات في قطاع التأمين <- am@theaminternationals.com",
+          en: "Open to insurance partnerships -> am@theaminternational.com",
+          ar: "نرحب بشراكات في قطاع التأمين <- am@theaminternational.com",
         }),
       },
       study3: {
@@ -112,8 +112,8 @@ const successStoriesContent = {
           ar: "نعمل مع: المستشفيات، العيادات، منصات الطب عن بُعد، علامات العافية، شركات التقنية الصحية الناشئة، والممارسين المستقلّين.",
         }),
         link: t({
-          en: "Open to healthcare partnerships -> am@theaminternationals.com",
-          ar: "نرحب بشراكات في قطاع الرعاية الصحية <- am@theaminternationals.com",
+          en: "Open to healthcare partnerships -> am@theaminternational.com",
+          ar: "نرحب بشراكات في قطاع الرعاية الصحية <- am@theaminternational.com",
         }),
       },
     },

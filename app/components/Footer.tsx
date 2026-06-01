@@ -76,7 +76,7 @@ const Footer = () => {
                     </div>
                 </a>
 
-                <a href="mailto:am@theaminternationals.com" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">
+                <a href="mailto:am@theaminternational.com" className="flex items-center gap-3 hover:text-[#C9A84C] transition-colors group">
                     <Mail className={`w-5 h-5 text-[#C9A84C] shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                     <span className="truncate">{content.emailLabel?.value || "Email"}</span>
                 </a>

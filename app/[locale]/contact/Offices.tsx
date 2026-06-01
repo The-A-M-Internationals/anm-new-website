@@ -12,7 +12,7 @@ export default function OurOffices() {
     {
       location: content.dubaiLocation.value,
       phone: '+91 73061 09679',
-      email: 'am@theaminternationals.com',
+      email: 'am@theaminternational.com',
       address: content.dubaiAddress.value,
       link: 'https://maps.app.goo.gl/PSJeoPD7X4DXwESL6'
     }

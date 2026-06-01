@@ -175,7 +175,7 @@ const SuccessStories: React.FC = () => {
                     </p>
                   </div>
                   <div className="text-sm md:text-base text-gray-900 hover:text-[#C9A84C] transition-colors cursor-pointer mt-4">
-                    <a href="mailto:am@theaminternationals.com">
+                    <a href="mailto:am@theaminternational.com">
                       <span className="font-semibold">
                         {study.link.split(/->|<-|→|←/)[0].trimEnd()}
                       </span>
@@ -183,7 +183,7 @@ const SuccessStories: React.FC = () => {
                         {study.link.match(/->|<-|→|←/)?.[0]}
                       </span>
                       <span className="font-normal">
-                        {study.link.includes('am@theaminternationals.com') && 'am@theaminternationals.com'}
+                        {study.link.includes('am@theaminternational.com') && 'am@theaminternational.com'}
                       </span>
                     </a>
                   </div>
