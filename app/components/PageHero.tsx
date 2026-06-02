@@ -4,7 +4,8 @@ import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { useIntlayer, useLocale } from "next-intlayer";
+import { useLocale } from "next-intlayer";
+import { handleHashLink } from '@/lib/handleHashLink'
 
 interface PageHeroProps {
    badge?: string
@@ -33,7 +34,6 @@ const PageHero: React.FC<PageHeroProps> = ({
    buttonImage,
    titleClassName
 }) => {
-   const content = useIntlayer("financeHero");
    const { locale } = useLocale();
    const router = useRouter();
    const [isZoomed, setIsZoomed] = useState(false);
@@ -132,24 +132,9 @@ const PageHero: React.FC<PageHeroProps> = ({
          >
             <button
                onClick={(e) => {
-                  if (link.includes('#')) {
-                     const [path, hash] = link.split('#');
-                     const currentPath = window.location.pathname;
-                     // Check if path matches or if it's just a hash
-                     if (currentPath === path || (path === '' && hash)) {
-                        const element = document.getElementById(hash);
-                        if (element) {
-                           e.preventDefault();
-                           const yOffset = -112; // Standard navbar offset
-                           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                           window.scrollTo({ top: y, behavior: 'smooth' });
-                           // Update URL hash without reload
-                           window.history.pushState(null, '', `#${hash}`);
-                           return;
-                        }
-                     }
+                  if (!handleHashLink(e, link, router)) {
+                     router.push(link);
                   }
-                  router.push(link);
                }}
                className='cursor-pointer text-xs md:text-sm lg:text-base bg-[#D4AF37] rounded-full px-4 py-2 md:px-3 md:py-1 lg:px-6 lg:py-3 flex items-center gap-2 text-black font-semibold whitespace-nowrap hover:scale-105 transition-transform'
             >

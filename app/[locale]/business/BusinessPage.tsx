@@ -18,7 +18,7 @@ export default function BusinessPage() {
         locale === "ar" ? "/about-ar.png" : "/about.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/business/herotab-ar.png" : "/business/herotab.png";
+        locale === "ar" ? "/business/herotab.png" : "/business/herotab.png";
 
     const heroButtonImage =
         locale === "ar" ? "/business/hero-buttonn-ar.png" : "/business/hero-button.png";

@@ -8,7 +8,7 @@ import { AppLocale } from "@/types/locale";
 const Services = () => {
     const router = useRouter();
     const { locale } = useLocale();
-    const content = useIntlayer("services");
+    const content = useIntlayer("services_content");
 
     const services = [
         {
@@ -212,10 +212,10 @@ const Services = () => {
                                                 <animate attributeName="opacity" from=".6" to="0" dur="2.4s" repeatCount="indefinite" />
                                             </circle>
                                             {[
-                                                { cx: 52, cy: 38, label: idx === 1 ? content.cloudLabel.value : "", ly: 26, d: 0 },
-                                                { cx: 172, cy: 42, label: idx === 1 ? content.erpLabel.value : "", ly: 30, d: 0.5 },
-                                                { cx: 48, cy: 138, label: idx === 1 ? content.apiLabel.value : "", ly: 156, d: 1 },
-                                                { cx: 176, cy: 132, label: idx === 1 ? content.dataLabel.value : "", ly: 150, d: 0.8 },
+                                                { cx: 52, cy: 38, label: idx === 1 ? content?.cloudLabel?.value : "", ly: 26, d: 0 },
+                                                { cx: 172, cy: 42, label: idx === 1 ? content?.erpLabel?.value : "", ly: 30, d: 0.5 },
+                                                { cx: 48, cy: 138, label: idx === 1 ? content?.apiLabel?.value : "", ly: 156, d: 1 },
+                                                { cx: 176, cy: 132, label: idx === 1 ? content?.dataLabel?.value : "", ly: 150, d: 0.8 },
                                                 { cx: 110, cy: 18, label: "", ly: 0, d: 0.3 },
                                             ].map((n, i) => (
                                                 <g key={i}>

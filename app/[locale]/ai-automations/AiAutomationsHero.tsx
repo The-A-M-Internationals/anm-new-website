@@ -347,20 +347,20 @@ const AIAutomationsHero = () => {
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20 px-4">
                         <button
                             onClick={() => {
                                 const servicesSection = document.getElementById('ai-automation-services');
                                 servicesSection?.scrollIntoView({ behavior: 'smooth' });
                             }}
-                            className="group relative px-12 py-5 bg-[#1E40AF] text-white rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#1E40AF]/40 hover:-translate-y-1"
+                            className="group relative w-full sm:w-auto px-12 py-5 bg-[#1E40AF] text-white rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#1E40AF]/40 hover:-translate-y-1 flex justify-center"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div 
                                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                                 style={{ animation: 'shimmer 3s ease-in-out infinite' }}
                             />
-                            <span className="relative z-10 flex items-center gap-3">
+                            <span className="relative z-10 flex items-center justify-center gap-3">
                                 {content.exploreServices.value}
                                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -369,9 +369,9 @@ const AIAutomationsHero = () => {
                         </button>
                         <button
                             onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
-                            className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#1E40AF]/50 hover:-translate-y-1"
+                            className="group relative w-full sm:w-auto px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#1E40AF]/50 hover:-translate-y-1 flex justify-center"
                         >                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                            <span className="relative z-10">{content.bookConsultation.value}</span>
+                            <span className="relative z-10 flex items-center justify-center">{content.bookConsultation.value}</span>
                         </button>
                     </div>
 

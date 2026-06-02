@@ -85,7 +85,7 @@ const impactsChildWelfareContent = {
         }),
       },
     ],
-    getInTouch: t({
+    contact: t({
       en: "Get in touch: am@theaminternational.com",
       ar: "تواصلوا معنا: am@theaminternational.com",
     }),

@@ -6,6 +6,8 @@ import Apps from "./components/Apps";
 import EPM from "./components/EPM";
 import FeaturesList from "./components/FeaturesList";
 import Results from "./components/Results";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import { AppLocale } from "@/types/locale";
 
 export default function FeaturesPage() {
     const content = useIntlayer("featuresPage");
@@ -19,7 +21,7 @@ export default function FeaturesPage() {
         locale === "ar" ? "/event-arr.png" : "/event.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/blogs/tab-hero-ar.png" : "/blogs/tab-hero.png";
+        locale === "ar" ? "/blogs/tab-hero.png" : "/blogs/tab-hero.png";
 
     const heroButtonImage =
         locale === "ar" ? "/features/button-hero-ar.png" : "/features/button-hero.png";
@@ -32,7 +34,7 @@ export default function FeaturesPage() {
                     title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={`/${locale}/features#epm-suites`}
+                    link={getLocalizedPath(locale as AppLocale, "/features#epm-suites")}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}

@@ -24,7 +24,7 @@ interface NavbarModalProps {
   // New props for the bridge logic
   onMouseEnter: () => void;
   onMouseLeave: () => void;
-  handleHashLink: (e: React.MouseEvent, link: string) => boolean;
+  handleHashLink: (e: React.MouseEvent, link: string, router: ReturnType<typeof useRouter>) => boolean;
 }
 
 const NavbarModal = ({
@@ -129,7 +129,7 @@ const NavbarModal = ({
                   <button 
                     onClick={(e) => { 
                       onClose(); 
-                      if (!handleHashLink(e, `/${currentLocale}/blogs#article`)) {
+                      if (!handleHashLink(e, `/${currentLocale}/blogs#article`, router)) {
                         router.push(`/${currentLocale}/blogs#article`);
                       }
                     }} 
@@ -150,7 +150,7 @@ const NavbarModal = ({
                   scroll={true}
                   onClick={(e) => {
                     onClose();
-                    handleHashLink(e, button.link);
+                    handleHashLink(e, button.link, router);
                   }}
                   key={index}
                   className="flex items-center gap-2 bg-white px-3 md:px-4 py-2 rounded-xl border border-[#D4AF37] shadow hover:shadow-md transition w-full sm:w-auto"

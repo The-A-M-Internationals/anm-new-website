@@ -84,7 +84,7 @@ const Open = () => {
                 <>
                     <div className="flex flex-col items-center gap-4">
                         <Image
-                            src="/careers/empty.png"
+                            src="/careers/open.png"
                             alt="No positions"
                             width={400}
                             height={400}
