@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
+import { handleHashLink } from '@/lib/handleHashLink';
 
-type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
+type IntlayerKey = Extract<keyof ReturnType<typeof useIntlayer>, string>;
 
 type NavKey =
   | 'Services'
@@ -35,31 +36,9 @@ const Navbar = () => {
 
   const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
 
-  const handleHashLink = (e: React.MouseEvent, link: string) => {
-    if (link.includes('#')) {
-      const [path, hash] = link.split('#');
-      const currentPath = window.location.pathname;
-
-      if (currentPath === path || (path === '' && hash)) {
-        const element = document.getElementById(hash);
-        if (element) {
-          e.preventDefault();
-          const yOffset = -112; // Adjusted for navbar height
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-          window.history.pushState(null, '', `#${hash}`);
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // ─── NAV ITEMS ────────────────────────────────────────────────────────────
-  // Only "Services" and "About Us" open a modal dropdown.
-  // The remaining items are direct links rendered as plain buttons.
   const navItems: Record<NavKey, NavItem> = {
     Services: {
       labelKey: 'services',
@@ -145,14 +124,12 @@ const Navbar = () => {
     },
   }
 
-  // Direct-link URLs for non-dropdown items
   const directLinks: Partial<Record<NavKey, string>> = {
     'What Sets Us Apart': getLocalizedLink('/what-sets-us-apart'),
     'Make an Impact': getLocalizedLink('/impacts'),
     Career: getLocalizedLink('/careers'),
   }
 
-  // ─── HOVER / CLOSE HELPERS ────────────────────────────────────────────────
   const cancelClose = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -168,24 +145,20 @@ const Navbar = () => {
   }
 
   const handleNavMouseEnter = (navKey: NavKey) => {
-    // Only open a modal when there are dropdown items
     if (navItems[navKey].rightSideButtons.length === 0) return;
     cancelClose();
     setActiveNavKey(navKey);
     setIsModalOpen(true);
   }
 
-  // Mobile click logic
   const handleNavClick = (navKey: NavKey) => {
     const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
-
     if (!hasDropdown) {
       const link = directLinks[navKey];
       if (link) router.push(link);
       setIsMobileMenuOpen(false);
       return;
     }
-
     if (isModalOpen && activeNavKey !== navKey) {
       setActiveNavKey(navKey);
     } else if (!isModalOpen) {
@@ -207,107 +180,47 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   }
 
-  // ─── RENDER ───────────────────────────────────────────────────────────────
   return (
     <>
       <nav className="bg-white shadow-sm w-full z-50 lg:relative">
         <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-
-            {/* Logo */}
             <Link href={getLocalizedLink('/')} className="shrink-0">
               <img src="/Logo.svg" alt="Logo" className="h-12 md:h-auto" />
             </Link>
 
-            {/* ── Desktop Navigation ── */}
             <div className="hidden lg:flex items-center gap-1">
+              {(Object.keys(navItems) as NavKey[]).map((key) => (
+                <DesktopNavButton
+                  key={key}
+                  navKey={key}
+                  navItems={navItems}
+                  activeNavKey={activeNavKey}
+                  handleNavMouseEnter={handleNavMouseEnter}
+                  scheduleClose={scheduleClose}
+                  content={content}
+                  router={router}
+                  directLinks={directLinks}
+                  handleHashLink={handleHashLink}
+                />
+              ))}
 
-              {/* Services — dropdown */}
-              <DesktopNavButton
-                navKey="Services"
-                navItems={navItems}
-                activeNavKey={activeNavKey}
-                handleNavMouseEnter={handleNavMouseEnter}
-                scheduleClose={scheduleClose}
-                content={content}
-                router={router}
-                directLinks={directLinks}
-                handleHashLink={handleHashLink}
-              />
-
-              {/* About Us — dropdown */}
-              <DesktopNavButton
-                navKey="About Us"
-                navItems={navItems}
-                activeNavKey={activeNavKey}
-                handleNavMouseEnter={handleNavMouseEnter}
-                scheduleClose={scheduleClose}
-                content={content}
-                router={router}
-                directLinks={directLinks}
-                handleHashLink={handleHashLink}
-              />
-
-              {/* What Sets Us Apart — direct link */}
-              <DesktopNavButton
-                navKey="What Sets Us Apart"
-                navItems={navItems}
-                activeNavKey={activeNavKey}
-                handleNavMouseEnter={handleNavMouseEnter}
-                scheduleClose={scheduleClose}
-                content={content}
-                router={router}
-                directLinks={directLinks}
-                handleHashLink={handleHashLink}
-              />
-
-              {/* Make an Impact — direct link */}
-              <DesktopNavButton
-                navKey="Make an Impact"
-                navItems={navItems}
-                activeNavKey={activeNavKey}
-                handleNavMouseEnter={handleNavMouseEnter}
-                scheduleClose={scheduleClose}
-                content={content}
-                router={router}
-                directLinks={directLinks}
-                handleHashLink={handleHashLink}
-              />
-
-              {/* Career — direct link */}
-              <DesktopNavButton
-                navKey="Career"
-                navItems={navItems}
-                activeNavKey={activeNavKey}
-                handleNavMouseEnter={handleNavMouseEnter}
-                scheduleClose={scheduleClose}
-                content={content}
-                router={router}
-                directLinks={directLinks}
-                handleHashLink={handleHashLink}
-              />
-
-              {/* Divider */}
               <span className="mx-2 h-5 w-px bg-gray-200" aria-hidden />
-
-              {/* Language Switcher */}
               <LanguageSwitcher />
 
-              {/* CTA */}
               <Link
                 href={getLocalizedLink("/contact#form")}
-                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"))}
+                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
                 className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-white px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
               >
                 {content.bookConsultation.value}
               </Link>
             </div>
 
-            {/* ── Tablet & Mobile controls ── */}
             <div className="lg:hidden flex items-center gap-3">
               <Link
                 href={getLocalizedLink("/contact#form")}
-                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"))}
+                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
                 className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-colors duration-150"
               >
                 {content.bookConsultation.value}
@@ -333,58 +246,27 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* ── Mobile Menu ── */}
           {isMobileMenuOpen && (
             <div className="lg:hidden pb-4 border-t border-gray-100 mt-1">
               <div className="flex flex-col divide-y divide-gray-100">
-                <MobileNavButton
-                  navKey="Services"
-                  navItems={navItems}
-                  activeNavKey={activeNavKey}
-                  isModalOpen={isModalOpen}
-                  handleNavClick={handleNavClick}
-                  content={content}
-                />
-                <MobileNavButton
-                  navKey="About Us"
-                  navItems={navItems}
-                  activeNavKey={activeNavKey}
-                  isModalOpen={isModalOpen}
-                  handleNavClick={handleNavClick}
-                  content={content}
-                />
-                <MobileNavButton
-                  navKey="What Sets Us Apart"
-                  navItems={navItems}
-                  activeNavKey={activeNavKey}
-                  isModalOpen={isModalOpen}
-                  handleNavClick={handleNavClick}
-                  content={content}
-                />
-                <MobileNavButton
-                  navKey="Make an Impact"
-                  navItems={navItems}
-                  activeNavKey={activeNavKey}
-                  isModalOpen={isModalOpen}
-                  handleNavClick={handleNavClick}
-                  content={content}
-                />
-                <MobileNavButton
-                  navKey="Career"
-                  navItems={navItems}
-                  activeNavKey={activeNavKey}
-                  isModalOpen={isModalOpen}
-                  handleNavClick={handleNavClick}
-                  content={content}
-                />
+                {(Object.keys(navItems) as NavKey[]).map((key) => (
+                  <MobileNavButton
+                    key={key}
+                    navKey={key}
+                    navItems={navItems}
+                    activeNavKey={activeNavKey}
+                    isModalOpen={isModalOpen}
+                    handleNavClick={handleNavClick}
+                    content={content}
+                  />
+                ))}
               </div>
 
-              {/* Mobile CTA */}
               <div className="px-4 pt-4">
                 <Link
                   href={getLocalizedLink("/contact#form")}
                   onClick={(e) => {
-                    if (!handleHashLink(e, getLocalizedLink("/contact#form"))) {
+                    if (!handleHashLink(e, getLocalizedLink("/contact#form"), router)) {
                       setIsMobileMenuOpen(false);
                     }
                   }}
@@ -398,7 +280,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ── Dropdown Modal ── */}
       <NavbarModal
         isOpen={isModalOpen}
         onClose={closeModal}
@@ -411,7 +292,6 @@ const Navbar = () => {
   )
 }
 
-// ─── DESKTOP NAV BUTTON RENDERER ─────────────────────────────────────────
 interface DesktopNavButtonProps {
   navKey: NavKey
   navItems: Record<NavKey, NavItem>
@@ -421,7 +301,7 @@ interface DesktopNavButtonProps {
   content: Record<string, any>
   router: ReturnType<typeof useRouter>
   directLinks: Partial<Record<NavKey, string>>
-  handleHashLink: (e: React.MouseEvent, link: string) => boolean
+  handleHashLink: (e: React.MouseEvent, link: string, router: ReturnType<typeof useRouter>) => boolean
 }
 
 const DesktopNavButton = ({
@@ -465,7 +345,7 @@ const DesktopNavButton = ({
   return (
     <button
       onClick={(e) => {
-        if (!handleHashLink(e, directLinks[navKey]!)) {
+        if (!handleHashLink(e, directLinks[navKey]!, router)) {
           router.push(directLinks[navKey]!)
         }
       }}
@@ -476,7 +356,6 @@ const DesktopNavButton = ({
   );
 };
 
-// ─── MOBILE NAV BUTTON RENDERER ──────────────────────────────────────────
 interface MobileNavButtonProps {
   navKey: NavKey
   navItems: Record<NavKey, NavItem>

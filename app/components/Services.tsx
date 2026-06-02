@@ -8,7 +8,7 @@ import { AppLocale } from "@/types/locale";
 const Services = () => {
     const router = useRouter();
     const { locale } = useLocale();
-    const content = useIntlayer("services");
+    const content = useIntlayer("services_content");
 
     const services = [
         {
@@ -138,12 +138,12 @@ const Services = () => {
                     {/* Heading */}
                     <div className="text-center mb-10 md:mb-14">
                         <h3 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold">
-                            {content?.heading?.value}{" "}
-                            <span className="text-[#D4AF37]">{content?.headingHighlight?.value}</span>{" "}
-                            {content?.headingEnd?.value}
+                            {content?.heading?.value?.toString()}{" "}
+                            <span className="text-[#D4AF37]">{content?.headingHighlight?.value?.toString()}</span>{" "}
+                            {content?.headingEnd?.value?.toString()}
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base mt-3 max-w-2xl mx-auto">
-                            {content?.subheading?.value}
+                            {content?.subheading?.value?.toString()}
                         </p>
                     </div>
 
@@ -212,16 +212,16 @@ const Services = () => {
                                                 <animate attributeName="opacity" from=".6" to="0" dur="2.4s" repeatCount="indefinite" />
                                             </circle>
                                             {[
-                                                { cx: 52, cy: 38, label: idx === 1 ? content.cloudLabel.value : "", ly: 26, d: 0 },
-                                                { cx: 172, cy: 42, label: idx === 1 ? content.erpLabel.value : "", ly: 30, d: 0.5 },
-                                                { cx: 48, cy: 138, label: idx === 1 ? content.apiLabel.value : "", ly: 156, d: 1 },
-                                                { cx: 176, cy: 132, label: idx === 1 ? content.dataLabel.value : "", ly: 150, d: 0.8 },
+                                                { cx: 52, cy: 38, label: idx === 1 ? content?.cloudLabel?.value : "", ly: 26, d: 0 },
+                                                { cx: 172, cy: 42, label: idx === 1 ? content?.erpLabel?.value : "", ly: 30, d: 0.5 },
+                                                { cx: 48, cy: 138, label: idx === 1 ? content?.apiLabel?.value : "", ly: 156, d: 1 },
+                                                { cx: 176, cy: 132, label: idx === 1 ? content?.dataLabel?.value : "", ly: 150, d: 0.8 },
                                                 { cx: 110, cy: 18, label: "", ly: 0, d: 0.3 },
                                             ].map((n, i) => (
                                                 <g key={i}>
                                                     <circle cx={n.cx} cy={n.cy} r="9" fill="rgba(12,31,74,.07)" stroke="#0C1F4A" strokeWidth="1.2" />
                                                     <circle cx={n.cx} cy={n.cy} r="5" fill="#0C1F4A"><animate attributeName="opacity" values=".5;1;.5" dur={`${2.2 + i * 0.2}s`} begin={`${n.d}s`} repeatCount="indefinite" /></circle>
-                                                    {n.label && <text x={n.cx} y={n.ly} textAnchor="middle" fontSize="7" fill="#0C1F4A" fontWeight="700" opacity=".6">{n.label}</text>}
+                                                    {n.label && <text x={n.cx} y={n.ly} textAnchor="middle" fontSize="7" fill="#0C1F4A" fontWeight="700" opacity=".6">{n.label?.toString()}</text>}
                                                     </g>
                                                     ))}
                                                     </svg>
@@ -255,9 +255,9 @@ const Services = () => {
                                                     ))}
                                                     <circle cx="198" cy="66" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin=".6s" repeatCount="indefinite" /></circle>
                                                     <circle cx="198" cy="118" r="9" fill="#C9A84C"><animate attributeName="opacity" values=".5;1;.5" dur="1.7s" begin="1s" repeatCount="indefinite" /></circle>
-                                                    <text x="28" y="154" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content?.inputLabel?.value}</text>
-                                                    <text x="90" y="124" dy="12" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content?.hiddenLabel?.value}</text>
-                                                    <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content?.outputLabel?.value}</text>
+                                                    <text x="28" y="154" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content?.inputLabel?.value?.toString()}</text>
+                                                    <text x="90" y="124" dy="12" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content?.hiddenLabel?.value?.toString()}</text>
+                                                    <text x="198" y="138" textAnchor="middle" fontSize="7" fill="rgba(201,168,76,.6)" fontWeight="700">{content?.outputLabel?.value?.toString()}</text>
                                                     </svg>
                                                     )}
 
@@ -270,10 +270,10 @@ const Services = () => {
                                                     </svg>
                                                     </div>
                                                     <p style={{ fontSize: 8.5, fontWeight: 800, color: idx === 2 ? "rgba(201,168,76,.75)" : "#92660A", letterSpacing: locale === 'ar' ? 'normal' : ".1em", textTransform: locale === 'ar' ? 'none' : "uppercase", margin: "8px 0 2px" }}>
-                                                    {svc.category}
+                                                    {svc.category?.toString()}
                                                     </p>
                                                     <h3 style={{ fontSize: 15, fontWeight: 800, color: idx === 2 ? "#fff" : "#0C1F4A", margin: 0, fontFamily: "Lora,Georgia,serif", lineHeight: 1.2 }}>
-                                                    {svc.title}
+                                                    {svc.title?.toString()}
                                                     </h3>
                                                     </div>
                                                     </div>
@@ -309,7 +309,7 @@ const Services = () => {
                                                     ))}
                                                     </div>
                                                     <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 700, color: "#C9A84C" }}>
-                                                    {content?.explore?.value} <span className="am-arr rtl:rotate-180">→</span>
+                                                    {content?.explore?.value?.toString()} <span className="am-arr rtl:rotate-180">→</span>
                                                     </div>
                                                     </div>
                                                     </div>
