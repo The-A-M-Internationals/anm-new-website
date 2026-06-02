@@ -19,7 +19,7 @@ export default function FinanceTransformationPage({ initialTab }: { initialTab?:
         locale === "ar" ? "/serv-ar.png" : "/serv.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/about-ar.png" : "/about.png";
+        locale === "ar" ? "/aboutus/new-ar.png" : "/aboutus/new.png";
 
     const heroButtonImage =
         locale === "ar" ? "/services/button-image-ar.png" : "/services/button-image.png";

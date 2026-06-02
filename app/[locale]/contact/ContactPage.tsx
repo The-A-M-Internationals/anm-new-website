@@ -19,7 +19,7 @@ const ContactPage = () => {
         locale === "ar" ? "/contactmo-ar.png" : "/contactm.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/blogs/tab-hero.png" : "/blogs/tab-hero.png";
+        locale === "ar" ? "/blogs/tab-hero-ar.png" : "/blogs/tab-hero.png";
 
     const heroButtonImage =
         locale === "ar" ? "/contact-button-heroo-ar.png" : "/contact-button-hero.png";

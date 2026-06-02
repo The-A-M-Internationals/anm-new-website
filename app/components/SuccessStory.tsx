@@ -33,14 +33,12 @@ const SuccessStory = () => {
   const imageSource = locale === "ar" ? ARABIC_BADGE : STATIC_IMAGES;
 
   const localizedServices = useMemo(() => {
-    const tabKeys = ['automotive', 'healthcare', 'insurance'];
     return imageSource.map((service, index) => ({
       ...service,
       title: content.items[index]?.title.value ?? '',
       description: content.items[index]?.description.value ?? '',
       industry: content.items[index]?.industry.value ?? '',
       badge: content.items[index]?.badge.value,
-      tabKey: tabKeys[index] || 'all',
     }));
   }, [imageSource, content.items]);
 
@@ -86,7 +84,7 @@ const SuccessStory = () => {
 
       {/* Cards */}
       <div className='flex flex-col md:flex-row flex-wrap justify-center gap-3 sm:gap-4 mt-1 sm:mt-8 w-full max-w-7xl'>
-        {visibleServices.map((service: any, idx: number) => (
+        {visibleServices.map((service, idx) => (
           <SucessStoryCard
             key={page * ITEMS_PER_PAGE + idx}
             title={service.title}
@@ -94,7 +92,6 @@ const SuccessStory = () => {
             image={service.image}
             industry={service.industry}
             badge={service.badge}
-            onClick={() => router.push(`/${locale}/success-stories?tab=${service.tabKey}#story-content`)}
           />
         ))}
       </div>

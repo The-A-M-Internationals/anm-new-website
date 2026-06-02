@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import AOSInitializer from "../components/AOSInitializer";
 import GoToTopButton from "../components/GoToTopButton";
-import HashScrollHandler from "../components/HashScrollHandler";
 
 import { getHTMLTextDir } from 'intlayer';
 import { IntlayerClientProvider } from "next-intlayer";
@@ -68,7 +67,6 @@ export default async function RootLayout({
                 `}} />
                 <IntlayerClientProvider locale={locale}>
                     <AOSInitializer />
-                    <HashScrollHandler />
                     <Navbar />
                     {children}
                     <GoToTopButton />

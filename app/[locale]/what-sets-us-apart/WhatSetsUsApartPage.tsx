@@ -20,7 +20,7 @@ export default function WhatSetsUsApartPage() {
         locale === "ar" ? "/event-arr.png" : "/event.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/blogs/tab-hero.png" : "/blogs/tab-hero.png";
+        locale === "ar" ? "/blogs/tab-hero-ar.png" : "/blogs/tab-hero.png";
 
     const heroButtonImage =
         locale === "ar" ? "/features/button-hero-ar.png" : "/features/button-hero.png";

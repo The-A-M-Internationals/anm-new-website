@@ -1,39 +1,14 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useIntlayer, useLocale } from 'next-intlayer';
 
 const SuccessStories: React.FC = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const content = useIntlayer("success-stories");
   const { locale } = useLocale();
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const [activeTab, setActiveTab] = useState('all');
-
-  useEffect(() => {
-    const tab = searchParams.get('tab');
-    if (tab && ['automotive', 'healthcare', 'insurance', 'all'].includes(tab)) {
-      setActiveTab(tab);
-    }
-  }, [searchParams]);
-
-  // Manually handle hash scroll to ensure it bypasses the hero image
-  useEffect(() => {
-    if (window.location.hash === '#story-content' || searchParams.get('tab')) {
-      setTimeout(() => {
-        if (containerRef.current) {
-          const yOffset = -80; // Buffer for fixed navbar
-          const y = containerRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }, 500); // Increased timeout to ensure layout is stable
-    }
-  }, []);
-
   const tabs = [
     { key: 'all', label: content.tabs.all.value },
     { key: 'automotive', label: content.tabs.automotive.value },
@@ -94,12 +69,14 @@ const SuccessStories: React.FC = () => {
     },
   ];
 
+  const [activeTab, setActiveTab] = useState('all');
+
   const filteredStudies = activeTab === 'all'
     ? caseStudies
     : caseStudies.filter(study => study.industryKey === activeTab);
 
   return (
-    <div className="min-h-screen py-10" id="story-content" ref={containerRef}>
+    <div className="min-h-screen py-10">
       <div className="w-[92%] max-w-[1400px] mx-auto">
         {/* Tabs */}
         <div className="flex border border-[#F6F6F6] w-fit mx-auto rounded-3xl md:rounded-full shadow-sm p-2 flex-wrap justify-center gap-2 mb-12">

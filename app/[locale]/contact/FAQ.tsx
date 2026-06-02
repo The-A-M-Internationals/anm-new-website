@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
-import { handleHashLink } from "@/lib/handleHashLink";
 
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -128,14 +127,7 @@ const FAQ = () => {
                 <p className='text-white text-base md:text-lg text-center w-full md:w-[60%]'>
                     {content.joinDescription.value}
                 </p>
-                <button 
-                    onClick={(e) => {
-                        if (!handleHashLink(e, `/${locale}/careers#open-positions`, router)) {
-                            router.push(`/${locale}/careers#open-positions`);
-                        }
-                    }} 
-                    className='bg-[#C9A84C] w-[300px] flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer'
-                >
+                <button onClick={() => router.push(`/${locale}/careers#open-positions`)} className='bg-[#C9A84C] w-[300px] flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer'>
                     {content.joinButton.value}
                     <ArrowRight className='w-5 h-5 rtl:rotate-180' />
                 </button>

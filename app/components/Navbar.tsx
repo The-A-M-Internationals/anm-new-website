@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
-import { handleHashLink } from '@/lib/handleHashLink';
 
 type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
 
@@ -35,6 +34,26 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
+
+  const handleHashLink = (e: React.MouseEvent, link: string) => {
+    if (link.includes('#')) {
+      const [path, hash] = link.split('#');
+      const currentPath = window.location.pathname;
+
+      if (currentPath === path || (path === '' && hash)) {
+        const element = document.getElementById(hash);
+        if (element) {
+          e.preventDefault();
+          const yOffset = -112; // Adjusted for navbar height
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          window.history.pushState(null, '', `#${hash}`);
+          return true;
+        }
+      }
+    }
+    return false;
+  };
 
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -277,7 +296,7 @@ const Navbar = () => {
               {/* CTA */}
               <Link
                 href={getLocalizedLink("/contact#form")}
-                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
+                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"))}
                 className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-white px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
               >
                 {content.bookConsultation.value}
@@ -288,7 +307,7 @@ const Navbar = () => {
             <div className="lg:hidden flex items-center gap-3">
               <Link
                 href={getLocalizedLink("/contact#form")}
-                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
+                onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"))}
                 className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-colors duration-150"
               >
                 {content.bookConsultation.value}
@@ -365,7 +384,7 @@ const Navbar = () => {
                 <Link
                   href={getLocalizedLink("/contact#form")}
                   onClick={(e) => {
-                    if (!handleHashLink(e, getLocalizedLink("/contact#form"), router)) {
+                    if (!handleHashLink(e, getLocalizedLink("/contact#form"))) {
                       setIsMobileMenuOpen(false);
                     }
                   }}
@@ -402,7 +421,7 @@ interface DesktopNavButtonProps {
   content: Record<string, any>
   router: ReturnType<typeof useRouter>
   directLinks: Partial<Record<NavKey, string>>
-  handleHashLink: (e: React.MouseEvent, link: string, router: ReturnType<typeof useRouter>) => boolean
+  handleHashLink: (e: React.MouseEvent, link: string) => boolean
 }
 
 const DesktopNavButton = ({
@@ -446,7 +465,7 @@ const DesktopNavButton = ({
   return (
     <button
       onClick={(e) => {
-        if (!handleHashLink(e, directLinks[navKey]!, router)) {
+        if (!handleHashLink(e, directLinks[navKey]!)) {
           router.push(directLinks[navKey]!)
         }
       }}
