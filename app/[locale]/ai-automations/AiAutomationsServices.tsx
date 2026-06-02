@@ -355,7 +355,7 @@ const AiAutomationsServices = () => {
                                         <ul className="space-y-3 mt-auto">
                                             {service.services.map((item, i) => (
                                                 <li key={i} className="flex items-start gap-3 text-white/70 group-hover:text-white/90 transition-colors">
-                                                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: service.accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0 rtl:rotate-180" style={{ color: service.accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                     </svg>
                                                     <span className="text-sm">{item}</span>

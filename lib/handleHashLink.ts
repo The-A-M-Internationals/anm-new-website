@@ -6,10 +6,9 @@ export const handleHashLink = (e: React.MouseEvent, link: string, router: Return
     const currentPath = window.location.pathname;
 
     // Standardize paths by removing trailing slashes for comparison
-    const normalizedCurrentPath = currentPath.replace(/\/$/, '') || '/';
-    const normalizedTargetPath = path.replace(/\/$/, '') || '/';
+    const normalizedCurrentPath = currentPath.replace(/\/$/, '');
+    const normalizedTargetPath = path.replace(/\/$/, '');
 
-    // If paths match, or if it's an anchor-only link on the same page
     if (normalizedCurrentPath === normalizedTargetPath || (path === '' && hash)) {
       const element = document.getElementById(hash);
       if (element) {

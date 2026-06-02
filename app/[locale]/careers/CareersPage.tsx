@@ -19,7 +19,7 @@ export default function CareersPage() {
         locale === "ar" ? "/interview-ar.png" : "/interview.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/careers/tab-hero.png" : "/careers/tab-hero.png";
+        locale === "ar" ? "/careers/tab-hero-ar.png" : "/careers/tab-hero.png";
 
     const heroButtonImage =
         locale === "ar" ? "/careers/button-hero-ar.png" : "/careers/button-hero.png";

@@ -306,7 +306,7 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 pr-2">
                   <h3 className="font-semibold text-[28px]">{content.emailUs.value}</h3>
                   <a href="mailto:am@theaminternational.com" className="text-lg hover:text-[#D4AF37] transition-colors">am@theaminternational.com</a>
-                  <p className="text-lg ">theaminternationals.com</p>
+                  <p className="text-lg ">theaminternational.com</p>
                   <p className="text-gray-500 text-xs">{content.responseTime.value}</p>
                 </div>
               </div>

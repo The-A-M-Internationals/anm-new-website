@@ -7,15 +7,11 @@ interface SucessStoryCardProps {
     description: string;
     badge?: string;
     industry: string;
-    onClick?: () => void;
 }
 
-const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, description, badge, industry, onClick }) => {
+const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, description, badge, industry }) => {
     return (
-        <div 
-            onClick={onClick}
-            className='hover:scale-105 transition relative h-[450px] md:h-[480px] lg:h-[500px] w-[330px] mx-auto md:w-[380px] lg:w-[400px] mt-2 cursor-pointer'
-        >
+        <div className='hover:scale-105 transition relative h-[450px] md:h-[480px] lg:h-[500px] w-[330px] mx-auto md:w-[380px] lg:w-[400px] mt-2'>
             <div className='absolute top-1 end-0 md:top-1 lg:top-0 lg:end-2 z-10'>
                 <h2 className='px-1 py-0.5 md:px-2 md:py-1 rounded-full text-[17px] md:text-[16px] bg-[#FFFBED] border border-[#D4AF37] text-[#897122]'>
                     {industry}
