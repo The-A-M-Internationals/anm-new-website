@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);

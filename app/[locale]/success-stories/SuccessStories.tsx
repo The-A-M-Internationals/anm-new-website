@@ -14,16 +14,17 @@ const SuccessStories: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState('all');
 
+  const searchTab = searchParams.get('tab');
+
   useEffect(() => {
-    const tab = searchParams.get('tab');
-    if (tab && ['automotive', 'healthcare', 'insurance', 'all'].includes(tab)) {
-      setActiveTab(tab);
+    if (searchTab && ['automotive', 'healthcare', 'insurance', 'all'].includes(searchTab)) {
+      setActiveTab(searchTab);
     }
-  }, [searchParams]);
+  }, [searchTab]);
 
   // Manually handle hash scroll to ensure it bypasses the hero image
   useEffect(() => {
-    if (window.location.hash === '#story-content' || searchParams.get('tab')) {
+    if (window.location.hash === '#story-content' || searchTab) {
       setTimeout(() => {
         if (containerRef.current) {
           const yOffset = -80; // Buffer for fixed navbar
@@ -32,7 +33,7 @@ const SuccessStories: React.FC = () => {
         }
       }, 500); // Increased timeout to ensure layout is stable
     }
-  }, []);
+  }, [searchTab]);
 
   const tabs = [
     { key: 'all', label: content.tabs.all.value },

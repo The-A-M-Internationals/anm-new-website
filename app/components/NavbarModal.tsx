@@ -9,11 +9,11 @@ import { useLocale } from "next-intlayer";
 import type { AppLocale } from "@/types/locale";
 import { handleHashLink } from '@/lib/handleHashLink';
 
-type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
+type IntlayerKey = Extract<keyof ReturnType<typeof useIntlayer>, string>;
 
 interface RightSideButton {
   icon: string
-  textKey: any
+  textKey: string
   type: string
   link: string
 }
@@ -39,7 +39,7 @@ const NavbarModal = ({
   const { locale } = useLocale();
   const currentLocale = locale as AppLocale;
   const router = useRouter();
-  const navbarContent = useIntlayer("navbar");
+  const navbarContent = useIntlayer("navbar") as any;
   const t = useIntlayer("navbarModal");
 
   useEffect(() => {
@@ -124,7 +124,7 @@ const NavbarModal = ({
                   <button
                     onClick={(e) => {
                       onClose();
-                      if (!handleHashLink(e, `/${currentLocale}/blogs#article`, router)) {
+                      if (!handleHashLinkProp(e, `/${currentLocale}/blogs#article`, router)) {
                         router.push(`/${currentLocale}/blogs#article`);
                       }
                     }}
@@ -145,13 +145,13 @@ const NavbarModal = ({
                   scroll={true}
                   onClick={(e) => {
                     onClose();
-                    handleHashLink(e, button.link, router);
+                    handleHashLinkProp(e, button.link, router);
                   }}
                   key={index}
                   className="flex items-center gap-2 bg-white px-3 md:px-4 py-2 rounded-xl border border-[#D4AF37] shadow hover:shadow-md transition w-full sm:w-auto"
                 >
                   <img src={button.icon} alt="Bottom Icon" className='w-6 h-5 md:w-8 md:h-6' />
-                  <span className="text-base md:text-xl font-semibold">{(navbarContent as any)?.[button.textKey]?.value || (navbarContent as any)?.[button.textKey] || button.textKey}</span>
+                  <span className="text-base md:text-xl font-semibold">{navbarContent[button.textKey]?.value || navbarContent[button.textKey] || button.textKey}</span>
                 </Link>
               ))}
             </div>

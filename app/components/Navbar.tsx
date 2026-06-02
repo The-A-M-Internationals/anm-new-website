@@ -7,7 +7,7 @@ import { useIntlayer, useLocale } from "next-intlayer";
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
 import { handleHashLink } from '@/lib/handleHashLink';
 
-type IntlayerKey = keyof ReturnType<typeof useIntlayer>;
+type IntlayerKey = Extract<keyof ReturnType<typeof useIntlayer>, string>;
 
 type NavKey =
   | 'Services'
