@@ -16,7 +16,7 @@ const EventsPage = () => {
     const heroImageMobile = locale === "ar" ? "/event-ar.png" : "/event.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/features/tab-hero-ar.png" : "/features/tab-hero.png";
+        locale === "ar" ? "/blogs/tab-hero.png" : "/blogs/tab-hero.png";
 
     const heroButtonImage =
         locale === "ar" ? "/eventsbutton-ar.png" : "/eventsbutton.png";

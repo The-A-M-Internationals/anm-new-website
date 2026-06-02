@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  typedRoutes: false,
 };
 
 export default withIntlayer(nextConfig);
