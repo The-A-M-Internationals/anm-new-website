@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
+import { useLocale } from "next-intlayer";
 
 interface CardProps {
     icon: ReactNode;
@@ -8,6 +9,8 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ icon, title, description }) => {
+    const { locale } = useLocale();
+
     return (
         <div className="m-1 md:m-4 group relative w-full px-6 md:px-0 max-w-[330px] md:max-w-[360px] lg:max-w-[375px] mx-auto">
 
@@ -53,7 +56,7 @@ const Card: React.FC<CardProps> = ({ icon, title, description }) => {
                     </div>
 
                     {/* Arrow circle */}
-                    <Link href="/features#epm-suites" aria-label="Learn more about this service">
+                    <Link href={`/${locale}/features#epm-suites`} aria-label="Learn more about this service">
                         <div className="absolute top-4 right-4 md:top-0 md:right-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white z-30 flex items-center justify-center shadow-md">
                             <div className="w-full h-full rounded-full bg-[#D4AF37] flex items-center justify-center">
                                 {/* flip arrow back */}

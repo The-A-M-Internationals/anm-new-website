@@ -66,7 +66,7 @@ export const eventsContent = {
           en: "10:00 AM - 5:00 PM",
           ar: "10:00 صباحًا - 5:00 مساءً",
         }),
-        imageSrc: "/images/summit.jpg",
+        imageSrc: "/events/pic.jpg",
       },
       {
         id: "2",
@@ -94,7 +94,7 @@ export const eventsContent = {
           en: "9:00 AM - 4:00 PM",
           ar: "9:00 صباحًا - 4:00 مساءً",
         }),
-        imageSrc: "/images/techexpo.jpg",
+        imageSrc: "/events/pic.jpg",
       },
       // Add more events as needed
     ],

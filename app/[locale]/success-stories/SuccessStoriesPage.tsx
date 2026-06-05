@@ -11,7 +11,7 @@ const SuccessStoriesPage = () => {
 
     const heroImage = isArabic ? "/SuccessStories-ar.png" : "/SuccessStories.png";
     const heroImageMobile = isArabic ? "/stories-ar.png" : "/stories.png";
-    const heroImageTablet = isArabic ? "/SuccessStories-tab-ar.png" : "/SuccessStories.png";
+    const heroImageTablet = isArabic ? "/SuccessStories-ar.png" : "/SuccessStories.png";
     const heroButtonImage = isArabic
         ? "/button/success-button-hero-ar.png"
         : "/button/success-button-hero.png";
