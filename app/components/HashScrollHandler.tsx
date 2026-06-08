@@ -17,6 +17,8 @@ const HashScrollHandler = () => {
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
+      } else {
+        window.scrollTo(0, 0);
       }
     };
 
