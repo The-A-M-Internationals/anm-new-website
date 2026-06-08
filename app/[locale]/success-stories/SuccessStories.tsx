@@ -27,7 +27,7 @@ const SuccessStories: React.FC = () => {
     if (window.location.hash === '#story-content' || searchTab) {
       setTimeout(() => {
         if (containerRef.current) {
-          const yOffset = -80; // Buffer for fixed navbar
+          const yOffset = 0; // Removed offset as navbar is not fixed
           const y = containerRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;      
           window.scrollTo({ top: y, behavior: 'smooth' });
         }

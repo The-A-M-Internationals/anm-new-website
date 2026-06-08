@@ -38,7 +38,7 @@ const WhatSetsUsApartList = () => {
     ];
 
     return (
-        <div id="what-sets-us-apart" className="bg-transparent pt-4 pb-12 md:pt-8 md:pb-20 lg:pt-10 lg:pb-24 px-4 sm:px-6 lg:px-8 scroll-mt-[112px]">
+        <div id="what-sets-us-apart" className="bg-transparent pt-4 pb-12 md:pt-8 md:pb-20 lg:pt-10 lg:pb-24 px-4 sm:px-6 lg:px-8">
             <div className="w-full mx-auto p-2 md:p-7">
                 {/* Header */}
                 <div className="mb-8">

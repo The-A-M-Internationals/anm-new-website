@@ -13,7 +13,7 @@ export const handleHashLink = (e: React.MouseEvent, link: string, router: Return
       const element = document.getElementById(hash);
       if (element) {
         e.preventDefault();
-        const yOffset = -112; // Adjusted for fixed navbar
+        const yOffset = 0; // Removed offset as navbar is not fixed
         const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
         

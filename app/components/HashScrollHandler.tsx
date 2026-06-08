@@ -13,7 +13,7 @@ const HashScrollHandler = () => {
       if (hash) {
         const element = document.getElementById(hash);
         if (element) {
-          const yOffset = -112; // Adjusted for fixed navbar
+          const yOffset = 0; // Removed offset as navbar is not fixed
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }

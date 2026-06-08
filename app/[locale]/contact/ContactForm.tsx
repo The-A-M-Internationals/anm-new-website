@@ -19,7 +19,7 @@ const ContactForm: React.FC = () => {
       setTimeout(() => {
         const element = document.getElementById('form');
         if (element) {
-          const yOffset = -100; // Account for fixed navbar
+          const yOffset = 0; // Removed offset as navbar is not fixed
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
