@@ -23,10 +23,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function DigitalMarketingPage() {
     return (
         <div>
-            <DigitalMarketingHero />
-            <DigitalMarketingServices />
-            <Events />
-            <Innovation />
+            <section className="snap-section"><DigitalMarketingHero /></section>
+            <section className="snap-section"><DigitalMarketingServices /></section>
+            <section className="snap-section"><Events /></section>
+            <section className="snap-section"><Innovation /></section>
         </div>
     );
 }

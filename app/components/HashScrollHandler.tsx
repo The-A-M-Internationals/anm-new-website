@@ -20,6 +20,10 @@ const HashScrollHandler = () => {
       }
     };
 
+    // Listen for hash changes manually as Next.js navigation might not trigger useEffect on hash-only changes
+    window.addEventListener('hashchange', handleScroll);
+    window.addEventListener('popstate', handleScroll);
+
     // Attempt to scroll immediately
     handleScroll();
 
@@ -28,6 +32,8 @@ const HashScrollHandler = () => {
     const timer2 = setTimeout(handleScroll, 500);
 
     return () => {
+      window.removeEventListener('hashchange', handleScroll);
+      window.removeEventListener('popstate', handleScroll);
       clearTimeout(timer);
       clearTimeout(timer2);
     };

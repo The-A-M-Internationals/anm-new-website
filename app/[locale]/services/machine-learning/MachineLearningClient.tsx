@@ -5,6 +5,7 @@ import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef } from "react";
 import { useIntlayer } from "next-intlayer";
 import { AppLocale } from "@/types/locale";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 const MachineLearningHero = () => {
     const router = useRouter();
@@ -158,7 +159,12 @@ const MachineLearningHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
-                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
+                            onClick={(e) => {
+                                const link = getLocalizedPath(locale as AppLocale, "/contact#form");
+                                if (!handleHashLink(e, link, router)) {
+                                    router.push(link);
+                                }
+                            }}
                             className="group relative px-12 py-5 bg-[#2563EB] text-white rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#2563EB]/40 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6] to-[#2563EB] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -166,9 +172,12 @@ const MachineLearningHero = () => {
                             <span className="relative z-10">{content.getStarted.value}</span>
                         </button>
                         <button
-                            onClick={() => {
-                                const servicesSection = document.getElementById('ml-services');
-                                servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                            onClick={(e) => {
+                                const link = "#ml-services";
+                                if (!handleHashLink(e, link, router)) {
+                                    const servicesSection = document.getElementById('ml-services');
+                                    servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                                }
                             }}
                             className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#2563EB]/50 hover:-translate-y-1"
                         >

@@ -7,10 +7,14 @@ import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import Link from "next/link";
 import { AppLocale } from "@/types/locale";
 
+import { handleHashLink } from "@/lib/handleHashLink";
+
 const HomeHero = () => {
     const router = useRouter();
     const { locale } = useLocale();
     const content = useIntlayer("homeHero");
+
+    const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
 
     // Animated counter refs
     const clientsRef = useRef<HTMLDivElement>(null);
@@ -524,12 +528,18 @@ const HomeHero = () => {
                             <div className="flex flex-col sm:flex-row gap-4 mb-10">
                                 <Link
                                     href={getLocalizedPath(locale as AppLocale, "/contact#form")}
+                                    onClick={(e) => handleHashLink(e, getLocalizedPath(locale as AppLocale, "/contact#form"), router)}
                                     className="flex items-center justify-center px-7 py-3.5 bg-[#C9A84C] text-[#0C1F4A] rounded-lg text-[15px] font-bold hover:bg-[#D4AF37] transition-colors"
                                 >
                                     {content.bookConsultation.value}
                                 </Link>
                                 <button
-                                    onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/#services"))}
+                                    onClick={(e) => {
+                                        const link = getLocalizedPath(locale as AppLocale, "/#services");
+                                        if (!handleHashLink(e, link, router)) {
+                                            router.push(link);
+                                        }
+                                    }}
                                     className="px-7 py-3.5 bg-transparent text-[#C9A84C] border-2 border-[#C9A84C] rounded-lg text-[15px] font-bold hover:bg-[#C9A84C] hover:text-[#0C1F4A] transition-colors"
                                 >
                                     {content.exploreServices.value}

@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useIntlayer } from "next-intlayer";
 import { useLocale } from "next-intlayer";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 export default function SuggestTopicSection() {
 
@@ -21,7 +22,12 @@ export default function SuggestTopicSection() {
                 {content.description.value}
             </p>
             <button
-                onClick={() => router.push(`/${locale}/contact#form`)}
+                onClick={(e) => {
+                    const link = `/${locale}/contact#form`;
+                    if (!handleHashLink(e, link, router)) {
+                        router.push(link);
+                    }
+                }}
                 className='bg-[#D4AF37] w-full sm:w-[200px] flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer'
             >
                 {content.button.value}

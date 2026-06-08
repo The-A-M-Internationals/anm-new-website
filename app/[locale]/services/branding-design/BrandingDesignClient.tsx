@@ -5,6 +5,7 @@ import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef } from "react";
 import { useIntlayer } from "next-intlayer";
 import { AppLocale } from "@/types/locale";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 const BrandingDesignHero = () => {
     const router = useRouter();
@@ -166,7 +167,12 @@ const BrandingDesignHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
-                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
+                            onClick={(e) => {
+                                const link = getLocalizedPath(locale as AppLocale, "/contact#form");
+                                if (!handleHashLink(e, link, router)) {
+                                    router.push(link);
+                                }
+                            }}
                             className="group relative px-12 py-5 bg-[#C9A84C] text-[#0C1F4A] rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#C9A84C]/40 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#E5C17C] to-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

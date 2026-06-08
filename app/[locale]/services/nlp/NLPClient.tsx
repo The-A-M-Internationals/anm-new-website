@@ -5,6 +5,7 @@ import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { AppLocale } from "@/types/locale";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 const NLPHero = () => {
     const router = useRouter();
@@ -193,7 +194,12 @@ const NLPHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
-                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
+                            onClick={(e) => {
+                                const link = getLocalizedPath(locale as AppLocale, "/contact#form");
+                                if (!handleHashLink(e, link, router)) {
+                                    router.push(link);
+                                }
+                            }}
                             className="group relative px-12 py-5 bg-[#1E40AF] text-white rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#1E40AF]/40 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -201,9 +207,12 @@ const NLPHero = () => {
                             <span className="relative z-10">{content.getStarted.value}</span>
                         </button>
                         <button
-                            onClick={() => {
-                                const servicesSection = document.getElementById('nlp-services');
-                                servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                            onClick={(e) => {
+                                const link = "#nlp-services";
+                                if (!handleHashLink(e, link, router)) {
+                                    const servicesSection = document.getElementById('nlp-services');
+                                    servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                                }
                             }}
                             className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#1E40AF]/50 hover:-translate-y-1"
                         >
