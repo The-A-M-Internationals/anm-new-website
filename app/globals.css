@@ -58,21 +58,32 @@
 @import "tailwindcss";
 
 html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
-    scroll-padding-top: 112px;
-    height: 100%;
+    scroll-behavior: initial;
 }
 
-@media (max-width: 1024px) {
-    html {
-        scroll-padding-top: 64px;
-    }
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
 }
 
 body {
     overflow-x: hidden;
-    height: 100%;
 }
 
 .snap-section {
