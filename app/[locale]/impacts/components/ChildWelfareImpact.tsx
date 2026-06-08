@@ -171,10 +171,17 @@ const ChildWelfareImpact = () => {
                     </div>
                 </div>
 
-                {/* Chart */}
-                <div className="bg-white rounded-3xl p-6 h-96 md:h-[420px] mb-20 shadow-sm border border-gray-100">
+                <div className="bg-white rounded-3xl p-4 md:p-6 h-96 md:h-[420px] mb-20 shadow-sm border border-gray-100" dir="ltr">
                     <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={chartData}>
+                        <AreaChart 
+                            data={chartData}
+                            margin={{ 
+                                top: 10, 
+                                right: 30, 
+                                left: 10, 
+                                bottom: 0 
+                            }}
+                        >
                             <defs>
                                 <linearGradient id="colorAmount" x1="0" y1="1" x2="0" y2="0">
                                     <stop offset="0%" stopColor="rgba(201,168,76,0)" stopOpacity={0} />
@@ -182,12 +189,13 @@ const ChildWelfareImpact = () => {
                                 </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                            <XAxis dataKey="month" tick={{ fill: '#666', fontSize: 14 }} />
+                            <XAxis dataKey="month" tick={{ fill: '#666', fontSize: 12 }} />
                             <YAxis
-                                tick={{ fill: '#666', fontSize: 14 }}
+                                tick={{ fill: '#666', fontSize: 12 }}
                                 tickFormatter={(value) => `${locale === 'ar' ? 'د.إ' : '$'}${value / 1000}K`}
                                 domain={[0, 600000]}
                                 ticks={[0, 150000, 300000, 450000, 600000]}
+                                width={80}
                             />
                             <Tooltip content={<CustomTooltip raised={content?.raised?.value} cumulative={content?.cumulative?.value} charitable={content?.charitable?.value} locale={locale} />} />
                             <Area
