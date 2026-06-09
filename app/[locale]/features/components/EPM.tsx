@@ -100,7 +100,7 @@ export default function EPM() {
 
 
     return (
-        <div id='epm-suites' className="bg-[#0F1E4D] flex items-center justify-center py-12 md:py-20 lg:py-24 px-6 relative overflow-hidden scroll-mt-[112px] md:scroll-mt-[112px] lg:scroll-mt-[112px]">
+        <div id='epm-suites' className="bg-[#0F1E4D] flex items-center justify-center py-12 md:py-20 lg:py-24 px-6 relative overflow-hidden">
             {/* Decorative background elements */}
 
             <div className='absolute left-0 top-0 rtl:right-0 rtl:left-auto'>
