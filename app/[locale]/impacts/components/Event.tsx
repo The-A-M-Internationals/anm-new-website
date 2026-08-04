@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Calendar, Clock } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
-import { handleHashLink } from "@/lib/handleHashLink";
 
 const Event = () => {
     const content = useIntlayer("impactsEvent");
@@ -85,12 +84,7 @@ const Event = () => {
 
                         {/* Button */}
                         <button
-                            onClick={(e) => {
-                                const link = `/${locale}/contact#form`;
-                                if (!handleHashLink(e, link, router)) {
-                                    router.push(link);
-                                }
-                            }}
+                            onClick={() => router.push(`/${locale}/contact#form`)}
                             className="w-44 text-center bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition"
                         >
                             <p>{content.button.value}</p>

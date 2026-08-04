@@ -5,7 +5,6 @@ import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef } from "react";
 import { useIntlayer } from "next-intlayer";
 import { AppLocale } from "@/types/locale";
-import { handleHashLink } from "@/lib/handleHashLink";
 
 const GenerativeAIHero = () => {
     const router = useRouter();
@@ -150,12 +149,7 @@ const GenerativeAIHero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
                         <button
-                            onClick={(e) => {
-                                const link = getLocalizedPath(locale as AppLocale, "/contact#form");
-                                if (!handleHashLink(e, link, router)) {
-                                    router.push(link);
-                                }
-                            }}
+                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
                             className="group relative px-12 py-5 bg-[#60A5FA] text-white rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#60A5FA]/40 hover:-translate-y-1"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#93C5FD] to-[#60A5FA] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -163,12 +157,9 @@ const GenerativeAIHero = () => {
                             <span className="relative z-10">{content.getStarted.value}</span>
                         </button>
                         <button
-                            onClick={(e) => {
-                                const link = "#gen-ai-services";
-                                if (!handleHashLink(e, link, router)) {
-                                    const servicesSection = document.getElementById('gen-ai-services');
-                                    servicesSection?.scrollIntoView({ behavior: 'smooth' });
-                                }
+                            onClick={() => {
+                                const servicesSection = document.getElementById('gen-ai-services');
+                                servicesSection?.scrollIntoView({ behavior: 'smooth' });
                             }}
                             className="group relative px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#60A5FA]/50 hover:-translate-y-1"
                         >

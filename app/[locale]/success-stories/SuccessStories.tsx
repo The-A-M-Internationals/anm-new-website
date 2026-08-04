@@ -5,8 +5,6 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useIntlayer, useLocale } from 'next-intlayer';
 
-import { handleHashLink } from '@/lib/handleHashLink';
-
 const SuccessStories: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -29,7 +27,7 @@ const SuccessStories: React.FC = () => {
     if (window.location.hash === '#story-content' || searchTab) {
       setTimeout(() => {
         if (containerRef.current) {
-          const yOffset = 0; // Removed offset as navbar is not fixed
+          const yOffset = -80; // Buffer for fixed navbar
           const y = containerRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;      
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
@@ -204,25 +202,12 @@ const SuccessStories: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button 
-              onClick={(e) => {
-                const link = `/${locale}/features#epm-suites`;
-                if (!handleHashLink(e, link, router)) {
-                  router.push(link);
-                }
-              }}
+              onClick={() => router.push(`/${locale}/features#epm-suites`)}
               className="bg-[#C9A84C] text-black font-semibold cursor-pointer px-8 py-3 rounded-full hover:scale-105 transition-all w-full sm:w-auto"
             >
               {content.cta.seeEpm.value}
             </button>
-            <button 
-              onClick={(e) => {
-                const link = `/${locale}/contact#form`;
-                if (!handleHashLink(e, link, router)) {
-                  router.push(link);
-                }
-              }} 
-              className="bg-black text-white font-semibold cursor-pointer px-8 py-3 rounded-full hover:scale-105 transition-all w-full sm:w-auto"
-            >
+            <button onClick={() => router.push(`/${locale}/contact#form`)} className="bg-black text-white font-semibold cursor-pointer px-8 py-3 rounded-full hover:scale-105 transition-all w-full sm:w-auto">
               {content.cta.scheduleConsultation.value}
             </button>
           </div>

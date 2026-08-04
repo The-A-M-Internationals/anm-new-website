@@ -7,7 +7,7 @@ interface SucessStoryCardProps {
     description: string;
     badge?: string;
     industry: string;
-    onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    onClick?: () => void;
 }
 
 const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, description, badge, industry, onClick }) => {

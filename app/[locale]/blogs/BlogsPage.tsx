@@ -22,7 +22,7 @@ export default function BlogsPage() {
         locale === "ar" ? "/blogs/button-heroo-ar.png" : "/blogs/button-hero.png";
     return (
         <div>
-            <section className="">
+            <section className="snap-section">
                 <PageHero
                     title={content.heroTitle.value}
                     description={content.heroDescription.value}
@@ -34,9 +34,9 @@ export default function BlogsPage() {
                     buttonImage={heroButtonImage}
                 />
             </section>
-            <section className=""><Article /></section>
-            <section className=""><BlogArticleList /></section>
-            <section className=""><SuggestTopicSection /></section>
+            <section className="snap-section"><Article /></section>
+            <section className="snap-section"><BlogArticleList /></section>
+            <section className="snap-section"><SuggestTopicSection /></section>
         </div>
     );
 }

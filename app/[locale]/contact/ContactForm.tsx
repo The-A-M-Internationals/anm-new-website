@@ -7,7 +7,6 @@ import { Mail, MapPin, Clock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect } from 'react';
-import { handleHashLink } from '@/lib/handleHashLink';
 
 const ContactForm: React.FC = () => {
   const content = useIntlayer("contactFormDetails");
@@ -20,7 +19,7 @@ const ContactForm: React.FC = () => {
       setTimeout(() => {
         const element = document.getElementById('form');
         if (element) {
-          const yOffset = 0; // Removed offset as navbar is not fixed
+          const yOffset = -100; // Account for fixed navbar
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
@@ -290,15 +289,7 @@ const ContactForm: React.FC = () => {
               <p className="text-gray-600 mb-6 text-xl w-[90%]">
                 {content.demoDesc.value}
               </p>
-              <button 
-                onClick={(e) => {
-                  const link = `/${locale}/features#epm-suites`;
-                  if (!handleHashLink(e, link, router)) {
-                    router.push(link);
-                  }
-                }} 
-                className="w-[80%] md:w-[50%] bg-[#D4AF37] text-black font-semibold py-3 px-6 rounded-full hover:scale-105 transition cursor-pointer"
-              >
+              <button onClick={() => router.push(`/${locale}/features#epm-suites`)} className="w-[80%] md:w-[50%] bg-[#D4AF37] text-black font-semibold py-3 px-6 rounded-full hover:scale-105 transition cursor-pointer">
                 {content.scheduleDemo.value}
               </button>
             </div>

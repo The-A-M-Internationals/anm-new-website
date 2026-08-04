@@ -4,7 +4,7 @@ import { withIntlayer } from "next-intlayer/server";
 
 const nextConfig: NextConfig = {
   turbopack: {
-    root: process.cwd(),
+    root: ".",
   },
   images: {
     unoptimized: true,
