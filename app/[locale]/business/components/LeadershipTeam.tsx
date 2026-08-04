@@ -70,11 +70,6 @@ const LeadershipTeam = () => {
                             />
 
                             {/* POSITION BADGE (Removed for common title) */}
-                            {service.position && (
-                                <div className="absolute top-0 right-3 md:top-1 md:right-0 px-3 py-1 md:px-3 md:py-1.5 bg-[#FFFBED]/80 border border-[#D4AF37] text-[#D4AF37] text-xs sm:text-sm font-semibold rounded-full backdrop-blur-md z-20">
-                                    {service.position}
-                                </div>
-                            )}
 
                             {/* NAME + DESCRIPTION */}
                             <div className={`absolute bottom-0 h-28 w-full px-4 py-3 text-white bg-black/40 backdrop-blur-xl transition-opacity duration-300 z-10 ${activeMobileIndex === idx ? 'opacity-0' : 'opacity-100'}`}>
