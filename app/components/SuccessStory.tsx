@@ -18,10 +18,12 @@ const ARABIC_BADGE = [
   { image: '/Success-3-arabic.png' },
 ]
 
+import { handleHashLink } from "@/lib/handleHashLink";
+
 const SuccessStory = () => {
   const router = useRouter();
-
   const { locale } = useLocale();
+
   const content = useIntlayer('successStory');
 
   const [page, setPage] = useState(0);
@@ -94,7 +96,12 @@ const SuccessStory = () => {
             image={service.image}
             industry={service.industry}
             badge={service.badge}
-            onClick={() => router.push(`/${locale}/success-stories?tab=${service.tabKey}#story-content`)}
+            onClick={(e) => {
+              const link = `/${locale}/success-stories?tab=${service.tabKey}#story-content`;
+              if (!handleHashLink(e, link, router)) {
+                router.push(link);
+              }
+            }}
           />
         ))}
       </div>

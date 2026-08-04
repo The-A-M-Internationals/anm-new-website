@@ -116,9 +116,11 @@ const BlogArticleList = () => {
             <div className="max-w-7xl mx-auto">
 
                 {/* HEADING */}
-                <h1 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12">
-                    {content.headingPrefix.value} <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>
-                </h1>
+                <div className="text-center">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12">
+                        {content.headingPrefix.value} <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>
+                    </h1>
+                </div>
 
 
                 {/* MOBILE FILTER & TAG BUTTONS */}

@@ -11,15 +11,20 @@ const LeadershipTeam = () => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
 
-    // Only one leader for now
     const Services = [
         {
             title: content.leader1Name.value,
             image: '/business/anusha.jpg',
             description: content.leader1CardDescription.value,
-            position: content.leader1PositionBadge.value,
             fullBio: content.leader1FullBio.value,
             role: content.leader1RoleLine.value
+        },
+        {
+            title: content.leader2Name.value,
+            image: '/business/sijith.png',
+            description: content.leader2CardDescription.value,
+            fullBio: content.leader2FullBio.value,
+            role: content.leader2RoleLine.value
         }
     ];
 
@@ -33,12 +38,20 @@ const LeadershipTeam = () => {
                 <span className="text-[#ab8d2b]">{content.title.value}</span>
             </h3>
 
-            <p className="text-[#6B7280] text-[18px] md:text-lg lg:text-xl text-center">
+            <p className="text-[#6B7280] text-[18px] md:text-lg lg:text-xl text-center mt-4">
                 {content.subtitle.value}
             </p>
 
+            {/* FOUNDERS GROUP TITLE */}
+            <div className="mt-8 mb-8 text-center">
+                <h4 className="text-2xl sm:text-3xl font-bold text-[#D4AF37] relative inline-block">
+                    Founders
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-[2px] bg-[#D4AF37]"></div>
+                </h4>
+            </div>
+
             {/* IMAGES WITH TEXT OVERLAY */}
-            <div className="flex flex-col sm:flex-row justify-center gap-10 mt-12 flex-wrap w-full items-center">
+            <div className="flex flex-col sm:flex-row justify-center gap-10 flex-wrap w-full items-center">
                 {Services.map((service, idx) => (
                     <div
                         key={idx}
@@ -56,10 +69,7 @@ const LeadershipTeam = () => {
                                 className="object-cover rounded-2xl transition-transform duration-300 lg:group-hover:scale-105"
                             />
 
-                            {/* POSITION BADGE */}
-                            <div className="absolute top-0 right-3 md:top-1 md:right-0 px-3 py-1 md:px-3 md:py-1.5 bg-[#FFFBED]/80 border border-[#D4AF37] text-[#D4AF37] text-xs sm:text-sm font-semibold rounded-full backdrop-blur-md z-20">
-                                {service.position}
-                            </div>
+                            {/* POSITION BADGE (Removed for common title) */}
 
                             {/* NAME + DESCRIPTION */}
                             <div className={`absolute bottom-0 h-28 w-full px-4 py-3 text-white bg-black/40 backdrop-blur-xl transition-opacity duration-300 z-10 ${activeMobileIndex === idx ? 'opacity-0' : 'opacity-100'}`}>

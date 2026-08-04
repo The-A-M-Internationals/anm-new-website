@@ -162,11 +162,11 @@ const Footer = () => {
                 {/* LEFT - LOGO AND DESCRIPTION */}
                 <div className="flex flex-col lg:flex-1 gap-6 sm:gap-8 md:gap-10 order-1">
                     <Image
-                        src="/logo.png"
+                        src="/new-logo.png"
                         alt="Logo"
-                        width={150}
-                        height={150}
-                        className="w-32 sm:w-36 md:w-40 lg:w-37.5 h-auto"
+                        width={300}
+                        height={300}
+                        className="w-48 sm:w-56 md:w-64 lg:w-64 h-auto object-contain"
                     />
 
                     <div className="text-[16px] md:text-lg lg:text-[20px]">

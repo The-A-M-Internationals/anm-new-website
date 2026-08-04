@@ -5,6 +5,7 @@ import { useIntlayer, useLocale } from "next-intlayer";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef, useState } from "react";
 import { AppLocale } from "@/types/locale";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 const AIAutomationsHero = () => {
     const router = useRouter();
@@ -75,7 +76,8 @@ const AIAutomationsHero = () => {
         }
 
         const nodes: NeuralNode[] = [];
-        for (let i = 0; i < 150; i++) {
+        // Reduced from 150 to 45 to prevent massive frame drops and scroll lag
+        for (let i = 0; i < 45; i++) {
             nodes.push(new NeuralNode(
                 Math.random() * canvas.width,
                 Math.random() * canvas.height
@@ -368,7 +370,12 @@ const AIAutomationsHero = () => {
                             </span>
                         </button>
                         <button
-                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
+                            onClick={(e) => {
+                                const link = getLocalizedPath(locale as AppLocale, "/contact#form");
+                                if (!handleHashLink(e, link, router)) {
+                                    router.push(link);
+                                }
+                            }}
                             className="group relative w-full sm:w-auto px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#1E40AF]/50 hover:-translate-y-1 flex justify-center"
                         >
                             <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />

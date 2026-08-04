@@ -23,10 +23,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function AIAutomationsPage() {
     return (
         <div>
-            <AIAutomationsHero />
-            <AiAutomationsServices />
-            <Events />
-            <Innovation />
+            <section className="snap-section"><AIAutomationsHero /></section>
+            <section className="snap-section"><AiAutomationsServices /></section>
+            <section className="snap-section"><Events /></section>
+            <section className="snap-section"><Innovation /></section>
         </div>
     );
 }

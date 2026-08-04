@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useIntlayer, useLocale } from "next-intlayer";
 
+import { handleHashLink } from "@/lib/handleHashLink";
+
 const Hero = () => {
    const router = useRouter();
    const { locale } = useLocale();
@@ -103,14 +105,24 @@ const Hero = () => {
 
             <div className='flex flex-col sm:flex-row gap-2 sm:gap-3 items-start sm:items-center rtl:items-start sm:rtl:items-center mt-2'>
                <button
-                  onClick={() => router.push(`/${locale}/features#epm-suites`)}
+                  onClick={(e) => {
+                     const link = `/${locale}/features#epm-suites`;
+                     if (!handleHashLink(e, link, router)) {
+                        router.push(link);
+                     }
+                  }}
                   className='bg-[#D4AF37] text-black px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:scale-105 transition cursor-pointer'
                >
                   {exploreEpmSuite}
                </button>
 
                <button
-                  onClick={() => router.push(`/${locale}/contact#form`)}
+                  onClick={(e) => {
+                     const link = `/${locale}/contact#form`;
+                     if (!handleHashLink(e, link, router)) {
+                        router.push(link);
+                     }
+                  }}
                   className='bg-white text-[#D4AF37] border border-[#D4AF37] px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:scale-105 transition cursor-pointer'
                >
                   {bookConsultation}

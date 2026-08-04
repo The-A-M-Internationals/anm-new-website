@@ -321,7 +321,7 @@ const DigitalMarketingServices = () => {
                                 onMouseLeave={() => setActiveCard(null)}
                             >
                                 {/* Card */}
-                                <div className="relative h-full min-h-[480px] rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10">
+                                <div className="relative h-full min-h-[480px] rounded-3xl overflow-hidden bg-white/5 border border-white/10">
                                     {/* Animated gradient border */}
                                     <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ padding: '1px' }}>
                                         <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} rounded-3xl`} style={{ animation: 'gradient-rotate 8s linear infinite' }} />

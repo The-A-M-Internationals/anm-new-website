@@ -6,6 +6,8 @@ import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { useEffect, useRef, useState } from "react";
 import { AppLocale } from "@/types/locale";
 
+import { handleHashLink } from "@/lib/handleHashLink";
+
 const DigitalMarketingHero = () => {
     const router = useRouter();
     const { locale } = useLocale();
@@ -40,7 +42,7 @@ const DigitalMarketingHero = () => {
             baseY: number;
         }> = [];
 
-        const gridSize = 80;
+        const gridSize = window.innerWidth < 768 ? 120 : 180;
         const cols = Math.ceil(canvas.width / gridSize) + 1;
         const rows = Math.ceil(canvas.height / gridSize) + 1;
 
@@ -401,7 +403,12 @@ const DigitalMarketingHero = () => {
                             </span>
                         </button>
                         <button
-                            onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/contact#form"))}
+                            onClick={(e) => {
+                                const link = getLocalizedPath(locale as AppLocale, "/contact#form");
+                                if (!handleHashLink(e, link, router)) {
+                                    router.push(link);
+                                }
+                            }}
                             className="group relative w-full sm:w-auto px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#C9A84C]/50 hover:-translate-y-1 flex justify-center"
                         >                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             <span className="relative z-10 flex items-center justify-center w-full">{content.bookConsultation.value}</span>

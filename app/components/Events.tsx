@@ -8,6 +8,7 @@ import LiveEvents from "./LiveEvents";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import "./events.content";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 interface EventType {
     id: string;
@@ -219,7 +220,12 @@ const Events = () => {
                 {visibleEvents.length > 0 && (
                     <div className="flex justify-center mt-4">
                         <button
-                            onClick={() => router.push(`/${locale}/events#upcoming-events`)}
+                            onClick={(e) => {
+                                const link = `/${locale}/events#upcoming-events`;
+                                if (!handleHashLink(e, link, router)) {
+                                    router.push(link);
+                                }
+                            }}
                             className="bg-[#D4AF37] cursor-pointer text-sm sm:text-base font-semibold px-8 py-3 rounded-full hover:scale-105 transition shadow-md"
                         >
                             {content?.viewAll?.value}

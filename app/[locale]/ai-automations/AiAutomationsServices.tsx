@@ -307,7 +307,7 @@ const AiAutomationsServices = () => {
                                 onMouseLeave={() => setActiveCard(null)}
                             >
                                 {/* Card background with gradient ring */}
-                                <div className="relative h-full bg-gradient-to-br from-[#0F1F3D]/40 via-[#0A1628]/60 to-[#050A1E]/80 backdrop-blur-sm rounded-3xl border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-blue-500/20">
+                                <div className="relative h-full bg-gradient-to-br from-[#0F1F3D]/40 via-[#0A1628]/60 to-[#050A1E]/80 rounded-3xl border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-blue-500/20">
                                     
                                     {/* Rotating gradient ring */}
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">

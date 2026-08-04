@@ -18,16 +18,16 @@ export const footerContent = {
       ar: "https://www.instagram.com/the.am.epm/",
     }),
     linkedinLink: t({
-      en: "https://www.linkedin.com/company/the-am-international/",
-      ar: "https://www.linkedin.com/company/the-am-international/",
+      en: "https://www.linkedin.com/company/a-minternational/",
+      ar: "https://www.linkedin.com/company/a-minternational/",
     }),
     twitterLink: t({
       en: "https://x.com/the_am_epm",
       ar: "https://x.com/the_am_epm",
     }),
     youtubeLink: t({
-      en: "https://www.youtube.com/@the_am_epm",
-      ar: "https://www.youtube.com/@the_am_epm",
+      en: "https://www.youtube.com/@AMInternational-z6q",
+      ar: "https://www.youtube.com/@AMInternational-z6q",
     }),
 
     // Finance Transformation section

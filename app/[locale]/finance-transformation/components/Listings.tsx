@@ -4,6 +4,7 @@ import ServiceCard from "./ServiceCard";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import { handleHashLink } from "@/lib/handleHashLink";
 
 interface ServiceData {
     title: string;
@@ -212,7 +213,12 @@ const Listings = () => {
             {/* UNIFIED CTA */}
             <div className="mt-16 flex justify-center">
                 <button
-                    onClick={() => router.push(`/${locale}/features#features`)}
+                    onClick={(e) => {
+                        const link = `/${locale}/features#features`;
+                        if (!handleHashLink(e, link, router)) {
+                            router.push(link);
+                        }
+                    }}
                     className="flex items-center gap-2 px-8 py-4 rounded-full border border-[#D4AF37] text-xl font-bold bg-[#D4AF37] text-black transition-transform duration-300 hover:scale-105 cursor-pointer shadow-lg"
                 >
                     {cardContent.exploreCta.value}
