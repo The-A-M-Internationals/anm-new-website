@@ -115,6 +115,22 @@ const LeadershipTeam = () => {
                 ))}
             </div>
 
+            {/* EMPLOYEES GROUP TITLE */}
+            <div className="mt-20 mb-8 text-center w-full">
+                <h4 className="text-2xl sm:text-3xl font-bold text-[#D4AF37] relative inline-block">
+                    Our Team
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-[2px] bg-[#D4AF37]"></div>
+                </h4>
+                <p className="text-[#6B7280] text-sm md:text-base text-center mt-4 max-w-2xl mx-auto">
+                    Meet the talented individuals driving our vision forward.
+                </p>
+            </div>
+
+            {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
+            <div id="employees-space" className="flex flex-wrap justify-center gap-6 w-full items-center min-h-[400px] rounded-2xl">
+                {/* Employee cards can be mapped here later. For now, this creates the space you requested. */}
+            </div>
+
             <style jsx>{`
                 @keyframes fadeIn {
                     from {
