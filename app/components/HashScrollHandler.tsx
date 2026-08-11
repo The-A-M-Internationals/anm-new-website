@@ -13,7 +13,9 @@ const HashScrollHandler = () => {
       if (hash) {
         const element = document.getElementById(hash);
         if (element) {
-          const yOffset = 0; // Removed offset as navbar is not fixed
+          // Use an offset to skip the large top padding on sections (e.g. py-24)
+          const isMobile = window.innerWidth < 768;
+          const yOffset = isMobile ? 40 : 80;
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }

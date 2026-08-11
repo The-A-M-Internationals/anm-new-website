@@ -63,13 +63,14 @@ const HomeHero = () => {
                                 style={{ fontFamily: "Lora, Georgia, serif" }}
                             >
                                 <SplitText
-                                    text={content.tagline.value + " "}
+                                    text={content.tagline.value}
                                     tag="span"
                                     className="inline"
                                     delay={40}
                                     duration={1.5}
                                     from={{ opacity: 0, y: 15 }}
                                 />
+                                {" "}
                                 <SplitText
                                     text={content.taglineHighlight.value}
                                     tag="span"

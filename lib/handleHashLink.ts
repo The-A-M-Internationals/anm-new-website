@@ -16,7 +16,9 @@ export const handleHashLink = (e: React.MouseEvent, link: string, router: Return
         e.preventDefault();
         
         // Always force scroll immediately
-        const yOffset = 0; 
+        // Use an offset to skip the large top padding on sections (e.g. py-24)
+        const isMobile = window.innerWidth < 768;
+        const yOffset = isMobile ? 40 : 80;
         const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
         
