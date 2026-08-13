@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
 import "./aboutUs.content"; // registers dictionary
@@ -12,6 +12,7 @@ const AboutUs = () => {
     const content = useIntlayer("aboutUs");
     const { locale } = useLocale();
     const videoRef = useRef<HTMLVideoElement>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         const videoElement = videoRef.current;
@@ -62,15 +63,35 @@ const AboutUs = () => {
                 </p>
 
                 {/* Landscape Video Player */}
-                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black ring-4 ring-white/50 mb-10">
+                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black ring-4 ring-white/50 mb-10 group">
                     <video 
                         ref={videoRef}
                         src="/aboutus-video.mp4" 
-                        controls
+                        poster="/hero-bg.png"
+                        controls={isPlaying}
+                        onPlay={() => setIsPlaying(true)}
+                        onPause={() => setIsPlaying(false)}
+                        onEnded={() => {
+                            setIsPlaying(false);
+                            videoRef.current?.load();
+                        }}
                         className="w-full h-full object-cover"
                     >
                         Your browser does not support the video tag.
                     </video>
+
+                    {/* Custom Centered Play Button */}
+                    {!isPlaying && (
+                        <div 
+                            className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-all duration-300 cursor-pointer group/play"
+                            onClick={() => {
+                                videoRef.current?.play();
+                                setIsPlaying(true);
+                            }}
+                        >
+                            <Play className="w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] transform group-hover/play:scale-110 transition-transform duration-300" fill="currentColor" />
+                        </div>
+                    )}
                 </div>
 
                 {/* Explore More Button */}
