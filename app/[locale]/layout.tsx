@@ -70,7 +70,6 @@ export default async function RootLayout({
                 <IntlayerClientProvider locale={locale}>
                     <SmoothScrolling />
                     <AOSInitializer />
-                    <HashScrollHandler />
                     <Navbar />
                     {children}
                     <GoToTopButton />

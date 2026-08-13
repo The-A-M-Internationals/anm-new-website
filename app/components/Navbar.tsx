@@ -155,7 +155,7 @@ const Navbar = () => {
     const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
     if (!hasDropdown) {
       const link = directLinks[navKey];
-      if (link) router.push(link);
+      if (link) router.push(link, { scroll: false });
       setIsMobileMenuOpen(false);
       return;
     }
@@ -346,7 +346,7 @@ const DesktopNavButton = ({
     <button
       onClick={(e) => {
         if (!handleHashLink(e, directLinks[navKey]!, router)) {
-          router.push(directLinks[navKey]!)
+          router.push(directLinks[navKey]!, { scroll: false })
         }
       }}
       className="text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:text-gray-900"

@@ -40,7 +40,7 @@ export default function BusinessPage() {
             </section>
             <section className="snap-section"><EmpoweringSection /></section>
             <section className="snap-section"><JourneyTimeline /></section>
-            <section className="snap-section"><LeadershipTeam /></section>
+            <LeadershipTeam />
             <section className="snap-section"><Innovation /></section>
         </div>
     );

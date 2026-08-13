@@ -2,7 +2,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useIntlayer } from "next-intlayer";
 import "./leadershipTeam.content";
 
@@ -28,12 +28,38 @@ const LeadershipTeam = () => {
         }
     ];
 
+    const Employees = Array(8).fill({
+        name: "Team Member",
+        role: "Placeholder Role",
+        image: "/business/sijith.png"
+    });
+
     const handleMobileClick = (idx: number) => {
         setActiveMobileIndex(activeMobileIndex === idx ? null : idx);
     };
 
+    const gridRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-32');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        if (gridRef.current) {
+            const cards = gridRef.current.querySelectorAll('.team-card');
+            cards.forEach(card => observer.observe(card));
+        }
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div id="team" className='flex flex-col items-center justify-center px-4 py-12 md:py-20 lg:py-24'>
+        <>
+            <section id="team" className='no-global-reveal snap-section flex flex-col items-center justify-center px-4 pt-4 md:pt-8 pb-8'>
             <h3 className="text-[#000000] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold text-center">
                 <span className="text-[#ab8d2b]">{content.title.value}</span>
             </h3>
@@ -55,7 +81,7 @@ const LeadershipTeam = () => {
                 {Services.map((service, idx) => (
                     <div
                         key={idx}
-                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer"
+                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transition-transform duration-500"
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
                         onClick={() => handleMobileClick(idx)}
@@ -114,9 +140,11 @@ const LeadershipTeam = () => {
                     </div>
                 ))}
             </div>
+            </section>
 
+            <section className='flex flex-col items-center justify-center px-4 py-12 md:py-20 lg:py-24'>
             {/* EMPLOYEES GROUP TITLE */}
-            <div className="mt-20 mb-8 text-center w-full">
+            <div className="mb-8 text-center w-full">
                 <h4 className="text-2xl sm:text-3xl font-bold text-[#D4AF37] relative inline-block">
                     Our Team
                     <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-[2px] bg-[#D4AF37]"></div>
@@ -127,8 +155,35 @@ const LeadershipTeam = () => {
             </div>
 
             {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
-            <div id="employees-space" className="flex flex-wrap justify-center gap-6 w-full items-center min-h-[400px] rounded-2xl">
-                {/* Employee cards can be mapped here later. For now, this creates the space you requested. */}
+            <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 lg:gap-y-[150px] w-full items-start mt-10 pb-32">
+                {Employees.map((emp, idx) => (
+                    <div 
+                        key={idx} 
+                        className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out opacity-0 translate-y-32
+                            ${idx % 4 === 0 ? 'lg:mt-0' : ''}
+                            ${idx % 4 === 1 ? 'lg:mt-16' : ''}
+                            ${idx % 4 === 2 ? 'lg:mt-32' : ''}
+                            ${idx % 4 === 3 ? 'lg:mt-16' : ''}
+                        `}
+                        style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
+                    >
+                        {/* IMAGE - Sharp corners like the video */}
+                        <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#f3f4f6]">
+                            <Image 
+                                src={emp.image}
+                                alt={emp.name}
+                                fill
+                                className="object-cover transition-all duration-700 group-hover:scale-105"
+                            />
+                        </div>
+
+                        {/* TEXT CONTAINER - Name left, Role right */}
+                        <div className="flex justify-between items-start mt-4 px-1">
+                            <span className="font-semibold text-base text-gray-900 leading-tight pr-2">{emp.name}</span>
+                            <span className="text-xs text-gray-500 text-right leading-tight whitespace-nowrap">{emp.role}</span>
+                        </div>
+                    </div>
+                ))}
             </div>
 
             <style jsx>{`
@@ -145,8 +200,10 @@ const LeadershipTeam = () => {
                 .animate-fadeIn {
                     animation: fadeIn 0.2s ease-out;
                 }
+                
             `}</style>
-        </div>
+            </section>
+        </>
     );
 };
 

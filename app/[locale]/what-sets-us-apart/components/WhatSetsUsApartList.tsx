@@ -55,7 +55,7 @@ const WhatSetsUsApartList = () => {
                     {features.map((feature, index) => (
                         <div
                             key={index}
-                            className="border-b border-[#000000] py-8 flex flex-col md:flex-row items-start justify-between gap-4 md:gap-8 group transition-colors px-4 -mx-4"
+                            className="reveal-up border-b border-[#000000] py-8 flex flex-col md:flex-row items-start justify-between gap-4 md:gap-8 group transition-colors px-4 -mx-4"
                         >
                             <div className="flex-1 order-2 md:order-1">
                                 <h3 className="text-2xl md:text-[28px] font-medium text-[#000000] mb-2">

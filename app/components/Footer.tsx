@@ -93,7 +93,7 @@ const Footer = () => {
             <div className="text-[#C9A84C] text-lg sm:text-xl md:text-2xl mt-2">
                 {content.followUs?.value || "Follow Us"}
                 <div className="flex items-center gap-3 mt-2">
-                    <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center justify-center">
+                    <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -106,8 +106,8 @@ const Footer = () => {
                         </svg>
                     </a>
 
-                    <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center justify-center">
-                        <svg className="w-[1.35rem] h-[1.35rem] text-gray-800 dark:text-white" aria-hidden="true"
+                    <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
                             <path
@@ -118,7 +118,7 @@ const Footer = () => {
 
 
 
-                    <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center justify-center">
+                    <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
@@ -268,8 +268,25 @@ const Footer = () => {
             <div className="w-full h-px bg-white" />
 
             <div className="bg-[#0D1B3E] text-center text-white py-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
-                <div className="text-[#C9A84C] text-sm sm:text-base md:text-lg font-medium tracking-wide">
-                    {content?.tagline?.value}
+                <style dangerouslySetInnerHTML={{__html: `
+                    @keyframes marquee-footer {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .animate-marquee-footer {
+                        display: inline-block;
+                        white-space: nowrap;
+                        animation: marquee-footer 20s linear infinite;
+                    }
+                `}} />
+                
+                <div className="w-[50%] mx-auto overflow-hidden flex items-center mb-2">
+                    <div className="animate-marquee-footer text-[#C9A84C] text-sm sm:text-base md:text-lg font-medium tracking-wide">
+                        {/* Repeat the text enough times to fill ultra-wide screens and guarantee a seamless loop */}
+                        {[...Array(8)].map((_, i) => (
+                            <span key={i} className="mx-8">{content?.tagline?.value}</span>
+                        ))}
+                    </div>
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-1 opacity-80">
                     <span>{content?.copyright?.value || ""}</span>
