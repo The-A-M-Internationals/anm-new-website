@@ -21,7 +21,7 @@ interface ScrollFloatProps {
   scrollEnd?: string;
   stagger?: number;
   scrub?: boolean | number;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: any;
 }
 
 const ScrollFloat: React.FC<ScrollFloatProps> = ({
