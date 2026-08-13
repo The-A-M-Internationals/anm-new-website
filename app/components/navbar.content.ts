@@ -43,7 +43,7 @@ export const navbarContent = {
     managedServices: t({ en: "Managed Services", ar: "الخدمات المدارة" }),
     about: t({ en: "About", ar: "حول" }),
     mission: t({ en: "Mission", ar: "مهمة" }),
-    team: t({ en: "Leadership Team", ar: "فريق القيادة" }),
+    team: t({ en: "Team", ar: "فريق" }),
     process: t({ en: "Process", ar: "عملية" }),
     methods: t({ en: "Methods", ar: "أساليب" }),
     results: t({ en: "Results", ar: "نتائج" }),

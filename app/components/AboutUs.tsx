@@ -1,11 +1,16 @@
 'use client';
 
 import { useEffect, useRef } from "react";
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import { AppLocale } from "@/types/locale";
 import "./aboutUs.content"; // registers dictionary
 
 const AboutUs = () => {
     const content = useIntlayer("aboutUs");
+    const { locale } = useLocale();
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
@@ -57,7 +62,7 @@ const AboutUs = () => {
                 </p>
 
                 {/* Landscape Video Player */}
-                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black ring-4 ring-white/50">
+                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black ring-4 ring-white/50 mb-10">
                     <video 
                         ref={videoRef}
                         src="/aboutus-video.mp4" 
@@ -67,6 +72,15 @@ const AboutUs = () => {
                         Your browser does not support the video tag.
                     </video>
                 </div>
+
+                {/* Explore More Button */}
+                <Link
+                    href={getLocalizedPath(locale as AppLocale, "/business")}
+                    className="bg-[#D4AF37] text-black px-4 py-2 sm:px-6 sm:py-3 flex items-center gap-2 rounded-full text-sm sm:text-base font-semibold hover:scale-105 transition cursor-pointer mt-2"
+                >
+                    {content.cta.value}
+                    <ArrowRight className='w-4 h-4 rtl:rotate-180' />
+                </Link>
             </div>
         </div>
     );

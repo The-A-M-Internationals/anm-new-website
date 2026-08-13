@@ -70,7 +70,7 @@ const Navbar = () => {
           icon: '/services/financial.svg',
           textKey: 'mission',
           type: 'primary' as const,
-          link: getLocalizedLink('/business#mission')
+          link: getLocalizedLink('/business')
         },
         {
           icon: '/blogs.svg',

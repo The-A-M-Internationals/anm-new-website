@@ -33,15 +33,15 @@ const WhyChooseUs = () => {
                             key={index}
                             className={`
                                 bg-white rounded-2xl shadow-lg p-4 lg:px-7 max-w-sm lg:w-[500px]
-                                transition-all duration-300
+                                transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl cursor-pointer text-black hover:text-[#D4AF37]
                                 ${feature.highlight ? "border-l-8 border-yellow-500" : "border-l-8 border-[#D9D9D9]"}
                                 ${index === 1 ? "lg:ml-16" : ""}
                             `}
                         >
-                            <p className="text-2xl md:text-[30px] text-black mb-1">
+                            <p className="text-2xl md:text-[30px] mb-1 font-semibold transition-colors duration-300">
                                 {feature.title.value}
                             </p>
-                            <p className="text-black text-[18px]">
+                            <p className="text-[18px] transition-colors duration-300">
                                 {feature.description.value}
                             </p>
                         </div>

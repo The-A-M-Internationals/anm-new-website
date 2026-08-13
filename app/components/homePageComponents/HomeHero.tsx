@@ -51,7 +51,7 @@ const HomeHero = () => {
 
             {/* Content Container */}
             <div className="relative z-10 w-[95%] max-w-7xl mx-auto h-full">
-                <div className="flex justify-end items-center h-full">
+                <div className={`flex ${locale === 'ar' ? 'justify-start' : 'justify-end'} items-center h-full`}>
                     
                     {/* Right Side - Glassmorphic Content Panel */}
                     <div className="w-full lg:w-[55%] xl:w-[50%] animate-fade-in-up">

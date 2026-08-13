@@ -15,11 +15,10 @@ export const handleHashLink = (e: React.MouseEvent, link: string, router: Return
       if (element) {
         e.preventDefault();
         
-        // Always force scroll immediately
-        // Use an offset to skip the large top padding on sections (e.g. py-24)
+        // Use an offset to prevent the fixed header from covering the section
         const isMobile = window.innerWidth < 768;
-        const yOffset = isMobile ? 40 : 80;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        const yOffset = isMobile ? 80 : 120;
+        const y = element.getBoundingClientRect().top + window.pageYOffset - yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
         
         // If the URL hash is ALREADY the target hash, the browser's native 'hashchange' won't fire.
