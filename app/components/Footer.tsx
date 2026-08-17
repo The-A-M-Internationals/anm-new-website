@@ -269,14 +269,22 @@ const Footer = () => {
 
             <div className="bg-[#0D1B3E] text-center text-white py-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
                 <style dangerouslySetInnerHTML={{__html: `
-                    @keyframes marquee-footer {
+                    @keyframes marquee-footer-ltr {
                         0% { transform: translateX(0); }
                         100% { transform: translateX(-50%); }
+                    }
+                    @keyframes marquee-footer-rtl {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(50%); }
                     }
                     .animate-marquee-footer {
                         display: inline-block;
                         white-space: nowrap;
-                        animation: marquee-footer 20s linear infinite;
+                        animation: marquee-footer-ltr 20s linear infinite;
+                    }
+                    [dir="rtl"] .animate-marquee-footer,
+                    :is([dir="rtl"]) .animate-marquee-footer {
+                        animation: marquee-footer-rtl 20s linear infinite;
                     }
                 `}} />
                 

@@ -123,7 +123,7 @@ const LeadershipTeam = () => {
                         {/* HOVER POPUP - Desktop only */}
                         {hoveredIndex === idx && (
                             <div
-                                className={`absolute top-0 ${idx === 0 ? 'right-full mr-4' : 'left-full ml-4'
+                                className={`absolute top-0 ${idx === 0 ? 'end-full me-4' : 'start-full ms-4'
                                     } w-80 bg-white shadow-2xl rounded-xl p-6 border border-gray-200 z-50 hidden lg:block animate-fadeIn`}
                             >
                                 <h4 className="text-xl font-bold text-[#D4AF37] mb-1">

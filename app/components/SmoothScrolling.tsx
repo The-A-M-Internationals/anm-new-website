@@ -15,14 +15,10 @@ export default function SmoothScrolling() {
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
+      lerp: 0.07, // Physics-based interpolation for that ultra-buttery feel
       wheelMultiplier: 1,
+      smoothWheel: true,
       touchMultiplier: 2,
-      infinite: false,
     });
 
     lenisRef.current = lenis;
@@ -114,6 +110,12 @@ export default function SmoothScrolling() {
         setTimeout(() => {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
+          
+          // Clean up GPU memory after the animation finishes
+          el.addEventListener('transitionend', function cleanup() {
+            el.style.willChange = 'auto';
+            el.removeEventListener('transitionend', cleanup);
+          });
         }, index * 120); // 120ms stagger between each element
         
         // Once revealed, stop observing it so we don't waste performance
@@ -142,6 +144,7 @@ export default function SmoothScrolling() {
           // Set the initial hidden state and attach the smooth hardware-accelerated transition
           el.style.opacity = '0';
           el.style.transform = 'translateY(40px)';
+          el.style.willChange = 'opacity, transform';
           el.style.transition = 'opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
           
           observer.observe(el);
