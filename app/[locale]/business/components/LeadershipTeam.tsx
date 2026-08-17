@@ -28,7 +28,7 @@ const LeadershipTeam = () => {
         }
     ];
 
-    const Employees = Array(8).fill({
+    const Employees = Array(6).fill({
         name: "Team Member",
         role: "Placeholder Role",
         image: "/business/sijith.png"
@@ -155,15 +155,15 @@ const LeadershipTeam = () => {
             </div>
 
             {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
-            <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 lg:gap-y-[150px] w-full items-start mt-10 pb-32">
+            <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 lg:gap-y-[60px] w-full items-start mt-10 pb-32">
                 {Employees.map((emp, idx) => (
                     <div 
                         key={idx} 
                         className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out opacity-0 translate-y-32
-                            ${idx % 4 === 0 ? 'lg:mt-0' : ''}
-                            ${idx % 4 === 1 ? 'lg:mt-16' : ''}
-                            ${idx % 4 === 2 ? 'lg:mt-32' : ''}
-                            ${idx % 4 === 3 ? 'lg:mt-16' : ''}
+                            ${idx === 4 ? 'lg:col-start-2' : ''}
+                            ${(idx === 4 || (idx !== 4 && idx !== 5 && idx % 4 === 1) || (idx !== 4 && idx !== 5 && idx % 4 === 3)) ? 'lg:mt-16' : ''}
+                            ${(idx === 5 || (idx !== 4 && idx !== 5 && idx % 4 === 2)) ? 'lg:mt-32' : ''}
+                            ${(idx !== 4 && idx !== 5 && idx % 4 === 0) ? 'lg:mt-0' : ''}
                         `}
                         style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
