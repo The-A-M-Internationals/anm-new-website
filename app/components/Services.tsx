@@ -164,15 +164,29 @@ const Services = () => {
                                     borderBottom: idx === 0 ? "1px solid #EDE0A8" : idx === 1 ? "1px solid #E2DAC8" : "1px solid #1A3570", 
                                     height: 172 
                                 }}>
-                                    {/* Finance: Image Background */}
+                                    {/* Finance: Bar chart animation */}
                                     {idx === 0 && (
-                                        <div style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-                                            <img 
-                                                src="/finance-graph.png" 
-                                                alt="Financial Transformation Graph" 
-                                                style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} 
-                                            />
-                                        </div>
+                                        <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} viewBox="0 0 220 172" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                                            <line x1="0" y1="43" x2="220" y2="43" stroke="#C9A84C" strokeWidth=".4" strokeDasharray="3 4" opacity=".25" />
+                                            <line x1="0" y1="86" x2="220" y2="86" stroke="#C9A84C" strokeWidth=".4" strokeDasharray="3 4" opacity=".25" />
+                                            <line x1="0" y1="129" x2="220" y2="129" stroke="#C9A84C" strokeWidth=".4" strokeDasharray="3 4" opacity=".25" />
+                                            {[
+                                                { x: 20, y: 118, h: 44, o: 0.2, d: 0.2 },
+                                                { x: 40, y: 100, h: 62, o: 0.32, d: 0.35 },
+                                                { x: 60, y: 112, h: 50, o: 0.28, d: 0.5 },
+                                                { x: 80, y: 82, h: 80, o: 0.44, d: 0.65 },
+                                                { x: 100, y: 62, h: 100, o: 0.58, d: 0.8 },
+                                                { x: 120, y: 45, h: 117, o: 0.72, d: 0.95 },
+                                                { x: 140, y: 30, h: 132, o: 0.86, d: 1.1 },
+                                                { x: 160, y: 18, h: 144, o: 1, d: 1.25 },
+                                                { x: 180, y: 10, h: 152, o: 1, d: 1.4 },
+                                            ].map((b, i) => (
+                                                <rect key={i} x={b.x} y={b.y} width="13" height={b.h} rx="2" fill={`rgba(201,168,76,${b.o})`} style={{ transformOrigin: `${b.x}px 162px`, animation: `am-bar-up .6s ease-out ${b.d}s both` }} />
+                                            ))}
+                                            <polyline points="26,122 46,104 66,116 86,86 106,66 126,50 146,34 166,22 186,14" fill="none" stroke="#0C1F4A" strokeWidth="2" strokeDasharray="400" strokeDashoffset="400" style={{ animation: "am-draw-line 1.6s ease-out 1.5s forwards" }} strokeLinecap="round" strokeLinejoin="round" />
+                                            <circle r="4" fill="#0C1F4A"><animateMotion dur="2.8s" begin="3.2s" repeatCount="indefinite" path="M26,122 C46,104 66,116 86,86 106,66 126,50 146,34 166,22 186,14" /></circle>
+                                            <text x="190" y="11" fontSize="8" fill="#0C1F4A" fontWeight="800" opacity=".85">▲24%</text>
+                                        </svg>
                                     )}
                                     
                                     {/* Digital: Network graph */}
