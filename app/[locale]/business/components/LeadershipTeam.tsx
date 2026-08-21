@@ -32,7 +32,7 @@ const LeadershipTeam = () => {
         { name: "Sri Varsha", role: "Developer - Chief Bug Slayer", image: "/business/sri-varsha.jpg" },
         { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
-        { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.jpg" },
+        { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.png" },
         { name: "Team Member", role: "Placeholder Role", image: "/business/sijith.png" },
         { name: "Narayanan", role: "Software Engineer - Backend Beast", image: "/business/surya.png" }
     ];
