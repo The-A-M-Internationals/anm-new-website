@@ -15,10 +15,14 @@ export default function SmoothScrolling() {
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
-      lerp: 0.07, // Physics-based interpolation for that ultra-buttery feel
-      wheelMultiplier: 1,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
       smoothWheel: true,
+      wheelMultiplier: 1,
       touchMultiplier: 2,
+      infinite: false,
     });
 
     lenisRef.current = lenis;
@@ -56,7 +60,7 @@ export default function SmoothScrolling() {
           const target = document.querySelector(hash);
           if (target) {
             // Tell Lenis to natively handle the scroll (no offset needed since navbar is not fixed!)
-            lenisRef.current.scrollTo(target);
+            lenisRef.current.scrollTo(target as HTMLElement);
             if (scrollInterval) clearInterval(scrollInterval);
             return true;
           }

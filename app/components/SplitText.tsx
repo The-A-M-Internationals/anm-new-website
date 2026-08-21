@@ -18,7 +18,7 @@ interface SplitTextProps {
   threshold?: number;
   rootMargin?: string;
   textAlign?: 'left' | 'right' | 'center' | 'justify' | 'initial' | 'inherit';
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: React.ElementType;
   onLetterAnimationComplete?: () => void;
 }
 
