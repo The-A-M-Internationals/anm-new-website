@@ -29,12 +29,12 @@ export default function DrivingImpactDashboard() {
                     {content.stats.map((stat: { value: { value: string }; label: { value: string } }, index: number) => (
                         <div 
                             key={index} 
-                            className="bg-[#FFFBED] border border-gray-200 rounded-3xl p-6 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300"
+                            className="group bg-[#FFFBED] border border-gray-200 rounded-3xl p-6 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer"
                         >
                             <div className="text-3xl md:text-4xl font-bold text-[#C9A84C] mb-2">
                                 {stat.value.value}
                             </div>
-                            <div className="text-gray-900 font-medium text-base">
+                            <div className="text-gray-900 font-medium text-base transition-colors duration-300 group-hover:text-[#C9A84C]">
                                 {stat.label.value}
                             </div>
                         </div>

@@ -47,7 +47,7 @@ const Apps = () => {
                         {topRowApps.map((app, index) => (
                             <div
                                 key={index}
-                                className="bg-white text-[#000000] px-8 py-4 rounded-xl font-semibold text-lg transition-all"
+                                className="bg-white text-[#000000] hover:text-[#D4AF37] px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 cursor-pointer"
                             >
                                 {app}
                             </div>
@@ -59,7 +59,7 @@ const Apps = () => {
                         {bottomRowApps.map((app, index) => (
                             <div
                                 key={index}
-                                className="bg-white text-[#000000] px-8 py-4 rounded-xl font-semibold text-lg transition-all"
+                                className="bg-white text-[#000000] hover:text-[#D4AF37] px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 cursor-pointer"
                             >
                                 {app}
                             </div>

@@ -125,7 +125,7 @@ const NavbarModal = ({
                     onClick={(e) => {
                       onClose();
                       if (!handleHashLinkProp(e, `/${currentLocale}/blogs#article`, router)) {
-                        router.push(`/${currentLocale}/blogs#article`);
+                        router.push(`/${currentLocale}/blogs#article`, { scroll: false });
                       }
                     }}
                     className="text-[#D4AF37] font-semibold flex items-center gap-2 w-fit transition text-sm md:text-base cursor-pointer hover:scale-105 transition"
@@ -142,7 +142,7 @@ const NavbarModal = ({
               {rightSideButtons.map((button, index) => (
                 <Link
                   href={button.link}
-                  scroll={true}
+                  scroll={false}
                   onClick={(e) => {
                     onClose();
                     handleHashLinkProp(e, button.link, router);
