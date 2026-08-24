@@ -15,6 +15,8 @@ const HomeHero = () => {
     const { locale } = useLocale();
     const content = useIntlayer("homeHero");
 
+    const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
+
     // Animated counter refs
     const clientsRef = useRef<HTMLDivElement>(null);
     const countriesRef = useRef<HTMLDivElement>(null);
