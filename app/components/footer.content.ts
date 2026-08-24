@@ -123,8 +123,8 @@ export const footerContent = {
 
     // Copyright
     tagline: t({
-      en: "— Elevating the World, Elegantly —",
-      ar: "— نرتقي بالعالم، بأناقة —",
+      en: "Elevating the World, Elegantly",
+      ar: "نرتقي بالعالم، بأناقة",
     }),
     copyright: t({
       en: "© 2026 The A&M internationals. All rights reserved.",

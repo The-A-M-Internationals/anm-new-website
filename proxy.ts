@@ -2,7 +2,7 @@ import { intlayerMiddleware } from "next-intlayer/middleware";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 1. Skip middleware for static assets, API, and internal Next.js files
@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
     pathname.includes("favicon.ico") ||
-    /\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2)$/i.test(pathname)
+    /\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2|mp4|webm)$/i.test(pathname)
   ) {
     return NextResponse.next();
   }
@@ -23,6 +23,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths that are NOT static assets or API routes
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2)$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2|mp4|webm)$).*)",
   ],
 };

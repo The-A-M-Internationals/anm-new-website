@@ -362,7 +362,15 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 pr-2">
                   <h3 className="font-semibold text-[28px]">{content.visitOffice.value}</h3>
                   <p className="text-lg whitespace-pre-line">{content.office.value}</p>
-                  <p className="text-gray-500 text-xs">{content.appointment.value}</p>
+                  <button 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
+                    }}
+                    className="text-gray-500 text-xs hover:text-[#D4AF37] transition-colors mt-1"
+                  >
+                    {content.appointment.value}
+                  </button>
                 </div>
               </div>
             </div>

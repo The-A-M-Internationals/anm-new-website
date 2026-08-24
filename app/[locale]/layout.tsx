@@ -57,8 +57,8 @@ export default async function RootLayout({
     const isArabic = locale === 'ar';
 
     return (
-        <html lang={locale} dir={getHTMLTextDir(locale)} className={`${tajawal.variable} ${cairo.variable} ${notoTabsArabic.variable}`}>
-            <body className={`${isArabic ? 'font-noto' : 'font-sf'}`}>
+        <html lang={locale} dir={getHTMLTextDir(locale)} className={`${tajawal.variable} ${cairo.variable} ${notoTabsArabic.variable}`} suppressHydrationWarning>
+            <body className={`${isArabic ? 'font-noto' : 'font-sf'}`} suppressHydrationWarning>
                 <style dangerouslySetInnerHTML={{ __html: `
                     :root {
                         --heading-font: ${isArabic ? 'var(--font-tajawal), var(--font-cairo)' : "'SF Pro', sans-serif"};
@@ -70,7 +70,6 @@ export default async function RootLayout({
                 <IntlayerClientProvider locale={locale}>
                     <SmoothScrolling />
                     <AOSInitializer />
-                    <HashScrollHandler />
                     <Navbar />
                     {children}
                     <GoToTopButton />

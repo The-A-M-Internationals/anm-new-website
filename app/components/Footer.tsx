@@ -92,8 +92,8 @@ const Footer = () => {
 
             <div className="text-[#C9A84C] text-lg sm:text-xl md:text-2xl mt-2">
                 {content.followUs?.value || "Follow Us"}
-                <div className="flex gap-2 mt-2">
-                    <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <div className="flex items-center gap-3 mt-2">
+                    <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -106,7 +106,7 @@ const Footer = () => {
                         </svg>
                     </a>
 
-                    <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                    <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
@@ -116,30 +116,9 @@ const Footer = () => {
                         </svg>
                     </a>
 
-                    <a href={content.twitterLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                        <svg width="20" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g clipPath="url(#clip0_196_4828)">
-                                <mask id="mask0_196_4828" mask="luminance"
-                                    maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                                    <path d="M0 0H24V24H0V0Z" fill="white" />
-                                </mask>
-                                <g mask="url(#mask0_196_4828)">
-                                    <path
-                                        d="M18.9 1.125H22.5806L14.5406 10.3376L24 22.8759H16.5943L10.7897 15.273L4.15543 22.8759H0.471429L9.07029 13.0187L0 1.12671H7.59429L12.8331 8.07471L18.9 1.125ZM17.6057 20.6679H19.6457L6.48 3.21814H4.29257L17.6057 20.6679Z"
-                                        fill="white"
-                                    />
-                                </g>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_196_4828">
-                                    <rect width="24" height="24" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-                    </a>
 
-                    <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+
+                    <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
@@ -182,25 +161,25 @@ const Footer = () => {
                 {/* FINANCE TRANSFORMATION - Order 2 */}
                 <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-2">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
-                        <Link href={getLocalizedLink("/finance-transformation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation"), router)} className="hover:underline transition-all">{content.financeTransformation?.value || "Finance Transformation"}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.financeTransformation?.value || "Finance Transformation"}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/finance-transformation#financial-consolidation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#financial-consolidation"), router)} className="hover:text-[#C9A84C] transition-colors">{content.financialConsolidation?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#planning-budgeting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#planning-budgeting"), router)} className="hover:text-[#C9A84C] transition-colors">{content.planningBudgeting?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#account-reconciliation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#account-reconciliation"), router)} className="hover:text-[#C9A84C] transition-colors">{content.accountReconciliation?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#profitability-cost")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#profitability-cost"), router)} className="hover:text-[#C9A84C] transition-colors">{content.profitabilityCost?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#enterprise-data"), router)} className="hover:text-[#C9A84C] transition-colors">{content.enterpriseData?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#narrative-reporting"), router)} className="hover:text-[#C9A84C] transition-colors">{content.narrativeReporting?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#tax-reporting"), router)} className="hover:text-[#C9A84C] transition-colors">{content.taxReporting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#financial-consolidation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#financial-consolidation"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.financialConsolidation?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#planning-budgeting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#planning-budgeting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.planningBudgeting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#account-reconciliation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#account-reconciliation"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.accountReconciliation?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#profitability-cost")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#profitability-cost"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.profitabilityCost?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#enterprise-data"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.enterpriseData?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#narrative-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.narrativeReporting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#tax-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.taxReporting?.value || ""}</Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
-                        <Link href={getLocalizedLink("/finance-transformation#managed-services")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#managed-services"), router)} className="hover:underline transition-all">{content.managedServices?.value || "Managed Services"}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#managed-services")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#managed-services"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.managedServices?.value || "Managed Services"}</Link>
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#consulting-as-service"), router)} className="hover:text-[#C9A84C] transition-colors">{content.consultingAsService?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#epm-solution-management"), router)} className="hover:text-[#C9A84C] transition-colors">{content.epmSolutionManagement?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#version-upgrade"), router)} className="hover:text-[#C9A84C] transition-colors">{content.versionUpgrade?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#monthly-maintenance"), router)} className="hover:text-[#C9A84C] transition-colors">{content.monthlyMaintenance?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#consulting-as-service"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.consultingAsService?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#epm-solution-management"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.epmSolutionManagement?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#version-upgrade"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.versionUpgrade?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#monthly-maintenance"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.monthlyMaintenance?.value || ""}</Link>
                     </div>
                 </div>
 
@@ -210,7 +189,7 @@ const Footer = () => {
                         {content.resources?.value || "Resources"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
-                        <Link href={getLocalizedLink("/")} onClick={(e) => handleHashLink(e, getLocalizedLink("/"), router)} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/")} onClick={(e) => handleHashLink(e, getLocalizedLink("/"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">
                             {content.amInternational?.value || "The A&M internationals"}
                         </Link>
                     </div>
@@ -218,16 +197,16 @@ const Footer = () => {
                         {content.howWeWork?.value || "How We Work"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
-                        <Link href={getLocalizedLink("/features")} onClick={(e) => handleHashLink(e, getLocalizedLink("/features"), router)} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/features")} onClick={(e) => handleHashLink(e, getLocalizedLink("/features"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">
                             {content.features?.value || "Features"}
                         </Link>
-                        <Link href={getLocalizedLink("/success-stories")} onClick={(e) => handleHashLink(e, getLocalizedLink("/success-stories"), router)} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/success-stories")} onClick={(e) => handleHashLink(e, getLocalizedLink("/success-stories"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">
                             {content.successStories?.value || "Success Stories"}
                         </Link>
-                        <Link href={getLocalizedLink("/what-sets-us-apart")} onClick={(e) => handleHashLink(e, getLocalizedLink("/what-sets-us-apart"), router)} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/what-sets-us-apart")} onClick={(e) => handleHashLink(e, getLocalizedLink("/what-sets-us-apart"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">
                             {content.whatSetsApart?.value || "What Sets Us Apart"}
                         </Link>
-                        <Link href={getLocalizedLink("/methodology")} onClick={(e) => handleHashLink(e, getLocalizedLink("/methodology"), router)} className="hover:text-[#C9A84C] transition-colors">
+                        <Link href={getLocalizedLink("/methodology")} onClick={(e) => handleHashLink(e, getLocalizedLink("/methodology"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">
                             {content.methodology?.value || "Methodology"}
                         </Link>
                     </div>
@@ -289,8 +268,33 @@ const Footer = () => {
             <div className="w-full h-px bg-white" />
 
             <div className="bg-[#0D1B3E] text-center text-white py-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
-                <div className="text-[#C9A84C] text-sm sm:text-base md:text-lg font-medium tracking-wide">
-                    {content?.tagline?.value}
+                <style dangerouslySetInnerHTML={{__html: `
+                    @keyframes marquee-footer-ltr {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    @keyframes marquee-footer-rtl {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(50%); }
+                    }
+                    .animate-marquee-footer {
+                        display: inline-block;
+                        white-space: nowrap;
+                        animation: marquee-footer-ltr 20s linear infinite;
+                    }
+                    [dir="rtl"] .animate-marquee-footer,
+                    :is([dir="rtl"]) .animate-marquee-footer {
+                        animation: marquee-footer-rtl 20s linear infinite;
+                    }
+                `}} />
+                
+                <div className="w-[50%] mx-auto overflow-hidden flex items-center mb-2">
+                    <div className="animate-marquee-footer text-[#C9A84C] text-sm sm:text-base md:text-lg font-medium tracking-wide">
+                        {/* Repeat the text enough times to fill ultra-wide screens and guarantee a seamless loop */}
+                        {[...Array(8)].map((_, i) => (
+                            <span key={i} className="mx-8">{content?.tagline?.value}</span>
+                        ))}
+                    </div>
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-1 opacity-80">
                     <span>{content?.copyright?.value || ""}</span>
@@ -300,7 +304,7 @@ const Footer = () => {
                             href="https://privacy-policy.theaminternationals.com/" 
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:text-[#C9A84C] transition-colors"
+                            className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300"
                         >
                             {content.privacy?.value || "Privacy"}
                         </a>
@@ -309,7 +313,7 @@ const Footer = () => {
                             href="https://privacy-policy.theaminternationals.com/" 
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:text-[#C9A84C] transition-colors"
+                            className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300"
                         >
                             {content.terms?.value || "Terms"}
                         </a>
