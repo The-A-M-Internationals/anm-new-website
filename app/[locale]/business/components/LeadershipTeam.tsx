@@ -33,7 +33,7 @@ const LeadershipTeam = () => {
         { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
         { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.png" },
-        { name: "Team Member", role: "Placeholder Role", image: "/business/sijith.png" },
+        // { name: "Team Member", role: "Placeholder Role", image: "/business/sijith.png" },
         { name: "Narayanan", role: "Software Engineer - Backend Beast", image: "/business/surya.png" }
     ];
 
@@ -164,11 +164,11 @@ const LeadershipTeam = () => {
                     <div 
                         key={idx} 
                         className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out opacity-0 translate-y-32
-                            ${idx === 4 ? 'lg:col-start-2' : ''}
                             ${(idx === 0) ? 'lg:mt-0' : ''}
                             ${(idx === 3) ? 'lg:mt-4' : ''}
-                            ${(idx === 1 || idx === 4) ? 'lg:mt-10' : ''}
-                            ${(idx === 2 || idx === 5) ? 'lg:mt-20' : ''}
+                            ${(idx === 1) ? 'lg:mt-10' : ''}
+                            ${(idx === 2) ? 'lg:mt-20' : ''}
+                            ${(idx === 4) ? 'lg:mt-10 lg:col-start-2' : ''}
                         `}
                         style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
