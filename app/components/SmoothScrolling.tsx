@@ -15,8 +15,7 @@ export default function SmoothScrolling() {
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.05,
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
@@ -108,20 +107,29 @@ export default function SmoothScrolling() {
       // Filter out only the elements that just entered the screen
       const visibleEntries = entries.filter(entry => entry.isIntersecting);
       
-      // Apply a staggered delay to create the "wave" effect natively!
-      visibleEntries.forEach((entry, index) => {
+      // Group entries by intersection time to stagger them cleanly
+      let delayIndex = 0;
+      visibleEntries.forEach(entry => {
         const el = entry.target as HTMLElement;
-        setTimeout(() => {
+        
+        // Let the GPU natively handle the stagger delay
+        el.style.transitionDelay = `${delayIndex * 0.2}s`;
+        
+        requestAnimationFrame(() => {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
-          
-          // Clean up GPU memory after the animation finishes
-          el.addEventListener('transitionend', function cleanup() {
+        });
+
+        // Clean up GPU memory after the animation finishes
+        el.addEventListener('transitionend', function cleanup(e) {
+          if (e.propertyName === 'transform') {
             el.style.willChange = 'auto';
+            el.style.transitionDelay = '0s';
             el.removeEventListener('transitionend', cleanup);
-          });
-        }, index * 120); // 120ms stagger between each element
+          }
+        });
         
+        delayIndex++;
         // Once revealed, stop observing it so we don't waste performance
         observer.unobserve(el);
       });
@@ -147,9 +155,9 @@ export default function SmoothScrolling() {
           
           // Set the initial hidden state and attach the smooth hardware-accelerated transition
           el.style.opacity = '0';
-          el.style.transform = 'translateY(40px)';
+          el.style.transform = 'translateY(100px)';
           el.style.willChange = 'opacity, transform';
-          el.style.transition = 'opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          el.style.transition = 'opacity 1.7s cubic-bezier(0.16, 1, 0.3, 1), transform 1.7s cubic-bezier(0.16, 1, 0.3, 1)';
           
           observer.observe(el);
         });
