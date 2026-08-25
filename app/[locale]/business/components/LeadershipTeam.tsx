@@ -145,7 +145,7 @@ const LeadershipTeam = () => {
             </div>
             </section>
 
-            <section id="leadership-team" className="w-full relative py-20 lg:py-32 bg-white overflow-hidden flex flex-col items-center justify-center px-4 lg:px-8">
+            <section id="leadership-team" className="no-global-reveal w-full relative py-20 lg:py-32 bg-white overflow-hidden flex flex-col items-center justify-center px-4 lg:px-8">
             <div className="w-full flex flex-col items-center">
                 {/* HEADER */}
                 <div className="text-center mb-16 w-full animate-slideUp">
@@ -163,14 +163,14 @@ const LeadershipTeam = () => {
                 {Employees.map((emp, idx) => (
                     <div 
                         key={idx} 
-                        className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-[1800ms] ease-out opacity-0 translate-y-32
+                        className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out opacity-0 translate-y-32
                             ${(idx === 0) ? 'lg:mt-0' : ''}
                             ${(idx === 3) ? 'lg:mt-4' : ''}
                             ${(idx === 1) ? 'lg:mt-10' : ''}
                             ${(idx === 2) ? 'lg:mt-20' : ''}
                             ${(idx === 4) ? 'lg:mt-10 lg:col-start-2' : ''}
                         `}
-                        style={{ transitionDelay: `${(idx % 4) * 250}ms` }}
+                        style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
                         {/* IMAGE - Sharp corners like the video */}
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#f3f4f6]">
