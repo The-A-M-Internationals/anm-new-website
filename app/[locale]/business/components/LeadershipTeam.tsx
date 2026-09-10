@@ -33,7 +33,7 @@ const LeadershipTeam = () => {
         { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
         { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.png" },
-        // { name: "Team Member", role: "Placeholder Role", image: "/business/sijith.png" },
+        { name: "Rudra Prakash", role: "EPM Consultant", image: "/business/rudra-prakash.jpg" },
         { name: "Narayanan", role: "Software Engineer - Backend Beast", image: "/business/surya.png" }
     ];
 
@@ -95,6 +95,7 @@ const LeadershipTeam = () => {
                                 src={service.image}
                                 alt={service.title}
                                 fill
+                                priority
                                 className="object-cover rounded-2xl transition-transform duration-300 lg:group-hover:scale-105"
                             />
 
@@ -159,16 +160,17 @@ const LeadershipTeam = () => {
                 </div>
 
                 {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
-                <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-16 lg:gap-y-[60px] w-full items-start mt-10 pb-32">
+                <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 lg:gap-y-[150px] w-full items-start mt-10 pb-32">
                 {Employees.map((emp, idx) => (
                     <div 
                         key={idx} 
-                        className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out opacity-0 translate-y-32
-                            ${(idx === 0) ? 'lg:mt-0' : ''}
-                            ${(idx === 3) ? 'lg:mt-4' : ''}
-                            ${(idx === 1) ? 'lg:mt-10' : ''}
-                            ${(idx === 2) ? 'lg:mt-20' : ''}
-                            ${(idx === 4) ? 'lg:mt-10 lg:col-start-2' : ''}
+                        className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out will-change-transform opacity-0 translate-y-32
+                            ${idx === 0 ? 'lg:mt-0' : ''}
+                            ${idx === 1 ? 'lg:mt-16' : ''}
+                            ${idx === 2 ? 'lg:mt-32' : ''}
+                            ${idx === 3 ? 'lg:mt-16' : ''}
+                            ${idx === 4 ? 'lg:mt-0 lg:col-start-2' : ''}
+                            ${idx === 5 ? 'lg:mt-16' : ''}
                         `}
                         style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
@@ -178,7 +180,8 @@ const LeadershipTeam = () => {
                                 src={emp.image}
                                 alt={emp.name}
                                 fill
-                                className="object-cover transition-all duration-700 group-hover:scale-105"
+                                priority={idx < 4}
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                         </div>
                         
