@@ -36,8 +36,7 @@ const Benefits = () => {
                 </p>
                 <p className="text-[#6B7280] text-lg md:text-[24px] mt-2">{content.subtitle.value}</p>        
             </div>
-            <div className="flex flex-col gap-6 max-w-[95%] md:w-full md:max-w-full items-center">      
-                <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">       
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl items-center justify-items-center">      
                     <FancyCard
                         icon="/careers/growth.svg"
                         title={content.card1Title.value}
@@ -59,9 +58,6 @@ const Benefits = () => {
                         isActive={activeIndex === 2}
                         onClick={() => handleCardClick(2)}
                     />
-                </div>
-
-                <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">       
                     <FancyCard
                         icon="/careers/comp.svg"
                         title={content.card4Title.value}
@@ -83,7 +79,6 @@ const Benefits = () => {
                         isActive={activeIndex === 5}
                         onClick={() => handleCardClick(5)}
                     />
-                </div>
             </div>
         </div>
     )
