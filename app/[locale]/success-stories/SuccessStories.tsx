@@ -134,6 +134,8 @@ const SuccessStories: React.FC = () => {
                   src={study.image}
                   alt={study.companyName}
                   className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute border-t border-white/32 w-full bottom-0 bg-transparent backdrop-blur-[8px] flex flex-col gap-1 p-4">
                   <h3 className="text-xs w-fit rounded-full px-3 py-2 bg-[#FFFBED] font-semibold text-[#C9A84C]">

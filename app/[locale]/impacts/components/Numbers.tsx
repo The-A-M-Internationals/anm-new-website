@@ -14,8 +14,7 @@ const Numbers = () => {
                 <p className="text-base lg:text-lg leading-relaxed max-w-4xl mx-auto">{content.intro.value}
                 </p>
             </div>
-            <div className="flex flex-col items-center justify-center mt-10 max-w-full md:hidden lg:block lg:w-full lg:max-w-full mx-auto">
-                <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap">
+            <div className="md:hidden lg:grid lg:grid-cols-3 gap-6 mt-10 max-w-7xl mx-auto w-full items-center justify-items-center">
                     <Card
                         icon="/careers/growth.svg"
                         title={content.target.value}
@@ -31,19 +30,20 @@ const Numbers = () => {
                         title={content.archievedPercentage.value}
                         description="42%"
                     />
-                </div>
-                <div className="flex flex-col lg:flex-row gap-6 justify-center w-full flex-wrap mt-6">
-                    <FancyCard
-                        icon="/careers/growth.svg"
-                        title={content.totalDoanted.value}
-                        description={locale === 'ar' ? "٤٢٬٠٥٠ درهم" : "$42,050"}
-                    />
-                    <FancyCard
-                        icon="/careers/growth.svg"
-                        title={content.beneficiariesSupported.value}
-                        description={content.students.value}
-                    />
-                </div>
+                    <div className="lg:col-start-1 lg:justify-self-end w-full lg:w-auto">
+                        <FancyCard
+                            icon="/careers/growth.svg"
+                            title={content.totalDoanted.value}
+                            description={locale === 'ar' ? "٤٢٬٠٥٠ درهم" : "$42,050"}
+                        />
+                    </div>
+                    <div className="lg:col-start-2 lg:col-span-2 lg:justify-self-start w-full lg:w-auto">
+                        <FancyCard
+                            icon="/careers/growth.svg"
+                            title={content.beneficiariesSupported.value}
+                            description={content.students.value}
+                        />
+                    </div>
             </div>
 
             <div className="hidden md:block lg:hidden mt-10 w-full mx-auto">
