@@ -41,14 +41,17 @@ const LeadershipTeam = () => {
         setActiveMobileIndex(activeMobileIndex === idx ? null : idx);
     };
 
+    const sectionRef = useRef<HTMLDivElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Clean, un-hijacked entrance observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('opacity-100', 'translate-y-0');
                     entry.target.classList.remove('opacity-0', 'translate-y-32');
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
@@ -57,6 +60,7 @@ const LeadershipTeam = () => {
             const cards = gridRef.current.querySelectorAll('.team-card');
             cards.forEach(card => observer.observe(card));
         }
+
         return () => observer.disconnect();
     }, []);
 
@@ -146,7 +150,7 @@ const LeadershipTeam = () => {
             </div>
             </section>
 
-            <section id="leadership-team" className="no-global-reveal w-full relative py-20 lg:py-32 bg-white overflow-hidden flex flex-col items-center justify-center px-4 lg:px-8">
+            <section ref={sectionRef} id="leadership-team" className="no-global-reveal w-full relative py-20 lg:py-32 bg-white overflow-hidden flex flex-col items-center justify-center px-4 lg:px-8">
             <div className="w-full flex flex-col items-center">
                 {/* HEADER */}
                 <div className="text-center mb-16 w-full animate-slideUp">
@@ -160,17 +164,17 @@ const LeadershipTeam = () => {
                 </div>
 
                 {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
-                <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 lg:gap-y-[150px] w-full items-start mt-10 pb-32">
+                <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 w-full items-start mt-10 pb-32">
                 {Employees.map((emp, idx) => (
                     <div 
                         key={idx} 
                         className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out will-change-transform opacity-0 translate-y-32
-                            ${idx === 0 ? 'lg:mt-0' : ''}
-                            ${idx === 1 ? 'lg:mt-16' : ''}
-                            ${idx === 2 ? 'lg:mt-32' : ''}
-                            ${idx === 3 ? 'lg:mt-16' : ''}
-                            ${idx === 4 ? 'lg:mt-0 lg:col-start-2' : ''}
-                            ${idx === 5 ? 'lg:mt-16' : ''}
+                            ${(idx === 0) ? 'lg:mt-0' : ''}
+                            ${(idx === 1) ? 'lg:mt-10' : ''}
+                            ${(idx === 2) ? 'lg:mt-20' : ''}
+                            ${(idx === 3) ? 'lg:mt-4' : ''}
+                            ${(idx === 4) ? 'lg:mt-10 lg:col-start-2' : ''}
+                            ${(idx === 5) ? 'lg:mt-20' : ''}
                         `}
                         style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
@@ -181,6 +185,7 @@ const LeadershipTeam = () => {
                                 alt={emp.name}
                                 fill
                                 priority={idx < 4}
+                                decoding="async"
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                         </div>
