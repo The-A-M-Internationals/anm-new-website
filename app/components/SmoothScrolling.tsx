@@ -4,47 +4,44 @@ import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-export default function SmoothScrolling() {
+export default function SmoothScrolling({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
 
+  // 1. Core Lenis Initialization
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
+    console.log("Lenis initializing...");
     const lenis = new Lenis({
-      lerp: 0.05,
-      orientation: "vertical",
-      gestureOrientation: "vertical",
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
     });
-
     lenisRef.current = lenis;
+    (window as any).lenis = lenis;
+    (window as any).__lenis = lenis;
 
-    // Sync ScrollTrigger with Lenis's scroll updates
-    lenis.on("scroll", ScrollTrigger.update);
+    // FORCE INJECT LENIS CLASSES (Failsafe for v1.3.x)
+    document.documentElement.classList.add('lenis', 'lenis-smooth');
 
-    // Drive Lenis natively for maximum unthrottled performance
-    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
+      requestAnimationFrame(raf);
     }
-    rafId = requestAnimationFrame(raf);
+    const rafId = requestAnimationFrame(raf);
 
     return () => {
       cancelAnimationFrame(rafId);
-      lenis.off("scroll", ScrollTrigger.update);
       lenis.destroy();
       lenisRef.current = null;
+      document.documentElement.classList.remove('lenis', 'lenis-smooth');
     };
   }, []);
 
+  // 2. Hash Scrolling Support
   useEffect(() => {
     if (!lenisRef.current) return;
 
@@ -58,7 +55,6 @@ export default function SmoothScrolling() {
         try {
           const target = document.querySelector(hash);
           if (target) {
-            // Tell Lenis to natively handle the scroll (no offset needed since navbar is not fixed!)
             lenisRef.current.scrollTo(target as HTMLElement);
             if (scrollInterval) clearInterval(scrollInterval);
             return true;
@@ -75,7 +71,6 @@ export default function SmoothScrolling() {
     const handleScroll = () => {
       scrollAttempts = 0;
       if (scrollInterval) clearInterval(scrollInterval);
-      
       if (!tryScroll()) {
         scrollInterval = setInterval(() => {
           scrollAttempts++;
@@ -88,7 +83,6 @@ export default function SmoothScrolling() {
 
     window.addEventListener('hashchange', handleScroll);
     window.addEventListener('popstate', handleScroll);
-
     handleScroll();
 
     return () => {
@@ -98,21 +92,16 @@ export default function SmoothScrolling() {
     };
   }, [pathname]);
 
+  // 3. The Global Bottom-to-Top Reveal Effect
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // We use a native IntersectionObserver instead of GSAP.
-    // CSS transitions run on the GPU, which completely eliminates the lag!
     const observer = new IntersectionObserver((entries) => {
-      // Filter out only the elements that just entered the screen
       const visibleEntries = entries.filter(entry => entry.isIntersecting);
-      
-      // Group entries by intersection time to stagger them cleanly
       let delayIndex = 0;
+      
       visibleEntries.forEach(entry => {
         const el = entry.target as HTMLElement;
-        
-        // Let the GPU natively handle the stagger delay
         el.style.transitionDelay = `${delayIndex * 0.2}s`;
         
         requestAnimationFrame(() => {
@@ -120,7 +109,6 @@ export default function SmoothScrolling() {
           el.style.transform = 'translate3d(0, 0, 0)';
         });
 
-        // Clean up GPU memory after the animation finishes
         el.addEventListener('transitionend', function cleanup(e) {
           if (e.propertyName === 'transform') {
             el.style.willChange = 'auto';
@@ -130,13 +118,11 @@ export default function SmoothScrolling() {
         });
         
         delayIndex++;
-        // Once revealed, stop observing it so we don't waste performance
         observer.unobserve(el);
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); // Trigger slightly before it fully enters
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     const timer = setTimeout(() => {
-      // Force Lenis to recalculate the page height after SPA navigation
       if (lenisRef.current) {
         lenisRef.current.resize();
       }
@@ -144,21 +130,16 @@ export default function SmoothScrolling() {
       const sections = document.querySelectorAll('section:not(.no-global-reveal)');
       
       sections.forEach((section) => {
-        // Skip hero sections already visible on page load
         if (section.getBoundingClientRect().top < window.innerHeight * 0.3) return;
 
-        // Target the inner layout chunks automatically, AND any specifically marked deep items
         const children = section.querySelectorAll(':scope > div > *, .reveal-up');
         
         children.forEach((child) => {
           const el = child as HTMLElement;
-          
-          // Set the initial hidden state and attach the smooth hardware-accelerated transition
           el.style.opacity = '0';
           el.style.transform = 'translate3d(0, 100px, 0)';
           el.style.willChange = 'opacity, transform';
           el.style.transition = 'opacity 1.7s cubic-bezier(0.16, 1, 0.3, 1), transform 1.7s cubic-bezier(0.16, 1, 0.3, 1)';
-          
           observer.observe(el);
         });
       });
@@ -170,5 +151,5 @@ export default function SmoothScrolling() {
     };
   }, [pathname]);
 
-  return null;
+  return <>{children}</>;
 }

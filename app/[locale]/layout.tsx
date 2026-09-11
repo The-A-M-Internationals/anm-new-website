@@ -68,12 +68,13 @@ export default async function RootLayout({
                     }
                 `}} />
                 <IntlayerClientProvider locale={locale}>
-                    <SmoothScrolling />
-                    <AOSInitializer />
-                    <Navbar />
-                    {children}
-                    <GoToTopButton />
-                    <Footer />
+                    <SmoothScrolling>
+                        <AOSInitializer />
+                        <Navbar />
+                        {children}
+                        <GoToTopButton />
+                        <Footer />
+                    </SmoothScrolling>
                 </IntlayerClientProvider>
             </body>
         </html>

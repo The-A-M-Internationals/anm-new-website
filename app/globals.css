@@ -86,10 +86,7 @@ body {
     overflow-x: hidden;
 }
 
-.snap-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
+
 
 .font-sf {
     font-family: 'SF Pro', sans-serif;
