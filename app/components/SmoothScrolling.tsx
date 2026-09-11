@@ -106,7 +106,7 @@ export default function SmoothScrolling({
         
         requestAnimationFrame(() => {
           el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
+          el.style.transform = 'translate3d(0, 0, 0)';
         });
 
         el.addEventListener('transitionend', function cleanup(e) {
@@ -137,7 +137,7 @@ export default function SmoothScrolling({
         children.forEach((child) => {
           const el = child as HTMLElement;
           el.style.opacity = '0';
-          el.style.transform = 'translateY(100px)';
+          el.style.transform = 'translate3d(0, 100px, 0)';
           el.style.willChange = 'opacity, transform';
           el.style.transition = 'opacity 1.7s cubic-bezier(0.16, 1, 0.3, 1), transform 1.7s cubic-bezier(0.16, 1, 0.3, 1)';
           observer.observe(el);
