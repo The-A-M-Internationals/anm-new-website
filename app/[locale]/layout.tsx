@@ -44,6 +44,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
     title: "The A&M internationals",
     description: "The A&M internationals provides services to help businesses thrive in the global market.",
+    icons: {
+        icon: [
+            { url: "/favicon.ico" },
+            { url: "/icon.png", type: "image/png" },
+        ],
+        apple: [
+            { url: "/apple-icon.png" },
+        ],
+    },
 };
 
 export default async function RootLayout({
