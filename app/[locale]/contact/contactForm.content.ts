@@ -114,8 +114,8 @@ const contactFormContent = {
     }),
 
     office: t({
-      en: "Office - C1 - 1F - SF6017\nAjman Free Zone C1 Building\nAjman Free Zone, UAE\nMakani No: 4442612247",
-      ar: "مكتب - C1 - 1F - SF6017\nمبنى C1 - منطقة عجمان الحرة\nعجمان، الإمارات العربية المتحدة\nرقم مكاني: 4442612247",
+      en: "Office - C1 - 1F - SF6017\nAjman Free Zone C1 Building\nAjman Free Zone, UAE",
+      ar: "مكتب - C1 - 1F - SF6017\nمبنى C1 - منطقة عجمان الحرة\nعجمان، الإمارات العربية المتحدة",
     }),
 
     appointment: t({

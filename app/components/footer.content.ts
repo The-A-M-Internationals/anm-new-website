@@ -95,8 +95,6 @@ export const footerContent = {
     buildingValue: t({ en: "Ajman Free Zone C1 Building", ar: "مبنى C1 - منطقة عجمان الحرة" }),
     districtLabel: t({ en: "Business District", ar: "المنطقة التجارية" }),
     districtValue: t({ en: "Ajman Free Zone", ar: "منطقة عجمان الحرة" }),
-    makaniLabel: t({ en: "Makani No", ar: "رقم مكاني" }),
-    makaniValue: t({ en: "4442612247", ar: "4442612247" }),
 
     // How we work section
     howWeWork: t({ en: "How we work", ar: "كيف نعمل" }),

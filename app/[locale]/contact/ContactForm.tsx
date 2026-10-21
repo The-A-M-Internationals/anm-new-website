@@ -356,12 +356,26 @@ const ContactForm: React.FC = () => {
             {/* Visit Our Office */}
             <div className="bg-white w-full border border-gray-300 rounded-[28px] sm:rounded-[36px] p-5 sm:p-6 shadow-sm">
               <div className="flex items-start gap-4">
-                <div className="bg-[#FFFBED] p-3 rounded-2xl flex-shrink-0 mt-0.5">
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#FFFBED] p-3 rounded-2xl flex-shrink-0 mt-0.5 hover:scale-105 transition-transform"
+                  title="View on Google Maps"
+                >
                   <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#D4AF37]" />
-                </div>
+                </a>
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.visitOffice.value}</h3>
-                  <p className="text-sm sm:text-base text-gray-800 whitespace-pre-line leading-relaxed">{content.office.value}</p>
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm sm:text-base text-gray-800 hover:text-[#D4AF37] block whitespace-pre-line leading-relaxed transition-colors"
+                    title="View on Google Maps"
+                  >
+                    {content.office.value}
+                  </a>
                   <button 
                     onClick={(e) => {
                       e.preventDefault();

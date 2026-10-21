@@ -26,8 +26,8 @@ const officesContent = {
       ar: "الإمارات العربية المتحدة",
     }),
     dubaiAddress: t({
-      en: "Office - C1 - 1F - SF6017, Ajman Free Zone C1 Building, Ajman Free Zone, UAE (Makani No: 4442612247)",
-      ar: "مكتب - C1 - 1F - SF6017، مبنى C1 - منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة (رقم مكاني: 4442612247)",
+      en: "Office - C1 - 1F - SF6017, Ajman Free Zone C1 Building, Ajman Free Zone, UAE",
+      ar: "مكتب - C1 - 1F - SF6017، مبنى C1 - منطقة عجمان الحرة، عجمان، الإمارات العربية المتحدة",
     }),
 
     indiaLocation: t({

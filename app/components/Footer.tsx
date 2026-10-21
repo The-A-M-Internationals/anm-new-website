@@ -5,7 +5,7 @@ import { useState } from "react";
 import { subscribeToNewsletter } from "../../services/newsletter";
 import Link from "next/link";
 import { useIntlayer, useLocale } from "next-intlayer";
-import { Phone, Mail, Globe, MapPin, Building2 } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import "./footer.content";
 import { useRouter } from "next/navigation";
 import { handleHashLink } from "@/lib/handleHashLink";
@@ -91,33 +91,30 @@ const Footer = () => {
                 </div>
             </div>
 
-            {/* Premises & Building Details */}
-            <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" />
+            {/* Premises & Building Details - Clickable Google Maps Location */}
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 group transition-colors"
+                title="View on Google Maps"
+            >
+                <MapPin className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
                 <div className="flex flex-col text-xs sm:text-sm text-gray-200 space-y-1">
                     <div>
                         <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.premisesLabel?.value || "Premises Number"}:</span>
-                        <span className="font-semibold text-white">{content.premisesValue?.value || "Office - C1 - 1F - SF6017"}</span>
+                        <span className="font-semibold text-white group-hover:text-[#C9A84C] transition-colors">{content.premisesValue?.value || "Office - C1 - 1F - SF6017"}</span>
                     </div>
                     <div>
                         <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.buildingLabel?.value || "Building Name"}:</span>
-                        <span className="font-medium text-gray-200">{content.buildingValue?.value || "Ajman Free Zone C1 Building"}</span>
+                        <span className="font-medium text-gray-200 group-hover:text-[#C9A84C] transition-colors">{content.buildingValue?.value || "Ajman Free Zone C1 Building"}</span>
                     </div>
                     <div>
                         <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.districtLabel?.value || "Business District"}:</span>
-                        <span className="font-medium text-gray-300">{content.districtValue?.value || "Ajman Free Zone"}</span>
+                        <span className="font-medium text-gray-300 group-hover:text-[#C9A84C] transition-colors">{content.districtValue?.value || "Ajman Free Zone"}</span>
                     </div>
                 </div>
-            </div>
-
-            {/* Makani Number */}
-            <div className="flex items-start gap-3">
-                <Globe className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" />
-                <div className="flex flex-col">
-                    <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.makaniLabel?.value || "Makani No"}:</span>
-                    <span className="font-mono font-bold text-white tracking-wider text-base">{content.makaniValue?.value || "4442612247"}</span>
-                </div>
-            </div>
+            </a>
         </div>
     );
 
