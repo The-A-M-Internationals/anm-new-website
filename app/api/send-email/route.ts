@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import nodemailer, { type Transporter } from "nodemailer";
 import { db } from "@/lib/firebaseConfig";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     const hasSmtpCredentials = Boolean(smtpUser && smtpPass);
 
-    let transporter: nodemailer.Transporter | null = null;
+    let transporter: Transporter | null = null;
     if (hasSmtpCredentials) {
       transporter = nodemailer.createTransport({
         host: smtpHost,
