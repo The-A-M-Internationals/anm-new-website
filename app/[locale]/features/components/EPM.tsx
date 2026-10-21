@@ -83,6 +83,27 @@ export default function EPM() {
                 ...formData,
                 submittedAt: new Date().toISOString()
             });
+
+            // Dispatch confirmation and alert email
+            try {
+                await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: 'consultation',
+                        data: {
+                            name: formData.name,
+                            company: formData.company,
+                            email: formData.email,
+                            phone: formData.phone,
+                            service: `EPM Demo Request (${formData.epm})`,
+                            vision: `Requested EPM Suite: ${formData.epm}`,
+                        },
+                    }),
+                });
+            } catch (mailErr) {
+                console.warn('Could not dispatch EPM demo email:', mailErr);
+            }
             showTempMsg(setSuccessMsg, String(content.successSubmitted.value));
             setFormData({
                 name: '',
