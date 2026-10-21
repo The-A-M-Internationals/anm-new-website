@@ -108,6 +108,12 @@ const Navbar = () => {
           type: 'outline' as const,
           link: getLocalizedLink('/blogs')
         },
+        {
+          icon: '/tick.svg',
+          textKey: 'contactUs',
+          type: 'outline' as const,
+          link: '#contact'
+        },
       ]
     },
     'What Sets Us Apart': {

@@ -15,6 +15,7 @@ export const navbarContent = {
     bookConsultation: t({ en: "Book a Consultation", ar: "احجز استشارة" }),
 
     // Submenu items
+    contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
     amCommunity: t({
       en: "The A&M internationals community",
       ar: "مجتمع A&M الدولي",

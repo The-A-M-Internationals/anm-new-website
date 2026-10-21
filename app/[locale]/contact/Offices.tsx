@@ -11,10 +11,10 @@ export default function OurOffices() {
   const offices = [
     {
       location: content.dubaiLocation.value,
-      phone: '+91 73061 09679',
-      email: 'am@theaminternational.com',
+      phone: '+971 564783478',
+      email: 'am@theaminternationals.com',
       address: content.dubaiAddress.value,
-      link: 'https://maps.app.goo.gl/PSJeoPD7X4DXwESL6'
+      link: 'https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8'
     }
   ];
 
@@ -73,10 +73,16 @@ export default function OurOffices() {
                   </div>
 
                   {/* Address */}
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-[#D4AF37] mt-1 shrink-0" />
+                  <a 
+                    href={office.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-start gap-3 hover:text-[#D4AF37] transition-colors group"
+                    title="View on Google Maps"
+                  >
+                    <MapPin className="w-5 h-5 text-[#D4AF37] mt-1 shrink-0 group-hover:scale-110 transition-transform" />
                     <span>{office.address}</span>
-                  </div>
+                  </a>
                 </div>
 
                 {/* Get Direction Button */}

@@ -3,10 +3,10 @@ import { t } from "intlayer";
 export const footerContent = {
   key: "footer",
   content: {
-    // Company description
+    // Company description - Cleaned up to reclaim space
     companyDescription: t({
-      en: "Elevating businesses with enterprise performance management and expert IT consulting solutions.",
-      ar: "رفع مستوى الأعمال من خلال إدارة الأداء المؤسسي وحلول الاستشارات التقنية المتخصصة.",
+      en: "",
+      ar: "",
     }),
 
     // Social section
@@ -86,9 +86,15 @@ export const footerContent = {
 
     // Contact Us section
     contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
-    phoneLabel: t({ en: "+91 73061 09679 (WhatsApp & Calls)", ar: "+91 73061 09679 (واتساب ومكالمات)" }),
-    emailLabel: t({ en: "am@theaminternational.com", ar: "am@theaminternational.com" }),
+    phoneLabel: t({ en: "+971 564783478", ar: "+971 564783478" }),
+    emailLabel: t({ en: "am@theaminternationals.com", ar: "am@theaminternationals.com" }),
     websiteLabel: t({ en: "theaminternationals.com", ar: "theaminternationals.com" }),
+    premisesLabel: t({ en: "Premises Number", ar: "رقم المبنى / المكتب" }),
+    premisesValue: t({ en: "Office - C1 - 1F - SF6017", ar: "مكتب - C1 - 1F - SF6017" }),
+    buildingLabel: t({ en: "Building Name", ar: "اسم المبنى" }),
+    buildingValue: t({ en: "Ajman Free Zone C1 Building", ar: "مبنى C1 - منطقة عجمان الحرة" }),
+    districtLabel: t({ en: "Business District", ar: "المنطقة التجارية" }),
+    districtValue: t({ en: "Ajman Free Zone", ar: "منطقة عجمان الحرة" }),
 
     // How we work section
     howWeWork: t({ en: "How we work", ar: "كيف نعمل" }),
