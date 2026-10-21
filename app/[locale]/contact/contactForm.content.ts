@@ -114,8 +114,9 @@ const contactFormContent = {
     }),
 
     office: t({
-      en: "The A&M internationals, Ajman Free Zone, Ajman, United Arab Emirates",
-      ar: "A&M الدولية\nمنطقة عجمان الحرة\nعجمان، الإمارات العربية المتحدة",    }),
+      en: "Office - C1 - 1F - SF6017\nAjman Free Zone C1 Building\nAjman Free Zone, UAE\nMakani No: 4442612247",
+      ar: "مكتب - C1 - 1F - SF6017\nمبنى C1 - منطقة عجمان الحرة\nعجمان، الإمارات العربية المتحدة\nرقم مكاني: 4442612247",
+    }),
 
     appointment: t({
       en: "Schedule an appointment",

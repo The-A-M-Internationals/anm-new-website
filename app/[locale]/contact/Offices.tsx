@@ -11,8 +11,8 @@ export default function OurOffices() {
   const offices = [
     {
       location: content.dubaiLocation.value,
-      phone: '+91 73061 09679',
-      email: 'am@theaminternational.com',
+      phone: '+971 564783478',
+      email: 'am@theaminternationals.com',
       address: content.dubaiAddress.value,
       link: 'https://maps.app.goo.gl/PSJeoPD7X4DXwESL6'
     }
