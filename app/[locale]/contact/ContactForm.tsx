@@ -102,6 +102,20 @@ const ContactForm: React.FC = () => {
         phone: fullPhone,
         submittedAt: new Date().toISOString()
       });
+
+      // Dispatch confirmation email to client and alert to admin
+      try {
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'consultation',
+            data: { ...formData, phone: fullPhone },
+          }),
+        });
+      } catch (mailErr) {
+        console.warn('Could not dispatch consultation email:', mailErr);
+      }
       setSuccessMsg(content.success.value);
       setTimeout(() => setSuccessMsg(null), 3000);
       setFormData({

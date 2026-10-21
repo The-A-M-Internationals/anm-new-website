@@ -31,6 +31,17 @@ export async function subscribeToNewsletter(
       subscribedAt: Timestamp.now(),
     });
 
+    // Send confirmation email to subscriber and notification to admin
+    try {
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "subscribe", email }),
+      });
+    } catch (mailErr) {
+      console.warn("Could not dispatch subscription email:", mailErr);
+    }
+
     return { status: "success" };
   } catch (err) {
     console.error("Newsletter subscription error:", err);
