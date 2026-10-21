@@ -70,7 +70,6 @@ const PageHero: React.FC<PageHeroProps> = ({
                   src={image}
                   alt="Hero Desktop"
                   fill
-               // className={`object-cover transition-transform duration-700 ease-out ${isZoomed ? "scale-105" : "scale-100"}`}
                />
             </div>
 
@@ -81,7 +80,6 @@ const PageHero: React.FC<PageHeroProps> = ({
                   alt="Hero Tablet"
                   fill
                   className='object-contain'
-               // className={`object-contain transition-transform duration-700 ease-out ${isZoomed ? "scale-105" : "scale-100"}`}
                />
             </div>
 
@@ -91,7 +89,6 @@ const PageHero: React.FC<PageHeroProps> = ({
                   src={image2}
                   alt="Hero Mobile"
                   fill
-               // className={`object-cover transition-transform duration-700 ease-out ${isZoomed ? "scale-105" : "scale-100"}`}
                />
             </div>
 
