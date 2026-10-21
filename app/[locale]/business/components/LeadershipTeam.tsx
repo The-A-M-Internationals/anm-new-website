@@ -29,11 +29,11 @@ const LeadershipTeam = () => {
     ];
 
     const Employees = [
-        { name: "Sri Varsha", role: "Developer - Chief Bug Slayer", image: "/business/sri-varsha.jpg" },
         { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.png" },
+        { name: "Rudra Prakash", role: "EPM Consultant", image: "/business/rudra-prakash.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
         { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.png" },
-        { name: "Rudra Prakash", role: "EPM Consultant", image: "/business/rudra-prakash.jpg" },
+        { name: "Sri Varsha", role: "Developer - Chief Bug Slayer", image: "/business/sri-varsha.jpg" },
         { name: "Narayanan", role: "Software Engineer - Backend Beast", image: "/business/surya.png" }
     ];
 
