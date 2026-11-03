@@ -132,11 +132,11 @@ const HomeHero = () => {
                             </div>
 
                             {/* Beautiful Mini Cards Row for Services */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {/* Finance Card */}
                                 <div 
                                     onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/finance-transformation"))}
-                                    className="group cursor-pointer p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#C9A84C]/50 transition-all duration-300 flex flex-col justify-between"
+                                    className="group cursor-pointer p-3.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#C9A84C]/50 transition-all duration-300 flex flex-col justify-between"
                                 >
                                     <div className="text-[9px] font-bold uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors mb-1">
                                         {content.financeLabel.value}
@@ -146,23 +146,10 @@ const HomeHero = () => {
                                     </div>
                                 </div>
 
-                                {/* Digital Card */}
-                                <div 
-                                    onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/digital-transformation"))}
-                                    className="group cursor-pointer p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#4AADDA]/50 transition-all duration-300 flex flex-col justify-between"
-                                >
-                                    <div className="text-[9px] font-bold uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors mb-1">
-                                        {content.digitalLabel.value}
-                                    </div>
-                                    <div className="text-xs font-bold text-white group-hover:text-[#4AADDA] transition-colors leading-tight">
-                                        {content.digitalTitle.value}
-                                    </div>
-                                </div>
-
                                 {/* AI Card */}
                                 <div 
                                     onClick={() => router.push(getLocalizedPath(locale as AppLocale, "/ai-automations"))}
-                                    className="group cursor-pointer p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#9B79E0]/50 transition-all duration-300 flex flex-col justify-between"
+                                    className="group cursor-pointer p-3.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#9B79E0]/50 transition-all duration-300 flex flex-col justify-between"
                                 >
                                     <div className="text-[9px] font-bold uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors mb-1">
                                         {content.aiLabel.value}

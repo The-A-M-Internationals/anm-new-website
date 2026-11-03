@@ -1,0 +1,13 @@
+---
+description: Enterprise UI, TypeScript Verification & Modularity Standards
+globs: **/*.{ts,tsx,js,jsx}
+alwaysApply: true
+---
+
+# Code & Design Directives
+
+- Run `npm run typecheck` before finishing any task. Zero TypeScript errors allowed.
+- Keep components modular and strictly under 120 lines.
+- Canvas is `#F4F6F9`, cards are pure white with `border-slate-200/80 rounded-xl shadow-xs`.
+- All clickable items must have `cursor-pointer` and `transition-all duration-150 ease-in-out`.
+- Never stretch or squash media/logos: use strict aspect ratios.

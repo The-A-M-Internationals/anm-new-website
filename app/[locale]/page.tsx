@@ -1,6 +1,7 @@
 import Services from "../components/Services";
 import AboutUs from "../components/AboutUs";
 import PartnerShipCard from "../components/PartnerShipCard";
+import OurClients from "../components/OurClients";
 import SuccessStory from "../components/SuccessStory";
 import Events from "../components/Events";
 import Innovation from "../components/Innovation";
@@ -21,6 +22,9 @@ export default function Home() {
       {/* <section className="snap-section">
         <PartnerShipCard />
       </section> */}
+      <section className="snap-section">
+        <OurClients />
+      </section>
       <section className="snap-section">
         <SuccessStory />
       </section>

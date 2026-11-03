@@ -68,8 +68,8 @@ const servicesContent = {
       ar: "أوراكل EPM",
     }),
     financeTag2: t({
-      en: "SAP",
-      ar: "ساب",
+      en: "EPM Cloud",
+      ar: "سحابة EPM",
     }),
     digitalCategory: t({
       en: "Digital Transformation",
@@ -128,56 +128,80 @@ const servicesContent = {
       ar: "أتمتة الذكاء الاصطناعي",
     }),
     aiTitle: t({
-      en: "Intelligent Automation at Scale",
-      ar: "الأتمتة الذكية على نطاق واسع",
+      en: "Intelligent Automation, Elevated by AI",
+      ar: "الأتمتة الذكية المعززة بالذكاء الاصطناعي",
     }),
     aiDescription: t({
-      en: "RPA, generative AI and machine learning that eliminate manual effort and create competitive advantage.",
-      ar: "أتمتة العمليات الروبوتية والذكاء الاصطناعي التوليدي والتعلم الآلي الذي يلغي الجهد اليدوي ويخلق ميزة تنافسية.",
+      en: "Transform your business with cutting-edge AI and machine learning. Automate workflows, enhance decision-making, and unlock unprecedented efficiency.",
+      ar: "حوّل أعمالك باستخدام أحدث تقنيات الذكاء الاصطناعي والتعلم الآلي لأتمتة سير العمل وتعزيز اتخاذ القرارات وتحقيق كفاءة غير مسبوقة.",
     }),
     aiCapability1: t({
+      en: "Machine Learning",
+      ar: "التعلم الآلي",
+    }),
+    aiCapability2: t({
       en: "Robotic Process Automation",
       ar: "أتمتة العمليات الروبوتية",
     }),
-    aiCapability2: t({
-      en: "Generative AI Integration",
-      ar: "تكامل الذكاء الاصطناعي التوليدي",
-    }),
     aiCapability3: t({
-      en: "AI-Powered Analytics",
-      ar: "التحليلات المدعومة بالذكاء الاصطناعي",
+      en: "Natural Language Processing",
+      ar: "معالجة اللغة الطبيعية",
     }),
     aiCapability4: t({
-      en: "Intelligent Doc Processing",
-      ar: "معالجة المستندات الذكية",
+      en: "Computer Vision",
+      ar: "الرؤية الحاسوبية",
+    }),
+    aiCapability5: t({
+      en: "Generative AI",
+      ar: "الذكاء الاصطناعي التوليدي",
     }),
     aiMetric1Value: t({
-      en: "70%",
-      ar: "٧٠٪",
+      en: "85%",
+      ar: "٨٥٪",
     }),
     aiMetric1Label: t({
+      en: "efficiency increase",
+      ar: "زيادة الكفاءة",
+    }),
+    aiMetric2Value: t({
+      en: "10x",
+      ar: "١٠×",
+    }),
+    aiMetric2Label: t({
       en: "faster processing",
       ar: "معالجة أسرع",
     }),
-    aiMetric2Value: t({
-      en: "90%",
-      ar: "٩٠٪",
+    aiMetric3Value: t({
+      en: "24/7",
+      ar: "٢٤/٧",
     }),
-    aiMetric2Label: t({
-      en: "fewer errors",
-      ar: "أخطاء أقل",
+    aiMetric3Label: t({
+      en: "automated operations",
+      ar: "عمليات مؤتمتة",
     }),
     aiTag1: t({
+      en: "ML",
+      ar: "ML",
+    }),
+    aiTag2: t({
       en: "RPA",
       ar: "RPA",
     }),
-    aiTag2: t({
+    aiTag3: t({
+      en: "NLP",
+      ar: "NLP",
+    }),
+    aiTag4: t({
+      en: "CV",
+      ar: "CV",
+    }),
+    aiTag5: t({
       en: "GenAI",
-      ar: "الذكاء الاصطناعي التوليدي",
+      ar: "GenAI",
     }),
     explore: t({
-      en: "Explore",
-      ar: "استكشف",
+      en: "Explore AI Solutions",
+      ar: "استكشف حلول الذكاء الاصطناعي",
     }),
     cloudLabel: t({
       en: "Cloud",

@@ -1,0 +1,39 @@
+# Cursor Rules for The A&M Internationals
+
+## Project Overview
+Enterprise B2B website for The A&M Internationals, specializing in Oracle EPM Cloud, Financial Transformation, and Enterprise AI & Automations.
+
+## Tech Stack
+- Framework: Next.js 16 (App Router), React 19
+- Language: TypeScript 5
+- Styling: Tailwind CSS v4, Lucide React icons
+- Internationalization: Intlayer / next-intlayer (Bilingual English & Arabic)
+- Animation: GSAP, Lenis Smooth Scroll, AOS
+- Backend / Services: Firebase (v12), Nodemailer, AWS S3 Client
+
+## Verification & Commands
+- Dev Server: `npm run dev`
+- Typecheck: `npm run typecheck` (`tsc --noEmit`)
+- Lint: `npm run lint` (`eslint`)
+- Build: `npm run build` (`npx intlayer build && next build`)
+- ALWAYS run `npm run typecheck` before concluding any edit. Zero TypeScript errors allowed.
+
+## Architectural Rules
+- File Size Limit: Keep components modular and strictly under 120 lines. Decompose large sections into clean atomic UI components.
+- App Router Pages: `src/app/[locale]/`
+- Reusable UI Components: `src/components/`
+- Content Dictionaries: `src/app/[locale]/**/*.content.ts` (Intlayer format)
+- Services / Config: `src/services/` & `src/lib/`
+
+## Visual Polish & Anti-AI-Slop Directives
+- Canvas: `#F4F6F9` (never raw white or muddy dark background).
+- Surface / Cards: Pure white `#FFFFFF` with soft borders (`border-slate-200/80`) and subtle shadows (`shadow-xs` / `shadow-sm`).
+- Interactivity: Every clickable element (buttons, links, triggers, cards) MUST have `cursor-pointer`.
+- Micro-interactions: Smooth transitions (`transition-all duration-150 ease-in-out`) on hover and focus.
+- Anti-Squish Containers: Strict aspect ratios and overflow boundaries; never let banners, cards, or logos squash or stretch vertically.
+
+## Operational Guardrails
+1. Systematic Debugging: Identify root cause with evidence before patching.
+2. Strict Verification: Run typecheck before reporting complete.
+3. Git Safety: No `git push --force` or `git reset --hard`.
+4. Token Optimization: Concise responses, link to files, avoid re-printing unchanged code.
