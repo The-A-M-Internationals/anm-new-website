@@ -351,7 +351,7 @@ const DigitalMarketingServices = () => {
 
                                             {/* Central icon */}
                                             <div 
-                                                className="relative z-10 p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+                                                className="relative z-10 p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-500 group-hover:scale-110 group-hover:rotate-3"
                                                 style={{ color: service.accentColor }}
                                             >
                                                 {service.icon}

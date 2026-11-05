@@ -1,65 +1,27 @@
-'use client';
+"use client";
 
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+/** Scrolls to #hash after route changes / deep links — via Lenis, after layout has settled. */
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { scrollToHash } from "@/lib/handleHashLink";
 
-const HashScrollHandler = () => {
+export default function HashScrollHandler() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    let scrollAttempts = 0;
-    let scrollInterval: NodeJS.Timeout | null = null;
-
-    const tryScroll = () => {
-      const hash = window.location.hash.replace('#', '');
+    const go = () => {
+      const { hash } = window.location;
       if (hash) {
-        const element = document.getElementById(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-          if (scrollInterval) clearInterval(scrollInterval);
-          return true;
-        }
-      } else if (scrollAttempts === 0) {
-        // Only scroll to top on the very first attempt if there's no hash
-        window.scrollTo(0, 0);
-        if (scrollInterval) clearInterval(scrollInterval);
-        return true;
-      }
-      return false;
-    };
-
-    const handleScroll = () => {
-      scrollAttempts = 0;
-      if (scrollInterval) clearInterval(scrollInterval);
-      
-      // Try immediately
-      if (!tryScroll()) {
-        // If not found, poll for up to 2 seconds
-        scrollInterval = setInterval(() => {
-          scrollAttempts++;
-          if (tryScroll() || scrollAttempts >= 20) {
-            if (scrollInterval) clearInterval(scrollInterval);
-          }
-        }, 100);
+        requestAnimationFrame(() => requestAnimationFrame(() => scrollToHash(hash)));
+      } else {
+        window.__lenis?.scrollTo(0, { immediate: true });
       }
     };
 
-    // Listen for hash changes manually
-    window.addEventListener('hashchange', handleScroll);
-    window.addEventListener('popstate', handleScroll);
-
-    // Initial attempt on mount / pathname change
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('hashchange', handleScroll);
-      window.removeEventListener('popstate', handleScroll);
-      if (scrollInterval) clearInterval(scrollInterval);
-    };
-  }, [pathname, searchParams]);
+    go();
+    window.addEventListener("hashchange", go);
+    return () => window.removeEventListener("hashchange", go);
+  }, [pathname]);
 
   return null;
-};
-
-export default HashScrollHandler;
+}

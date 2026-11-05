@@ -1,30 +1,8 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { usePathname } from "next/navigation";
-
+/**
+ * Page-enter fade on every navigation (templates remount per route).
+ * CSS-only so content paints with the server HTML instead of waiting for
+ * hydration + GSAP — the previous JS fade held LCP back by ~20 s on mobile.
+ */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    
-    // Kill any ongoing tweens on this element just in case
-    gsap.killTweensOf(containerRef.current);
-
-    // Elegant fade-in and slight slide-up on every page load/navigation
-    gsap.fromTo(
-      containerRef.current,
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.1 }
-    );
-  }, [pathname]); // Re-run when pathname changes, though template remounts anyway
-
-  return (
-    <div ref={containerRef} className="opacity-0 min-h-screen">
-      {children}
-    </div>
-  );
+  return <div className="page-enter min-h-screen">{children}</div>;
 }

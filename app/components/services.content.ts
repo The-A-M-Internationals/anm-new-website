@@ -203,6 +203,10 @@ const servicesContent = {
       en: "Explore AI Solutions",
       ar: "استكشف حلول الذكاء الاصطناعي",
     }),
+    financeExplore: t({
+      en: "Explore EPM Solutions",
+      ar: "استكشف حلول EPM",
+    }),
     cloudLabel: t({
       en: "Cloud",
       ar: "سحابي",

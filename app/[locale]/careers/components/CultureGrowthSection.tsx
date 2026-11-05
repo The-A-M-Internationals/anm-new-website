@@ -50,6 +50,7 @@ const CultureGrowthSection = () => {
                             src="/careers/culture-growth.jpg"
                             alt="Culture and Growth"
                             fill
+                            sizes="(min-width: 1024px) 552px, 100vw"
                             className="object-cover"
                         />
                     </div>
@@ -59,7 +60,7 @@ const CultureGrowthSection = () => {
                         {values.map((value, index) => (
                             <div
                                 key={index}
-                                className="group bg-white border border-[#D9D9D9] shadow-xl flex flex-col gap-3 rounded-[40px] p-6 md:p-8 h-auto md:h-[197px] cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl transition-all duration-300"
+                                className="group bg-white border border-[#D9D9D9] shadow-xl flex flex-col gap-3 rounded-[40px] p-6 md:p-8 h-auto md:h-[197px] cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300"
                             >
                                 <h3 className="text-lg md:text-xl font-bold text-[#D4AF37]">
                                     {value.title}

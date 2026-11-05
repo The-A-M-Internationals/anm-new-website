@@ -176,12 +176,6 @@ const Footer = () => {
                         height={300}
                         className="w-48 sm:w-56 md:w-64 lg:w-64 h-auto object-contain"
                     />
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 w-fit">
-                        <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-                        <span className="text-xs font-mono tracking-wider uppercase text-slate-300">
-                            Oracle Partner Network
-                        </span>
-                    </div>
 
                     {/* Contact Details with ID for Smooth Scroll from About Us dropdown */}
                     {renderContact()}
@@ -349,3 +343,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

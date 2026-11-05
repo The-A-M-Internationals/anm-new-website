@@ -222,7 +222,7 @@ const ChildWelfareImpact = () => {
                     {stats.map((stat, index) => (
                         <div
                             key={index}
-                            className="group bg-white rounded-3xl flex flex-col p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 items-center justify-center text-center"
+                            className="group bg-white rounded-3xl flex flex-col p-8 shadow-md hover:shadow-xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300 transform hover:-translate-y-2 border border-gray-100 items-center justify-center text-center"
                         >
                             <div className="text-5xl md:text-4xl font-semibold text-[#C9A84C] mb-4">
                                 {stat.value}
@@ -251,7 +251,7 @@ const ChildWelfareImpact = () => {
                     {/* CSR Pillars */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {content?.csrPillars?.map((pillar: any, index: number) => (
-                            <div key={index} className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm shadow-sm border border-gray-100 cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl transition-all duration-300">
+                            <div key={index} className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm shadow-sm border border-gray-100 cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300">
                                 <h4 className="text-[#C9A84C] font-bold text-xl mb-3">{pillar?.title?.value}</h4>
                                 <p className="text-gray-600 text-sm transition-colors duration-300 group-hover:text-[#C9A84C]">{pillar?.description?.value}</p>
                             </div>

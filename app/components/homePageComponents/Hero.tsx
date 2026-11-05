@@ -48,17 +48,17 @@ const Hero = () => {
 
             {/* Desktop */}
             <div className="hidden lg:block absolute inset-0">
-               <Image src={desktopImage} alt="Hero Desktop" fill className="object-cover object-center rounded-lg" priority />
+               <Image src={desktopImage} alt="Hero Desktop" fill sizes="100vw" className="object-cover object-center rounded-lg" priority />
             </div>
 
             {/* Tablet */}
             <div className="hidden md:block lg:hidden absolute inset-0">
-               <Image src={tabletImage} alt="Hero Tablet" fill className="object-cover rounded-lg" priority />
+               <Image src={tabletImage} alt="Hero Tablet" fill sizes="100vw" className="object-cover rounded-lg" priority />
             </div>
 
             {/* Mobile */}
             <div className="block md:hidden absolute inset-0">
-               <Image src={mobileImage} alt="Hero Mobile" fill className="object-cover rounded-lg" priority />
+               <Image src={mobileImage} alt="Hero Mobile" fill sizes="100vw" className="object-cover rounded-lg" priority />
             </div>
          </div>
 

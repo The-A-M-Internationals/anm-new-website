@@ -5,10 +5,11 @@ import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect, useRef } from "react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import Link from "next/link";
+import Image from "next/image";
 import { AppLocale } from "@/types/locale";
 
 import { handleHashLink } from "@/lib/handleHashLink";
-import SplitText from "../SplitText";
+import CssSplitText from "../CssSplitText";
 
 const HomeHero = () => {
     const router = useRouter();
@@ -44,9 +45,9 @@ const HomeHero = () => {
 
     return (
         <section 
-            className="relative w-full h-[calc(100vh-80px)] min-h-[650px] flex items-center bg-cover bg-no-repeat overflow-hidden"
-            style={{ backgroundImage: "url('/hero-bg.png')", backgroundPosition: "center bottom" }}
+            className="relative w-full h-[calc(100vh-80px)] min-h-[650px] flex items-center overflow-hidden"
         >
+            <Image src="/hero-bg.png" alt="" fill priority sizes="100vw" className="object-cover object-bottom" />
             {/* Elegant Gradient Overlay - darker on the right for text readability, keeping the left logo visible */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#050E30]/10 via-[#050E30]/60 to-[#050E30]/95" />
             <div className="absolute inset-0 bg-black/20" />
@@ -64,24 +65,9 @@ const HomeHero = () => {
                                 className="text-3xl md:text-4xl lg:text-[42px] font-bold text-white mb-3 leading-[1.2]"
                                 style={{ fontFamily: "Lora, Georgia, serif" }}
                             >
-                                <SplitText
-                                    text={content.tagline.value}
-                                    tag="span"
-                                    className="inline"
-                                    delay={40}
-                                    duration={1.5}
-                                    from={{ opacity: 0, y: 15 }}
-                                />
+                                <CssSplitText text={content.tagline.value} className="inline" />
                                 {" "}
-                                <SplitText
-                                    text={content.taglineHighlight.value}
-                                    tag="span"
-                                    className="inline text-[#C9A84C]"
-                                    delay={40}
-                                    duration={1.5}
-                                    from={{ opacity: 0, y: 15 }}
-                                    to={{ opacity: 1, y: 0, delay: 1.2 }}
-                                />
+                                <CssSplitText text={content.taglineHighlight.value} className="inline text-[#C9A84C]" delay={1200} />
                             </h1>
                             <p className="text-sm md:text-base text-white/80 mb-6 leading-relaxed font-light">
                                 {content.description.value}

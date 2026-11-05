@@ -39,6 +39,8 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
                             src={imageSrc}
                             alt={title}
                             fill
+                            unoptimized={(imageSrc ?? "").startsWith("http")}
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover"
                         />
                     </div>

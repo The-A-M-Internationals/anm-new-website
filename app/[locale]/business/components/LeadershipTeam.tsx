@@ -88,19 +88,20 @@ const LeadershipTeam = () => {
                 {Services.map((service, idx) => (
                     <div
                         key={idx}
-                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transition-transform duration-500"
+                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transform-gpu transition-[transform,opacity] duration-500 ease-in-out"
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
                         onClick={() => handleMobileClick(idx)}
                     >
                         {/* IMAGE CONTAINER */}
-                        <div className="relative w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg">
+                        <div className="relative w-full aspect-[37/50] max-h-[500px] rounded-2xl overflow-hidden shadow-lg">
                             <Image
                                 src={service.image}
                                 alt={service.title}
                                 fill
-                                priority
-                                className="object-cover rounded-2xl transition-transform duration-300 lg:group-hover:scale-105"
+                                priority={idx === 0}
+                                sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
+                                className="object-cover rounded-2xl transform-gpu transition-[transform,opacity] duration-300 ease-in-out lg:group-hover:scale-105"
                             />
 
                             {/* POSITION BADGE (Removed for common title) */}
@@ -186,7 +187,8 @@ const LeadershipTeam = () => {
                                 fill
                                 priority={idx < 4}
                                 decoding="async"
-                                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                sizes="(min-width: 1024px) 330px, 50vw"
+                                className="object-cover transform-gpu transition-[transform,opacity] duration-700 ease-in-out group-hover:scale-105"
                             />
                         </div>
                         

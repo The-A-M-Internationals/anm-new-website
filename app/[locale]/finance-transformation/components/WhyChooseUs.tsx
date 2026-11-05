@@ -33,7 +33,7 @@ const WhyChooseUs = () => {
                             key={index}
                             className={`
                                 bg-white rounded-2xl shadow-lg p-4 lg:px-7 max-w-sm lg:w-[500px]
-                                transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl cursor-pointer text-black hover:text-[#D4AF37]
+                                transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300 transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl cursor-pointer text-black hover:text-[#D4AF37]
                                 ${feature.highlight ? "border-l-8 border-yellow-500" : "border-l-8 border-[#D9D9D9]"}
                                 ${index === 1 ? "lg:ml-16" : ""}
                             `}

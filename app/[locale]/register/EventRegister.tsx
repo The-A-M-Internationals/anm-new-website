@@ -121,6 +121,7 @@ const EventRegister = () => {
                                     src={event.imageSrc}
                                     alt={event.title}
                                     fill
+                                    unoptimized={(event.imageSrc ?? "").startsWith("http")}
                                     className="object-cover"
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                     priority

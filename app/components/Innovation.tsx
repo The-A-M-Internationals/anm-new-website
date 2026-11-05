@@ -19,6 +19,7 @@ const Innovation = () => {
                     src="/left.svg"
                     alt="Left Decorative Icon"
                     fill
+                    sizes="192px"
                     className="opacity-50 sm:opacity-60 md:opacity-80 object-contain rtl:-scale-x-100"
                 />
             </div>
@@ -65,6 +66,7 @@ const Innovation = () => {
                     src="/right.svg"
                     alt="Right Decorative Icon"
                     fill
+                    sizes="160px"
                     className="opacity-50 sm:opacity-60 md:opacity-80 object-contain rtl:-scale-x-100"
                 />
             </div>

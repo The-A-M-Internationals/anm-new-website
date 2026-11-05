@@ -1,4 +1,4 @@
-import Services from "../components/Services";
+import ServicesShowcase from "../components/services/showcase/ServicesShowcase";
 import AboutUs from "../components/AboutUs";
 import PartnerShipCard from "../components/PartnerShipCard";
 import OurClients from "../components/OurClients";
@@ -14,7 +14,7 @@ export default function Home() {
         <HomeHero />
       </section>
       <section className="snap-section">
-        <Services />
+        <ServicesShowcase />
       </section>
       <section className="snap-section">
         <AboutUs />
@@ -25,7 +25,7 @@ export default function Home() {
       <section className="snap-section">
         <OurClients />
       </section>
-      <section className="snap-section">
+      <section id="success-stories" className="snap-section">
         <SuccessStory />
       </section>
       <section className="snap-section">

@@ -70,6 +70,7 @@ const PageHero: React.FC<PageHeroProps> = ({
                   src={image}
                   alt="Hero Desktop"
                   fill
+                  sizes="100vw"
                />
             </div>
 
@@ -79,6 +80,7 @@ const PageHero: React.FC<PageHeroProps> = ({
                   src={image3}
                   alt="Hero Tablet"
                   fill
+                  sizes="100vw"
                   className='object-contain'
                />
             </div>
@@ -89,6 +91,7 @@ const PageHero: React.FC<PageHeroProps> = ({
                   src={image2}
                   alt="Hero Mobile"
                   fill
+                  sizes="100vw"
                />
             </div>
 

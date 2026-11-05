@@ -3,10 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
 import Link from "next/link";
+import { getImageProps } from "next/image";
 import { ArrowRight, Play } from "lucide-react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
 import "./aboutUs.content"; // registers dictionary
+
+// Video poster through the image optimizer (the source PNG is 2.6 MB)
+const POSTER = getImageProps({ src: "/hero-bg.png", alt: "", width: 1280, height: 720 }).props.src;
 
 const AboutUs = () => {
     const content = useIntlayer("aboutUs");
@@ -67,7 +71,9 @@ const AboutUs = () => {
                     <video 
                         ref={videoRef}
                         src="/aboutus-video.mp4" 
-                        poster="/hero-bg.png"
+                        poster={POSTER}
+                        preload="metadata"
+                        playsInline
                         controls={isPlaying}
                         onPlay={() => setIsPlaying(true)}
                         onPause={() => setIsPlaying(false)}

@@ -51,6 +51,7 @@ const JourneyTimeline = () => {
                             src="/business/main.jpg"
                             alt="Our journey main"
                             fill
+                            sizes="(min-width: 768px) 672px, 100vw"
                             className="object-cover"
                         />
                     </div>
@@ -101,6 +102,7 @@ const JourneyTimeline = () => {
                                                 src={milestone.image}
                                                 alt="Milestone image"
                                                 fill
+                                                sizes="(min-width: 768px) 288px, 256px"
                                                 className="object-cover"
                                             />
                                         </div>

@@ -87,6 +87,8 @@ const Article = () => {
                                     src={article.imageUrl || "/blogs/event.jpg"}
                                     alt={article.title || content.imageAltFallback}
                                     fill
+                                    unoptimized={(article.imageUrl ?? "").startsWith("http")}
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
                                     className="object-cover rounded-[40px]"
                                 />
                             </div>

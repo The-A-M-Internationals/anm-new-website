@@ -57,6 +57,10 @@
 
 @import "tailwindcss";
 
+[data-aos]:not(.is-revealed) {
+    opacity: 0;
+}
+
 html {
     scroll-behavior: initial;
 }
@@ -79,6 +83,11 @@ html.lenis body {
 }
 
 .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+/* No hover effects firing while content glides under a still cursor (navbar stays live) */
+.lenis.lenis-scrolling .page-enter {
     pointer-events: none;
 }
 
@@ -130,4 +139,25 @@ body {
     100% {
         transform: rotate(360deg);
     }
+}
+
+/* Page-enter fade (app/[locale]/template.tsx): smooth transition between pages, CSS-only */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: none; }
+}
+.page-enter { animation: page-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
+@media (prefers-reduced-motion: reduce) {
+  .page-enter { animation: none; }
+}
+
+
+/* Letter rise (CssSplitText) — compositor-driven, never stalls during load */
+@keyframes char-rise {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: none; }
+}
+.char-rise { display: inline-block; animation: char-rise 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .char-rise { animation: none; }
 }

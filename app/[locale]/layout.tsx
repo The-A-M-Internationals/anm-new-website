@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "../globals.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import AOSInitializer from "../components/AOSInitializer";
+import ScrollReveal from "../components/ScrollReveal";
+import ImagePreloader from "../components/ImagePreloader";
 import GoToTopButton from "../components/GoToTopButton";
 import HashScrollHandler from "../components/HashScrollHandler";
 import SmoothScrolling from "../components/SmoothScrolling";
@@ -30,8 +31,6 @@ const notoTabsArabic = Noto_Sans_Arabic({
     variable: '--font-noto',
 });
 
-import type { AppLocale } from "@/types/locale";
-// import type { Locales } from "intlayer";
 import type { Viewport } from 'next';
 
 export const viewport: Viewport = {
@@ -78,7 +77,9 @@ export default async function RootLayout({
                 `}} />
                 <IntlayerClientProvider locale={locale}>
                     <SmoothScrolling>
-                        <AOSInitializer />
+                        <ScrollReveal />
+                        <ImagePreloader />
+                        <HashScrollHandler />
                         <Navbar />
                         {children}
                         <GoToTopButton />

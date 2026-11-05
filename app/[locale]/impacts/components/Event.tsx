@@ -23,6 +23,7 @@ const Event = () => {
                                 src='/gala.jpg'
                                 alt="Event Image"
                                 fill
+                                sizes="(min-width: 1024px) 650px, 100vw"
                                 className="object-cover"
                             />
                         </div>

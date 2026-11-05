@@ -40,7 +40,7 @@ const ServiceNavigationCards = () => {
                     <button
                         key={card.title}
                         onClick={() => router.push(card.link)}
-                        className="group text-start bg-[#FFFBED] border border-[#D4AF37]/40 rounded-2xl md:rounded-3xl p-6 md:p-10 flex flex-col gap-4 md:gap-6 shadow-sm hover:shadow-md hover:border-[#D4AF37] transition-all duration-200 cursor-pointer"
+                        className="group text-start bg-[#FFFBED] border border-[#D4AF37]/40 rounded-2xl md:rounded-3xl p-6 md:p-10 flex flex-col gap-4 md:gap-6 shadow-sm hover:shadow-md hover:border-[#D4AF37] transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-200 cursor-pointer"
                     >
                         {/* Icon */}
                         <div className="w-14 h-14 flex items-center justify-center">

@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import NavbarModal from './NavbarModal'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
@@ -185,17 +186,7 @@ const Navbar = () => {
       <nav className="bg-white shadow-sm w-full z-50 lg:relative">
         <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            <div className="shrink-0 flex items-center gap-3">
-              <Link href={getLocalizedLink('/')} className="shrink-0 flex items-center">
-                <img src="/new-logo.png" alt="Logo" className="h-14 md:h-[76px] w-auto object-contain py-1" />
-              </Link>
-              <div className="hidden sm:flex items-center gap-1.5 pl-3 border-l border-slate-200">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-                <span className="text-[10px] md:text-[11px] font-semibold tracking-wider uppercase text-slate-600 font-mono">
-                  Oracle Partner Network
-                </span>
-              </div>
-            </div>
+            <Link href={getLocalizedLink('/')} className="shrink-0 flex items-center"><Image src="/new-logo.png" alt="Logo" width={890} height={280} priority sizes="242px" className="h-14 md:h-[76px] w-auto object-contain py-1" /></Link>
 
             <div className="hidden lg:flex items-center gap-1">
               {(Object.keys(navItems) as NavKey[]).map((key) => (
