@@ -37,3 +37,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local dev / AI tooling and review files (never upload)
+.agents/
+.claude/
+.cursor/
+.cursorrules
+.vscode/
+AGENTS.md
+CLAUDE.md
+docs/
+*.md
+!README.md
+Content_Review_*
+THE_AM_INTERNATIONALS_CONTENT_REVIEW_*
+public/*-preview.html
+public/*previz*.html
