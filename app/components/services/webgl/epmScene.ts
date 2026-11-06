@@ -50,7 +50,7 @@ export const createEpmScene: SceneFactory = (canvas, _overlay, { bias = 0, onCap
   const loc = gl.getAttribLocation(pr, "aP"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   gl.uniform4fv(U.uT, new Float32Array(TOWERS.flat()));
 
-  const reduce = prefersReducedMotion(), governor = createDprGovernor(0.65, 0.45, 0.1, "epm");
+  const reduce = prefersReducedMotion(), governor = createDprGovernor(1, 0.75, 0.125);
   const m = { x: 0, y: 0, tx: 0, ty: 0 };
   let T = reduce ? 40 : 0, time = 0, caption = "";
 

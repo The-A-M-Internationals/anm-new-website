@@ -24,23 +24,23 @@ const HomeHero = () => {
     const yearsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Time-based, synced to the display: if the page is busy for a moment the count
+        // catches up instead of crawling, and it eases out like the headline.
+        const frames: number[] = [];
         const animateCounter = (element: HTMLElement, target: number, suffix: string = "", duration: number = 1000) => {
-            let start = 0;
-            const increment = target / (duration / 16);
-            const timer = setInterval(() => {
-                start += increment;
-                if (start >= target) {
-                    element.textContent = target + suffix;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(start) + suffix;
-                }
-            }, 16);
+            const t0 = performance.now();
+            const step = (now: number) => {
+                const p = Math.min(1, Math.max(0, (now - t0) / duration));
+                element.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+                if (p < 1) frames.push(requestAnimationFrame(step));
+            };
+            frames.push(requestAnimationFrame(step));
         };
 
-        if (clientsRef.current) animateCounter(clientsRef.current, 150, "+", 1100);
-        if (countriesRef.current) animateCounter(countriesRef.current, 12, "+", 900);
-        if (yearsRef.current) animateCounter(yearsRef.current, 10, "+", 750);
+        if (clientsRef.current) animateCounter(clientsRef.current, 150, "+", 1400);
+        if (countriesRef.current) animateCounter(countriesRef.current, 12, "+", 1200);
+        if (yearsRef.current) animateCounter(yearsRef.current, 10, "+", 1000);
+        return () => frames.forEach(cancelAnimationFrame);
     }, []);
 
     return (

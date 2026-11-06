@@ -4,17 +4,9 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 /**
  * Global scroll-to-reveal: content blocks rise 80px and fade in, staggered, as they enter.
- *
- * Smoothness rules:
- * - GSAP tweens on the shared ticker (same clock as Lenis + ScrollTrigger) — no CSS
- *   transitions or setTimeout waves competing with the scroll loop.
- * - Transform + opacity only; transform is cleared afterwards so nothing fights hover effects.
- * - Elements that run their own GSAP motion (OWNED) are never touched.
- * - Tall containers are split into their children so blocks reveal one by one.
- * - Content mounted later (fetched events, client-only sections) is picked up too.
+ * - GSAP on the shared ticker (same clock as Lenis + ScrollTrigger); transform + opacity only.
  */
 const OWNED = "[data-reveal],[data-card],[data-word],[data-orb],[data-panel],canvas,video,iframe,.no-global-reveal";
 const MAX_DEPTH = 3;
@@ -86,20 +78,27 @@ export default function ScrollReveal() {
       if (!hidden.length) return;
 
       ctx.add(() => {
-        // Layer promoted while off-screen and kept (opacity only: no containing block for fixed
-        // children), so each block rasterizes once ahead of time — the reveal is pure compositing.
+        // Pre-promoted off-screen so the reveal is pure compositing (no raster burst on enter)
         gsap.set(hidden, { y: 80, opacity: 0, willChange: "transform, opacity" });
         const reveal = (batch: Element[]) => {
           batch.forEach(markDone);
           gsap.to(batch, {
             y: 0, opacity: 1, duration: 1.15, ease: "expo.out", stagger: 0.09, overwrite: true,
-            onComplete() { gsap.set(this.targets(), { clearProps: "transform,opacity", willChange: "opacity" }); },
+            onComplete() { settle.push(...(this.targets() as Element[])); if (!settleTimer) settleTimer = window.setTimeout(flush, 400); },
           });
         };
         ScrollTrigger.batch(hidden, { start: "top bottom+=60", once: true, interval: 0.1, onEnter: reveal, onEnterBack: reveal });
       });
     };
 
+    // Tidy finished reveals only at rest: dropping the layer re-rasterizes (a hitch mid-glide)
+    const settle: Element[] = [];
+    let settleTimer = 0;
+    const flush = () => {
+      if (window.__lenis?.isScrolling === "smooth") { settleTimer = window.setTimeout(flush, 250); return; }
+      settleTimer = 0;
+      gsap.set(settle.splice(0), { clearProps: "transform,opacity,willChange" });
+    };
     let debounce = 0;
     const timer = window.setTimeout(scan, 150);
     const mo = new MutationObserver(() => {
@@ -111,6 +110,7 @@ export default function ScrollReveal() {
     return () => {
       window.clearTimeout(timer);
       window.clearTimeout(debounce);
+      window.clearTimeout(settleTimer);
       mo.disconnect();
       ctx.revert();
     };

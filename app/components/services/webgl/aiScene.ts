@@ -45,7 +45,7 @@ export const createAiScene: SceneFactory = (canvas, overlay, { bias = 0, onCapti
   const bA = mkBuf("aA", A, gl.DYNAMIC_DRAW), bB = mkBuf("aB", B, gl.DYNAMIC_DRAW); mkBuf("aR", seeds, gl.STATIC_DRAW);
   gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE); gl.disable(gl.DEPTH_TEST);
 
-  const reduce = prefersReducedMotion(), governor = createDprGovernor(1.25, 0.75, 0.25);
+  const reduce = prefersReducedMotion(), governor = createDprGovernor(1, 0.75, 0.125);
   const m = { x: 0, y: 0, tx: 0, ty: 0 };
   let T = reduce ? 60 : 0, time = 0, mixStart = -10, target = "rest", spin = 0, shown = "";
 

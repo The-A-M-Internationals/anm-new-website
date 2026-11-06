@@ -62,18 +62,31 @@ export function fitCanvas(canvas: HTMLCanvasElement, dprCap: number, overlay?: H
   return { w, h, dpr, aspect: w / h, cssWidth: r.width };
 }
 
+/* Scenes draw at most ~72 fps, and hold their frame while the page glides: one draw costs more
+   than a 144 Hz frame on integrated GPUs, so drawing mid-scroll makes the page judder. The held
+   frame still moves with the page; the animation resumes (no time jump) the moment it settles. */
+const MIN_FRAME = 0.012;
+/* Only hold while the page is really moving: the glide's long slow tail (< 2px a frame) hides a
+   skipped frame, so the scene starts the moment the visitor arrives. "native" can linger, so ignore it. */
+const gliding = () => {
+  const l = typeof window !== "undefined" ? window.__lenis : undefined;
+  return !!l && l.isScrolling === "smooth" && Math.abs(l.velocity) > 2;
+};
+
 /**
  * rAF loop with play/pause. `tick` returns false when no further frames are
  * needed (e.g. reduced motion). `kick` renders a single frame while paused.
  */
 export function createLoop(tick: (dt: number) => boolean) {
-  let raf = 0, last = 0, playing = false, alive = true;
+  let raf = 0, last = 0, acc = 0, playing = false, alive = true;
   const frame = (now: number) => {
-    const dt = Math.min(0.1, (now - (last || now)) / 1000); last = now;
-    const more = tick(dt);
+    acc += last ? (now - last) / 1000 : MIN_FRAME; last = now;
+    let more = true;
+    if (playing && gliding()) acc = 0;
+    else if (acc >= MIN_FRAME || !playing) { more = tick(Math.min(0.1, acc)); acc = 0; }
     raf = alive && playing && more ? requestAnimationFrame(frame) : 0;
   };
-  const kick = () => { if (alive && !raf) { last = 0; raf = requestAnimationFrame(frame); } };
+  const kick = () => { if (alive && !raf) { last = 0; acc = 0; raf = requestAnimationFrame(frame); } };
   return {
     play() { playing = true; kick(); },
     pause() { playing = false; cancelAnimationFrame(raf); raf = 0; },

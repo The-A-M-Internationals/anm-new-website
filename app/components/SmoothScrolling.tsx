@@ -23,21 +23,29 @@ export const useLenis = () => useContext(LenisContext);
 declare global { interface Window { __lenis?: Lenis } }
 
 /**
- * Scroll feel (default: snappy). Override for testing: ?scroll=current | snappy | native (remembered per tab).
- * - current: duration-based glide (1.1 s expo ease-out)
- * - snappy:  frame-based lerp — quicker response, short tail (typical award-site feel)
- * - native:  no Lenis; the browser's own compositor-threaded smooth scrolling
+ * Scroll feel, adapted from Framer's Lenis component. Test overrides (remembered per tab):
+ * - ?scroll=glide (default): duration-based glide; length = intensity / 10 s (Framer default 12 → 1.2 s)
+ * - ?intensity=1–100: tune the glide live, like Framer's Intensity slider · ?speed=0.3–2: distance per wheel click
+ * - ?scroll=snappy: frame-based lerp · ?scroll=native: no Lenis, browser scrolling
  */
-type ScrollMode = "current" | "snappy" | "native";
-const MODES: ScrollMode[] = ["current", "snappy", "native"];
-function scrollMode(): ScrollMode {
-  const q = new URLSearchParams(window.location.search).get("scroll") as ScrollMode | null;
+type ScrollMode = "glide" | "snappy" | "native";
+const MODES: ScrollMode[] = ["glide", "snappy", "native"];
+function setting(key: string, valid: (v: string) => boolean, fallback: string) {
+  const q = new URLSearchParams(window.location.search).get(key);
   try {
-    if (q && MODES.includes(q)) sessionStorage.setItem("anm-scroll", q);
-    const saved = sessionStorage.getItem("anm-scroll") as ScrollMode | null;
-    if (saved && MODES.includes(saved)) return saved;
+    if (q && valid(q)) sessionStorage.setItem(`anm-${key}`, q);
+    const saved = sessionStorage.getItem(`anm-${key}`);
+    if (saved && valid(saved)) return saved;
   } catch {}
-  return q && MODES.includes(q) ? q : "snappy";
+  return q && valid(q) ? q : fallback;
+}
+const scrollMode = () => setting("scroll", (v) => MODES.includes(v as ScrollMode), "glide") as ScrollMode;
+const intensity = () => Number(setting("intensity", (v) => +v >= 1 && +v <= 100, "12"));
+const wheelSpeed = () => Number(setting("speed", (v) => +v >= 0.3 && +v <= 2, "0.7"));
+
+/** Framer "disable/enable smooth" tweak: e.g. turn smoothing off while a modal or map is open. */
+export function setSmoothWheel(on: boolean) {
+  if (window.__lenis) window.__lenis.options.smoothWheel = on;
 }
 
 export default function SmoothScrolling({ children }: { children: ReactNode }) {
@@ -54,13 +62,13 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
     if (mode === "native") return;                         // consumers fall back to window.scrollTo
 
     const feel = mode === "snappy"
-      ? { lerp: 0.12 }
-      : { duration: 1.1, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) };
+      ? { lerp: 0.075 }
+      : { duration: intensity() / 10, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) };
     const l = new Lenis({
       autoRaf: false,                                      // GSAP's ticker drives it (below) — never two rAF loops
       ...feel,
       smoothWheel: !reduce,
-      wheelMultiplier: 1,
+      wheelMultiplier: wheelSpeed(),                     // distance per wheel click (lower = calmer)
       touchMultiplier: 1,
       syncTouch: false,                                    // native momentum on touch devices = smoothest on phones
     });
@@ -79,7 +87,7 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
     // measured. Re-measure once things settle — and only while Lenis is idle, so the wheel never hitches.
     let settle = 0, lastH = document.body.scrollHeight;
     const refreshWhenIdle = () => {
-      if (l.isScrolling) { settle = window.setTimeout(refreshWhenIdle, 200); return; }
+      if (l.isScrolling === "smooth") { settle = window.setTimeout(refreshWhenIdle, 200); return; }
       const h = document.body.scrollHeight;
       if (h === lastH) return;                             // width-only / no-op changes: nothing to re-measure
       lastH = h;

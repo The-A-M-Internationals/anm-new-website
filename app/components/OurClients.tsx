@@ -61,7 +61,7 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
   let dragging = false, moved = 0, startX = 0, startPX = 0, lastPX = 0, lastT = 0, skew = 0;
   let wheelTimer = 0, raf = 0, last = 0;
   const visible = true;
-  const cur = { x: 0, y: 0, tx: 0, ty: 0, show: 0, tshow: 0 };
+  const cur = { x: 0, y: 0, tx: 0, ty: 0, show: 0, tshow: 0, px: 0, py: 0 };   // px/py: pointer in window coords
 
   const clamp = (n: number, a: number, b: number) => Math.min(b, Math.max(a, n));
   const nearest = (pos: number) => snaps.reduce((best, s, i) => (Math.abs(s - pos) < Math.abs(snaps[best] - pos) ? i : best), 0);
@@ -109,7 +109,11 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
       if (!reduce) c.inner.style.transform = `translate3d(${(-off * 18).toFixed(1)}px,0,0)`;
     });
 
-    cur.x += (cur.tx - cur.x) * 0.2; cur.y += (cur.ty - cur.y) * 0.2; cur.show += (cur.tshow - cur.show) * 0.15;
+    // Re-anchor to the pointer every frame so the cursor stays under it while the page scrolls;
+    // easing scaled by dt so it feels the same at 60 Hz and 144 Hz.
+    if (cur.tshow) { const vr = viewport.getBoundingClientRect(); cur.tx = cur.px - vr.left; cur.ty = cur.py - vr.top; }
+    const ease = (r: number) => 1 - Math.pow(1 - r, dt * 60);
+    cur.x += (cur.tx - cur.x) * ease(0.25); cur.y += (cur.ty - cur.y) * ease(0.25); cur.show += (cur.tshow - cur.show) * ease(0.3);
     cursor.style.transform = `translate3d(${cur.x}px,${cur.y}px,0) translate(-50%,-50%) scale(${(cur.show * (dragging ? 0.85 : 1)).toFixed(3)})`;
 
     const i = nearest(x);
@@ -120,7 +124,8 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
     next.disabled = target <= minX + 1;
 
     const settled = !dragging && x === target && Math.abs(skew) < 0.01 &&
-      cards.every((c) => Math.abs(c.trx - c.rx) < 0.01 && Math.abs(c.try_ - c.ry) < 0.01) && Math.abs(cur.tshow - cur.show) < 0.001;
+      cards.every((c) => Math.abs(c.trx - c.rx) < 0.01 && Math.abs(c.try_ - c.ry) < 0.01) && Math.abs(cur.tshow - cur.show) < 0.001 &&
+      (cur.show < 0.001 || (Math.abs(cur.tx - cur.x) < 0.1 && Math.abs(cur.ty - cur.y) < 0.1));   // cursor has caught up
     raf = visible && !settled ? requestAnimationFrame(frame) : 0;
   };
 
@@ -137,6 +142,7 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
     start();
   };
   const onMove = (e: PointerEvent) => {
+    cur.px = e.clientX; cur.py = e.clientY;
     const vr = viewport.getBoundingClientRect();
     cur.tx = e.clientX - vr.left; cur.ty = e.clientY - vr.top;
     if (e.pointerType !== "touch") cur.tshow = 1;
@@ -193,7 +199,27 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
     c.el.addEventListener("mouseleave", onLeave);
   });
 
-  const onViewportEnter = () => { cur.tshow = 1; start(); };
+  const onViewportEnter = (e: MouseEvent) => {
+    cur.px = e.clientX; cur.py = e.clientY;
+    const vr = viewport.getBoundingClientRect();
+    cur.x = cur.tx = e.clientX - vr.left; cur.y = cur.ty = e.clientY - vr.top;   // appear under the pointer, not fly in from the corner
+    cur.tshow = 1; start();
+  };
+  /* Pointer events are paused while the page glides (keeps scrolling smooth), so mouseenter/leave
+     arrive late. Track the mouse on the window and hit-test on every scroll frame instead. */
+  let mouse = false;
+  const onWindowPointer = (e: PointerEvent) => {
+    if (e.pointerType === "touch") return;
+    mouse = true; cur.px = e.clientX; cur.py = e.clientY;
+  };
+  const onPageScroll = () => {
+    if (!mouse || dragging) return;
+    const vr = viewport.getBoundingClientRect();
+    const inside = cur.px >= vr.left && cur.px <= vr.right && cur.py >= vr.top && cur.py <= vr.bottom;
+    if (inside && !cur.tshow) { cur.x = cur.tx = cur.px - vr.left; cur.y = cur.ty = cur.py - vr.top; cur.tshow = 1; }
+    else if (!inside && cur.tshow) cur.tshow = 0;
+    if (cur.tshow || cur.show > 0.001) start();
+  };
   const onViewportLeave = () => { cur.tshow = 0; start(); };
   const onPrev = () => goTo(index - 1);
   const onNext = () => goTo(index + 1);
@@ -206,6 +232,8 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
   viewport.addEventListener("keydown", onKey);
   viewport.addEventListener("mouseenter", onViewportEnter);
   viewport.addEventListener("mouseleave", onViewportLeave);
+  window.addEventListener("scroll", onPageScroll, { passive: true });
+  window.addEventListener("pointermove", onWindowPointer, { passive: true });
   prev.addEventListener("click", onPrev);
   next.addEventListener("click", onNext);
 
@@ -229,6 +257,8 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
     viewport.removeEventListener("keydown", onKey);
     viewport.removeEventListener("mouseenter", onViewportEnter);
     viewport.removeEventListener("mouseleave", onViewportLeave);
+    window.removeEventListener("scroll", onPageScroll);
+    window.removeEventListener("pointermove", onWindowPointer);
     prev.removeEventListener("click", onPrev);
     next.removeEventListener("click", onNext);
     track.removeEventListener("click", onTrackClick, true);
