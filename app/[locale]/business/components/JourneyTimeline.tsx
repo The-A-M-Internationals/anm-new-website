@@ -1,9 +1,14 @@
-import React from 'react';
+"use client";
+
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import { useIntlayer } from "next-intlayer";
+import { useTimelineDraw } from "@/app/components/useTimelineDraw";
 
 const JourneyTimeline = () => {
     const content = useIntlayer("businessJourneyTimeline");
+    const timelineRef = useRef<HTMLDivElement>(null);
+    useTimelineDraw(timelineRef);
     const milestones = [
         {
             image: "/business/image1.jpg",
@@ -58,38 +63,38 @@ const JourneyTimeline = () => {
                 </div>
 
                 {/* TIMELINE CONTAINER */}
-                <div className="relative pt-10">
+                <div ref={timelineRef} className="relative pt-10">
 
                     {/* VERTICAL LINE (correct height now) */}
-                    <div className="hidden md:block absolute left-1/2 -translate-x-1/2 -top-24 bottom-27.5 w-[3px] bg-[#D4AF37]"></div>
+                    <div data-draw="y" className="hidden md:block absolute left-1/2 -translate-x-1/2 -top-24 bottom-27.5 w-[3px] bg-[#D4AF37]"></div>
 
                     <div className="relative space-y-24">
 
                         {/* --- MOBILE VERTICAL LINE (ONE CONTINUOUS LINE) --- */}
-                        <div className="md:hidden absolute start-5 -top-25 bottom-13 w-[3px] bg-[#D4AF37]"></div>
+                        <div data-draw="y" className="md:hidden absolute start-5 -top-25 bottom-13 w-[3px] bg-[#D4AF37]"></div>
 
                         {milestones.map((milestone, index) => (
-                            <div key={index} className="relative">
+                            <div key={index} data-draw-row className="relative">
 
                                 {/* --- MOBILE HORIZONTAL LINE (STARTS FROM VERTICAL, ENDS BEFORE IMAGE) --- */}
-                                <div className="md:hidden absolute start-5 top-[110px] w-[80px] h-[3px] bg-[#D4AF37]"></div>
+                                <div data-draw="x" className="md:hidden absolute start-5 top-[110px] w-[80px] h-[3px] bg-[#D4AF37] ltr:origin-left rtl:origin-right"></div>
 
                                 {/* --- MOBILE DOT AT END OF HORIZONTAL LINE --- */}
-                                <div className="md:hidden absolute start-[85px] top-[102px] w-4 h-4 rounded-full bg-[#D4AF37] shadow-md"></div>
+                                <div data-draw="dot" className="md:hidden absolute start-[85px] top-[102px] w-4 h-4 rounded-full bg-[#D4AF37] shadow-md"></div>
 
                                 {/* --- DESKTOP HORIZONTAL + DOTS (UNCHANGED) --- */}
                                 {milestone.position === "left" && (
-                                    <div className="hidden md:block absolute start-1/2 top-1/2 -translate-y-1/2 w-28 h-[3px] bg-[#D4AF37]"></div>
+                                    <div data-draw="x" className="hidden md:block absolute start-1/2 top-1/2 -translate-y-1/2 w-28 h-[3px] bg-[#D4AF37] ltr:origin-left rtl:origin-right"></div>
                                 )}
                                 {milestone.position === "right" && (
-                                    <div className="hidden md:block absolute end-1/2 top-1/2 -translate-y-1/2 w-28 h-[3px] bg-[#D4AF37]"></div>
+                                    <div data-draw="x" className="hidden md:block absolute end-1/2 top-1/2 -translate-y-1/2 w-28 h-[3px] bg-[#D4AF37] ltr:origin-right rtl:origin-left"></div>
                                 )}
 
                                 {milestone.position === "left" && (
-                                    <div className="hidden md:block absolute start-[calc(50%+7rem)] top-1/2 -translate-y-1/2 w-5 h-5 bg-[#D4AF37] border-4 border-[#D4AF37] rounded-full shadow-md"></div>
+                                    <div data-draw="dot" className="hidden md:block absolute start-[calc(50%+7rem)] top-1/2 -translate-y-1/2 w-5 h-5 bg-[#D4AF37] border-4 border-[#D4AF37] rounded-full shadow-md"></div>
                                 )}
                                 {milestone.position === "right" && (
-                                    <div className="hidden md:block absolute end-[calc(50%+7rem)] top-1/2 -translate-y-1/2 w-5 h-5 bg-[#D4AF37] border-4 border-[#D4AF37] rounded-full shadow-md"></div>
+                                    <div data-draw="dot" className="hidden md:block absolute end-[calc(50%+7rem)] top-1/2 -translate-y-1/2 w-5 h-5 bg-[#D4AF37] border-4 border-[#D4AF37] rounded-full shadow-md"></div>
                                 )}
 
                                 {/* --- CONTENT ROW --- */}

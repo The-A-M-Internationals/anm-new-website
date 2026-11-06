@@ -92,7 +92,7 @@ const BlogArticleList = () => {
                     return bTime - aTime;
                 });
                 setArticles(sortedList);
-                console.log("Fetched Articles: ", articleList);
+
 
             } catch (err) {
                 console.error("Error fetching data: ", err);

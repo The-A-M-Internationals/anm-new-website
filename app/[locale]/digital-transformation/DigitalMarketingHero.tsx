@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { AppLocale } from "@/types/locale";
 
 import { handleHashLink } from "@/lib/handleHashLink";
@@ -13,17 +13,6 @@ const DigitalMarketingHero = () => {
     const { locale } = useLocale();
     const content = useIntlayer("digitalMarketingServices");
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            const x = (e.clientX / window.innerWidth) * 2 - 1;
-            const y = (e.clientY / window.innerHeight) * 2 - 1;
-            setMousePos({ x, y });
-        };
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -259,7 +248,6 @@ const DigitalMarketingHero = () => {
                     className="absolute end-[10%] top-1/2 -translate-y-1/2 w-96 h-96 pointer-events-none opacity-50"
                     style={{ 
                         animation: 'globe-rotate 80s linear infinite',
-                        transform: `perspective(1000px) rotateX(${mousePos.y * 3}deg) rotateY(${mousePos.x * 3}deg)`,
                         transition: 'transform 0.5s ease-out',
                     }}
                 >

@@ -145,15 +145,16 @@ const ContactForm: React.FC = () => {
             <div className="bg-white border border-gray-300 rounded-[20px] md:rounded-[40px] p-4 md:p-8 shadow-sm">
               <p className="text-xl md:text-2xl font-bold text-gray-900 mb-6">{content.formTitle.value}</p>
 
-              <div className="space-y-5">
+              <form className="space-y-5" onSubmit={handleSubmit} noValidate>
 
                 {/* Your Name */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-name" className="block text-sm font-medium  mb-2">
                     {content.fullName.value} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
+                    id="cf-name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -164,11 +165,12 @@ const ContactForm: React.FC = () => {
 
                 {/* Company Name */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-company" className="block text-sm font-medium  mb-2">
                     {content.companyName.value}
                   </label>
                   <input
                     type="text"
+                    id="cf-company"
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
@@ -179,11 +181,12 @@ const ContactForm: React.FC = () => {
 
                 {/* Work Email */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-email" className="block text-sm font-medium  mb-2">
                     {content.workEmail.value} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
+                    id="cf-email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -194,7 +197,7 @@ const ContactForm: React.FC = () => {
 
                 {/* Phone Number */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-phone" className="block text-sm font-medium  mb-2">
                     {content.phoneNumber.value}
                   </label>
                   <div className="flex gap-2">
@@ -217,6 +220,7 @@ const ContactForm: React.FC = () => {
                     </select>
                     <input
                       type="tel"
+                      id="cf-phone"
                       name="phone"
                       dir="ltr"
                       value={formData.phone}
@@ -229,10 +233,11 @@ const ContactForm: React.FC = () => {
 
                 {/* I'm interested in */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-service" className="block text-sm font-medium  mb-2">
                     {content.interestedIn.value} <span className="text-red-500">*</span>
                   </label>
                   <select
+                    id="cf-service"
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
@@ -249,10 +254,11 @@ const ContactForm: React.FC = () => {
 
                 {/* Tell us about your vision */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-vision" className="block text-sm font-medium  mb-2">
                     {content.vision.value} <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="cf-vision"
                     name="vision"
                     value={formData.vision}
                     onChange={handleChange}
@@ -264,10 +270,11 @@ const ContactForm: React.FC = () => {
 
                 {/* How did you hear about us */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-howHeard" className="block text-sm font-medium  mb-2">
                     {content.howHeard.value}
                   </label>
                   <select
+                    id="cf-howHeard"
                     name="howHeard"
                     value={formData.howHeard}
                     onChange={handleChange}
@@ -284,18 +291,18 @@ const ContactForm: React.FC = () => {
 
                 {/* Submit Button */}
                 <button
-                  onClick={handleSubmit}
+                  type="submit"
                   disabled={submitting}
                   className="w-full bg-[#D4AF37] hover:scale-105 transition cursor-pointer text-black font-semibold py-3 px-6 rounded-full duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? content.submitting.value : content.submit.value}
                 </button>
-                {formError && <p className="text-center text-sm text-red-600 mt-2">{formError}</p>}
-                {successMsg && <p className="text-center text-sm text-green-600 mt-2">{successMsg}</p>}
+                {formError && <p role="alert" className="text-center text-sm text-red-600 mt-2">{formError}</p>}
+                {successMsg && <p role="status" className="text-center text-sm text-green-600 mt-2">{successMsg}</p>}
                 <p className="text-center text-sm text-gray-500">
                   {content.footerNote.value}
                 </p>
-              </div>
+              </form>
             </div>
 
             {/* Request Demo Section */}

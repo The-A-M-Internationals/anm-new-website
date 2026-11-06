@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer, { type Transporter } from "nodemailer";
 import { db } from "@/lib/firebaseConfig";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { esc, isEmail, oneLine, rateLimited, sameOrigin, text } from "@/lib/email/guard";
 
 interface ConsultationData {
   name: string;
@@ -15,8 +16,27 @@ interface ConsultationData {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { type, email, data } = body;
+    if (!sameOrigin(request)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    if (rateLimited(request)) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
+    const body = await request.json().catch(() => null);
+    if (!body || typeof body !== "object") return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    const { type } = body;
+    // Every value below is validated, length-capped and HTML-escaped before it reaches a template
+    const rawEmail = type === "subscribe" ? body.email : body.data?.email;
+    if (!isEmail(rawEmail)) return NextResponse.json({ error: "A valid email is required" }, { status: 400 });
+    const sendTo = rawEmail.trim();                             // plain address for the mail "to" field
+    const email = esc(sendTo);
+    const d = body.data ?? {};
+    const data: ConsultationData = {
+      name: esc(text(d.name, 100)),
+      company: esc(text(d.company, 150)),
+      email,
+      phone: esc(text(d.phone, 40)),
+      service: esc(text(d.service, 120)),
+      vision: esc(text(d.vision, 5000)),
+      howHeard: esc(text(d.howHeard, 120)),
+    };
 
     const smtpHost = process.env.SMTP_HOST || "smtp.office365.com";
     const smtpPort = Number(process.env.SMTP_PORT) || 587;
@@ -93,9 +113,9 @@ export async function POST(request: NextRequest) {
       // Fallback: Also save to Firestore 'mail' collection (triggers Firebase Trigger Email extension if installed)
       try {
         await addDoc(collection(db, "mail"), {
-          to: [email],
+          to: [sendTo],
           message: {
-            subject: subscriberSubject,
+            subject: oneLine(subscriberSubject),
             html: subscriberHtml,
           },
           createdAt: Timestamp.now(),
@@ -109,15 +129,15 @@ export async function POST(request: NextRequest) {
         try {
           await transporter.sendMail({
             from: fromAddress,
-            to: email,
-            subject: subscriberSubject,
+            to: sendTo,
+            subject: oneLine(subscriberSubject),
             html: subscriberHtml,
           });
 
           await transporter.sendMail({
             from: fromAddress,
             to: adminEmail,
-            subject: adminSubject,
+            subject: oneLine(adminSubject),
             html: adminHtml,
           });
           return NextResponse.json({ success: true, method: "smtp" });
@@ -140,7 +160,7 @@ export async function POST(request: NextRequest) {
 
     // 2. CONSULTATION / INQUIRY BOOKING EMAIL
     if (type === "consultation") {
-      const consultData = data as ConsultationData;
+      const consultData = data;
       if (!consultData || !consultData.email || !consultData.name) {
         return NextResponse.json(
           { error: "Name and email are required for consultation" },
@@ -207,9 +227,9 @@ export async function POST(request: NextRequest) {
       // Fallback: Also save to Firestore 'mail' collection
       try {
         await addDoc(collection(db, "mail"), {
-          to: [consultData.email],
+          to: [sendTo],
           message: {
-            subject: clientSubject,
+            subject: oneLine(clientSubject),
             html: clientHtml,
           },
           createdAt: Timestamp.now(),
@@ -223,15 +243,15 @@ export async function POST(request: NextRequest) {
         try {
           await transporter.sendMail({
             from: fromAddress,
-            to: consultData.email,
-            subject: clientSubject,
+            to: sendTo,
+            subject: oneLine(clientSubject),
             html: clientHtml,
           });
 
           await transporter.sendMail({
             from: fromAddress,
             to: adminEmail,
-            subject: adminSubject,
+            subject: oneLine(adminSubject),
             html: adminHtml,
           });
           return NextResponse.json({ success: true, method: "smtp" });
@@ -256,6 +276,6 @@ export async function POST(request: NextRequest) {
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : "Internal server error";
     console.error("Email route error:", errorMsg);
-    return NextResponse.json({ error: errorMsg }, { status: 500 });
+    return NextResponse.json({ error: "Could not send email" }, { status: 500 });
   }
 }

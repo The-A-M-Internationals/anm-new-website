@@ -147,8 +147,14 @@ body {
   to { opacity: 1; transform: none; }
 }
 .page-enter { animation: page-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
+/* Exit half (PageLeave.tsx): the old page lifts away while the next one loads */
+@keyframes page-leave {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+.page-enter.page-leaving { animation: page-leave 0.32s cubic-bezier(0.55, 0, 0.45, 1) both; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
-  .page-enter { animation: none; }
+  .page-enter, .page-enter.page-leaving { animation: none; }
 }
 
 

@@ -170,12 +170,13 @@ export default function EPM() {
                 <div className="bg-white rounded-[20px] md:rounded-[40px] shadow-2xl p-6 md:p-8 rtl:text-right">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">{content.formTitle.value}</h2>
 
-                    <div className="space-y-4">
-                        <label className="block text-gray-700 font-medium mb-1">
+                    <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+                        <label htmlFor="epm-name" className="block text-gray-700 font-medium mb-1">
                             {content.fullNameLabel.value} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="text"
+                            id="epm-name"
                             name="name"
                             placeholder={content.fullNamePlaceholder.value}
                             value={formData.name}
@@ -183,11 +184,12 @@ export default function EPM() {
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition rtl:text-right"
                         />
 
-                        <label className="block text-gray-700 font-medium mb-1">
+                        <label htmlFor="epm-email" className="block text-gray-700 font-medium mb-1">
                             {content.workEmailLabel.value} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="email"
+                            id="epm-email"
                             name="email"
                             placeholder="johndoe@gmail.com"
                             value={formData.email}
@@ -195,11 +197,12 @@ export default function EPM() {
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition rtl:text-right"
                         />
 
-                        <label className="block text-gray-700 font-medium mb-1">
+                        <label htmlFor="epm-company" className="block text-gray-700 font-medium mb-1">
                             {content.companyNameLabel.value} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="text"
+                            id="epm-company"
                             name="company"
                             placeholder={content.companyNamePlaceholder.value}
                             value={formData.company}
@@ -207,11 +210,12 @@ export default function EPM() {
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition rtl:text-right"
                         />
 
-                        <label className="block text-gray-700 font-medium mb-1">
+                        <label htmlFor="epm-phone" className="block text-gray-700 font-medium mb-1">
                             {content.phoneNumberLabel.value} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="tel"
+                            id="epm-phone"
                             name="phone"
                             dir={locale === 'ar' ? 'rtl' : 'ltr'}
                             placeholder="1234567890"
@@ -245,15 +249,15 @@ export default function EPM() {
                         </select>
 
                         <button
-                            onClick={handleSubmit}
+                            type="submit"
                             disabled={submitting}
                             className="bg-[#D4AF37] w-full flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer"
                         >
                             {submitting ? content.submittingButton.value : content.submitButton.value}
                         </button>
-                        {formError && <p className="text-red-600 text-sm rtl:text-right">{formError}</p>}
-                        {successMsg && <p className="text-green-600 text-sm rtl:text-right">{successMsg}</p>}
-                    </div>
+                        {formError && <p role="alert" className="text-red-600 text-sm rtl:text-right">{formError}</p>}
+                        {successMsg && <p role="status" className="text-green-600 text-sm rtl:text-right">{successMsg}</p>}
+                    </form>
                 </div>
             </div>
         </div>

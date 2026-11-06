@@ -84,6 +84,8 @@ const FAQ = () => {
                             >
                                 <button
                                     onClick={() => toggleFAQ(index)}
+                                    aria-expanded={openIndex === index}
+                                    aria-controls={`faq-answer-${index}`}
                                     className="w-full flex items-start justify-between text-left group"
                                 >
                                     <div className="flex-1">
@@ -104,7 +106,7 @@ const FAQ = () => {
                                     </div>
                                 </button>
 
-                                <div
+                                <div id={`faq-answer-${index}`} role="region"
                                     className={`overflow-hidden transition-all duration-300 ${openIndex === index
                                         ? 'max-h-96 opacity-100 mt-4'
                                         : 'max-h-0 opacity-0'

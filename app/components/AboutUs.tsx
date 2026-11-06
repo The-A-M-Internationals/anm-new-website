@@ -89,6 +89,7 @@ const AboutUs = () => {
                     {/* Custom Centered Play Button */}
                     {!isPlaying && (
                         <div 
+                            data-cursor="play"
                             className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-all duration-300 cursor-pointer group/play"
                             onClick={() => {
                                 videoRef.current?.play();

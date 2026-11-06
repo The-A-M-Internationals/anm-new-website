@@ -14,6 +14,7 @@ const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, descrip
     return (
         <div 
             onClick={onClick}
+            data-cursor={onClick ? "view" : undefined}
             className='hover:scale-105 transition relative h-[450px] md:h-[480px] lg:h-[500px] w-[330px] mx-auto md:w-[380px] lg:w-[400px] mt-2 cursor-pointer'
         >
             <div className='absolute top-1 end-0 md:top-1 lg:top-0 lg:end-2 z-10'>

@@ -1,8 +1,14 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import { useIntlayer } from "next-intlayer";
+import { useTimelineDraw } from "@/app/components/useTimelineDraw";
 
 const MethodologySection = () => {
     const content = useIntlayer("methodologySection");
+    const timelineRef = useRef<HTMLDivElement>(null);
+    useTimelineDraw(timelineRef);
 
     const steps = [{
         number: content.steps[0].number,
@@ -54,14 +60,14 @@ const MethodologySection = () => {
                     </div>
 
                     {/* Timeline Container */}
-                    <div className="relative mt-12">
+                    <div ref={timelineRef} className="relative mt-12">
                         {/* Vertical Line - left for md, center for lg */}
-                        <div className="absolute start-0 md:start-0 lg:start-1/2 lg:-translate-x-1/2 lg:-top-5 -top-28 md:top-0 bottom-0 w-[3px] bg-[#D4AF37] hidden md:block"></div>
+                        <div data-draw="y" className="absolute start-0 md:start-0 lg:start-1/2 lg:-translate-x-1/2 lg:-top-5 -top-28 md:top-0 bottom-0 w-[3px] bg-[#D4AF37] hidden md:block"></div>
 
                         {/* Steps */}
                         <div className="space-y-12 md:space-y-24 md:ps-12">
                             {steps.map((step, index) => (
-                                <div key={index} className="relative flex flex-col lg:flex-row items-start gap-10">
+                                <div key={index} data-draw-row className="relative flex flex-col lg:flex-row items-start gap-10">
                                     {/* IMAGE */}
                                     <div className="w-full md:w-full lg:w-5/12 flex justify-center" data-aos="fade-up" data-aos-delay="100">
                                         <div className="relative group w-full max-w-sm md:max-w-none lg:max-w-full">
@@ -79,7 +85,7 @@ const MethodologySection = () => {
 
                                     {/* DOT - left for md, center for lg */}
                                     <div className="hidden md:block absolute start-[-58px] top-[410px] lg:static lg:w-2/12 lg:flex lg:justify-center lg:pt-2 lg:-translate-x-6 lg:rtl:translate-x-6">
-                                        <div className="w-6 h-6 bg-[#D4AF37] rounded-full shadow-lg" />
+                                        <div data-draw="dot" className="w-6 h-6 bg-[#D4AF37] rounded-full shadow-lg" />
                                     </div>
 
                                     <div className="w-full md:w-full lg:w-5/12" data-aos="fade-up" data-aos-delay="250">

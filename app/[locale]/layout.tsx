@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ScrollReveal from "../components/ScrollReveal";
 import ImagePreloader from "../components/ImagePreloader";
+import PageLeave from "../components/PageLeave";
+import GlobalCursor from "../components/GlobalCursor";
 import GoToTopButton from "../components/GoToTopButton";
 import HashScrollHandler from "../components/HashScrollHandler";
 import SmoothScrolling from "../components/SmoothScrolling";
@@ -36,8 +38,6 @@ import type { Viewport } from 'next';
 export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
 };
 
 export const metadata: Metadata = {
@@ -79,6 +79,8 @@ export default async function RootLayout({
                     <SmoothScrolling>
                         <ScrollReveal />
                         <ImagePreloader />
+                        <PageLeave />
+                        <GlobalCursor />
                         <HashScrollHandler />
                         <Navbar />
                         {children}

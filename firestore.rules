@@ -1,0 +1,64 @@
+rules_version = '2';
+
+// Website rules: visitors may READ published content and ADD form entries — nothing else.
+// Paste into Firebase console → Firestore Database → Rules → Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function str(v, max) { return v is string && v.size() <= max; }
+    function optStr(field, max) { return !(field in request.resource.data) || str(request.resource.data[field], max); }
+    function only(fields) { return request.resource.data.keys().hasOnly(fields); }
+    function email(v) { return str(v, 254) && v.matches('^[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,24}$'); }
+
+    // ---- Published content: anyone can read, nobody can write from the website ----
+    match /events/{id}   { allow read: if true; }
+    match /articles/{id} { allow read: if true; }
+    match /jobs/{id}     { allow read: if true; }
+
+    // ---- Form submissions: create only, validated; never readable, editable or deletable ----
+    match /customers/{id} {
+      allow create: if only(['name','company','email','countryCode','phone','service','vision','howHeard','submittedAt'])
+        && str(request.resource.data.name, 100) && email(request.resource.data.email)
+        && optStr('company', 150) && optStr('countryCode', 10) && optStr('phone', 40)
+        && optStr('service', 120) && optStr('vision', 5000) && optStr('howHeard', 120) && optStr('submittedAt', 40);
+    }
+    match /EPM/{id} {
+      allow create: if only(['name','email','company','phone','epm','submittedAt'])
+        && str(request.resource.data.name, 100) && email(request.resource.data.email)
+        && optStr('company', 150) && optStr('phone', 40) && optStr('epm', 120) && optStr('submittedAt', 40);
+    }
+    match /eventRegistrations/{id} {
+      allow create: if only(['eventId','name','email','phone','registeredAt'])
+        && str(request.resource.data.eventId, 128) && str(request.resource.data.name, 100)
+        && email(request.resource.data.email) && optStr('phone', 40)
+        && request.resource.data.registeredAt is timestamp;
+    }
+    match /applications/{id} {
+      allow create: if only(['name','email','phone','experience','resumeUrl','jobId','jobTitle','submittedAt'])
+        && str(request.resource.data.name, 100) && email(request.resource.data.email)
+        && optStr('phone', 40) && optStr('experience', 2000) && optStr('jobId', 128) && optStr('jobTitle', 200)
+        && optStr('submittedAt', 40)
+        && str(request.resource.data.resumeUrl, 500) && request.resource.data.resumeUrl.matches('^https://[^/]+\\.amazonaws\\.com/uploads/.*');
+    }
+    // Newsletter: the document ID is the lower-cased email, so "already subscribed" is a single-document
+    // check — the subscriber list itself can never be listed or read in bulk.
+    match /newsletters/{emailId} {
+      allow get: if true;
+      allow create: if only(['email','subscribedAt']) && email(request.resource.data.email)
+        && emailId == request.resource.data.email.lower() && request.resource.data.subscribedAt is timestamp;
+    }
+
+    // ---- Email queue used by the site's email route (Trigger Email extension) ----
+    // One recipient, subject + html only. NOTE: still writable by anyone until the email route
+    // uses a server (Admin SDK) key — see the hand-over notes.
+    match /mail/{id} {
+      allow create: if only(['to','message','createdAt'])
+        && request.resource.data.to is list && request.resource.data.to.size() == 1
+        && email(request.resource.data.to[0])
+        && request.resource.data.message.keys().hasOnly(['subject','html'])
+        && str(request.resource.data.message.subject, 300) && str(request.resource.data.message.html, 20000);
+    }
+
+    // Everything else — including admins — is closed to the website.
+  }
+}

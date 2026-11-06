@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { AppLocale } from "@/types/locale";
 import { handleHashLink } from "@/lib/handleHashLink";
 
@@ -12,17 +12,6 @@ const AIAutomationsHero = () => {
     const { locale } = useLocale();
     const content = useIntlayer("aiAutomations");
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            const x = (e.clientX / window.innerWidth) * 2 - 1;
-            const y = (e.clientY / window.innerHeight) * 2 - 1;
-            setMousePos({ x, y });
-        };
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;

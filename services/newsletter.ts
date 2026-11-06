@@ -1,11 +1,4 @@
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  addDoc,
-  Timestamp,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "../lib/firebaseConfig";
 
 export type SubscribeResult =
@@ -17,17 +10,20 @@ export async function subscribeToNewsletter(
   email: string
 ): Promise<SubscribeResult> {
   try {
-    const newsletterRef = collection(db, "newsletters");
+    // One document per subscriber, keyed by the lower-cased email: the duplicate check is a single
+    // document read, so the subscriber list never has to be readable (see firestore.rules).
+    const address = email.trim().toLowerCase();
+    if (!/^[^\s@/]+@[^\s@/]+\.[a-z]{2,24}$/.test(address)) {
+      return { status: "error", message: "Please enter a valid email address." };
+    }
+    const ref = doc(db, "newsletters", address);
 
-    const q = query(newsletterRef, where("email", "==", email));
-    const snapshot = await getDocs(q);
-
-    if (!snapshot.empty) {
+    if ((await getDoc(ref)).exists()) {
       return { status: "already_subscribed" };
     }
 
-    await addDoc(newsletterRef, {
-      email,
+    await setDoc(ref, {
+      email: address,
       subscribedAt: Timestamp.now(),
     });
 
@@ -36,7 +32,7 @@ export async function subscribeToNewsletter(
       await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "subscribe", email }),
+        body: JSON.stringify({ type: "subscribe", email: address }),
       });
     } catch (mailErr) {
       console.warn("Could not dispatch subscription email:", mailErr);

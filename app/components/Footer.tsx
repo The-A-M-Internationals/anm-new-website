@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { subscribeToNewsletter } from "../../services/newsletter";
+// Firebase loads only when someone subscribes, not on every page
 import Link from "next/link";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { Phone, Mail, MapPin } from "lucide-react";
@@ -40,6 +40,7 @@ const Footer = () => {
         setLoading(true);
         setMessage(null);
 
+        const { subscribeToNewsletter } = await import("../../services/newsletter");
         const result = await subscribeToNewsletter(email);
 
         if (result.status === "success") {
