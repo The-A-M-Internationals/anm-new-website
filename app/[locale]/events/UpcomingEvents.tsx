@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import LiveEvents from '../../components/LiveEvents';
-import { db } from "../../../lib/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from 'next-intlayer';
 
 type EventType = {
@@ -20,19 +20,19 @@ type EventType = {
     timeRange: string;
     timeRangeAr?: string;
     imageSrc: string;
+    buttonText?: string;
+    buttonTextAr?: string;
+    buttonLink?: string;
 };
 
-const UpcomingEvents = () => {
+const UpcomingEvents = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const content = useIntlayer("eventsPage");
     const { locale } = useLocale();
-    const [events, setEvents] = useState<EventType[]>([]);
-    const [loading, setLoading] = useState(true);
+    const { docs, loading } = useCmsDocs("events", serverDocs);
 
-    useEffect(() => {
-        const fetchEvents = async () => {
-            setLoading(true);
+    const events = useMemo(() => {
             try {
-                const snapshot = await getDocs(collection(db, 'events'));
+                const snapshot = asSnapshot(docs);
 
                 const isArabic = locale?.toLowerCase().startsWith('ar');
 
@@ -69,6 +69,9 @@ const UpcomingEvents = () => {
                             timeRange: data.timeRange ?? '',
                             timeRangeAr: data.timeRangeAr,
                             imageSrc: data.imageSrc ?? '',
+                            buttonText: data.buttonText,
+                            buttonTextAr: data.buttonTextAr,
+                            buttonLink: data.buttonLink,
                         };
                     })
                     .filter(event => {
@@ -92,6 +95,9 @@ const UpcomingEvents = () => {
                             month: event.month,
                             timeRange: event.timeRange,
                             imageSrc: event.imageSrc,
+                            buttonText: event.buttonText,
+                            buttonTextAr: event.buttonTextAr,
+                            buttonLink: event.buttonLink,
                         };
                     }
 
@@ -104,20 +110,18 @@ const UpcomingEvents = () => {
                         month: event.monthAr ?? event.month,
                         timeRange: event.timeRangeAr ?? event.timeRange,
                         imageSrc: event.imageSrc,
+                        buttonText: event.buttonText,
+                        buttonTextAr: event.buttonTextAr,
+                        buttonLink: event.buttonLink,
                     };
                 });
 
-                setEvents(localizedEvents);
+                return localizedEvents as EventType[];
             } catch (error) {
                 console.error("Failed to load upcoming events", error);
-                setEvents([]);
-            } finally {
-                setLoading(false);
+                return [] as EventType[];
             }
-        };
-
-        fetchEvents();
-    }, [locale]);
+    }, [docs, locale]);
 
     return (
         <div id="upcoming-events" className="flex flex-col gap-2">

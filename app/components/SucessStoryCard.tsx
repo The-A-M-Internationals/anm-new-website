@@ -3,6 +3,8 @@ import React from 'react'
 
 interface SucessStoryCardProps {
     image: string;
+    /** Client name, shown above the title (only when the client has approved it) */
+    client?: string;
     title: string;
     description: string;
     badge?: string;
@@ -10,7 +12,7 @@ interface SucessStoryCardProps {
     onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, description, badge, industry, onClick }) => {
+const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, client, title, description, badge, industry, onClick }) => {
     return (
         <div 
             onClick={onClick}
@@ -33,6 +35,9 @@ const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, descrip
                 />
 
                 <div className='absolute bottom-3 w-full px-4 sm:px-6 py-3 sm:py-5'>
+                    {client && (
+                        <p className='text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-white mb-1 [text-shadow:0_1px_8px_rgba(0,0,0,0.85)]'>{client}</p>
+                    )}
                     <h3 className='text-lg sm:text-xl md:text-2xl font-semibold text-white'>{title}</h3>
 
                     <p className='text-white mt-1 sm:mt-2 text-xs sm:text-sm md:text-base'>
@@ -52,5 +57,16 @@ const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, descrip
         </div>
     )
 }
+
+/** Empty slot, same size as a card, until a real project is added */
+export const SuccessStoryPlaceholder = ({ label }: { label: string }) => (
+    <div
+        aria-hidden="true"
+        className='relative h-[450px] md:h-[480px] lg:h-[500px] w-[330px] mx-auto md:w-[380px] lg:w-[400px] mt-2 rounded-xl border border-dashed border-[#D4AF37]/50 bg-gradient-to-b from-[#FFFBED] to-white flex flex-col items-center justify-center gap-3 px-8 text-center'
+    >
+        <span className='w-10 h-10 rounded-full border border-[#D4AF37]/50 grid place-items-center text-[#D4AF37] text-xl leading-none'>+</span>
+        <p className='text-sm md:text-base font-medium text-[#897122]'>{label}</p>
+    </div>
+)
 
 export default SucessStoryCard

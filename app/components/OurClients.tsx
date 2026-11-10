@@ -17,6 +17,7 @@ import { Fragment, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CLIENTS, type Client } from "./clients-data";
+import CursorIcons from "./CursorIcons";
 import { handleHashLink } from "@/lib/handleHashLink";
 
 /* ======================================================================
@@ -145,7 +146,9 @@ function createCarousel(root: HTMLElement, reduce: boolean): () => void {
     cur.px = e.clientX; cur.py = e.clientY;
     const vr = viewport.getBoundingClientRect();
     cur.tx = e.clientX - vr.left; cur.ty = e.clientY - vr.top;
-    if (e.pointerType !== "touch") cur.tshow = 1;
+    // Over a card link the normal hand takes over; everywhere else the glass bubble is the cursor
+    const onLink = !dragging && !!(e.target as Element).closest?.("a[href]");
+    if (e.pointerType !== "touch") cur.tshow = onLink ? 0 : 1;
     if (!dragging) { start(); return; }
     moved += Math.abs(e.clientX - lastPX);
     x = rubber(startX + (e.clientX - startPX));
@@ -494,8 +497,8 @@ export default function OurClients({ clients = CLIENTS }: { clients?: Client[] }
             <ClientCard key={c.id} c={c} i={i} total={ordered.length} />
           ))}
         </ul>
-        <div className="oc-cursor" data-cursor aria-hidden="true">
-          <span>Drag</span>
+        <div className="oc-cursor glass-cursor" data-kind="drag" data-cursor aria-hidden="true">
+          <CursorIcons />
         </div>
       </div>
 
@@ -691,12 +694,9 @@ const CSS = `
 
 /* Cursor + Rail */
 .oc-cursor {
-  position: absolute; left: 0; top: 0; z-index: 5; width: 84px; height: 84px; border-radius: 50%;
-  display: grid; place-items: center; pointer-events: none; transform: scale(0);
-  background: #0d1d4a; border: 1px solid rgba(201, 161, 59, .45); box-shadow: 0 10px 24px -6px rgba(11,19,43,.4);
-  font: 700 11px/1 ui-monospace, Menlo, Consolas, monospace; letter-spacing: .18em; text-transform: uppercase; color: #f2cd62;
+  position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none; transform: scale(0);
 }
-.oc.is-dragging .oc-cursor { background: #c9a13b; border-color: #f2cd62; color: #0b132b; }
+.oc.is-dragging .oc-cursor { background: rgba(201, 161, 59, .85); border-color: #f2cd62; color: #0b132b; }
 .oc-rail { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 24px; margin-top: 12px; }
           <span className="oc-hint">Drag · swipe · ← →</span>
 .oc-bar { position: relative; height: 3px; background: #e5e7eb; border-radius: 2px; overflow: hidden; }
@@ -713,6 +713,10 @@ const CSS = `
 .oc-next-sec:hover svg { transform: rotate(90deg) translateX(4px); }
 
 @media (hover: none) { .oc-viewport { cursor: grab; } .oc-cursor { display: none; } }
+/* Mouse/trackpad: the glass bubble replaces the system cursor (no grab hand on top of it); links keep the hand */
+@media (hover: hover) and (pointer: fine) {
+  .oc-viewport, .oc-viewport *:not(a):not(a *), .oc.is-dragging .oc-viewport, .oc.is-dragging .oc-viewport * { cursor: none; }
+}
 @media (max-width: 900px) {
   .oc-head { grid-template-columns: 1fr; gap: 28px; }
   .oc-feature { grid-template-columns: 1fr; gap: 22px; }

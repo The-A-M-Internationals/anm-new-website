@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Clock, ArrowRight } from 'lucide-react';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../../lib/firebaseConfig";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from "next-intlayer";
 
 // Article Interface
@@ -26,7 +26,7 @@ export interface Article {
     createdAt?: { seconds: number; nanoseconds: number };
 }
 
-const BlogArticleList = () => {
+const BlogArticleList = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const content = useIntlayer("blogsArticleList");
     const { locale } = useLocale();
     const [activeFilter, setActiveFilter] = useState<string>('All Post');
@@ -45,8 +45,7 @@ const BlogArticleList = () => {
         { key: "Company News", label: content.filters.companyNews.value },
     ];
 
-    const [articles, setArticles] = useState<Article[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const { docs, loading } = useCmsDocs("articles", serverDocs);
 
     // ⭐ Static Popular Tags
     // const popularTags: string[] = [
@@ -59,11 +58,10 @@ const BlogArticleList = () => {
     //     "Developers",
     // ];
 
-    // 🔥 Fetch Articles From Firestore
-    useEffect(() => {
-        const fetchData = async () => {
+    // Articles from Firestore (loaded on the server)
+    const articles = useMemo(() => {
             try {
-                const articleSnap = await getDocs(collection(db, "articles"));
+                const articleSnap = asSnapshot(docs);
                 const articleList: Article[] = articleSnap.docs.map((doc) => {
                     const data = doc.data();
                     return {
@@ -91,18 +89,12 @@ const BlogArticleList = () => {
                     const bTime = (b as Article).createdAt?.seconds || 0;
                     return bTime - aTime;
                 });
-                setArticles(sortedList);
-
-
+                return sortedList;
             } catch (err) {
                 console.error("Error fetching data: ", err);
-            } finally {
-                setLoading(false);
+                return [] as Article[];
             }
-        };
-
-        fetchData();
-    }, []);
+    }, [docs]);
 
     // Filter Articles
     const filteredArticles: Article[] =

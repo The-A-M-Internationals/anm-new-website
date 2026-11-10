@@ -86,11 +86,6 @@ html.lenis body {
     pointer-events: none;
 }
 
-/* No hover effects firing while content glides under a still cursor (navbar stays live) */
-.lenis.lenis-scrolling .page-enter {
-    pointer-events: none;
-}
-
 body {
     overflow-x: hidden;
 }
@@ -166,4 +161,35 @@ body {
 .char-rise { display: inline-block; animation: char-rise 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) both; }
 @media (prefers-reduced-motion: reduce) {
   .char-rise { animation: none; }
+}
+
+/* Glass cursor (GlobalCursor + Our Clients): frosted circle, thin gold ring, icon only */
+.glass-cursor {
+  width: 56px; height: 56px; border-radius: 9999px; display: grid; place-items: center;
+  color: #0b1e4f; background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4); backdrop-filter: blur(10px) saturate(1.4);
+  border: 1px solid rgba(201, 161, 59, 0.7);
+  box-shadow: 0 8px 24px -8px rgba(11, 19, 43, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.glass-cursor [data-icon] { display: none; grid-area: 1 / 1; }
+.glass-cursor[data-kind="drag"] [data-icon="drag"],
+.glass-cursor[data-kind="play"] [data-icon="play"],
+.glass-cursor[data-kind="view"] [data-icon="view"] { display: block; }
+
+/* Hand cursor on everything clickable, site-wide. Tailwind v4 resets buttons to the arrow cursor,
+   so this restores it globally. Base layer: an explicit cursor-* utility on an element still wins. */
+@layer base {
+  a[href], button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [role="tab"], [role="link"],
+  select:not(:disabled), summary, label[for],
+  input:is([type="submit"], [type="button"], [type="reset"], [type="checkbox"], [type="radio"], [type="file"]):not(:disabled) {
+    cursor: pointer;
+  }
+  button:disabled, select:disabled, input:disabled, [aria-disabled="true"] { cursor: not-allowed; }
+}
+
+/* Mouse/trackpad: where the glass cursor shows (data-cursor view/play/drag), it replaces the system
+   cursor, so there is never a hand under the bubble. Links inside such an area keep the hand. */
+@media (hover: hover) and (pointer: fine) {
+  :is([data-cursor="view"], [data-cursor="play"], [data-cursor="drag"]),
+  :is([data-cursor="view"], [data-cursor="play"], [data-cursor="drag"]) *:not(a):not(a *) { cursor: none; }
 }

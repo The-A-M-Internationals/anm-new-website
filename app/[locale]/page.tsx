@@ -3,7 +3,7 @@ import AboutUs from "../components/AboutUs";
 import PartnerShipCard from "../components/PartnerShipCard";
 import OurClients from "../components/OurClients";
 import SuccessStory from "../components/SuccessStory";
-import Events from "../components/Events";
+import EventsSection from "../components/EventsSection";
 import Innovation from "../components/Innovation";
 import HomeHero from "../components/homePageComponents/HomeHero";
 
@@ -29,7 +29,7 @@ export default function Home() {
         <SuccessStory />
       </section>
       <section className="snap-section">
-        <Events />
+        <EventsSection />
       </section>
       {/* <section className="snap-section">
         <Innovation />
@@ -37,3 +37,6 @@ export default function Home() {
     </div>
   );
 }
+
+// Events come from Firebase: rebuild this page at most once a minute so new posts show up
+export const revalidate = 60;

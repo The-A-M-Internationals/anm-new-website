@@ -29,10 +29,7 @@ export function useShowcaseServices() {
       title: v(c.financeTitle, "Oracle EPM Solutions"),
       desc: v(c.financeDescription),
       list: [1, 2, 3, 4].map((n) => v(c[`financeCapability${n}`])).filter(Boolean),
-      stats: [1, 2].map((n) => ({
-        num: v(c[`financeMetric${n}Value`]),
-        label: v(c[`financeMetric${n}Label`]),
-      })),
+      stats: [],                                   // stat boxes removed (approved home page changes)
       tags: [1, 2].map((n) => v(c[`financeTag${n}`])).filter(Boolean),
       explore: v(c.financeExplore, "Explore EPM Solutions"),
     },
@@ -42,12 +39,9 @@ export function useShowcaseServices() {
       eyebrow: v(c.aiCategory, "AI Automations"),
       title: v(c.aiTitle, "AI Automations"),
       desc: v(c.aiDescription),
-      list: [1, 2, 3, 4, 5].map((n) => v(c[`aiCapability${n}`])).filter(Boolean),
-      stats: [1, 2, 3].map((n) => ({
-        num: v(c[`aiMetric${n}Value`]),
-        label: v(c[`aiMetric${n}Label`]),
-      })),
-      tags: [1, 2, 3, 4, 5].map((n) => v(c[`aiTag${n}`])).filter(Boolean),
+      list: [1, 2, 3].map((n) => v(c[`aiCapability${n}`])).filter(Boolean),
+      stats: [],
+      tags: [1, 2].map((n) => v(c[`aiTag${n}`])).filter(Boolean),
       explore: v(c.explore, "Explore"),
     },
   ];

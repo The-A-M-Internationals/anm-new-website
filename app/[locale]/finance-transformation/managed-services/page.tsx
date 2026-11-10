@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import FinanceTransformationPage from "../FinanceTransformationPage";
 
 export const metadata: Metadata = {
-    title: "Managed Services | The A&M internationals",
+    title: "Managed Services | The A&M Internationals",
     description: "Ongoing EPM support — Consulting-as-a-Service, Solution Management, Version Upgrades, and Monthly Maintenance.",
 }
 

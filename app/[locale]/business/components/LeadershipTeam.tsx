@@ -43,6 +43,7 @@ const LeadershipTeam = () => {
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
+    const foundersRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Clean, un-hijacked entrance observer
@@ -56,10 +57,9 @@ const LeadershipTeam = () => {
             });
         }, { threshold: 0.1 });
 
-        if (gridRef.current) {
-            const cards = gridRef.current.querySelectorAll('.team-card');
-            cards.forEach(card => observer.observe(card));
-        }
+        [foundersRef.current, gridRef.current].forEach((group) => {
+            group?.querySelectorAll('.team-card').forEach(card => observer.observe(card));
+        });
 
         return () => observer.disconnect();
     }, []);
@@ -84,10 +84,14 @@ const LeadershipTeam = () => {
             </div>
 
             {/* IMAGES WITH TEXT OVERLAY */}
-            <div className="flex flex-col sm:flex-row justify-center gap-10 flex-wrap w-full items-center">
+            <div ref={foundersRef} className="flex flex-col sm:flex-row justify-center gap-10 flex-wrap w-full items-center">
                 {Services.map((service, idx) => (
                     <div
                         key={idx}
+                        className="team-card w-full max-w-[370px] transition-all duration-1000 ease-out will-change-transform opacity-0 translate-y-32"
+                        style={{ transitionDelay: `${idx * 150}ms` }}
+                    >
+                    <div
                         className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transform-gpu transition-[transform,opacity] duration-500 ease-in-out"
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
@@ -99,7 +103,7 @@ const LeadershipTeam = () => {
                                 src={service.image}
                                 alt={service.title}
                                 fill
-                                priority={idx === 0}
+                                loading="eager"
                                 sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
                                 className="object-cover rounded-2xl transform-gpu transition-[transform,opacity] duration-300 ease-in-out lg:group-hover:scale-105"
                             />
@@ -147,6 +151,7 @@ const LeadershipTeam = () => {
                             </div>
                         )}
                     </div>
+                    </div>
                 ))}
             </div>
             </section>
@@ -185,7 +190,7 @@ const LeadershipTeam = () => {
                                 src={emp.image}
                                 alt={emp.name}
                                 fill
-                                priority={idx < 4}
+                                loading="eager"
                                 decoding="async"
                                 sizes="(min-width: 1024px) 330px, 50vw"
                                 className="object-cover transform-gpu transition-[transform,opacity] duration-700 ease-in-out group-hover:scale-105"

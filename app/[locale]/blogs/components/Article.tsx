@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import { Calendar, Clock, Users, UserSquare2 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../../../lib/firebaseConfig";
+import { useMemo } from "react";
+import type { CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from "next-intlayer";
 
 interface ArticleType {
@@ -25,11 +25,15 @@ interface ArticleType {
     readTime_ar?: string;
 }
 
-const Article = () => {
+const Article = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const { locale } = useLocale();
     const content = useIntlayer("blogsFeatureArticle");
-    const [article, setArticle] = useState<ArticleType | null>(null);
-    const [loading, setLoading] = useState(true);
+    const { docs, loading } = useCmsDocs("articles", serverDocs);
+    // The featured article: first one flagged featureArticle (same rule as the old Firestore query)
+    const article = useMemo(() => {
+        const d = docs.find((x) => [true, "true", "Yes"].includes(x.data.featureArticle));
+        return d ? ({ id: d.id, ...d.data } as ArticleType) : null;
+    }, [docs]);
 
     // Helper to get localized content
     const getLocalizedContent = (field: keyof ArticleType) => {
@@ -40,24 +44,6 @@ const Article = () => {
         }
         return article[field] as string;
     };
-
-    useEffect(() => {
-        const fetchFeatureArticle = async () => {
-            try {
-                const q = query(collection(db, "articles"), where("featureArticle", "in", [true, "true", "Yes"]));
-                const snap = await getDocs(q);
-                if (!snap.empty) {
-                    const doc = snap.docs[0];
-                    setArticle({ id: doc.id, ...doc.data() } as ArticleType);
-                }
-            } catch (err) {
-                console.error("Error fetching feature article:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchFeatureArticle();
-    }, []);
 
     if (loading) {
         return <div className="text-center py-20">{content.loading.value}</div>;

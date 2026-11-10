@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
+import { eventCta, openEventCta } from "./eventCta";
 
 interface LiveEventsProps {
     id: string;
@@ -12,6 +13,9 @@ interface LiveEventsProps {
     month: string;
     timeRange: string;
     imageSrc: string;
+    buttonText?: string;
+    buttonTextAr?: string;
+    buttonLink?: string;
 }
 
 const LiveEvents: React.FC<LiveEventsProps> = ({
@@ -23,10 +27,14 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
     month,
     timeRange,
     imageSrc,
+    buttonText,
+    buttonTextAr,
+    buttonLink,
 }) => {
     const router = useRouter();
     const { locale } = useLocale();
     const content = useIntlayer("events");
+    const cta = eventCta({ id, buttonText, buttonTextAr, buttonLink }, locale, content.registerNow.value);
 
     return (
         <div className="flex flex-col items-center mb-4 gap-2 px-4">
@@ -35,14 +43,23 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
                 {/* Image Section */}
                 <div className="w-full lg:w-1/3">
                     <div className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-full min-h-[250px] rounded-2xl sm:rounded-3xl md:rounded-[40px] overflow-hidden">
-                        <Image
-                            src={imageSrc}
-                            alt={title}
-                            fill
-                            unoptimized={(imageSrc ?? "").startsWith("http")}
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-cover"
-                        />
+                        {imageSrc ? (
+                            <Image
+                                src={imageSrc}
+                                alt={title}
+                                fill
+                                unoptimized={imageSrc.startsWith("http")}
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="object-cover"
+                            />
+                        ) : (
+                            /* No photo set in Firebase yet: brand panel with the date and venue */
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#050E30] via-[#0B1E4F] to-[#050E30] flex flex-col items-center justify-center gap-2 p-6 text-center">
+                                <span className="text-4xl md:text-5xl font-bold text-[#E3C973]" style={{ fontFamily: "Lora, Georgia, serif" }}>{dateRange}</span>
+                                <span className="text-sm md:text-base font-semibold uppercase tracking-[0.14em] text-white/80">{month}</span>
+                                {location && <span className="mt-2 text-xs md:text-sm text-white/60">{location}</span>}
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -82,16 +99,18 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
                             </span>
 
                         </div>
-                        {/* Time */}
+                        {/* Time (hidden when the event has no hours set) */}
+                        {timeRange && (
                         <div className="flex items-center gap-2 border border-gray-200 px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-sm">
                             <Clock className='w-4 h-4 md:w-6 md:h-6 text-[#D4AF37] font-light' />
                             <span className="text-gray-900 font-medium text-sm md:text-base">{timeRange}</span>
                         </div>
+                        )}
                     </div>
 
                     {/* Button */}
-                    <button onClick={() => router.push(`/${locale}/register?eventId=${id}`)} className="bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full flex items-center gap-2 transition text-sm sm:text-base">
-                        {content.registerNow.value}
+                    <button onClick={(e) => openEventCta(e, cta, router)} className="bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full flex items-center gap-2 transition text-sm sm:text-base">
+                        {cta.label}
                         <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 rtl:rotate-180" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>

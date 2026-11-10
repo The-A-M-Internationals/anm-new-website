@@ -22,7 +22,7 @@ const REST: SceneCaption = { idx: "AI", title: "Intelligent Automation", line: "
 const DONE: SceneCaption = { idx: "24/7", title: "Powered by Artificial Intelligence", line: "One AI core · five capabilities · always on", done: true };
 const FOV = 0.72;
 
-export const createAiScene: SceneFactory = (canvas, overlay, { bias = 0, onCaption }) => {
+export const createAiScene: SceneFactory = (canvas, overlay, { bias = 0, onCaption, pullBack = 1 }) => {
   const gl = canvas.getContext("webgl2", { antialias: true, alpha: true, premultipliedAlpha: true });
   if (!gl) return null;
   const pr = createProgram(gl, P_VS, P_FS), U = getUniforms(gl, pr, ["uPV", "uRot", "uMix", "uTime", "uPx"]);
@@ -83,7 +83,7 @@ export const createAiScene: SceneFactory = (canvas, overlay, { bias = 0, onCapti
 
     const { w, h, dpr, aspect } = fitCanvas(canvas, governor(dt), overlay);
     gl.viewport(0, 0, w, h); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-    const dist = 3.8 * fitDistance(aspect, 1.15) - (key === "rest" ? 0 : 0.15);
+    const dist = (3.8 * fitDistance(aspect, 1.15) - (key === "rest" ? 0 : 0.15)) * pullBack;
     const s = aspect > 1.3 ? bias * 0.4 * dist * Math.tan(FOV / 2) * aspect : 0;
     const PV = mul4(persp(FOV, aspect, 0.1, 30), lookAt([m.x * 0.6 - s, 0.18 - m.y * 0.4, dist], [-s, 0.05, 0]));
     gl.uniformMatrix4fv(U.uPV, false, PV); gl.uniform1f(U.uRot, rot); gl.uniform1f(U.uMix, mixAt());

@@ -59,7 +59,7 @@ const impactsChildWelfareContent = {
       ar: "المسؤولية الاجتماعية للمؤسسات",
     }),
     csrDescription: t({
-      en: "At The A&M internationals, we believe that elevating brands also means elevating communities. As we grow, so does our commitment to giving back — through pro bono work for purpose-driven organizations, technology partnerships with educational initiatives, and CSR programs that reflect our values.",
+      en: "At The A&M Internationals, we believe that elevating brands also means elevating communities. As we grow, so does our commitment to giving back — through pro bono work for purpose-driven organizations, technology partnerships with educational initiatives, and CSR programs that reflect our values.",
       ar: "في A&M الدولية، نؤمن بأن الارتقاء بالعلامات التجارية يعني أيضًا الارتقاء بالمجتمعات. ومع نمونا، يكبر معنا التزامنا بالعطاء — من خلال المشاريع التطوعية للمؤسسات ذات الرسالة، والشراكات التقنية مع المبادرات التعليمية، وبرامج المسؤولية الاجتماعية التي تعكس قيمنا.",
     }),
     csrPillars: [

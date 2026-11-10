@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { db } from "@/lib/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useIntlayer, useLocale } from "next-intlayer";
@@ -23,19 +23,16 @@ type Job = {
     descriptionAr?: string;
 };
 
-const Open = () => {
+const Open = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const router = useRouter();
     const content = useIntlayer("careersOpenPositions");
     const { locale } = useLocale();
 
-    const [jobs, setJobs] = useState<Job[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const { docs, loading, failed } = useCmsDocs("jobs", serverDocs);
+    const error = failed ? content.loadError.value : null;
 
-    useEffect(() => {
-        const fetchJobs = async () => {
-            try {
-                const snap = await getDocs(collection(db, "jobs"));
+    const jobs = useMemo(() => {
+                const snap = asSnapshot(docs);
                 const list: Job[] = snap.docs.map((doc) => {
                     const data = doc.data();
                     return {
@@ -52,16 +49,8 @@ const Open = () => {
                         descriptionAr: data.descriptionAr,
                     };
                 });
-                setJobs(list);
-            } catch {
-                setError(content.loadError.value);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchJobs();
-    }, [locale]);
+                return list;
+    }, [docs]);
 
     const hasJobs = !loading && jobs.length > 0;
 

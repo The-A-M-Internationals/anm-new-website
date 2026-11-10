@@ -107,7 +107,7 @@ const Navbar = () => {
           icon: '/tick.svg',
           textKey: 'contactUs',
           type: 'outline' as const,
-          link: '#contact'
+          link: getLocalizedLink('/contact')
         },
       ]
     },

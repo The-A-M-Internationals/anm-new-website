@@ -9,8 +9,8 @@ import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
 import "./aboutUs.content"; // registers dictionary
 
-// Video poster through the image optimizer (the source PNG is 2.6 MB)
-const POSTER = getImageProps({ src: "/hero-bg.png", alt: "", width: 1280, height: 720 }).props.src;
+// Video poster: the "Oracle EPM, end to end" title card, taken from the video itself (4.2s)
+const POSTER = getImageProps({ src: "/aboutus-poster.jpg", alt: "", width: 960, height: 540 }).props.src;
 
 const AboutUs = () => {
     const content = useIntlayer("aboutUs");
@@ -70,7 +70,7 @@ const AboutUs = () => {
                 <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black ring-4 ring-white/50 mb-10 group">
                     <video 
                         ref={videoRef}
-                        src="/aboutus-video.mp4" 
+                        src="/aboutus-video.mp4?v=2" 
                         poster={POSTER}
                         preload="metadata"
                         playsInline
@@ -96,7 +96,8 @@ const AboutUs = () => {
                                 setIsPlaying(true);
                             }}
                         >
-                            <Play className="w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] transform group-hover/play:scale-110 transition-transform duration-300" fill="currentColor" />
+                            {/* Touch screens only: on desktop the glass cursor is the play button */}
+                            <Play className="[@media(hover:hover)_and_(pointer:fine)]:hidden w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] transform group-hover/play:scale-110 transition-transform duration-300" fill="currentColor" />
                         </div>
                     )}
                 </div>

@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
     return {
         title: (t({
-            en: "Branding & Design | The A&M internationals",
+            en: "Branding & Design | The A&M Internationals",
             ar: "العلامة التجارية والتصميم | A&M الدولية",
         }) as any)[locale],
         description: (t({

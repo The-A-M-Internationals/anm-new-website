@@ -10,7 +10,9 @@ const nextConfig: NextConfig = {
     // Served resized + AVIF/WebP per device; full-size PNGs were stalling GPU raster mid-scroll.
     // Firestore-driven images (unknown hosts) opt out per-image with `unoptimized`.
     unoptimized: false,
-    formats: ["image/avif", "image/webp"],
+    // WebP only: AVIF encodes ~5-10x slower, so each new image size stalled the server (and, on
+    // localhost, the same laptop the browser runs on) right as the visitor started scrolling.
+    formats: ["image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       {

@@ -25,6 +25,7 @@ export default function PanelCopy({ service }: { service: ShowcaseService }) {
         ))}
       </ul>
 
+      {service.stats.length > 0 && (
       <div data-reveal className="mt-7">
         <div className="h-px w-full bg-gradient-to-r rtl:bg-gradient-to-l from-white/25 via-white/10 to-transparent" />
         <dl className={`mt-5 grid gap-4 ${service.stats.length > 2 ? "grid-cols-3" : "grid-cols-2"}`}>
@@ -36,8 +37,10 @@ export default function PanelCopy({ service }: { service: ShowcaseService }) {
           ))}
         </dl>
       </div>
+      )}
 
-      <div data-reveal className="mt-7 flex flex-wrap items-center justify-between gap-4">
+      {/* Same two-column grid as the list above: tags in column 1, the button starts on column 2's edge */}
+      <div data-reveal className="mt-7 grid grid-cols-1 sm:grid-cols-2 items-center gap-x-6 gap-y-4">
         <ul className="flex flex-wrap gap-1.5">
           {service.tags.map((tag) => (
             <li key={tag} className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-semibold text-white/70">
@@ -48,7 +51,7 @@ export default function PanelCopy({ service }: { service: ShowcaseService }) {
         <Link
           href={service.href}
           aria-describedby={titleId}
-          className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-r from-[#C9A84C] to-[#E3C973] px-6 py-2.5 text-sm font-bold text-[#050E30] [text-shadow:none] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-150 ease-in-out"
+          className="inline-flex justify-self-start cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-r from-[#C9A84C] to-[#E3C973] px-6 py-2.5 text-sm font-bold text-[#050E30] [text-shadow:none] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-150 ease-in-out"
         >
           {service.explore}
           <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden />

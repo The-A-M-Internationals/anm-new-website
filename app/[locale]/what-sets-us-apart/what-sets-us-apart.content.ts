@@ -12,7 +12,7 @@ const whatSetsUsApartContent = {
       ar: "يُميِّزنا",
     }),
     heroDescription: t({
-      en: "Six reasons brands choose The A&M internationals.",
+      en: "Six reasons brands choose The A&M Internationals.",
       ar: "ستة أسباب تجعل العلامات التجارية تختار A&M الدولية.",
     }),
     heroButton: t({

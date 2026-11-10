@@ -1,19 +1,24 @@
 import { t } from "intlayer";
 
+/**
+ * Home "Our Work" section (approved home page changes, 10 Nov 2026).
+ * Only real, delivered projects go in `items`; the rest of the row shows placeholder slots
+ * until more projects are approved.
+ */
 const successStoryContent = {
   key: "successStory",
   content: {
     headingStart: t({
-      en: "Success",
-      ar: "قصص",
+      en: "Our",
+      ar: "أعمالنا",
     }),
     headingEnd: t({
-      en: "Stories",
-      ar: "النجاح",
+      en: "Work",
+      ar: "",
     }),
     subheading: t({
-      en: "Real results that drive business transformation",
-      ar: "نتائج حقيقية تقود تحول الأعمال",
+      en: "Projects we've delivered for our clients.",
+      ar: "مشاريع أنجزناها لعملائنا.",
     }),
 
     cta: t({
@@ -21,59 +26,32 @@ const successStoryContent = {
       ar: "اكتشف المزيد",
     }),
 
+    placeholder: t({
+      en: "More projects coming soon",
+      ar: "المزيد من المشاريع قريبًا",
+    }),
+
     items: [
       {
+        client: t({
+          en: "TBC Corporation",
+          ar: "TBC Corporation",
+        }),
         title: t({
-          en: "Global Manufacturing Corp",
-          ar: "شركة تصنيع عالمية",
+          en: "ESG emissions reporting",
+          ar: "تقارير انبعاثات ESG",
         }),
         description: t({
-          en: "Fragmented data across 15 systems",
-          ar: "بيانات مجزأة عبر 15 نظامًا",
+          en: "Built emissions reporting into Oracle EPM, alongside the financials",
+          ar: "بنينا تقارير الانبعاثات داخل Oracle EPM، جنبًا إلى جنب مع البيانات المالية",
         }),
         industry: t({
-          en: "Automotive",
-          ar: "السيارات",
+          en: "Oracle EPM",
+          ar: "Oracle EPM",
         }),
         badge: t({
-          en: "87% Faster Reporting",
-          ar: "تقارير أسرع بنسبة 87٪",
-        }),
-      },
-      {
-        title: t({
-          en: "Regional Healthcare Network",
-          ar: "شبكة رعاية صحية إقليمية",
-        }),
-        description: t({
-          en: "Manual compliance tracking",
-          ar: "متابعة الامتثال يدويًا",
-        }),
-        industry: t({
-          en: "Healthcare",
-          ar: "الرعاية الصحية",
-        }),
-        badge: t({
-          en: "100% audit compliance",
-          ar: "امتثال تدقيق 100٪",
-        }),
-      },
-      {
-        title: t({
-          en: "Financial Services Leader",
-          ar: "شركة رائدة في الخدمات المالية",
-        }),
-        description: t({
-          en: "Legacy infrastructure bottlenecks",
-          ar: "اختناقات في البنية التحتية القديمة",
-        }),
-        industry: t({
-          en: "Insurance",
-          ar: "التأمين",
-        }),
-        badge: t({
-          en: "3x performance improvement",
-          ar: "تحسن الأداء 3 مرات",
+          en: "Delivered",
+          ar: "تم التسليم",
         }),
       },
     ],

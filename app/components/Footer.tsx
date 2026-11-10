@@ -5,10 +5,11 @@ import { useState } from "react";
 // Firebase loads only when someone subscribes, not on every page
 import Link from "next/link";
 import { useIntlayer, useLocale } from "next-intlayer";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import "./footer.content";
 import { useRouter } from "next/navigation";
 import { handleHashLink } from "@/lib/handleHashLink";
+import OraclePartnerBadge from "./OraclePartnerBadge";
 
 const Footer = () => {
     const content = useIntlayer("footer");
@@ -92,6 +93,18 @@ const Footer = () => {
                 </div>
             </div>
 
+            {/* WhatsApp + working hours */}
+            <div className="flex items-start gap-3">
+                <MessageCircle className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
+                <div className="flex flex-col">
+                    <span className="text-[11px] text-gray-400 uppercase tracking-wider">{content.whatsappLabel?.value || "WhatsApp"}</span>
+                    <a href="https://wa.me/971564783478" target="_blank" rel="noopener noreferrer" className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
+                        +971 56 478 3478
+                    </a>
+                    <span className="text-xs text-gray-400 mt-0.5">{content.hoursValue?.value || "Mon–Sat, 9 AM–6 PM GST"}</span>
+                </div>
+            </div>
+
             {/* Premises & Building Details - Clickable Google Maps Location */}
             <a
                 href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
@@ -170,13 +183,17 @@ const Footer = () => {
 
                 {/* LEFT - LOGO AND CONTACT (Description text removed to reclaim space) */}
                 <div className="flex flex-col lg:flex-1 gap-6 sm:gap-8 md:gap-8 order-1">
-                    <Image
-                        src="/new-logo.png"
-                        alt="Logo"
-                        width={300}
-                        height={300}
-                        className="w-48 sm:w-56 md:w-64 lg:w-64 h-auto object-contain"
-                    />
+                    {/* Logo + Oracle PartnerNetwork member badge */}
+                    <div className="flex flex-wrap items-center gap-4">
+                        <Image
+                            src="/new-logo.png"
+                            alt="Logo"
+                            width={300}
+                            height={300}
+                            className="w-48 sm:w-56 md:w-64 lg:w-64 h-auto object-contain"
+                        />
+                        <OraclePartnerBadge />
+                    </div>
 
                     {/* Contact Details with ID for Smooth Scroll from About Us dropdown */}
                     {renderContact()}
@@ -214,7 +231,7 @@ const Footer = () => {
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
                         <Link href={getLocalizedLink("/")} onClick={(e) => handleHashLink(e, getLocalizedLink("/"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">
-                            {content.amInternational?.value || "The A&M internationals"}
+                            {content.amInternational?.value || "The A&M Internationals"}
                         </Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">

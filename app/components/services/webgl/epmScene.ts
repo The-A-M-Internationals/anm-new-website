@@ -41,7 +41,7 @@ function camAt(T: number) {
   return c;
 }
 
-export const createEpmScene: SceneFactory = (canvas, _overlay, { bias = 0, onCaption }) => {
+export const createEpmScene: SceneFactory = (canvas, _overlay, { bias = 0, onCaption, pullBack = 1, minCamDist = 0 }) => {
   const gl = canvas.getContext("webgl2", { antialias: false, alpha: false, powerPreference: "high-performance" });
   if (!gl) return null;
   const pr = createProgram(gl, VS, FS), U = getUniforms(gl, pr, UNIFORMS);
@@ -60,7 +60,7 @@ export const createEpmScene: SceneFactory = (canvas, _overlay, { bias = 0, onCap
     const { w, h, aspect } = fitCanvas(canvas, governor(dt));
     gl.viewport(0, 0, w, h);
 
-    const cv = camAt(T), dist = cv[3] * fitDistance(aspect, 1.45);
+    const cv = camAt(T), dist = Math.max(cv[3], minCamDist) * fitDistance(aspect, 1.45) * pullBack;
     const yaw = cv[1] + m.x * 0.4, pitch = cv[2] - m.y * 0.1, tgt = [0, cv[4], 0.05];
     const eye = [tgt[0] + Math.sin(yaw) * Math.cos(pitch) * dist, tgt[1] + Math.sin(pitch) * dist, tgt[2] + Math.cos(yaw) * Math.cos(pitch) * dist];
     const f = nz([tgt[0] - eye[0], tgt[1] - eye[1], tgt[2] - eye[2]]), rt = nz(cr(f, [0, 1, 0])), up = cr(rt, f);

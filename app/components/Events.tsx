@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../lib/firebaseConfig";
+import { useMemo, useState } from "react";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { ArrowRight } from "lucide-react";
 import LiveEvents from "./LiveEvents";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import "./events.content";
 import { handleHashLink } from "@/lib/handleHashLink";
+import { eventCta, openEventCta } from "./eventCta";
 
 interface EventType {
     id: string;
@@ -24,22 +25,22 @@ interface EventType {
     timeRange: string;
     timeRangeAr?: string;
     imageSrc: string;
+    buttonText?: string;
+    buttonTextAr?: string;
+    buttonLink?: string;
 }
 
-const Events = () => {
+/** `docs` comes from the server (EventsSection), so the events are in the page HTML */
+const Events = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const content = useIntlayer("events");
     const { locale } = useLocale();
     const router = useRouter();
 
-    const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
-    const [liveEvent, setLiveEvent] = useState<EventType | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const { docs, loading, failed } = useCmsDocs("events", serverDocs);
 
-    useEffect(() => {
-        const fetchEvents = async () => {
+    const { liveEvent, upcomingEvents, broken } = useMemo(() => {
             try {
-                const snapshot = await getDocs(collection(db, "events"));
+                const snapshot = asSnapshot(docs);
 
                 const parseEventDateRange = (dateRange: string, month: string) => {
                     const days = dateRange.match(/\d{1,2}/g);
@@ -85,6 +86,9 @@ const Events = () => {
                         timeRange: data.timeRange,
                         timeRangeAr: data.timeRangeAr,
                         imageSrc: data.imageSrc,
+                        buttonText: data.buttonText,
+                        buttonTextAr: data.buttonTextAr,
+                        buttonLink: data.buttonLink,
                     };
 
                     if (today >= range.startDate && today <= range.endDate) {
@@ -100,18 +104,13 @@ const Events = () => {
                     return r1.startDate.getTime() - r2.startDate.getTime();
                 });
 
-                setLiveEvent(detectedLiveEvent);
-                setUpcomingEvents(upcoming);
+                return { liveEvent: detectedLiveEvent as EventType | null, upcomingEvents: upcoming, broken: false };
             } catch (err) {
                 console.error(err);
-                setError("Failed to load events");
-            } finally {
-                setLoading(false);
+                return { liveEvent: null, upcomingEvents: [] as EventType[], broken: true };
             }
-        };
-
-        fetchEvents();
-    }, [locale]); // re-run when language changes
+    }, [docs]);
+    const error = failed || broken ? "Failed to load events" : null;
 
     /* PAGINATION */
     const [page, setPage] = useState(0);
@@ -127,9 +126,8 @@ const Events = () => {
         return <div className="w-full flex justify-center py-10">Loading events...</div>;
     }
 
-    if (error) {
-        return <div className="w-full flex justify-center py-10 text-red-500">{error}</div>;
-    }
+    // No live or upcoming event (or they couldn't be loaded): hide the whole Events section
+    if (error || (!liveEvent && upcomingEvents.length === 0)) return null;
 
     return (
         <div className="bg-gradient-to-r from-[#EED689]/10 to-white py-12 md:py-16">
@@ -204,10 +202,10 @@ const Events = () => {
                                     </p>
 
                                     <button
-                                        onClick={() => router.push(`/${locale}/register?eventId=${event.id}`)}
+                                        onClick={(e) => openEventCta(e, eventCta(event, locale, content?.registerNow?.value), router)}
                                         className="text-[#D4AF37] hover:text-yellow-700 cursor-pointer font-semibold flex items-center gap-2"
                                     >
-                                        {content?.registerNow?.value}
+                                        {eventCta(event, locale, content?.registerNow?.value).label}
                                         <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                                     </button>
                                 </div>

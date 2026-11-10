@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import AIAutomationsHero from "./AiAutomationsHero";
 import AiAutomationsServices from "./AiAutomationsServices";
-import Events from "../../components/Events";
+import EventsSection from "../../components/EventsSection";
 import Innovation from "../../components/Innovation";
 import { t } from "intlayer";
 
@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
     return {
         title: (t({
-            en: "AI Automations | The A&M internationals",
+            en: "AI Automations | The A&M Internationals",
             ar: "أتمتة الذكاء الاصطناعي | A&M الدولية",
         }) as any)[locale],
         description: (t({
@@ -25,8 +25,10 @@ export default function AIAutomationsPage() {
         <div>
             <section className="snap-section"><AIAutomationsHero /></section>
             <section className="snap-section"><AiAutomationsServices /></section>
-            <section className="snap-section"><Events /></section>
+            <section className="snap-section"><EventsSection /></section>
             <section className="snap-section"><Innovation /></section>
         </div>
     );
 }
+// Events come from Firebase: rebuild this page at most once a minute so new posts show up
+export const revalidate = 60;

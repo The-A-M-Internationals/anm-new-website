@@ -30,9 +30,9 @@ export default function PageLeave() {
       const page = document.querySelector(".page-enter");
       if (!page) return;
       page.classList.add("page-leaving");
-      // Safety net: if the navigation never happens, bring the page back
+      // Safety net: if the navigation never happens, bring the page back (long enough for a slow load)
       window.clearTimeout(undo);
-      undo = window.setTimeout(() => page.classList.remove("page-leaving"), 1500);
+      undo = window.setTimeout(() => page.classList.remove("page-leaving"), 6000);
     };
     // Bubble phase on window: runs after React's handlers, so a handler that cancels the click wins
     const afterReact = (e: MouseEvent) => { if (!e.defaultPrevented || isNextLink(e)) onClick(e); };

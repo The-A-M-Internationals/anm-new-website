@@ -21,7 +21,7 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon, isActiv
 
     return (
         <div 
-            className="m-4 md:m-6 group relative w-full max-w-[300px] mx-auto md:max-w-[380px]"
+            className="m-4 md:m-6 group relative w-full max-w-[300px] mx-auto md:max-w-[380px] cursor-pointer"
             onClick={handleToggle}
         >       
             {/* MAIN CARD CONTAINER - DEFINES THE SHAPE */}

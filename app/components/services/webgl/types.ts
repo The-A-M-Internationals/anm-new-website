@@ -4,6 +4,10 @@ export type SceneOptions = {
   /** +1 shifts the model right, -1 left (away from the copy card); applied on wide canvases only */
   bias?: number;
   onCaption?: (caption: SceneCaption) => void;
+  /** Camera distance multiplier (>1 pulls back so the whole model fits with margin). Used when baking. */
+  pullBack?: number;
+  /** EPM only: the camera never comes closer than this keyframe distance (keeps close-ups inside the frame) */
+  minCamDist?: number;
 };
 
 /** A standalone renderer the playback controller can drive */

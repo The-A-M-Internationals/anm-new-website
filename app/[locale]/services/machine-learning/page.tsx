@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
     return {
         title: (t({
-            en: "Machine Learning | The A&M internationals",
+            en: "Machine Learning | The A&M Internationals",
             ar: "تعلم الآلة | A&M الدولية",
         }) as any)[locale],
         description: (t({

@@ -41,8 +41,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-    title: "The A&M internationals",
-    description: "The A&M internationals provides services to help businesses thrive in the global market.",
+    title: "The A&M Internationals",
+    description: "The A&M Internationals provides services to help businesses thrive in the global market.",
     icons: {
         icon: [
             { url: "/favicon.ico" },

@@ -12,7 +12,7 @@ const impactsDashboardContent = {
       ar: "نتائج حقيقية. عملاء حقيقيون. إنجازات ملموسة.",
     }),
     intro1: t({
-      en: "At The A&M internationals, every number tells a story — of a client trusted, a vision delivered, and a brand elevated. From boutique hospitality brands to enterprise solutions, our work spans continents, industries, and ambitions — serving clients across India, the UAE, and the United States.",
+      en: "At The A&M Internationals, every number tells a story — of a client trusted, a vision delivered, and a brand elevated. From boutique hospitality brands to enterprise solutions, our work spans continents, industries, and ambitions — serving clients across India, the UAE, and the United States.",
       ar: "في A&M الدولية، كل رقم يروي قصة — قصة عميل وثق بنا، ورؤية تحققت، وعلامة تجارية ارتقت. من علامات الضيافة البوتيكية إلى الحلول المؤسسية، يمتد عملنا عبر القارات والقطاعات والطموحات — خدمةً لعملائنا في الهند والإمارات العربية المتحدة والولايات المتحدة الأمريكية.",
     }),
     intro2: t({

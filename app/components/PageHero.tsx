@@ -2,7 +2,7 @@
 
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
+import { getImageProps } from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useLocale } from "next-intlayer";
 import { handleHashLink } from '@/lib/handleHashLink'
@@ -36,6 +36,11 @@ const PageHero: React.FC<PageHeroProps> = ({
 }) => {
    const { locale } = useLocale();
    const router = useRouter();
+   const heroCommon = { alt: 'Hero', fill: true, sizes: '100vw', loading: 'eager' as const, fetchPriority: 'high' as const };
+   const { props: { srcSet: d } } = getImageProps({ ...heroCommon, src: image });
+   const { props: { srcSet: t } } = getImageProps({ ...heroCommon, src: image3 });
+   const { props: mobileImg } = getImageProps({ ...heroCommon, src: image2 });
+   const desktopSrc = { srcSet: d }, tabletSrc = { srcSet: t };
    const [isZoomed, setIsZoomed] = useState(false);
 
    useEffect(() => {
@@ -64,36 +69,14 @@ const PageHero: React.FC<PageHeroProps> = ({
     lg:h-[670px]
   "
          >
-            {/* Desktop Image */}
-            <div className="hidden md:hidden lg:block absolute inset-0">
-               <Image
-                  src={image}
-                  alt="Hero Desktop"
-                  fill
-                  sizes="100vw"
-               />
-            </div>
-
-            {/* Tablet Image */}
-            <div className="hidden sm:block lg:hidden absolute inset-0">
-               <Image
-                  src={image3}
-                  alt="Hero Tablet"
-                  fill
-                  sizes="100vw"
-                  className='object-contain'
-               />
-            </div>
-
-            {/* Mobile Image */}
-            <div className="block sm:hidden md:hidden absolute inset-0">
-               <Image
-                  src={image2}
-                  alt="Hero Mobile"
-                  fill
-                  sizes="100vw"
-               />
-            </div>
+            {/* Hero image: one <picture>, so each screen downloads only its own size, straight away
+                (desktop >= 1024px, tablet >= 640px, phone below). Same images and fit as before. */}
+            <picture>
+               <source media="(min-width: 1024px)" srcSet={desktopSrc.srcSet} sizes="100vw" />
+               <source media="(min-width: 640px)" srcSet={tabletSrc.srcSet} sizes="100vw" />
+               {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
+               <img {...mobileImg} className="absolute inset-0 h-full w-full object-fill sm:object-contain lg:object-fill" />
+            </picture>
 
             {/* Text */}
             <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 flex w-[95%] flex-col gap-2 md:gap-1 lg:gap-2'>

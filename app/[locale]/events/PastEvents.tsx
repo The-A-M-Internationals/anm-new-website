@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../lib/firebaseConfig";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from "next-intlayer";
 
 interface EventType {
@@ -20,19 +20,18 @@ interface EventType {
 
 const ITEMS_PER_PAGE = 2;
 
-const PastEvents: React.FC = () => {
+const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
   const content = useIntlayer("eventsPage");
   const { locale } = useLocale();
-  const [events, setEvents] = useState<EventType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { docs, loading } = useCmsDocs("events", serverDocs);
   const [page, setPage] = useState(0);
+  // Back to the first page when the list or language changes
+  const [listKey, setListKey] = useState({ docs, locale });
+  if (listKey.docs !== docs || listKey.locale !== locale) { setListKey({ docs, locale }); setPage(0); }
 
-  useEffect(() => {
-    const fetchPastEvents = async () => {
-      setLoading(true);
-      setPage(0);
+  const events = useMemo(() => {
       try {
-        const snapshot = await getDocs(collection(db, "events"));
+        const snapshot = asSnapshot(docs);
 
         const isArabic = locale?.toLowerCase().startsWith("ar");
 
@@ -99,16 +98,12 @@ const PastEvents: React.FC = () => {
           };
         });
 
-        setEvents(localizedEvents);
+        return localizedEvents as EventType[];
       } catch (error) {
         console.error("Failed to load past events", error);
-      } finally {
-        setLoading(false);
+        return [] as EventType[];
       }
-    };
-
-    fetchPastEvents();
-  }, [locale]);
+  }, [docs, locale]);
 
   const totalPages = Math.ceil(events.length / ITEMS_PER_PAGE);
   const visibleEvents = events.slice(

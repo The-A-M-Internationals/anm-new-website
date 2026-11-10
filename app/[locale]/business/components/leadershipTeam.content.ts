@@ -41,14 +41,14 @@ const leadershipTeamContent: Dictionary = {
     leader1RoleLine: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "Founder, The A&M internationals",
+        [Locales.ENGLISH]: "Founder, The A&M Internationals",
         [Locales.ARABIC]: "المؤسس، A&M الدولية",
       },
     },
     leader1FullBio: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "An ambitious leader in financial transformation and performance-driven innovation, Anusha Anala leads The A&M internationals's mission to help global organizations work smarter and scale faster. With over 15 years of experience in enterprise performance, analytics, and modern finance operations, she turns complexity into clarity—delivering streamlined processes, scalable solutions, and measurable business results. Anusha leads with strategic precision, innovation, and an unwavering commitment to client success.",
+        [Locales.ENGLISH]: "An ambitious leader in financial transformation and performance-driven innovation, Anusha Anala leads The A&M Internationals's mission to help global organizations work smarter and scale faster. With over 15 years of experience in enterprise performance, analytics, and modern finance operations, she turns complexity into clarity—delivering streamlined processes, scalable solutions, and measurable business results. Anusha leads with strategic precision, innovation, and an unwavering commitment to client success.",
         [Locales.ARABIC]: "قائدة طموحة في التحول المالي والابتكار القائم على الأداء، تقود أنوشا أنالا مهمة A&M الدولية لمساعدة المؤسسات العالمية على العمل بذكاء أكبر والتوسع بسرعة أكبر. وبخبرة تزيد عن 15 عامًا في أداء المؤسسات والتحليلات وعمليات التمويل الحديثة، تحوّل التعقيد إلى وضوح — عبر تقديم عمليات مبسطة وحلول قابلة للتوسع ونتائج أعمال قابلة للقياس. تقود أنوشا بدقة استراتيجية وابتكار والتزام ثابت بنجاح العملاء.",
       },
     },

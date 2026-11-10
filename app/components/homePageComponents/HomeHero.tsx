@@ -10,6 +10,7 @@ import { AppLocale } from "@/types/locale";
 
 import { handleHashLink } from "@/lib/handleHashLink";
 import CssSplitText from "../CssSplitText";
+import OraclePartnerBadge from "../OraclePartnerBadge";
 
 const HomeHero = () => {
     const router = useRouter();
@@ -20,8 +21,8 @@ const HomeHero = () => {
 
     // Animated counter refs
     const clientsRef = useRef<HTMLDivElement>(null);
+    const projectsRef = useRef<HTMLDivElement>(null);
     const countriesRef = useRef<HTMLDivElement>(null);
-    const yearsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Time-based, synced to the display: if the page is busy for a moment the count
@@ -37,9 +38,10 @@ const HomeHero = () => {
             frames.push(requestAnimationFrame(step));
         };
 
-        if (clientsRef.current) animateCounter(clientsRef.current, 150, "+", 1400);
-        if (countriesRef.current) animateCounter(countriesRef.current, 12, "+", 1200);
-        if (yearsRef.current) animateCounter(yearsRef.current, 10, "+", 1000);
+        // Same figures as the Make an Impact page
+        if (clientsRef.current) animateCounter(clientsRef.current, 26, "+", 1400);
+        if (projectsRef.current) animateCounter(projectsRef.current, 40, "+", 1200);
+        if (countriesRef.current) animateCounter(countriesRef.current, 3, "", 1000);
         return () => frames.forEach(cancelAnimationFrame);
     }, []);
 
@@ -97,6 +99,11 @@ const HomeHero = () => {
                                     {content.exploreServices.value}
                                 </button>
                             </div>
+
+                            {/* Oracle PartnerNetwork member badge, under the two buttons */}
+                            <div className="flex justify-center -mt-1 mb-6">
+                                <OraclePartnerBadge />
+                            </div>
                             
                             {/* Divider */}
                             <div className="h-[1px] w-full bg-gradient-to-r from-white/20 via-white/10 to-transparent mb-6" />
@@ -108,12 +115,12 @@ const HomeHero = () => {
                                     <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.clients.value}</div>
                                 </div>
                                 <div>
-                                    <div ref={countriesRef} className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}>0+</div>
-                                    <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.countries.value}</div>
+                                    <div ref={projectsRef} className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}>0+</div>
+                                    <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.projects.value}</div>
                                 </div>
                                 <div>
-                                    <div ref={yearsRef} className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}>0+</div>
-                                    <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.years.value}</div>
+                                    <div ref={countriesRef} className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}>0</div>
+                                    <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.countries.value}</div>
                                 </div>
                             </div>
 

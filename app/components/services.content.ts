@@ -47,22 +47,6 @@ const servicesContent = {
       en: "Managed Services",
       ar: "الخدمات المدارة",
     }),
-    financeMetric1Value: t({
-      en: "40%",
-      ar: "٤٠٪",
-    }),
-    financeMetric1Label: t({
-      en: "faster close",
-      ar: "إغلاق أسرع",
-    }),
-    financeMetric2Value: t({
-      en: "150+",
-      ar: "١٥٠+",
-    }),
-    financeMetric2Label: t({
-      en: "implementations",
-      ar: "تنفيذ",
-    }),
     financeTag1: t({
       en: "Oracle EPM",
       ar: "أوراكل EPM",
@@ -128,76 +112,32 @@ const servicesContent = {
       ar: "أتمتة الذكاء الاصطناعي",
     }),
     aiTitle: t({
-      en: "Intelligent Automation, Elevated by AI",
-      ar: "الأتمتة الذكية المعززة بالذكاء الاصطناعي",
+      en: "AI for Oracle EPM",
+      ar: "الذكاء الاصطناعي لـ Oracle EPM",
     }),
     aiDescription: t({
-      en: "Transform your business with cutting-edge AI and machine learning. Automate workflows, enhance decision-making, and unlock unprecedented efficiency.",
-      ar: "حوّل أعمالك باستخدام أحدث تقنيات الذكاء الاصطناعي والتعلم الآلي لأتمتة سير العمل وتعزيز اتخاذ القرارات وتحقيق كفاءة غير مسبوقة.",
+      en: "We build AI and automation tools that take repetitive work off finance teams.",
+      ar: "نطوّر أدوات ذكاء اصطناعي وأتمتة تُعفي فرق المالية من الأعمال المتكررة.",
     }),
     aiCapability1: t({
-      en: "Machine Learning",
-      ar: "التعلم الآلي",
+      en: "EPM Build Agent (coming soon)",
+      ar: "وكيل بناء EPM (قريبًا)",
     }),
     aiCapability2: t({
-      en: "Robotic Process Automation",
-      ar: "أتمتة العمليات الروبوتية",
+      en: "EPM Automation Tools",
+      ar: "أدوات أتمتة EPM",
     }),
     aiCapability3: t({
-      en: "Natural Language Processing",
-      ar: "معالجة اللغة الطبيعية",
-    }),
-    aiCapability4: t({
-      en: "Computer Vision",
-      ar: "الرؤية الحاسوبية",
-    }),
-    aiCapability5: t({
-      en: "Generative AI",
-      ar: "الذكاء الاصطناعي التوليدي",
-    }),
-    aiMetric1Value: t({
-      en: "85%",
-      ar: "٨٥٪",
-    }),
-    aiMetric1Label: t({
-      en: "efficiency increase",
-      ar: "زيادة الكفاءة",
-    }),
-    aiMetric2Value: t({
-      en: "10x",
-      ar: "١٠×",
-    }),
-    aiMetric2Label: t({
-      en: "faster processing",
-      ar: "معالجة أسرع",
-    }),
-    aiMetric3Value: t({
-      en: "24/7",
-      ar: "٢٤/٧",
-    }),
-    aiMetric3Label: t({
-      en: "automated operations",
-      ar: "عمليات مؤتمتة",
+      en: "AI on Oracle Cloud",
+      ar: "الذكاء الاصطناعي على Oracle Cloud",
     }),
     aiTag1: t({
-      en: "ML",
-      ar: "ML",
+      en: "AI",
+      ar: "AI",
     }),
     aiTag2: t({
-      en: "RPA",
-      ar: "RPA",
-    }),
-    aiTag3: t({
-      en: "NLP",
-      ar: "NLP",
-    }),
-    aiTag4: t({
-      en: "CV",
-      ar: "CV",
-    }),
-    aiTag5: t({
-      en: "GenAI",
-      ar: "GenAI",
+      en: "Oracle Cloud",
+      ar: "Oracle Cloud",
     }),
     explore: t({
       en: "Explore AI Solutions",
