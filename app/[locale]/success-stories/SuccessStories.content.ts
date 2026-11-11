@@ -22,7 +22,7 @@ const successStoriesContent = {
         en: "Let's discuss how we can help you achieve similar results while creating positive social impact.",
         ar: "لنناقش كيف يمكننا مساعدتك في تحقيق نتائج مماثلة مع إحداث تأثير اجتماعي إيجابي.",
       }),
-      seeEpm: t({ en: "See EPM in Action", ar: "شاهد EPM في العمل" }),
+      seeEpm: t({ en: "Talk to an EPM expert", ar: "تحدّث مع خبير EPM" }),
       scheduleConsultation: t({
         en: "Schedule Consultation",
         ar: "جدولة استشارة",

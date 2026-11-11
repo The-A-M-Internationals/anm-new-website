@@ -8,6 +8,7 @@ export function proxy(request: NextRequest) {
   // 1. Skip middleware for static assets, API, and internal Next.js files
   if (
     pathname.startsWith("/api") ||
+    pathname === "/admin" || pathname.startsWith("/admin/") ||   // admin portal: no language routing
     pathname.startsWith("/_next") ||
     pathname.includes("favicon.ico") ||
     /\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2|mp4|webm|xml|txt)$/i.test(pathname)

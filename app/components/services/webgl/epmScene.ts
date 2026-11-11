@@ -16,7 +16,7 @@ const TOWERS = [
   [0.0, 0.0, 0.26, 1.62],     // Group HQ
 ];
 const STEPS: [number, string][] = [
-  [0, "Entity books · UAE · India · UK · USA"],
+  [0, "Entity books · UAE · USA · India"],
   [3, "Reconciling entity ledgers"],
   [9, "Consolidating to group"],
   [13.5, "Group view coming together"],

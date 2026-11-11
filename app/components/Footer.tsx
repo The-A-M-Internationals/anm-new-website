@@ -182,17 +182,20 @@ const Footer = () => {
             <div className="bg-[#0D1B3E] w-full h-auto flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
 
                 {/* LEFT - LOGO AND CONTACT (Description text removed to reclaim space) */}
-                <div className="flex flex-col lg:flex-1 gap-6 sm:gap-8 md:gap-8 order-1">
-                    {/* Logo + Oracle PartnerNetwork member badge */}
-                    <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-col min-[1024px]:flex-1 min-[1400px]:flex-[1.3] gap-6 sm:gap-8 md:gap-8 order-1">
+                    {/* Co-brand lockup: The A&M Internationals | Oracle Partner (thin divider, same as the navbar).
+                        Side by side on phones/tablets and 1400px+; stacked on laptops, where the footer
+                        columns leave no room for both in one row. */}
+                    <div className="flex flex-row items-center gap-3 -ms-3 min-[1024px]:flex-col min-[1024px]:items-start min-[1024px]:ms-0 min-[1400px]:flex-row min-[1400px]:items-center min-[1400px]:gap-4 min-[1400px]:-ms-3">
                         <Image
                             src="/new-logo.png"
-                            alt="Logo"
+                            alt="The A&M Internationals"
                             width={300}
                             height={300}
-                            className="w-48 sm:w-56 md:w-64 lg:w-64 h-auto object-contain"
+                            className="w-44 min-[1024px]:-ms-3 min-[1400px]:ms-0 min-[1400px]:w-48 h-auto object-contain shrink-0"
                         />
-                        <OraclePartnerBadge />
+                        <span className="h-10 min-[1024px]:hidden min-[1400px]:block min-[1400px]:h-12 w-px shrink-0 bg-white/25" aria-hidden />
+                        <OraclePartnerBadge tone="dark" className="h-9 min-[1024px]:h-8 min-[1400px]:h-10 w-auto shrink-0" />
                     </div>
 
                     {/* Contact Details with ID for Smooth Scroll from About Us dropdown */}
@@ -212,6 +215,8 @@ const Footer = () => {
                         <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#enterprise-data"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.enterpriseData?.value || ""}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#narrative-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.narrativeReporting?.value || ""}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#tax-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.taxReporting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#data-integration")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#data-integration"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.dataIntegration?.value || "Data Integration"}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#esg-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#esg-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.esgReporting?.value || "ESG & Sustainability Reporting"}</Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
                         <Link href={getLocalizedLink("/finance-transformation#managed-services")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#managed-services"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.managedServices?.value || "Managed Services"}</Link>
@@ -219,8 +224,9 @@ const Footer = () => {
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
                         <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#consulting-as-service"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.consultingAsService?.value || ""}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#epm-solution-management"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.epmSolutionManagement?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#version-upgrade"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.versionUpgrade?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#monthly-update-testing")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#monthly-update-testing"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.versionUpgrade?.value || "Monthly Update Testing"}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#monthly-maintenance"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.monthlyMaintenance?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#epm-staffing")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#epm-staffing"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.epmStaffing?.value || "EPM Staffing"}</Link>
                     </div>
                 </div>
 
@@ -342,16 +348,8 @@ const Footer = () => {
                             rel="noopener noreferrer"
                             className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300"
                         >
-                            {content.privacy?.value || "Privacy"}
-                        </a>
-                        <span className="mx-1">|</span>
-                        <a
-                            href="https://privacy-policy.theaminternationals.com/" 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300"
-                        >
-                            {content.terms?.value || "Terms"}
+                            {/* One combined Privacy & Terms document */}
+                            {content.privacyTerms?.value || "Privacy & Terms"}
                         </a>
                     </div>
                 </div>

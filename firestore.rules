@@ -1,7 +1,8 @@
 rules_version = '2';
 
 // Website rules: visitors may READ published content and ADD form entries — nothing else.
-// Paste into Firebase console → Firestore Database → Rules → Publish.
+// Admins (signed-in users whose email has a document in /admins) edit content from /admin.
+// Publish: Firebase console → Firestore Database → Rules (paste) → Publish.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -9,11 +10,18 @@ service cloud.firestore {
     function optStr(field, max) { return !(field in request.resource.data) || str(request.resource.data[field], max); }
     function only(fields) { return request.resource.data.keys().hasOnly(fields); }
     function email(v) { return str(v, 254) && v.matches('^[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,24}$'); }
+    function signedInEmail() { return request.auth != null && request.auth.token.email is string ? request.auth.token.email.lower() : ''; }
+    function isAdmin() { return signedInEmail() != '' && exists(/databases/$(database)/documents/admins/$(signedInEmail())); }
 
-    // ---- Published content: anyone can read, nobody can write from the website ----
-    match /events/{id}   { allow read: if true; }
-    match /articles/{id} { allow read: if true; }
-    match /jobs/{id}     { allow read: if true; }
+    // ---- Published content: anyone can read; only admins (the /admin portal) can change it ----
+    match /events/{id}      { allow read: if true; allow write: if isAdmin(); }
+    match /articles/{id}    { allow read: if true; allow write: if isAdmin(); }
+    match /jobs/{id}        { allow read: if true; allow write: if isAdmin(); }
+    match /siteContent/{id} { allow read: if true; allow write: if isAdmin(); }
+
+    // ---- Admin list: document ID = the admin's email in lower case. Added by the owner in the
+    //      Firebase console only. A signed-in user may check their own entry; nobody can write it.
+    match /admins/{adminEmail} { allow get: if signedInEmail() == adminEmail; }
 
     // ---- Form submissions: create only, validated; never readable, editable or deletable ----
     match /customers/{id} {
@@ -59,6 +67,12 @@ service cloud.firestore {
         && str(request.resource.data.message.subject, 300) && str(request.resource.data.message.html, 20000);
     }
 
-    // Everything else — including admins — is closed to the website.
+    // ---- Admins may read form submissions (for a future inbox in the portal) ----
+    match /customers/{id}          { allow read: if isAdmin(); }
+    match /EPM/{id}                { allow read: if isAdmin(); }
+    match /eventRegistrations/{id} { allow read: if isAdmin(); }
+    match /applications/{id}       { allow read: if isAdmin(); }
+
+    // Everything else is closed.
   }
 }

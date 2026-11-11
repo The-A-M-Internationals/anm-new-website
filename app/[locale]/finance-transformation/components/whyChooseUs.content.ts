@@ -16,12 +16,12 @@ const financeTransformationWhyChooseUsContent = {
     features: [
       {
         title: t({
-          en: "Proven Track Record",
-          ar: "سجل نجاح مثبت",
+          en: "Senior-led",
+          ar: "بقيادة خبراء كبار",
         }),
         description: t({
-          en: "100+ successful implementations across diverse industries and company sizes.",
-          ar: "أكثر من 100 تنفيذ ناجح عبر صناعات مختلفة وأحجام شركات متنوعة.",
+          en: "Every project is overseen by a consultant with 16 years of Oracle EPM experience.",
+          ar: "يشرف على كل مشروع استشاري يمتلك 16 عامًا من الخبرة في Oracle EPM.",
         }),
         highlight: false,
       },

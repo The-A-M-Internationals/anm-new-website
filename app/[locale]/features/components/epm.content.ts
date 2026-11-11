@@ -83,8 +83,8 @@ const featuresEpmContent = {
       ar: "إدارة حلول EPM",
     }),
     optionVersionUpgrade: t({
-      en: "Version Upgrade & Patching",
-      ar: "ترقية الإصدارات والتحديثات",
+      en: "Monthly Update Testing",
+      ar: "اختبار التحديثات الشهرية",
     }),
     optionMonthlyMaintenance: t({
       en: "Monthly Maintenance & Administration",

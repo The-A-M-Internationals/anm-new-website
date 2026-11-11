@@ -584,7 +584,7 @@ const CSS = `
   padding-right: .18em;
 }
 .oc-head-side { display: grid; gap: 24px; justify-items: start; }
-.oc-lede { margin: 0; max-width: 44ch; font-size: 15.5px; line-height: 1.65; color: var(--mute); }
+.oc-lede { margin: 0; max-width: 44ch; font-size: 16.5px; line-height: 1.65; color: var(--mute); }
 .oc-controls { display: flex; gap: 12px; }
 .oc-btn {
   width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #0b1e4f;

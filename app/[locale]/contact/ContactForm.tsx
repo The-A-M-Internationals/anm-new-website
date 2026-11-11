@@ -313,7 +313,7 @@ const ContactForm: React.FC = () => {
               </p>
               <button 
                 onClick={(e) => {
-                  const link = `/${locale}/features#epm-suites`;
+                  const link = `/${locale}/contact#form`;
                   if (!handleHashLink(e, link, router)) {
                     router.push(link);
                   }

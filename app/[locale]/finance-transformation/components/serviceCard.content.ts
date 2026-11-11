@@ -4,8 +4,8 @@ const financeTransformationServiceCardContent = {
   key: "financeTransformationServiceCard",
   content: {
     exploreCta: t({
-      en: "Explore",
-      ar: "استكشف",
+      en: "Talk to an EPM expert",
+      ar: "تحدّث مع خبير EPM",
     }),
   },
 };

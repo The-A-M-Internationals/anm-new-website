@@ -10,7 +10,6 @@ import { AppLocale } from "@/types/locale";
 
 import { handleHashLink } from "@/lib/handleHashLink";
 import CssSplitText from "../CssSplitText";
-import OraclePartnerBadge from "../OraclePartnerBadge";
 
 const HomeHero = () => {
     const router = useRouter();
@@ -98,11 +97,6 @@ const HomeHero = () => {
                                 >
                                     {content.exploreServices.value}
                                 </button>
-                            </div>
-
-                            {/* Oracle PartnerNetwork member badge, under the two buttons */}
-                            <div className="flex justify-center -mt-1 mb-6">
-                                <OraclePartnerBadge />
                             </div>
                             
                             {/* Divider */}

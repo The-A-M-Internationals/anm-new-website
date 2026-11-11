@@ -1,23 +1,20 @@
 import Image from "next/image";
 
 /**
- * Oracle PartnerNetwork member badge (official artwork, cropped). The artwork has black "PARTNER"
- * text, so it always sits on its own white chip, which keeps it legible on the navy hero and footer.
+ * Oracle Partner logo (official artwork, cropped). `tone` picks the version for the background:
+ * "light" = original colours for white backgrounds (navbar), "dark" = grey text/divider turned
+ * white, red ORACLE kept, for navy backgrounds (hero, footer).
  */
-export default function OraclePartnerBadge({ className = "" }: { className?: string }) {
+export default function OraclePartnerBadge({ tone = "light", className = "h-6 w-auto" }: { tone?: "light" | "dark"; className?: string }) {
   return (
-    <div
-      className={`inline-flex items-center rounded-lg bg-white px-3 py-2 shadow-md ring-1 ring-black/5 ${className}`}
+    <Image
+      src={tone === "dark" ? "/oracle-partner-white.png" : "/oracle-partner.png"}
+      alt="Oracle Partner"
       title="Oracle PartnerNetwork Member"
-    >
-      <Image
-        src="/oracle-partner.png"
-        alt="Oracle PartnerNetwork Member"
-        width={454}
-        height={67}
-        sizes="180px"
-        className="h-5 w-auto sm:h-6"
-      />
-    </div>
+      width={640}
+      height={150}
+      sizes="160px"
+      className={className}
+    />
   );
 }

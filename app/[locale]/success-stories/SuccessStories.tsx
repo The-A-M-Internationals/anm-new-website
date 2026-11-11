@@ -207,7 +207,7 @@ const SuccessStories: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button 
               onClick={(e) => {
-                const link = `/${locale}/features#epm-suites`;
+                const link = `/${locale}/contact#form`;
                 if (!handleHashLink(e, link, router)) {
                   router.push(link);
                 }

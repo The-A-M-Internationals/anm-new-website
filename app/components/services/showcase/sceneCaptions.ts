@@ -7,7 +7,7 @@ export const SCENE_CAPTIONS: Record<"epm" | "ai", [number, SceneCaption][]> = {
     [
       0,
       {
-        "title": "Entity books · UAE · India · UK · USA",
+        "title": "Entity books · UAE · USA · India",
         "done": false
       }
     ],
@@ -56,7 +56,7 @@ export const SCENE_CAPTIONS: Record<"epm" | "ai", [number, SceneCaption][]> = {
     [
       30.8,
       {
-        "title": "Entity books · UAE · India · UK · USA",
+        "title": "Entity books · UAE · USA · India",
         "done": false
       }
     ]

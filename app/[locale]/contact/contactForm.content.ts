@@ -89,8 +89,8 @@ const contactFormContent = {
     }),
 
     scheduleDemo: t({
-      en: "Schedule Demo",
-      ar: "حجز عرض توضيحي",
+      en: "Book a Consultation",
+      ar: "احجز استشارة",
     }),
 
     emailUs: t({

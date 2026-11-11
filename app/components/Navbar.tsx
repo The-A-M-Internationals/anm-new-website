@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 import NavbarModal from './NavbarModal'
 import Link from 'next/link'
 import Image from 'next/image'
+import OraclePartnerBadge from "./OraclePartnerBadge";
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
@@ -189,6 +190,9 @@ const Navbar = () => {
             <Link href={getLocalizedLink('/')} className="shrink-0 flex items-center"><Image src="/new-logo.png" alt="Logo" width={890} height={280} priority sizes="242px" className="h-14 md:h-[76px] w-auto object-contain py-1" /></Link>
 
             <div className="hidden lg:flex items-center gap-1">
+              {/* Oracle Partner logo, right before Services (screens 1400px+: narrower, the menu items would wrap) */}
+              <OraclePartnerBadge tone="light" className="hidden min-[1400px]:block h-8 w-auto" />
+              <span className="hidden min-[1400px]:block mx-3 h-5 w-px bg-gray-200" aria-hidden />
               {(Object.keys(navItems) as NavKey[]).map((key) => (
                 <DesktopNavButton
                   key={key}
@@ -220,7 +224,7 @@ const Navbar = () => {
               <Link
                 href={getLocalizedLink("/contact#form")}
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
-                className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-colors duration-150"
+                className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold xl:whitespace-nowrap transition-colors duration-150"
               >
                 {content.bookConsultation.value}
               </Link>
@@ -323,7 +327,7 @@ const DesktopNavButton = ({
         onMouseEnter={() => handleNavMouseEnter(navKey)}
         onMouseLeave={() => scheduleClose(300)}
         className={`
-          text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold
+          text-[#4B5563] cursor-pointer px-2.5 2xl:px-3 py-2 text-sm font-semibold xl:whitespace-nowrap
           transition-colors duration-150 hover:text-gray-900
           ${isActive ? 'border-b-2 border-[#C9A84C] text-gray-900' : ''}
         `}
@@ -348,7 +352,7 @@ const DesktopNavButton = ({
           router.push(directLinks[navKey]!, { scroll: false })
         }
       }}
-      className="text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:text-gray-900"
+      className="text-[#4B5563] cursor-pointer px-2.5 2xl:px-3 py-2 text-sm font-semibold xl:whitespace-nowrap transition-colors duration-150 hover:text-gray-900"
     >
       {(content as any)?.[navItems[navKey].labelKey]?.value || (content as any)?.[navItems[navKey].labelKey] || navKey}
     </button>

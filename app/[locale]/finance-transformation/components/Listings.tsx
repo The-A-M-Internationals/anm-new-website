@@ -158,13 +158,16 @@ const serviceIds = [
     "enterprise-data",
     "narrative-reporting",
     "tax-reporting",
+    "data-integration",
+    "esg-reporting",
 ];
 
 const managedServiceIds = [
     "consulting-as-service",
     "epm-solution-management",
-    "version-upgrade",
+    "monthly-update-testing",
     "monthly-maintenance",
+    "epm-staffing",
 ];
 
 const Listings = () => {
@@ -188,7 +191,7 @@ const Listings = () => {
                     title={service.title.value}
                     description={service.description.value}
                     tags={service.tags.map((tag: Record<string, any>) => tag.value)}
-                    svgIcon={serviceIcons[index]}
+                    svgIcon={serviceIcons[index % serviceIcons.length]}
                 />
             ))}
 
@@ -206,7 +209,7 @@ const Listings = () => {
                     title={service.title.value}
                     description={service.description.value}
                     tags={service.tags.map((tag: Record<string, any>) => tag.value)}
-                    svgIcon={managedServiceIcons[index]}
+                    svgIcon={managedServiceIcons[index % managedServiceIcons.length]}
                 />
             ))}
 
@@ -214,7 +217,7 @@ const Listings = () => {
             <div className="mt-16 flex justify-center">
                 <button
                     onClick={(e) => {
-                        const link = `/${locale}/features#features`;
+                        const link = `/${locale}/contact#form`;
                         if (!handleHashLink(e, link, router)) {
                             router.push(link);
                         }

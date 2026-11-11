@@ -36,8 +36,8 @@ const servicesContent = {
       ar: "التخطيط والميزانية",
     }),
     financeCapability2: t({
-      en: "Financial Consolidation",
-      ar: "الدمج المالي",
+      en: "Financial Consolidation & Close",
+      ar: "الدمج المالي والإقفال",
     }),
     financeCapability3: t({
       en: "Account Reconciliation",

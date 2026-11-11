@@ -60,6 +60,8 @@ export const footerContent = {
       ar: "التقارير الوصفية",
     }),
     taxReporting: t({ en: "Tax Reporting", ar: "التقارير الضريبية" }),
+    dataIntegration: t({ en: "Data Integration", ar: "تكامل البيانات" }),
+    esgReporting: t({ en: "ESG & Sustainability Reporting", ar: "تقارير ESG والاستدامة" }),
 
     // Managed Services section
     managedServices: t({ en: "Managed Services", ar: "الخدمات المدارة" }),
@@ -72,13 +74,14 @@ export const footerContent = {
       ar: "إدارة حلول EPM",
     }),
     versionUpgrade: t({
-      en: "Version Upgrade & Patching",
-      ar: "ترقية الإصدارات والتحديثات",
+      en: "Monthly Update Testing",
+      ar: "اختبار التحديثات الشهرية",
     }),
     monthlyMaintenance: t({
       en: "Monthly Maintenance & Administration",
       ar: "الصيانة والإدارة الشهرية",
     }),
+    epmStaffing: t({ en: "EPM Staffing", ar: "توفير كفاءات EPM" }),
 
     // Resources section
     resources: t({ en: "Resources", ar: "الموارد" }),
@@ -140,6 +143,7 @@ export const footerContent = {
     }),
     privacy: t({ en: "Privacy", ar: "سياسة الخصوصية" }),
     terms: t({ en: "Terms", ar: "الأحكام والشروط" }),
+    privacyTerms: t({ en: "Privacy & Terms", ar: "الخصوصية والشروط" }),
   },
 };
 

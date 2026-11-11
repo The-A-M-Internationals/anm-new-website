@@ -24,9 +24,9 @@ declare global { interface Window { __lenis?: Lenis } }
 
 /**
  * Scroll feel, adapted from Framer's Lenis component. Test overrides (remembered per tab):
- * - ?scroll=glide (default): duration-based glide; length = intensity / 10 s (Framer default 12 → 1.2 s)
+ * - ?scroll=glide: duration-based glide (the old default); length = intensity / 10 s (Framer default 12 → 1.2 s)
  * - ?intensity=1–100: tune the glide live, like Framer's Intensity slider · ?speed=0.3–2: distance per wheel click
- * - ?scroll=snappy: frame-based lerp · ?scroll=native: no Lenis, browser scrolling
+ * - ?scroll=snappy (default): frame-based lerp that follows the wheel, smooth but never drags · ?scroll=native: browser scrolling
  */
 type ScrollMode = "glide" | "snappy" | "native";
 const MODES: ScrollMode[] = ["glide", "snappy", "native"];
@@ -39,9 +39,9 @@ function setting(key: string, valid: (v: string) => boolean, fallback: string) {
   } catch {}
   return q && valid(q) ? q : fallback;
 }
-const scrollMode = () => setting("scroll", (v) => MODES.includes(v as ScrollMode), "glide") as ScrollMode;
+const scrollMode = () => setting("scroll", (v) => MODES.includes(v as ScrollMode), "snappy") as ScrollMode;
 const intensity = () => Number(setting("intensity", (v) => +v >= 1 && +v <= 100, "12"));
-const wheelSpeed = () => Number(setting("speed", (v) => +v >= 0.3 && +v <= 2, "0.7"));
+const wheelSpeed = () => Number(setting("speed", (v) => +v >= 0.3 && +v <= 2, "0.9"));
 
 /** Framer "disable/enable smooth" tweak: e.g. turn smoothing off while a modal or map is open. */
 export function setSmoothWheel(on: boolean) {
@@ -62,7 +62,7 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
     if (mode === "native") return;                         // consumers fall back to window.scrollTo
 
     const feel = mode === "snappy"
-      ? { lerp: 0.075 }
+      ? { lerp: 0.1 }                                   // eases ~10% of the way each frame: smooth, responsive
       : { duration: intensity() / 10, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) };
     const l = new Lenis({
       autoRaf: false,                                      // GSAP's ticker drives it (below) — never two rAF loops
