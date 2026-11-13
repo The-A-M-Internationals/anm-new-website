@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
-import { t } from "intlayer";
+import { getTranslation } from "intlayer";
 import BrandingDesignClient from "./BrandingDesignClient";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
 
     return {
-        title: (t({
+        title: getTranslation({
             en: "Branding & Design | The A&M Internationals",
             ar: "العلامة التجارية والتصميم | A&M الدولية",
-        }) as any)[locale],
-        description: (t({
+        }, locale),
+        description: getTranslation({
             en: "Strategic branding and distinctive visual design to elevate your brand identity.",
             ar: "العلامة التجارية الاستراتيجية والتصميم البصري المميز للارتقاء بهوية علامتك التجارية.",
-        }) as any)[locale],
+        }, locale),
     };
 }
 

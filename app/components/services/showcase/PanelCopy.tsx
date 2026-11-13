@@ -51,7 +51,7 @@ export default function PanelCopy({ service }: { service: ShowcaseService }) {
         <Link
           href={service.href}
           aria-describedby={titleId}
-          className="inline-flex justify-self-start cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-r from-[#C9A84C] to-[#E3C973] px-6 py-2.5 text-sm font-bold text-[#050E30] [text-shadow:none] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-150 ease-in-out"
+          className="inline-flex justify-self-start cursor-pointer items-center gap-2 whitespace-nowrap rounded-lg bg-gradient-to-r from-[#C9A84C] to-[#E3C973] px-6 py-2.5 text-sm font-bold text-[#050E30] [text-shadow:none] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-150 ease-in-out"
         >
           {service.explore}
           <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden />

@@ -5,6 +5,7 @@ import { SCHEMAS } from "@/lib/admin/schemas";
 import { useAdmin } from "./useAdmin";
 import LoginForm from "./LoginForm";
 import CollectionEditor from "./CollectionEditor";
+import SingleEditor from "./SingleEditor";
 
 /** Admin portal: sign-in gate, then one tab per editable part of the site */
 export default function AdminApp() {
@@ -62,7 +63,9 @@ export default function AdminApp() {
         </nav>
       </header>
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
-        <CollectionEditor key={schema.id} schema={schema} user={state.user} />
+        {schema.single
+          ? <SingleEditor key={schema.id} schema={schema} user={state.user} />
+          : <CollectionEditor key={schema.id} schema={schema} user={state.user} />}
       </main>
     </div>
   );

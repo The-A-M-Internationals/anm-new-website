@@ -1,0 +1,32 @@
+"use client";
+
+import { useIntlayer } from "next-intlayer";
+
+/** EPM Build Agent: "Built on Oracle" band (same dark style as the former integrations section) */
+const BuiltOnOracle = () => {
+    const content = useIntlayer("featuresBuiltOnOracle");
+
+    return (
+        <div
+            id="built-on-oracle"
+            className="relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden bg-[#0F1E4D]"
+            style={{
+                backgroundImage: "url('/whychooseus.svg')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "right -100px",
+            }}
+        >
+            <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-4xl md:text-[48px] font-bold text-white mb-3">
+                    {content.titlePrefix.value} <span className="text-yellow-500">{content.titleHighlight.value}</span>
+                </h2>
+                <p className="text-gray-300 text-lg">
+                    {content.description.value}
+                </p>
+            </div>
+        </div>
+    );
+};
+
+export default BuiltOnOracle;

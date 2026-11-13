@@ -79,18 +79,18 @@ const contactFormContent = {
     }),
 
     demoTitle: t({
-      en: "Request an EPM Suite Demo",
-      ar: "طلب عرض توضيحي لنظام EPM",
+      en: "Book a 30-minute discovery call",
+      ar: "احجز مكالمة تعارف لمدة 30 دقيقة",
     }),
 
     demoDesc: t({
-      en: "See our flagship product in action with a personalized 30-minute walkthrough tailored to your specific use cases.",
-      ar: "شاهد منتجنا الرئيسي أثناء العمل من خلال عرض مخصص لمدة 30 دقيقة يناسب احتياجاتك.",
+      en: "Tell us about your planning, close or reporting challenge.",
+      ar: "أخبرنا عن التحدي الذي تواجهه في التخطيط أو الإقفال المالي أو إعداد التقارير.",
     }),
 
     scheduleDemo: t({
-      en: "Book a Consultation",
-      ar: "احجز استشارة",
+      en: "Book a call",
+      ar: "احجز مكالمة",
     }),
 
     emailUs: t({
@@ -148,21 +148,25 @@ const contactFormContent = {
         en: "Select a service",
         ar: "اختر الخدمة",
       }),
+      epmImplementation: t({
+        en: "Oracle EPM Implementation",
+        ar: "تطبيق Oracle EPM",
+      }),
+      epmSupport: t({
+        en: "EPM Support / Managed Services",
+        ar: "دعم EPM / الخدمات المُدارة",
+      }),
+      epmStaffing: t({
+        en: "EPM Staffing",
+        ar: "توفير كوادر EPM",
+      }),
+      webDesign: t({
+        en: "Website / UI-UX Design",
+        ar: "تصميم المواقع / تجربة المستخدم",
+      }),
       digitalMarketing: t({
         en: "Digital Marketing",
         ar: "التسويق الرقمي",
-      }),
-      uiux: t({
-        en: "UI/UX Design",
-        ar: "تصميم تجربة المستخدم",
-      }),
-      webDev: t({
-        en: "Web Development",
-        ar: "تطوير المواقع",
-      }),
-      epm: t({
-        en: "EPM",
-        ar: "إدارة الأداء المؤسسي",
       }),
       other: t({
         en: "Other",

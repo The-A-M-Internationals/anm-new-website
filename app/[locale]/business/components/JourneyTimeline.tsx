@@ -9,33 +9,20 @@ const JourneyTimeline = () => {
     const content = useIntlayer("businessJourneyTimeline");
     const timelineRef = useRef<HTMLDivElement>(null);
     useTimelineDraw(timelineRef);
+    // Photo beside each milestone (milestone 6 reuses image1 until a real photo is supplied)
+    const images = ["image1", "image2", "image3", "image4", "image5", "image1"];
     const milestones = [
-        {
-            image: "/business/image1.jpg",
-            text: content.milestone1.value,
-            position: "right"
-        },
-        {
-            image: "/business/image2.jpg",
-            text: content.milestone2.value,
-            position: "left"
-        },
-        {
-            image: "/business/image3.jpg",
-            text: content.milestone3.value,
-            position: "right"
-        },
-        {
-            image: "/business/image4.jpg",
-            text: content.milestone4.value,
-            position: "left"
-        },
-        {
-            image: "/business/image5.jpg",
-            text: content.milestone5.value,
-            position: "right"
-        }
-    ];
+        content.milestone1.value,
+        content.milestone2.value,
+        content.milestone3.value,
+        content.milestone4.value,
+        content.milestone5.value,
+        content.milestone6.value,
+    ].map((text, i) => ({
+        image: `/business/${images[i]}.jpg`,
+        text,
+        position: i % 2 === 0 ? "right" : "left",
+    }));
 
     return (
         <section id="about-us" className="py-12 md:py-20 lg:py-24 px-6 md:px-12">

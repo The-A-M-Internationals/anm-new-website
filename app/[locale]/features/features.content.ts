@@ -4,20 +4,20 @@ const featuresContent = {
   key: "featuresPage",
   content: {
     heroTitle: t({
-      en: "EPM Suite:",
-      ar: "مجموعة EPM:",
+      en: "EPM Build Agent:",
+      ar: "EPM Build Agent:",
     }),
     heroTitle2: t({
-      en: "Performance at Scale",
-      ar: "أداء على نطاق واسع",
+      en: "AI that helps build Oracle EPM",
+      ar: "ذكاء اصطناعي يساعد في بناء Oracle EPM",
     }),
     heroDescription: t({
-      en: "Transform fragmented data into unified insights. Our Enterprise Performance Management platform gives you real-time visibility into every aspect of your business.",
-      ar: "حوّل البيانات المتفرقة إلى رؤى موحّدة. تمنحك منصة إدارة أداء المؤسسة رؤية فورية لكل جانب من جوانب أعمالك.",
+      en: "We're building an AI assistant that takes on repetitive Oracle EPM build work, so consultants spend their time on design and the business. Preview at GITEX Global 2026.",
+      ar: "نعمل على بناء مساعد ذكاء اصطناعي يتولّى أعمال البناء المتكررة في Oracle EPM، ليتفرّغ الاستشاريون للتصميم واحتياجات الأعمال. عرض تمهيدي في GITEX Global 2026.",
     }),
     heroButton: t({
-      en: "Request a Demo",
-      ar: "اطلب عرضًا توضيحيًا",
+      en: "Join early access",
+      ar: "انضم إلى الوصول المبكر",
     }),
   },
 };

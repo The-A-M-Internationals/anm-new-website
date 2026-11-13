@@ -3,7 +3,7 @@ import FeaturesPage from "./FeaturesPage";
 
 export const metadata: Metadata = {
     title: "Features | The A&M Internationals",
-    description: "Explore the features of The A&M Internationals's EPM Suite, designed to optimize your business performance and drive growth.",
+    description: "EPM Build Agent: AI that helps build Oracle EPM. Join early access.",
 }
 
 export default function Page() {

@@ -446,7 +446,7 @@ export default function OurClients({ clients = CLIENTS }: { clients?: Client[] }
   const glow = new Set(["our", "architecture."]);
 
   return (
-    <section ref={ref} className="oc" id="our-clients" aria-labelledby="oc-title">
+    <section ref={ref} className="oc" id="our-clients" dir="ltr" /* client copy is English-only */ aria-labelledby="oc-title">
       <style>{CSS}</style>
       <div className="oc-orb" data-orb="gold" aria-hidden="true" />
       <div className="oc-orb oc-orb--navy" data-orb="navy" aria-hidden="true" />
@@ -698,7 +698,7 @@ const CSS = `
 }
 .oc.is-dragging .oc-cursor { background: rgba(201, 161, 59, .85); border-color: #f2cd62; color: #0b132b; }
 .oc-rail { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 24px; margin-top: 12px; }
-          <span className="oc-hint">Drag · swipe · ← →</span>
+.oc-hint { font-size: 12px; letter-spacing: .08em; color: #9ca3af; white-space: nowrap; }
 .oc-bar { position: relative; height: 3px; background: #e5e7eb; border-radius: 2px; overflow: hidden; }
 .oc-bar i {
   position: absolute; inset: 0; transform-origin: left; transform: scaleX(.15);
@@ -721,7 +721,8 @@ const CSS = `
   .oc-head { grid-template-columns: 1fr; gap: 28px; }
   .oc-feature { grid-template-columns: 1fr; gap: 22px; }
   .oc-tilt, .oc-inner { min-height: 440px; }
-          <span className="oc-hint">Drag · swipe · ← →</span>
+  .oc-rail { grid-template-columns: auto 1fr auto; gap: 16px; }
+  .oc-hint { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .oc-tilt, .oc-inner, .oc-track { transition: none !important; }

@@ -44,6 +44,10 @@ const FAQ = () => {
         {
             question: content.faq8Question.value,
             answer: content.faq8Answer.value,
+        },
+        {
+            question: content.faq9Question.value,
+            answer: content.faq9Answer.value,
         }
     ];
 

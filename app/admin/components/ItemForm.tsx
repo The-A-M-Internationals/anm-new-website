@@ -73,7 +73,7 @@ export default function ItemForm({ schema, id, data, user, onSaved, onDeleted, n
           {id ? "Save changes" : `Publish ${schema.singular}`}
         </button>
         {status && <p className={`text-sm ${status.kind === "error" ? "text-red-600" : status.kind === "ok" ? "text-emerald-700" : "text-slate-500"}`}>{status.text}</p>}
-        {id && (
+        {id && !schema.single && (
           <div className="ms-auto flex items-center gap-2">
             {confirmDelete && <span className="text-sm text-slate-600">Delete for good?</span>}
             <button onClick={() => (confirmDelete ? remove() : setConfirmDelete(true))} className="cursor-pointer rounded-lg border border-red-200 px-4 py-2 text-sm font-semibold text-red-600 transition-all duration-150 ease-in-out hover:bg-red-50">

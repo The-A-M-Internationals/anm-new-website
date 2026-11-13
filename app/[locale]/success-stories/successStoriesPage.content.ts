@@ -5,16 +5,16 @@ const successStoriesPageContent = {
   key: "successstories-page",
   content: {
     heroTitle: t({
-      en: "Success Stories That Inspire",
-      ar: "قصص نجاح ملهمة",
+      en: "Our Work",
+      ar: "أعمالنا",
     }),
     heroTitle2: t({
       en: "",
       ar: "",
     }),
     heroDescription: t({
-      en: "Real challenges. Real solutions. Real results. Discover how we've helped organizations across industries achieve measurable transformation.",
-      ar: "تحديات حقيقية. حلول حقيقية. نتائج حقيقية. اكتشف كيف ساعدنا المنظمات عبر الصناعات في تحقيق تحول قابل للقياس.",
+      en: "A look at projects we've delivered for clients in the USA, UAE and India.",
+      ar: "نظرة على مشاريع قدّمناها لعملاء في الولايات المتحدة والإمارات والهند.",
     }),
     heroButton: t({
       en: "Schedule a Consultation",

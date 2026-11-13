@@ -45,7 +45,7 @@ const CultureGrowthSection = () => {
                 <div className="flex flex-col lg:flex-row items-start gap-10">
 
                     {/* LEFT IMAGE */}
-                    <div className="shadow-lg w-full lg:w-[552px] h-[300px] md:h-[418px] rounded-[20px] overflow-hidden relative">
+                    <div className="shadow-lg w-full lg:w-[44%] xl:w-[552px] shrink-0 h-[300px] md:h-[418px] rounded-[20px] overflow-hidden relative">
                         <Image
                             src="/careers/culture-growth.jpg"
                             alt="Culture and Growth"
@@ -60,7 +60,7 @@ const CultureGrowthSection = () => {
                         {values.map((value, index) => (
                             <div
                                 key={index}
-                                className="group bg-white border border-[#D9D9D9] shadow-xl flex flex-col gap-3 rounded-[40px] p-6 md:p-8 h-auto md:h-[197px] cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300"
+                                className="group bg-white border border-[#D9D9D9] shadow-xl flex flex-col gap-3 rounded-[40px] p-6 md:p-8 lg:p-6 xl:p-8 h-auto md:min-h-[197px] cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300"
                             >
                                 <h3 className="text-lg md:text-xl font-bold text-[#D4AF37]">
                                     {value.title}

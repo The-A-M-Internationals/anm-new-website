@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
-import { t } from "intlayer";
+import { getTranslation } from "intlayer";
 import ComputerVisionClient from "./ComputerVisionClient";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
 
     return {
-        title: (t({
+        title: getTranslation({
             en: "Computer Vision | The A&M Internationals",
             ar: "رؤية الكمبيوتر | A&M الدولية",
-        }) as any)[locale],
-        description: (t({
+        }, locale),
+        description: getTranslation({
             en: "Advanced computer vision solutions for image and video analysis using AI.",
             ar: "حلول رؤية الكمبيوتر المتقدمة لتحليل الصور والفيديو باستخدام الذكاء الاصطناعي.",
-        }) as any)[locale],
+        }, locale),
     };
 }
 

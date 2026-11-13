@@ -79,6 +79,16 @@ const Benefits = () => {
                         isActive={activeIndex === 5}
                         onClick={() => handleCardClick(5)}
                     />
+                    {/* 7th card: centred on its own row so the grid stays balanced */}
+                    <div className="w-full md:col-span-2 lg:col-span-1 lg:col-start-2">
+                        <FancyCard
+                            icon="/careers/ai.svg"
+                            title={content.card7Title.value}
+                            description={content.card7Description.value}
+                            isActive={activeIndex === 6}
+                            onClick={() => handleCardClick(6)}
+                        />
+                    </div>
             </div>
         </div>
     )

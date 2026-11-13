@@ -10,12 +10,16 @@ import "./footer.content";
 import { useRouter } from "next/navigation";
 import { handleHashLink } from "@/lib/handleHashLink";
 import OraclePartnerBadge from "./OraclePartnerBadge";
+import { useContactInfo, useContactText } from "./ContactInfo";
+import { digits } from "@/lib/cms/siteContent";
 
 const Footer = () => {
     const content = useIntlayer("footer");
     const router = useRouter();
 
     const { locale } = useLocale();
+    const contact = useContactInfo();
+    const contactText = useContactText(locale);
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     type MessageKey = keyof ReturnType<typeof useIntlayer>;
@@ -76,8 +80,8 @@ const Footer = () => {
                 <Phone className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                 <div className="flex flex-col">
                     <span className="text-[11px] text-gray-400 uppercase tracking-wider">Phone</span>
-                    <a href="tel:+971564783478" className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
-                        +971 564783478
+                    <a href={`tel:${digits(contact.phone)}`} className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
+                        {contact.phone}
                     </a>
                 </div>
             </div>
@@ -87,8 +91,8 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" />
                 <div className="flex flex-col">
                     <span className="text-[11px] text-gray-400 uppercase tracking-wider">Email</span>
-                    <a href="mailto:am@theaminternationals.com" className="font-medium text-white hover:text-[#C9A84C] transition-colors break-all">
-                        am@theaminternationals.com
+                    <a href={`mailto:${contact.email}`} className="font-medium text-white hover:text-[#C9A84C] transition-colors break-all">
+                        {contact.email}
                     </a>
                 </div>
             </div>
@@ -98,22 +102,25 @@ const Footer = () => {
                 <MessageCircle className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                 <div className="flex flex-col">
                     <span className="text-[11px] text-gray-400 uppercase tracking-wider">{content.whatsappLabel?.value || "WhatsApp"}</span>
-                    <a href="https://wa.me/971564783478" target="_blank" rel="noopener noreferrer" className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
-                        +971 56 478 3478
+                    <a href={`https://wa.me/${digits(contact.whatsapp).replace("+", "")}`} target="_blank" rel="noopener noreferrer" className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
+                        {contact.whatsapp}
                     </a>
-                    <span className="text-xs text-gray-400 mt-0.5">{content.hoursValue?.value || "Mon–Sat, 9 AM–6 PM GST"}</span>
+                    <span className="text-xs text-gray-400 mt-0.5">{contactText.hours || content.hoursValue?.value || "Mon–Sat, 9 AM–6 PM GST"}</span>
                 </div>
             </div>
 
             {/* Premises & Building Details - Clickable Google Maps Location */}
             <a
-                href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                href={contact.mapLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 group transition-colors"
                 title="View on Google Maps"
             >
                 <MapPin className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
+                {contactText.office ? (
+                    <span className="text-xs sm:text-sm font-medium text-gray-200 whitespace-pre-line group-hover:text-[#C9A84C] transition-colors">{contactText.office}</span>
+                ) : (
                 <div className="flex flex-col text-xs sm:text-sm text-gray-200 space-y-1">
                     <div>
                         <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.premisesLabel?.value || "Premises Number"}:</span>
@@ -128,6 +135,7 @@ const Footer = () => {
                         <span className="font-medium text-gray-300 group-hover:text-[#C9A84C] transition-colors">{content.districtValue?.value || "Ajman Free Zone"}</span>
                     </div>
                 </div>
+                )}
             </a>
         </div>
     );
@@ -179,7 +187,7 @@ const Footer = () => {
 
     return (
         <div className="">
-            <div className="bg-[#0D1B3E] w-full h-auto flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
+            <div className="bg-[#0D1B3E] w-full h-auto flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-12 xl:flex xl:flex-row xl:gap-8 text-white p-6 sm:p-10 md:p-15 gap-8">
 
                 {/* LEFT - LOGO AND CONTACT (Description text removed to reclaim space) */}
                 <div className="flex flex-col min-[1024px]:flex-1 min-[1400px]:flex-[1.3] gap-6 sm:gap-8 md:gap-8 order-1">
@@ -203,7 +211,7 @@ const Footer = () => {
                 </div>
 
                 {/* FINANCE TRANSFORMATION - Order 2 */}
-                <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-2">
+                <div className="flex flex-col lg:flex-1 xl:ml-20 gap-4 sm:gap-5 order-2">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
                         <Link href={getLocalizedLink("/finance-transformation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.financeTransformation?.value || "Finance Transformation"}</Link>
                     </div>
@@ -231,7 +239,7 @@ const Footer = () => {
                 </div>
 
                 {/* RESOURCES AND HOW WE WORK - Order 3 */}
-                <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-3">
+                <div className="flex flex-col lg:flex-1 xl:ml-20 gap-4 sm:gap-5 order-3">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
                         {content.resources?.value || "Resources"}
                     </div>

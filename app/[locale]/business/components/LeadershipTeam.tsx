@@ -3,15 +3,25 @@
 
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import "./leadershipTeam.content";
+import type { CmsDoc } from '@/lib/cms/shared';
+import { tr } from '@/lib/cms/siteContent';
 
-const LeadershipTeam = () => {
+/** founders / team: from the admin portal; without them the built-in people show */
+const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc[] }) => {
     const content = useIntlayer("businessLeadershipTeam");
+    const { locale } = useLocale();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
 
-    const Services = [
+    const Services = founders ? founders.map(({ data: d }) => ({
+        title: tr(d, 'name', locale),
+        image: String(d.imageSrc || ''),
+        description: tr(d, 'tagline', locale),
+        fullBio: tr(d, 'bio', locale),
+        role: tr(d, 'role', locale),
+    })).filter((f) => f.image) : [
         {
             title: content.leader1Name.value,
             image: '/business/anusha.jpg',
@@ -28,7 +38,11 @@ const LeadershipTeam = () => {
         }
     ];
 
-    const Employees = [
+    const Employees = team ? team.map(({ data: d }) => ({
+        name: tr(d, 'name', locale),
+        role: tr(d, 'role', locale),
+        image: String(d.imageSrc || ''),
+    })).filter((e) => e.image) : [
         { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.png" },
         { name: "Rudra Prakash", role: "EPM Consultant", image: "/business/rudra-prakash.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
@@ -136,7 +150,7 @@ const LeadershipTeam = () => {
                         {/* HOVER POPUP - Desktop only */}
                         {hoveredIndex === idx && (
                             <div
-                                className={`absolute top-0 ${idx === 0 ? 'end-full me-4' : 'start-full ms-4'
+                                className={`absolute top-0 ${(Services.length <= 2 ? idx === 0 : idx >= Services.length / 2) ? 'end-full me-4' : 'start-full ms-4'
                                     } w-80 bg-white shadow-2xl rounded-xl p-6 border border-gray-200 z-50 hidden lg:block animate-fadeIn`}
                             >
                                 <h4 className="text-xl font-bold text-[#D4AF37] mb-1">
@@ -170,7 +184,7 @@ const LeadershipTeam = () => {
                 </div>
 
                 {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
-                <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 w-full items-start mt-10 pb-32">
+                <div id="employees-space" ref={gridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 sm:gap-x-6 gap-y-10 sm:gap-y-16 w-full items-start mt-10 pb-16 sm:pb-32">
                 {Employees.map((emp, idx) => (
                     <div 
                         key={idx} 
@@ -179,8 +193,9 @@ const LeadershipTeam = () => {
                             ${(idx === 1) ? 'lg:mt-10' : ''}
                             ${(idx === 2) ? 'lg:mt-20' : ''}
                             ${(idx === 3) ? 'lg:mt-4' : ''}
-                            ${(idx === 4) ? 'lg:mt-10 lg:col-start-2' : ''}
-                            ${(idx === 5) ? 'lg:mt-20' : ''}
+                            ${(idx === 4) ? (Employees.length === 6 ? 'lg:mt-10 lg:col-start-2' : 'lg:mt-0') : ''}
+                            ${(idx === 5) ? (Employees.length === 6 ? 'lg:mt-20' : 'lg:mt-10') : ''}
+                            ${(idx >= 6) ? ['lg:mt-0', 'lg:mt-10', 'lg:mt-20', 'lg:mt-4'][idx % 4] : ''}
                         `}
                         style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
@@ -198,9 +213,9 @@ const LeadershipTeam = () => {
                         </div>
                         
                         {/* TEXT - Name left, Role right */}
-                        <div className="mt-3 flex flex-row justify-between items-center w-full">
+                        <div className="mt-3 flex flex-row flex-wrap justify-between items-baseline gap-x-3 gap-y-0.5 w-full">
                             <h5 className="text-gray-900 font-medium text-sm md:text-[15px]">{emp.name}</h5>
-                            <p className="text-[#9CA3AF] text-xs md:text-sm font-light">{emp.role}</p>
+                            <p className="text-[#6B7280] text-xs md:text-sm">{emp.role}</p>
                         </div>
                     </div>
                 ))}

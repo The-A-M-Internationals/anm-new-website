@@ -4,12 +4,12 @@ const impactsDashboardContent = {
   key: "drivingimpactsDashboard",
   content: {
     header: t({
-      en: "Our Impact in Numbers",
-      ar: "أثرنا بالأرقام",
+      en: "Our Impact",
+      ar: "أثرنا",
     }),
     subheader: t({
-      en: "Real outcomes. Real clients. Real results.",
-      ar: "نتائج حقيقية. عملاء حقيقيون. إنجازات ملموسة.",
+      en: "Real work, and giving back as we grow.",
+      ar: "عمل حقيقي، وعطاء يكبر مع نمونا.",
     }),
     intro1: t({
       en: "At The A&M Internationals, every number tells a story — of a client trusted, a vision delivered, and a brand elevated. From boutique hospitality brands to enterprise solutions, our work spans continents, industries, and ambitions — serving clients across India, the UAE, and the United States.",
@@ -37,28 +37,12 @@ const impactsDashboardContent = {
         value: t({ en: "8+", ar: "٨+" }),
       },
       {
-        label: t({ en: "Client Retention Rate", ar: "معدل الاحتفاظ بالعملاء" }),
-        value: t({ en: "92%", ar: "٩٢٪" }),
-      },
-      {
-        label: t({ en: "Total Project Value Delivered", ar: "إجمالي قيمة المشاريع المُنجزة" }),
-        value: t({ en: "$1.2M+ USD", ar: "٤.٤+ مليون درهم إماراتي" }),
-      },
-      {
         label: t({ en: "Team Members", ar: "أعضاء الفريق" }),
         value: t({ en: "15", ar: "١٥" }),
       },
       {
         label: t({ en: "Years of Combined Experience", ar: "إجمالي سنوات الخبرة" }),
         value: t({ en: "50+", ar: "٥٠+" }),
-      },
-      {
-        label: t({ en: "Average Project Turnaround", ar: "متوسط مدة تسليم المشروع" }),
-        value: t({ en: "30 Days", ar: "٣٠ يومًا" }),
-      },
-      {
-        label: t({ en: "Client Satisfaction Score", ar: "معدل رضا العملاء" }),
-        value: t({ en: "4.8 / 5", ar: "٤.٨ / ٥" }),
       },
     ],
   },

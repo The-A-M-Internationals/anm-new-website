@@ -20,22 +20,23 @@ const WhyChooseUs = () => {
         >
             <div className={`w-[95%] mx-auto relative z-10 flex flex-col lg:flex-row items-center lg:items-center ${isArabic ? "gap-20" : "gap-10"}`}>
                 {/* LEFT TITLE */}
-                <div className={`flex items-center justify-center text-center lg:text-left lg:w-1/2 ${isArabic ? "lg:mr-12" : ""}`}>
-                    <p className="text-4xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight">
+                {/* English: title sits toward the middle, next to the cards (mirrors the Arabic layout) */}
+                <div className={`flex items-center justify-center text-center lg:text-left lg:w-1/2 ${isArabic ? "lg:mr-12" : "lg:justify-end lg:pe-6"}`}>
+                    <p className={`text-4xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight ${isArabic ? "" : "lg:max-w-[520px]"}`}>
                         {content.titleLine1.value} <br /> {content.titleLine2.value}
                     </p>
                 </div>
 
                 {/* RIGHT-SIDE CARDS */}
-                <div className={`flex flex-col gap-6 w-full lg:translate-x-25 lg:w-1/2 items-center lg:items-start ${isArabic ? "lg:ml-12" : ""}`}>
+                <div className={`flex flex-col gap-6 w-full xl:translate-x-25 lg:w-1/2 items-center lg:items-start ${isArabic ? "lg:ml-12" : ""}`}>
                     {content.features.map((feature: { title: { value: string }; description: { value: string }; highlight: boolean }, index: number) => (
                         <div
                             key={index}
                             className={`
-                                bg-white rounded-2xl shadow-lg p-4 lg:px-7 max-w-sm lg:w-[500px]
+                                bg-white rounded-2xl shadow-lg p-4 lg:px-7 w-full max-w-sm lg:w-[500px]
                                 transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300 transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl cursor-pointer text-black hover:text-[#D4AF37]
-                                ${feature.highlight ? "border-l-8 border-yellow-500" : "border-l-8 border-[#D9D9D9]"}
-                                ${index === 1 ? "lg:ml-16" : ""}
+                                ${feature.highlight ? "border-s-8 border-yellow-500" : "border-s-8 border-[#D9D9D9]"}
+                                ${index === 1 ? "lg:ms-16" : ""}
                             `}
                         >
                             <p className="text-2xl md:text-[30px] mb-1 font-semibold transition-colors duration-300">

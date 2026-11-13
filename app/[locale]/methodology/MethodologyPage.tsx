@@ -19,7 +19,7 @@ export default function MethodologyPage() {
         locale === "ar" ? "/methodology-ar.png" : "/methodology.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/business/tab-hero-ar.png" : "/business/tab-hero.png";
+        locale === "ar" ? "/business/tab-hero.png" : "/business/tab-hero.png";
 
     const heroButtonImage =
         locale === "ar" ? "/business/button-ar.png" : "/business/button.png";

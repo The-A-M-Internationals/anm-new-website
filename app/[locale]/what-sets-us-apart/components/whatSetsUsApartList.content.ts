@@ -12,8 +12,8 @@ const whatSetsUsApartListContent = {
       ar: "يُميِّزنا",
     }),
     subtitle: t({
-      en: "Six reasons brands choose The A&M Internationals.",
-      ar: "ستة أسباب تجعل العلامات التجارية تختار A&M الدولية.",
+      en: "Six reasons clients choose The A&M Internationals.",
+      ar: "ستة أسباب تجعل العملاء يختارون A&M الدولية.",
     }),
     feature1Title: t({
       en: "1. Global Reach, Local Understanding",
@@ -36,8 +36,8 @@ const whatSetsUsApartListContent = {
       ar: "٣. تتعامل مباشرة مع صُنّاع القرار",
     }),
     feature3Description: t({
-      en: "We've kept the agency intentionally focused so that every project benefits from senior-level attention. You won't be handed off to a junior team after the pitch — the people shaping the strategy stay involved through execution.",
-      ar: "أبقينا الوكالة مُركّزة عن قصد، حتى يحظى كل مشروع باهتمام كبار المسؤولين. لن يتم تحويلك إلى فريق مبتدئ بعد العرض — الأشخاص الذين يضعون الاستراتيجية هم أنفسهم من يُنفّذونها.",
+      en: "We've kept the agency intentionally focused so that every project benefits from senior-level attention. You won't be handed off to a junior team after the pitch — the people shaping the strategy stay involved through execution. Every Oracle EPM project is led by a consultant with 16 years of EPM experience.",
+      ar: "أبقينا الوكالة مُركّزة عن قصد، حتى يحظى كل مشروع باهتمام كبار المسؤولين. لن يتم تحويلك إلى فريق مبتدئ بعد العرض — الأشخاص الذين يضعون الاستراتيجية هم أنفسهم من يُنفّذونها. ويقود كل مشروع Oracle EPM استشاري يمتلك 16 عامًا من الخبرة في EPM.",
     }),
     feature4Title: t({
       en: "4. Enterprise Thinking, Creative Execution",
@@ -56,12 +56,12 @@ const whatSetsUsApartListContent = {
       ar: "نحن نركز على بناء العلاقات، وليس المعاملات. يستمر العديد من عملائنا في العمل معنا عبر خدمات ومراحل نمو متعددة لأننا نعطي الأولوية للاتساق والثقة والقيمة الملموسة.",
     }),
     feature6Title: t({
-      en: "6. Built for Modern Brands",
-      ar: "٦. مصممة للعلامات التجارية الحديثة",
+      en: "6. Oracle Partner, AI-ready",
+      ar: "٦. شريك Oracle، جاهزون للذكاء الاصطناعي",
     }),
     feature6Description: t({
-      en: "From AI-powered automation and digital transformation to branding, performance marketing, and immersive visual production, we help brands stay competitive in a rapidly evolving digital world.",
-      ar: "من الأتمتة المدعومة بالذكاء الاصطناعي والتحول الرقمي إلى بناء العلامة التجارية والتسويق القائم على الأداء والإنتاج البصري الغامر، نساعد العلامات التجارية على البقاء تنافسية في عالم رقمي يتطور بسرعة.",
+      en: "We're an Oracle PartnerNetwork member, building AI for Oracle EPM (EPM Build Agent) alongside our branding and web work.",
+      ar: "نحن عضو في Oracle PartnerNetwork، ونطوّر حلول ذكاء اصطناعي لـ Oracle EPM (EPM Build Agent) إلى جانب أعمالنا في بناء العلامات التجارية وتطوير المواقع.",
     }),
   },
 };

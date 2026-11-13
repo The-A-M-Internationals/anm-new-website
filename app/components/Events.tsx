@@ -131,18 +131,19 @@ const Events = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
 
     return (
         <div className="bg-gradient-to-r from-[#EED689]/10 to-white py-12 md:py-16">
+            {/* Live block only when something is live; otherwise the section starts at Upcoming Events */}
+            {liveEvent && (
             <div className="max-w-7xl mx-auto w-full">
                 {/* HEADER */}
                 <h2 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[48px] text-center">
                     {content?.header?.value}
                 </h2>
-                <p className="font-semibold text-[#6B7280] text-xs sm:text-sm md:text-base text-center px-4 lg:mb-10">
+                <p className="font-semibold text-[#6B7280] text-sm md:text-base text-center px-4 mt-2 mb-6 lg:mb-10">
                     {content?.subHeader?.value}
                 </p>
 
                 {/* LIVE EVENT */}
-                {liveEvent ? (
-                    <LiveEvents
+                <LiveEvents
                         {...{
                             ...liveEvent,
                             title: locale === "ar" ? liveEvent.titleAr || liveEvent.title : liveEvent.title,
@@ -152,15 +153,12 @@ const Events = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                             timeRange: locale === "ar" ? liveEvent.timeRangeAr || liveEvent.timeRange : liveEvent.timeRange,
                         }}
                     />
-                ) : (
-                    <div className="w-full text-center text-gray-500 text-lg font-medium mb-6">
-                        {content?.noLiveEvents?.value}
-                    </div>
-                )}
+
             </div>
+            )}
 
             {/* UPCOMING EVENTS */}
-            <div className="max-w-7xl mx-auto px-4 mt-8 flex flex-col gap-6 pb-5 md:pb-12">
+            <div className={`max-w-7xl mx-auto px-4 ${liveEvent ? "mt-8" : ""} flex flex-col gap-6 pb-5 md:pb-12`}>
                 <div className="text-center">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">
                         {content?.upcomingHeader?.value}
@@ -172,7 +170,7 @@ const Events = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                         {content?.noUpcomingEvents?.value}
                     </p>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className={`grid grid-cols-1 gap-6 ${visibleEvents.length === 1 ? "md:w-1/2 md:mx-auto w-full" : "md:grid-cols-2"}`}>
                         {visibleEvents.map((event) => {
                             const title = locale === "ar" ? event.titleAr || event.title : event.title;
                             const description = locale === "ar" ? event.descriptionAr || event.description : event.description;

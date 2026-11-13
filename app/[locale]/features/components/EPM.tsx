@@ -7,9 +7,41 @@ import { db } from '@/lib/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import { useIntlayer, useLocale } from "next-intlayer";
 
-export default function EPM() {
+/** consultation: "Talk to an Oracle EPM expert" form (What Sets Us Apart). earlyAccess: EPM Build Agent sign-up (Features). */
+export default function EPM({ variant = 'consultation' }: { variant?: 'consultation' | 'earlyAccess' }) {
     const content = useIntlayer("featuresEpm");
+    const early = useIntlayer("featuresEarlyAccess");
+    const isEarly = variant === 'earlyAccess';
     const { locale } = useLocale();
+    const copy = isEarly ? {
+        title: early.leftTitle.value, description: early.leftDescription.value, bullets: [] as string[],
+        formTitle: early.formTitle.value, label: early.moduleLabel.value, placeholder: early.modulePlaceholder.value,
+        submit: early.submitButton.value,
+        options: [
+            { value: 'early-access-planning', label: early.optionPlanning.value },
+            { value: 'early-access-fccs', label: early.optionFccs.value },
+            { value: 'early-access-arcs', label: early.optionArcs.value },
+            { value: 'early-access-other', label: early.optionOther.value },
+        ],
+    } : {
+        title: content.leftTitle.value, description: content.leftDescription.value,
+        bullets: [content.bullet1.value, content.bullet2.value, content.bullet3.value],
+        formTitle: content.formTitle.value, label: content.serviceLabel.value, placeholder: content.servicePlaceholder.value,
+        submit: content.submitButton.value,
+        options: [
+            { value: 'fcc', label: content.optionFcc.value },
+            { value: 'planning&budgeting', label: content.optionPlanning.value },
+            { value: 'account-reconciliation', label: content.optionAccountReconciliation.value },
+            { value: 'pcm', label: content.optionPcm.value },
+            { value: 'enterprise-data-management', label: content.optionEnterpriseDataManagement.value },
+            { value: 'narrative-reporting', label: content.optionNarrativeReporting.value },
+            { value: 'tax-reporting', label: content.optionTaxReporting.value },
+            { value: 'consulting-as-a-service', label: content.optionConsultingAsService.value },
+            { value: 'epm-solution-management', label: content.optionEpmSolutionManagement.value },
+            { value: 'version-upgrade-patching', label: content.optionVersionUpgrade.value },
+            { value: 'monthly-maintenance-administration', label: content.optionMonthlyMaintenance.value },
+        ],
+    };
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -96,13 +128,13 @@ export default function EPM() {
                             company: formData.company,
                             email: formData.email,
                             phone: formData.phone,
-                            service: `EPM Demo Request (${formData.epm})`,
-                            vision: `Requested EPM Suite: ${formData.epm}`,
+                            service: isEarly ? `EPM Build Agent Early Access (${formData.epm})` : `EPM Consultation Request (${formData.epm})`,
+                            vision: isEarly ? `EPM Build Agent early access. Modules used: ${formData.epm}` : `Oracle EPM consultation call: ${formData.epm}`,
                         },
                     }),
                 });
             } catch (mailErr) {
-                console.warn('Could not dispatch EPM demo email:', mailErr);
+                console.warn('Could not dispatch EPM form email:', mailErr);
             }
             showTempMsg(setSuccessMsg, String(content.successSubmitted.value));
             setFormData({
@@ -136,39 +168,29 @@ export default function EPM() {
                 {/* Left side - Info */}
                 <div className="text-white space-y-6 rtl:text-right">
                     <h1 className="text-4xl font-bold leading-tight">
-                        {content.leftTitle.value}
+                        {copy.title}
                     </h1>
                     <p className="text-[#FFFFFF] text-lg">
-                        {content.leftDescription.value}
+                        {copy.description}
                     </p>
 
-                    <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                            <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
-                                <Check className="w-3 h-3 text-[#D4AF37]" />
-                            </div>
-                            <span className="text-blue-100">{content.bullet1.value}</span>
+                    {copy.bullets.length > 0 && (
+                        <div className="space-y-3">
+                            {copy.bullets.map((bullet) => (
+                                <div key={bullet} className="flex items-center gap-3">
+                                    <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
+                                        <Check className="w-3 h-3 text-[#D4AF37]" />
+                                    </div>
+                                    <span className="text-blue-100">{bullet}</span>
+                                </div>
+                            ))}
                         </div>
-
-                        <div className="flex items-center gap-3">
-                            <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
-                                <Check className="w-3 h-3 text-[#D4AF37]" />
-                            </div>
-                            <span className="text-blue-100">{content.bullet2.value}</span>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
-                                <Check className="w-3 h-3 text-[#D4AF37]" />
-                            </div>
-                            <span className="text-blue-100">{content.bullet3.value}</span>
-                        </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Right side - Form */}
                 <div className="bg-white rounded-[20px] md:rounded-[40px] shadow-2xl p-6 md:p-8 rtl:text-right">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6">{content.formTitle.value}</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">{copy.formTitle}</h2>
 
                     <form className="space-y-4" onSubmit={handleSubmit} noValidate>
                         <label htmlFor="epm-name" className="block text-gray-700 font-medium mb-1">
@@ -225,27 +247,19 @@ export default function EPM() {
                         />
 
                         <label htmlFor="epm-service" className="block text-gray-700 font-medium mb-1">
-                            {content.serviceLabel.value} <span className="text-red-500">*</span>
+                            {copy.label} <span className="text-red-500">*</span>
                         </label>
                         <select
                             id="epm-service"
                             name="epm"
                             value={formData.epm}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition resize-none rtl:text-right"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition resize-none rtl:text-right cursor-pointer"
                         >
-                            <option value="">{content.servicePlaceholder.value}</option>
-                            <option value="fcc">{content.optionFcc.value}</option>
-                            <option value="planning&budgeting">{content.optionPlanning.value}</option>
-                            <option value="account-reconciliation">{content.optionAccountReconciliation.value}</option>
-                            <option value="pcm">{content.optionPcm.value}</option>
-                            <option value="enterprise-data-management">{content.optionEnterpriseDataManagement.value}</option>
-                            <option value="narrative-reporting">{content.optionNarrativeReporting.value}</option>
-                            <option value="tax-reporting">{content.optionTaxReporting.value}</option>
-                            <option value="consulting-as-a-service">{content.optionConsultingAsService.value}</option>
-                            <option value="epm-solution-management">{content.optionEpmSolutionManagement.value}</option>
-                            <option value="version-upgrade-patching">{content.optionVersionUpgrade.value}</option>
-                            <option value="monthly-maintenance-administration">{content.optionMonthlyMaintenance.value}</option>
+                            <option value="">{copy.placeholder}</option>
+                            {copy.options.map((option) => (
+                                <option key={option.value} value={option.value}>{option.label}</option>
+                            ))}
                         </select>
 
                         <button
@@ -253,7 +267,7 @@ export default function EPM() {
                             disabled={submitting}
                             className="bg-[#D4AF37] w-full flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer"
                         >
-                            {submitting ? content.submittingButton.value : content.submitButton.value}
+                            {submitting ? content.submittingButton.value : copy.submit}
                         </button>
                         {formError && <p role="alert" className="text-red-600 text-sm rtl:text-right">{formError}</p>}
                         {successMsg && <p role="status" className="text-green-600 text-sm rtl:text-right">{successMsg}</p>}

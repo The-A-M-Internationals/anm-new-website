@@ -21,8 +21,8 @@ const empoweringSectionContent = {
 
     value2Title: t({ en: "Social Impact", ar: "الأثر الاجتماعي" }),
     value2Description: t({
-      en: "10% of monthly income goes directly to orphanages and children's trusts.",
-      ar: "يُخصص 10% من الدخل الشهري مباشرةً لدور الأيتام وصناديق رعاية الأطفال.",
+      en: "Giving back is one of the reasons we started A&M. We support children's charities as we grow.",
+      ar: "العطاء من الأسباب التي دفعتنا إلى تأسيس A&M. وندعم الجمعيات الخيرية المعنية بالأطفال مع نموّنا.",
     }),
 
     value3Title: t({ en: "Partnership", ar: "الشراكة" }),
@@ -33,8 +33,8 @@ const empoweringSectionContent = {
 
     value4Title: t({ en: "Innovation", ar: "الابتكار" }),
     value4Description: t({
-      en: "Continuously seeking to leverage the latest technologies and methodologies.",
-      ar: "نسعى باستمرار للاستفادة من أحدث التقنيات والمنهجيات.",
+      en: "From automation tools to AI agents on Oracle Cloud, we build what our clients will need next.",
+      ar: "من أدوات الأتمتة إلى وكلاء الذكاء الاصطناعي على Oracle Cloud، نبني ما سيحتاجه عملاؤنا في المرحلة القادمة.",
     }),
   },
 };

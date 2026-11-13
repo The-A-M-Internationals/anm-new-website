@@ -8,11 +8,15 @@ import { useRouter } from 'next/navigation';
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect } from 'react';
 import { handleHashLink } from '@/lib/handleHashLink';
+import { useContactInfo, useContactText } from '../../components/ContactInfo';
+import { digits } from '@/lib/cms/siteContent';
 
 const ContactForm: React.FC = () => {
   const content = useIntlayer("contactFormDetails");
   const { locale } = useLocale();
   const router = useRouter();
+  const contact = useContactInfo();
+  const contactText = useContactText(locale);
 
   useEffect(() => {
     // Check if there is a hash in the URL on mount and manually scroll if Next.js missed it
@@ -244,10 +248,11 @@ const ContactForm: React.FC = () => {
                     className="w-full px-4 py-3 rounded-xl cursor-pointer border border-gray-200 bg-white"
                   >
                     <option value="">{content.services.placeholder.value}</option>
+                    <option value="epm-implementation">{content.services.epmImplementation.value}</option>
+                    <option value="epm-support">{content.services.epmSupport.value}</option>
+                    <option value="epm-staffing">{content.services.epmStaffing.value}</option>
+                    <option value="website-uiux-design">{content.services.webDesign.value}</option>
                     <option value="digital-marketing">{content.services.digitalMarketing.value}</option>
-                    <option value="uiux">{content.services.uiux.value}</option>
-                    <option value="web-dev">{content.services.webDev.value}</option>
-                    <option value="epm">{content.services.epm.value}</option>
                     <option value="other">{content.services.other.value}</option>
                   </select>
                 </div>
@@ -311,13 +316,9 @@ const ContactForm: React.FC = () => {
               <p className="text-gray-600 mb-6 text-xl w-[90%]">
                 {content.demoDesc.value}
               </p>
-              <button 
-                onClick={(e) => {
-                  const link = `/${locale}/contact#form`;
-                  if (!handleHashLink(e, link, router)) {
-                    router.push(link);
-                  }
-                }} 
+              <button
+                type="button"
+                onClick={(e) => handleHashLink(e, '#form', router)}
                 className="w-[80%] md:w-[50%] bg-[#D4AF37] text-black font-semibold py-3 px-6 rounded-full hover:scale-105 transition cursor-pointer"
               >
                 {content.scheduleDemo.value}
@@ -335,7 +336,7 @@ const ContactForm: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.emailUs.value}</h3>
-                  <a href="mailto:am@theaminternationals.com" className="text-sm sm:text-base block text-gray-800 hover:text-[#D4AF37] transition-colors break-all">am@theaminternationals.com</a>
+                  <a href={`mailto:${contact.email}`} className="text-sm sm:text-base block text-gray-800 hover:text-[#D4AF37] transition-colors break-all">{contact.email}</a>
                   <p className="text-gray-500 text-xs sm:text-sm">{content.responseTime.value}</p>
                 </div>
               </div>
@@ -345,7 +346,7 @@ const ContactForm: React.FC = () => {
             <div className="bg-white w-full border border-gray-300 rounded-[28px] sm:rounded-[36px] p-5 sm:p-6 shadow-sm">
               <div className="flex items-start gap-4">
                 <a 
-                  href="https://wa.me/971564783478" 
+                  href={`https://wa.me/${digits(contact.whatsapp).replace("+", "")}`}
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="bg-[#FFFBED] p-3 rounded-2xl flex-shrink-0 hover:scale-105 transition-transform mt-0.5"
@@ -365,8 +366,8 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.callUs.value}</h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    <a href="tel:+971564783478" className="text-sm sm:text-base font-medium text-gray-800 hover:text-[#D4AF37] transition-colors" dir="ltr">
-                      {locale === 'ar' ? '\u200E+971 564783478' : '+971 564783478'}
+                    <a href={`tel:${digits(contact.phone)}`} className="text-sm sm:text-base font-medium text-gray-800 hover:text-[#D4AF37] transition-colors" dir="ltr">
+                      {locale === 'ar' ? `\u200E${contact.phone}` : contact.phone}
                     </a>
                   </div>
                   <p className="text-gray-500 text-xs sm:text-sm">{content.callTime.value}</p>
@@ -378,7 +379,7 @@ const ContactForm: React.FC = () => {
             <div className="bg-white w-full border border-gray-300 rounded-[28px] sm:rounded-[36px] p-5 sm:p-6 shadow-sm">
               <div className="flex items-start gap-4">
                 <a 
-                  href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                  href={contact.mapLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#FFFBED] p-3 rounded-2xl flex-shrink-0 mt-0.5 hover:scale-105 transition-transform"
@@ -389,13 +390,13 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.visitOffice.value}</h3>
                   <a 
-                    href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                    href={contact.mapLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm sm:text-base text-gray-800 hover:text-[#D4AF37] block whitespace-pre-line leading-relaxed transition-colors"
                     title="View on Google Maps"
                   >
-                    {content.office.value}
+                    {contactText.office || content.office.value}
                   </a>
                   <button 
                     onClick={(e) => {
@@ -419,8 +420,8 @@ const ContactForm: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.businessHours.value}</h3>
-                  <p className="text-sm sm:text-base font-medium text-gray-800">{content.businessHoursTime.value}</p>
-                  <p className="text-gray-500 text-xs sm:text-sm">{content.workingDays.value}</p>
+                  <p className="text-sm sm:text-base font-medium text-gray-800">{contactText.hours || content.businessHoursTime.value}</p>
+                  {!contactText.hours && <p className="text-gray-500 text-xs sm:text-sm">{content.workingDays.value}</p>}
                 </div>
               </div>
             </div>

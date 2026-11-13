@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useRouter, useParams } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import { handleHashLink } from "@/lib/handleHashLink";
 import { useIntlayer } from "next-intlayer";
 import { useState } from "react";
 import { AppLocale } from "@/types/locale";
@@ -14,25 +15,20 @@ const AiAutomationsServices = () => {
     const content = useIntlayer("aiAutomations");
     const [activeCard, setActiveCard] = useState<number | null>(null);
 
-    const serviceRoutes: { [key: number]: string } = {
-        1: "/services/machine-learning",
-        2: "/services/rpa",
-        3: "/services/nlp",
-        4: "/services/computer-vision",
-        5: "/services/generative-ai",
-    };
+    const contactHref = getLocalizedPath(locale as AppLocale, "/contact#form");
 
     const services = [
         {
             id: 1,
-            title: content.mlTitle.value,
-            description: content.mlDescription.value,
+            title: content.buildAgentTitle.value,
+            badge: content.comingSoon.value,
+            description: content.buildAgentDescription.value,
             services: [
-                content.mlService1.value,
-                content.mlService2.value,
-                content.mlService3.value,
-                content.mlService4.value,
+                content.buildAgentService1.value,
+                content.buildAgentService2.value,
+                content.buildAgentService3.value,
             ],
+            href: getLocalizedPath(locale as AppLocale, "/features"),
             gradient: "from-blue-900/20 via-blue-800/20 to-blue-700/20",
             accentColor: "#2563EB",
             icon: (
@@ -45,14 +41,15 @@ const AiAutomationsServices = () => {
         },
         {
             id: 2,
-            title: content.rpaTitle.value,
-            description: content.rpaDescription.value,
+            title: content.epmAutomationTitle.value,
+            badge: null,
+            description: content.epmAutomationDescription.value,
             services: [
-                content.rpaService1.value,
-                content.rpaService2.value,
-                content.rpaService3.value,
-                content.rpaService4.value,
+                content.epmAutomationService1.value,
+                content.epmAutomationService2.value,
+                content.epmAutomationService3.value,
             ],
+            href: contactHref,
             gradient: "from-indigo-900/20 via-indigo-800/20 to-blue-900/20",
             accentColor: "#3B82F6",
             icon: (
@@ -66,56 +63,20 @@ const AiAutomationsServices = () => {
         },
         {
             id: 3,
-            title: content.nlpTitle.value,
-            description: content.nlpDescription.value,
+            title: content.ociAITitle.value,
+            badge: null,
+            description: content.ociAIDescription.value,
             services: [
-                content.nlpService1.value,
-                content.nlpService2.value,
-                content.nlpService3.value,
-                content.nlpService4.value,  
+                content.ociAIService1.value,
+                content.ociAIService2.value,
+                content.ociAIService3.value,
             ],
-            gradient: "from-sky-900/20 via-blue-900/20 to-indigo-900/20",
-            accentColor: "#1E40AF",
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" />
-                </svg>
-            ),
-        },
-        {
-            id: 4,
-            title: content.cvTitle.value,
-            description: content.cvDescription.value,
-            services: [
-                content.cvService1.value,
-                content.cvService2.value,
-                content.cvService3.value,
-                content.cvService4.value,
-            ],
-            gradient: "from-cyan-900/20 via-sky-900/20 to-blue-900/20",
-            accentColor: "#0EA5E9",
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                </svg>
-            ),
-        },
-        {
-            id: 5,
-            title: content.genAITitle.value,
-            description: content.genAIDescription.value,
-            services: [
-                content.genAIService1.value,
-                content.genAIService2.value,
-                content.genAIService3.value,
-                content.genAIService4.value,
-            ],
+            href: contactHref,
             gradient: "from-blue-800/20 via-indigo-900/20 to-blue-900/20",
             accentColor: "#60A5FA",
             icon: (
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
                 </svg>
             ),
         },
@@ -301,7 +262,7 @@ const AiAutomationsServices = () => {
                         {services.map((service, index) => (
                             <div
                                 key={service.id}
-                                className="group relative"
+                                className={`group relative ${index === services.length - 1 ? "md:col-span-2 md:w-[calc(50%-1rem)] md:mx-auto lg:col-span-1 lg:w-auto" : ""}`}
                                 style={{ animation: `card-float ${6 + index * 0.5}s ease-in-out infinite ${index * 0.2}s` }}
                                 onMouseEnter={() => setActiveCard(service.id)}
                                 onMouseLeave={() => setActiveCard(null)}
@@ -344,6 +305,14 @@ const AiAutomationsServices = () => {
                                         {/* Title */}
                                         <h3 className="text-2xl font-bold text-white mb-3" style={{ fontFamily: "var(--heading-font)" }}>
                                             {service.title}
+                                            {service.badge && (
+                                                <span
+                                                    className="ms-3 inline-block align-middle px-3 py-1 rounded-full text-xs font-semibold"
+                                                    style={{ color: service.accentColor, border: `1px solid ${service.accentColor}50`, background: `${service.accentColor}15` }}
+                                                >
+                                                    {service.badge}
+                                                </span>
+                                            )}
                                         </h3>
 
                                         {/* Description */}
@@ -365,8 +334,9 @@ const AiAutomationsServices = () => {
 
                                         {/* Learn more link */}
                                         <Link 
-                                            href={getLocalizedPath(locale as AppLocale, serviceRoutes[service.id])}
-                                            className="mt-6 px-6 py-3 rounded-xl text-sm font-semibold text-white relative overflow-hidden group/btn transition-all duration-300 inline-block text-center"
+                                            href={service.href}
+                                            onClick={(e) => handleHashLink(e, service.href, router)}
+                                            className="mt-6 cursor-pointer px-6 py-3 rounded-xl text-sm font-semibold text-white relative overflow-hidden group/btn transition-all duration-300 inline-block text-center"
                                             style={{
                                                 background: `linear-gradient(135deg, ${service.accentColor}20 0%, ${service.accentColor}10 100%)`,
                                                 border: `1px solid ${service.accentColor}30`,

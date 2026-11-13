@@ -26,7 +26,7 @@ const FancyCard: React.FC<FancyCardProps> = ({ title, description, icon, isActiv
         >       
             {/* MAIN CARD CONTAINER - DEFINES THE SHAPE */}
             <div
-                className="relative h-[250px] md:h-[300px] w-full overflow-hidden rounded-3xl bg-white cursor-pointer"
+                className="relative min-h-[250px] md:min-h-[300px] w-full overflow-hidden rounded-3xl bg-white cursor-pointer"
             >
                 {/* 
                     MASKED GOLD OVERLAY 

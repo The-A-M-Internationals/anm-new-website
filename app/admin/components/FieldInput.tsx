@@ -18,7 +18,7 @@ function Input({ field, value, onChange, dir }: { field: Field; value: unknown; 
         onChange={(e) => onChange(e.target.value.split(",").map((t) => t.trim()).filter(Boolean))} />
     );
   }
-  return <input dir={dir} type={field.type === "link" ? "url" : "text"} value={String(value ?? "")} onChange={(e) => onChange(e.target.value)} className={box} />;
+  return <input dir={dir} type={field.type === "link" ? "url" : field.type === "number" ? "number" : "text"} value={String(value ?? "")} onChange={(e) => onChange(e.target.value)} className={box} />;
 }
 
 /** A labelled field: English + Arabic side by side when the field has an Arabic twin */

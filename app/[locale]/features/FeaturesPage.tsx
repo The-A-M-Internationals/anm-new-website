@@ -2,13 +2,13 @@
 
 import { useIntlayer, useLocale } from "next-intlayer";
 import PageHero from "../../components/PageHero";
-import Apps from "./components/Apps";
+import BuiltOnOracle from "./components/BuiltOnOracle";
 import EPM from "./components/EPM";
 import FeaturesList from "./components/FeaturesList";
-import Results from "./components/Results";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
 
+/** EPM Build Agent early-access page */
 export default function FeaturesPage() {
     const content = useIntlayer("featuresPage");
     const { locale } = useLocale();
@@ -34,7 +34,7 @@ export default function FeaturesPage() {
                     title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={`/${locale}/features#epm-suites`}
+                    link={getLocalizedPath(locale as AppLocale, "/features#epm-suites")}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}
@@ -43,9 +43,8 @@ export default function FeaturesPage() {
             </section>
 
             <section className="snap-section"><FeaturesList /></section>
-            <section className="snap-section"><Apps /></section>
-            <section className="snap-section"><Results /></section>
-            <section className="snap-section"><EPM /></section>
+            <section className="snap-section"><BuiltOnOracle /></section>
+            <section className="snap-section"><EPM variant="earlyAccess" /></section>
         </div>
     );
 }

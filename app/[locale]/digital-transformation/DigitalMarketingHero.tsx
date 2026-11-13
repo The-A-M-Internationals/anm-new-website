@@ -183,7 +183,7 @@ const DigitalMarketingHero = () => {
 
                 {/* Animated Rising Chart - Left */}
                 <div 
-                    className="absolute start-[8%] top-1/3 w-32 h-32 pointer-events-none opacity-40 rtl:scale-x-100"
+                    className="hidden xl:block absolute start-[8%] top-1/3 w-32 h-32 pointer-events-none opacity-40 rtl:scale-x-100"
                     style={{ animation: 'icon-float 7s ease-in-out infinite' }}
                 >
                     <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
@@ -204,7 +204,7 @@ const DigitalMarketingHero = () => {
 
                 {/* Hashtag - Top Right */}
                 <div 
-                    className="absolute top-[15%] end-[15%] w-24 h-24 pointer-events-none opacity-45"
+                    className="hidden xl:block absolute top-[15%] end-[15%] w-24 h-24 pointer-events-none opacity-45"
                     style={{ animation: 'icon-float 6s ease-in-out infinite 1s, pulse-glow 3s ease-in-out infinite' }}
                 >
                     <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
@@ -217,7 +217,7 @@ const DigitalMarketingHero = () => {
 
                 {/* Cursor Click - Bottom Right */}
                 <div 
-                    className="absolute bottom-[20%] end-[10%] w-20 h-20 pointer-events-none opacity-50"
+                    className="hidden xl:block absolute bottom-[20%] end-[10%] w-20 h-20 pointer-events-none opacity-50"
                     style={{ animation: 'icon-float 8s ease-in-out infinite 2s' }}
                 >
                     <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
@@ -335,7 +335,7 @@ const DigitalMarketingHero = () => {
                 ))}
 
                 <div 
-                    className="relative z-10 w-[90%] max-w-6xl mx-auto text-center py-20"
+                    className="relative z-10 w-[90%] max-w-6xl mx-auto text-center pt-20 pb-20 md:pb-40"
                     style={{ animation: 'elegant-rise 1.2s ease-out' }}
                 >
                     <div className="inline-flex items-center gap-3 px-6 py-3 mb-10 rounded-full bg-white/5 border border-[#C9A84C]/20 backdrop-blur-xl relative overflow-hidden">
@@ -370,13 +370,13 @@ const DigitalMarketingHero = () => {
                         {content.heroDescription.value}
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center sm:items-stretch mb-20 px-4">
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center sm:items-stretch px-4">
                         <button
                             onClick={() => {
                                 const servicesSection = document.getElementById('digital-marketing-services');
                                 servicesSection?.scrollIntoView({ behavior: 'smooth' });
                             }}
-                            className="group relative w-full sm:w-auto px-12 py-5 bg-[#C9A84C] text-[#0C1F4A] rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#C9A84C]/40 hover:-translate-y-1 flex justify-center"
+                            className="group relative w-full sm:w-auto cursor-pointer px-12 py-5 bg-[#C9A84C] text-[#0C1F4A] rounded-2xl text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#C9A84C]/40 hover:-translate-y-1 flex justify-center"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div 
@@ -397,32 +397,14 @@ const DigitalMarketingHero = () => {
                                     router.push(link);
                                 }
                             }}
-                            className="group relative w-full sm:w-auto px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#C9A84C]/50 hover:-translate-y-1 flex justify-center"
+                            className="group relative w-full sm:w-auto cursor-pointer px-12 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl text-lg font-semibold backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#C9A84C]/50 hover:-translate-y-1 flex justify-center"
                         >                            <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             <span className="relative z-10 flex items-center justify-center w-full">{content.bookConsultation.value}</span>
                         </button>
                     </div>
-
-                    <div className="grid grid-cols-3 gap-12 max-w-4xl mx-auto">
-                        {[
-                            { value: content.stat1Value.value, label: content.stat1Label.value },
-                            { value: content.stat2Value.value, label: content.stat2Label.value },
-                            { value: content.stat3Value.value, label: content.stat3Label.value },
-                        ].map((stat, i) => (
-                            <div key={i} className="group relative">
-                                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-[#C9A84C] to-[#D4AF37] bg-clip-text text-transparent mb-3 transition-transform duration-300 group-hover:scale-110">
-                                    {stat.value}
-                                </div>
-                                <div className="text-sm text-white/50 uppercase tracking-widest font-light">
-                                    {stat.label}
-                                </div>
-                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-[#C9A84C] group-hover:w-full transition-all duration-500" />
-                            </div>
-                        ))}
-                    </div>
                 </div>
 
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+                <div className="hidden md:block absolute bottom-12 left-1/2 -translate-x-1/2">
                     <div className="flex flex-col items-center gap-3 animate-bounce">
                         <span className="text-[#C9A84C]/50 text-xs uppercase tracking-widest font-light">{content.scroll.value}</span>
                         <div className="w-px h-12 bg-gradient-to-b from-[#C9A84C]/50 to-transparent" />

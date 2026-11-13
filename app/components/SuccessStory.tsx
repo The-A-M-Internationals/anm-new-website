@@ -5,6 +5,8 @@ import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useMemo } from 'react';
 import { useIntlayer, useLocale } from 'next-intlayer';
+import type { CmsDoc } from '@/lib/cms/shared';
+import { tr } from '@/lib/cms/siteContent';
 
 // Photo per real project (index matches content.items); the row always shows SLOTS cards
 const STATIC_IMAGES = [
@@ -21,7 +23,8 @@ type StoryItem = { client?: Text; title: Text; description: Text; industry: Text
 
 import { handleHashLink } from "@/lib/handleHashLink";
 
-const SuccessStory = () => {
+/** docs: Our Work cards from the admin portal; without them the built-in card shows */
+const SuccessStory = ({ docs }: { docs?: CmsDoc[] }) => {
   const router = useRouter();
   const { locale } = useLocale();
 
@@ -36,9 +39,19 @@ const SuccessStory = () => {
   const imageSource = locale === "ar" ? ARABIC_BADGE : STATIC_IMAGES;
 
   const localizedServices = useMemo(() => {
-    const tabKeys = ['automotive'];
+    const tabKeys = ['epm'];
+    const fromAdmin = docs?.map(({ data: d }, index) => ({
+      image: (locale === 'ar' && d.imageSrcAr) || d.imageSrc || imageSource[0].image,
+      client: tr(d, 'client', locale),
+      title: tr(d, 'title', locale),
+      description: tr(d, 'description', locale),
+      industry: tr(d, 'industry', locale),
+      badge: tr(d, 'badge', locale) || undefined,
+      tabKey: tabKeys[index] || 'all',
+      placeholder: false,
+    }));
     const items = content.items as unknown as StoryItem[];
-    const real = items.map((item, index) => ({
+    const real = fromAdmin ?? items.map((item, index) => ({
       image: imageSource[index]?.image ?? imageSource[0].image,
       client: item.client?.value ?? '',
       title: item.title.value,
@@ -51,7 +64,7 @@ const SuccessStory = () => {
     // Empty slots keep the row's shape until more projects are approved
     const empty = Array.from({ length: Math.max(0, SLOTS - real.length) }, () => ({ placeholder: true as const }));
     return [...real, ...empty];
-  }, [imageSource, content.items]);
+  }, [imageSource, content.items, docs, locale]);
 
 
   useEffect(() => {
@@ -94,7 +107,7 @@ const SuccessStory = () => {
       </p>
 
       {/* Cards */}
-      <div className='flex flex-col md:flex-row flex-wrap justify-center gap-3 sm:gap-4 mt-1 sm:mt-8 w-full max-w-7xl'>
+      <div className='flex flex-col md:flex-row flex-wrap justify-center gap-3 min-[640px]:gap-4 min-[1340px]:gap-x-8 mt-1 sm:mt-8 w-full max-w-7xl'>
         {visibleServices.map((service: any, idx: number) => service.placeholder ? (
           <SuccessStoryPlaceholder key={page * ITEMS_PER_PAGE + idx} label={content.placeholder.value} />
         ) : (

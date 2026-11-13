@@ -2,17 +2,16 @@
 
 import { useIntlayer, useLocale } from "next-intlayer";
 import PageHero from "../../components/PageHero";
-import Apps from "../features/components/Apps";
 import EPM from "../features/components/EPM";
 import WhatSetsUsApartList from "./components/WhatSetsUsApartList";
-import Results from "../features/components/Results";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import type { AppLocale } from "@/types/locale";
 
 export default function WhatSetsUsApartPage() {
-    // 99% Features Page replica - using featuresPage content for everything except the list
-    const content = useIntlayer("featuresPage");
+    const content = useIntlayer("whatSetsUsApartPage");
     const { locale } = useLocale();
 
-    // 🔥 Exact replica of Features Page images
+    // Same hero images as the Features page
     const heroImage =
         locale === "ar" ? "/features/hero-image-ar.png" : "/features/hero-image.png";
 
@@ -30,10 +29,9 @@ export default function WhatSetsUsApartPage() {
             <section className="snap-section">
                 <PageHero
                     title={content.heroTitle.value}
-                    title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={`/${locale}/features#epm-suites`}
+                    link={getLocalizedPath(locale as AppLocale, "/contact#form")}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}
@@ -41,12 +39,8 @@ export default function WhatSetsUsApartPage() {
                 />
             </section>
 
-            {/* The 1% unique content: WhatSetsUsApartList instead of FeaturesList */}
             <section className="snap-section bg-[#f9f9f9]"><WhatSetsUsApartList /></section>
-            
-            <section className="snap-section"><Apps /></section>
-            <section className="snap-section"><Results /></section>
-            <section className="snap-section"><EPM /></section>
+            <section className="snap-section"><EPM variant="consultation" /></section>
         </div>
     );
 }

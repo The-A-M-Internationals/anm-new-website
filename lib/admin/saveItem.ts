@@ -1,8 +1,8 @@
 "use client";
 
-import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, updateDoc, where, type DocumentData } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, setDoc, updateDoc, where, type DocumentData } from "firebase/firestore";
 import { db } from "./firebase";
-import type { CollectionSchema, Field } from "./schemas";
+import { collectionOf, type CollectionSchema, type Field } from "./schemas";
 import { toEventFields } from "./eventDates";
 
 export type Draft = Record<string, unknown>;
@@ -15,6 +15,7 @@ export function toDraft(schema: CollectionSchema, data: DocumentData = {}): Draf
   const d: Draft = {};
   for (const f of schema.fields) {
     d[f.key] = data[f.key] ?? (f.alsoKey ? data[f.alsoKey] : undefined) ?? empty(f);
+    if (f.type === "number") d[f.key] = d[f.key] === null ? "" : String(d[f.key]);
     if (f.ar) d[f.ar] = data[f.ar] ?? (f.alsoAr ? data[f.alsoAr] : undefined) ?? empty(f);
   }
   return d;
@@ -32,6 +33,12 @@ function toPayload(schema: CollectionSchema, draft: Draft, dates: Dates): Docume
   const p: DocumentData = {};
   const clean = (v: unknown) => (typeof v === "string" ? v.trim() : v);
   for (const f of schema.fields) {
+    if (f.type === "number") {
+      // Empty box = no number (the site keeps its current one)
+      const n = Number(String(draft[f.key] ?? "").trim());
+      p[f.key] = String(draft[f.key] ?? "").trim() === "" || !Number.isFinite(n) ? null : n;
+      continue;
+    }
     p[f.key] = clean(draft[f.key] ?? empty(f));
     if (f.alsoKey) p[f.alsoKey] = p[f.key];
     if (f.ar) {
@@ -46,6 +53,10 @@ function toPayload(schema: CollectionSchema, draft: Draft, dates: Dates): Docume
 /** Create or update; returns the document id */
 export async function saveItem(schema: CollectionSchema, id: string | null, draft: Draft, dates: Dates) {
   const payload = toPayload(schema, draft, dates);
+  if (schema.single) {
+    await setDoc(doc(db, "siteContent", schema.single), { ...payload, updatedAt: serverTimestamp() }, { merge: true });
+    return schema.single;
+  }
   let savedId = id;
   if (id) await updateDoc(doc(db, schema.id, id), { ...payload, updatedAt: serverTimestamp() });
   else savedId = (await addDoc(collection(db, schema.id), { ...payload, createdAt: serverTimestamp() })).id;
@@ -58,4 +69,4 @@ export async function saveItem(schema: CollectionSchema, id: string | null, draf
   return savedId as string;
 }
 
-export const removeItem = (schema: CollectionSchema, id: string) => deleteDoc(doc(db, schema.id, id));
+export const removeItem = (schema: CollectionSchema, id: string) => deleteDoc(doc(db, collectionOf(schema), id));

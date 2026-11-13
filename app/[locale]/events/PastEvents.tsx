@@ -111,6 +111,9 @@ const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
     page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
   );
 
+  // Nothing past to show: hide the whole section instead of an empty heading
+  if (!loading && events.length === 0) return null;
+
   return (
     <div className="py-4 px-4">
       <div className="w-[90%] mx-auto">
@@ -164,15 +167,17 @@ const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
                     {event.description}
                   </p>
 
-                  <button
-                    onClick={() =>
-                      window.open(event.externalLink, "_blank", "noopener,noreferrer")
-                    }
-                    className="inline-flex cursor-pointer items-center text-[#D4AF37] font-semibold hover:text-yellow-600 transition-colors group"
-                  >
-                    {content.past.watchRecording.value}
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
-                  </button>
+                  {event.externalLink && (
+                    <button
+                      onClick={() =>
+                        window.open(event.externalLink, "_blank", "noopener,noreferrer")
+                      }
+                      className="inline-flex cursor-pointer items-center text-[#D4AF37] font-semibold hover:text-yellow-600 transition-colors group"
+                    >
+                      {content.past.watchRecording.value}
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

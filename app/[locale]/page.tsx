@@ -6,12 +6,16 @@ import SuccessStory from "../components/SuccessStory";
 import EventsSection from "../components/EventsSection";
 import Innovation from "../components/Innovation";
 import HomeHero from "../components/homePageComponents/HomeHero";
+import { getCollection, getEntry } from "@/lib/cms/server";
+import { byOrder, toCounters } from "@/lib/cms/siteContent";
 
-export default function Home() {
+export default async function Home() {
+  // Admin-edited: banner numbers and Our Work cards (built-in content if none saved)
+  const [home, ourWork] = await Promise.all([getEntry("siteContent", "home"), getCollection("ourWork")]);
   return (
     <div className="flex flex-col">
       <section className="snap-section">
-        <HomeHero />
+        <HomeHero counters={toCounters(home?.data)} />
       </section>
       <section className="snap-section">
         <ServicesShowcase />
@@ -26,7 +30,7 @@ export default function Home() {
         <OurClients />
       </section>
       <section id="success-stories" className="snap-section">
-        <SuccessStory />
+        <SuccessStory docs={ourWork?.length ? byOrder(ourWork) : undefined} />
       </section>
       <section className="snap-section">
         <EventsSection />

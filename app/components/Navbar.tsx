@@ -189,7 +189,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-16 md:h-20">
             <Link href={getLocalizedLink('/')} className="shrink-0 flex items-center"><Image src="/new-logo.png" alt="Logo" width={890} height={280} priority sizes="242px" className="h-14 md:h-[76px] w-auto object-contain py-1" /></Link>
 
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden xl:flex items-center gap-1">
               {/* Oracle Partner logo, right before Services (screens 1400px+: narrower, the menu items would wrap) */}
               <OraclePartnerBadge tone="light" className="hidden min-[1400px]:block h-8 w-auto" />
               <span className="hidden min-[1400px]:block mx-3 h-5 w-px bg-gray-200" aria-hidden />
@@ -220,7 +220,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div className="lg:hidden flex items-center gap-3">
+            <div className="xl:hidden flex items-center gap-3">
               <Link
                 href={getLocalizedLink("/contact#form")}
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
@@ -229,7 +229,7 @@ const Navbar = () => {
                 {content.bookConsultation.value}
               </Link>
 
-              <div className="md:block lg:hidden">
+              <div className="md:block xl:hidden">
                 <LanguageSwitcher />
               </div>
 
@@ -250,7 +250,7 @@ const Navbar = () => {
           </div>
 
           {isMobileMenuOpen && (
-            <div className="lg:hidden pb-4 border-t border-gray-100 mt-1">
+            <div className="xl:hidden pb-4 border-t border-gray-100 mt-1">
               <div className="flex flex-col divide-y divide-gray-100">
                 {(Object.keys(navItems) as NavKey[]).map((key) => (
                   <MobileNavButton

@@ -3,18 +3,22 @@
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
+import { useContactInfo, useContactText } from "../../components/ContactInfo";
 
 export default function OurOffices() {
   const content = useIntlayer("offices");
+  const { locale } = useLocale();
+  const contact = useContactInfo();
+  const contactText = useContactText(locale);
 
   const offices = [
     {
       location: content.dubaiLocation.value,
-      phone: '+971 564783478',
-      email: 'am@theaminternationals.com',
-      address: content.dubaiAddress.value,
-      link: 'https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8'
+      phone: contact.phone,
+      email: contact.email,
+      address: contactText.office || content.dubaiAddress.value,
+      link: contact.mapLink
     }
   ];
 
@@ -64,13 +68,13 @@ export default function OurOffices() {
                   {/* Phone */}
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-[#D4AF37]" />
-                    <span>{office.phone}</span>
+                    <span dir="ltr">{office.phone}</span>
                   </div>
 
                   {/* Email */}
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-[#D4AF37]" />
-                    <span>{office.email}</span>
+                    <span dir="ltr">{office.email}</span>
                   </div>
 
                   {/* Address */}

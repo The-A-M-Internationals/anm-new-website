@@ -34,14 +34,12 @@ const BlogArticleList = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const [showMobileTags, setShowMobileTags] = useState(false);
 
     // Define filters with fixed keys for matching and localized labels
-    const filterOptions = [
+    // Keys must match the article's "tags" in Firebase (English)
+    const allFilterOptions = [
         { key: "All Post", label: content.filters.allPost.value },
-        { key: "EPM Strategy", label: content.filters.epmStrategy.value },
-        { key: "Cloud", label: content.filters.cloud.value },
-        { key: "Data Analytics", label: content.filters.dataAnalytics.value },
-        { key: "Cybersecurity", label: content.filters.cybersecurity.value },
-        { key: "AI & Machine Learning", label: content.filters.aiMl.value },
-        { key: "CSR", label: content.filters.csr.value },
+        { key: "Oracle EPM", label: content.filters.oracleEpm.value },
+        { key: "ESG Reporting", label: content.filters.esgReporting.value },
+        { key: "AI for EPM", label: content.filters.aiForEpm.value },
         { key: "Company News", label: content.filters.companyNews.value },
     ];
 
@@ -95,6 +93,11 @@ const BlogArticleList = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                 return [] as Article[];
             }
     }, [docs]);
+
+    // Only show categories that have at least one article
+    const filterOptions = allFilterOptions.filter(
+        (f) => f.key === "All Post" || articles.some((a) => a.tags?.includes(f.key))
+    );
 
     // Filter Articles
     const filteredArticles: Article[] =

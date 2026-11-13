@@ -10,8 +10,10 @@ import { AppLocale } from "@/types/locale";
 
 import { handleHashLink } from "@/lib/handleHashLink";
 import CssSplitText from "../CssSplitText";
+import { DEFAULT_COUNTERS, type Counters } from "@/lib/cms/siteContent";
 
-const HomeHero = () => {
+/** counters: the three banner numbers, editable in the admin portal */
+const HomeHero = ({ counters = DEFAULT_COUNTERS }: { counters?: Counters }) => {
     const router = useRouter();
     const { locale } = useLocale();
     const content = useIntlayer("homeHero");
@@ -38,11 +40,11 @@ const HomeHero = () => {
         };
 
         // Same figures as the Make an Impact page
-        if (clientsRef.current) animateCounter(clientsRef.current, 26, "+", 1400);
-        if (projectsRef.current) animateCounter(projectsRef.current, 40, "+", 1200);
-        if (countriesRef.current) animateCounter(countriesRef.current, 3, "", 1000);
+        if (clientsRef.current) animateCounter(clientsRef.current, counters.clients, "+", 1400);
+        if (projectsRef.current) animateCounter(projectsRef.current, counters.projects, "+", 1200);
+        if (countriesRef.current) animateCounter(countriesRef.current, counters.countries, "", 1000);
         return () => frames.forEach(cancelAnimationFrame);
-    }, []);
+    }, [counters.clients, counters.projects, counters.countries]);
 
     return (
         <section 

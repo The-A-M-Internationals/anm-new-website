@@ -6,28 +6,33 @@ const journeyTimelineContent = {
     title: t({ en: "Our Journey", ar: "رحلتنا" }),
 
     milestone1: t({
-      en: "Founded with a purpose — combining technology and social responsibility.",
-      ar: "تأسسنا بهدف واضح — نجمع بين التقنية والمسؤولية المجتمعية.",
+      en: "The A&M Internationals F.Z.C registered in Ajman Free Zone, UAE.",
+      ar: "تسجيل The A&M Internationals F.Z.C في المنطقة الحرة بعجمان، الإمارات العربية المتحدة.",
     }),
 
     milestone2: t({
-      en: "Launched our flagship EPM Suite, serving 50+ enterprises.",
-      ar: "أطلقنا حزمة EPM الرائدة لدينا لخدمة أكثر من 50 مؤسسة.",
+      en: "First Oracle EPM clients in the USA.",
+      ar: "أول عملائنا في Oracle EPM في الولايات المتحدة الأمريكية.",
     }),
 
     milestone3: t({
-      en: "Achieved $10M+ in social contributions for children's welfare.",
-      ar: "حققنا مساهمات مجتمعية بأكثر من ١٠ مليون درهم لدعم رفاه الأطفال.",
+      en: "Delivered an Oracle EPM ESG emissions reporting project (Scope 1 and 2, plus the first Scope 3 build).",
+      ar: "تنفيذ مشروع لتقارير انبعاثات ESG على Oracle EPM (النطاقان 1 و2، إضافةً إلى أول بناء للنطاق 3).",
     }),
 
     milestone4: t({
-      en: "Grew to 100+ talented professionals across multiple regions.",
-      ar: "نما فريقنا ليضم أكثر من 100 محترف موهوب عبر مناطق متعددة.",
+      en: "2026 — Built an in-house team of EPM consultants, designers and developers in India.",
+      ar: "2026 — بناء فريق داخلي من استشاريي EPM والمصممين والمطورين في الهند.",
     }),
 
     milestone5: t({
-      en: "Serving 200+ global clients with purpose and performance.",
-      ar: "نخدم أكثر من 200 عميل عالمي بهدف وأداء.",
+      en: "Nov 2026 — Became an Oracle PartnerNetwork member.",
+      ar: "نوفمبر 2026 — أصبحنا عضوًا في Oracle PartnerNetwork.",
+    }),
+
+    milestone6: t({
+      en: "Dec 2026 — GITEX Global, Dubai: first preview of our EPM Build Agent.",
+      ar: "ديسمبر 2026 — GITEX Global في دبي: أول عرض تمهيدي لـ EPM Build Agent.",
     }),
   },
 };

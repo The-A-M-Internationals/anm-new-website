@@ -86,17 +86,17 @@ const PageHero: React.FC<PageHeroProps> = ({
                   </h4>
                )}
 
-               <h3 className={`font-bold text-white leading-[1.2] ${titleClassName || 'w-[80%] md:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
+               <h3 className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
                   {title}
                </h3>
 
                {title2 && (
-                  <h3 className={`font-bold text-white leading-[1.2] ${titleClassName || 'w-[80%] md:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
+                  <h3 className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
                      {title2}
                   </h3>
                )}
 
-               <p className='text-[18px] md:text-base lg:text-[19px] text-white w-[70%] md:w-[60%] lg:w-[65%] leading-relaxed'>
+               <p className='text-[18px] md:text-base lg:text-[19px] text-white [text-shadow:0_1px_12px_rgba(0,0,0,0.6)] w-[70%] md:w-[60%] lg:w-[65%] leading-relaxed'>
                   {description}
                </p>
             </div>

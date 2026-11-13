@@ -35,6 +35,7 @@ export default function CollectionEditor({ schema, user }: { schema: CollectionS
   const sorted = useMemo(() => {
     if (!items) return [];
     const list = [...items];
+    if (schema.ordered) return list.sort((a, b) => (Number(a.data.order) || 999) - (Number(b.data.order) || 999));
     if (schema.id === "jobs") return list.sort((a, b) => String(a.data.title ?? "").localeCompare(String(b.data.title ?? "")));
     return list.sort((a, b) => sortKey(schema, b.data).localeCompare(sortKey(schema, a.data)));
   }, [items, schema]);
@@ -42,6 +43,8 @@ export default function CollectionEditor({ schema, user }: { schema: CollectionS
   const current = selected && selected !== "new" ? items?.find((i) => i.id === selected) : undefined;
 
   return (
+    <>
+    {schema.intro && <p className="mb-4 text-sm text-slate-600">{schema.intro}</p>}
     <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
       <aside className="h-fit rounded-xl border border-slate-200/80 bg-white p-4 shadow-xs">
         <div className="flex items-center justify-between">
@@ -86,5 +89,6 @@ export default function CollectionEditor({ schema, user }: { schema: CollectionS
         )}
       </section>
     </div>
+    </>
   );
 }

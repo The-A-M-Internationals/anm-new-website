@@ -14,8 +14,8 @@ const careersContent = {
     }),
 
     heroDescription: t({
-      en: "At The A&M Internationals, you’ll work with passionate engineers and architects who value collaboration, continuous learning, and meaningful impact. Here, your ideas matter, your growth is prioritized, and the work you do creates real change — for businesses and for the world around us.",
-      ar: "في A&M الدولية، ستعمل مع مهندسين ومعماريين شغوفين يقدّرون التعاون والتعلّم المستمر والأثر الحقيقي. هنا، لأفكارك قيمة، ولنموّك أولوية، والعمل الذي تقوم به يصنع تغييرًا ملموسًا — للشركات وللعالم من حولنا.",
+      en: "At The A&M Internationals, you’ll work with Oracle EPM consultants, designers and developers on real client projects from your first months. We train fresh talent and give people ownership early.",
+      ar: "في A&M الدولية، ستعمل مع مستشاري Oracle EPM والمصممين والمطورين على مشاريع حقيقية للعملاء منذ أشهرك الأولى. نُدرّب المواهب الجديدة ونمنح الأفراد المسؤولية مبكرًا.",
     }),
 
     heroButton: t({

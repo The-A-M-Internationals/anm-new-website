@@ -9,6 +9,9 @@ import GlobalCursor from "../components/GlobalCursor";
 import GoToTopButton from "../components/GoToTopButton";
 import HashScrollHandler from "../components/HashScrollHandler";
 import SmoothScrolling from "../components/SmoothScrolling";
+import { ContactInfoProvider } from "../components/ContactInfo";
+import { getEntry } from "@/lib/cms/server";
+import { toContact } from "@/lib/cms/siteContent";
 
 import { getHTMLTextDir } from 'intlayer';
 import { IntlayerClientProvider } from "next-intlayer";
@@ -40,6 +43,9 @@ export const viewport: Viewport = {
     initialScale: 1,
 };
 
+// Admin-edited content (contact details in the footer) refreshes at most once a minute
+export const revalidate = 60;
+
 export const metadata: Metadata = {
     title: "The A&M Internationals",
     description: "The A&M Internationals provides services to help businesses thrive in the global market.",
@@ -63,6 +69,8 @@ export default async function RootLayout({
 }) {
     const { locale } = await params;
     const isArabic = locale === 'ar';
+    // Contact details edited in the admin portal (footer + Contact page); built-in values if unset
+    const contact = toContact((await getEntry("siteContent", "contact"))?.data);
 
     return (
         <html lang={locale} dir={getHTMLTextDir(locale)} className={`${tajawal.variable} ${cairo.variable} ${notoTabsArabic.variable}`} suppressHydrationWarning>
@@ -76,6 +84,7 @@ export default async function RootLayout({
                     }
                 `}} />
                 <IntlayerClientProvider locale={locale}>
+                    <ContactInfoProvider value={contact}>
                     <SmoothScrolling>
                         <ScrollReveal />
                         <ImagePreloader />
@@ -87,6 +96,7 @@ export default async function RootLayout({
                         <GoToTopButton />
                         <Footer />
                     </SmoothScrolling>
+                    </ContactInfoProvider>
                 </IntlayerClientProvider>
             </body>
         </html>
