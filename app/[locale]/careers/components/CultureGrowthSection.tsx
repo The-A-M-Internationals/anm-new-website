@@ -61,12 +61,12 @@ const CultureGrowthSection = () => {
                         {values.map((value, index) => (
                             <div
                                 key={index}
-                                className="group bg-white border border-[#D9D9D9] shadow-xl flex flex-col gap-3 rounded-[40px] p-6 md:p-8 lg:p-6 xl:p-8 h-auto md:min-h-[197px] cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300"
+                                className="spot-card group bg-white border border-[#D9D9D9] shadow-lg flex flex-col gap-3 rounded-[40px] p-6 md:p-8 lg:p-6 xl:p-8 h-auto md:min-h-[197px] transform-gpu transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-xl"
                             >
-                                <h3 className="text-lg md:text-xl font-bold text-[#D4AF37]">
+                                <h3 className="text-lg md:text-xl font-bold text-[#D4AF37] relative w-fit after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:origin-left rtl:after:origin-right after:scale-x-0 after:bg-[#C9A13B] after:transition-transform after:duration-500 after:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:after:scale-x-100">
                                     {value.title}
                                 </h3>
-                                <p className="text-gray-600 leading-normal text-xs md:text-sm transition-colors duration-300 group-hover:text-[#D4AF37]">
+                                <p className="text-gray-600 leading-normal text-xs md:text-sm">
                                     {value.description}
                                 </p>
                             </div>

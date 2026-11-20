@@ -85,7 +85,7 @@ const Open = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                     </div>
                     </>
                     )}            {hasJobs && (
-                <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+                <div className="mt-4 flex flex-wrap justify-center gap-6 w-full max-w-6xl">
                     {jobs.map((job) => {
                         const title = locale === "ar" ? job.titleAr || job.title : job.title;
                         const department = locale === "ar" ? job.departmentAr || job.department : job.department;
@@ -95,7 +95,7 @@ const Open = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                         return (
                             <div
                                 key={job.id}
-                                className="border border-gray-300 rounded-2xl p-5 text-left rtl:text-right shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                                className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] border border-gray-300 rounded-2xl p-5 text-start shadow-sm hover:shadow-md transition flex flex-col justify-between"
                             >
                                 <div>
                                     <p className="font-semibold text-xl">{title}</p>

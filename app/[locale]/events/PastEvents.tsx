@@ -103,11 +103,11 @@ const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
         {/* Events Grid */}
         {!loading && events.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
               {visibleEvents.map((event) => (
                 <div
                   key={event.id}
-                  className="bg-white rounded-[20px] md:rounded-[40px] border border-gray-300 p-6 md:p-8 shadow-md hover:shadow-md transition-shadow duration-300"
+                  className="w-full lg:w-[calc(50%-0.75rem)] bg-white rounded-[20px] md:rounded-[40px] border border-gray-300 p-6 md:p-8 shadow-md hover:shadow-md transition-shadow duration-300"
                 >
                   {event.tag && (
                     <span className="inline-block bg-[#FFFBED] text-[#D4AF37] px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3">

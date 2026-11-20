@@ -61,9 +61,13 @@ export default function GlobalCursor() {
       if (k && !s.tshow) { s.x = s.tx; s.y = s.ty; }               // appear under the pointer
       target(k);
     };
-    // While the page glides, pointer events are off: hit-test the tagged elements by geometry
-    const onScroll = () => {
-      if (!s.seen) return;
+    // While the page glides, pointer events are off: hit-test the tagged elements by geometry.
+    // Measuring every tagged element forces a style/layout pass, so it runs at most every 120ms
+    // (and once more when the scroll stops), never on every scroll tick.
+    let hitTimer = 0;
+    const onScroll = () => { if (s.seen && !hitTimer) hitTimer = window.setTimeout(hitTest, 120); };
+    const hitTest = () => {
+      hitTimer = 0;
       let k = "";
       for (const t of document.querySelectorAll<HTMLElement>(TAGGED)) {
         const r = t.getBoundingClientRect();
@@ -79,6 +83,7 @@ export default function GlobalCursor() {
     document.documentElement.addEventListener("mouseleave", onLeave);
     return () => {
       cancelAnimationFrame(raf);
+      window.clearTimeout(hitTimer);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("scroll", onScroll);
       document.documentElement.removeEventListener("mouseleave", onLeave);

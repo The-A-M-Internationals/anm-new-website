@@ -7,6 +7,7 @@ import PauseOffscreenAnimations from "../components/PauseOffscreenAnimations";
 import ImagePreloader from "../components/ImagePreloader";
 import PageLeave from "../components/PageLeave";
 import PageProgress from "../components/PageProgress";
+import Spotlight from "../components/Spotlight";
 import GlobalCursor from "../components/GlobalCursor";
 import GoToTopButton from "../components/GoToTopButton";
 import HashScrollHandler from "../components/HashScrollHandler";
@@ -93,6 +94,7 @@ export default async function RootLayout({
                         <ImagePreloader />
                         <PageLeave />
                         <PageProgress />
+                        <Spotlight />
                         <GlobalCursor />
                         <HashScrollHandler />
                         <Navbar />

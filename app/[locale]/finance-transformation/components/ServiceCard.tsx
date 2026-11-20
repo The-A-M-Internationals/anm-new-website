@@ -2,8 +2,9 @@
 
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, ReactNode } from "react";
+import { useRef, useState, ReactNode } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
+import { useTagCascade } from "./useTagCascade";
 
 interface CardProps {
     id?: string;
@@ -26,9 +27,11 @@ export const ServiceCard: React.FC<CardProps> = ({
     const content = useIntlayer("financeTransformationServiceCard");
 
     const visibleTags = tags.filter(Boolean);
+    const cardRef = useRef<HTMLDivElement>(null);
+    useTagCascade(cardRef);   // tags rise in one by one when the card scrolls into view
 
     return (
-        <div id={id} className="bg-[#FFFBED] flex justify-center items-center">
+        <div id={id} ref={cardRef} className="bg-[#FFFBED] flex justify-center items-center">
 
             {/* 📱 MOBILE VERSION */}
             <div className="w-full md:hidden flex justify-center">
@@ -71,7 +74,7 @@ export const ServiceCard: React.FC<CardProps> = ({
 
                             <div className="flex flex-wrap gap-2 mt-3">
                                 {visibleTags.map((tag, i) => (
-                                    <span key={i} className="px-3 py-1 rounded-full bg-yellow-50 text-[#D4AF37] text-xs font-medium">
+                                    <span key={i} data-tag className="px-3 py-1 rounded-full bg-yellow-50 text-[#D4AF37] text-xs font-medium">
                                         {tag}
                                     </span>
                                 ))}
@@ -85,7 +88,7 @@ export const ServiceCard: React.FC<CardProps> = ({
             {/* 💻 DESKTOP / TABLET VERSION */}
             <div className="hidden md:flex m-4 md:m-10 relative w-full max-w-[90%] group rtl:[transform:scaleX(-1)]">
 
-                <div className="relative h-auto w-full overflow-hidden rounded-3xl bg-white p-6 md:p-12">
+                <div data-spot-mirror className="spot-card relative h-auto w-full overflow-hidden rounded-3xl bg-white p-6 md:p-12">
                     <div className="absolute inset-0 border-2 border-gray-200 rounded-3xl"></div>
 
                     {/* Decorative corner */}
@@ -98,7 +101,7 @@ export const ServiceCard: React.FC<CardProps> = ({
 
                     {/* Icon */}
                     <div className="absolute -top-7 -right-9 w-16 h-16 md:w-24 md:h-24 z-50 text-[#111827] group-hover:text-[#D4AF37] fill-current transition-colors duration-300 flex items-center justify-center">
-                        <div className="w-16 h-16 md:w-13 md:h-13 flex items-center justify-center -translate-x-6 translate-y-4">
+                        <div className="w-16 h-16 md:w-13 md:h-13 flex items-center justify-center -translate-x-6 translate-y-4 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-90">
                             {svgIcon}
                         </div>
                     </div>
@@ -116,7 +119,7 @@ export const ServiceCard: React.FC<CardProps> = ({
 
                         <div className="flex flex-wrap gap-3 mt-8">
                             {visibleTags.map((tag, i) => (
-                                <span key={i} className="px-4 py-2 rounded-full bg-yellow-50 text-yellow-700 text-sm font-medium hover:bg-[#0F1E4D] hover:text-white">
+                                <span key={i} data-tag className="px-4 py-2 rounded-full border border-transparent bg-yellow-50 text-yellow-700 text-sm font-medium transition-colors duration-150 ease-in-out hover:border-[#C9A13B] hover:bg-white">
                                     {tag}
                                 </span>
                             ))}

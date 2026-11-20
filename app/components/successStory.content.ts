@@ -2,8 +2,8 @@ import { t } from "intlayer";
 
 /**
  * Home "Our Work" section (approved home page changes, 10 Nov 2026).
- * Only real, delivered projects go in `items`; the rest of the row shows placeholder slots
- * until more projects are approved.
+ * Only real, delivered projects go in `items`; the row centres itself on however
+ * many there are.
  */
 const successStoryContent = {
   key: "successStory",
@@ -24,11 +24,6 @@ const successStoryContent = {
     cta: t({
       en: "Explore More",
       ar: "اكتشف المزيد",
-    }),
-
-    placeholder: t({
-      en: "More projects coming soon",
-      ar: "المزيد من المشاريع قريبًا",
     }),
 
     items: [

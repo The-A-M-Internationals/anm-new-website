@@ -6,10 +6,8 @@ import "./innovation.content";
 
 import { handleHashLink } from "@/lib/handleHashLink";
 
-const WHATSAPP = "https://wa.me/971564783478";
-
-/** hideContact: show only Book a Consultation (e.g. Methodology) */
-const Innovation = ({ hideContact = false }: { hideContact?: boolean }) => {
+/** Closing banner with one action: Book a Consultation */
+const Innovation = () => {
     const router = useRouter();
     const path = usePathname();
     const content = useIntlayer("innovation");
@@ -49,17 +47,6 @@ const Innovation = ({ hideContact = false }: { hideContact?: boolean }) => {
                     >
                         {content?.epmButton?.value}
                     </button>
-                    {/* Get in Touch opens WhatsApp (Book a Consultation is the form), so visitors get two ways to reach us */}
-                    {!hideContact && (
-                        <a
-                            href={WHATSAPP}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-6 py-2.5 sm:px-8 sm:py-3 bg-white text-[#897122] text-sm sm:text-base font-semibold cursor-pointer hover:scale-105 rounded-full transition-all duration-200 w-full sm:w-auto text-center"
-                        >
-                            {content?.contactButton?.value}
-                        </a>
-                    )}
                 </div>
             </div>
 

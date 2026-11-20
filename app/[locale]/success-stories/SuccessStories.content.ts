@@ -41,8 +41,8 @@ const successStoriesContent = {
         metric2: t({ en: "Scope 3", ar: "النطاق 3" }),
         metric2Label: t({ en: "First build", ar: "البناء الأول" }),
         client: t({
-          en: "A US automotive company (first client, June 2026)",
-          ar: "شركة سيارات أمريكية (أول عميل، يونيو 2026)",
+          en: "A US automotive company",
+          ar: "شركة سيارات أمريكية",
         }),
         challenge: t({
           en: "Report greenhouse-gas emissions alongside the financials, in the same system finance already uses.",

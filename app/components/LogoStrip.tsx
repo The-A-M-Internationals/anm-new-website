@@ -3,7 +3,7 @@
 import { Fragment, useRef } from "react";
 import LogoTile from "./LogoTile";
 import { useLogoStrip } from "./useLogoStrip";
-import { LOGOS, type LogoItem } from "./logos-data";
+import { GLIDE_FROM, LOGOS, type LogoItem } from "./logos-data";
 import "./logoStrip.css";
 
 const HEADLINE = ["Enterprises", "that", "run", "their", "numbers", "on", "our", "architecture."];
@@ -14,7 +14,9 @@ export default function LogoStrip({ logos = LOGOS }: { logos?: LogoItem[] }) {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLUListElement>(null);
   useLogoStrip(root, track);
-  // A short list is repeated so one set is always wider than the screen and the loop has no gaps
+  // The row adapts to the count: a few logos sit still and centred, a longer list glides
+  const still = logos.length < GLIDE_FROM;
+  // When gliding, the list is repeated so one set is always wider than the screen and the loop has no gaps
   const set = Array.from({ length: Math.max(1, Math.ceil(10 / logos.length)) }, () => logos).flat();
 
   return (
@@ -41,10 +43,10 @@ export default function LogoStrip({ logos = LOGOS }: { logos?: LogoItem[] }) {
         </p>
       </div>
 
-      <div className="ls-strip" data-reveal>
-        <ul ref={track} className="ls-track">
-          {[...set, ...set].map((item, i) => (
-            <LogoTile key={`${item.id}-${i}`} item={item} hidden={i >= logos.length} />
+      <div className={still ? "ls-strip ls-strip--still" : "ls-strip"} data-reveal>
+        <ul ref={still ? undefined : track} className="ls-track">
+          {(still ? logos : [...set, ...set]).map((item, i) => (
+            <LogoTile key={`${item.id}-${i}`} item={item} hidden={!still && i >= logos.length} />
           ))}
         </ul>
       </div>

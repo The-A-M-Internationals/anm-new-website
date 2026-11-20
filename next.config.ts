@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
     ],
   },
   typedRoutes: false,
+  experimental: {
+    // Dev server memory target (bytes). On a 15 GB laptop it grew past 2 GB and Windows killed
+    // its worker ("Jest worker encountered child process exceptions"). Does not affect the live site.
+    turbopackMemoryLimit: 1536 * 1024 * 1024,
+  },
 };
 
 export default withIntlayer(nextConfig);

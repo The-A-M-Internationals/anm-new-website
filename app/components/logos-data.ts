@@ -6,14 +6,11 @@ export type LogoItem = {
   logo?: string;
 };
 
-// TBC is the only real logo so far. The rest are placeholders: add `name` and `logo` once the files are in /public
-export const LOGOS: LogoItem[] = [
-  { id: "tbc", name: "TBC Corporation", logo: "/tbc-logo.png" },
-  ...Array.from({ length: 11 }, (_, i) => {
-    const n = String(i + 2).padStart(2, "0");
-    return { id: `logo-${n}`, name: `Logo ${n}` };
-  }),
-];
+// Built-in list, used only when no logos are saved in the admin portal. Real logos only.
+export const LOGOS: LogoItem[] = [{ id: "tbc", name: "TBC Corporation", logo: "/tbc-logo.png" }];
+
+/** Fewer logos than this sit still and centred; from this many on they glide as one looping line. */
+export const GLIDE_FROM = 6;
 
 /** Logos saved in the admin portal (Home: Client logos). Entries without an uploaded logo are skipped. */
 export function toLogos(docs: { id: string; data: Record<string, unknown> }[]): LogoItem[] {

@@ -193,3 +193,29 @@ body {
   :is([data-cursor="view"], [data-cursor="play"], [data-cursor="drag"]),
   :is([data-cursor="view"], [data-cursor="play"], [data-cursor="drag"]) *:not(a):not(a *) { cursor: none; }
 }
+
+/* Careers benefits (BenefitTile.tsx): the icon redraws itself when its tile is hovered */
+@keyframes benefit-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .group:hover .benefit-icon * { stroke-dasharray: 100; animation: benefit-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1); }
+}
+
+/* Gold light that follows the pointer across a card (Spotlight.tsx sets --spot-x / --spot-y) */
+.spot-card { position: relative; }
+.spot-card::before,
+.spot-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; }
+/* a 1.5px ring that only shows near the pointer */
+.spot-card::before {
+  padding: 1.5px;
+  background: radial-gradient(240px circle at var(--spot-x, -400px) var(--spot-y, -400px), #D4AF37, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+/* a faint warm pool inside the card */
+.spot-card::after { background: radial-gradient(300px circle at var(--spot-x, -400px) var(--spot-y, -400px), rgba(212, 175, 55, 0.12), transparent 70%); }
+
+/* Smooth scrolling: while the page is moving (Lenis adds .lenis-scrolling), page content ignores the
+   pointer, so cards sliding under it do not start their hover effects mid-scroll. Hover returns the
+   moment scrolling stops. Measured on a 4x slower CPU: Finance page slow frames 16% -> under 1%. */
+html.lenis-scrolling .page-enter { pointer-events: none; }

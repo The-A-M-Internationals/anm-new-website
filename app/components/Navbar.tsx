@@ -192,7 +192,7 @@ const Navbar = () => {
 
             <div className="hidden xl:flex items-center gap-1">
               {/* Oracle Partner logo, right before Services (a little smaller on 1280–1399px screens so the menu fits) */}
-              <OraclePartnerBadge tone="light" className="h-6 min-[1400px]:h-8 w-auto" />
+              <OraclePartnerBadge tone="light" className="h-8 min-[1400px]:h-10 w-auto" />
               <span className="mx-2 min-[1400px]:mx-3 h-5 w-px bg-gray-200" aria-hidden />
               {(Object.keys(navItems) as NavKey[]).map((key) => (
                 <DesktopNavButton
@@ -223,7 +223,7 @@ const Navbar = () => {
 
             <div className="xl:hidden flex items-center gap-3">
               {/* Oracle Partner logo on tablets (phones: the bar is too narrow, it shows in the footer) */}
-              <OraclePartnerBadge tone="light" className="hidden sm:block h-6 w-auto" />
+              <OraclePartnerBadge tone="light" className="hidden sm:block h-8 w-auto" />
               <Link
                 href={getLocalizedLink("/contact#form")}
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}

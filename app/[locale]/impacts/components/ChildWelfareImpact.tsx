@@ -37,9 +37,9 @@ const ChildWelfareImpact = () => {
                     {/* CSR Pillars */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {content?.csrPillars?.map((pillar: any, index: number) => (
-                            <div key={index} className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm shadow-sm border border-gray-100 cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300">
-                                <h4 className="text-[#C9A84C] font-bold text-xl mb-3">{pillar?.title?.value}</h4>
-                                <p className="text-gray-600 text-sm transition-colors duration-300 group-hover:text-[#C9A84C]">{pillar?.description?.value}</p>
+                            <div key={index} className="spot-card group flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm shadow-sm border border-gray-100 transform-gpu transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-xl">
+                                <h4 className="text-[#C9A84C] font-bold text-xl mb-3 relative w-fit after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:origin-left rtl:after:origin-right after:scale-x-0 after:bg-[#C9A13B] after:transition-transform after:duration-500 after:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:after:scale-x-100">{pillar?.title?.value}</h4>
+                                <p className="text-gray-600 text-sm">{pillar?.description?.value}</p>
                             </div>
                         ))}
                     </div>

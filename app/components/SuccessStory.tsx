@@ -1,6 +1,6 @@
 'use client';
 
-import SucessStoryCard, { SuccessStoryPlaceholder } from './SucessStoryCard';
+import SucessStoryCard from './SucessStoryCard';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useMemo } from 'react';
@@ -8,7 +8,7 @@ import { useIntlayer, useLocale } from 'next-intlayer';
 import type { CmsDoc } from '@/lib/cms/shared';
 import { tr } from '@/lib/cms/siteContent';
 
-// Photo per real project (index matches content.items); the row always shows SLOTS cards
+// Photo per real project (index matches content.items)
 const STATIC_IMAGES = [
   { image: '/Successnew1.png' },
 ];
@@ -16,7 +16,6 @@ const STATIC_IMAGES = [
 const ARABIC_BADGE = [
   { image: '/Success-arabic.png' },
 ]
-const SLOTS = 3;
 
 type Text = { value: string };
 type StoryItem = { client?: Text; title: Text; description: Text; industry: Text; badge?: Text };
@@ -48,10 +47,10 @@ const SuccessStory = ({ docs }: { docs?: CmsDoc[] }) => {
       industry: tr(d, 'industry', locale),
       badge: tr(d, 'badge', locale) || undefined,
       tabKey: tabKeys[index] || 'all',
-      placeholder: false,
     }));
     const items = content.items as unknown as StoryItem[];
-    const real = fromAdmin ?? items.map((item, index) => ({
+    // However many projects there are, the row centres on them (a single card sits in the middle)
+    return fromAdmin ?? items.map((item, index) => ({
       image: imageSource[index]?.image ?? imageSource[0].image,
       client: item.client?.value ?? '',
       title: item.title.value,
@@ -59,11 +58,7 @@ const SuccessStory = ({ docs }: { docs?: CmsDoc[] }) => {
       industry: item.industry.value,
       badge: item.badge?.value,
       tabKey: tabKeys[index] || 'all',
-      placeholder: false,
     }));
-    // Empty slots keep the row's shape until more projects are approved
-    const empty = Array.from({ length: Math.max(0, SLOTS - real.length) }, () => ({ placeholder: true as const }));
-    return [...real, ...empty];
   }, [imageSource, content.items, docs, locale]);
 
 
@@ -108,9 +103,7 @@ const SuccessStory = ({ docs }: { docs?: CmsDoc[] }) => {
 
       {/* Cards */}
       <div className='flex flex-col md:flex-row flex-wrap justify-center gap-3 min-[640px]:gap-4 min-[1340px]:gap-x-8 mt-1 sm:mt-8 w-full max-w-7xl'>
-        {visibleServices.map((service: any, idx: number) => service.placeholder ? (
-          <SuccessStoryPlaceholder key={page * ITEMS_PER_PAGE + idx} label={content.placeholder.value} />
-        ) : (
+        {visibleServices.map((service, idx) => (
           <SucessStoryCard
             key={page * ITEMS_PER_PAGE + idx}
             client={service.client}
@@ -130,7 +123,7 @@ const SuccessStory = ({ docs }: { docs?: CmsDoc[] }) => {
       </div>
 
       {/* Pagination dots (tab only) */}
-      {isTab && (
+      {isTab && totalPages > 1 && (
         <div className="flex justify-center mt-4 gap-2">
           <div className="flex gap-2 bg-[#FFFBED] rounded-full px-4 py-2">
             {Array.from({ length: totalPages }).map((_, idx) => (

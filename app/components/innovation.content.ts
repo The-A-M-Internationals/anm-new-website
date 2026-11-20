@@ -15,10 +15,6 @@ const innovationContent = {
       en: "Book a Consultation",
       ar: "احجز استشارة",
     }),
-    contactButton: t({
-      en: "Get in Touch",
-      ar: "تواصل معنا",
-    }),
   },
 };
 

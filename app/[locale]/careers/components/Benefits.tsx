@@ -1,97 +1,42 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import FancyCard from "./FancyCard";
+import { useRef } from "react";
+import { BrainCircuit, GraduationCap, HandCoins, Handshake, HeartHandshake, Laptop, Palmtree } from "lucide-react";
 import { useIntlayer } from "next-intlayer";
+import BenefitTile from "./BenefitTile";
+import { useBenefitsReveal } from "./useBenefitsReveal";
 
+/**
+ * Careers benefits as a bento: one navy feature tile, four compact tiles beside it and two wide
+ * tiles underneath, so all seven benefits and their full text fit in one view on a laptop.
+ * Phones stack them in one column; tablets use two.
+ */
 const Benefits = () => {
-    const content = useIntlayer("careersBenefits");
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    // Handle clicking outside to reset active state
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-                setActiveIndex(null);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
-    const handleCardClick = (index: number) => {
-        setActiveIndex(activeIndex === index ? null : index);
-    };
+    const c = useIntlayer("careersBenefits");
+    const grid = useRef<HTMLDivElement>(null);
+    useBenefitsReveal(grid);   // tiles rise in one after another on scroll
 
     return (
-        <div ref={containerRef} className="flex flex-col justify-center items-center gap-5 py-12 md:py-20 px-4">
-            <div className="flex flex-col justify-center items-center text-center">
+        <div className="flex flex-col items-center gap-8 px-4 py-12 md:py-20">
+            <div className="flex flex-col items-center text-center">
                 <p className="text-3xl md:text-[48px] font-semibold text-[#000000]">
-                    <span className="text-[#D4AF37]">{content.titleHighlight.value} </span>
-                    {content.titleRest.value}
+                    <span className="text-[#D4AF37]">{c.titleHighlight.value} </span>
+                    {c.titleRest.value}
                 </p>
-                <p className="text-[#6B7280] text-lg md:text-[24px] mt-2">{content.subtitle.value}</p>        
+                <p className="text-[#6B7280] text-lg md:text-[24px] mt-2">{c.subtitle.value}</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl items-center justify-items-center">      
-                    <FancyCard
-                        icon="/careers/growth.svg"
-                        title={content.card1Title.value}
-                        description={content.card1Description.value}
-                        isActive={activeIndex === 0}
-                        onClick={() => handleCardClick(0)}
-                    />
-                    <FancyCard
-                        icon="/careers/culture.svg"
-                        title={content.card2Title.value}
-                        description={content.card2Description.value}
-                        isActive={activeIndex === 1}
-                        onClick={() => handleCardClick(1)}
-                    />
-                    <FancyCard
-                        icon="/careers/hybrid.svg"
-                        title={content.card3Title.value}
-                        description={content.card3Description.value}
-                        isActive={activeIndex === 2}
-                        onClick={() => handleCardClick(2)}
-                    />
-                    <FancyCard
-                        icon="/careers/comp.svg"
-                        title={content.card4Title.value}
-                        description={content.card4Description.value}
-                        isActive={activeIndex === 3}
-                        onClick={() => handleCardClick(3)}
-                    />
-                    <FancyCard
-                        icon="/careers/balance.svg"
-                        title={content.card5Title.value}
-                        description={content.card5Description.value}
-                        isActive={activeIndex === 4}
-                        onClick={() => handleCardClick(4)}
-                    />
-                    <FancyCard
-                        icon="/careers/impact.svg"
-                        title={content.card6Title.value}
-                        description={content.card6Description.value}
-                        isActive={activeIndex === 5}
-                        onClick={() => handleCardClick(5)}
-                    />
-                    {/* 7th card: centred on its own row so the grid stays balanced */}
-                    <div className="w-full md:col-span-2 lg:col-span-1 lg:col-start-2">
-                        <FancyCard
-                            icon="/careers/ai.svg"
-                            title={content.card7Title.value}
-                            description={content.card7Description.value}
-                            isActive={activeIndex === 6}
-                            onClick={() => handleCardClick(6)}
-                        />
-                    </div>
+
+            <div ref={grid} className="no-global-reveal grid w-full max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[minmax(124px,auto)]">
+                <BenefitTile big icon={GraduationCap} title={c.card1Title.value} description={c.card1Description.value} className="md:col-span-2 lg:row-span-2" />
+                <BenefitTile icon={Laptop} title={c.card3Title.value} description={c.card3Description.value} />
+                <BenefitTile icon={HandCoins} title={c.card4Title.value} description={c.card4Description.value} />
+                <BenefitTile icon={Palmtree} title={c.card5Title.value} description={c.card5Description.value} />
+                <BenefitTile icon={BrainCircuit} title={c.card7Title.value} description={c.card7Description.value} />
+                <BenefitTile icon={Handshake} title={c.card2Title.value} description={c.card2Description.value} className="lg:col-span-2" />
+                <BenefitTile icon={HeartHandshake} title={c.card6Title.value} description={c.card6Description.value} className="lg:col-span-2" />
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Benefits;

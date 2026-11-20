@@ -76,7 +76,9 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
     l.on("scroll", ScrollTrigger.update);
 
     const tick = (time: number) => l.raf(time * 1000);
-    gsap.ticker.add(tick);
+    // Prioritized: Lenis moves the page BEFORE GSAP writes this frame's animation styles. The other
+    // way round, scrollTo() had to flush those fresh styles first, a second style pass every frame.
+    gsap.ticker.add(tick, false, true);
     gsap.ticker.lagSmoothing(0);
 
     const refresh = () => ScrollTrigger.refresh();

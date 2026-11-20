@@ -58,15 +58,4 @@ const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, client, title,
     )
 }
 
-/** Empty slot, same size as a card, until a real project is added */
-export const SuccessStoryPlaceholder = ({ label }: { label: string }) => (
-    <div
-        aria-hidden="true"
-        className='relative h-[140px] md:h-[480px] lg:h-[500px] w-[330px] mx-auto md:mx-0 md:w-[380px] lg:w-[400px] mt-2 rounded-xl border border-dashed border-[#D4AF37]/50 bg-gradient-to-b from-[#FFFBED] to-white flex flex-col items-center justify-center gap-3 px-8 text-center'
-    >
-        <span className='w-10 h-10 rounded-full border border-[#D4AF37]/50 grid place-items-center text-[#D4AF37] text-xl leading-none'>+</span>
-        <p className='text-sm md:text-base font-medium text-[#897122]'>{label}</p>
-    </div>
-)
-
 export default SucessStoryCard
