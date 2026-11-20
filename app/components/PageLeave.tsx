@@ -19,7 +19,6 @@ export default function PageLeave() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let undo = 0;
     const onClick = (e: MouseEvent) => {
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const a = (e.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
@@ -27,20 +26,35 @@ export default function PageLeave() {
       const url = new URL(a.href, window.location.href);
       if (url.origin !== window.location.origin) return;
       if (url.pathname === window.location.pathname) return;          // same page (hash links scroll instead)
-      const page = document.querySelector(".page-enter");
-      if (!page) return;
-      page.classList.add("page-leaving");
-      // Safety net: if the navigation never happens, bring the page back (long enough for a slow load)
-      window.clearTimeout(undo);
-      undo = window.setTimeout(() => page.classList.remove("page-leaving"), 6000);
+      announceLeave(a.href);
     };
     // Bubble phase on window: runs after React's handlers, so a handler that cancels the click wins
     const afterReact = (e: MouseEvent) => { if (!e.defaultPrevented || isNextLink(e)) onClick(e); };
     window.addEventListener("click", afterReact);
-    return () => { window.removeEventListener("click", afterReact); window.clearTimeout(undo); };
+    return () => { window.removeEventListener("click", afterReact); };
   }, []);
 
   return null;
+}
+
+let undo = 0;
+
+/**
+ * Starts the leave half of the page transition: the current page fades away quickly and the
+ * gold progress line (PageProgress.tsx) starts. Links are picked up automatically; buttons that navigate
+ * with router.push call this just before pushing. Does nothing for the page you are already on.
+ */
+export function announceLeave(href: string) {
+  if (typeof window === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const url = new URL(href, window.location.href);
+  if (url.origin !== window.location.origin || url.pathname === window.location.pathname) return;
+  const page = document.querySelector(".page-enter");
+  if (!page || page.classList.contains("page-leaving")) return;
+  page.classList.add("page-leaving");
+  window.dispatchEvent(new Event("page:leaving"));
+  // Safety net: if the navigation never happens, bring the page back (long enough for a slow load)
+  window.clearTimeout(undo);
+  undo = window.setTimeout(() => page.classList.remove("page-leaving"), 6000);
 }
 
 /** next/link prevents the default itself before navigating client-side, so its clicks still count. */

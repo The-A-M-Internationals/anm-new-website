@@ -134,8 +134,8 @@ const careersContent = {
       ar: "هدف وأثر اجتماعي",
     }),
     benefit6Description: t({
-      en: "Company donates 10% of income to orphanages and children's trusts",
-      ar: "تتبرع الشركة بنسبة 10% من الدخل لدور الأيتام وصناديق رعاية الأطفال",
+      en: "We donate 10% of our profits to children's welfare causes.",
+      ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
     }),
 
     openPositionsTitlePrefix: t({

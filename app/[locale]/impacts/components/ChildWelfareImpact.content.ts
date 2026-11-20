@@ -8,8 +8,8 @@ const impactsChildWelfareContent = {
       ar: "دعم رفاهية الأطفال بهدف واضح",
     }),
     headerDescription: t({
-      en: "We contribute a portion of our revenue to trusted child-welfare trusts and orphanages, ensuring that our success helps fund education, healthcare, and essential care for children in need.",
-      ar: "نخصص جزءًا من إيراداتنا لصالح صناديق رعاية الأطفال ودور الأيتام الموثوقة، لضمان أن نجاحنا يساهم في تمويل التعليم والرعاية الصحية والرعاية الأساسية للأطفال المحتاجين.",
+      en: "We donate 10% of our profits to children's welfare causes.",
+      ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
     }),
     // New CSR Content from PDF merged
     csrTitle: t({
@@ -43,6 +43,10 @@ const impactsChildWelfareContent = {
         }),
       },
     ],
+    // Labels for the contribution graph's hover card (WelfareGraph.tsx)
+    raised: t({ en: "Raised this month", ar: "المبلغ المجموع هذا الشهر" }),
+    cumulative: t({ en: "Cumulative total", ar: "الإجمالي التراكمي" }),
+    charitable: t({ en: "Charitable Contribution (10%)", ar: "المساهمة الخيرية (١٠٪)" }),
     getInTouch: t({
       en: "Get in touch: am@theaminternationals.com",
       ar: "تواصلوا معنا: am@theaminternationals.com",

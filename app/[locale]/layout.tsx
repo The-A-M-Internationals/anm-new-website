@@ -3,8 +3,10 @@ import "../globals.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ScrollReveal from "../components/ScrollReveal";
+import PauseOffscreenAnimations from "../components/PauseOffscreenAnimations";
 import ImagePreloader from "../components/ImagePreloader";
 import PageLeave from "../components/PageLeave";
+import PageProgress from "../components/PageProgress";
 import GlobalCursor from "../components/GlobalCursor";
 import GoToTopButton from "../components/GoToTopButton";
 import HashScrollHandler from "../components/HashScrollHandler";
@@ -87,8 +89,10 @@ export default async function RootLayout({
                     <ContactInfoProvider value={contact}>
                     <SmoothScrolling>
                         <ScrollReveal />
+                        <PauseOffscreenAnimations />
                         <ImagePreloader />
                         <PageLeave />
+                        <PageProgress />
                         <GlobalCursor />
                         <HashScrollHandler />
                         <Navbar />

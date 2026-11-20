@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { db } from '@/lib/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
+import { withTimeout } from "@/lib/withTimeout";
 import { Mail, MapPin, Clock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useIntlayer, useLocale } from "next-intlayer";
@@ -101,11 +102,11 @@ const ContactForm: React.FC = () => {
     setSubmitting(true);
     try {
       const fullPhone = formData.phone.trim() ? `${formData.countryCode} ${formData.phone}` : '';
-      await addDoc(collection(db, 'customers'), {
+      await withTimeout(addDoc(collection(db, 'customers'), {
         ...formData,
         phone: fullPhone,
         submittedAt: new Date().toISOString()
-      });
+      }));
 
       // Dispatch confirmation email to client and alert to admin
       try {

@@ -21,6 +21,7 @@ service cloud.firestore {
     match /ourWork/{id}     { allow read: if true; allow write: if isAdmin(); }
     match /founders/{id}    { allow read: if true; allow write: if isAdmin(); }
     match /team/{id}        { allow read: if true; allow write: if isAdmin(); }
+    match /clientLogos/{id} { allow read: if true; allow write: if isAdmin(); }
 
     // ---- Admin list: document ID = the admin's email in lower case. Added by the owner in the
     //      Firebase console only. A signed-in user may check their own entry; nobody can write it.

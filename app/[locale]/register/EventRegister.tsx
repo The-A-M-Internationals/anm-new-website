@@ -3,6 +3,7 @@
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { addDoc, collection, Timestamp, doc, getDoc } from 'firebase/firestore';
+import { withTimeout } from "@/lib/withTimeout";
 import Image from 'next/image';
 import { db } from '../../../lib/firebaseConfig';
 import { CalendarDays, Clock, MapPin } from 'lucide-react';
@@ -83,13 +84,13 @@ const EventRegister = () => {
         setMessage(null);
 
         try {
-            await addDoc(collection(db, 'eventRegistrations'), {
+            await withTimeout(addDoc(collection(db, 'eventRegistrations'), {
                 eventId,
                 name: form.name,
                 email: form.email,
                 phone: form.phone,
                 registeredAt: Timestamp.now(),
-            });
+            }));
 
             setMessage(content.successMessage.value);
             setForm({ name: '', email: '', phone: '' });
@@ -116,7 +117,7 @@ const EventRegister = () => {
                 <div className="bg-linear-to-br from-[#FFFBED] to-white p-6 md:p-8 flex flex-col gap-4">
                     {event ? (
                         <>
-                            <div className="relative w-full h-56 rounded-2xl overflow-hidden">
+                            {event.imageSrc && <div className="relative w-full h-56 rounded-2xl overflow-hidden">
                                 <Image
                                     src={event.imageSrc}
                                     alt={event.title}
@@ -126,7 +127,7 @@ const EventRegister = () => {
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                     priority
                                 />
-                            </div>
+                            </div>}
 
                             <h2 className="text-2xl font-semibold text-gray-900">{event.title}</h2>
                             <p className="text-gray-600">{event.description}</p>

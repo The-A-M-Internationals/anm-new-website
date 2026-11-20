@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebaseConfig';
 import { doc, getDoc, addDoc, collection } from 'firebase/firestore';
+import { withTimeout } from "@/lib/withTimeout";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useIntlayer, useLocale } from "next-intlayer";
@@ -125,7 +126,7 @@ export default function JobApplyPage({ id, initialJob }: { id: string; initialJo
         try {
             const resumeUrl = await uploadToS3(form.resumeFile);
 
-            await addDoc(collection(db, 'applications'), {
+            await withTimeout(addDoc(collection(db, 'applications'), {
                 name: form.name,
                 email: form.email,
                 phone: form.phone,
@@ -134,7 +135,7 @@ export default function JobApplyPage({ id, initialJob }: { id: string; initialJo
                 jobId: id,
                 jobTitle: job?.title,
                 submittedAt: new Date().toISOString(),
-            });
+            }));
 
             setSuccess(content.success.value);
             setForm({ name: '', email: '', phone: '', experience: '', resumeFile: null });

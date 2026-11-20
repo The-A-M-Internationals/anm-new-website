@@ -19,30 +19,16 @@ const impactsDashboardContent = {
       en: "We measure our success not just in projects completed, but in the lasting partnerships we build and the impact we create globally. The figures below reflect our journey so far — and we're just getting started.",
       ar: "نقيس نجاحنا ليس فقط بعدد المشاريع المُنجزة، بل بالشراكات الدائمة التي نبنيها والأثر العالمي الذي نصنعه. الأرقام أدناه تعكس رحلتنا حتى الآن — ونحن في البداية فقط.",
     }),
+    // Clients (26+), Projects (40+) and Industries (8+) counters are hidden
+    // until the numbers are confirmed; re-add them here when they are.
     stats: [
-      {
-        label: t({ en: "Clients Served", ar: "العملاء الذين خدمناهم" }),
-        value: t({ en: "26+", ar: "٢٦+" }),
-      },
-      {
-        label: t({ en: "Projects Delivered", ar: "المشاريع المُنجزة" }),
-        value: t({ en: "40+", ar: "٤٠+" }),
-      },
       {
         label: t({ en: "Countries Reached", ar: "الدول التي وصلنا إليها" }),
         value: t({ en: "3 (UAE, India, USA)", ar: "٣ (الإمارات، الهند، الولايات المتحدة)" }),
       },
       {
-        label: t({ en: "Industries Served", ar: "القطاعات التي خدمناها" }),
-        value: t({ en: "8+", ar: "٨+" }),
-      },
-      {
         label: t({ en: "Team Members", ar: "أعضاء الفريق" }),
-        value: t({ en: "15", ar: "١٥" }),
-      },
-      {
-        label: t({ en: "Years of Combined Experience", ar: "إجمالي سنوات الخبرة" }),
-        value: t({ en: "50+", ar: "٥٠+" }),
+        value: t({ en: "8", ar: "٨" }),
       },
     ],
   },

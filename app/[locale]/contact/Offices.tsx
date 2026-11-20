@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import OfficeLocationMap from './OfficeLocationMap';
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useContactInfo, useContactText } from "../../components/ContactInfo";
 
@@ -39,17 +39,9 @@ export default function OurOffices() {
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-8 items-start">
 
-          {/* Image FIRST on mobile, SECOND on desktop */}
+          {/* Office map FIRST on mobile, SECOND on desktop */}
           <div className="h-full order-1 lg:order-2">
-            <div className="rounded-3xl overflow-hidden w-full h-full shadow-2xl min-h-[300px] relative">
-              <Image
-                src="/offices.jpg"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                alt="map image"
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
+            <OfficeLocationMap mapLink={contact.mapLink} address={offices[0].address} />
           </div>
 
           {/* Cards SECOND on mobile, FIRST on desktop */}

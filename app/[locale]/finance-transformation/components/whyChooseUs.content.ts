@@ -42,8 +42,8 @@ const financeTransformationWhyChooseUsContent = {
           ar: "أثر مجتمعي",
         }),
         description: t({
-          en: "We donate a portion of our earnings to trusted orphanages and children's welfare trusts.",
-          ar: "نخصص جزءًا من أرباحنا لدعم دور الأيتام الموثوقة وصناديق رعاية الأطفال.",
+          en: "We donate 10% of our profits to children's welfare causes.",
+          ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
         }),
         highlight: false,
       },

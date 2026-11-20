@@ -2,7 +2,8 @@ import Image from "next/image";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
-import { eventCta, openEventCta } from "./eventCta";
+import { eventCta, eventDetailsLink, openEventCta } from "./eventCta";
+import EventPoster from "./EventPoster";
 
 interface LiveEventsProps {
     id: string;
@@ -16,6 +17,9 @@ interface LiveEventsProps {
     buttonText?: string;
     buttonTextAr?: string;
     buttonLink?: string;
+    detailsText?: string;
+    detailsTextAr?: string;
+    detailsLink?: string;
 }
 
 const LiveEvents: React.FC<LiveEventsProps> = ({
@@ -30,11 +34,15 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
     buttonText,
     buttonTextAr,
     buttonLink,
+    detailsText,
+    detailsTextAr,
+    detailsLink,
 }) => {
     const router = useRouter();
     const { locale } = useLocale();
     const content = useIntlayer("events");
     const cta = eventCta({ id, buttonText, buttonTextAr, buttonLink }, locale, content.registerNow.value);
+    const details = eventDetailsLink({ detailsText, detailsTextAr, detailsLink }, locale);
 
     return (
         <div className="flex flex-col items-center mb-4 gap-2 px-4">
@@ -53,12 +61,8 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
                                 className="object-cover"
                             />
                         ) : (
-                            /* No photo set in Firebase yet: brand panel with the date and venue */
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#050E30] via-[#0B1E4F] to-[#050E30] flex flex-col items-center justify-center gap-2 p-6 text-center">
-                                <span className="text-4xl md:text-5xl font-bold text-[#E3C973]" style={{ fontFamily: "Lora, Georgia, serif" }}>{dateRange}</span>
-                                <span className="text-sm md:text-base font-semibold uppercase tracking-[0.14em] text-white/80">{month}</span>
-                                {location && <span className="mt-2 text-xs md:text-sm text-white/60">{location}</span>}
-                            </div>
+                            /* No photo set in Firebase yet: poster with turning rings and the date */
+                            <EventPoster dateRange={dateRange} month={month} location={location} />
                         )}
                     </div>
                 </div>
@@ -108,13 +112,20 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
                         )}
                     </div>
 
-                    {/* Button */}
+                    {/* Buttons: optional "Event details" link next to the main call to action */}
+                    <div className="flex flex-wrap items-center gap-3">
+                    {details && (
+                        <a href={details.href} target={details.external ? "_blank" : undefined} rel={details.external ? "noopener noreferrer" : undefined} className="border border-[#D4AF37] text-gray-900 hover:bg-[#FFFBED] hover:scale-105 cursor-pointer font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full flex items-center gap-2 transition text-sm sm:text-base">
+                            {details.label}
+                        </a>
+                    )}
                     <button onClick={(e) => openEventCta(e, cta, router)} className="bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full flex items-center gap-2 transition text-sm sm:text-base">
                         {cta.label}
                         <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 rtl:rotate-180" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                     </button>
+                    </div>
                 </div>
             </div>
         </div>

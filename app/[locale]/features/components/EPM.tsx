@@ -5,6 +5,7 @@ import { Check } from 'lucide-react';
 import Image from 'next/image';
 import { db } from '@/lib/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
+import { withTimeout } from "@/lib/withTimeout";
 import { useIntlayer, useLocale } from "next-intlayer";
 
 /** consultation: "Talk to an Oracle EPM expert" form (What Sets Us Apart). earlyAccess: EPM Build Agent sign-up (Features). */
@@ -14,14 +15,15 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
     const isEarly = variant === 'earlyAccess';
     const { locale } = useLocale();
     const copy = isEarly ? {
-        title: early.leftTitle.value, description: early.leftDescription.value, bullets: [] as string[],
+        title: early.leftTitle.value, description: early.leftDescription.value,
+        bullets: [early.bullet1.value, early.bullet2.value, early.bullet3.value],
         formTitle: early.formTitle.value, label: early.moduleLabel.value, placeholder: early.modulePlaceholder.value,
         submit: early.submitButton.value,
         options: [
-            { value: 'early-access-planning', label: early.optionPlanning.value },
-            { value: 'early-access-fccs', label: early.optionFccs.value },
-            { value: 'early-access-arcs', label: early.optionArcs.value },
-            { value: 'early-access-other', label: early.optionOther.value },
+            { value: 'Planning', label: early.optionPlanning.value },
+            { value: 'Financial Consolidation and Close', label: early.optionFccs.value },
+            { value: 'Account Reconciliation', label: early.optionArcs.value },
+            { value: 'Other', label: early.optionOther.value },
         ],
     } : {
         title: content.leftTitle.value, description: content.leftDescription.value,
@@ -47,7 +49,8 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
         email: '',
         company: '',
         phone: '',
-        epm: ''
+        epm: '',
+        message: ''
     });
     const [formError, setFormError] = useState<string | null>(null);
     const [submitting, setSubmitting] = useState(false);
@@ -74,7 +77,9 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
         // Check if all fields are filled
-        if (!formData.name.trim() || !formData.company.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.epm.trim()) {
+        // Early access: only name, email and company are required (phone, modules and message are optional)
+        const missingOptional = !isEarly && (!formData.phone.trim() || !formData.epm.trim());
+        if (!formData.name.trim() || !formData.company.trim() || !formData.email.trim() || missingOptional) {
             showTempMsg(setFormError, String(content.errorFillRequired.value));
             return;
         }
@@ -105,16 +110,16 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
 
         // Validate phone number (10-15 digits with optional formatting)
         const phoneDigitsOnly = formData.phone.replace(/\D/g, '');
-        if (phoneDigitsOnly.length < 10 || phoneDigitsOnly.length > 15) {
+        if ((formData.phone.trim() || !isEarly) && (phoneDigitsOnly.length < 10 || phoneDigitsOnly.length > 15)) {
             showTempMsg(setFormError, String(content.errorInvalidPhone.value));
             return;
         }
         setSubmitting(true);
         try {
-            await addDoc(collection(db, 'EPM'), {
+            await withTimeout(addDoc(collection(db, 'EPM'), {
                 ...formData,
                 submittedAt: new Date().toISOString()
-            });
+            }));
 
             // Dispatch confirmation and alert email
             try {
@@ -128,8 +133,10 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
                             company: formData.company,
                             email: formData.email,
                             phone: formData.phone,
-                            service: isEarly ? `EPM Build Agent Early Access (${formData.epm})` : `EPM Consultation Request (${formData.epm})`,
-                            vision: isEarly ? `EPM Build Agent early access. Modules used: ${formData.epm}` : `Oracle EPM consultation call: ${formData.epm}`,
+                            service: isEarly ? `EPM Build Agent Early Access (${formData.epm || 'modules not given'})` : `EPM Consultation Request (${formData.epm})`,
+                            vision: isEarly
+                                ? `EPM Build Agent early access. Modules used: ${formData.epm || 'not given'}${formData.message.trim() ? `\nMessage: ${formData.message.trim()}` : ''}`
+                                : `Oracle EPM consultation call: ${formData.epm}`,
                         },
                     }),
                 });
@@ -142,7 +149,8 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
                 company: '',
                 email: '',
                 phone: '',
-                epm: ''
+                epm: '',
+                message: ''
             });
         } catch {
             showTempMsg(setFormError, String(content.errorSubmitFailed.value));
@@ -153,7 +161,7 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
 
 
     return (
-        <div id='epm-suites' className="bg-[#0F1E4D] flex items-center justify-center py-12 md:py-20 lg:py-24 px-6 relative overflow-hidden">
+        <div id={isEarly ? 'early-access' : 'epm-suites'} className="bg-[#0F1E4D] flex items-center justify-center py-12 md:py-20 lg:py-24 px-6 relative overflow-hidden">
             {/* Decorative background elements */}
 
             <div className='absolute left-0 top-0 rtl:right-0 rtl:left-auto'>
@@ -233,7 +241,7 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
                         />
 
                         <label htmlFor="epm-phone" className="block text-gray-700 font-medium mb-1">
-                            {content.phoneNumberLabel.value} <span className="text-red-500">*</span>
+                            {content.phoneNumberLabel.value} {!isEarly && <span className="text-red-500">*</span>}
                         </label>
                         <input
                             type="tel"
@@ -247,7 +255,7 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
                         />
 
                         <label htmlFor="epm-service" className="block text-gray-700 font-medium mb-1">
-                            {copy.label} <span className="text-red-500">*</span>
+                            {copy.label} {!isEarly && <span className="text-red-500">*</span>}
                         </label>
                         <select
                             id="epm-service"
@@ -262,6 +270,22 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
                             ))}
                         </select>
 
+                        {isEarly && (
+                            <>
+                                <label htmlFor="epm-message" className="block text-gray-700 font-medium mb-1">
+                                    {early.messageLabel.value}
+                                </label>
+                                <textarea
+                                    id="epm-message"
+                                    name="message"
+                                    rows={3}
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition resize-none rtl:text-right"
+                                />
+                            </>
+                        )}
+
                         <button
                             type="submit"
                             disabled={submitting}
@@ -269,6 +293,7 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
                         >
                             {submitting ? content.submittingButton.value : copy.submit}
                         </button>
+                        {isEarly && <p className="text-gray-500 text-sm text-center">{early.note.value}</p>}
                         {formError && <p role="alert" className="text-red-600 text-sm rtl:text-right">{formError}</p>}
                         {successMsg && <p role="status" className="text-green-600 text-sm rtl:text-right">{successMsg}</p>}
                     </form>

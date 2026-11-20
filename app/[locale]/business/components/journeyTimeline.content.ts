@@ -6,33 +6,28 @@ const journeyTimelineContent = {
     title: t({ en: "Our Journey", ar: "رحلتنا" }),
 
     milestone1: t({
-      en: "The A&M Internationals F.Z.C registered in Ajman Free Zone, UAE.",
-      ar: "تسجيل The A&M Internationals F.Z.C في المنطقة الحرة بعجمان، الإمارات العربية المتحدة.",
+      en: "Jun 2026 — First Oracle EPM client: an ESG emissions reporting project for a US automotive company",
+      ar: "يونيو 2026 — أول عميل لنا في Oracle EPM: مشروع لتقارير انبعاثات ESG لشركة سيارات أمريكية",
     }),
 
     milestone2: t({
-      en: "First Oracle EPM clients in the USA.",
-      ar: "أول عملائنا في Oracle EPM في الولايات المتحدة الأمريكية.",
+      en: "2026 — Built an in-house team of EPM consultants, designers and developers in India",
+      ar: "2026 — بناء فريق داخلي من استشاريي EPM والمصممين والمطورين في الهند",
     }),
 
     milestone3: t({
-      en: "Delivered an Oracle EPM ESG emissions reporting project (Scope 1 and 2, plus the first Scope 3 build).",
-      ar: "تنفيذ مشروع لتقارير انبعاثات ESG على Oracle EPM (النطاقان 1 و2، إضافةً إلى أول بناء للنطاق 3).",
+      en: "Oct 2026 — Attended AI Everything, Abu Dhabi",
+      ar: "أكتوبر 2026 — حضور AI Everything في أبوظبي",
     }),
 
     milestone4: t({
-      en: "2026 — Built an in-house team of EPM consultants, designers and developers in India.",
-      ar: "2026 — بناء فريق داخلي من استشاريي EPM والمصممين والمطورين في الهند.",
+      en: "Nov 2026 — Became an Oracle PartnerNetwork member",
+      ar: "نوفمبر 2026 — أصبحنا عضوًا في Oracle PartnerNetwork",
     }),
 
     milestone5: t({
-      en: "Nov 2026 — Became an Oracle PartnerNetwork member.",
-      ar: "نوفمبر 2026 — أصبحنا عضوًا في Oracle PartnerNetwork.",
-    }),
-
-    milestone6: t({
-      en: "Dec 2026 — GITEX Global, Dubai: first preview of our EPM Build Agent.",
-      ar: "ديسمبر 2026 — GITEX Global في دبي: أول عرض تمهيدي لـ EPM Build Agent.",
+      en: "Dec 2026 — GITEX Global 2026, Dubai",
+      ar: "ديسمبر 2026 — GITEX Global 2026، دبي",
     }),
   },
 };

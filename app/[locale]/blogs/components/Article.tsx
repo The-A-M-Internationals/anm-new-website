@@ -1,49 +1,24 @@
 "use client";
 import Image from "next/image";
-import { Calendar, Clock, Users, UserSquare2 } from "lucide-react";
+import { Clock } from "lucide-react";
 import { useMemo } from "react";
 import type { CmsDoc } from "@/lib/cms/shared";
 import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from "next-intlayer";
-
-interface ArticleType {
-    id: string;
-    category: string;
-    title: string;
-    description: string;
-    authors: string;
-    readTime: string;
-    tags?: string[];
-    externalLink?: string;
-    imageUrl?: string;
-    featureArticle?: boolean;
-    // Localized fields
-    title_ar?: string;
-    description_ar?: string;
-    category_ar?: string;
-    authors_ar?: string;
-    readTime_ar?: string;
-}
+import BlogCover from "./BlogCover";
+import { articleImage, articleLink, localizedField } from "../articleFields";
 
 const Article = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const { locale } = useLocale();
     const content = useIntlayer("blogsFeatureArticle");
     const { docs, loading } = useCmsDocs("articles", serverDocs);
     // The featured article: first one flagged featureArticle (same rule as the old Firestore query)
-    const article = useMemo(() => {
-        const d = docs.find((x) => [true, "true", "Yes"].includes(x.data.featureArticle));
-        return d ? ({ id: d.id, ...d.data } as ArticleType) : null;
-    }, [docs]);
+    const article = useMemo(() => docs.find((x) => [true, "true", "Yes"].includes(x.data.featureArticle)) ?? null, [docs]);
 
-    // Helper to get localized content
-    const getLocalizedContent = (field: keyof ArticleType) => {
-        if (!article) return "";
-        const arField = `${field}_ar` as keyof ArticleType;
-        if (locale === 'ar' && article[arField]) {
-            return article[arField] as string;
-        }
-        return article[field] as string;
-    };
+    // Localized field (titleAr or title_ar), falling back to English
+    const getLocalizedContent = (field: string) => (article ? localizedField(article.data, field, locale) : "");
+    const image = article ? articleImage(article.data) : "";
+    const link = article ? articleLink(article.id, article.data, locale) : null;
 
     if (loading) {
         return <div className="text-center py-20">{content.loading.value}</div>;
@@ -68,15 +43,19 @@ const Article = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                     <div className="flex flex-col lg:flex-row gap-2 lg:gap-[30px]">
                         {/* Image Section - Top for mobile/tablet, Left for desktop */}
                         <div className="w-full lg:w-[30%] flex-shrink-0">
-                            <div className="relative w-full h-[230px] lg:h-full min-h-[400px]">
-                                <Image
-                                    src={article.imageUrl || "/blogs/event.jpg"}
-                                    alt={article.title || content.imageAltFallback}
-                                    fill
-                                    unoptimized={(article.imageUrl ?? "").startsWith("http")}
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
-                                    className="object-cover rounded-[40px]"
-                                />
+                            <div className="relative w-full h-[230px] lg:h-full min-h-[400px] overflow-hidden rounded-[40px]">
+                                {image ? (
+                                    <Image
+                                        src={image}
+                                        alt={getLocalizedContent("title") || content.imageAltFallback.value}
+                                        fill
+                                        unoptimized={image.startsWith("http")}
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                        className="object-cover rounded-[40px]"
+                                    />
+                                ) : (
+                                    <BlogCover title={getLocalizedContent("title")} />
+                                )}
                             </div>
                         </div>
 
@@ -129,12 +108,12 @@ const Article = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                             </div>
 
                             {/* CTA Button */}
-                            {article.externalLink && (
+                            {link && (
                                 <a
-                                    href={article.externalLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2 bg-[#D4AF37]   text-black font-semibold px-8 py-3.5 rounded-full transition-all hover:scale-105 shadow-md w-full md:w-auto"
+                                    href={link.href}
+                                    target={link.external ? "_blank" : undefined}
+                                    rel={link.external ? "noopener noreferrer" : undefined}
+                                    className="inline-flex items-center justify-center gap-2 bg-[#D4AF37] text-black font-semibold px-8 py-3.5 rounded-full transition-all hover:scale-105 shadow-md w-full md:w-auto cursor-pointer"
                                 >
                                     <span>{content.readFullArticle.value}</span>
                                     <svg

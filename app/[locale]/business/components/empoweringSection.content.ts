@@ -21,8 +21,8 @@ const empoweringSectionContent = {
 
     value2Title: t({ en: "Social Impact", ar: "الأثر الاجتماعي" }),
     value2Description: t({
-      en: "Giving back is one of the reasons we started A&M. We support children's charities as we grow.",
-      ar: "العطاء من الأسباب التي دفعتنا إلى تأسيس A&M. وندعم الجمعيات الخيرية المعنية بالأطفال مع نموّنا.",
+      en: "We donate 10% of our profits to children's welfare causes.",
+      ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
     }),
 
     value3Title: t({ en: "Partnership", ar: "الشراكة" }),

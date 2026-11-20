@@ -7,6 +7,7 @@ import { handleHashLink } from "@/lib/handleHashLink";
 import { useIntlayer } from "next-intlayer";
 import { useState } from "react";
 import { AppLocale } from "@/types/locale";
+import FlowLines from "@/app/components/FlowLines";
 
 const AiAutomationsServices = () => {
     const router = useRouter();
@@ -16,6 +17,7 @@ const AiAutomationsServices = () => {
     const [activeCard, setActiveCard] = useState<number | null>(null);
 
     const contactHref = getLocalizedPath(locale as AppLocale, "/contact#form");
+    const learnMoreHref = getLocalizedPath(locale as AppLocale, "/features");
 
     const services = [
         {
@@ -93,11 +95,6 @@ const AiAutomationsServices = () => {
                     0% { transform: rotate(0deg); }
                     100% { transform: rotate(360deg); }
                 }
-                @keyframes orb-drift {
-                    0%, 100% { transform: translate(0, 0); }
-                    33% { transform: translate(20px, -20px); }
-                    66% { transform: translate(-15px, 15px); }
-                }
                 @keyframes ripple-out {
                     0% { transform: scale(1); opacity: 0.5; }
                     100% { transform: scale(2); opacity: 0; }
@@ -108,143 +105,9 @@ const AiAutomationsServices = () => {
                 }
             `}</style>
 
-            <section id="ai-automation-services" className="relative py-16 md:py-24 bg-gradient-to-b from-[#050A1E] via-[#0F1F3D] to-[#0A1628] overflow-hidden">
-                {/* Subtle grid */}
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0" style={{
-                        backgroundImage: 'linear-gradient(rgba(37,99,235,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.3) 1px, transparent 1px)',
-                        backgroundSize: '60px 60px',
-                    }} />
-                </div>
-
-                {/* Ambient gradient orbs */}
-                <div className="absolute top-20 right-20 w-96 h-96 bg-[#2563EB]/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 25s ease-in-out infinite' }} />
-                <div className="absolute bottom-20 left-20 w-80 h-80 bg-[#1E40AF]/10 rounded-full blur-3xl" style={{ animation: 'orb-drift 30s ease-in-out infinite reverse' }} />
-
-                {/* Floating 3D AI Icons */}
-                <style>{`
-                    @keyframes float-3d-1 {
-                        0%, 100% { transform: translateY(0) translateZ(0) rotateX(0deg) rotateY(0deg); }
-                        50% { transform: translateY(-30px) translateZ(20px) rotateX(10deg) rotateY(15deg); }
-                    }
-                    @keyframes float-3d-2 {
-                        0%, 100% { transform: translateY(0) translateZ(0) rotateX(0deg) rotateZ(0deg); }
-                        50% { transform: translateY(-25px) translateZ(15px) rotateX(-10deg) rotateZ(-10deg); }
-                    }
-                    @keyframes float-3d-3 {
-                        0%, 100% { transform: translateY(0) translateZ(0) rotateY(0deg); }
-                        50% { transform: translateY(-35px) translateZ(25px) rotateY(20deg); }
-                    }
-                `}</style>
-
-                {/* Brain/AI Icon - Top Left */}
-                <div 
-                    className="absolute top-[15%] start-[8%] w-20 h-20 pointer-events-none opacity-50"
-                    style={{ 
-                        animation: 'float-3d-1 8s ease-in-out infinite',
-                        transformStyle: 'preserve-3d',
-                        filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
-                    }}
-                >
-                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
-                        <path d="M 50 20 Q 65 20 75 35 Q 80 45 78 55 Q 75 65 68 72 Q 58 80 50 78 Q 42 80 32 72 Q 25 65 22 55 Q 20 45 25 35 Q 35 20 50 20" 
-                            fill="rgba(37, 99, 235, 0.2)" 
-                            stroke="#2563EB" 
-                            strokeWidth="2" 
-                        />
-                        {[{x: 35, y: 40}, {x: 50, y: 35}, {x: 65, y: 40}, {x: 40, y: 55}, {x: 50, y: 50}, {x: 60, y: 55}].map((pos, i) => (
-                            <circle key={`brain-${i}`} cx={pos.x} cy={pos.y} r="3" fill="#3B82F6">
-                                <animate attributeName="r" values="3;5;3" dur="2s" begin={`${i * 0.3}s`} repeatCount="indefinite" />
-                            </circle>
-                        ))}
-                    </svg>
-                </div>
-
-                {/* Circuit Chip Icon - Top Right */}
-                <div 
-                    className="absolute top-[18%] end-[12%] w-18 h-18 pointer-events-none opacity-45"
-                    style={{ 
-                        animation: 'float-3d-2 7s ease-in-out infinite 1s',
-                        transformStyle: 'preserve-3d',
-                        filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
-                    }}
-                >
-                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
-                        <rect x="30" y="30" width="40" height="40" rx="4" fill="rgba(30, 64, 175, 0.2)" stroke="#1E40AF" strokeWidth="2" />
-                        <line x1="40" y1="30" x2="40" y2="20" stroke="#2563EB" strokeWidth="2" />
-                        <line x1="50" y1="30" x2="50" y2="20" stroke="#2563EB" strokeWidth="2" />
-                        <line x1="60" y1="30" x2="60" y2="20" stroke="#2563EB" strokeWidth="2" />
-                        <line x1="40" y1="70" x2="40" y2="80" stroke="#2563EB" strokeWidth="2" />
-                        <line x1="50" y1="70" x2="50" y2="80" stroke="#2563EB" strokeWidth="2" />
-                        <line x1="60" y1="70" x2="60" y2="80" stroke="#2563EB" strokeWidth="2" />
-                        <circle cx="50" cy="50" r="8" fill="#3B82F6" opacity="0.6" />
-                    </svg>
-                </div>
-
-                {/* Robot Icon - Left Side */}
-                <div 
-                    className="absolute top-[45%] start-[5%] w-24 h-24 pointer-events-none opacity-40"
-                    style={{ 
-                        animation: 'float-3d-3 9s ease-in-out infinite 2s',
-                        transformStyle: 'preserve-3d',
-                        filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
-                    }}
-                >
-                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
-                        <rect x="30" y="35" width="40" height="40" rx="6" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" strokeWidth="2" />
-                        <circle cx="42" cy="50" r="4" fill="#60A5FA" />
-                        <circle cx="58" cy="50" r="4" fill="#60A5FA" />
-                        <rect x="43" y="60" width="14" height="3" rx="1.5" fill="#2563EB" />
-                        <circle cx="50" cy="25" r="3" fill="#1E40AF" />
-                        <line x1="50" y1="28" x2="50" y2="35" stroke="#2563EB" strokeWidth="2" />
-                        <rect x="25" y="45" width="5" height="15" rx="2" fill="#2563EB" opacity="0.7" />
-                        <rect x="70" y="45" width="5" height="15" rx="2" fill="#2563EB" opacity="0.7" />
-                    </svg>
-                </div>
-
-                {/* Neural Network Icon - Right Side */}
-                <div 
-                    className="absolute top-[50%] end-[8%] w-20 h-20 pointer-events-none opacity-50"
-                    style={{ 
-                        animation: 'float-3d-1 8.5s ease-in-out infinite 1.5s',
-                        transformStyle: 'preserve-3d',
-                        filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
-                    }}
-                >
-                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
-                        {/* Left layer */}
-                        <circle cx="20" cy="50" r="5" fill="#2563EB" opacity="0.8" />
-                        {/* Middle layer */}
-                        <circle cx="50" cy="30" r="5" fill="#3B82F6" opacity="0.8" />
-                        <circle cx="50" cy="50" r="5" fill="#3B82F6" opacity="0.8" />
-                        <circle cx="50" cy="70" r="5" fill="#3B82F6" opacity="0.8" />
-                        {/* Right layer */}
-                        <circle cx="80" cy="50" r="5" fill="#60A5FA" opacity="0.8" />
-                        {/* Connections */}
-                        <line x1="20" y1="50" x2="50" y2="30" stroke="#2563EB" strokeWidth="1" opacity="0.4" />
-                        <line x1="20" y1="50" x2="50" y2="50" stroke="#2563EB" strokeWidth="1" opacity="0.4" />
-                        <line x1="20" y1="50" x2="50" y2="70" stroke="#2563EB" strokeWidth="1" opacity="0.4" />
-                        <line x1="50" y1="30" x2="80" y2="50" stroke="#3B82F6" strokeWidth="1" opacity="0.4" />
-                        <line x1="50" y1="50" x2="80" y2="50" stroke="#3B82F6" strokeWidth="1" opacity="0.4" />
-                        <line x1="50" y1="70" x2="80" y2="50" stroke="#3B82F6" strokeWidth="1" opacity="0.4" />
-                    </svg>
-                </div>
-
-                {/* Code Brackets Icon - Bottom Right */}
-                <div 
-                    className="absolute bottom-[25%] end-[15%] w-16 h-16 pointer-events-none opacity-45"
-                    style={{ 
-                        animation: 'float-3d-2 7.5s ease-in-out infinite 0.5s',
-                        transformStyle: 'preserve-3d',
-                        filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
-                    }}
-                >
-                    <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100">
-                        <path d="M 30 30 L 20 50 L 30 70" stroke="#2563EB" strokeWidth="3" fill="none" strokeLinecap="round" />
-                        <path d="M 70 30 L 80 50 L 70 70" stroke="#2563EB" strokeWidth="3" fill="none" strokeLinecap="round" />
-                        <line x1="55" y1="25" x2="45" y2="75" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" />
-                    </svg>
-                </div>
+            <section id="ai-automation-services" className="relative py-16 md:py-24 bg-[#050b26] overflow-hidden">
+                {/* Backdrop: the same flowing lines as the hero above */}
+                <FlowLines />
 
                 <div className="relative z-10 w-[90%] max-w-7xl mx-auto">
                     {/* Section header */}
@@ -272,9 +135,10 @@ const AiAutomationsServices = () => {
                                     
                                     {/* Rotating gradient ring */}
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                        <div 
-                                            className={`absolute inset-[-2px] bg-gradient-to-r ${service.gradient} rounded-3xl`}
-                                            style={{ animation: 'gradient-rotate 8s linear infinite' }}
+                                        {/* Spins only while hovered (it's invisible otherwise), so it costs no frames during scroll */}
+                                        <div
+                                            className={`absolute inset-[-2px] bg-gradient-to-r ${service.gradient} rounded-3xl [animation-play-state:paused] group-hover:[animation-play-state:running]`}
+                                            style={{ animationName: 'gradient-rotate', animationDuration: '8s', animationTimingFunction: 'linear', animationIterationCount: 'infinite' }}
                                         />
                                         <div className="absolute inset-[2px] bg-gradient-to-br from-[#0F1F3D] via-[#0A1628] to-[#050A1E] rounded-3xl" />
                                     </div>
@@ -332,23 +196,6 @@ const AiAutomationsServices = () => {
                                             ))}
                                         </ul>
 
-                                        {/* Learn more link */}
-                                        <Link 
-                                            href={service.href}
-                                            onClick={(e) => handleHashLink(e, service.href, router)}
-                                            className="mt-6 cursor-pointer px-6 py-3 rounded-xl text-sm font-semibold text-white relative overflow-hidden group/btn transition-all duration-300 inline-block text-center"
-                                            style={{
-                                                background: `linear-gradient(135deg, ${service.accentColor}20 0%, ${service.accentColor}10 100%)`,
-                                                border: `1px solid ${service.accentColor}30`,
-                                            }}
-                                        >
-                                            <span className="relative z-10">{content.learnMore.value}</span>
-                                            <div 
-                                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover/btn:opacity-100"
-                                                style={{ animation: 'shine-sweep 2s ease-in-out infinite' }}
-                                            />
-                                        </Link>
-
                                         {/* Corner accent */}
                                         <div className="absolute top-4 end-4 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity">
                                             <div className="absolute inset-0 rounded-full" style={{ background: `radial-gradient(circle, ${service.accentColor} 0%, transparent 70%)` }} />
@@ -357,6 +204,22 @@ const AiAutomationsServices = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+
+                    {/* One shared Learn more for all three cards → the EPM Build Agent page */}
+                    <div className="mt-14 flex justify-center">
+                        <Link
+                            href={learnMoreHref}
+                            onClick={(e) => handleHashLink(e, learnMoreHref, router)}
+                            className="group/btn relative overflow-hidden cursor-pointer px-10 py-4 rounded-xl text-base font-semibold text-white text-center transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
+                            style={{ background: "linear-gradient(135deg, #2563EB33 0%, #2563EB14 100%)", border: "1px solid #3B82F650" }}
+                        >
+                            <span className="relative z-10">{content.learnMore.value}</span>
+                            <div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover/btn:opacity-100 [animation-play-state:paused] group-hover/btn:[animation-play-state:running]"
+                                style={{ animationName: 'shine-sweep', animationDuration: '2s', animationTimingFunction: 'ease-in-out', animationIterationCount: 'infinite' }}
+                            />
+                        </Link>
                     </div>
                 </div>
             </section>

@@ -138,16 +138,16 @@ body {
 
 /* Page-enter fade (app/[locale]/template.tsx): smooth transition between pages, CSS-only */
 @keyframes page-enter {
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(22px) scale(0.985); }
   to { opacity: 1; transform: none; }
 }
-.page-enter { animation: page-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
-/* Exit half (PageLeave.tsx): the old page lifts away while the next one loads */
+.page-enter { animation: page-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; transform-origin: 50% 0; }
+/* Exit half (PageLeave.tsx): the old page drops back and clears quickly while the next one loads */
 @keyframes page-leave {
   from { opacity: 1; transform: none; }
-  to { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 0; transform: translateY(-8px) scale(0.992); }
 }
-.page-enter.page-leaving { animation: page-leave 0.32s cubic-bezier(0.55, 0, 0.45, 1) both; pointer-events: none; }
+.page-enter.page-leaving { animation: page-leave 0.2s cubic-bezier(0.4, 0, 1, 1) both; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
   .page-enter, .page-enter.page-leaving { animation: none; }
 }

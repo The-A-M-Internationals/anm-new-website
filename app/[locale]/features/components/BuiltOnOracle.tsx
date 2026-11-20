@@ -21,9 +21,11 @@ const BuiltOnOracle = () => {
                 <h2 className="text-4xl md:text-[48px] font-bold text-white mb-3">
                     {content.titlePrefix.value} <span className="text-yellow-500">{content.titleHighlight.value}</span>
                 </h2>
-                <p className="text-gray-300 text-lg">
-                    {content.description.value}
-                </p>
+                <div className="space-y-3">
+                    {[content.line1.value, content.line2.value, content.line3.value].map((line) => (
+                        <p key={line} className="text-gray-300 text-lg">{line}</p>
+                    ))}
+                </div>
             </div>
         </div>
     );

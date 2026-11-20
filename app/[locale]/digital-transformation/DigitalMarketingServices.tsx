@@ -268,9 +268,9 @@ const DigitalMarketingServices = () => {
                     }}
                 >
                     <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
-                        <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGrad)" stroke="#C9A84C" strokeWidth="2" />
+                        <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGradServices)" stroke="#C9A84C" strokeWidth="2" />
                         <defs>
-                            <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <linearGradient id="cursorGradServices" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="rgba(201, 168, 76, 0.3)" />
                                 <stop offset="100%" stopColor="rgba(201, 168, 76, 0.1)" />
                             </linearGradient>

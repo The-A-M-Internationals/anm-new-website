@@ -15,8 +15,8 @@ const benefitsContent = {
 
     card1Title: t({ en: "Professional Growth", ar: "نمو مهني" }),
     card1Description: t({
-      en: "Structured Oracle EPM training, mentorship from senior consultants, and Oracle certification support",
-      ar: "تدريب منظم على Oracle EPM، وإرشاد من كبار المستشارين، ودعم للحصول على شهادات Oracle",
+      en: "Structured Oracle EPM training, mentorship from senior consultants, and Oracle certification guidance",
+      ar: "تدريب منظم على Oracle EPM، وإرشاد من كبار المستشارين، وتوجيه للحصول على شهادات Oracle",
     }),
 
     card2Title: t({
@@ -60,8 +60,8 @@ const benefitsContent = {
       ar: "هدف وأثر اجتماعي",
     }),
     card6Description: t({
-      en: "We support children's charities as we grow",
-      ar: "ندعم الجمعيات الخيرية للأطفال مع نموّنا",
+      en: "We donate 10% of our profits to children's welfare causes.",
+      ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
     }),
 
     card7Title: t({

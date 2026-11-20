@@ -3,9 +3,11 @@
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { getImageProps } from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useRef } from 'react'
 import { useLocale } from "next-intlayer";
 import { handleHashLink } from '@/lib/handleHashLink'
+import HeroRevealText from './HeroRevealText'
+import { useHeroTextReveal } from './useHeroTextReveal'
 
 interface PageHeroProps {
    badge?: string
@@ -41,23 +43,8 @@ const PageHero: React.FC<PageHeroProps> = ({
    const { props: { srcSet: t } } = getImageProps({ ...heroCommon, src: image3 });
    const { props: mobileImg } = getImageProps({ ...heroCommon, src: image2 });
    const desktopSrc = { srcSet: d }, tabletSrc = { srcSet: t };
-   const [isZoomed, setIsZoomed] = useState(false);
-
-   useEffect(() => {
-      // Trigger zoom every 10 seconds
-      const interval = setInterval(() => {
-         setIsZoomed(true);
-
-         // Remove zoom after 700ms (match transition duration)
-         const timeout = setTimeout(() => {
-            setIsZoomed(false);
-         }, 700);
-
-         return () => clearTimeout(timeout);
-      }, 3000);
-
-      return () => clearInterval(interval);
-   }, []);
+   const textRef = useRef<HTMLDivElement>(null);
+   useHeroTextReveal(textRef);   // title lines rise out of a mask on load
 
    return (
       <div className='relative w-[90%] mx-auto'>
@@ -79,24 +66,20 @@ const PageHero: React.FC<PageHeroProps> = ({
             </picture>
 
             {/* Text */}
-            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 flex w-[95%] flex-col gap-2 md:gap-1 lg:gap-2'>
+            <div ref={textRef} className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 flex w-[95%] flex-col gap-2 md:gap-1 lg:gap-2'>
                {badge && (
-                  <h4 className='w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
+                  <h4 data-hero-soft className='motion-safe:opacity-0 w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
                      {badge}
                   </h4>
                )}
 
-               <h3 className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
-                  {title}
-               </h3>
+               <HeroRevealText text={title} className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`} />
 
                {title2 && (
-                  <h3 className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
-                     {title2}
-                  </h3>
+                  <HeroRevealText text={title2} className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`} />
                )}
 
-               <p className='text-[18px] md:text-base lg:text-[19px] text-white [text-shadow:0_1px_12px_rgba(0,0,0,0.6)] w-[70%] md:w-[60%] lg:w-[65%] leading-relaxed'>
+               <p data-hero-soft className='motion-safe:opacity-0 text-[18px] md:text-base lg:text-[19px] text-white [text-shadow:0_1px_12px_rgba(0,0,0,0.6)] w-[70%] md:w-[60%] lg:w-[65%] leading-relaxed'>
                   {description}
                </p>
             </div>

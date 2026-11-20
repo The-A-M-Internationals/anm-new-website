@@ -81,8 +81,6 @@ const Open = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                         />
                         <p className="text-black text-sm md:text-base max-w-2xl">
                             {content.emptyLine1.value}
-                            <br className="hidden md:block" />
-                            {content.emptyLine2.value}
                         </p>
                     </div>
                     </>

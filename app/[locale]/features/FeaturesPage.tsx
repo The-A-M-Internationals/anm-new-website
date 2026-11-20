@@ -34,7 +34,7 @@ export default function FeaturesPage() {
                     title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={getLocalizedPath(locale as AppLocale, "/features#epm-suites")}
+                    link={getLocalizedPath(locale as AppLocale, "/features#early-access")}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}

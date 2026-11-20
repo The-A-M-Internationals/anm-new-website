@@ -43,7 +43,7 @@ export default function MethodologyPage() {
             <section className="snap-section"><MethodologySection /></section>
             <section className="snap-section"><ProcessMatters /></section>
             {/* <PartnerShip /> */}
-            <section className="snap-section"><Innovation /></section>
+            <section className="snap-section"><Innovation hideContact /></section>
         </div>
     );
 }

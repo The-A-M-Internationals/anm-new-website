@@ -12,8 +12,8 @@ const featuresContent = {
       ar: "ذكاء اصطناعي يساعد في بناء Oracle EPM",
     }),
     heroDescription: t({
-      en: "We're building an AI assistant that takes on repetitive Oracle EPM build work, so consultants spend their time on design and the business. Preview at GITEX Global 2026.",
-      ar: "نعمل على بناء مساعد ذكاء اصطناعي يتولّى أعمال البناء المتكررة في Oracle EPM، ليتفرّغ الاستشاريون للتصميم واحتياجات الأعمال. عرض تمهيدي في GITEX Global 2026.",
+      en: "We’re building an AI assistant that takes on repetitive Oracle EPM build work, so consultants can spend their time on design and the business.",
+      ar: "نعمل على بناء مساعد ذكاء اصطناعي يتولّى أعمال البناء المتكررة في Oracle EPM، ليتمكّن الاستشاريون من تخصيص وقتهم للتصميم واحتياجات الأعمال.",
     }),
     heroButton: t({
       en: "Join early access",

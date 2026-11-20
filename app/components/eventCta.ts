@@ -22,3 +22,17 @@ export function openEventCta(ev: MouseEvent, cta: ReturnType<typeof eventCta>, r
   if (cta.external) { window.open(cta.href, "_blank", "noopener,noreferrer"); return; }
   if (!handleHashLink(ev, cta.href, router)) router.push(cta.href);
 }
+
+/**
+ * Optional second button on an upcoming event (Firebase): detailsText / detailsTextAr + detailsLink,
+ * e.g. "Event details" → https://… (opens in a new tab). Hidden when either text or link is missing.
+ */
+export type EventDetailsFields = { detailsText?: string; detailsTextAr?: string; detailsLink?: string };
+
+export function eventDetailsLink(e: EventDetailsFields, locale: string) {
+  const label = locale === "ar" ? e.detailsTextAr || e.detailsText : e.detailsText;
+  const link = e.detailsLink?.trim();
+  if (!label || !link) return null;
+  const href = link.startsWith("/") ? `/${locale}${link}` : link;
+  return { label, href, external: /^https?:\/\//.test(href) };
+}

@@ -1,16 +1,24 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useIntlayer } from 'next-intlayer';
+import { useIntlayer, useLocale } from 'next-intlayer';
+import type { CmsDoc } from '@/lib/cms/shared';
+import { useCmsDocs } from '@/lib/cms/useCmsDocs';
+import { byOrder } from '@/lib/cms/siteContent';
 
 import StoryCard, { type Story } from './StoryCard';
 import StoriesCta from './StoriesCta';
+import TeamExperience from './TeamExperience';
+import { storiesFromDocs } from './ourWorkStories';
 
-const TAB_KEYS = ['all', 'epm', 'digital'];
+const TAB_KEYS = ['all', 'epm'];
 
-const SuccessStories: React.FC = () => {
+/** docs: Our Work projects from the admin portal; without them the built-in ESG card shows */
+const SuccessStories: React.FC<{ docs?: CmsDoc[] }> = ({ docs: initialDocs }) => {
   const searchParams = useSearchParams();
   const content = useIntlayer("success-stories");
+  const { locale } = useLocale();
+  const { docs } = useCmsDocs('ourWork', initialDocs);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const searchTab = searchParams.get('tab');
@@ -38,46 +46,31 @@ const SuccessStories: React.FC = () => {
   const tabs = [
     { key: 'all', label: content.tabs.all.value },
     { key: 'epm', label: content.tabs.epm.value },
-    { key: 'digital', label: content.tabs.digital.value },
   ];
 
-  const s = content.caseStudies;
+  const s = content.caseStudies.study1;
   const l = content.labels;
+  const labels = { client: l.client.value, challenge: l.challenge.value, whatWeDid: l.whatWeDid.value, outcome: l.outcome.value };
 
-  const caseStudies: Story[] = [
-    {
-      id: '1',
-      categoryKey: 'epm',
-      industry: s.study1.industry.value,
-      companyName: s.study1.companyName.value,
-      metric1: s.study1.metric1.value,
-      metric1Label: s.study1.metric1Label.value,
-      metric2: s.study1.metric2.value,
-      metric2Label: s.study1.metric2Label.value,
-      image: '/sst1.jpg',
-      rows: [
-        { label: l.client.value, text: s.study1.client.value },
-        { label: l.challenge.value, text: s.study1.challenge.value },
-        { label: l.whatWeDid.value, text: s.study1.whatWeDid.value },
-        { label: l.outcome.value, text: s.study1.outcome.value, highlight: true },
-      ],
-    },
-    {
-      id: '2',
-      categoryKey: 'digital',
-      industry: s.study2.industry.value,
-      companyName: s.study2.companyName.value,
-      metric1: s.study2.metric1.value,
-      metric1Label: s.study2.metric1Label.value,
-      metric2: s.study2.metric2.value,
-      metric2Label: s.study2.metric2Label.value,
-      image: '/sst2.jpg',
-      rows: [
-        { label: l.client.value, text: s.study2.client.value },
-        { label: l.whatWeDid.value, text: s.study2.whatWeDid.value, highlight: true },
-      ],
-    },
-  ];
+  const builtIn: Story = {
+    id: '1',
+    categoryKey: 'epm',
+    industry: s.industry.value,
+    companyName: s.companyName.value,
+    metric1: s.metric1.value,
+    metric1Label: s.metric1Label.value,
+    metric2: s.metric2.value,
+    metric2Label: s.metric2Label.value,
+    image: '/sst1.jpg',
+    rows: [
+      { label: labels.client, text: s.client.value },
+      { label: labels.challenge, text: s.challenge.value },
+      { label: labels.whatWeDid, text: s.whatWeDid.value },
+      { label: labels.outcome, text: s.outcome.value, highlight: true },
+    ],
+  };
+
+  const caseStudies: Story[] = docs.length ? storiesFromDocs(byOrder(docs), locale, labels) : [builtIn];
 
   const filteredStudies = activeTab === 'all'
     ? caseStudies
@@ -105,9 +98,11 @@ const SuccessStories: React.FC = () => {
         {/* Case Studies */}
         <div className="space-y-12 w-full">
           {filteredStudies.map((study) => (
-            <StoryCard key={study.id} study={study} />
+            <StoryCard key={study.id} study={study} readStoryLabel={l.readStory.value} />
           ))}
         </div>
+
+        <TeamExperience />
 
         <StoriesCta />
       </div>

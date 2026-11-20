@@ -34,8 +34,8 @@ const successStoryContent = {
     items: [
       {
         client: t({
-          en: "TBC Corporation",
-          ar: "TBC Corporation",
+          en: "A US automotive company",
+          ar: "شركة سيارات أمريكية",
         }),
         title: t({
           en: "ESG emissions reporting",

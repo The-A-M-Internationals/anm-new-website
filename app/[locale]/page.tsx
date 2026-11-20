@@ -1,17 +1,21 @@
 import ServicesShowcase from "../components/services/showcase/ServicesShowcase";
 import AboutUs from "../components/AboutUs";
 import PartnerShipCard from "../components/PartnerShipCard";
-import OurClients from "../components/OurClients";
+import LogoStrip from "../components/LogoStrip";
 import SuccessStory from "../components/SuccessStory";
 import EventsSection from "../components/EventsSection";
 import Innovation from "../components/Innovation";
 import HomeHero from "../components/homePageComponents/HomeHero";
 import { getCollection, getEntry } from "@/lib/cms/server";
 import { byOrder, toCounters } from "@/lib/cms/siteContent";
+import { toLogos } from "../components/logos-data";
 
 export default async function Home() {
-  // Admin-edited: banner numbers and Our Work cards (built-in content if none saved)
-  const [home, ourWork] = await Promise.all([getEntry("siteContent", "home"), getCollection("ourWork")]);
+  // Admin-edited: banner numbers, Our Work cards and client logos (built-in content if none saved)
+  const [home, ourWork, clientLogos] = await Promise.all([
+    getEntry("siteContent", "home"), getCollection("ourWork"), getCollection("clientLogos"),
+  ]);
+  const logos = toLogos(clientLogos ? byOrder(clientLogos) : []);
   return (
     <div className="flex flex-col">
       <section className="snap-section">
@@ -27,7 +31,7 @@ export default async function Home() {
         <PartnerShipCard />
       </section> */}
       <section className="snap-section">
-        <OurClients />
+        <LogoStrip logos={logos.length ? logos : undefined} />
       </section>
       <section id="success-stories" className="snap-section">
         <SuccessStory docs={ourWork?.length ? byOrder(ourWork) : undefined} />

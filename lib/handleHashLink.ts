@@ -13,8 +13,10 @@ const headerOffset = () => {
 
 export function scrollToHash(hash: string, immediate = false): boolean {
   if (typeof window === "undefined" || !hash || hash === "#") return false;
-  const targetId = hash.startsWith("#") ? hash : `#${hash}`;
-  const el = document.querySelector<HTMLElement>(targetId);
+  // getElementById, not querySelector: a typed URL like "#team/admin" is not a valid CSS selector
+  let id = hash.replace(/^#/, "");
+  try { id = decodeURIComponent(id); } catch { /* keep raw id */ }
+  const el = document.getElementById(id);
   if (!el) return false;
   const lenis = window.__lenis;
   if (lenis) {
@@ -37,12 +39,14 @@ export function handleHashLink(
   const [path, hash] = href.split("#");
   if (typeof window === "undefined") return false;
 
+  // English pages are served without "/en" (/en/contact redirects to /contact), so drop it before comparing
+  const stripEn = (p: string) => (p.replace(/^\/en(?=\/|$)/, "").replace(/\/$/, "") || "/");
   const currentPath = window.location.pathname;
   const locale = currentPath.split("/")[1];
   const hasLocale = ["en", "ar"].includes(locale);
   const targetPathWithLocale = hasLocale && !path.startsWith(`/${locale}`) ? `/${locale}${path}` : path;
-  const normalizedCurrentPath = currentPath.replace(/\/$/, "") || "/";
-  const normalizedTargetPath = targetPathWithLocale.replace(/\/$/, "") || "/";
+  const normalizedCurrentPath = stripEn(currentPath);
+  const normalizedTargetPath = stripEn(targetPathWithLocale);
 
   if (normalizedCurrentPath === normalizedTargetPath || path === "") {
     e.preventDefault();
@@ -50,6 +54,15 @@ export function handleHashLink(
       window.history.pushState(null, "", `#${hash}`);
       return true;
     }
+    return false;
+  }
+
+  // Another page: go straight to the final address so the "/en" redirect can't drop the #hash
+  const router = _router as { push?: (href: string) => void } | undefined;
+  if (path && typeof router?.push === "function") {
+    e.preventDefault();
+    router.push(`${normalizedTargetPath}#${hash}`);
+    return true;
   }
 
   return false;

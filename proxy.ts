@@ -19,7 +19,7 @@ export function proxy(request: NextRequest) {
     pathname === "/admin" || pathname.startsWith("/admin/") ||   // admin portal: no language routing
     pathname.startsWith("/_next") ||
     pathname.includes("favicon.ico") ||
-    /\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2|mp4|webm|xml|txt)$/i.test(pathname)
+    /\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2|mp4|webm|xml|txt|mjs)$/i.test(pathname)
   ) {
     return NextResponse.next();
   }
@@ -32,6 +32,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths that are NOT static assets or API routes
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2|mp4|webm|xml|txt)$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf|otf|woff|woff2|mp4|webm|xml|txt|mjs)$).*)",
   ],
 };

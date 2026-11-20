@@ -2,11 +2,19 @@
 'use client';
 
 import Image from 'next/image';
+import { UserRound } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useIntlayer, useLocale } from "next-intlayer";
 import "./leadershipTeam.content";
 import type { CmsDoc } from '@/lib/cms/shared';
 import { tr } from '@/lib/cms/siteContent';
+
+/** Desktop column a card sits in (for the staggered offsets); the centered last row keeps the middle columns' offsets */
+const staggerCol = (idx: number, n: number) => {
+    const r = n % 4, lastStart = n - r;
+    if (!r || idx < lastStart) return idx % 4;
+    return Math.min(3, Math.floor((4 - r) / 2) + (idx - lastStart));
+};
 
 /** founders / team: from the admin portal; without them the built-in people show */
 const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc[] }) => {
@@ -42,12 +50,13 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
         name: tr(d, 'name', locale),
         role: tr(d, 'role', locale),
         image: String(d.imageSrc || ''),
-    })).filter((e) => e.image) : [
-        { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.png" },
+    })).filter((e) => e.name) : [
+        { name: "Pratusha", role: "QA Engineer", image: "" },
         { name: "Rudra Prakash", role: "EPM Consultant", image: "/business/rudra-prakash.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
         { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.png" },
-        { name: "Sri Varsha", role: "Developer - Chief Bug Slayer", image: "/business/sri-varsha.jpg" },
+        { name: "Sri Varsha", role: "Technical Lead - Chief Bug Slayer", image: "/business/sri-varsha.jpg" },
+        { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.png" },
         { name: "Narayanan", role: "Software Engineer - Backend Beast", image: "/business/surya.png" }
     ];
 
@@ -102,7 +111,7 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                 {Services.map((service, idx) => (
                     <div
                         key={idx}
-                        className="team-card w-full max-w-[370px] transition-all duration-1000 ease-out will-change-transform opacity-0 translate-y-32"
+                        className="team-card w-full max-w-[370px] transition-[opacity,translate,transform] duration-1000 ease-out will-change-transform opacity-0 translate-y-32"
                         style={{ transitionDelay: `${idx * 150}ms` }}
                     >
                     <div
@@ -138,7 +147,7 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                                 <p className="text-sm text-gray-600 font-semibold mb-3">
                                     {service.role}
                                 </p>
-                                <p className="text-sm text-gray-700 leading-relaxed overflow-y-auto max-h-[70%]">
+                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line overflow-y-auto max-h-[70%]">
                                     {service.fullBio}
                                 </p>
                                 <button className="mt-4 text-[#D4AF37] text-sm font-bold border-b border-[#D4AF37] pb-0.5">
@@ -159,7 +168,7 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                                 <p className="text-sm text-gray-600 font-semibold mb-3">
                                     {service.role}
                                 </p>
-                                <p className="text-sm text-gray-700 leading-relaxed">
+                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
                                     {service.fullBio}
                                 </p>
                             </div>
@@ -184,24 +193,19 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                 </div>
 
                 {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
-                <div id="employees-space" ref={gridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 sm:gap-x-6 gap-y-10 sm:gap-y-16 w-full items-start mt-10 pb-16 sm:pb-32">
+                {/* Rows of 4 (2 on mobile); an unfinished last row is centered, whatever the team size */}
+                <div id="employees-space" ref={gridRef} className="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-10 sm:gap-y-16 w-full items-start mt-10 pb-16 sm:pb-32">
                 {Employees.map((emp, idx) => (
-                    <div 
-                        key={idx} 
-                        className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out will-change-transform opacity-0 translate-y-32
-                            ${(idx === 0) ? 'lg:mt-0' : ''}
-                            ${(idx === 1) ? 'lg:mt-10' : ''}
-                            ${(idx === 2) ? 'lg:mt-20' : ''}
-                            ${(idx === 3) ? 'lg:mt-4' : ''}
-                            ${(idx === 4) ? (Employees.length === 6 ? 'lg:mt-10 lg:col-start-2' : 'lg:mt-0') : ''}
-                            ${(idx === 5) ? (Employees.length === 6 ? 'lg:mt-20' : 'lg:mt-10') : ''}
-                            ${(idx >= 6) ? ['lg:mt-0', 'lg:mt-10', 'lg:mt-20', 'lg:mt-4'][idx % 4] : ''}
+                    <div
+                        key={idx}
+                        className={`team-card flex flex-col w-[calc((100%-0.75rem)/2)] sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4.5rem)/4)] group cursor-pointer transition-[opacity,translate,transform] duration-1000 ease-out will-change-transform opacity-0 translate-y-32
+                            ${['lg:mt-0', 'lg:mt-10', 'lg:mt-20', 'lg:mt-4'][staggerCol(idx, Employees.length)]}
                         `}
                         style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
                         {/* IMAGE - Sharp corners like the video */}
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#f3f4f6]">
-                            <Image 
+                            {emp.image ? <Image
                                 src={emp.image}
                                 alt={emp.name}
                                 fill
@@ -209,7 +213,12 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                                 decoding="async"
                                 sizes="(min-width: 1024px) 330px, 50vw"
                                 className="object-cover transform-gpu transition-[transform,opacity] duration-700 ease-in-out group-hover:scale-105"
-                            />
+                            /> : (
+                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-[#9CA3AF]" aria-label={`${emp.name} (photo coming soon)`}>
+                                    <UserRound className="w-1/3 h-1/3" strokeWidth={1.25} />
+                                    <span className="text-xs md:text-sm">Photo coming soon</span>
+                                </div>
+                            )}
                         </div>
                         
                         {/* TEXT - Name left, Role right */}

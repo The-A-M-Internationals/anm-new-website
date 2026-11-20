@@ -32,7 +32,8 @@ const CultureGrowthSection = () => {
 
                 {/* ROW 1 — Title + Description */}
                 <div id="culture" className="flex flex-col lg:flex-row justify-between items-start gap-6">
-                    <h2 className="text-xl md:text-2xl font-semibold text-black leading-tight">
+                    {/* Desktop: same width as the image below and centered over it, level with the middle of the paragraph */}
+                    <h2 className="text-xl md:text-2xl font-semibold text-black leading-tight lg:w-[44%] xl:w-[552px] lg:shrink-0 lg:text-center lg:self-center">
                         {content.title.value}
                     </h2>
 

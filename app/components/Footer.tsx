@@ -318,7 +318,7 @@ const Footer = () => {
 
             <div className="w-full h-px bg-white/20" />
 
-            <div className="bg-[#0D1B3E] text-center text-white py-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
+            <div className="bg-[#0D1B3E] text-center text-white pt-6 pb-24 md:pb-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
                 <style dangerouslySetInnerHTML={{__html: `
                     @keyframes marquee-footer-ltr {
                         0% { transform: translateX(0); }

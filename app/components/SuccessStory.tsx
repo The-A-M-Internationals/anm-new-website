@@ -92,7 +92,7 @@ const SuccessStory = ({ docs }: { docs?: CmsDoc[] }) => {
   }, [isTab, totalPages]);
 
   return (
-    <div id="success-stories" className='flex flex-col items-center justify-center px-4 py-8'>
+    <div className='flex flex-col items-center justify-center px-4 py-8'>
       {/* Heading */}
       <h3 className="text-[#000000] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold text-center">
         <span className="text-[#ab8d2b]">

@@ -17,13 +17,8 @@ const openPositionsContent = {
     }),
 
     emptyLine1: t({
-      en: "No current openings — but great things are coming soon.",
-      ar: "لا توجد وظائف متاحة حاليًا — لكن القادم أفضل قريبًا.",
-    }),
-
-    emptyLine2: t({
-      en: "Subscribe to stay updated on future roles and opportunities!",
-      ar: "اشترك لتبقى على اطلاع بالفرص والأدوار القادمة!",
+      en: "No open roles right now. Send your CV to am@theaminternationals.com and we'll be in touch when something opens up.",
+      ar: "لا توجد وظائف شاغرة حاليًا. أرسل سيرتك الذاتية إلى am@theaminternationals.com وسنتواصل معك عند توفّر فرصة جديدة.",
     }),
 
     deptLabel: t({ en: "Dept", ar: "القسم" }),

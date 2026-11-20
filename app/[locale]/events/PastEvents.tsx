@@ -5,16 +5,16 @@ import { ArrowRight } from "lucide-react";
 import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
 import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from "next-intlayer";
+import { parseEventRange, startOfToday } from "./eventDates";
 
 interface EventType {
   id: string;
   title: string;
-  titleAr?: string;
   description: string;
-  descriptionAr?: string;
   dateRange: string;
   month: string;
-  monthAr?: string;
+  /** Optional small label from Firebase (`tag` / `tagAr`), e.g. "Attended" */
+  tag: string;
   externalLink: string;
 }
 
@@ -32,73 +32,24 @@ const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
   const events = useMemo(() => {
       try {
         const snapshot = asSnapshot(docs);
-
         const isArabic = locale?.toLowerCase().startsWith("ar");
+        const today = startOfToday();
+        const pick = (en?: string, ar?: string) => (isArabic ? ar ?? en : en) ?? "";
 
-        const parseEventEndDate = (dateRange: string, month: string): Date | null => {
-          const days = dateRange.match(/\d{1,2}/g);
-          if (!days || days.length === 0) return null;
-
-          const endDay = days[days.length - 1];
-          const [mon, yr] = month.split(",");
-          const year = `20${yr.trim()}`;
-
-          const endDate = new Date(`${mon} ${endDay}, ${year}`);
-          endDate.setHours(23, 59, 59, 999);
-          return endDate;
-        };
-
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        const pastEvents: EventType[] = snapshot.docs
-          .map((doc) => {
-            const data = doc.data();
-            return {
-              id: doc.id,
-              title: data.title ?? "",
-              titleAr: data.titleAr,
-              description: data.description ?? "",
-              descriptionAr: data.descriptionAr,
-              dateRange: data.dateRange ?? "",
-              month: data.month ?? "",
-              monthAr: data.monthAr,
-              externalLink: data.externalLink ?? "",
-            };
-          })
-          .filter((event) => {
-            const endDate = parseEventEndDate(event.dateRange, event.month);
-            return endDate !== null && endDate < today;
-          })
-          .sort((a, b) => {
-            const d1 = parseEventEndDate(a.dateRange, a.month);
-            const d2 = parseEventEndDate(b.dateRange, b.month);
-            return (d2?.getTime() ?? 0) - (d1?.getTime() ?? 0);
-          });
-
-        const localizedEvents = pastEvents.map((event) => {
-          if (!isArabic) {
-            return {
-              id: event.id,
-              title: event.title,
-              description: event.description,
-              dateRange: event.dateRange,
-              month: event.month,
-              externalLink: event.externalLink,
-            };
-          }
-
-          return {
-            id: event.id,
-            title: event.titleAr ?? event.title,
-            description: event.descriptionAr ?? event.description,
-            dateRange: event.dateRange,
-            month: event.monthAr ?? event.month,
-            externalLink: event.externalLink,
-          };
-        });
-
-        return localizedEvents as EventType[];
+        // Month-only events (no day numbers) end on the last day of their month
+        return snapshot.docs
+          .map((doc) => ({ id: doc.id, data: doc.data(), range: parseEventRange(doc.data().dateRange, doc.data().month) }))
+          .filter(({ range }) => range !== null && range.end < today)
+          .sort((a, b) => b.range!.end.getTime() - a.range!.end.getTime())
+          .map(({ id, data }): EventType => ({
+            id,
+            title: pick(data.title, data.titleAr),
+            description: pick(data.description, data.descriptionAr),
+            dateRange: data.dateRange ?? "",
+            month: pick(data.month, data.monthAr),
+            tag: pick(data.tag, data.tagAr),
+            externalLink: data.externalLink ?? "",
+          }));
       } catch (error) {
         console.error("Failed to load past events", error);
         return [] as EventType[];
@@ -158,7 +109,11 @@ const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
                   key={event.id}
                   className="bg-white rounded-[20px] md:rounded-[40px] border border-gray-300 p-6 md:p-8 shadow-md hover:shadow-md transition-shadow duration-300"
                 >
-                  {/* REMOVED: Date Badge section was here */}
+                  {event.tag && (
+                    <span className="inline-block bg-[#FFFBED] text-[#D4AF37] px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3">
+                      {event.tag}
+                    </span>
+                  )}
 
                   <h2 className="text-2xl font-medium text-gray-900 mb-4">
                     {event.title}

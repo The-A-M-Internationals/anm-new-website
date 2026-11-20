@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useIntlayer } from "next-intlayer";
+import WelfareGraph from "./WelfareGraph";
 
 const ChildWelfareImpact = () => {
     const content = useIntlayer("impactsChildWelfare");
@@ -19,6 +20,8 @@ const ChildWelfareImpact = () => {
                         {content?.headerDescription?.value}
                     </p>
                 </div>
+
+                <WelfareGraph />
 
                 {/* CSR SECTION */}
                 <div className="border-t border-gray-200 pt-16">

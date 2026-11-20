@@ -5,3 +5,6 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://theaminter
 export const localePath = (locale: string, path: string) =>
   `${locale === "ar" ? "/ar" : ""}${path === "/" ? (locale === "ar" ? "" : "/") : path}`;
 
+
+/** "Get in Touch" buttons open WhatsApp; "Book a Consultation" stays on the contact form. */
+export const WHATSAPP_URL = "https://wa.me/971564783478";

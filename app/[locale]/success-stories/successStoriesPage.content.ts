@@ -13,8 +13,8 @@ const successStoriesPageContent = {
       ar: "",
     }),
     heroDescription: t({
-      en: "A look at projects we've delivered for clients in the USA, UAE and India.",
-      ar: "نظرة على مشاريع قدّمناها لعملاء في الولايات المتحدة والإمارات والهند.",
+      en: "Real projects we’ve delivered, and the Oracle EPM experience our team brings to every client.",
+      ar: "مشاريع حقيقية أنجزناها، وخبرة Oracle EPM التي يقدّمها فريقنا لكل عميل.",
     }),
     heroButton: t({
       en: "Schedule a Consultation",

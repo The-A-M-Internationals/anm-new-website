@@ -1,0 +1,55 @@
+/* Our Clients section: original heading and backdrop, with one line of logos gliding sideways below it */
+.ls {
+  --gutter: max(20px, calc((100vw - 1240px) / 2));
+  position: relative; overflow: hidden; isolation: isolate; contain: layout paint;
+  padding: clamp(80px, 9vw, 120px) 0 clamp(64px, 8vw, 96px);
+  background: #f4f6f9; color: #0b132b;
+}
+.ls-orb {
+  position: absolute; z-index: -1; width: 55vw; height: 55vw; max-width: 800px; max-height: 800px;
+  left: -10vw; top: -14vw; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(201, 161, 59, .16), rgba(201, 161, 59, .06) 40%, rgba(201, 161, 59, .01) 70%, transparent);
+}
+.ls-orb--navy {
+  left: auto; right: -14vw; top: auto; bottom: -20vw;
+  background: radial-gradient(closest-side, rgba(13, 29, 74, .10), rgba(13, 29, 74, .03) 45%, rgba(13, 29, 74, .005) 70%, transparent);
+}
+.ls-grid {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .45;
+  background-image: linear-gradient(rgba(11, 19, 43, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(11, 19, 43, .04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000, transparent);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000, transparent);
+}
+.ls-head {
+  display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 40px; align-items: end;
+  padding: 0 var(--gutter); margin-bottom: clamp(40px, 5vw, 64px);
+}
+.ls-title { margin: 0; font-size: clamp(34px, 4.8vw, 64px); line-height: 1.05; font-weight: 700; letter-spacing: -.03em; color: #0b1e4f; }
+.ls-wmask { display: inline-block; overflow: hidden; vertical-align: top; padding: .08em .24em .14em .02em; margin-right: -.16em; }
+.ls-wmask > span { display: inline-block; will-change: transform; }
+.ls-highlight { color: #d4af37; font-style: italic; font-weight: 600; letter-spacing: -.015em; padding-right: .18em; }
+.ls-lede { margin: 0; max-width: 44ch; font-size: 16.5px; line-height: 1.65; color: #5b6474; }
+@media (max-width: 900px) { .ls-head { grid-template-columns: 1fr; gap: 28px; } }
+
+.ls-strip {
+  direction: ltr; overflow: hidden; padding-block: 22px; cursor: grab; touch-action: pan-y;
+  user-select: none; -webkit-user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.ls-strip[data-dragging] { cursor: grabbing; }
+.ls-track { display: flex; width: max-content; margin: 0; padding: 0; list-style: none; will-change: transform; }
+/* Bare logos (margins, not gap, so both sets measure exactly the same) */
+.ls-item {
+  flex: none; display: grid; place-items: center; margin-inline: 30px; height: 72px;
+  transition: transform .25s ease-in-out;
+}
+.ls-item:hover { transform: scale(1.1); }
+.ls-logo { position: relative; width: 132px; height: 60px; }
+
+@media (max-width: 640px) {
+  .ls-strip { padding-block: 16px; }
+  .ls-item { margin-inline: 18px; height: 56px; }
+  .ls-logo { width: 100px; height: 46px; }
+}
