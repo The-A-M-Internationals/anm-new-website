@@ -101,7 +101,7 @@ export const ServiceCard: React.FC<CardProps> = ({
 
                     {/* Icon */}
                     <div className="absolute -top-7 -right-9 w-16 h-16 md:w-24 md:h-24 z-50 text-[#111827] group-hover:text-[#D4AF37] fill-current transition-colors duration-300 flex items-center justify-center">
-                        <div className="w-16 h-16 md:w-13 md:h-13 flex items-center justify-center -translate-x-6 translate-y-4 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-90">
+                        <div className="w-16 h-16 md:w-13 md:h-13 flex items-center justify-center -translate-x-6 translate-y-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-90">
                             {svgIcon}
                         </div>
                     </div>

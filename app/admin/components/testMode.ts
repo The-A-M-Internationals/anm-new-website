@@ -4,9 +4,10 @@ import { useSyncExternalStore } from "react";
 import type { User } from "firebase/auth";
 
 /**
- * Test mode: use the portal before Firebase logins exist. Only on this computer while running
- * `npm run dev` (development build + localhost); a production build never offers it.
- * Changes still go to the REAL Firebase database.
+ * Test mode: look around the portal without a login. Offered only when the site is opened on
+ * this computer (localhost), in the dev server or a local production build; the live website's
+ * address never matches, so visitors are never offered it.
+ * It only opens the screens: the database still decides who may save (firestore.rules).
  */
 const KEY = "anm-admin-test";
 const listeners = new Set<() => void>();
@@ -14,7 +15,6 @@ const notify = () => listeners.forEach((l) => l());
 const subscribe = (cb: () => void) => { listeners.add(cb); return () => { listeners.delete(cb); }; };
 
 export const canUseTestMode = () =>
-  process.env.NODE_ENV === "development" &&
   typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
 const isActive = () => {

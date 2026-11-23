@@ -75,6 +75,17 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
     window.__lenis = l;
     l.on("scroll", ScrollTrigger.update);
 
+    // html[data-gliding] = the page is really moving (hover effects are paused, see globals.css).
+    // Lenis's own .lenis-scrolling class stays on through the long, barely-moving tail of the glide,
+    // which left cards ignoring the mouse for about a second after the page had visibly stopped.
+    let gliding = false, glideEnd = 0;
+    const setGliding = (on: boolean) => { if (on !== gliding) { gliding = on; document.documentElement.toggleAttribute("data-gliding", on); } };
+    l.on("scroll", () => {
+      setGliding(Math.abs(l.velocity) > 1.2);                // px per frame; below this the page looks still
+      window.clearTimeout(glideEnd);
+      glideEnd = window.setTimeout(() => setGliding(false), 140);   // scroll events stopped: never stay stuck
+    });
+
     const tick = (time: number) => l.raf(time * 1000);
     // Prioritized: Lenis moves the page BEFORE GSAP writes this frame's animation styles. The other
     // way round, scrollTo() had to flush those fresh styles first, a second style pass every frame.
@@ -103,6 +114,8 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
     return () => {
       ro.disconnect();
       window.clearTimeout(settle);
+      window.clearTimeout(glideEnd);
+      setGliding(false);
       window.removeEventListener("load", refresh);
       gsap.ticker.remove(tick);
       l.destroy();

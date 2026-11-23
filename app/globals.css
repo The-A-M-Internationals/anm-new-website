@@ -215,7 +215,8 @@ body {
 /* a faint warm pool inside the card */
 .spot-card::after { background: radial-gradient(300px circle at var(--spot-x, -400px) var(--spot-y, -400px), rgba(212, 175, 55, 0.12), transparent 70%); }
 
-/* Smooth scrolling: while the page is moving (Lenis adds .lenis-scrolling), page content ignores the
-   pointer, so cards sliding under it do not start their hover effects mid-scroll. Hover returns the
-   moment scrolling stops. Measured on a 4x slower CPU: Finance page slow frames 16% -> under 1%. */
-html.lenis-scrolling .page-enter { pointer-events: none; }
+/* Smooth scrolling: while the page is really moving (SmoothScrolling sets html[data-gliding]), page
+   content ignores the pointer, so cards sliding under it do not start their hover effects mid-scroll.
+   Hover returns as soon as the page looks still, not when Lenis finishes its slow tail.
+   Measured on a 4x slower CPU: Finance page slow frames 16% -> under 1%. */
+html[data-gliding] .page-enter { pointer-events: none; }

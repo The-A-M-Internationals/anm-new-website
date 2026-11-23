@@ -3,6 +3,9 @@ import nodemailer, { type Transporter } from "nodemailer";
 import { db } from "@/lib/firebaseConfig";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { esc, isEmail, oneLine, rateLimited, sameOrigin, text } from "@/lib/email/guard";
+import { newsEmail } from "@/lib/email/newsEmail";
+import { welcomeEmail } from "@/lib/email/newsItems";
+import { addSubscriber } from "@/lib/email/resend";
 
 interface ConsultationData {
   name: string;
@@ -74,32 +77,12 @@ export async function POST(request: NextRequest) {
 
       const subscriberSubject =
         "Welcome to The A&M Internationals Newsletter";
-      const subscriberHtml = `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0D1B3E; color: #ffffff; border-radius: 12px; overflow: hidden;">
-          <div style="padding: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <h1 style="color: #C9A84C; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: 1px;">THE A&M INTERNATIONALS</h1>
-            <p style="color: #ffffff; font-size: 13px; margin-top: 6px; opacity: 0.8;">Elevating the World, Elegantly</p>
-          </div>
-          <div style="padding: 35px 30px; background-color: #ffffff; color: #1F2937;">
-            <h2 style="color: #0D1B3E; font-size: 20px; margin-top: 0;">Thank You for Subscribing!</h2>
-            <p style="font-size: 15px; line-height: 1.6; color: #4B5563;">
-              We are delighted to welcome you to <strong>The A&M Internationals</strong> community. You are now subscribed to receive our latest enterprise insights, industry analysis, and corporate updates.
-            </p>
-            <div style="margin: 25px 0; padding: 20px; background-color: #FFFBED; border-left: 4px solid #C9A84C; border-radius: 4px;">
-              <p style="margin: 0; font-size: 14px; color: #78350F; font-weight: 500;">
-                Subscribed Email: <strong>${email}</strong>
-              </p>
-            </div>
-            <p style="font-size: 14px; line-height: 1.6; color: #6B7280;">
-              If you ever have any questions or would like to explore our advisory services, feel free to reply directly to this email or contact us at <a href="mailto:am@theaminternationals.com" style="color: #C9A84C; text-decoration: none; font-weight: bold;">am@theaminternationals.com</a>.
-            </p>
-          </div>
-          <div style="padding: 20px 30px; text-align: center; background-color: #09132B; font-size: 12px; color: #9CA3AF;">
-            <p style="margin: 0;">&copy; ${new Date().getFullYear()} The A&M Internationals. All rights reserved.</p>
-            <p style="margin: 5px 0 0 0;">Ajman Free Zone C1 Building, Ajman Free Zone, UAE</p>
-          </div>
-        </div>
-      `;
+      // Same design as every other subscriber email
+      const subscriberHtml = newsEmail(welcomeEmail());
+
+      // Put them on the list that project / job / article / event emails go to (Resend keeps it)
+      const listed = await addSubscriber(sendTo);
+      if (!listed.ok && listed.status !== 0) console.warn("[subscribe] could not add to the Resend list:", listed.status, listed.message);
 
       const adminSubject = `New Newsletter Subscriber: ${email}`;
       const adminHtml = `

@@ -6,7 +6,8 @@ import type { User } from "firebase/auth";
 import type { CollectionSchema } from "@/lib/admin/schemas";
 import { fromEventFields } from "@/lib/admin/eventDates";
 import { missing, removeItem, saveItem, toDraft, type Dates } from "@/lib/admin/saveItem";
-import { refreshLiveSite } from "./useAdmin";
+import { isNotifiable } from "@/lib/email/newsItems";
+import { emailSubscribers, refreshLiveSite } from "./useAdmin";
 import FieldInput from "./FieldInput";
 
 type Props = {
@@ -20,6 +21,8 @@ export default function ItemForm({ schema, id, data, user, onSaved, onDeleted, n
   const [dates, setDates] = useState<Dates>(() => fromEventFields(data?.dateRange, data?.month, data?.startDate, data?.endDate));
   const [status, setStatus] = useState<{ kind: "ok" | "error" | "busy"; text: string } | null>(notice ? { kind: "ok", text: notice } : null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [notify, setNotify] = useState(false);   // "Email this to subscribers": never ticked by default
+  const canNotify = isNotifiable(schema.id);
   const set = (key: string, v: unknown) => { setDraft((d) => ({ ...d, [key]: v })); setStatus(null); };
 
   const save = async () => {
@@ -30,7 +33,14 @@ export default function ItemForm({ schema, id, data, user, onSaved, onDeleted, n
     try {
       const saved = await saveItem(schema, id, draft, dates);
       await refreshLiveSite(user);
-      setStatus({ kind: "ok", text: "Saved. It's live on the website." });
+      if (canNotify && notify) {
+        setStatus({ kind: "busy", text: "Saved. Emailing subscribers…" });
+        const problem = await emailSubscribers(user, schema.id, saved);
+        setNotify(false);   // one tick = one email; tick again to send again
+        setStatus(problem ? { kind: "error", text: `Saved and live, but the email was not sent. ${problem}` } : { kind: "ok", text: "Saved, live, and emailed to subscribers." });
+      } else {
+        setStatus({ kind: "ok", text: "Saved. It's live on the website." });
+      }
       if (!id) onSaved(saved);
     } catch {
       setStatus({ kind: "error", text: "Couldn't save. Check your connection and try again." });
@@ -72,6 +82,12 @@ export default function ItemForm({ schema, id, data, user, onSaved, onDeleted, n
         <button onClick={save} disabled={status?.kind === "busy"} className="cursor-pointer rounded-lg bg-[#050E30] px-6 py-2.5 text-sm font-bold text-white transition-all duration-150 ease-in-out hover:bg-[#0B1E4F] disabled:opacity-60">
           {id ? "Save changes" : `Publish ${schema.singular}`}
         </button>
+        {canNotify && (
+          <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+            <input type="checkbox" checked={notify} onChange={(e) => setNotify(e.target.checked)} className="h-4 w-4 cursor-pointer accent-[#C9A84C]" />
+            Email this to subscribers
+          </label>
+        )}
         {status && <p className={`text-sm ${status.kind === "error" ? "text-red-600" : status.kind === "ok" ? "text-emerald-700" : "text-slate-500"}`}>{status.text}</p>}
         {id && !schema.single && (
           <div className="ms-auto flex items-center gap-2">
