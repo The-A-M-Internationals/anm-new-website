@@ -191,7 +191,7 @@ export default function JobApplyPage({ id, initialJob }: { id: string; initialJo
                     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                         <input
                             name="name"
-                            placeholder={`${content.nameLabel.value}*`}
+                            placeholder={`${content.nameLabel.value}*`} aria-label={`${content.nameLabel.value}*`}
                             value={form.name}
                             onChange={handleChange}
                             className="border rounded px-3 py-2 rtl:text-right"
@@ -200,7 +200,7 @@ export default function JobApplyPage({ id, initialJob }: { id: string; initialJo
                         <input
                             name="email"
                             type="email"
-                            placeholder={`${content.emailLabel.value}*`}
+                            placeholder={`${content.emailLabel.value}*`} aria-label={`${content.emailLabel.value}*`}
                             value={form.email}
                             onChange={handleChange}
                             className="border rounded px-3 py-2 rtl:text-right"
@@ -208,7 +208,7 @@ export default function JobApplyPage({ id, initialJob }: { id: string; initialJo
 
                         <input
                             name="phone"
-                            placeholder={`${content.phoneLabel.value}*`}
+                            placeholder={`${content.phoneLabel.value}*`} aria-label={`${content.phoneLabel.value}*`}
                             value={form.phone}
                             onChange={handleChange}
                             className="border rounded px-3 py-2 rtl:text-right"
@@ -216,7 +216,7 @@ export default function JobApplyPage({ id, initialJob }: { id: string; initialJo
 
                         <textarea
                             name="experience"
-                            placeholder={content.experienceLabel.value}
+                            placeholder={content.experienceLabel.value} aria-label={content.experienceLabel.value}
                             value={form.experience}
                             onChange={handleChange}
                             className="border rounded px-3 py-2 min-h-24 rtl:text-right"

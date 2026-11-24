@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/admin/firebase";
-import { exitTestMode, TEST_USER, useTestModeActive } from "./testMode";
 
 export type AdminState =
   | { status: "loading" }
@@ -30,16 +29,13 @@ export function useAdmin() {
     }
   }), []);
 
-  const testMode = useTestModeActive();
-  if (testMode) return { state: { status: "admin", user: TEST_USER } as AdminState, signOut: exitTestMode, testMode };
-  return { state, signOut: () => signOut(auth), testMode };
+  return { state, signOut: () => signOut(auth) };
 }
 
 /** Email a saved item (project, job, article or event) to every subscriber. Returns an error text, or "" when sent. */
 export async function emailSubscribers(user: User, collection: string, id: string): Promise<string> {
   try {
     const token = await user.getIdToken();
-    if (!token) return "Test mode can't email subscribers. Sign in with the admin login.";
     const res = await fetch("/api/notify-subscribers", {
       method: "POST",
       headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
@@ -58,7 +54,7 @@ export async function refreshLiveSite(user: User) {
     const token = await user.getIdToken();
     await fetch(`/api/revalidate?email=${encodeURIComponent((user.email ?? "").toLowerCase())}`, {
       method: "POST",
-      headers: token ? { authorization: `Bearer ${token}` } : {},   // test mode has no token
+      headers: { authorization: `Bearer ${token}` },
     });
   } catch {
     /* the site still refreshes on its own within a minute */

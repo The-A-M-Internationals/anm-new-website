@@ -5,7 +5,7 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { esc, isEmail, oneLine, rateLimited, sameOrigin, text } from "@/lib/email/guard";
 import { newsEmail } from "@/lib/email/newsEmail";
 import { welcomeEmail } from "@/lib/email/newsItems";
-import { addSubscriber } from "@/lib/email/resend";
+import { addSubscriber, resendReady, sendOne } from "@/lib/email/resend";
 
 interface ConsultationData {
   name: string;
@@ -125,13 +125,17 @@ export async function POST(request: NextRequest) {
           });
           return NextResponse.json({ success: true, method: "smtp" });
         } catch (mailError) {
-          console.error("SMTP error sending newsletter email:", mailError);
-          return NextResponse.json({
-            success: true,
-            method: "firestore_fallback",
-            warning: "SMTP send failed, queued in Firestore",
-          });
+          console.error("SMTP error sending newsletter email:", mailError);   // fall through to Resend below
         }
+      }
+
+      // No SMTP account: send through Resend instead
+      if (resendReady()) {
+        const sent = await sendOne({ to: sendTo, subject: oneLine(subscriberSubject), html: subscriberHtml });
+        if (!sent.ok) console.error("[subscribe] Resend did not send the welcome email:", sent.status, sent.message);
+        const told = await sendOne({ to: adminEmail, subject: oneLine(adminSubject), html: adminHtml });
+        if (!told.ok) console.warn("[subscribe] Resend did not send the admin notice:", told.status, told.message);
+        if (sent.ok) return NextResponse.json({ success: true, method: "resend" });
       }
 
       return NextResponse.json({
@@ -239,13 +243,17 @@ export async function POST(request: NextRequest) {
           });
           return NextResponse.json({ success: true, method: "smtp" });
         } catch (mailError) {
-          console.error("SMTP error sending consultation email:", mailError);
-          return NextResponse.json({
-            success: true,
-            method: "firestore_fallback",
-            warning: "SMTP send failed, queued in Firestore",
-          });
+          console.error("SMTP error sending consultation email:", mailError);   // fall through to Resend below
         }
+      }
+
+      // No SMTP account: send through Resend instead
+      if (resendReady()) {
+        const sent = await sendOne({ to: sendTo, subject: oneLine(clientSubject), html: clientHtml });
+        if (!sent.ok) console.error("[consultation] Resend did not send the confirmation:", sent.status, sent.message);
+        const told = await sendOne({ to: adminEmail, subject: oneLine(adminSubject), html: adminHtml });
+        if (!told.ok) console.error("[consultation] Resend did not send the enquiry to the office:", told.status, told.message);
+        if (sent.ok || told.ok) return NextResponse.json({ success: true, method: "resend" });
       }
 
       return NextResponse.json({

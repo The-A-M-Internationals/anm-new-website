@@ -10,12 +10,6 @@ import { FIREBASE_PROJECT, FIRESTORE_DATABASE } from "@/lib/firebaseConfig";
  */
 
 export async function POST(req: Request) {
-  // Admin test mode (localhost + npm run dev only) has no login token; never allowed in production
-  if (process.env.NODE_ENV === "development" && !req.headers.get("authorization")) {
-    revalidateTag("cms", { expire: 0 });
-    return NextResponse.json({ ok: true, dev: true });
-  }
-
   const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   const email = new URL(req.url).searchParams.get("email")?.toLowerCase();
   if (!token || !email) return NextResponse.json({ ok: false }, { status: 401 });

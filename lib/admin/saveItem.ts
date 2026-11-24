@@ -1,9 +1,10 @@
 "use client";
 
-import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, setDoc, updateDoc, where, type DocumentData } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc, type DocumentData } from "firebase/firestore";
 import { db } from "./firebase";
 import { collectionOf, type CollectionSchema, type Field } from "./schemas";
 import { toEventFields } from "./eventDates";
+import { loadSeed, mergeSeed, REMOVED } from "../cms/seed";
 
 export type Draft = Record<string, unknown>;
 export type Dates = { start: string; end: string };
@@ -57,16 +58,25 @@ export async function saveItem(schema: CollectionSchema, id: string | null, draf
     await setDoc(doc(db, "siteContent", schema.single), { ...payload, updatedAt: serverTimestamp() }, { merge: true });
     return schema.single;
   }
+  const seed = await loadSeed(schema.id);
   let savedId = id;
-  if (id) await updateDoc(doc(db, schema.id, id), { ...payload, updatedAt: serverTimestamp() });
+  // A built-in item is not in the database until its first save, so it is written whole (never updateDoc)
+  if (id) await setDoc(doc(db, schema.id, id), { ...seed.find((s) => s.id === id)?.data, ...payload, updatedAt: serverTimestamp() }, { merge: true });
   else savedId = (await addDoc(collection(db, schema.id), { ...payload, createdAt: serverTimestamp() })).id;
 
   // Only one featured article at a time (the Blogs page shows the first one it finds)
   if (schema.id === "articles" && payload.featureArticle === true) {
-    const others = await getDocs(query(collection(db, "articles"), where("featureArticle", "==", true)));
-    await Promise.all(others.docs.filter((d) => d.id !== savedId).map((d) => updateDoc(d.ref, { featureArticle: false })));
+    const saved = await getDocs(collection(db, "articles"));
+    const all = mergeSeed(seed, saved.docs.map((d) => ({ id: d.id, data: d.data() })));
+    await Promise.all(all.filter((a) => a.id !== savedId && a.data.featureArticle === true)
+      .map((a) => setDoc(doc(db, "articles", a.id), { ...a.data, featureArticle: false }, { merge: true })));
   }
   return savedId as string;
 }
 
-export const removeItem = (schema: CollectionSchema, id: string) => deleteDoc(doc(db, collectionOf(schema), id));
+/** A built-in item cannot be deleted from the site's code, so it is marked removed instead */
+export async function removeItem(schema: CollectionSchema, id: string) {
+  const ref = doc(db, collectionOf(schema), id);
+  const builtIn = !schema.single && (await loadSeed(schema.id)).some((s) => s.id === id);
+  return builtIn ? setDoc(ref, { [REMOVED]: true }) : deleteDoc(ref);
+}

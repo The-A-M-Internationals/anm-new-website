@@ -73,7 +73,7 @@ const PageHero: React.FC<PageHeroProps> = ({
                   </h4>
                )}
 
-               <HeroRevealText text={title} className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`} />
+               <HeroRevealText as="h1" text={title} className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`} />
 
                {title2 && (
                   <HeroRevealText text={title2} className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`} />

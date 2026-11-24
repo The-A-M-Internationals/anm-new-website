@@ -4,14 +4,12 @@ import { useState } from "react";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { Eye, EyeOff } from "lucide-react";
 import { auth } from "@/lib/admin/firebase";
-import { enterTestMode, useTestModeAvailable } from "./testMode";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [show, setShow] = useState(false);
-  const testAvailable = useTestModeAvailable();
   const [msg, setMsg] = useState<{ kind: "error" | "info"; text: string } | null>(null);
 
   const submit = async (e: React.FormEvent) => {
@@ -69,11 +67,6 @@ export default function LoginForm() {
         <button type="button" onClick={reset} className="mt-3 w-full cursor-pointer text-center text-sm text-slate-500 hover:text-[#050E30]">
           Forgot password?
         </button>
-        {testAvailable && (
-          <button type="button" onClick={enterTestMode} className="mt-6 w-full cursor-pointer rounded-lg border border-dashed border-amber-400 bg-amber-50 py-2 text-sm font-semibold text-amber-800 transition-all duration-150 ease-in-out hover:bg-amber-100">
-            Test mode (this computer only, no login)
-          </button>
-        )}
       </form>
     </main>
   );

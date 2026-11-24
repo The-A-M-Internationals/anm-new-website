@@ -28,9 +28,9 @@ export default function OurOffices() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-3">
+          <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-3">
             {content.titlePrefix.value} <span className="text-[#D4AF37]">{content.titleHighlight.value}</span>
-          </h1>
+          </h2>
           <p className="text-gray-600 text-xl">
             {content.subtitle.value}
           </p>

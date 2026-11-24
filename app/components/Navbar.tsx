@@ -215,7 +215,7 @@ const Navbar = () => {
               <Link
                 href={getLocalizedLink("/contact#form")}
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
-                className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-white px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
+                className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
               >
                 {content.bookConsultation.value}
               </Link>
@@ -227,7 +227,7 @@ const Navbar = () => {
               <Link
                 href={getLocalizedLink("/contact#form")}
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
-                className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold xl:whitespace-nowrap transition-colors duration-150"
+                className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-4 py-2 rounded-full text-sm font-semibold xl:whitespace-nowrap transition-colors duration-150"
               >
                 {content.bookConsultation.value}
               </Link>
@@ -238,7 +238,7 @@ const Navbar = () => {
 
               <button
                 onClick={toggleMobileMenu}
-                className="text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700"
+                className="-m-2.5 cursor-pointer p-2.5 text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700"
                 aria-label="Toggle menu"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -276,7 +276,7 @@ const Navbar = () => {
                       setIsMobileMenuOpen(false);
                     }
                   }}
-                  className="w-full flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-3 rounded-full text-sm font-semibold transition-colors duration-150"
+                  className="w-full flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-4 py-3 rounded-full text-sm font-semibold transition-colors duration-150"
                 >
                   {content.bookConsultation.value}
                 </Link>

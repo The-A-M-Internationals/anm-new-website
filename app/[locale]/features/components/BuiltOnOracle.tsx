@@ -9,7 +9,7 @@ const BuiltOnOracle = () => {
     return (
         <div
             id="built-on-oracle"
-            className="relative py-12 md:py-20 lg:py-24 px-4 overflow-hidden bg-[#0F1E4D]"
+            className="relative py-12 md:py-16 lg:py-20 px-4 overflow-hidden bg-[#0F1E4D]"
             style={{
                 backgroundImage: "url('/whychooseus.svg')",
                 backgroundRepeat: "no-repeat",

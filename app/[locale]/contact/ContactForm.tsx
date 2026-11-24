@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { db } from '@/lib/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import { withTimeout } from "@/lib/withTimeout";
-import { Mail, MapPin, Clock } from 'lucide-react';
+import { Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import { useRouter } from 'next/navigation';
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect } from 'react';
@@ -208,6 +208,7 @@ const ContactForm: React.FC = () => {
                   <div className="flex gap-2">
                     <select
                       name="countryCode"
+                      aria-label="Country code"
                       value={formData.countryCode}
                       onChange={handleChange}
                       className="w-1/3 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white"
@@ -311,18 +312,19 @@ const ContactForm: React.FC = () => {
               </form>
             </div>
 
-            {/* Request Demo Section */}
-            <div className="bg-white rounded-[40px] border border-gray-300 p-8 shadow-sm mt-6">
-              <h2 className="text-2xl font-medium text-gray-900 mb-3">{content.demoTitle.value}</h2>
-              <p className="text-gray-600 mb-6 text-xl w-[90%]">
-                {content.demoDesc.value}
-              </p>
+            {/* Discovery call: the invitation on one side, a compact button on the other (stacked on phones) */}
+            <div className="bg-white rounded-[28px] sm:rounded-[36px] border border-gray-300 p-6 sm:p-8 shadow-sm mt-6 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+              <div className="min-w-0">
+                <h2 className="text-xl sm:text-2xl font-medium text-gray-900">{content.demoTitle.value}</h2>
+                <p className="mt-2 text-base sm:text-lg text-gray-600">{content.demoDesc.value}</p>
+              </div>
               <button
                 type="button"
                 onClick={(e) => handleHashLink(e, '#form', router)}
-                className="w-[80%] md:w-[50%] bg-[#D4AF37] text-black font-semibold py-3 px-6 rounded-full hover:scale-105 transition cursor-pointer"
+                className="group inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#D4AF37] px-7 py-3 font-semibold text-black cursor-pointer transition-all duration-150 ease-in-out hover:bg-[#C9A13B]"
               >
                 {content.scheduleDemo.value}
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden />
               </button>
             </div>
           </div>
@@ -338,7 +340,7 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.emailUs.value}</h3>
                   <a href={`mailto:${contact.email}`} className="text-sm sm:text-base block text-gray-800 hover:text-[#D4AF37] transition-colors break-all">{contact.email}</a>
-                  <p className="text-gray-500 text-xs sm:text-sm">{content.responseTime.value}</p>
+                  <p className="text-gray-500 text-sm">{content.responseTime.value}</p>
                 </div>
               </div>
             </div>
@@ -371,7 +373,7 @@ const ContactForm: React.FC = () => {
                       {locale === 'ar' ? `\u200E${contact.phone}` : contact.phone}
                     </a>
                   </div>
-                  <p className="text-gray-500 text-xs sm:text-sm">{content.callTime.value}</p>
+                  <p className="text-gray-500 text-sm">{content.callTime.value}</p>
                 </div>
               </div>
             </div>
@@ -404,7 +406,7 @@ const ContactForm: React.FC = () => {
                       e.preventDefault();
                       document.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
                     }}
-                    className="text-gray-500 text-xs sm:text-sm hover:text-[#D4AF37] transition-colors pt-1 block cursor-pointer"
+                    className="text-gray-500 text-sm hover:text-[#D4AF37] transition-colors pt-1 block cursor-pointer"
                   >
                     {content.appointment.value}
                   </button>
@@ -422,7 +424,7 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.businessHours.value}</h3>
                   <p className="text-sm sm:text-base font-medium text-gray-800">{contactText.hours || content.businessHoursTime.value}</p>
-                  {!contactText.hours && <p className="text-gray-500 text-xs sm:text-sm">{content.workingDays.value}</p>}
+                  {!contactText.hours && <p className="text-gray-500 text-sm">{content.workingDays.value}</p>}
                 </div>
               </div>
             </div>

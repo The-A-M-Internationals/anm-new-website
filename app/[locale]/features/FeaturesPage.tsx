@@ -5,6 +5,13 @@ import PageHero from "../../components/PageHero";
 import BuiltOnOracle from "./components/BuiltOnOracle";
 import EPM from "./components/EPM";
 import FeaturesList from "./components/FeaturesList";
+import AgentWhy from "./components/agent/AgentWhy";
+import AgentSteps from "./components/agent/AgentSteps";
+import AgentCards from "./components/agent/AgentCards";
+import AgentModules from "./components/agent/AgentModules";
+import AgentRoadmap from "./components/agent/AgentRoadmap";
+import AgentBuiltBy from "./components/agent/AgentBuiltBy";
+import AgentFaq from "./components/agent/AgentFaq";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
 
@@ -42,7 +49,15 @@ export default function FeaturesPage() {
                 />
             </section>
 
+            <section className="snap-section"><AgentWhy /></section>
             <section className="snap-section"><FeaturesList /></section>
+            <section className="snap-section"><AgentSteps /></section>
+            <section className="snap-section"><AgentCards which="control" /></section>
+            <section className="snap-section"><AgentModules /></section>
+            <section className="snap-section"><AgentCards which="audience" /></section>
+            <section className="snap-section"><AgentRoadmap /></section>
+            <section className="snap-section"><AgentBuiltBy /></section>
+            <section className="snap-section"><AgentFaq /></section>
             <section className="snap-section"><BuiltOnOracle /></section>
             <section className="snap-section"><EPM variant="earlyAccess" /></section>
         </div>

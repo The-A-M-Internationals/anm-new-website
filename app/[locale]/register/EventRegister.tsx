@@ -167,7 +167,7 @@ const EventRegister = () => {
                     <label className="text-sm font-medium mb-1">{content.fullName.value}</label>
                     <input
                         name="name"
-                        placeholder={content.namePlaceholder.value}
+                        placeholder={content.namePlaceholder.value} aria-label={content.namePlaceholder.value}
                         value={form.name}
                         onChange={handleChange}
                         className="w-full border rounded-lg px-4 py-2 mb-3"
@@ -177,7 +177,7 @@ const EventRegister = () => {
                     <input
                         name="email"
                         type="email"
-                        placeholder={content.emailPlaceholder.value}
+                        placeholder={content.emailPlaceholder.value} aria-label={content.emailPlaceholder.value}
                         value={form.email}
                         onChange={handleChange}
                         className="w-full border rounded-lg px-4 py-2 mb-3"
@@ -188,7 +188,7 @@ const EventRegister = () => {
                     </label>
                     <input
                         name="phone"
-                        placeholder={content.phonePlaceholder.value}
+                        placeholder={content.phonePlaceholder.value} aria-label={content.phonePlaceholder.value}
                         value={form.phone}
                         onChange={handleChange}
                         className="w-full border rounded-lg px-4 py-2 mb-4"

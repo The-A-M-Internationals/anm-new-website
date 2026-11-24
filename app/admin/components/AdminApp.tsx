@@ -9,7 +9,7 @@ import SingleEditor from "./SingleEditor";
 
 /** Admin portal: sign-in gate, then one tab per editable part of the site */
 export default function AdminApp() {
-  const { state, signOut, testMode } = useAdmin();
+  const { state, signOut } = useAdmin();
   const [tab, setTab] = useState(SCHEMAS[0].id);
 
   if (state.status === "loading") {
@@ -31,11 +31,6 @@ export default function AdminApp() {
   const schema = SCHEMAS.find((s) => s.id === tab) ?? SCHEMAS[0];
   return (
     <div className="min-h-screen">
-      {testMode && (
-        <p className="bg-amber-100 px-4 py-2 text-center text-sm font-medium text-amber-900">
-          Test mode on this computer: no login, but changes still go to the real database and show on the website. Use test items and delete them after.
-        </p>
-      )}
       <header className="sticky top-0 z-20 bg-[#050E30] text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <div>
@@ -45,7 +40,7 @@ export default function AdminApp() {
           <div className="flex items-center gap-3 text-sm">
             <a href="/" target="_blank" rel="noopener noreferrer" className="cursor-pointer text-white/70 hover:text-white">View site ↗</a>
             <span className="hidden text-white/50 sm:inline">{state.user.email}</span>
-            <button onClick={signOut} className="cursor-pointer rounded-lg border border-white/20 px-3 py-1.5 transition-all duration-150 ease-in-out hover:bg-white/10">{testMode ? "Exit test mode" : "Sign out"}</button>
+            <button onClick={signOut} className="cursor-pointer rounded-lg border border-white/20 px-3 py-1.5 transition-all duration-150 ease-in-out hover:bg-white/10">Sign out</button>
           </div>
         </div>
         <nav className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 sm:px-6" role="tablist">

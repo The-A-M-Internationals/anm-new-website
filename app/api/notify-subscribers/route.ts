@@ -10,8 +10,7 @@ import { resendReady, sendToSubscribers, UNSUBSCRIBE_LINK } from "@/lib/email/re
  * Emails one published item (project, job, article or event) to every subscriber.
  * Called by the admin portal when "Email this to subscribers" is ticked on save.
  * Admins only: the caller's Firebase login token must be able to read their own admins/{email}
- * document, which the Firestore rules allow for admins alone. Test mode has no token, so it can
- * never send. The email is built here from what is saved in the database, never from the request.
+ * document, which the Firestore rules allow for admins alone. The email is built here from what is saved in the database, never from the request.
  */
 export async function POST(req: Request) {
   const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");

@@ -220,3 +220,15 @@ body {
    Hover returns as soon as the page looks still, not when Lenis finishes its slow tail.
    Measured on a 4x slower CPU: Finance page slow frames 16% -> under 1%. */
 html[data-gliding] .page-enter { pointer-events: none; }
+
+/* Phones: footer links keep their look but get a finger-sized touch area (invisible padding). */
+@media (pointer: coarse) {
+  .site-footer a { position: relative; }
+  .site-footer a::after { content: ""; position: absolute; inset: -8px 0; }
+}
+
+/* Opening intro (SiteIntro): above everything while it plays, gone once done or skipped.
+   The safety animation removes it after 12s even if the script never ran, so nobody gets stuck behind it. */
+.site-intro { position: fixed; inset: 0; z-index: 10000; animation: intro-safety 0.01s linear 12s forwards; }
+html[data-intro="skip"] .site-intro, html[data-intro="done"] .site-intro { display: none; }
+@keyframes intro-safety { to { visibility: hidden; pointer-events: none; } }

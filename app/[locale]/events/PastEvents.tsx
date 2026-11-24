@@ -70,7 +70,7 @@ const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
       <div className="w-[90%] mx-auto">
         {/* Header - Fixed with .value */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {locale?.toLowerCase().startsWith("ar") ? (
               <>
                 <span className="text-[#D4AF37]">{content.eventsWord.value}</span>{" "}
@@ -82,7 +82,7 @@ const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
                 <span className="text-[#D4AF37]">{content.eventsWord.value}</span>
               </>
             )}
-          </h1>
+          </h2>
           <p className="text-[#6B7280] text-xl md:text-[21px]">
             {content.past.subheading.value}
           </p>

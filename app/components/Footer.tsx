@@ -79,7 +79,7 @@ const Footer = () => {
             <div className="flex items-start gap-3">
                 <Phone className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                 <div className="flex flex-col">
-                    <span className="text-[11px] text-gray-400 uppercase tracking-wider">Phone</span>
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">Phone</span>
                     <a href={`tel:${digits(contact.phone)}`} className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
                         {contact.phone}
                     </a>
@@ -90,7 +90,7 @@ const Footer = () => {
             <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" />
                 <div className="flex flex-col">
-                    <span className="text-[11px] text-gray-400 uppercase tracking-wider">Email</span>
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">Email</span>
                     <a href={`mailto:${contact.email}`} className="font-medium text-white hover:text-[#C9A84C] transition-colors break-all">
                         {contact.email}
                     </a>
@@ -101,7 +101,7 @@ const Footer = () => {
             <div className="flex items-start gap-3">
                 <MessageCircle className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                 <div className="flex flex-col">
-                    <span className="text-[11px] text-gray-400 uppercase tracking-wider">{content.whatsappLabel?.value || "WhatsApp"}</span>
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">{content.whatsappLabel?.value || "WhatsApp"}</span>
                     <a href={`https://wa.me/${digits(contact.whatsapp).replace("+", "")}`} target="_blank" rel="noopener noreferrer" className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
                         {contact.whatsapp}
                     </a>
@@ -123,15 +123,15 @@ const Footer = () => {
                 ) : (
                 <div className="flex flex-col text-xs sm:text-sm text-gray-200 space-y-1">
                     <div>
-                        <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.premisesLabel?.value || "Premises Number"}:</span>
+                        <span className="text-xs text-gray-400 block uppercase tracking-wider">{content.premisesLabel?.value || "Premises Number"}:</span>
                         <span className="font-semibold text-white group-hover:text-[#C9A84C] transition-colors">{content.premisesValue?.value || "Office - C1 - 1F - SF6017"}</span>
                     </div>
                     <div>
-                        <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.buildingLabel?.value || "Building Name"}:</span>
+                        <span className="text-xs text-gray-400 block uppercase tracking-wider">{content.buildingLabel?.value || "Building Name"}:</span>
                         <span className="font-medium text-gray-200 group-hover:text-[#C9A84C] transition-colors">{content.buildingValue?.value || "Ajman Free Zone C1 Building"}</span>
                     </div>
                     <div>
-                        <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.districtLabel?.value || "Business District"}:</span>
+                        <span className="text-xs text-gray-400 block uppercase tracking-wider">{content.districtLabel?.value || "Business District"}:</span>
                         <span className="font-medium text-gray-300 group-hover:text-[#C9A84C] transition-colors">{content.districtValue?.value || "Ajman Free Zone"}</span>
                     </div>
                 </div>
@@ -146,8 +146,8 @@ const Footer = () => {
             <div className="text-[#C9A84C] text-[18px] sm:text-[20px] font-semibold mb-3">
                 {content.followUs?.value || "Follow Us"}
             </div>
-            <div className="flex items-center gap-3">
-                <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+            <div className="flex items-center gap-5">
+                <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-11 w-11 -m-2.5 hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
@@ -160,7 +160,7 @@ const Footer = () => {
                     </svg>
                 </a>
 
-                <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+                <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="h-11 w-11 -m-2.5 hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
@@ -170,7 +170,7 @@ const Footer = () => {
                     </svg>
                 </a>
 
-                <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+                <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="h-11 w-11 -m-2.5 hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
@@ -186,7 +186,7 @@ const Footer = () => {
     );
 
     return (
-        <div className="">
+        <div className="site-footer">
             <div className="bg-[#0D1B3E] w-full h-auto flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-12 xl:flex xl:flex-row xl:gap-8 text-white p-6 sm:p-10 md:p-15 gap-8">
 
                 {/* LEFT - LOGO AND CONTACT (Description text removed to reclaim space) */}
@@ -271,7 +271,7 @@ const Footer = () => {
                         {content.stayConnected?.value || "Stay Connected"}
                     </div>
 
-                    <div className="text-xs sm:text-sm md:text-base">
+                    <div className="text-sm md:text-base">
                         {content.newsletterDescription?.value || ""}
                     </div>
 
@@ -279,7 +279,7 @@ const Footer = () => {
 
                         <input
                             type="email"
-                            placeholder={content.emailPlaceholder?.value || "Your email address"}
+                            placeholder={content.emailPlaceholder?.value || "Your email address"} aria-label={content.emailPlaceholder?.value || "Your email address"}
                             className={`bg-[#222B44] p-2 text-sm sm:text-base outline-none border ${message?.type === 'error' ? 'border-red-400' : 'border-[#FFFFFF8A]'} rounded-[40px] w-full`}
                             value={email}
                             onChange={e => setEmail(e.target.value)}

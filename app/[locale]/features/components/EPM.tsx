@@ -175,9 +175,9 @@ export default function EPM({ variant = 'consultation' }: { variant?: 'consultat
             <div className="max-w-5xl w-full grid md:grid-cols-2 gap-8 items-center z-10">
                 {/* Left side - Info */}
                 <div className="text-white space-y-6 rtl:text-right">
-                    <h1 className="text-4xl font-bold leading-tight">
+                    <h2 className="text-4xl font-bold leading-tight">
                         {copy.title}
-                    </h1>
+                    </h2>
                     <p className="text-[#FFFFFF] text-lg">
                         {copy.description}
                     </p>

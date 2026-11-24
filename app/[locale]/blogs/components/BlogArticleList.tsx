@@ -119,9 +119,9 @@ const BlogArticleList = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
 
                 {/* HEADING */}
                 <div className="text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12">
                         {content.headingPrefix.value} <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>
-                    </h1>
+                    </h2>
                 </div>
 
 

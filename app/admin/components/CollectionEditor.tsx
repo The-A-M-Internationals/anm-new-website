@@ -6,6 +6,7 @@ import type { User } from "firebase/auth";
 import { db } from "@/lib/admin/firebase";
 import type { CollectionSchema } from "@/lib/admin/schemas";
 import { fromEventFields } from "@/lib/admin/eventDates";
+import { loadSeed, mergeSeed } from "@/lib/cms/seed";
 import ItemForm from "./ItemForm";
 
 type Item = { id: string; data: DocumentData };
@@ -26,11 +27,19 @@ export default function CollectionEditor({ schema, user }: { schema: CollectionS
   const [notice, setNotice] = useState("");
   const pick = (id: string | "new" | null) => { setNotice(""); setSelected(id); };
 
-  useEffect(() => onSnapshot(
-    collection(db, schema.id),
-    (snap) => setItems(snap.docs.map((d) => ({ id: d.id, data: d.data() }))),
-    () => setError("Couldn't load this list. Check your connection and admin access."),
-  ), [schema.id]);
+  // Built-in items show in the list too; saving one stores it in the database from then on
+  useEffect(() => {
+    let stop = () => {}, alive = true;
+    loadSeed(schema.id).then((seed) => {
+      if (!alive) return;
+      stop = onSnapshot(
+        collection(db, schema.id),
+        (snap) => setItems(mergeSeed(seed, snap.docs.map((d) => ({ id: d.id, data: d.data() })))),
+        () => setError("Couldn't load this list. Check your connection and admin access."),
+      );
+    });
+    return () => { alive = false; stop(); };
+  }, [schema.id]);
 
   const sorted = useMemo(() => {
     if (!items) return [];

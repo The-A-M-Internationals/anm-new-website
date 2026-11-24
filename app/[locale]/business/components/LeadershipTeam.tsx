@@ -51,7 +51,6 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
         role: tr(d, 'role', locale),
         image: String(d.imageSrc || ''),
     })).filter((e) => e.name) : [
-        { name: "Pratusha", role: "QA Engineer", image: "" },
         { name: "Rudra Prakash", role: "EPM Consultant", image: "/business/rudra-prakash.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
         { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.png" },
@@ -115,7 +114,7 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                         style={{ transitionDelay: `${idx * 150}ms` }}
                     >
                     <div
-                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transform-gpu transition-[transform,opacity] duration-500 ease-in-out"
+                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transition-[translate] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
                         onClick={() => handleMobileClick(idx)}
@@ -128,7 +127,7 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                                 fill
                                 loading="eager"
                                 sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
-                                className="object-cover rounded-2xl transform-gpu transition-[transform,opacity] duration-300 ease-in-out lg:group-hover:scale-105"
+                                className="object-cover rounded-2xl transition-[scale] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform lg:group-hover:scale-[1.04]"
                             />
 
                             {/* POSITION BADGE (Removed for common title) */}
@@ -212,7 +211,7 @@ const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc
                                 loading="eager"
                                 decoding="async"
                                 sizes="(min-width: 1024px) 330px, 50vw"
-                                className="object-cover transform-gpu transition-[transform,opacity] duration-700 ease-in-out group-hover:scale-105"
+                                className="object-cover transition-[scale] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.04]"
                             /> : (
                                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-[#9CA3AF]" aria-label={`${emp.name} (photo coming soon)`}>
                                     <UserRound className="w-1/3 h-1/3" strokeWidth={1.25} />

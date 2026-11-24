@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
-import { useEffect, useRef } from "react";
+import RollingNumber from "./RollingNumber";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,32 +19,6 @@ const HomeHero = ({ counters = DEFAULT_COUNTERS }: { counters?: Counters }) => {
     const content = useIntlayer("homeHero");
 
     const getLocalizedLink = (path: string) => `/${locale}${path === '/' ? '' : path}`;
-
-    // Animated counter refs
-    const clientsRef = useRef<HTMLDivElement>(null);
-    const projectsRef = useRef<HTMLDivElement>(null);
-    const countriesRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        // Time-based, synced to the display: if the page is busy for a moment the count
-        // catches up instead of crawling, and it eases out like the headline.
-        const frames: number[] = [];
-        const animateCounter = (element: HTMLElement, target: number, suffix: string = "", duration: number = 1000) => {
-            const t0 = performance.now();
-            const step = (now: number) => {
-                const p = Math.min(1, Math.max(0, (now - t0) / duration));
-                element.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
-                if (p < 1) frames.push(requestAnimationFrame(step));
-            };
-            frames.push(requestAnimationFrame(step));
-        };
-
-        // Same figures as the Make an Impact page
-        if (clientsRef.current) animateCounter(clientsRef.current, counters.clients, "+", 1400);
-        if (projectsRef.current) animateCounter(projectsRef.current, counters.projects, "+", 1200);
-        if (countriesRef.current) animateCounter(countriesRef.current, counters.countries, "", 1000);
-        return () => frames.forEach(cancelAnimationFrame);
-    }, [counters.clients, counters.projects, counters.countries]);
 
     return (
         <section 
@@ -107,16 +81,16 @@ const HomeHero = ({ counters = DEFAULT_COUNTERS }: { counters?: Counters }) => {
                             {/* Metrics Area */}
                             <div className="grid grid-cols-3 gap-4 mb-6 text-center">
                                 <div>
-                                    <div ref={clientsRef} className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}>0+</div>
-                                    <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.clients.value}</div>
+                                    <div className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}><RollingNumber value={counters.clients} suffix="+" delay={0.5} /></div>
+                                    <div className="text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.clients.value}</div>
                                 </div>
                                 <div>
-                                    <div ref={projectsRef} className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}>0+</div>
-                                    <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.projects.value}</div>
+                                    <div className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}><RollingNumber value={counters.projects} suffix="+" delay={0.65} /></div>
+                                    <div className="text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.projects.value}</div>
                                 </div>
                                 <div>
-                                    <div ref={countriesRef} className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}>0</div>
-                                    <div className="text-[10px] md:text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.countries.value}</div>
+                                    <div className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "Lora, Georgia, serif" }}><RollingNumber value={counters.countries} delay={0.8} /></div>
+                                    <div className="text-xs text-[#C9A84C] uppercase tracking-wider font-semibold">{content.countries.value}</div>
                                 </div>
                             </div>
 

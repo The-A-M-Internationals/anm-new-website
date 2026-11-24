@@ -27,11 +27,11 @@ const Innovation = () => {
 
             {/* Main content */}
             <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
                     {content?.heading?.value}
-                </h1>
+                </h2>
 
-                <p className="text-xs sm:text-sm md:text-base text-white font-semibold mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto">
+                <p className="text-sm md:text-base text-white font-semibold mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto">
                     {content?.description?.value}
                 </p>
 

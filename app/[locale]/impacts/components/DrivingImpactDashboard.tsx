@@ -12,9 +12,9 @@ export default function DrivingImpactDashboard() {
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                         {content.header.value}
-                    </h2>
+                    </h1>
                     <p className="text-[#C9A84C] font-semibold text-xl mb-8">
                         {content.subheader.value}
                     </p>

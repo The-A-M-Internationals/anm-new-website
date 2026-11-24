@@ -9,6 +9,7 @@ import PageLeave from "../components/PageLeave";
 import PageProgress from "../components/PageProgress";
 import Spotlight from "../components/Spotlight";
 import AdminShortcut from "../components/AdminShortcut";
+import SiteIntro from "../components/intro/SiteIntro";
 import GlobalCursor from "../components/GlobalCursor";
 import GoToTopButton from "../components/GoToTopButton";
 import HashScrollHandler from "../components/HashScrollHandler";
@@ -78,6 +79,12 @@ export default async function RootLayout({
 
     return (
         <html lang={locale} dir={getHTMLTextDir(locale)} className={`${tajawal.variable} ${cairo.variable} ${notoTabsArabic.variable}`} suppressHydrationWarning>
+            <head>
+                {/* Lettering of the logo in the opening intro: only the letters it uses */}
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap&text=THEAMINRNOLS%26%20" />
+            </head>
             <body className={`${isArabic ? 'font-noto' : 'font-sf'}`} suppressHydrationWarning>
                 <style dangerouslySetInnerHTML={{ __html: `
                     :root {
@@ -87,6 +94,11 @@ export default async function RootLayout({
                         font-family: var(--heading-font) !important;
                     }
                 `}} />
+                {/* Opening intro: on the first page of a visit, and again when the visitor refreshes with F5 (or a hard
+                    refresh). Any other reload shows the page straight away. Never with reduced motion. Decided before the first paint. */}
+                <script dangerouslySetInnerHTML={{ __html: "try{var s=sessionStorage,again=s.getItem('anm-intro-replay');s.removeItem('anm-intro-replay');if(matchMedia('(prefers-reduced-motion: reduce)').matches||(s.getItem('anm-intro')&&!again))document.documentElement.setAttribute('data-intro','skip');addEventListener('keydown',function(e){if(e.key==='F5'||((e.ctrlKey||e.metaKey)&&e.shiftKey&&(e.key==='R'||e.key==='r')))try{s.setItem('anm-intro-replay','1')}catch(_){}},true)}catch(e){}" }} />
+                <noscript><style>{".site-intro{display:none}"}</style></noscript>
+                <SiteIntro />
                 <IntlayerClientProvider locale={locale}>
                     <ContactInfoProvider value={contact}>
                     <SmoothScrolling>

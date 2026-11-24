@@ -46,6 +46,10 @@ async function segmentId(): Promise<Result<string>> {
   return { ok: true, data: (segment = made.data.id) };
 }
 
+/** Send one email to one address (works with a "sending only" key too) */
+export const sendOne = (mail: { to: string; subject: string; html: string; from?: string }) =>
+  call<{ id: string }>("POST", "/emails", { from: mail.from || newsFrom(), to: [mail.to], subject: mail.subject, html: mail.html });
+
 /** Add one email to the subscriber list. Safe to call again for someone already on it. */
 export async function addSubscriber(email: string): Promise<Result> {
   const seg = await segmentId();

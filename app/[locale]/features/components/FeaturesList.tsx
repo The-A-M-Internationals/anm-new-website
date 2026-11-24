@@ -1,44 +1,34 @@
 "use client";
 
 import { useIntlayer } from "next-intlayer";
+import AgentHeading from "./agent/AgentHeading";
+import { A_ITEM, useAgentReveal } from "./agent/useAgentReveal";
 
+/** What it's being built to do: four capabilities, revealed one after another as the section scrolls in */
 const FeaturesList = () => {
     const content = useIntlayer("featuresList");
+    const ref = useAgentReveal();
     const features = [
         { title: content.feature1Title.value, text: content.feature1Text.value },
         { title: content.feature2Title.value, text: content.feature2Text.value },
         { title: content.feature3Title.value, text: content.feature3Text.value },
         { title: content.feature4Title.value, text: content.feature4Text.value },
     ];
+    const highlight = String(content.titleHighlight.value);
 
     return (
-        <div id="features" className="bg-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-            <div className="w-full mx-auto p-2 md:p-7">
-                {/* Header */}
-                <div className="mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#000000] mb-3">
-                        {content.titlePrefix.value} <span className="text-[#ab8d2b]">{content.titleHighlight.value}</span>
-                    </h2>
-                    <span className="inline-block mt-2 rounded-full px-3 py-1.5 bg-[#FFFBED] text-xs md:text-sm font-semibold text-[#ab8d2b]">
-                        {content.statusTag.value}
-                    </span>
-                </div>
+        <div ref={ref} id="features" className="no-global-reveal bg-white px-4 py-10 sm:px-6 md:py-14 lg:px-8 lg:py-16">
+            <div className="mx-auto max-w-7xl p-2 md:p-7">
+                <AgentHeading text={`${content.titlePrefix.value} ${highlight}`} gold={highlight.split(/\s+/).filter(Boolean).length} />
+                <span data-a-item className={`mt-4 inline-block rounded-full bg-[#FFFBED] px-3 py-1.5 text-xs font-semibold text-[#ab8d2b] md:text-sm ${A_ITEM}`}>
+                    {content.statusTag.value}
+                </span>
 
-                {/* Features List */}
-                <div className="space-y-0">
+                <div className="mt-8 md:mt-10">
                     {features.map((feature, index) => (
-                        <div
-                            key={index}
-                            className="reveal-up border-b border-[#000000] py-8 flex flex-col md:flex-row items-start justify-between gap-4 md:gap-8 group transition-colors px-4 -mx-4"
-                        >
-                            <div className="flex-1 order-2 md:order-1">
-                                <h3 className="text-2xl md:text-[28px] font-medium text-[#000000]">
-                                    {feature.title}
-                                </h3>
-                                <p className="mt-2 text-gray-600 text-base md:text-lg">
-                                    {feature.text}
-                                </p>
-                            </div>
+                        <div key={index} data-a-item className={`border-b border-[#050E30]/20 py-8 ${A_ITEM}`}>
+                            <h3 className="text-2xl font-medium text-[#050E30] md:text-[28px]">{feature.title}</h3>
+                            <p className="mt-2 max-w-4xl text-base text-slate-600 md:text-lg">{feature.text}</p>
                         </div>
                     ))}
                 </div>
