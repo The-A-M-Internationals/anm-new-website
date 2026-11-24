@@ -1,5 +1,6 @@
 'use client';
 
+import RollLabel from "./RollLabel";
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { getImageProps } from 'next/image'
@@ -105,7 +106,7 @@ const PageHero: React.FC<PageHeroProps> = ({
                }}
                className='cursor-pointer text-xs md:text-sm lg:text-base bg-[#D4AF37] rounded-full px-4 py-2 md:px-3 md:py-1 lg:px-6 lg:py-3 flex items-center gap-2 text-black font-semibold whitespace-nowrap hover:scale-105 transition-transform'
             >
-               {button}
+               <RollLabel>{button}</RollLabel>
                <ArrowRight strokeWidth={1.5} className='w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 rtl:rotate-180' />
             </button>
          </div>

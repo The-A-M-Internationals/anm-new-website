@@ -26,7 +26,7 @@ export default function RollingNumber({ value, suffix = "", delay = 0, className
       strips.forEach((strip, i) => {
         tl.fromTo(strip, { yPercent: 0 }, { yPercent: Number(strip.dataset.roll), duration: 1.5 + i * 0.35, ease: "expo.out" }, i * 0.1);
       });
-      tl.fromTo("[data-roll-suffix]", { autoAlpha: 0, scale: 0.3, yPercent: 30 }, { autoAlpha: 1, scale: 1, yPercent: 0, duration: 0.6, ease: "back.out(2.6)" }, "-=0.75");
+      if (el.querySelector("[data-roll-suffix]")) tl.fromTo("[data-roll-suffix]", { autoAlpha: 0, scale: 0.3, yPercent: 30 }, { autoAlpha: 1, scale: 1, yPercent: 0, duration: 0.6, ease: "back.out(2.6)" }, "-=0.75");
       return () => tl.kill();
     }, el);
     return () => mm.revert();

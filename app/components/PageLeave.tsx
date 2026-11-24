@@ -41,7 +41,7 @@ let undo = 0;
 
 /**
  * Starts the leave half of the page transition: the current page fades away quickly and the
- * gold progress line (PageProgress.tsx) starts. Links are picked up automatically; buttons that navigate
+ * loading screen (PageLoader.tsx) starts. Links are picked up automatically; buttons that navigate
  * with router.push call this just before pushing. Does nothing for the page you are already on.
  */
 export function announceLeave(href: string) {

@@ -1,3 +1,4 @@
+import RollLabel from "./RollLabel";
 import Image from "next/image";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -120,7 +121,7 @@ const LiveEvents: React.FC<LiveEventsProps> = ({
                         </a>
                     )}
                     <button onClick={(e) => openEventCta(e, cta, router)} className="bg-[#D4AF37] hover:scale-105 cursor-pointer text-black font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-full flex items-center gap-2 transition text-sm sm:text-base">
-                        {cta.label}
+                        <RollLabel>{cta.label}</RollLabel>
                         <svg fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 rtl:rotate-180" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>

@@ -6,7 +6,7 @@ import ScrollReveal from "../components/ScrollReveal";
 import PauseOffscreenAnimations from "../components/PauseOffscreenAnimations";
 import ImagePreloader from "../components/ImagePreloader";
 import PageLeave from "../components/PageLeave";
-import PageProgress from "../components/PageProgress";
+import PageLoader from "../components/PageLoader";
 import Spotlight from "../components/Spotlight";
 import AdminShortcut from "../components/AdminShortcut";
 import SiteIntro from "../components/intro/SiteIntro";
@@ -80,10 +80,10 @@ export default async function RootLayout({
     return (
         <html lang={locale} dir={getHTMLTextDir(locale)} className={`${tajawal.variable} ${cairo.variable} ${notoTabsArabic.variable}`} suppressHydrationWarning>
             <head>
-                {/* Lettering of the logo in the opening intro: only the letters it uses */}
+                {/* Lettering of the logo in the opening intro, and the count on the page loading screen: only the characters they use */}
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap&text=THEAMINRNOLS%26%20" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap&text=THEAMINRNOLS0123456789%26%20" />
             </head>
             <body className={`${isArabic ? 'font-noto' : 'font-sf'}`} suppressHydrationWarning>
                 <style dangerouslySetInnerHTML={{ __html: `
@@ -106,7 +106,7 @@ export default async function RootLayout({
                         <PauseOffscreenAnimations />
                         <ImagePreloader />
                         <PageLeave />
-                        <PageProgress />
+                        <PageLoader />
                         <Spotlight />
                         <AdminShortcut />
                         <GlobalCursor />

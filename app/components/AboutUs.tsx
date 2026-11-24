@@ -1,5 +1,6 @@
 'use client';
 
+import RollLabel from "./RollLabel";
 import { useEffect, useRef, useState } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
 import Link from "next/link";
@@ -107,7 +108,7 @@ const AboutUs = () => {
                     href={getLocalizedPath(locale as AppLocale, "/business")}
                     className="bg-[#D4AF37] text-black px-4 py-2 sm:px-6 sm:py-3 flex items-center gap-2 rounded-full text-sm sm:text-base font-semibold hover:scale-105 transition cursor-pointer mt-2"
                 >
-                    {content.cta.value}
+                    <RollLabel>{content.cta.value}</RollLabel>
                     <ArrowRight className='w-4 h-4 rtl:rotate-180' />
                 </Link>
             </div>

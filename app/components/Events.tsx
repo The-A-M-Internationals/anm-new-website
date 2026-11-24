@@ -1,5 +1,6 @@
 "use client";
 
+import RollLabel from "./RollLabel";
 import { useMemo, useState } from "react";
 import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
 import { useCmsDocs } from "@/lib/cms/useCmsDocs";
@@ -224,7 +225,7 @@ const Events = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
                             }}
                             className="bg-[#D4AF37] cursor-pointer text-sm sm:text-base font-semibold px-8 py-3 rounded-full hover:scale-105 transition shadow-md"
                         >
-                            {content?.viewAll?.value}
+                            <RollLabel>{content?.viewAll?.value}</RollLabel>
                         </button>
                     </div>
                 )}

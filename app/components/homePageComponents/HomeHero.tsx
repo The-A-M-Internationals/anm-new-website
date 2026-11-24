@@ -1,5 +1,6 @@
 "use client";
 
+import RollLabel from "../RollLabel";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import RollingNumber from "./RollingNumber";
@@ -57,7 +58,7 @@ const HomeHero = ({ counters = DEFAULT_COUNTERS }: { counters?: Counters }) => {
                                     onClick={(e) => handleHashLink(e, getLocalizedPath(locale as AppLocale, "/contact#form"), router)}
                                     className="flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-[#C9A84C] to-[#E3C973] text-[#050E30] rounded-lg text-sm font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
                                 >
-                                    {content.bookConsultation.value}
+                                    <RollLabel>{content.bookConsultation.value}</RollLabel>
                                 </Link>
                                 <button
                                     onClick={(e) => {
@@ -71,7 +72,7 @@ const HomeHero = ({ counters = DEFAULT_COUNTERS }: { counters?: Counters }) => {
                                     }}
                                     className="px-6 py-2.5 bg-white/5 backdrop-blur-sm text-[#C9A84C] border border-[#C9A84C]/50 rounded-lg text-sm font-bold shadow-lg hover:bg-[#C9A84C]/10 hover:border-[#C9A84C] transition-all duration-300"
                                 >
-                                    {content.exploreServices.value}
+                                    <RollLabel>{content.exploreServices.value}</RollLabel>
                                 </button>
                             </div>
                             

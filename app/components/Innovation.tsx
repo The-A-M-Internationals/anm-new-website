@@ -1,4 +1,5 @@
 "use client";
+import RollLabel from "./RollLabel";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
@@ -45,7 +46,7 @@ const Innovation = () => {
                         }} 
                         className="px-6 py-2.5 sm:px-8 sm:py-3 bg-[#D4AF37] cursor-pointer hover:scale-105 text-[#000000] text-sm sm:text-base font-semibold rounded-full transition-all duration-200 w-full sm:w-auto"
                     >
-                        {content?.epmButton?.value}
+                        <RollLabel>{content?.epmButton?.value}</RollLabel>
                     </button>
                 </div>
             </div>

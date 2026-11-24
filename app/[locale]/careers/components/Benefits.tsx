@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { BrainCircuit, GraduationCap, HandCoins, Handshake, HeartHandshake, Laptop, Palmtree } from "lucide-react";
 import { useIntlayer } from "next-intlayer";
 import BenefitTile from "./BenefitTile";
+import GrowthFilm from "./GrowthFilm";
 import { useBenefitsReveal } from "./useBenefitsReveal";
 
 /**
@@ -27,7 +28,8 @@ const Benefits = () => {
             </div>
 
             <div ref={grid} className="no-global-reveal grid w-full max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[minmax(124px,auto)]">
-                <BenefitTile big icon={GraduationCap} title={c.card1Title.value} description={c.card1Description.value} className="md:col-span-2 lg:row-span-2" />
+                <BenefitTile big icon={GraduationCap} title={c.card1Title.value} description={c.card1Description.value} className="md:col-span-2 lg:row-span-2"
+                    film={<GrowthFilm stages={(c.growthStages as { value: string }[]).map((s) => s.value)} />} />
                 <BenefitTile icon={Laptop} title={c.card3Title.value} description={c.card3Description.value} />
                 <BenefitTile icon={HandCoins} title={c.card4Title.value} description={c.card4Description.value} />
                 <BenefitTile icon={Palmtree} title={c.card5Title.value} description={c.card5Description.value} />

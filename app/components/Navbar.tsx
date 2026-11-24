@@ -1,4 +1,5 @@
 'use client'
+import RollLabel from "./RollLabel";
 import { announceLeave } from "./PageLeave";
 import { useState, useRef } from 'react'
 import NavbarModal from './NavbarModal'
@@ -217,7 +218,7 @@ const Navbar = () => {
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
                 className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
               >
-                {content.bookConsultation.value}
+                <RollLabel>{content.bookConsultation.value}</RollLabel>
               </Link>
             </div>
 
@@ -229,7 +230,7 @@ const Navbar = () => {
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
                 className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-4 py-2 rounded-full text-sm font-semibold xl:whitespace-nowrap transition-colors duration-150"
               >
-                {content.bookConsultation.value}
+                <RollLabel>{content.bookConsultation.value}</RollLabel>
               </Link>
 
               <div className="md:block xl:hidden">
@@ -278,7 +279,7 @@ const Navbar = () => {
                   }}
                   className="w-full flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-4 py-3 rounded-full text-sm font-semibold transition-colors duration-150"
                 >
-                  {content.bookConsultation.value}
+                  <RollLabel>{content.bookConsultation.value}</RollLabel>
                 </Link>
               </div>
             </div>

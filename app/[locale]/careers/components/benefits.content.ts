@@ -19,6 +19,18 @@ const benefitsContent = {
       ar: "تدريب منظم على Oracle EPM، وإرشاد من كبار المستشارين، وتوجيه للحصول على شهادات Oracle",
     }),
 
+    // names of the scenes in the Professional Growth film, in order (shown small in the tile's corner)
+    growthStages: [
+      t({ en: "Joining", ar: "الانضمام" }),
+      t({ en: "Part of the team", ar: "جزء من الفريق" }),
+      t({ en: "Training", ar: "التدريب" }),
+      t({ en: "Mentoring", ar: "الإرشاد" }),
+      t({ en: "Leading the room", ar: "قيادة الاجتماع" }),
+      t({ en: "Rewarded", ar: "المكافأة" }),
+      t({ en: "Promotion", ar: "الترقية" }),
+      t({ en: "Now you lead", ar: "الآن أنت تقود" }),
+    ],
+
     card2Title: t({
       en: "Real Client Work",
       ar: "عمل حقيقي مع العملاء",

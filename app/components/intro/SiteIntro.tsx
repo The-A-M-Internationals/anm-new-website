@@ -1,14 +1,9 @@
 "use client";
 
 import { useRef } from "react";
+import { ICON_SHAPES as SHAPES } from "./iconShapes";
 import { useSiteIntro } from "./useSiteIntro";
 
-/** The icon as three straight-edged shapes (traced from the brand artwork) */
-const SHAPES = [
-  "M190,2L192,431L156,410L156,264L97,227L97,375L57,351L57,166L66,163L155,217L155,70L38,142L38,340L0,318L0,117Z",
-  "M214,0L404,118L404,317L365,341L365,139L214,47Z",
-  "M216,138L271,185L330,144L346,155L346,352L213,435L213,392L306,333L306,211L267,235L216,192Z",
-];
 const GOLD_TEXT = "inline-block bg-[linear-gradient(180deg,#F6E27A_0%,#D4AF37_50%,#A47E1F_100%)] bg-clip-text [-webkit-text-fill-color:transparent]";
 const letters = (text: string) => [...text];
 
