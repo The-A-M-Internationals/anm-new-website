@@ -60,6 +60,8 @@ export const footerContent = {
       ar: "التقارير الوصفية",
     }),
     taxReporting: t({ en: "Tax Reporting", ar: "التقارير الضريبية" }),
+    dataIntegration: t({ en: "Data Integration", ar: "تكامل البيانات" }),
+    esgReporting: t({ en: "ESG & Sustainability Reporting", ar: "تقارير ESG والاستدامة" }),
 
     // Managed Services section
     managedServices: t({ en: "Managed Services", ar: "الخدمات المدارة" }),
@@ -72,22 +74,25 @@ export const footerContent = {
       ar: "إدارة حلول EPM",
     }),
     versionUpgrade: t({
-      en: "Version Upgrade & Patching",
-      ar: "ترقية الإصدارات والتحديثات",
+      en: "Monthly Update Testing",
+      ar: "اختبار التحديثات الشهرية",
     }),
     monthlyMaintenance: t({
       en: "Monthly Maintenance & Administration",
       ar: "الصيانة والإدارة الشهرية",
     }),
+    epmStaffing: t({ en: "EPM Staffing", ar: "توفير كفاءات EPM" }),
 
     // Resources section
     resources: t({ en: "Resources", ar: "الموارد" }),
-    amInternational: t({ en: "The A&M internationals", ar: "A&M الدولية" }),
+    amInternational: t({ en: "The A&M Internationals", ar: "A&M الدولية" }),
 
     // Contact Us section
     contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
     phoneLabel: t({ en: "+971 564783478", ar: "+971 564783478" }),
     emailLabel: t({ en: "am@theaminternationals.com", ar: "am@theaminternationals.com" }),
+    whatsappLabel: t({ en: "WhatsApp", ar: "واتساب" }),
+    hoursValue: t({ en: "Mon–Sat, 9 AM–6 PM GST", ar: "الاثنين–السبت، 9 صباحًا–6 مساءً بتوقيت الخليج" }),
     websiteLabel: t({ en: "theaminternationals.com", ar: "theaminternationals.com" }),
     premisesLabel: t({ en: "Premises Number", ar: "رقم المبنى / المكتب" }),
     premisesValue: t({ en: "Office - C1 - 1F - SF6017", ar: "مكتب - C1 - 1F - SF6017" }),
@@ -133,11 +138,12 @@ export const footerContent = {
       ar: "نرتقي بالعالم، بأناقة",
     }),
     copyright: t({
-      en: "© 2026 The A&M internationals. All rights reserved.",
-      ar: "© 2026 A&M الدولية. جميع الحقوق محفوظة.",
+      en: "© 2026 The A&M Internationals F.Z.C. All rights reserved.",
+      ar: "© 2026 The A&M Internationals F.Z.C. جميع الحقوق محفوظة.",
     }),
     privacy: t({ en: "Privacy", ar: "سياسة الخصوصية" }),
     terms: t({ en: "Terms", ar: "الأحكام والشروط" }),
+    privacyTerms: t({ en: "Privacy & Terms", ar: "الخصوصية والشروط" }),
   },
 };
 

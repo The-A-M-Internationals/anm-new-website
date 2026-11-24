@@ -5,16 +5,16 @@ const aiAutomationsContent = {
     content: {
         // Hero Section
         heroTitle: t({
-            en: "Intelligent Automation",
-            ar: "الأتمتة الذكية",
+            en: "AI and automation",
+            ar: "الذكاء الاصطناعي والأتمتة",
         }),
         heroSubtitle: t({
-            en: "Elevated by AI",
-            ar: "مدعومة بالذكاء الاصطناعي",
+            en: "for Oracle EPM",
+            ar: "لـ Oracle EPM",
         }),
         heroDescription: t({
-            en: "Transform your business with cutting-edge AI and machine learning solutions. Automate workflows, enhance decision-making, and unlock unprecedented efficiency.",
-            ar: "حوّل عملك بحلول الذكاء الاصطناعي والتعلم الآلي المتطورة. أتمتة سير العمل، وتحسين اتخاذ القرارات، وإطلاق العنان لكفاءة غير مسبوقة.",
+            en: "We build AI agents and automation tools that take repetitive work off Oracle EPM teams, running on Oracle Cloud.",
+            ar: "نبني وكلاء ذكاء اصطناعي وأدوات أتمتة تُخفّف العمل المتكرر عن فرق Oracle EPM، وتعمل على Oracle Cloud.",
         }),
         exploreServices: t({
             en: "Explore AI Solutions",
@@ -28,12 +28,6 @@ const aiAutomationsContent = {
             en: "Powered by Artificial Intelligence",
             ar: "مدعوم بالذكاء الاصطناعي",
         }),
-        stat1Value: t({ en: "85%", ar: "٨٥٪" }),
-        stat1Label: t({ en: "Efficiency Increase", ar: "زيادة الكفاءة" }),
-        stat2Value: t({ en: "10x", ar: "١٠ أضعاف" }),
-        stat2Label: t({ en: "Faster Processing", ar: "معالجة أسرع" }),
-        stat3Value: t({ en: "24/7", ar: "٢٤/٧" }),
-        stat3Label: t({ en: "Automated Operations", ar: "عمليات مؤتمتة" }),
         scroll: t({ en: "Scroll", ar: "تمرير" }),
         learnMore: t({ en: "Learn More", ar: "اعرف المزيد" }),
 
@@ -46,135 +40,75 @@ const aiAutomationsContent = {
             en: "Intelligent solutions powered by artificial intelligence",
             ar: "حلول ذكية مدعومة بالذكاء الاصطناعي",
         }),
-
-        // Machine Learning
-        mlTitle: t({
-            en: "Machine Learning",
-            ar: "التعلم الآلي",
-        }),
-        mlDescription: t({
-            en: "Custom ML models that learn from your data and improve over time",
-            ar: "نماذج تعلم آلي مخصصة تتعلم من بياناتك وتتحسن بمرور الوقت",
-        }),
-        mlService1: t({
-            en: "Predictive Analytics",
-            ar: "التحليلات التنبؤية",
-        }),
-        mlService2: t({
-            en: "Pattern Recognition",
-            ar: "التعرف على الأنماط",
-        }),
-        mlService3: t({
-            en: "Recommendation Systems",
-            ar: "أنظمة التوصيات",
-        }),
-        mlService4: t({
-            en: "Anomaly Detection",
-            ar: "كشف الشذوذ",
+        comingSoon: t({
+            en: "Coming soon",
+            ar: "قريبًا",
         }),
 
-        // Robotic Process Automation
-        rpaTitle: t({
-            en: "Robotic Process Automation",
-            ar: "أتمتة العمليات الروبوتية",
+        // EPM Build Agent
+        buildAgentTitle: t({
+            en: "EPM Build Agent",
+            ar: "EPM Build Agent",
         }),
-        rpaDescription: t({
-            en: "Automate repetitive tasks and free your team for strategic work",
-            ar: "أتمتة المهام المتكررة وتحرير فريقك للعمل الاستراتيجي",
+        buildAgentDescription: t({
+            en: "An AI agent that helps Oracle EPM teams build and configure their applications.",
+            ar: "وكيل ذكاء اصطناعي يساعد فرق Oracle EPM على بناء تطبيقاتهم وإعدادها.",
         }),
-        rpaService1: t({
-            en: "Data Entry Automation",
-            ar: "أتمتة إدخال البيانات",
+        buildAgentService1: t({
+            en: "Built for Oracle EPM",
+            ar: "مصمم لـ Oracle EPM",
         }),
-        rpaService2: t({
-            en: "Report Generation",
-            ar: "توليد التقارير",
+        buildAgentService2: t({
+            en: "Runs on Oracle Cloud",
+            ar: "يعمل على Oracle Cloud",
         }),
-        rpaService3: t({
-            en: "Email Processing",
-            ar: "معالجة البريد الإلكتروني",
-        }),
-        rpaService4: t({
-            en: "Workflow Orchestration",
-            ar: "تنسيق سير العمل",
+        buildAgentService3: t({
+            en: "Early access sign-up open",
+            ar: "التسجيل للوصول المبكر متاح",
         }),
 
-        // Natural Language Processing
-        nlpTitle: t({
-            en: "Natural Language Processing",
-            ar: "معالجة اللغة الطبيعية",
+        // EPM Automation
+        epmAutomationTitle: t({
+            en: "EPM Automation",
+            ar: "أتمتة EPM",
         }),
-        nlpDescription: t({
-            en: "Enable machines to understand and respond to human language",
-            ar: "تمكين الآلات من فهم اللغة البشرية والاستجابة لها",
+        epmAutomationDescription: t({
+            en: "Scripts and tools that automate data loads, admin and testing.",
+            ar: "نصوص برمجية وأدوات تؤتمت تحميل البيانات والمهام الإدارية والاختبار.",
         }),
-        nlpService1: t({
-            en: "Chatbots & Virtual Assistants",
-            ar: "روبوتات الدردشة والمساعدين الافتراضيين",
+        epmAutomationService1: t({
+            en: "Data load automation",
+            ar: "أتمتة تحميل البيانات",
         }),
-        nlpService2: t({
-            en: "Sentiment Analysis",
-            ar: "تحليل المشاعر",
+        epmAutomationService2: t({
+            en: "Admin task automation",
+            ar: "أتمتة المهام الإدارية",
         }),
-        nlpService3: t({
-            en: "Document Understanding",
-            ar: "فهم المستندات",
-        }),
-        nlpService4: t({
-            en: "Language Translation",
-            ar: "الترجمة اللغوية",
+        epmAutomationService3: t({
+            en: "Testing automation",
+            ar: "أتمتة الاختبارات",
         }),
 
-        // Computer Vision
-        cvTitle: t({
-            en: "Computer Vision",
-            ar: "رؤية الكمبيوتر",
+        // AI on Oracle Cloud
+        ociAITitle: t({
+            en: "AI on Oracle Cloud",
+            ar: "الذكاء الاصطناعي على Oracle Cloud",
         }),
-        cvDescription: t({
-            en: "Extract insights from images and video with advanced visual AI",
-            ar: "استخراج الرؤى من الصور والفيديو بالذكاء الاصطناعي البصري المتقدم",
+        ociAIDescription: t({
+            en: "AI built on OCI Generative AI, so your data stays on Oracle.",
+            ar: "ذكاء اصطناعي مبني على OCI Generative AI، لتبقى بياناتك على Oracle.",
         }),
-        cvService1: t({
-            en: "Image Recognition",
-            ar: "التعرف على الصور",
+        ociAIService1: t({
+            en: "OCI Generative AI",
+            ar: "OCI Generative AI",
         }),
-        cvService2: t({
-            en: "Object Detection",
-            ar: "كشف الأشياء",
+        ociAIService2: t({
+            en: "Model-agnostic",
+            ar: "غير مرتبط بنموذج محدد",
         }),
-        cvService3: t({
-            en: "Facial Analysis",
-            ar: "تحليل الوجه",
-        }),
-        cvService4: t({
-            en: "Quality Inspection",
-            ar: "فحص الجودة",
-        }),
-
-        // Generative AI
-        genAITitle: t({
-            en: "Generative AI",
-            ar: "الذكاء الاصطناعي التوليدي",
-        }),
-        genAIDescription: t({
-            en: "Create content, code, and solutions with cutting-edge generative models",
-            ar: "إنشاء المحتوى والأكواد والحلول بنماذج توليدية متطورة",
-        }),
-        genAIService1: t({
-            en: "Content Generation",
-            ar: "توليد المحتوى",
-        }),
-        genAIService2: t({
-            en: "Code Assistance",
-            ar: "مساعدة الأكواد",
-        }),
-        genAIService3: t({
-            en: "Creative Design",
-            ar: "التصميم الإبداعي",
-        }),
-        genAIService4: t({
-            en: "Data Synthesis",
-            ar: "تركيب البيانات",
+        ociAIService3: t({
+            en: "Your data stays on Oracle",
+            ar: "تبقى بياناتك على Oracle",
         }),
     },
 } satisfies DeclarationContent;

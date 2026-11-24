@@ -100,14 +100,14 @@ const NavbarModal = ({
                   {t?.masterclassTitle?.value}
                 </h2>
 
-                <a href={t?.masterclassRegisterUrl?.value} target="_blank" onClick={onClose}>
+                <Link href={`/${currentLocale}${t?.masterclassRegisterUrl?.value ?? "/contact#form"}`} onClick={onClose}>
                   <div className='flex w-full justify-center items-center'>
                     <button className="bg-[#D4AF37] text-black font-semibold px-4 md:px-7 py-2 md:py-3 rounded-full flex items-center gap-2 w-fit text-sm md:text-base cursor-pointer hover:scale-105 transition">    
                       {t?.masterclassRegisterBtn?.value}
                       <ArrowRight className='w-4 h-4 md:w-5 md:h-5 rtl:rotate-180' />
                     </button>
                   </div>
-                </a>
+                </Link>
               </div>
 
               <div className="w-full md:w-fit bg-gradient-to-r from-[#FFFFFF] to-[#FFFBED] rounded-[15px] md:rounded-[20px] shadow-md px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 border border-gray-100">

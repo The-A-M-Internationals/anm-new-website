@@ -245,7 +245,7 @@ const RPAServices = () => {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="group relative p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#3B82F6]/30 transition-all duration-500 hover:-translate-y-2"
+                            className="group relative p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#3B82F6]/30 transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-500 hover:-translate-y-2"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-[#3B82F6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
                             

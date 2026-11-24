@@ -12,8 +12,8 @@ export const homeHeroContent = {
       ar: "بأناقة",
     }),
     description: t({
-      en: "Technology modernisation, business transformation, and digital marketing solutions that drive measurable impact across your enterprise.",
-      ar: "حلول تحديث التكنولوجيا والتحول التجاري والتسويق الرقمي التي تحقق تأثيرًا قابلاً للقياس عبر مؤسستك.",
+      en: "Oracle EPM consulting, managed support and digital services, led by a team with 16 years of hands-on Oracle EPM experience.",
+      ar: "استشارات Oracle EPM والدعم المُدار والخدمات الرقمية، بقيادة فريق يمتلك 16 عامًا من الخبرة العملية في Oracle EPM.",
     }),
     bookConsultation: t({
       en: "Book a Consultation",
@@ -24,12 +24,16 @@ export const homeHeroContent = {
       ar: "استكشف الخدمات",
     }),
     clients: t({
-      en: "Clients Served",
+      en: "Clients",
       ar: "عميل",
+    }),
+    projects: t({
+      en: "Projects",
+      ar: "مشروع",
     }),
     countries: t({
       en: "Countries",
-      ar: "دولة",
+      ar: "دول",
     }),
     years: t({
       en: "Years Experience",
@@ -56,8 +60,8 @@ export const homeHeroContent = {
       ar: "أتمتة الذكاء الاصطناعي",
     }),
     aiTitle: t({
-      en: "RPA & GenAI",
-      ar: "RPA والذكاء الاصطناعي التوليدي",
+      en: "AI for EPM",
+      ar: "الذكاء الاصطناعي لـ EPM",
     }),
   },
 };

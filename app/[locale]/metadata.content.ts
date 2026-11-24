@@ -4,11 +4,11 @@ const metadata: Dictionary = {
   key: "metadata",
   content: {
     title: t({
-      en: "The A&M internationals",
+      en: "The A&M Internationals",
       ar: "A&M الدولية",
     }),
     description: t({
-      en: "The A&M internationals provides services to help businesses thrive in the global market.",
+      en: "The A&M Internationals provides services to help businesses thrive in the global market.",
       ar: "تقدم A&M الدولية خدمات لمساعدة الشركات على النجاح في السوق العالمي.",
     }),
   },

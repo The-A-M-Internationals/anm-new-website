@@ -14,8 +14,8 @@ const careersContent = {
     }),
 
     heroDescription: t({
-      en: "At The A&M internationals, you’ll work with passionate engineers and architects who value collaboration, continuous learning, and meaningful impact. Here, your ideas matter, your growth is prioritized, and the work you do creates real change — for businesses and for the world around us.",
-      ar: "في A&M الدولية، ستعمل مع مهندسين ومعماريين شغوفين يقدّرون التعاون والتعلّم المستمر والأثر الحقيقي. هنا، لأفكارك قيمة، ولنموّك أولوية، والعمل الذي تقوم به يصنع تغييرًا ملموسًا — للشركات وللعالم من حولنا.",
+      en: "At The A&M Internationals, you’ll work with Oracle EPM consultants, designers and developers on real client projects from your first months. We train fresh talent and give people ownership early.",
+      ar: "في A&M الدولية، ستعمل مع مستشاري Oracle EPM والمصممين والمطورين على مشاريع حقيقية للعملاء منذ أشهرك الأولى. نُدرّب المواهب الجديدة ونمنح الأفراد المسؤولية مبكرًا.",
     }),
 
     heroButton: t({
@@ -29,7 +29,7 @@ const careersContent = {
     }),
 
     cultureDescription: t({
-      en: "The A&M internationals fosters a work environment built on ownership, transparency, continuous learning, innovation, and mutual respect. We believe great companies are built by great people — and we invest in the growth of every individual.",
+      en: "The A&M Internationals fosters a work environment built on ownership, transparency, continuous learning, innovation, and mutual respect. We believe great companies are built by great people — and we invest in the growth of every individual.",
       ar: "تعزز A&M الدولية بيئة عمل قائمة على تحمل المسؤولية والشفافية والتعلّم المستمر والابتكار والاحترام المتبادل. نؤمن أن الشركات العظيمة تُبنى بأشخاص عظماء — لذلك نستثمر في نمو كل فرد.",
     }),
 
@@ -134,8 +134,8 @@ const careersContent = {
       ar: "هدف وأثر اجتماعي",
     }),
     benefit6Description: t({
-      en: "Company donates 10% of income to orphanages and children's trusts",
-      ar: "تتبرع الشركة بنسبة 10% من الدخل لدور الأيتام وصناديق رعاية الأطفال",
+      en: "We donate 10% of our profits to children's welfare causes.",
+      ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
     }),
 
     openPositionsTitlePrefix: t({

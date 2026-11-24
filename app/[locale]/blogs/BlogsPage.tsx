@@ -5,8 +5,9 @@ import Article from "./components/Article";
 import BlogArticleList from "./components/BlogArticleList";
 import SuggestTopicSection from "./components/SuggestTopicSection";
 import { useIntlayer, useLocale } from "next-intlayer";
+import type { CmsDoc } from "@/lib/cms/shared";
 
-export default function BlogsPage() {
+export default function BlogsPage({ articles }: { articles?: CmsDoc[] }) {
     const content = useIntlayer("blogsPage");
     const { locale } = useLocale();
     const heroImage =
@@ -34,8 +35,8 @@ export default function BlogsPage() {
                     buttonImage={heroButtonImage}
                 />
             </section>
-            <section className=""><Article /></section>
-            <section className=""><BlogArticleList /></section>
+            <section className=""><Article docs={articles} /></section>
+            <section className=""><BlogArticleList docs={articles} /></section>
             <section className=""><SuggestTopicSection /></section>
         </div>
     );

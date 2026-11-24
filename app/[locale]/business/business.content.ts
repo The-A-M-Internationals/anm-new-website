@@ -12,12 +12,12 @@ const businessContent = {
       ar: "ونصنع مستقبلًا أكثر إشراقًا.",
     }),
     heroDescription: t({
-      en: "Since 2018, we've been combining enterprise-grade technology solutions with unwavering commitment to social responsibility. Every project we complete helps change a child's life.",
-      ar: "منذ عام 2018، نجمع بين حلول تقنية بمستوى المؤسسات والتزام راسخ بالمسؤولية المجتمعية. كل مشروع ننجزه يسهم في تغيير حياة طفل.",
+      en: "The A&M Internationals is a UAE-based Oracle Partner, delivering Oracle EPM consulting and digital services to clients in the USA, UAE and India.",
+      ar: "A&M الدولية شريك لـ Oracle مقرّه الإمارات العربية المتحدة، نقدّم استشارات Oracle EPM والخدمات الرقمية لعملائنا في الولايات المتحدة والإمارات والهند.",
     }),
     heroButton: t({
-      en: "About our Journey",
-      ar: "عن رحلتنا",
+      en: "Our story",
+      ar: "قصتنا",
     }),
   },
 };

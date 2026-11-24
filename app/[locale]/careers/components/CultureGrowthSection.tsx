@@ -32,7 +32,8 @@ const CultureGrowthSection = () => {
 
                 {/* ROW 1 — Title + Description */}
                 <div id="culture" className="flex flex-col lg:flex-row justify-between items-start gap-6">
-                    <h2 className="text-xl md:text-2xl font-semibold text-black leading-tight">
+                    {/* Desktop: same width as the image below and centered over it, level with the middle of the paragraph */}
+                    <h2 className="text-xl md:text-2xl font-semibold text-black leading-tight lg:w-[44%] xl:w-[552px] lg:shrink-0 lg:text-center lg:self-center">
                         {content.title.value}
                     </h2>
 
@@ -45,11 +46,12 @@ const CultureGrowthSection = () => {
                 <div className="flex flex-col lg:flex-row items-start gap-10">
 
                     {/* LEFT IMAGE */}
-                    <div className="shadow-lg w-full lg:w-[552px] h-[300px] md:h-[418px] rounded-[20px] overflow-hidden relative">
+                    <div className="shadow-lg w-full lg:w-[44%] xl:w-[552px] shrink-0 h-[300px] md:h-[418px] rounded-[20px] overflow-hidden relative">
                         <Image
                             src="/careers/culture-growth.jpg"
                             alt="Culture and Growth"
                             fill
+                            sizes="(min-width: 1024px) 552px, 100vw"
                             className="object-cover"
                         />
                     </div>
@@ -59,12 +61,12 @@ const CultureGrowthSection = () => {
                         {values.map((value, index) => (
                             <div
                                 key={index}
-                                className="group bg-white border border-[#D9D9D9] shadow-xl flex flex-col gap-3 rounded-[40px] p-6 md:p-8 h-auto md:h-[197px] cursor-pointer transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl transition-all duration-300"
+                                className="spot-card group bg-white border border-[#D9D9D9] shadow-lg flex flex-col gap-3 rounded-[40px] p-6 md:p-8 lg:p-6 xl:p-8 h-auto md:min-h-[197px] transform-gpu transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-xl"
                             >
-                                <h3 className="text-lg md:text-xl font-bold text-[#D4AF37]">
+                                <h3 className="text-lg md:text-xl font-bold text-[#D4AF37] relative w-fit after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:origin-left rtl:after:origin-right after:scale-x-0 after:bg-[#C9A13B] after:transition-transform after:duration-500 after:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:after:scale-x-100">
                                     {value.title}
                                 </h3>
-                                <p className="text-gray-600 leading-normal text-xs md:text-sm transition-colors duration-300 group-hover:text-[#D4AF37]">
+                                <p className="text-gray-600 leading-normal text-xs md:text-sm">
                                     {value.description}
                                 </p>
                             </div>

@@ -1,26 +1,30 @@
 'use client';
 
+import RollLabel from "./RollLabel";
 import SucessStoryCard from './SucessStoryCard';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useMemo } from 'react';
 import { useIntlayer, useLocale } from 'next-intlayer';
+import type { CmsDoc } from '@/lib/cms/shared';
+import { tr } from '@/lib/cms/siteContent';
 
+// Photo per real project (index matches content.items)
 const STATIC_IMAGES = [
   { image: '/Successnew1.png' },
-  { image: '/Success-2.png' },
-  { image: '/Success-3.png' },
 ];
 
 const ARABIC_BADGE = [
   { image: '/Success-arabic.png' },
-  { image: '/Success-2-arabic.png' },
-  { image: '/Success-3-arabic.png' },
 ]
+
+type Text = { value: string };
+type StoryItem = { client?: Text; title: Text; description: Text; industry: Text; badge?: Text };
 
 import { handleHashLink } from "@/lib/handleHashLink";
 
-const SuccessStory = () => {
+/** docs: Our Work cards from the admin portal; without them the built-in card shows */
+const SuccessStory = ({ docs }: { docs?: CmsDoc[] }) => {
   const router = useRouter();
   const { locale } = useLocale();
 
@@ -35,16 +39,28 @@ const SuccessStory = () => {
   const imageSource = locale === "ar" ? ARABIC_BADGE : STATIC_IMAGES;
 
   const localizedServices = useMemo(() => {
-    const tabKeys = ['automotive', 'healthcare', 'insurance'];
-    return imageSource.map((service, index) => ({
-      ...service,
-      title: content.items[index]?.title.value ?? '',
-      description: content.items[index]?.description.value ?? '',
-      industry: content.items[index]?.industry.value ?? '',
-      badge: content.items[index]?.badge.value,
+    const tabKeys = ['epm'];
+    const fromAdmin = docs?.map(({ data: d }, index) => ({
+      image: (locale === 'ar' && d.imageSrcAr) || d.imageSrc || imageSource[0].image,
+      client: tr(d, 'client', locale),
+      title: tr(d, 'title', locale),
+      description: tr(d, 'description', locale),
+      industry: tr(d, 'industry', locale),
+      badge: tr(d, 'badge', locale) || undefined,
       tabKey: tabKeys[index] || 'all',
     }));
-  }, [imageSource, content.items]);
+    const items = content.items as unknown as StoryItem[];
+    // However many projects there are, the row centres on them (a single card sits in the middle)
+    return fromAdmin ?? items.map((item, index) => ({
+      image: imageSource[index]?.image ?? imageSource[0].image,
+      client: item.client?.value ?? '',
+      title: item.title.value,
+      description: item.description.value,
+      industry: item.industry.value,
+      badge: item.badge?.value,
+      tabKey: tabKeys[index] || 'all',
+    }));
+  }, [imageSource, content.items, docs, locale]);
 
 
   useEffect(() => {
@@ -87,10 +103,11 @@ const SuccessStory = () => {
       </p>
 
       {/* Cards */}
-      <div className='flex flex-col md:flex-row flex-wrap justify-center gap-3 sm:gap-4 mt-1 sm:mt-8 w-full max-w-7xl'>
-        {visibleServices.map((service: any, idx: number) => (
+      <div className='flex flex-col md:flex-row flex-wrap justify-center gap-3 min-[640px]:gap-4 min-[1340px]:gap-x-8 mt-1 sm:mt-8 w-full max-w-7xl'>
+        {visibleServices.map((service, idx) => (
           <SucessStoryCard
             key={page * ITEMS_PER_PAGE + idx}
+            client={service.client}
             title={service.title}
             description={service.description}
             image={service.image}
@@ -107,7 +124,7 @@ const SuccessStory = () => {
       </div>
 
       {/* Pagination dots (tab only) */}
-      {isTab && (
+      {isTab && totalPages > 1 && (
         <div className="flex justify-center mt-4 gap-2">
           <div className="flex gap-2 bg-[#FFFBED] rounded-full px-4 py-2">
             {Array.from({ length: totalPages }).map((_, idx) => (
@@ -129,7 +146,7 @@ const SuccessStory = () => {
         onClick={() => router.push(`/${locale}/success-stories`)}
         className='bg-[#D4AF37] text-black px-4 py-2 sm:px-6 sm:py-3 flex items-center gap-2 rounded-full text-sm sm:text-base font-semibold hover:scale-105 transition cursor-pointer mt-4 sm:mt-8 md:mt-10 mb-1 sm:mb-5 md:mb-5'
       >
-        {content.cta.value}
+        <RollLabel>{content.cta.value}</RollLabel>
         <ArrowRight className='w-4 h-4 rtl:rotate-180' />
       </button>
     </div>

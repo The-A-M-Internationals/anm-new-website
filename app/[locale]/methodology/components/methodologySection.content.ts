@@ -20,8 +20,8 @@ const methodologySectionContent = {
           ar: "فهم احتياجات وأهداف العميل",
         }),
         description: t({
-          en: "We begin with a deep understanding of your current processes, data flows, and business goals. Through workshops, system audits, and gap analysis, we identify quickly what really drives value and quantitative board-used to optimize resources and set clear, realistic milestones for the project.",
-          ar: "نبدأ بفهم عميق لعملياتك الحالية وتدفقات البيانات وأهداف العمل. من خلال ورش العمل وتدقيق الأنظمة وتحليل الفجوات، نحدد بسرعة ما يحقق القيمة فعلاً ونستخدم اللوحات الكمية لتحسين الموارد وتحديد معالم واضحة وواقعية للمشروع.",
+          en: "We begin with a deep understanding of your current processes, data flows, and business goals. Through workshops, system audits, and gap analysis, we quickly identify what really drives value, set clear success measures and agree realistic milestones for the project.",
+          ar: "نبدأ بفهم عميق لعملياتك الحالية وتدفقات البيانات وأهداف العمل. من خلال ورش العمل وتدقيق الأنظمة وتحليل الفجوات، نحدد بسرعة ما يحقق القيمة فعلاً، ونضع مقاييس نجاح واضحة، ونتفق على مراحل واقعية للمشروع.",
         }),
         bullets: [
           t({
@@ -80,7 +80,7 @@ const methodologySectionContent = {
           ar: "تنفيذ الخطط بدقة وعناية",
         }),
         description: t({
-          en: "We execute the build, test, and cutover from existing tools (or startup with a blank slate) in a structured, low-risk manner. Our team sets up Oracle EPM, migrates data, configures processes, and transitions with minimal disruption and immediate business value.",
+          en: "We execute the build, test, and cutover from existing tools (or start from a blank slate) in a structured, low-risk manner. Our team sets up Oracle EPM, migrates data, configures processes, and transitions with minimal disruption and immediate business value.",
           ar: "ننفذ البناء والاختبار والتحويل من الأدوات الحالية (أو البدء من الصفر) بطريقة منظمة ومنخفضة المخاطر. يقوم فريقنا بإعداد أوراكل EPM، وترحيل البيانات، وتكوين العمليات، والانتقال بأقل قدر من التعطيل وتحقيق قيمة فورية للأعمال.",
         }),
         bullets: [
@@ -110,8 +110,8 @@ const methodologySectionContent = {
           ar: "دعم طويل الأمد لتحقيق النجاح المستمر",
         }),
         description: t({
-          en: "We provide continuous support for your Oracle EPM environment through monthly health checks, release upgrades, and quick user assistance. Whether you need regular updates, new model enhancements, system validation, performance tuning, and continuous improvement.",
-          ar: "نقدم دعمًا مستمرًا لبيئة أوراكل EPM الخاصة بك من خلال الفحوصات الشهرية، وترقيات الإصدارات، والمساعدة السريعة للمستخدمين. سواء كنت بحاجة إلى تحديثات منتظمة، أو تحسينات على النماذج، أو التحقق من النظام، أو ضبط الأداء، أو التحسين المستمر.",
+          en: "We support your Oracle EPM environment with monthly health checks, testing of Oracle's monthly updates and quick user help. We also handle enhancements, performance tuning and continuous improvement.",
+          ar: "ندعم بيئة Oracle EPM الخاصة بك من خلال فحوصات شهرية لسلامة النظام، واختبار التحديثات الشهرية من Oracle، ومساعدة سريعة للمستخدمين. كما نتولى التحسينات وضبط الأداء والتحسين المستمر.",
         }),
         bullets: [
           t({

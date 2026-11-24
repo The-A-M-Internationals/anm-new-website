@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
-import { t } from "intlayer";
+import { getTranslation } from "intlayer";
 import GenerativeAIClient from "./GenerativeAIClient";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
 
     return {
-        title: (t({
-            en: "Generative AI | The A&M internationals",
+        title: getTranslation({
+            en: "Generative AI | The A&M Internationals",
             ar: "الذكاء الاصطناعي التوليدي | A&M الدولية",
-        }) as any)[locale],
-        description: (t({
+        }, locale),
+        description: getTranslation({
             en: "Cutting-edge generative AI solutions including LLMs, image generation, and creative automation.",
             ar: "حلول الذكاء الاصطناعي التوليدي المتطورة بما في ذلك نماذج اللغة الكبيرة وتوليد الصور والأتمتة الإبداعية.",
-        }) as any)[locale],
+        }, locale),
     };
 }
 

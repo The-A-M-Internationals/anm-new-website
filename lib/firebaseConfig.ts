@@ -1,15 +1,19 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+/** Firebase project the website reads from and the /admin portal writes to */
+export const FIREBASE_PROJECT = "am-website-5173f";
+/** This project's Firestore database is named "default" (not the older "(default)") */
+export const FIRESTORE_DATABASE = "default";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCU-3TwZewBzWkZqDOWmDjLcHMFoqKNy80",
-  authDomain: "aandm-a0fd5.firebaseapp.com",
-  projectId: "aandm-a0fd5",
-  storageBucket: "aandm-a0fd5.firebasestorage.app",
-  messagingSenderId: "271638307872",
-  appId: "1:271638307872:web:cf7a438f85edf3e2228845",
-  measurementId: "G-C5P1362Z5B",
+  apiKey: "AIzaSyAMiiaLwlAL7TkGSoH9tYXEOl7IcT4C78M",
+  authDomain: `${FIREBASE_PROJECT}.firebaseapp.com`,
+  projectId: FIREBASE_PROJECT,
+  storageBucket: `${FIREBASE_PROJECT}.firebasestorage.app`,
+  messagingSenderId: "130766324611",
+  appId: "1:130766324611:web:afe16e3fb0eff85fd36cb6",
 };
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+export const db = getFirestore(app, FIRESTORE_DATABASE);

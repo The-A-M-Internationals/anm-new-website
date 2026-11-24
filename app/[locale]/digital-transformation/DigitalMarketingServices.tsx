@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import { handleHashLink } from "@/lib/handleHashLink";
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useState } from "react";
 import { AppLocale } from "@/types/locale";
@@ -13,78 +14,9 @@ const DigitalMarketingServices = () => {
     const content = useIntlayer("digitalMarketingServices");
     const [activeCard, setActiveCard] = useState<number | null>(null);
 
-    const serviceRoutes: { [key: number]: string } = {
-        1: "/services/video-production",
-        2: "/services/social-media",
-        3: "/services/branding-design",
-        4: "/services/web-development",
-        5: "/services/content-marketing",
-    };
+    const contactHref = getLocalizedPath(locale as AppLocale, "/contact#form");
 
     const services = [
-        {
-            id: 1,
-            title: content.videoProductionTitle.value,
-            description: content.videoProductionDescription.value,
-            services: [
-                content.videoProductionService1.value,
-                content.videoProductionService2.value,
-                content.videoProductionService3.value,
-                content.videoProductionService4.value,
-            ],
-            gradient: "from-pink-500/20 via-rose-500/20 to-red-500/20",
-            accentColor: "#FF6B9D",
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M23 7l-7 5 7 5V7z" />
-                    <rect x="1" y="5" width="15" height="14" rx="2" />
-                </svg>
-            ),
-        },
-        {
-            id: 2,
-            title: content.socialMediaTitle.value,
-            description: content.socialMediaDescription.value,
-            services: [
-                content.socialMediaService1.value,
-                content.socialMediaService2.value,
-                content.socialMediaService3.value,
-                content.socialMediaService4.value,
-            ],
-            gradient: "from-indigo-500/20 via-purple-500/20 to-pink-500/20",
-            accentColor: "#4F46E5",
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <circle cx="12" cy="12" r="3" />
-                    <circle cx="6" cy="6" r="2" />
-                    <circle cx="18" cy="6" r="2" />
-                    <circle cx="18" cy="18" r="2" />
-                    <circle cx="6" cy="18" r="2" />
-                    <line x1="12" y1="9" x2="12" y2="3" />
-                    <line x1="9" y1="12" x2="3" y2="12" />
-                    <line x1="12" y1="15" x2="12" y2="21" />
-                    <line x1="15" y1="12" x2="21" y2="12" />
-                </svg>
-            ),
-        },
-        {
-            id: 3,
-            title: content.brandingTitle.value,
-            description: content.brandingDescription.value,
-            services: [
-                content.brandingService1.value,
-                content.brandingService2.value,
-                content.brandingService3.value,
-                content.brandingService4.value,
-            ],
-            gradient: "from-amber-500/20 via-yellow-500/20 to-orange-500/20",
-            accentColor: "#C9A84C",
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-            ),
-        },
         {
             id: 4,
             title: content.webDesignTitle.value,
@@ -103,6 +35,69 @@ const DigitalMarketingServices = () => {
                     <line x1="8" y1="21" x2="16" y2="21" />
                     <line x1="12" y1="17" x2="12" y2="21" />
                     <path d="M6 8h4M6 12h8M6 16h10" opacity="0.5" />
+                </svg>
+            ),
+        },
+        {
+            id: 3,
+            title: content.brandingTitle.value,
+            description: content.brandingDescription.value,
+            services: [
+                content.brandingService1.value,
+                content.brandingService2.value,
+                content.brandingService3.value,
+                content.brandingService4.value,
+                content.brandingService5.value,
+            ],
+            gradient: "from-amber-500/20 via-yellow-500/20 to-orange-500/20",
+            accentColor: "#C9A84C",
+            icon: (
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+            ),
+        },
+        {
+            id: 2,
+            title: content.socialMediaTitle.value,
+            description: content.socialMediaDescription.value,
+            services: [
+                content.socialMediaService1.value,
+                content.socialMediaService2.value,
+                content.socialMediaService3.value,
+            ],
+            gradient: "from-indigo-500/20 via-purple-500/20 to-pink-500/20",
+            accentColor: "#4F46E5",
+            icon: (
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="12" cy="12" r="3" />
+                    <circle cx="6" cy="6" r="2" />
+                    <circle cx="18" cy="6" r="2" />
+                    <circle cx="18" cy="18" r="2" />
+                    <circle cx="6" cy="18" r="2" />
+                    <line x1="12" y1="9" x2="12" y2="3" />
+                    <line x1="9" y1="12" x2="3" y2="12" />
+                    <line x1="12" y1="15" x2="12" y2="21" />
+                    <line x1="15" y1="12" x2="21" y2="12" />
+                </svg>
+            ),
+        },
+        {
+            id: 1,
+            title: content.videoProductionTitle.value,
+            description: content.videoProductionDescription.value,
+            services: [
+                content.videoProductionService1.value,
+                content.videoProductionService2.value,
+                content.videoProductionService3.value,
+                content.videoProductionService4.value,
+            ],
+            gradient: "from-pink-500/20 via-rose-500/20 to-red-500/20",
+            accentColor: "#FF6B9D",
+            icon: (
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M23 7l-7 5 7 5V7z" />
+                    <rect x="1" y="5" width="15" height="14" rx="2" />
                 </svg>
             ),
         },
@@ -190,7 +185,7 @@ const DigitalMarketingServices = () => {
 
                 {/* Camera Icon - Top Left */}
                 <div 
-                    className="absolute top-[15%] start-[8%] w-20 h-20 pointer-events-none opacity-60"
+                    className="hidden xl:block absolute top-[15%] start-[8%] w-20 h-20 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-1 8s ease-in-out infinite',
                         transformStyle: 'preserve-3d',
@@ -213,7 +208,7 @@ const DigitalMarketingServices = () => {
 
                 {/* Hashtag Icon - Top Right */}
                 <div 
-                    className="absolute top-[18%] end-[12%] w-16 h-16 pointer-events-none opacity-60"
+                    className="hidden xl:block absolute top-[18%] end-[12%] w-16 h-16 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-2 7s ease-in-out infinite 1s',
                         transformStyle: 'preserve-3d',
@@ -229,7 +224,7 @@ const DigitalMarketingServices = () => {
 
                 {/* Play Button Icon - Left Side */}
                 <div 
-                    className="absolute top-[45%] start-[5%] w-24 h-24 pointer-events-none opacity-50"
+                    className="hidden xl:block absolute top-[45%] start-[5%] w-24 h-24 pointer-events-none opacity-50"
                     style={{ 
                         animation: 'float-3d-3 9s ease-in-out infinite 2s',
                         transformStyle: 'preserve-3d',
@@ -249,7 +244,7 @@ const DigitalMarketingServices = () => {
 
                 {/* Chart/Analytics Icon - Right Side */}
                 <div 
-                    className="absolute top-[50%] end-[8%] w-20 h-20 pointer-events-none opacity-55"
+                    className="hidden xl:block absolute top-[50%] end-[8%] w-20 h-20 pointer-events-none opacity-55"
                     style={{ 
                         animation: 'float-3d-1 8.5s ease-in-out infinite 1.5s',
                         transformStyle: 'preserve-3d',
@@ -266,16 +261,16 @@ const DigitalMarketingServices = () => {
 
                 {/* Cursor/Click Icon - Bottom Right */}
                 <div 
-                    className="absolute bottom-[25%] end-[15%] w-16 h-16 pointer-events-none opacity-60"
+                    className="hidden xl:block absolute bottom-[25%] end-[15%] w-16 h-16 pointer-events-none opacity-60"
                     style={{ 
                         animation: 'float-3d-2 7.5s ease-in-out infinite 0.5s',
                         transformStyle: 'preserve-3d',
                     }}
                 >
                     <svg viewBox="0 0 100 100" className="w-full h-full rtl:-scale-x-100" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}>
-                        <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGrad)" stroke="#C9A84C" strokeWidth="2" />
+                        <path d="M 30 20 L 30 75 L 45 60 L 55 80 L 65 75 L 55 55 L 75 55 Z" fill="url(#cursorGradServices)" stroke="#C9A84C" strokeWidth="2" />
                         <defs>
-                            <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <linearGradient id="cursorGradServices" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="rgba(201, 168, 76, 0.3)" />
                                 <stop offset="100%" stopColor="rgba(201, 168, 76, 0.1)" />
                             </linearGradient>
@@ -351,7 +346,7 @@ const DigitalMarketingServices = () => {
 
                                             {/* Central icon */}
                                             <div 
-                                                className="relative z-10 p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+                                                className="relative z-10 p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-500 group-hover:scale-110 group-hover:rotate-3"
                                                 style={{ color: service.accentColor }}
                                             >
                                                 {service.icon}
@@ -406,8 +401,9 @@ const DigitalMarketingServices = () => {
 
                                         {/* CTA Link */}
                                         <Link 
-                                            href={getLocalizedPath(locale as AppLocale, serviceRoutes[service.id])}
-                                            className="relative w-full py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-[1.02] block text-center"
+                                            href={contactHref}
+                                            onClick={(e) => handleHashLink(e, contactHref, router)}
+                                            className="relative w-full cursor-pointer py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-[1.02] block text-center"
                                             style={{ backgroundColor: service.accentColor }}
                                         >
                                             <span className="relative z-10 flex items-center justify-center gap-2">

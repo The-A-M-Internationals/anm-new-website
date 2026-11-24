@@ -131,7 +131,7 @@ const aiAutomationsListingsContent = {
           ar: "عمليات الذكاء الاصطناعي وإدارة النماذج",
         }),
         description: t({
-          en: "The A&M internationals manages your deployed AI models on an ongoing basis — monitoring performance, detecting drift, retraining where needed, and ensuring your automation continues to deliver accurate, reliable results.",
+          en: "The A&M Internationals manages your deployed AI models on an ongoing basis — monitoring performance, detecting drift, retraining where needed, and ensuring your automation continues to deliver accurate, reliable results.",
           ar: "تدير A&M الدولية نماذج الذكاء الاصطناعي المنشورة لديك باستمرار — مراقبة الأداء واكتشاف الانحراف وإعادة التدريب عند الحاجة وضمان استمرار أتمتتك في تقديم نتائج دقيقة وموثوقة.",
         }),
         tags: [
@@ -148,7 +148,7 @@ const aiAutomationsListingsContent = {
           ar: "دعم وصيانة روبوتات RPA",
         }),
         description: t({
-          en: "The A&M internationals provides continuous support for your RPA estate — resolving bot failures, managing updates, handling exceptions, and optimising automation coverage as your business processes evolve.",
+          en: "The A&M Internationals provides continuous support for your RPA estate — resolving bot failures, managing updates, handling exceptions, and optimising automation coverage as your business processes evolve.",
           ar: "تقدم A&M الدولية دعمًا مستمرًا لأسطول RPA الخاص بك — حل أعطال الروبوتات وإدارة التحديثات ومعالجة الاستثناءات وتحسين تغطية الأتمتة مع تطور عمليات أعمالك.",
         }),
         tags: [
@@ -166,7 +166,7 @@ const aiAutomationsListingsContent = {
           ar: "مركز تميز الذكاء الاصطناعي",
         }),
         description: t({
-          en: "The A&M internationals helps you establish and run an AI Centre of Excellence — setting standards, scaling successful use cases, building internal capability, and governing AI adoption responsibly across the enterprise.",
+          en: "The A&M Internationals helps you establish and run an AI Centre of Excellence — setting standards, scaling successful use cases, building internal capability, and governing AI adoption responsibly across the enterprise.",
           ar: "تساعدك A&M الدولية على إنشاء وإدارة مركز تميز للذكاء الاصطناعي — وضع المعايير وتوسيع نطاق حالات الاستخدام الناجحة وبناء القدرات الداخلية وحوكمة تبني الذكاء الاصطناعي بمسؤولية عبر المؤسسة.",
         }),
         tags: [
@@ -184,7 +184,7 @@ const aiAutomationsListingsContent = {
           ar: "تحليلات الأتمتة والتقارير",
         }),
         description: t({
-          en: "The A&M internationals delivers ongoing reporting on your automation portfolio — tracking efficiency gains, cost savings, error rates, and ROI to demonstrate value and inform future investment decisions.",
+          en: "The A&M Internationals delivers ongoing reporting on your automation portfolio — tracking efficiency gains, cost savings, error rates, and ROI to demonstrate value and inform future investment decisions.",
           ar: "تقدم A&M الدولية تقارير مستمرة عن محفظة الأتمتة الخاصة بك — تتبع مكاسب الكفاءة ووفورات التكاليف ومعدلات الأخطاء والعائد على الاستثمار لإثبات القيمة وإبلاغ قرارات الاستثمار المستقبلية.",
         }),
         tags: [

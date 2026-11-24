@@ -9,19 +9,19 @@ const financeTransformationWhyChooseUsContent = {
     }),
 
     titleLine2: t({
-      en: "The A&M internationals?",
+      en: "The A&M Internationals?",
       ar: "A&M الدولية؟",
     }),
 
     features: [
       {
         title: t({
-          en: "Proven Track Record",
-          ar: "سجل نجاح مثبت",
+          en: "Senior-led",
+          ar: "بقيادة خبراء كبار",
         }),
         description: t({
-          en: "100+ successful implementations across diverse industries and company sizes.",
-          ar: "أكثر من 100 تنفيذ ناجح عبر صناعات مختلفة وأحجام شركات متنوعة.",
+          en: "Every project is overseen by a consultant with 16 years of Oracle EPM experience.",
+          ar: "يشرف على كل مشروع استشاري يمتلك 16 عامًا من الخبرة في Oracle EPM.",
         }),
         highlight: false,
       },
@@ -42,8 +42,8 @@ const financeTransformationWhyChooseUsContent = {
           ar: "أثر مجتمعي",
         }),
         description: t({
-          en: "We donate a portion of our earnings to trusted orphanages and children's welfare trusts.",
-          ar: "نخصص جزءًا من أرباحنا لدعم دور الأيتام الموثوقة وصناديق رعاية الأطفال.",
+          en: "We donate 10% of our profits to children's welfare causes.",
+          ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
         }),
         highlight: false,
       },

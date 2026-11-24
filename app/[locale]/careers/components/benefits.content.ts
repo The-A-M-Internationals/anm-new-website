@@ -15,26 +15,38 @@ const benefitsContent = {
 
     card1Title: t({ en: "Professional Growth", ar: "نمو مهني" }),
     card1Description: t({
-      en: "Sponsored certifications, mentorship programs, advanced cloud & DevSecOps exposure",
-      ar: "شهادات مدعومة، وبرامج إرشاد، وفرص متقدمة في السحابة وDevSecOps",
+      en: "Structured Oracle EPM training, mentorship from senior consultants, and Oracle certification guidance",
+      ar: "تدريب منظم على Oracle EPM، وإرشاد من كبار المستشارين، وتوجيه للحصول على شهادات Oracle",
     }),
 
+    // names of the scenes in the Professional Growth film, in order (shown small in the tile's corner)
+    growthStages: [
+      t({ en: "Joining", ar: "الانضمام" }),
+      t({ en: "Part of the team", ar: "جزء من الفريق" }),
+      t({ en: "Training", ar: "التدريب" }),
+      t({ en: "Mentoring", ar: "الإرشاد" }),
+      t({ en: "Leading the room", ar: "قيادة الاجتماع" }),
+      t({ en: "Rewarded", ar: "المكافأة" }),
+      t({ en: "Promotion", ar: "الترقية" }),
+      t({ en: "Now you lead", ar: "الآن أنت تقود" }),
+    ],
+
     card2Title: t({
-      en: "Engineering-Driven Culture",
-      ar: "ثقافة يقودها المهندسون",
+      en: "Real Client Work",
+      ar: "عمل حقيقي مع العملاء",
     }),
     card2Description: t({
-      en: "Work with global clients on real-world cloud-native systems",
-      ar: "اعمل مع عملاء عالميين على أنظمة سحابية أصلية واقعية",
+      en: "Work on Oracle EPM and digital projects for clients in the USA, UAE and India",
+      ar: "اعمل على مشاريع Oracle EPM والمشاريع الرقمية لعملاء في الولايات المتحدة والإمارات والهند",
     }),
 
     card3Title: t({
-      en: "Hybrid & Flexible Working",
-      ar: "عمل هجين ومرن",
+      en: "Fully Remote",
+      ar: "عمل عن بُعد بالكامل",
     }),
     card3Description: t({
-      en: "Flexible timing, remote-friendly culture",
-      ar: "مواعيد مرنة وثقافة داعمة للعمل عن بُعد",
+      en: "Flexible timing, remote team",
+      ar: "مواعيد مرنة وفريق يعمل عن بُعد",
     }),
 
     card4Title: t({
@@ -60,8 +72,17 @@ const benefitsContent = {
       ar: "هدف وأثر اجتماعي",
     }),
     card6Description: t({
-      en: "Company donates 10% of income to orphanages and children's trusts",
-      ar: "تتبرع الشركة بنسبة 10% من الدخل لدور الأيتام وصناديق رعاية الأطفال",
+      en: "We donate 10% of our profits to children's welfare causes.",
+      ar: "نتبرع بنسبة 10% من أرباحنا لقضايا رعاية الأطفال.",
+    }),
+
+    card7Title: t({
+      en: "Hands-on AI",
+      ar: "خبرة عملية في الذكاء الاصطناعي",
+    }),
+    card7Description: t({
+      en: "Help build our EPM Build Agent on Oracle Cloud",
+      ar: "ساهم في بناء EPM Build Agent الخاص بنا على Oracle Cloud",
     }),
   },
 };

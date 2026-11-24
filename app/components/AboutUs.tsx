@@ -1,12 +1,17 @@
 'use client';
 
+import RollLabel from "./RollLabel";
 import { useEffect, useRef, useState } from "react";
 import { useIntlayer, useLocale } from "next-intlayer";
 import Link from "next/link";
+import { getImageProps } from "next/image";
 import { ArrowRight, Play } from "lucide-react";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
 import "./aboutUs.content"; // registers dictionary
+
+// Video poster: the "Oracle EPM, end to end" title card, taken from the video itself (4.2s)
+const POSTER = getImageProps({ src: "/aboutus-poster.jpg", alt: "", width: 960, height: 540 }).props.src;
 
 const AboutUs = () => {
     const content = useIntlayer("aboutUs");
@@ -66,8 +71,10 @@ const AboutUs = () => {
                 <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black ring-4 ring-white/50 mb-10 group">
                     <video 
                         ref={videoRef}
-                        src="/aboutus-video.mp4" 
-                        poster="/hero-bg.png"
+                        src="/aboutus-video.mp4?v=2" 
+                        poster={POSTER}
+                        preload="metadata"
+                        playsInline
                         controls={isPlaying}
                         onPlay={() => setIsPlaying(true)}
                         onPause={() => setIsPlaying(false)}
@@ -83,13 +90,15 @@ const AboutUs = () => {
                     {/* Custom Centered Play Button */}
                     {!isPlaying && (
                         <div 
+                            data-cursor="play"
                             className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-all duration-300 cursor-pointer group/play"
                             onClick={() => {
                                 videoRef.current?.play();
                                 setIsPlaying(true);
                             }}
                         >
-                            <Play className="w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] transform group-hover/play:scale-110 transition-transform duration-300" fill="currentColor" />
+                            {/* Touch screens only: on desktop the glass cursor is the play button */}
+                            <Play className="[@media(hover:hover)_and_(pointer:fine)]:hidden w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] transform group-hover/play:scale-110 transition-transform duration-300" fill="currentColor" />
                         </div>
                     )}
                 </div>
@@ -99,7 +108,7 @@ const AboutUs = () => {
                     href={getLocalizedPath(locale as AppLocale, "/business")}
                     className="bg-[#D4AF37] text-black px-4 py-2 sm:px-6 sm:py-3 flex items-center gap-2 rounded-full text-sm sm:text-base font-semibold hover:scale-105 transition cursor-pointer mt-2"
                 >
-                    {content.cta.value}
+                    <RollLabel>{content.cta.value}</RollLabel>
                     <ArrowRight className='w-4 h-4 rtl:rotate-180' />
                 </Link>
             </div>

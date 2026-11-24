@@ -4,12 +4,12 @@ const featuresEpmContent = {
   key: "featuresEpm",
   content: {
     leftTitle: t({
-      en: "See EPM Suite in Action",
-      ar: "شاهد مجموعة EPM على أرض الواقع",
+      en: "Talk to an Oracle EPM expert",
+      ar: "تحدّث إلى خبير في Oracle EPM",
     }),
     leftDescription: t({
-      en: "Schedule a personalized demo to discover how EPM Suite can transform your business operations.",
-      ar: "احجز عرضًا توضيحيًا مخصصًا لاكتشاف كيف يمكن لمجموعة EPM تحويل عمليات أعمالك.",
+      en: "Book a free 30-minute call about your planning, close or reporting challenge.",
+      ar: "احجز مكالمة مجانية مدتها 30 دقيقة لمناقشة تحديات التخطيط أو الإقفال أو التقارير لديك.",
     }),
 
     bullet1: t({
@@ -26,8 +26,8 @@ const featuresEpmContent = {
     }),
 
     formTitle: t({
-      en: "Request Your Demo",
-      ar: "اطلب عرضًا توضيحيًا",
+      en: "Book a Consultation",
+      ar: "احجز استشارة",
     }),
 
     fullNameLabel: t({ en: "Full name", ar: "الاسم الكامل" }),
@@ -83,15 +83,15 @@ const featuresEpmContent = {
       ar: "إدارة حلول EPM",
     }),
     optionVersionUpgrade: t({
-      en: "Version Upgrade & Patching",
-      ar: "ترقية الإصدارات والتحديثات",
+      en: "Monthly Update Testing",
+      ar: "اختبار التحديثات الشهرية",
     }),
     optionMonthlyMaintenance: t({
       en: "Monthly Maintenance & Administration",
       ar: "الصيانة والإدارة الشهرية",
     }),
 
-    submitButton: t({ en: "Submit Request", ar: "إرسال الطلب" }),
+    submitButton: t({ en: "Book my call", ar: "احجز مكالمتي" }),
     submittingButton: t({ en: "Submitting...", ar: "جارٍ الإرسال..." }),
 
     errorFillRequired: t({

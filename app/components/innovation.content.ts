@@ -12,12 +12,8 @@ const innovationContent = {
       ar: "انضم إلينا في ابتكار حلول مؤثرة تلهم وتبتكر وترتقي بالتجارب.",
     }),
     epmButton: t({
-      en: "Request EPM Demo",
-      ar: "اطلب عرض EPM",
-    }),
-    contactButton: t({
-      en: "Get in Touch",
-      ar: "تواصل معنا",
+      en: "Book a Consultation",
+      ar: "احجز استشارة",
     }),
   },
 };

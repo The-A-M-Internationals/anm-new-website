@@ -2,13 +2,20 @@
 
 import { useIntlayer, useLocale } from "next-intlayer";
 import PageHero from "../../components/PageHero";
-import Apps from "./components/Apps";
+import BuiltOnOracle from "./components/BuiltOnOracle";
 import EPM from "./components/EPM";
 import FeaturesList from "./components/FeaturesList";
-import Results from "./components/Results";
+import AgentWhy from "./components/agent/AgentWhy";
+import AgentSteps from "./components/agent/AgentSteps";
+import AgentCards from "./components/agent/AgentCards";
+import AgentModules from "./components/agent/AgentModules";
+import AgentRoadmap from "./components/agent/AgentRoadmap";
+import AgentBuiltBy from "./components/agent/AgentBuiltBy";
+import AgentFaq from "./components/agent/AgentFaq";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { AppLocale } from "@/types/locale";
 
+/** EPM Build Agent early-access page */
 export default function FeaturesPage() {
     const content = useIntlayer("featuresPage");
     const { locale } = useLocale();
@@ -34,7 +41,7 @@ export default function FeaturesPage() {
                     title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={`/${locale}/features#epm-suites`}
+                    link={getLocalizedPath(locale as AppLocale, "/features#early-access")}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}
@@ -42,10 +49,17 @@ export default function FeaturesPage() {
                 />
             </section>
 
+            <section className="snap-section"><AgentWhy /></section>
             <section className="snap-section"><FeaturesList /></section>
-            <section className="snap-section"><Apps /></section>
-            <section className="snap-section"><Results /></section>
-            <section className="snap-section"><EPM /></section>
+            <section className="snap-section"><AgentSteps /></section>
+            <section className="snap-section"><AgentCards which="control" /></section>
+            <section className="snap-section"><AgentModules /></section>
+            <section className="snap-section"><AgentCards which="audience" /></section>
+            <section className="snap-section"><AgentRoadmap /></section>
+            <section className="snap-section"><AgentBuiltBy /></section>
+            <section className="snap-section"><AgentFaq /></section>
+            <section className="snap-section"><BuiltOnOracle /></section>
+            <section className="snap-section"><EPM variant="earlyAccess" /></section>
         </div>
     );
 }

@@ -2,19 +2,24 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { subscribeToNewsletter } from "../../services/newsletter";
+// Firebase loads only when someone subscribes, not on every page
 import Link from "next/link";
 import { useIntlayer, useLocale } from "next-intlayer";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import "./footer.content";
 import { useRouter } from "next/navigation";
 import { handleHashLink } from "@/lib/handleHashLink";
+import OraclePartnerBadge from "./OraclePartnerBadge";
+import { useContactInfo, useContactText } from "./ContactInfo";
+import { digits } from "@/lib/cms/siteContent";
 
 const Footer = () => {
     const content = useIntlayer("footer");
     const router = useRouter();
 
     const { locale } = useLocale();
+    const contact = useContactInfo();
+    const contactText = useContactText(locale);
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     type MessageKey = keyof ReturnType<typeof useIntlayer>;
@@ -40,6 +45,7 @@ const Footer = () => {
         setLoading(true);
         setMessage(null);
 
+        const { subscribeToNewsletter } = await import("../../services/newsletter");
         const result = await subscribeToNewsletter(email);
 
         if (result.status === "success") {
@@ -73,9 +79,9 @@ const Footer = () => {
             <div className="flex items-start gap-3">
                 <Phone className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
                 <div className="flex flex-col">
-                    <span className="text-[11px] text-gray-400 uppercase tracking-wider">Phone</span>
-                    <a href="tel:+971564783478" className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
-                        +971 564783478
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">Phone</span>
+                    <a href={`tel:${digits(contact.phone)}`} className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
+                        {contact.phone}
                     </a>
                 </div>
             </div>
@@ -84,36 +90,52 @@ const Footer = () => {
             <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" />
                 <div className="flex flex-col">
-                    <span className="text-[11px] text-gray-400 uppercase tracking-wider">Email</span>
-                    <a href="mailto:am@theaminternationals.com" className="font-medium text-white hover:text-[#C9A84C] transition-colors break-all">
-                        am@theaminternationals.com
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">Email</span>
+                    <a href={`mailto:${contact.email}`} className="font-medium text-white hover:text-[#C9A84C] transition-colors break-all">
+                        {contact.email}
                     </a>
+                </div>
+            </div>
+
+            {/* WhatsApp + working hours */}
+            <div className="flex items-start gap-3">
+                <MessageCircle className={`w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 ${locale === 'ar' ? 'scale-x-[-1]' : ''}`} />
+                <div className="flex flex-col">
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">{content.whatsappLabel?.value || "WhatsApp"}</span>
+                    <a href={`https://wa.me/${digits(contact.whatsapp).replace("+", "")}`} target="_blank" rel="noopener noreferrer" className="font-medium text-white hover:text-[#C9A84C] transition-colors" dir="ltr">
+                        {contact.whatsapp}
+                    </a>
+                    <span className="text-xs text-gray-400 mt-0.5">{contactText.hours || content.hoursValue?.value || "Mon–Sat, 9 AM–6 PM GST"}</span>
                 </div>
             </div>
 
             {/* Premises & Building Details - Clickable Google Maps Location */}
             <a
-                href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                href={contact.mapLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 group transition-colors"
                 title="View on Google Maps"
             >
                 <MapPin className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
+                {contactText.office ? (
+                    <span className="text-xs sm:text-sm font-medium text-gray-200 whitespace-pre-line group-hover:text-[#C9A84C] transition-colors">{contactText.office}</span>
+                ) : (
                 <div className="flex flex-col text-xs sm:text-sm text-gray-200 space-y-1">
                     <div>
-                        <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.premisesLabel?.value || "Premises Number"}:</span>
+                        <span className="text-xs text-gray-400 block uppercase tracking-wider">{content.premisesLabel?.value || "Premises Number"}:</span>
                         <span className="font-semibold text-white group-hover:text-[#C9A84C] transition-colors">{content.premisesValue?.value || "Office - C1 - 1F - SF6017"}</span>
                     </div>
                     <div>
-                        <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.buildingLabel?.value || "Building Name"}:</span>
+                        <span className="text-xs text-gray-400 block uppercase tracking-wider">{content.buildingLabel?.value || "Building Name"}:</span>
                         <span className="font-medium text-gray-200 group-hover:text-[#C9A84C] transition-colors">{content.buildingValue?.value || "Ajman Free Zone C1 Building"}</span>
                     </div>
                     <div>
-                        <span className="text-[11px] text-gray-400 block uppercase tracking-wider">{content.districtLabel?.value || "Business District"}:</span>
+                        <span className="text-xs text-gray-400 block uppercase tracking-wider">{content.districtLabel?.value || "Business District"}:</span>
                         <span className="font-medium text-gray-300 group-hover:text-[#C9A84C] transition-colors">{content.districtValue?.value || "Ajman Free Zone"}</span>
                     </div>
                 </div>
+                )}
             </a>
         </div>
     );
@@ -124,8 +146,8 @@ const Footer = () => {
             <div className="text-[#C9A84C] text-[18px] sm:text-[20px] font-semibold mb-3">
                 {content.followUs?.value || "Follow Us"}
             </div>
-            <div className="flex items-center gap-3">
-                <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+            <div className="flex items-center gap-5">
+                <a href={content.instagramLink?.value || "#"} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-11 w-11 -m-2.5 hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
@@ -138,7 +160,7 @@ const Footer = () => {
                     </svg>
                 </a>
 
-                <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+                <a href={content.linkedinLink?.value || "#"} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="h-11 w-11 -m-2.5 hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
@@ -148,7 +170,7 @@ const Footer = () => {
                     </svg>
                 </a>
 
-                <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+                <a href={content.youtubeLink?.value || "#"} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="h-11 w-11 -m-2.5 hover:text-white hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
@@ -164,25 +186,32 @@ const Footer = () => {
     );
 
     return (
-        <div className="">
-            <div className="bg-[#0D1B3E] w-full h-auto flex flex-col lg:flex-row text-white p-6 sm:p-10 md:p-15 gap-8">
+        <div className="site-footer">
+            <div className="bg-[#0D1B3E] w-full h-auto flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-12 xl:flex xl:flex-row xl:gap-8 text-white p-6 sm:p-10 md:p-15 gap-8">
 
                 {/* LEFT - LOGO AND CONTACT (Description text removed to reclaim space) */}
-                <div className="flex flex-col lg:flex-1 gap-6 sm:gap-8 md:gap-8 order-1">
-                    <Image
-                        src="/new-logo.png"
-                        alt="Logo"
-                        width={300}
-                        height={300}
-                        className="w-48 sm:w-56 md:w-64 lg:w-64 h-auto object-contain"
-                    />
+                <div className="flex flex-col min-[1024px]:flex-1 min-[1400px]:flex-[1.3] gap-6 sm:gap-8 md:gap-8 order-1">
+                    {/* Co-brand lockup: The A&M Internationals | Oracle Partner (thin divider, same as the navbar).
+                        Side by side on phones/tablets and 1400px+; stacked on laptops, where the footer
+                        columns leave no room for both in one row. */}
+                    <div className="flex flex-row items-center gap-3 -ms-3 min-[1024px]:flex-col min-[1024px]:items-start min-[1024px]:ms-0 min-[1400px]:flex-row min-[1400px]:items-center min-[1400px]:gap-4 min-[1400px]:-ms-3">
+                        <Image
+                            src="/new-logo.png"
+                            alt="The A&M Internationals"
+                            width={300}
+                            height={300}
+                            className="w-44 min-[1024px]:-ms-3 min-[1400px]:ms-0 min-[1400px]:w-48 h-auto object-contain shrink-0"
+                        />
+                        <span className="h-10 min-[1024px]:hidden min-[1400px]:block min-[1400px]:h-12 w-px shrink-0 bg-white/25" aria-hidden />
+                        <OraclePartnerBadge tone="dark" className="h-9 min-[1024px]:h-8 min-[1400px]:h-10 w-auto shrink-0" />
+                    </div>
 
                     {/* Contact Details with ID for Smooth Scroll from About Us dropdown */}
                     {renderContact()}
                 </div>
 
                 {/* FINANCE TRANSFORMATION - Order 2 */}
-                <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-2">
+                <div className="flex flex-col lg:flex-1 xl:ml-20 gap-4 sm:gap-5 order-2">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
                         <Link href={getLocalizedLink("/finance-transformation")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.financeTransformation?.value || "Finance Transformation"}</Link>
                     </div>
@@ -194,6 +223,8 @@ const Footer = () => {
                         <Link href={getLocalizedLink("/finance-transformation#enterprise-data")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#enterprise-data"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.enterpriseData?.value || ""}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#narrative-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#narrative-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.narrativeReporting?.value || ""}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#tax-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#tax-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.taxReporting?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#data-integration")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#data-integration"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.dataIntegration?.value || "Data Integration"}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#esg-reporting")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#esg-reporting"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.esgReporting?.value || "ESG & Sustainability Reporting"}</Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
                         <Link href={getLocalizedLink("/finance-transformation#managed-services")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#managed-services"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.managedServices?.value || "Managed Services"}</Link>
@@ -201,19 +232,20 @@ const Footer = () => {
                     <div className="text-[15px] md:text-base lg:text-[16px] flex flex-col gap-2">
                         <Link href={getLocalizedLink("/finance-transformation#consulting-as-service")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#consulting-as-service"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.consultingAsService?.value || ""}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#epm-solution-management")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#epm-solution-management"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.epmSolutionManagement?.value || ""}</Link>
-                        <Link href={getLocalizedLink("/finance-transformation#version-upgrade")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#version-upgrade"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.versionUpgrade?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#monthly-update-testing")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#monthly-update-testing"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.versionUpgrade?.value || "Monthly Update Testing"}</Link>
                         <Link href={getLocalizedLink("/finance-transformation#monthly-maintenance")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#monthly-maintenance"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.monthlyMaintenance?.value || ""}</Link>
+                        <Link href={getLocalizedLink("/finance-transformation#epm-staffing")} onClick={(e) => handleHashLink(e, getLocalizedLink("/finance-transformation#epm-staffing"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">{content.epmStaffing?.value || "EPM Staffing"}</Link>
                     </div>
                 </div>
 
                 {/* RESOURCES AND HOW WE WORK - Order 3 */}
-                <div className="flex flex-col lg:flex-1 lg:ml-20 gap-4 sm:gap-5 order-3">
+                <div className="flex flex-col lg:flex-1 xl:ml-20 gap-4 sm:gap-5 order-3">
                     <div className="text-[#C9A84C] text-[20px] md:text-2xl lg:text-[24px]">
                         {content.resources?.value || "Resources"}
                     </div>
                     <div className="text-[15px] md:text-base lg:text-[16px]">
                         <Link href={getLocalizedLink("/")} onClick={(e) => handleHashLink(e, getLocalizedLink("/"), router)} className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300">
-                            {content.amInternational?.value || "The A&M internationals"}
+                            {content.amInternational?.value || "The A&M Internationals"}
                         </Link>
                     </div>
                     <div className="text-[#C9A84C] mt-3 text-[20px] md:text-2xl lg:text-[24px]">
@@ -239,7 +271,7 @@ const Footer = () => {
                         {content.stayConnected?.value || "Stay Connected"}
                     </div>
 
-                    <div className="text-xs sm:text-sm md:text-base">
+                    <div className="text-sm md:text-base">
                         {content.newsletterDescription?.value || ""}
                     </div>
 
@@ -247,7 +279,7 @@ const Footer = () => {
 
                         <input
                             type="email"
-                            placeholder={content.emailPlaceholder?.value || "Your email address"}
+                            placeholder={content.emailPlaceholder?.value || "Your email address"} aria-label={content.emailPlaceholder?.value || "Your email address"}
                             className={`bg-[#222B44] p-2 text-sm sm:text-base outline-none border ${message?.type === 'error' ? 'border-red-400' : 'border-[#FFFFFF8A]'} rounded-[40px] w-full`}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
@@ -286,7 +318,7 @@ const Footer = () => {
 
             <div className="w-full h-px bg-white/20" />
 
-            <div className="bg-[#0D1B3E] text-center text-white py-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
+            <div className="bg-[#0D1B3E] text-center text-white pt-6 pb-24 md:pb-6 text-xs sm:text-sm flex flex-col items-center justify-center px-4 gap-4">
                 <style dangerouslySetInnerHTML={{__html: `
                     @keyframes marquee-footer-ltr {
                         0% { transform: translateX(0); }
@@ -324,16 +356,8 @@ const Footer = () => {
                             rel="noopener noreferrer"
                             className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300"
                         >
-                            {content.privacy?.value || "Privacy"}
-                        </a>
-                        <span className="mx-1">|</span>
-                        <a
-                            href="https://privacy-policy.theaminternationals.com/" 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-[#C9A84C] hover:scale-105 inline-block transform origin-left rtl:origin-right transition-all duration-300"
-                        >
-                            {content.terms?.value || "Terms"}
+                            {/* One combined Privacy & Terms document */}
+                            {content.privacyTerms?.value || "Privacy & Terms"}
                         </a>
                     </div>
                 </div>
@@ -343,3 +367,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

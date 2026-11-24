@@ -5,16 +5,16 @@ export const digitalMarketingServicesContent = {
   content: {
     // Hero section
     heroTitle: t({
-      en: "Digital Transformation",
-      ar: "التحول الرقمي",
+      en: "Digital &",
+      ar: "الخدمات الرقمية",
     }),
     heroSubtitle: t({
-      en: "& Innovation Services",
-      ar: "وخدمات الابتكار",
+      en: "Web Services",
+      ar: "وخدمات الويب",
     }),
     heroDescription: t({
-      en: "Empower your business with cutting-edge digital transformation strategies that drive efficiency and growth in the modern era.",
-      ar: "مكن عملك باستراتيجيات التحول الرقمي المتطورة التي تعزز الكفاءة والنمو في العصر الحديث.",
+      en: "Websites, UI/UX design, branding and digital marketing, built by our in-house team.",
+      ar: "مواقع إلكترونية، وتصميم واجهات وتجربة المستخدم، وهوية العلامة التجارية، والتسويق الرقمي، ينفذها فريقنا الداخلي.",
     }),
     exploreServices: t({
       en: "Explore Services",
@@ -28,12 +28,6 @@ export const digitalMarketingServicesContent = {
       en: "Powered by Innovation",
       ar: "مدعوم بالابتكار",
     }),
-    stat1Value: t({ en: "200%", ar: "٢٠٠٪" }),
-    stat1Label: t({ en: "Business Efficiency", ar: "كفاءة الأعمال" }),
-    stat2Value: t({ en: "98%", ar: "٩٨٪" }),
-    stat2Label: t({ en: "Client Satisfaction", ar: "رضا العملاء" }),
-    stat3Value: t({ en: "300%", ar: "٣٠٠٪" }),
-    stat3Label: t({ en: "Digital Adoption", ar: "التبني الرقمي" }),
     scroll: t({ en: "Scroll", ar: "تمرير" }),
     expertiseBadge: t({ en: "Our Expertise", ar: "خبراتنا" }),
 
@@ -95,10 +89,6 @@ export const digitalMarketingServicesContent = {
       ar: "إدارة المجتمع",
     }),
     socialMediaService3: t({
-      en: "Influencer Partnerships",
-      ar: "شراكات المؤثرين",
-    }),
-    socialMediaService4: t({
       en: "Analytics & Reporting",
       ar: "التحليلات والتقارير",
     }),
@@ -127,6 +117,10 @@ export const digitalMarketingServicesContent = {
     brandingService4: t({
       en: "Marketing Collateral",
       ar: "المواد التسويقية",
+    }),
+    brandingService5: t({
+      en: "UI/UX Design",
+      ar: "تصميم واجهات وتجربة المستخدم (UI/UX)",
     }),
 
     // Web Design & Development

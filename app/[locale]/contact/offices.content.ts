@@ -39,6 +39,39 @@ const officesContent = {
       ar: "G5، أبراج دريم سكيب، قطعة رقم 679/A و681، الشارع الرئيسي الخامس، مخطط OMBR، بنغالور 560043.",
     }),
 
+    mapTitle: t({
+      en: "Where our team works",
+      ar: "أين يعمل فريقنا",
+    }),
+    mapSubtitle: t({
+      en: "One team across three time zones",
+      ar: "فريق واحد عبر ثلاث مناطق زمنية",
+    }),
+    localTime: t({
+      en: "Local time",
+      ar: "التوقيت المحلي",
+    }),
+    cityUae: t({
+      en: "Ajman, UAE",
+      ar: "عجمان، الإمارات",
+    }),
+    cityIndia: t({
+      en: "Bangalore, India",
+      ar: "بنغالور، الهند",
+    }),
+    cityUsa: t({
+      en: "Charlotte, USA",
+      ar: "شارلوت، الولايات المتحدة",
+    }),
+    chatWhatsapp: t({
+      en: "Chat on WhatsApp",
+      ar: "تحدث معنا عبر واتساب",
+    }),
+    openMaps: t({
+      en: "Open in Google Maps",
+      ar: "افتح في خرائط Google",
+    }),
+
     usaLocation: t({
       en: "United States of America",
       ar: "الولايات المتحدة الأمريكية",

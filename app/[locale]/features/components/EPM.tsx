@@ -5,17 +5,52 @@ import { Check } from 'lucide-react';
 import Image from 'next/image';
 import { db } from '@/lib/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
+import { withTimeout } from "@/lib/withTimeout";
 import { useIntlayer, useLocale } from "next-intlayer";
 
-export default function EPM() {
+/** consultation: "Talk to an Oracle EPM expert" form (What Sets Us Apart). earlyAccess: EPM Build Agent sign-up (Features). */
+export default function EPM({ variant = 'consultation' }: { variant?: 'consultation' | 'earlyAccess' }) {
     const content = useIntlayer("featuresEpm");
+    const early = useIntlayer("featuresEarlyAccess");
+    const isEarly = variant === 'earlyAccess';
     const { locale } = useLocale();
+    const copy = isEarly ? {
+        title: early.leftTitle.value, description: early.leftDescription.value,
+        bullets: [early.bullet1.value, early.bullet2.value, early.bullet3.value],
+        formTitle: early.formTitle.value, label: early.moduleLabel.value, placeholder: early.modulePlaceholder.value,
+        submit: early.submitButton.value,
+        options: [
+            { value: 'Planning', label: early.optionPlanning.value },
+            { value: 'Financial Consolidation and Close', label: early.optionFccs.value },
+            { value: 'Account Reconciliation', label: early.optionArcs.value },
+            { value: 'Other', label: early.optionOther.value },
+        ],
+    } : {
+        title: content.leftTitle.value, description: content.leftDescription.value,
+        bullets: [content.bullet1.value, content.bullet2.value, content.bullet3.value],
+        formTitle: content.formTitle.value, label: content.serviceLabel.value, placeholder: content.servicePlaceholder.value,
+        submit: content.submitButton.value,
+        options: [
+            { value: 'fcc', label: content.optionFcc.value },
+            { value: 'planning&budgeting', label: content.optionPlanning.value },
+            { value: 'account-reconciliation', label: content.optionAccountReconciliation.value },
+            { value: 'pcm', label: content.optionPcm.value },
+            { value: 'enterprise-data-management', label: content.optionEnterpriseDataManagement.value },
+            { value: 'narrative-reporting', label: content.optionNarrativeReporting.value },
+            { value: 'tax-reporting', label: content.optionTaxReporting.value },
+            { value: 'consulting-as-a-service', label: content.optionConsultingAsService.value },
+            { value: 'epm-solution-management', label: content.optionEpmSolutionManagement.value },
+            { value: 'version-upgrade-patching', label: content.optionVersionUpgrade.value },
+            { value: 'monthly-maintenance-administration', label: content.optionMonthlyMaintenance.value },
+        ],
+    };
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         company: '',
         phone: '',
-        epm: ''
+        epm: '',
+        message: ''
     });
     const [formError, setFormError] = useState<string | null>(null);
     const [submitting, setSubmitting] = useState(false);
@@ -42,7 +77,9 @@ export default function EPM() {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
         // Check if all fields are filled
-        if (!formData.name.trim() || !formData.company.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.epm.trim()) {
+        // Early access: only name, email and company are required (phone, modules and message are optional)
+        const missingOptional = !isEarly && (!formData.phone.trim() || !formData.epm.trim());
+        if (!formData.name.trim() || !formData.company.trim() || !formData.email.trim() || missingOptional) {
             showTempMsg(setFormError, String(content.errorFillRequired.value));
             return;
         }
@@ -73,16 +110,16 @@ export default function EPM() {
 
         // Validate phone number (10-15 digits with optional formatting)
         const phoneDigitsOnly = formData.phone.replace(/\D/g, '');
-        if (phoneDigitsOnly.length < 10 || phoneDigitsOnly.length > 15) {
+        if ((formData.phone.trim() || !isEarly) && (phoneDigitsOnly.length < 10 || phoneDigitsOnly.length > 15)) {
             showTempMsg(setFormError, String(content.errorInvalidPhone.value));
             return;
         }
         setSubmitting(true);
         try {
-            await addDoc(collection(db, 'EPM'), {
+            await withTimeout(addDoc(collection(db, 'EPM'), {
                 ...formData,
                 submittedAt: new Date().toISOString()
-            });
+            }));
 
             // Dispatch confirmation and alert email
             try {
@@ -96,13 +133,15 @@ export default function EPM() {
                             company: formData.company,
                             email: formData.email,
                             phone: formData.phone,
-                            service: `EPM Demo Request (${formData.epm})`,
-                            vision: `Requested EPM Suite: ${formData.epm}`,
+                            service: isEarly ? `EPM Build Agent Early Access (${formData.epm || 'modules not given'})` : `EPM Consultation Request (${formData.epm})`,
+                            vision: isEarly
+                                ? `EPM Build Agent early access. Modules used: ${formData.epm || 'not given'}${formData.message.trim() ? `\nMessage: ${formData.message.trim()}` : ''}`
+                                : `Oracle EPM consultation call: ${formData.epm}`,
                         },
                     }),
                 });
             } catch (mailErr) {
-                console.warn('Could not dispatch EPM demo email:', mailErr);
+                console.warn('Could not dispatch EPM form email:', mailErr);
             }
             showTempMsg(setSuccessMsg, String(content.successSubmitted.value));
             setFormData({
@@ -110,7 +149,8 @@ export default function EPM() {
                 company: '',
                 email: '',
                 phone: '',
-                epm: ''
+                epm: '',
+                message: ''
             });
         } catch {
             showTempMsg(setFormError, String(content.errorSubmitFailed.value));
@@ -121,7 +161,7 @@ export default function EPM() {
 
 
     return (
-        <div id='epm-suites' className="bg-[#0F1E4D] flex items-center justify-center py-12 md:py-20 lg:py-24 px-6 relative overflow-hidden">
+        <div id={isEarly ? 'early-access' : 'epm-suites'} className="bg-[#0F1E4D] flex items-center justify-center py-12 md:py-20 lg:py-24 px-6 relative overflow-hidden">
             {/* Decorative background elements */}
 
             <div className='absolute left-0 top-0 rtl:right-0 rtl:left-auto'>
@@ -135,47 +175,38 @@ export default function EPM() {
             <div className="max-w-5xl w-full grid md:grid-cols-2 gap-8 items-center z-10">
                 {/* Left side - Info */}
                 <div className="text-white space-y-6 rtl:text-right">
-                    <h1 className="text-4xl font-bold leading-tight">
-                        {content.leftTitle.value}
-                    </h1>
+                    <h2 className="text-4xl font-bold leading-tight">
+                        {copy.title}
+                    </h2>
                     <p className="text-[#FFFFFF] text-lg">
-                        {content.leftDescription.value}
+                        {copy.description}
                     </p>
 
-                    <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                            <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
-                                <Check className="w-3 h-3 text-[#D4AF37]" />
-                            </div>
-                            <span className="text-blue-100">{content.bullet1.value}</span>
+                    {copy.bullets.length > 0 && (
+                        <div className="space-y-3">
+                            {copy.bullets.map((bullet) => (
+                                <div key={bullet} className="flex items-center gap-3">
+                                    <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
+                                        <Check className="w-3 h-3 text-[#D4AF37]" />
+                                    </div>
+                                    <span className="text-blue-100">{bullet}</span>
+                                </div>
+                            ))}
                         </div>
-
-                        <div className="flex items-center gap-3">
-                            <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
-                                <Check className="w-3 h-3 text-[#D4AF37]" />
-                            </div>
-                            <span className="text-blue-100">{content.bullet2.value}</span>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <div className="shrink-0 w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center">
-                                <Check className="w-3 h-3 text-[#D4AF37]" />
-                            </div>
-                            <span className="text-blue-100">{content.bullet3.value}</span>
-                        </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Right side - Form */}
                 <div className="bg-white rounded-[20px] md:rounded-[40px] shadow-2xl p-6 md:p-8 rtl:text-right">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6">{content.formTitle.value}</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">{copy.formTitle}</h2>
 
-                    <div className="space-y-4">
-                        <label className="block text-gray-700 font-medium mb-1">
+                    <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+                        <label htmlFor="epm-name" className="block text-gray-700 font-medium mb-1">
                             {content.fullNameLabel.value} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="text"
+                            id="epm-name"
                             name="name"
                             placeholder={content.fullNamePlaceholder.value}
                             value={formData.name}
@@ -183,11 +214,12 @@ export default function EPM() {
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition rtl:text-right"
                         />
 
-                        <label className="block text-gray-700 font-medium mb-1">
+                        <label htmlFor="epm-email" className="block text-gray-700 font-medium mb-1">
                             {content.workEmailLabel.value} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="email"
+                            id="epm-email"
                             name="email"
                             placeholder="johndoe@gmail.com"
                             value={formData.email}
@@ -195,11 +227,12 @@ export default function EPM() {
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition rtl:text-right"
                         />
 
-                        <label className="block text-gray-700 font-medium mb-1">
+                        <label htmlFor="epm-company" className="block text-gray-700 font-medium mb-1">
                             {content.companyNameLabel.value} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="text"
+                            id="epm-company"
                             name="company"
                             placeholder={content.companyNamePlaceholder.value}
                             value={formData.company}
@@ -207,11 +240,12 @@ export default function EPM() {
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition rtl:text-right"
                         />
 
-                        <label className="block text-gray-700 font-medium mb-1">
-                            {content.phoneNumberLabel.value} <span className="text-red-500">*</span>
+                        <label htmlFor="epm-phone" className="block text-gray-700 font-medium mb-1">
+                            {content.phoneNumberLabel.value} {!isEarly && <span className="text-red-500">*</span>}
                         </label>
                         <input
                             type="tel"
+                            id="epm-phone"
                             name="phone"
                             dir={locale === 'ar' ? 'rtl' : 'ltr'}
                             placeholder="1234567890"
@@ -221,39 +255,48 @@ export default function EPM() {
                         />
 
                         <label htmlFor="epm-service" className="block text-gray-700 font-medium mb-1">
-                            {content.serviceLabel.value} <span className="text-red-500">*</span>
+                            {copy.label} {!isEarly && <span className="text-red-500">*</span>}
                         </label>
                         <select
                             id="epm-service"
                             name="epm"
                             value={formData.epm}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition resize-none rtl:text-right"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition resize-none rtl:text-right cursor-pointer"
                         >
-                            <option value="">{content.servicePlaceholder.value}</option>
-                            <option value="fcc">{content.optionFcc.value}</option>
-                            <option value="planning&budgeting">{content.optionPlanning.value}</option>
-                            <option value="account-reconciliation">{content.optionAccountReconciliation.value}</option>
-                            <option value="pcm">{content.optionPcm.value}</option>
-                            <option value="enterprise-data-management">{content.optionEnterpriseDataManagement.value}</option>
-                            <option value="narrative-reporting">{content.optionNarrativeReporting.value}</option>
-                            <option value="tax-reporting">{content.optionTaxReporting.value}</option>
-                            <option value="consulting-as-a-service">{content.optionConsultingAsService.value}</option>
-                            <option value="epm-solution-management">{content.optionEpmSolutionManagement.value}</option>
-                            <option value="version-upgrade-patching">{content.optionVersionUpgrade.value}</option>
-                            <option value="monthly-maintenance-administration">{content.optionMonthlyMaintenance.value}</option>
+                            <option value="">{copy.placeholder}</option>
+                            {copy.options.map((option) => (
+                                <option key={option.value} value={option.value}>{option.label}</option>
+                            ))}
                         </select>
 
+                        {isEarly && (
+                            <>
+                                <label htmlFor="epm-message" className="block text-gray-700 font-medium mb-1">
+                                    {early.messageLabel.value}
+                                </label>
+                                <textarea
+                                    id="epm-message"
+                                    name="message"
+                                    rows={3}
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition resize-none rtl:text-right"
+                                />
+                            </>
+                        )}
+
                         <button
-                            onClick={handleSubmit}
+                            type="submit"
                             disabled={submitting}
                             className="bg-[#D4AF37] w-full flex items-center justify-center gap-2 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition cursor-pointer"
                         >
-                            {submitting ? content.submittingButton.value : content.submitButton.value}
+                            {submitting ? content.submittingButton.value : copy.submit}
                         </button>
-                        {formError && <p className="text-red-600 text-sm rtl:text-right">{formError}</p>}
-                        {successMsg && <p className="text-green-600 text-sm rtl:text-right">{successMsg}</p>}
-                    </div>
+                        {isEarly && <p className="text-gray-500 text-sm text-center">{early.note.value}</p>}
+                        {formError && <p role="alert" className="text-red-600 text-sm rtl:text-right">{formError}</p>}
+                        {successMsg && <p role="status" className="text-green-600 text-sm rtl:text-right">{successMsg}</p>}
+                    </form>
                 </div>
             </div>
         </div>

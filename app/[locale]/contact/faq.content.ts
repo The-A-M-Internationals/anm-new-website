@@ -17,8 +17,8 @@ const faqContent = {
       ar: "١. ما الخدمات التي تقدّمها A&M الدولية؟",
     }),
     faq1Answer: t({
-      en: "We offer four core services: Digital Marketing, UI/UX Design, Web Development, and Enterprise Performance Management (EPM). Most of our engagements combine two or more of these — for example, a brand might come to us for a website redesign and stay on for ongoing digital marketing. We work as an integrated team rather than siloed departments, which means your project benefits from every discipline working together from day one.",
-      ar: "نقدّم أربع خدمات أساسية: التسويق الرقمي، تصميم تجربة المستخدم، تطوير المواقع، وإدارة الأداء المؤسسي (EPM). معظم تعاملاتنا تجمع بين خدمتين أو أكثر — على سبيل المثال، قد تأتي علامة تجارية لإعادة تصميم موقعها، ثم تستمر معنا في التسويق الرقمي. نعمل كفريق متكامل لا كأقسام منفصلة، مما يعني أن مشروعك يستفيد من كل التخصصات معًا منذ اليوم الأول.",
+      en: "Our main service is Oracle EPM: implementation, managed support and EPM staffing. We also offer website design and build, UI/UX design and digital marketing.",
+      ar: "خدمتنا الرئيسية هي Oracle EPM: التطبيق، والدعم المُدار، وتوفير كوادر EPM. كما نقدّم تصميم المواقع وتطويرها، وتصميم تجربة وواجهة المستخدم، والتسويق الرقمي.",
     }),
 
     faq2Question: t({
@@ -26,8 +26,8 @@ const faqContent = {
       ar: "٢. ما المناطق والقطاعات التي تعملون معها؟",
     }),
     faq2Answer: t({
-      en: "We work with clients across India, the UAE, and the United States, with a growing presence in the wider GCC. Our work spans hospitality, food and agriculture, entertainment, public sector, and enterprise services — and we're actively expanding into healthcare, insurance, and automotive. If you're in a region or industry we haven't listed, reach out anyway. We're selective about who we partner with, but open to the right opportunities anywhere.",
-      ar: "نعمل مع عملاء في الهند والإمارات العربية المتحدة والولايات المتحدة الأمريكية، مع حضور متنامٍ في منطقة الخليج. تمتد أعمالنا عبر قطاعات الضيافة، الأغذية والزراعة، الترفيه، القطاع العام، وخدمات المؤسسات — ونتوسّع حاليًا في قطاعات الرعاية الصحية والتأمين والسيارات. إذا كنت في منطقة أو قطاع لم نذكره، تواصل معنا على أي حال. نحن انتقائيون فيمن نعمل معهم، لكننا منفتحون على الفرص المناسبة أينما كانت.",
+      en: "We work with clients in the USA, the UAE and India, and are growing across the GCC. Our Oracle EPM work covers automotive, manufacturing and healthcare, and our approach applies equally to retail, financial services, energy and other industries with complex planning, close and reporting needs.",
+      ar: "نعمل مع عملاء في الولايات المتحدة والإمارات العربية المتحدة والهند، ونتوسّع في أنحاء دول الخليج العربي. تشمل أعمالنا في Oracle EPM قطاعات السيارات والتصنيع والرعاية الصحية، ويُطبَّق نهجنا بالقدر نفسه على قطاعات التجزئة والخدمات المالية والطاقة وغيرها من القطاعات ذات الاحتياجات المعقّدة في التخطيط والإقفال المالي وإعداد التقارير.",
     }),
 
     faq3Question: t({
@@ -35,8 +35,8 @@ const faqContent = {
       ar: "٣. كيف أبدأ مشروعًا معكم؟",
     }),
     faq3Answer: t({
-      en: "The simplest way is to send us a message through our contact form or email us directly at am@theaminternationals.com. We'll schedule a discovery call within one business day to understand your goals, timeline, and budget. From there, we share a tailored proposal with scope, deliverables, and pricing — usually within 3–5 working days. No upfront commitment is needed until you're ready to move forward.",
-      ar: "أبسط طريقة هي إرسال رسالة عبر نموذج التواصل أو البريد الإلكتروني am@theaminternationals.com. سنُُحدّد مكالمة تعارف خلال يوم عمل واحد لفهم أهدافك وجدولك الزمني وميزانيتك. بعد ذلك، نُقدّم لك عرضًا مُخصّصًا        يشمل النطاق والتسليمات والتسعير — عادةً خلال ٣ إلى ٥ أيام عمل. لا يوجد التزام مُسبق حتى تكون مستعدًا للمضيّ   ّ قدمًا.",
+      en: "Send us a message through the form or email am@theaminternationals.com. We'll set up a discovery call within one business day to understand your goals and timeline, then share a tailored proposal with scope and pricing within 3–5 working days. No commitment is needed until you're ready.",
+      ar: "أرسل لنا رسالة عبر النموذج أو عبر البريد الإلكتروني am@theaminternationals.com. سنُحدّد مكالمة تعارف خلال يوم عمل واحد لفهم أهدافك وجدولك الزمني، ثم نُقدّم لك عرضًا مُخصّصًا يشمل النطاق والتسعير خلال ٣ إلى ٥ أيام عمل. لا حاجة لأي التزام حتى تكون مستعدًا.",
     }),
 
     faq4Question: t({
@@ -53,8 +53,8 @@ const faqContent = {
       ar: "٥. كم يستغرق المشروع عادةً؟",
     }),
     faq5Answer: t({
-      en: "Timelines vary by scope, but here are general ranges: a focused website redesign takes 4–6 weeks, a complete brand and digital build takes 8–12 weeks, and EPM or custom platform engagements run 3–6 months. We share a detailed timeline as part of every proposal and provide weekly updates throughout the project so you always know where things stand.",
-      ar: "تتفاوت الجداول الزمنية حسب النطاق، وإليك الأطر العامة: إعادة تصميم موقع تستغرق من ٤ إلى ٦ أسابيع، البناء الكامل للهوية والمنصة الرقمية يستغرق من ٨ إلى ١٢ أسبوعًا، ومشاريع EPM أو المنصات المخصّصة تمتد من ٣ إلى ٦ أشهر. نُشارك جدولاً زمنيًا تفصيليًا في كل عرض، ونُقدّم تحديثات أسبوعية طوال المشروع لتعرف موقع الأمور دائمًا.",
+      en: "Most Oracle EPM implementations take 3–6 months, depending on the modules and scope. Support engagements and smaller enhancements can start within a couple of weeks. Every proposal includes a detailed timeline, and we share weekly updates throughout the project.",
+      ar: "تستغرق معظم مشاريع تطبيق Oracle EPM من ٣ إلى ٦ أشهر، بحسب الوحدات والنطاق. ويمكن أن تبدأ خدمات الدعم والتحسينات الأصغر خلال أسبوعين تقريبًا. يتضمّن كل عرض جدولاً زمنيًا تفصيليًا، ونُشارك تحديثات أسبوعية طوال المشروع.",
     }),
 
     faq6Question: t({
@@ -62,8 +62,8 @@ const faqContent = {
       ar: "٦. هل تقدّمون دعمًا مستمرًا بعد تسليم المشروع؟",
     }),
     faq6Answer: t({
-      en: "Yes. Most of our clients continue with us through monthly support and growth retainers — covering everything from website maintenance and security updates to design iterations, marketing optimization, and new feature development. We treat launch as a starting point, not a finish line, and our retention reflects that approach.",
-      ar: "نعم. معظم عملائنا يستمرون معنا عبر عقود دعم ونمو شهرية — تشمل صيانة المواقع، تحديثات الأمان، تحسينات التصميم، تطوير التسويق، وإضافة ميزات جديدة. نتعامل مع الإطلاق كنقطة بداية لا كخط نهاية، ومعدّل احتفاظنا بالعملاء يعكس هذا النهج.",
+      en: "Yes — through monthly support plans for Oracle EPM and websites.",
+      ar: "نعم — من خلال خطط دعم شهرية لأنظمة Oracle EPM والمواقع الإلكترونية.",
     }),
 
     faq7Question: t({
@@ -82,6 +82,15 @@ const faqContent = {
     faq8Answer: t({
       en: "The honest answer: a 15-minute discovery call will tell both of us more than any FAQ can. We're not the right partner for every brand, and we'd rather have that conversation early than oversell. If you're looking for a team that values craft over volume, prioritizes long-term partnerships, and treats your brand with the care it deserves — there's a good chance we'll work well together.",
       ar: "الإجابة الصادقة: مكالمة تعارف لمدة ١٥ دقيقة ستُخبرنا بأكثر مما يمكن لأي قسم أسئلة شائعة أن يُخبره. لسنا الشريك المناسب لكل علامة تجارية، ونُفضّل أن نُجري تلك المحادثة مبكرًا بدلاً من المبالغة في الترويج. إذا كنت تبحث عن فريق يُقدّر الحرفية على الكمّ، ويُولي الأولوية للشراكات طويلة الأمد، ويعامل علامتك بالعناية التي تستحقّها — فثَمّة احتمال كبير أن نعمل معًا بشكل جيد.",
+    }),
+
+    faq9Question: t({
+      en: "9. ARE YOU AN ORACLE PARTNER?",
+      ar: "٩. هل أنتم شريك لـ Oracle؟",
+    }),
+    faq9Answer: t({
+      en: "Yes, we're a member of the Oracle PartnerNetwork.",
+      ar: "نعم، نحن عضو في Oracle PartnerNetwork.",
     }),
 
     joinTitle: t({

@@ -6,8 +6,9 @@ import CultureGrowthSection from "./components/CultureGrowthSection";
 import Open from "./components/Open";
 import Innovation from "../../components/Innovation";
 import { useIntlayer, useLocale } from "next-intlayer";
+import type { CmsDoc } from "@/lib/cms/shared";
 
-export default function CareersPage() {
+export default function CareersPage({ jobs }: { jobs?: CmsDoc[] }) {
     const content = useIntlayer("careersPage");
     const { locale } = useLocale();
 
@@ -43,7 +44,7 @@ export default function CareersPage() {
 
             <section className="snap-section"><CultureGrowthSection /></section>
             <section className="snap-section"><Benefits /></section>
-            <section className="snap-section"><Open /></section>
+            <section className="snap-section"><Open docs={jobs} /></section>
             <section className="snap-section"><Innovation /></section>
         </div>
     );

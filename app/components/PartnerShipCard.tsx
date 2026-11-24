@@ -1,5 +1,6 @@
 'use client';
 
+import RollLabel from "./RollLabel";
 import Image from 'next/image'
 import { useIntlayer } from 'next-intlayer';
 
@@ -24,7 +25,7 @@ const PartnerShipCard = () => {
           rel="noopener noreferrer"
           className='bg-[#D4AF37] text-black px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-semibold hover:scale-105 w-fit transition cursor-pointer inline-block text-center'
         >
-          {content.partneship.value}
+          <RollLabel>{content.partneship.value}</RollLabel>
         </a>
       </div>
       <div className='z-10 mt-6 lg:mt-0'>
