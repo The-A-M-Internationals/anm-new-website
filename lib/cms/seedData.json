@@ -1,0 +1,374 @@
+{
+ "events": [
+  {
+   "id": "4VesaTJx5DuA6OE9g9gU",
+   "data": {
+    "buttonLink": "https://wa.me/971564783478",
+    "buttonText": "Book a meeting",
+    "buttonTextAr": "احجز اجتماعًا",
+    "dateRange": "8 - 11",
+    "description": "Meet our co-founder Sijith Mathews at GITEX and ask for a preview of our EPM Build Agent.",
+    "descriptionAr": "التقِ بالمؤسِّس المشارك سيجيث ماثيوز في جيتكس واطلب عرضًا مسبقًا لـ EPM Build Agent.",
+    "detailsLink": "https://www.gitex.com/",
+    "detailsText": "Event details",
+    "detailsTextAr": "تفاصيل الفعالية",
+    "externalLink": "",
+    "imageSrc": "",
+    "location": "Dubai Exhibition Centre, Expo City Dubai",
+    "locationAr": "مركز دبي للمعارض، مدينة إكسبو دبي",
+    "month": "Dec, 26",
+    "monthAr": "ديسمبر، 26",
+    "timeRange": "",
+    "title": "GITEX Global 2026",
+    "titleAr": "جيتكس جلوبال 2026",
+    "updatedAt": {
+     "seconds": 1795000622,
+     "nanoseconds": 0
+    }
+   }
+  },
+  {
+   "id": "ai-everything-2026",
+   "data": {
+    "createdAt": {
+     "seconds": 1795000622,
+     "nanoseconds": 0
+    },
+    "dateRange": "",
+    "description": "Our team attended AI Everything in Abu Dhabi, meeting Oracle and technology partners to talk about AI in finance and Oracle EPM.",
+    "descriptionAr": "حضر فريقنا معرض AI Everything في أبوظبي، والتقى بشركاء Oracle وشركاء التكنولوجيا للحديث عن الذكاء الاصطناعي في المالية وOracle EPM.",
+    "externalLink": "",
+    "imageSrc": "",
+    "location": "Abu Dhabi",
+    "locationAr": "أبوظبي",
+    "month": "Oct, 26",
+    "monthAr": "أكتوبر، 26",
+    "tag": "Attended",
+    "tagAr": "حضرنا",
+    "title": "AI Everything, Abu Dhabi",
+    "titleAr": "AI Everything، أبوظبي"
+   }
+  }
+ ],
+ "articles": [
+  {
+   "id": "esg-emissions-lessons",
+   "data": {
+    "authors": "The A&M Internationals",
+    "authors_ar": "A&M الدولية",
+    "authorsAr": "A&M الدولية",
+    "body": "When our first client asked us to bring emissions reporting into Oracle EPM, the brief sounded simple: report greenhouse-gas emissions alongside the financials, in the same system the finance team already trusts. We built Scope 1 and Scope 2 reporting and laid the foundations for Scope 3. Here’s what we learned along the way.\n\n## 1. The hard part is the data, not the dashboard\n\nEmissions data doesn’t live in one place. It sits in utility bills, fuel records, facility spreadsheets and supplier files, each owned by a different team. Agreeing who owns each source, how often it arrives and what “complete” means took more effort than any part of the build. If you’re starting an ESG project, map your data owners before you design a single report.\n\n## 2. Treat emission factors like exchange rates\n\nEvery emissions number is activity data multiplied by an emission factor, and factors change. We stored them in Oracle EPM the way finance stores exchange rates: versioned, dated and linked to their source. When a factor is updated, the numbers can be recalculated cleanly, and everyone can see which version was used.\n\n## 3. Get Scope 1 and 2 right before you go deep on Scope 3\n\nScope 1 (your own fuel and operations) and Scope 2 (purchased energy) come from data you control. Scope 3 depends on suppliers, spend and estimates, and it’s a different kind of problem. We delivered Scope 1 and 2 first and did the initial Scope 3 build, designed so it can grow as better supplier data becomes available. Starting there gave the client reliable numbers early instead of waiting for perfect ones.\n\n## 4. Build the audit trail in from day one\n\nESG numbers get the same scrutiny as financial numbers, and sometimes more. We made sure every reported figure can be traced back to its source line and factor. It’s far easier to design this in at the start than to bolt it on before the first audit.\n\n## 5. Put ESG next to the financials, and plan for life after go-live\n\nRunning emissions reporting in Oracle EPM means it follows the same close calendar, security and review process as the financials, and finance can own it with confidence. But the work doesn’t stop at go-live. New sites, new factors and new reporting rules arrive every year, which is why our client moved straight into an ongoing support arrangement.\n\n## Thinking about ESG reporting in Oracle EPM?\n\nWe’re happy to share what worked for us. [Book a consultation](/contact#form), or message us on WhatsApp at [+971 56 478 3478](https://wa.me/971564783478).",
+    "body_ar": "عندما طلب منا عميلنا الأول دمج تقارير الانبعاثات في Oracle EPM، بدا المطلوب بسيطًا: إعداد تقارير انبعاثات الغازات الدفيئة جنبًا إلى جنب مع البيانات المالية، في النظام نفسه الذي يثق به فريق المالية بالفعل. بنينا تقارير النطاق 1 والنطاق 2، ووضعنا الأسس للنطاق 3. وإليكم ما تعلمناه خلال ذلك.\n\n## 1. الجزء الصعب هو البيانات، لا لوحة المعلومات\n\nلا توجد بيانات الانبعاثات في مكان واحد، بل تتوزع بين فواتير المرافق وسجلات الوقود وجداول بيانات المنشآت وملفات الموردين، ويملك كلًّا منها فريق مختلف. وقد تطلّب الاتفاق على مالك كل مصدر، وعدد مرات وصوله، ومعنى \"الاكتمال\" جهدًا أكبر من أي جزء من عملية البناء. إذا كنت تبدأ مشروعًا للحوكمة البيئية والاجتماعية (ESG)، فحدّد مالكي بياناتك قبل أن تصمم أي تقرير.\n\n## 2. تعامل مع معاملات الانبعاث كما تتعامل مع أسعار الصرف\n\nكل رقم انبعاثات هو بيانات نشاط مضروبة في معامل انبعاث، والمعاملات تتغير. لذلك خزّناها في Oracle EPM بالطريقة التي تخزّن بها الإدارة المالية أسعار الصرف: بإصدارات وتواريخ وربط بمصدرها. وعند تحديث أي معامل، يمكن إعادة احتساب الأرقام بسلاسة، ويرى الجميع الإصدار الذي استُخدم.\n\n## 3. أتقن النطاقين 1 و2 قبل التعمق في النطاق 3\n\nيأتي النطاق 1 (الوقود والعمليات الخاصة بك) والنطاق 2 (الطاقة المشتراة) من بيانات تتحكم بها. أما النطاق 3 فيعتمد على الموردين والإنفاق والتقديرات، وهو نوع مختلف من المشكلات. سلّمنا النطاقين 1 و2 أولًا، ونفّذنا البناء الأولي للنطاق 3 بتصميم يسمح له بالتوسع مع توفر بيانات أفضل من الموردين. وقد منح هذا البدء العميلَ أرقامًا موثوقة مبكرًا بدلًا من انتظار أرقام مثالية.\n\n## 4. ابنِ سجل التدقيق منذ اليوم الأول\n\nتخضع أرقام ESG للتدقيق نفسه الذي تخضع له الأرقام المالية، وأحيانًا أكثر. لذلك حرصنا على أن يكون كل رقم مُبلَّغ عنه قابلًا للتتبع حتى سطر مصدره ومعامله. فتصميم ذلك منذ البداية أسهل بكثير من إضافته قبيل أول عملية تدقيق.\n\n## 5. ضع ESG بجانب البيانات المالية، وخطّط لما بعد الإطلاق\n\nتشغيل تقارير الانبعاثات في Oracle EPM يعني أنها تتبع تقويم الإقفال نفسه وإجراءات الأمان والمراجعة نفسها المتبعة مع البيانات المالية، فيتمكن فريق المالية من تولّيها بثقة. لكن العمل لا يتوقف عند الإطلاق؛ فكل عام تظهر مواقع جديدة ومعاملات جديدة وقواعد تقارير جديدة، ولهذا انتقل عميلنا مباشرة إلى ترتيب دعم مستمر.\n\n## هل تفكر في تقارير ESG داخل Oracle EPM؟\n\nيسعدنا أن نشاركك ما نجح معنا. [احجز استشارة](/contact#form)، أو راسلنا عبر واتساب على [+971 56 478 3478](https://wa.me/971564783478).",
+    "bodyAr": "عندما طلب منا عميلنا الأول دمج تقارير الانبعاثات في Oracle EPM، بدا المطلوب بسيطًا: إعداد تقارير انبعاثات الغازات الدفيئة جنبًا إلى جنب مع البيانات المالية، في النظام نفسه الذي يثق به فريق المالية بالفعل. بنينا تقارير النطاق 1 والنطاق 2، ووضعنا الأسس للنطاق 3. وإليكم ما تعلمناه خلال ذلك.\n\n## 1. الجزء الصعب هو البيانات، لا لوحة المعلومات\n\nلا توجد بيانات الانبعاثات في مكان واحد، بل تتوزع بين فواتير المرافق وسجلات الوقود وجداول بيانات المنشآت وملفات الموردين، ويملك كلًّا منها فريق مختلف. وقد تطلّب الاتفاق على مالك كل مصدر، وعدد مرات وصوله، ومعنى \"الاكتمال\" جهدًا أكبر من أي جزء من عملية البناء. إذا كنت تبدأ مشروعًا للحوكمة البيئية والاجتماعية (ESG)، فحدّد مالكي بياناتك قبل أن تصمم أي تقرير.\n\n## 2. تعامل مع معاملات الانبعاث كما تتعامل مع أسعار الصرف\n\nكل رقم انبعاثات هو بيانات نشاط مضروبة في معامل انبعاث، والمعاملات تتغير. لذلك خزّناها في Oracle EPM بالطريقة التي تخزّن بها الإدارة المالية أسعار الصرف: بإصدارات وتواريخ وربط بمصدرها. وعند تحديث أي معامل، يمكن إعادة احتساب الأرقام بسلاسة، ويرى الجميع الإصدار الذي استُخدم.\n\n## 3. أتقن النطاقين 1 و2 قبل التعمق في النطاق 3\n\nيأتي النطاق 1 (الوقود والعمليات الخاصة بك) والنطاق 2 (الطاقة المشتراة) من بيانات تتحكم بها. أما النطاق 3 فيعتمد على الموردين والإنفاق والتقديرات، وهو نوع مختلف من المشكلات. سلّمنا النطاقين 1 و2 أولًا، ونفّذنا البناء الأولي للنطاق 3 بتصميم يسمح له بالتوسع مع توفر بيانات أفضل من الموردين. وقد منح هذا البدء العميلَ أرقامًا موثوقة مبكرًا بدلًا من انتظار أرقام مثالية.\n\n## 4. ابنِ سجل التدقيق منذ اليوم الأول\n\nتخضع أرقام ESG للتدقيق نفسه الذي تخضع له الأرقام المالية، وأحيانًا أكثر. لذلك حرصنا على أن يكون كل رقم مُبلَّغ عنه قابلًا للتتبع حتى سطر مصدره ومعامله. فتصميم ذلك منذ البداية أسهل بكثير من إضافته قبيل أول عملية تدقيق.\n\n## 5. ضع ESG بجانب البيانات المالية، وخطّط لما بعد الإطلاق\n\nتشغيل تقارير الانبعاثات في Oracle EPM يعني أنها تتبع تقويم الإقفال نفسه وإجراءات الأمان والمراجعة نفسها المتبعة مع البيانات المالية، فيتمكن فريق المالية من تولّيها بثقة. لكن العمل لا يتوقف عند الإطلاق؛ فكل عام تظهر مواقع جديدة ومعاملات جديدة وقواعد تقارير جديدة، ولهذا انتقل عميلنا مباشرة إلى ترتيب دعم مستمر.\n\n## هل تفكر في تقارير ESG داخل Oracle EPM؟\n\nيسعدنا أن نشاركك ما نجح معنا. [احجز استشارة](/contact#form)، أو راسلنا عبر واتساب على [+971 56 478 3478](https://wa.me/971564783478).",
+    "category": "ESG Reporting",
+    "category_ar": "تقارير ESG",
+    "categoryAr": "تقارير ESG",
+    "createdAt": {
+     "seconds": 1795000623,
+     "nanoseconds": 0
+    },
+    "description": "Five lessons from building greenhouse-gas emissions reporting inside Oracle EPM, and why the hard part isn’t the dashboard.",
+    "description_ar": "خمسة دروس من بناء تقارير انبعاثات الغازات الدفيئة داخل Oracle EPM، ولماذا لا يكمن الجزء الصعب في لوحة المعلومات.",
+    "descriptionAr": "خمسة دروس من بناء تقارير انبعاثات الغازات الدفيئة داخل Oracle EPM، ولماذا لا يكمن الجزء الصعب في لوحة المعلومات.",
+    "externalLink": "",
+    "featureArticle": false,
+    "imageSrc": "",
+    "readTime": "5 min read",
+    "readTime_ar": "٥ دقائق قراءة",
+    "readTimeAr": "٥ دقائق قراءة",
+    "tags": [
+     "ESG Reporting"
+    ],
+    "tags_ar": [
+     "تقارير ESG"
+    ],
+    "tagsAr": [
+     "تقارير ESG"
+    ],
+    "title": "What our ESG emissions project taught us",
+    "title_ar": "ما تعلّمناه من مشروع انبعاثات ESG",
+    "titleAr": "ما تعلّمناه من مشروع انبعاثات ESG"
+   }
+  },
+  {
+   "id": "gitex-global-2026",
+   "data": {
+    "authors": "Sijith Mathews, Co-Founder",
+    "authors_ar": "سيجيث ماثيوز، المؤسِّس المشارك",
+    "authorsAr": "سيجيث ماثيوز، المؤسِّس المشارك",
+    "body": "I’m excited to share that I’ll be attending **GITEX Global 2026**, the world’s largest tech and AI show, this December in Dubai.\n\nThis year GITEX moves to a new home. The Expo runs from **8 to 11 December 2026** at **Dubai Exhibition Centre, Expo City Dubai**.\n\n## Why I’m going\n\nI’m there to meet finance and technology leaders, Oracle partners and anyone working on planning, close and ESG reporting. I’ll also be talking about what we’re building at The A&M Internationals: the **EPM Build Agent**, an AI assistant that takes on repetitive Oracle EPM build work so consultants can focus on design and the business. If you’d like an early preview, just ask.\n\n## Let’s meet\n\nIf you’re at GITEX and want to talk about Oracle EPM, ESG reporting or AI for finance, message me on WhatsApp at [**+971 56 478 3478**](https://wa.me/971564783478) or email [**am@theaminternationals.com**](mailto:am@theaminternationals.com) to set up a time.\n\n**Event details:** [gitex.com/gitex-global-2026](https://www.gitex.com/)\n\nSee you in Dubai!\n\n*Sijith Mathews, Co-Founder, The A&M Internationals*",
+    "body_ar": "يسعدني أن أعلن أنني سأحضر **GITEX Global 2026**، أكبر معرض للتكنولوجيا والذكاء الاصطناعي في العالم، في دبي خلال شهر ديسمبر المقبل.\n\nينتقل GITEX هذا العام إلى مقر جديد، إذ يُقام المعرض من **8 إلى 11 ديسمبر 2026** في **مركز دبي للمعارض، مدينة إكسبو دبي**.\n\n## لماذا سأحضر\n\nسأكون هناك للقاء قادة المالية والتكنولوجيا وشركاء Oracle وكل من يعمل في مجالات التخطيط والإقفال وتقارير ESG. وسأتحدث أيضًا عمّا نبنيه في A&M الدولية: **EPM Build Agent**، وهو مساعد ذكاء اصطناعي يتولى أعمال البناء المتكررة في Oracle EPM ليتفرغ الاستشاريون للتصميم وللأعمال. وإن رغبت في الاطلاع على عرض مسبق، فما عليك إلا أن تطلب.\n\n## لنلتقِ\n\nإذا كنت في GITEX وترغب في الحديث عن Oracle EPM أو تقارير ESG أو الذكاء الاصطناعي في المالية، فراسلني عبر واتساب على [**+971 56 478 3478**](https://wa.me/971564783478) أو عبر البريد الإلكتروني [**am@theaminternationals.com**](mailto:am@theaminternationals.com) لتحديد موعد.\n\n**تفاصيل الفعالية:** [gitex.com/gitex-global-2026](https://www.gitex.com/)\n\nأراكم في دبي!\n\n*سيجيث ماثيوز، المؤسِّس المشارك، A&M الدولية*",
+    "bodyAr": "يسعدني أن أعلن أنني سأحضر **GITEX Global 2026**، أكبر معرض للتكنولوجيا والذكاء الاصطناعي في العالم، في دبي خلال شهر ديسمبر المقبل.\n\nينتقل GITEX هذا العام إلى مقر جديد، إذ يُقام المعرض من **8 إلى 11 ديسمبر 2026** في **مركز دبي للمعارض، مدينة إكسبو دبي**.\n\n## لماذا سأحضر\n\nسأكون هناك للقاء قادة المالية والتكنولوجيا وشركاء Oracle وكل من يعمل في مجالات التخطيط والإقفال وتقارير ESG. وسأتحدث أيضًا عمّا نبنيه في A&M الدولية: **EPM Build Agent**، وهو مساعد ذكاء اصطناعي يتولى أعمال البناء المتكررة في Oracle EPM ليتفرغ الاستشاريون للتصميم وللأعمال. وإن رغبت في الاطلاع على عرض مسبق، فما عليك إلا أن تطلب.\n\n## لنلتقِ\n\nإذا كنت في GITEX وترغب في الحديث عن Oracle EPM أو تقارير ESG أو الذكاء الاصطناعي في المالية، فراسلني عبر واتساب على [**+971 56 478 3478**](https://wa.me/971564783478) أو عبر البريد الإلكتروني [**am@theaminternationals.com**](mailto:am@theaminternationals.com) لتحديد موعد.\n\n**تفاصيل الفعالية:** [gitex.com/gitex-global-2026](https://www.gitex.com/)\n\nأراكم في دبي!\n\n*سيجيث ماثيوز، المؤسِّس المشارك، A&M الدولية*",
+    "category": "Company News",
+    "category_ar": "أخبار الشركة",
+    "categoryAr": "أخبار الشركة",
+    "createdAt": {
+     "seconds": 1795000624,
+     "nanoseconds": 0
+    },
+    "description": "I’ll be at GITEX Global 2026 in Dubai, 8–11 December. Let’s meet and talk about Oracle EPM and AI.",
+    "description_ar": "سأكون في GITEX Global 2026 في دبي من 8 إلى 11 ديسمبر. لنلتقِ ونتحدث عن Oracle EPM والذكاء الاصطناعي.",
+    "descriptionAr": "سأكون في GITEX Global 2026 في دبي من 8 إلى 11 ديسمبر. لنلتقِ ونتحدث عن Oracle EPM والذكاء الاصطناعي.",
+    "externalLink": "",
+    "featureArticle": false,
+    "imageSrc": "/business/sijith.png",
+    "readTime": "2 min read",
+    "readTime_ar": "دقيقتان قراءة",
+    "readTimeAr": "دقيقتان قراءة",
+    "tags": [
+     "Company News"
+    ],
+    "tags_ar": [
+     "أخبار الشركة"
+    ],
+    "tagsAr": [
+     "أخبار الشركة"
+    ],
+    "title": "Meet us at GITEX Global 2026",
+    "title_ar": "التقِ بنا في GITEX Global 2026",
+    "titleAr": "التقِ بنا في GITEX Global 2026"
+   }
+  },
+  {
+   "id": "kSUlQ9jjclmAWajhTvHk",
+   "data": {
+    "authors": "The A&M Internationals",
+    "authors_ar": "فريق خبراء A&M",
+    "authorsAr": "فريق خبراء A&M",
+    "body_ar": "في بيئة الأعمال المتسارعة اليوم، تسعى العديد من المؤسسات إلى تحسين أدائها من خلال حلول EPM. ومع ذلك، نجد أن الكثير من هذه التطبيقات تنتهي بكونها مجرد أدوات لإعداد التقارير بدلاً من أن تكون محركات لاتخاذ القرارات الاستراتيجية.\nالمشكلة تكمن في الفجوة بين البيانات والإجراءات. فوجود أرقام دقيقة وتنبؤات مفصلة لا يعني بالضرورة أن الإدارة ستتخذ القرارات الصحيحة بناءً عليها.\nلضمان نجاح تطبيق EPM، يجب التركيز على:\n١. مواءمة الأهداف المالية مع العمليات التشغيلية.\n٢. تبسيط تدفق البيانات لضمان الوصول السريع للمعلومات.\n٣. تدريب الكوادر على تحليل النتائج بدلاً من مجرد إدخال البيانات.\nفي A&M، نساعد عملائنا على سد هذه الفجوة وتحويل أنظمة EPM الخاصة بهم إلى أدوات حقيقية للنمو والتميز.",
+    "category": "Oracle EPM",
+    "category_ar": "Oracle EPM",
+    "categoryAr": "Oracle EPM",
+    "description": "Most growing companies don’t have a planning problem.\nThey have a decision-making problem.\nAfter working across EPM, FP&A, and finance transformation, a pattern is clear:\nforecasting exists—but it rarely drives action.\nAnd without action, planning has no impact.",
+    "description_ar": "معظم الشركات المتنامية لا تعاني من مشكلة في التخطيط، بل لديها مشكلة في اتخاذ القرار. من خلال العمل في مجالات EPM والتحول المالي، يتضح نمط معين: التنبؤ موجود — ولكنه نادرًا ما يؤدي إلى إجراءات فعلية. وبدون إجراءات، ليس للتخطيط أي تأثير.",
+    "descriptionAr": "معظم الشركات المتنامية لا تعاني من مشكلة في التخطيط، بل لديها مشكلة في اتخاذ القرار. من خلال العمل في مجالات EPM والتحول المالي، يتضح نمط معين: التنبؤ موجود — ولكنه نادرًا ما يؤدي إلى إجراءات فعلية. وبدون إجراءات، ليس للتخطيط أي تأثير.",
+    "externalLink": "https://medium.com/@aanala/why-most-epm-implementations-fail-to-drive-real-business-decisions-7d1acce3bbb0",
+    "featureArticle": true,
+    "imageSrc": "",
+    "readTime": "5 min read",
+    "readTime_ar": "٥ دقائق قراءة",
+    "readTimeAr": "٥ دقائق قراءة",
+    "tags": [
+     "Oracle EPM"
+    ],
+    "tags_ar": [
+     "Oracle EPM"
+    ],
+    "tagsAr": [
+     "Oracle EPM"
+    ],
+    "title": "Why Most EPM Implementations Fail to Drive Real Business Decisions",
+    "title_ar": "لماذا تفشل معظم تطبيقات EPM في دعم القرارات الفعلية للأعمال",
+    "titleAr": "لماذا تفشل معظم تطبيقات EPM في دعم القرارات الفعلية للأعمال"
+   }
+  }
+ ],
+ "jobs": [
+  {
+   "id": "SMjY3AN8Mfp3Yu6P5nyP",
+   "data": {
+    "createdAt": {
+     "seconds": 1794575829,
+     "nanoseconds": 0
+    },
+    "department": "Operations",
+    "departmentAr": "العمليات",
+    "description": "Invoicing, admin and internal operations support for the founders.",
+    "descriptionAr": "دعم الفواتير والأعمال الإدارية والعمليات الداخلية لمؤسسي الشركة.",
+    "location": "Remote",
+    "locationAr": "عن بُعد",
+    "title": "Operations Executive",
+    "titleAr": "تنفيذي عمليات",
+    "type": "Full-time",
+    "typeAr": "دوام كامل"
+   }
+  }
+ ],
+ "ourWork": [
+  {
+   "id": "oQaRMpCBrWUiO53hkzQx",
+   "data": {
+    "badge": "Delivered",
+    "badgeAr": "تم التسليم",
+    "challenge": "Report greenhouse-gas emissions alongside the financials, in the same system finance already uses.",
+    "challengeAr": "إعداد تقارير انبعاثات الغازات الدفيئة جنبًا إلى جنب مع البيانات المالية، في النظام نفسه الذي يستخدمه فريق المالية بالفعل.",
+    "client": "A US automotive company",
+    "clientAr": "شركة سيارات أمريكية",
+    "createdAt": {
+     "seconds": 1794488152,
+     "nanoseconds": 0
+    },
+    "description": "Built emissions reporting into Oracle EPM, alongside the financials",
+    "descriptionAr": "بنينا تقارير الانبعاثات داخل Oracle EPM، جنبًا إلى جنب مع البيانات المالية",
+    "imageSrc": "/Successnew1.png",
+    "imageSrcAr": "/Success-arabic.png",
+    "industry": "Oracle EPM",
+    "industryAr": "Oracle EPM",
+    "order": 1,
+    "outcome": "Delivered; ongoing support contract in progress.",
+    "outcomeAr": "تم التسليم؛ وعقد دعم مستمر قيد الإعداد.",
+    "storyLink": "/blogs/esg-emissions-lessons",
+    "title": "ESG emissions reporting",
+    "titleAr": "تقارير انبعاثات ESG",
+    "updatedAt": {
+     "seconds": 1795000621,
+     "nanoseconds": 0
+    },
+    "whatWeDid": "Built Scope 1 and Scope 2 emissions reporting in Oracle EPM, including data integration, plus the initial build for Scope 3.",
+    "whatWeDidAr": "بنينا تقارير انبعاثات النطاقين 1 و2 في Oracle EPM، بما في ذلك تكامل البيانات، إضافة إلى البناء الأولي للنطاق 3."
+   }
+  }
+ ],
+ "founders": [
+  {
+   "id": "nmDK2WKk7u1VHxckXWld",
+   "data": {
+    "bio": "Anusha Anala is the Founder and CEO of The A&M Internationals. She has 16 years of hands-on Oracle EPM experience across Planning and Budgeting, Financial Consolidation and Close, and Data Management, and has helped finance teams replace spreadsheets and slow month-end processes with systems they can trust.\n\nAt A&M, Anusha sets the company’s direction and leads EPM delivery. She stays hands-on in client projects, including the company’s first Oracle EPM engagement, an ESG emissions reporting build for a US automotive company. Her focus is simple: senior expertise on every project, and finance systems that keep working long after go-live.",
+    "bioAr": "أنوشا أنالا هي المؤسِّسة والرئيسة التنفيذية لشركة A&M الدولية. تمتلك 16 عامًا من الخبرة العملية في Oracle EPM في مجالات التخطيط والموازنة (Planning and Budgeting)، والتجميع المالي والإقفال (Financial Consolidation and Close)، وإدارة البيانات (Data Management)، وقد ساعدت الفرق المالية على استبدال جداول البيانات وعمليات إقفال نهاية الشهر البطيئة بأنظمة يمكنها الوثوق بها.\n\nفي A&M، تحدد أنوشا توجّه الشركة وتقود تنفيذ مشاريع EPM. وتبقى منخرطة بنفسها في مشاريع العملاء، بما في ذلك أول مشروع Oracle EPM للشركة، وهو بناء نظام لتقارير انبعاثات ESG لشركة سيارات أمريكية. وتركيزها بسيط: خبرة رفيعة المستوى في كل مشروع، وأنظمة مالية تواصل العمل بكفاءة لفترة طويلة بعد بدء التشغيل.",
+    "createdAt": {
+     "seconds": 1794488153,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/anusha.jpg",
+    "name": "ANUSHA ANALA",
+    "nameAr": "أنوشا أنالا",
+    "order": 1,
+    "role": "Founder & CEO",
+    "roleAr": "المؤسِّسة والرئيسة التنفيذية",
+    "tagline": "16 years of Oracle EPM, leading every engagement.",
+    "taglineAr": "16 عامًا من الخبرة في Oracle EPM، تقود كل مشروع بنفسها.",
+    "updatedAt": {
+     "seconds": 1795000619,
+     "nanoseconds": 0
+    }
+   }
+  },
+  {
+   "id": "vWQhPeXt1P29ufLmwcgN",
+   "data": {
+    "bio": "Sijith Mathews is the Founder and President of The A&M Internationals. He brings around three years of Oracle EPM consulting experience in Financial Consolidation and Close, together with eight years on the business side, a mix that lets him speak the language of both finance teams and the people who build their systems.\n\nAt A&M, Sijith leads business development, client relationships and operations, and drove the company’s membership of the Oracle PartnerNetwork. He also leads A&M’s work in AI, including the EPM Build Agent, an AI assistant designed to take on repetitive Oracle EPM build work so consultants can focus on design and the business.",
+    "bioAr": "سيجيث ماثيوز هو المؤسِّس ورئيس شركة A&M الدولية. يمتلك نحو ثلاث سنوات من الخبرة الاستشارية في Oracle EPM في مجال التجميع المالي والإقفال (Financial Consolidation and Close)، إلى جانب ثماني سنوات في الجانب التجاري، وهو مزيج يمكّنه من التحدث بلغة الفرق المالية ولغة من يبنون أنظمتها على حدٍّ سواء.\n\nفي A&M، يقود سيجيث تطوير الأعمال وعلاقات العملاء والعمليات، وقد قاد انضمام الشركة إلى Oracle PartnerNetwork. كما يقود أعمال A&M في مجال الذكاء الاصطناعي، بما في ذلك EPM Build Agent، وهو مساعد بالذكاء الاصطناعي مصمَّم لتولّي أعمال البناء المتكررة في Oracle EPM، ليتمكّن الاستشاريون من التركيز على التصميم والأعمال.",
+    "createdAt": {
+     "seconds": 1794488153,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/sijith.png",
+    "name": "SIJITH MATHEWS",
+    "nameAr": "سيجيث ماثيوز",
+    "order": 2,
+    "role": "Founder & President",
+    "roleAr": "المؤسِّس والرئيس",
+    "tagline": "Building the business, and the AI behind it.",
+    "taglineAr": "يبني الأعمال، والذكاء الاصطناعي الذي يقف خلفها.",
+    "updatedAt": {
+     "seconds": 1795000620,
+     "nanoseconds": 0
+    }
+   }
+  }
+ ],
+ "team": [
+  {
+   "id": "8su0uvd7HQkJRhIQSgO9",
+   "data": {
+    "createdAt": {
+     "seconds": 1794488156,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/surya.png",
+    "name": "Narayanan",
+    "nameAr": "",
+    "order": 6,
+    "role": "Software Engineer - Backend Beast",
+    "roleAr": "",
+    "updatedAt": {
+     "seconds": 1794998742,
+     "nanoseconds": 0
+    }
+   }
+  },
+  {
+   "id": "VIQixLR6MWW99nCdeJyx",
+   "data": {
+    "createdAt": {
+     "seconds": 1794488154,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/nehaa.png",
+    "name": "Nehaa C",
+    "nameAr": "",
+    "order": 1,
+    "role": "EPM Consultant - Forecast Fixer",
+    "roleAr": "",
+    "updatedAt": {
+     "seconds": 1794998733,
+     "nanoseconds": 0
+    }
+   }
+  },
+  {
+   "id": "WDPZlWD4wyT4cUXCbHYz",
+   "data": {
+    "createdAt": {
+     "seconds": 1794488155,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/gobika.png",
+    "name": "Gobika Babu",
+    "nameAr": "",
+    "order": 4,
+    "role": "UI Designer - Pixel Perfectionist",
+    "roleAr": ""
+   }
+  },
+  {
+   "id": "YtPmrUoXVogzvnmetCqG",
+   "data": {
+    "createdAt": {
+     "seconds": 1794488155,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/sanjana.jpg",
+    "name": "Sanjana R R",
+    "nameAr": "",
+    "order": 3,
+    "role": "UI Designer - Pixel Alchemist",
+    "roleAr": ""
+   }
+  },
+  {
+   "id": "jJoST0yKLVTQybgINvI1",
+   "data": {
+    "createdAt": {
+     "seconds": 1794488155,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/sri-varsha.jpg",
+    "name": "Sri Varsha",
+    "nameAr": "",
+    "order": 5,
+    "role": "Technical Lead - Chief Bug Slayer",
+    "roleAr": "",
+    "updatedAt": {
+     "seconds": 1795000620,
+     "nanoseconds": 0
+    }
+   }
+  },
+  {
+   "id": "lsMOFBavsWpumU6eMGI8",
+   "data": {
+    "createdAt": {
+     "seconds": 1794488154,
+     "nanoseconds": 0
+    },
+    "imageSrc": "/business/rudra-prakash.jpg",
+    "name": "Rudra Prakash",
+    "nameAr": "",
+    "order": 2,
+    "role": "EPM Consultant",
+    "roleAr": ""
+   }
+  }
+ ]
+}

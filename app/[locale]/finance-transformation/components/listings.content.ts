@@ -4,12 +4,12 @@ const financeTransformationListingsContent = {
   key: "financeTransformationListings",
   content: {
     sectionTitle: t({
-      en: "Finance Transformation",
-      ar: "تحول التمويل",
+      en: "Oracle EPM Implementation",
+      ar: "تنفيذ Oracle EPM",
     }),
 
     managedServiceTitle: t({
-      en: "Managed Service",
+      en: "Managed Services",
       ar: "الخدمات المُدارة",
     }),
 
@@ -179,6 +179,38 @@ const financeTransformationListingsContent = {
           }),
         ],
       },
+      {
+        title: t({
+          en: "Data Integration",
+          ar: "تكامل البيانات",
+        }),
+        description: t({
+          en: "Reliable, automated data loads from your ERP into Oracle EPM.",
+          ar: "تحميل بيانات موثوق ومؤتمت من نظام ERP الخاص بك إلى Oracle EPM.",
+        }),
+        tags: [
+          t({ en: "Integration Design", ar: "تصميم التكامل" }),
+          t({ en: "Mappings & Validation", ar: "الربط والتحقق" }),
+          t({ en: "Data Management / FDMEE", ar: "إدارة البيانات / FDMEE" }),
+          t({ en: "Automation", ar: "الأتمتة" }),
+        ],
+      },
+      {
+        title: t({
+          en: "ESG & Sustainability Reporting",
+          ar: "تقارير ESG والاستدامة",
+        }),
+        description: t({
+          en: "Track and report emissions alongside your financials in Oracle EPM.",
+          ar: "تتبّع الانبعاثات وأعدّ تقاريرها جنبًا إلى جنب مع بياناتك المالية في Oracle EPM.",
+        }),
+        tags: [
+          t({ en: "ESG Data Model", ar: "نموذج بيانات ESG" }),
+          t({ en: "Emissions Calculations", ar: "حسابات الانبعاثات" }),
+          t({ en: "Data Integration", ar: "تكامل البيانات" }),
+          t({ en: "Sustainability Reports", ar: "تقارير الاستدامة" }),
+        ],
+      },
     ],
 
     managedServices: [
@@ -188,8 +220,8 @@ const financeTransformationListingsContent = {
           ar: "الاستشارات كخدمة",
         }),
         description: t({
-          en: "The A&M internationals delivers tailored Enterprise Performance Management solutions that seamlessly align business processes with modern technology improving financial performance, operational accuracy, and long-term strategic success.",
-          ar: "تقدم A&M الدولية حلولًا مخصصة لإدارة أداء المؤسسات تُوائم عمليات الأعمال مع التقنية الحديثة لتحسين الأداء المالي ودقة التشغيل والنجاح الاستراتيجي على المدى الطويل.",
+          en: "Senior Oracle EPM advice when you need it: roadmaps, design reviews and second opinions.",
+          ar: "استشارات Oracle EPM من خبراء كبار عند الحاجة: خرائط طريق، ومراجعات تصميم، وآراء ثانية.",
         }),
         tags: [
           t({
@@ -220,8 +252,8 @@ const financeTransformationListingsContent = {
           ar: "إدارة حلول EPM",
         }),
         description: t({
-          en: "The A&M internationals enhances Enterprise Performance Management systems by optimizing workflows, strengthening financial efficiency, and enabling data-driven decision-making through customized, insight-focused strategies.",
-          ar: "تعزز A&M الدولية أنظمة إدارة أداء المؤسسات عبر تحسين سير العمل ورفع الكفاءة المالية وتمكين اتخاذ القرار القائم على البيانات من خلال استراتيجيات مخصصة تركز على الرؤى.",
+          en: "We improve and extend your live Oracle EPM application: new modules, rules, reports and security.",
+          ar: "نطوّر تطبيق Oracle EPM العامل لديك ونوسّعه: وحدات جديدة، وقواعد، وتقارير، وصلاحيات أمان.",
         }),
         tags: [
           t({ en: "Module Implementation", ar: "تنفيذ الوحدات" }),
@@ -240,38 +272,18 @@ const financeTransformationListingsContent = {
       },
       {
         title: t({
-          en: "Version Upgrade & Patching",
-          ar: "ترقية الإصدارات والتحديثات",
+          en: "Monthly Update Testing",
+          ar: "اختبار التحديثات الشهرية",
         }),
         description: t({
-          en: "The A&M internationals ensures seamless version upgrades, patching, and stability improvements for Enterprise Performance Management platforms minimizing operational disruption, improving reliability, and maximizing overall system performance.",
-          ar: "تضمن A&M الدولية ترقية الإصدارات والتحديثات وتحسين الاستقرار لمنصات إدارة أداء المؤسسات مع تقليل تعطل التشغيل وتحسين الاعتمادية وتعظيم أداء النظام.",
+          en: "We review Oracle's monthly EPM Cloud updates and test them in your test environment before they reach production.",
+          ar: "نراجع تحديثات Oracle EPM Cloud الشهرية ونختبرها في بيئة الاختبار لديك قبل وصولها إلى بيئة الإنتاج.",
         }),
         tags: [
-          t({
-            en: "Patch & Update Lifecycle Management",
-            ar: "إدارة دورة حياة التحديثات",
-          }),
-          t({
-            en: "Pre-Patch Sandbox Validation",
-            ar: "التحقق في بيئة اختبار قبل التحديث",
-          }),
-          t({
-            en: "Impact Analysis & Release Notes Review",
-            ar: "تحليل الأثر ومراجعة ملاحظات الإصدار",
-          }),
-          t({
-            en: "Regression & Automated Testing",
-            ar: "اختبارات رجعية ومؤتمتة",
-          }),
-          t({
-            en: "Rollback & Contingency Planning",
-            ar: "خطة الرجوع وخطط الطوارئ",
-          }),
-          t({
-            en: "Security & Compliance Patching",
-            ar: "تحديثات الأمان والامتثال",
-          }),
+          t({ en: "Release Notes Review", ar: "مراجعة ملاحظات الإصدار" }),
+          t({ en: "Test Environment Validation", ar: "التحقق في بيئة الاختبار" }),
+          t({ en: "Regression Testing", ar: "الاختبارات الرجعية" }),
+          t({ en: "Update Deferral Planning", ar: "تخطيط تأجيل التحديثات" }),
         ],
       },
       {
@@ -280,8 +292,8 @@ const financeTransformationListingsContent = {
           ar: "الصيانة والإدارة الشهرية",
         }),
         description: t({
-          en: "The A&M internationals provides comprehensive Managed Services for ongoing EPM maintenance and administration. Our team manages data loads, reporting cycles, consolidations, and other critical monthly processes ensuring every task is completed accurately, consistently, and on schedule.",
-          ar: "تقدم A&M الدولية خدمات مُدارة شاملة لصيانة وإدارة حلول EPM بشكل مستمر. يدير فريقنا تحميل البيانات ودورات التقارير والتوحيدات وغيرها من العمليات الشهرية الحرجة لضمان إنجاز كل مهمة بدقة وبشكل متسق وفي الوقت المحدد.",
+          en: "Month-end close support, data loads, user help and change requests, handled by our team every month.",
+          ar: "دعم إقفال نهاية الشهر، وتحميل البيانات، ومساعدة المستخدمين، وطلبات التغيير، يتولاها فريقنا كل شهر.",
         }),
         tags: [
           t({
@@ -305,6 +317,21 @@ const financeTransformationListingsContent = {
             ar: "تحسين الأداء والصيانة",
           }),
           t({ en: "Backup & Audit", ar: "النسخ الاحتياطي والتدقيق" }),
+        ],
+      },
+      {
+        title: t({
+          en: "EPM Staffing",
+          ar: "توفير كفاءات EPM",
+        }),
+        description: t({
+          en: "Experienced Oracle EPM consultants placed into your team, full or part time.",
+          ar: "استشاريو Oracle EPM ذوو خبرة ينضمون إلى فريقك بدوام كامل أو جزئي.",
+        }),
+        tags: [
+          t({ en: "Contract Consultants", ar: "استشاريون بعقود" }),
+          t({ en: "Part-time Support", ar: "دعم بدوام جزئي" }),
+          t({ en: "Short-term Cover", ar: "تغطية قصيرة الأجل" }),
         ],
       },
     ],

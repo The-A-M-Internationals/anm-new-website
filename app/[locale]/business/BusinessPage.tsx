@@ -6,8 +6,11 @@ import PageHero from "../../components/PageHero";
 import EmpoweringSection from "./components/EmpoweringSection";
 import JourneyTimeline from "./components/JourneyTimeline";
 import LeadershipTeam from "./components/LeadershipTeam";
+import type { CmsDoc } from "@/lib/cms/shared";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import type { AppLocale } from "@/types/locale";
 
-export default function BusinessPage() {
+export default function BusinessPage({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc[] }) {
     const content = useIntlayer("businessPage");
     const { locale } = useLocale();
 
@@ -31,7 +34,7 @@ export default function BusinessPage() {
                     title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={`/${locale}/business#about-us`}
+                    link={getLocalizedPath(locale as AppLocale, "/business#about-us")}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}
@@ -40,7 +43,7 @@ export default function BusinessPage() {
             </section>
             <section className="snap-section"><EmpoweringSection /></section>
             <section className="snap-section"><JourneyTimeline /></section>
-            <LeadershipTeam />
+            <LeadershipTeam founders={founders} team={team} />
             <section className="snap-section"><Innovation /></section>
         </div>
     );

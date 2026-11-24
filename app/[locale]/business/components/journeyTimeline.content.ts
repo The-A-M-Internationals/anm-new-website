@@ -6,28 +6,28 @@ const journeyTimelineContent = {
     title: t({ en: "Our Journey", ar: "رحلتنا" }),
 
     milestone1: t({
-      en: "Founded with a purpose — combining technology and social responsibility.",
-      ar: "تأسسنا بهدف واضح — نجمع بين التقنية والمسؤولية المجتمعية.",
+      en: "Jun 2026 — First Oracle EPM client: an ESG emissions reporting project for a US automotive company",
+      ar: "يونيو 2026 — أول عميل لنا في Oracle EPM: مشروع لتقارير انبعاثات ESG لشركة سيارات أمريكية",
     }),
 
     milestone2: t({
-      en: "Launched our flagship EPM Suite, serving 50+ enterprises.",
-      ar: "أطلقنا حزمة EPM الرائدة لدينا لخدمة أكثر من 50 مؤسسة.",
+      en: "2026 — Built an in-house team of EPM consultants, designers and developers in India",
+      ar: "2026 — بناء فريق داخلي من استشاريي EPM والمصممين والمطورين في الهند",
     }),
 
     milestone3: t({
-      en: "Achieved $10M+ in social contributions for children's welfare.",
-      ar: "حققنا مساهمات مجتمعية بأكثر من ١٠ مليون درهم لدعم رفاه الأطفال.",
+      en: "Oct 2026 — Attended AI Everything, Abu Dhabi",
+      ar: "أكتوبر 2026 — حضور AI Everything في أبوظبي",
     }),
 
     milestone4: t({
-      en: "Grew to 100+ talented professionals across multiple regions.",
-      ar: "نما فريقنا ليضم أكثر من 100 محترف موهوب عبر مناطق متعددة.",
+      en: "Nov 2026 — Became an Oracle PartnerNetwork member",
+      ar: "نوفمبر 2026 — أصبحنا عضوًا في Oracle PartnerNetwork",
     }),
 
     milestone5: t({
-      en: "Serving 200+ global clients with purpose and performance.",
-      ar: "نخدم أكثر من 200 عميل عالمي بهدف وأداء.",
+      en: "Dec 2026 — GITEX Global 2026, Dubai",
+      ar: "ديسمبر 2026 — GITEX Global 2026، دبي",
     }),
   },
 };

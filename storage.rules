@@ -1,0 +1,23 @@
+rules_version = '2';
+
+// Photos uploaded from the /admin portal (events, articles, …). Anyone can view them on the site;
+// only admins (email listed in Firestore /admins) can upload or delete, images only, max 5 MB.
+// Publish: Firebase console → Storage → Rules (paste) → Publish.
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email is string
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.token.email.lower()));
+    }
+
+    match /uploads/{folder}/{file} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow delete: if isAdmin();
+    }
+
+    // Everything else is closed.
+  }
+}

@@ -27,64 +27,64 @@ const leadershipTeamContent: Dictionary = {
     leader1CardDescription: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "Where Elevation Meets Elegance.",
-        [Locales.ARABIC]: "حيث يلتقي الارتقاء بالرقي.",
+        [Locales.ENGLISH]: "16 years of Oracle EPM, leading every engagement.",
+        [Locales.ARABIC]: "16 عامًا من الخبرة في Oracle EPM، تقود كل مشروع بنفسها.",
       },
     },
     leader1PositionBadge: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "Founder",
-        [Locales.ARABIC]: "المؤسس",
+        [Locales.ENGLISH]: "Founder & CEO",
+        [Locales.ARABIC]: "المؤسِّسة والرئيسة التنفيذية",
       },
     },
     leader1RoleLine: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "Founder, The A&M internationals",
-        [Locales.ARABIC]: "المؤسس، A&M الدولية",
+        [Locales.ENGLISH]: "Founder & CEO",
+        [Locales.ARABIC]: "المؤسِّسة والرئيسة التنفيذية",
       },
     },
     leader1FullBio: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "An ambitious leader in financial transformation and performance-driven innovation, Anusha Anala leads The A&M internationals's mission to help global organizations work smarter and scale faster. With over 15 years of experience in enterprise performance, analytics, and modern finance operations, she turns complexity into clarity—delivering streamlined processes, scalable solutions, and measurable business results. Anusha leads with strategic precision, innovation, and an unwavering commitment to client success.",
-        [Locales.ARABIC]: "قائدة طموحة في التحول المالي والابتكار القائم على الأداء، تقود أنوشا أنالا مهمة A&M الدولية لمساعدة المؤسسات العالمية على العمل بذكاء أكبر والتوسع بسرعة أكبر. وبخبرة تزيد عن 15 عامًا في أداء المؤسسات والتحليلات وعمليات التمويل الحديثة، تحوّل التعقيد إلى وضوح — عبر تقديم عمليات مبسطة وحلول قابلة للتوسع ونتائج أعمال قابلة للقياس. تقود أنوشا بدقة استراتيجية وابتكار والتزام ثابت بنجاح العملاء.",
+        [Locales.ENGLISH]: "Anusha Anala is the Founder and CEO of The A&M Internationals. She has 16 years of hands-on Oracle EPM experience across Planning and Budgeting, Financial Consolidation and Close, and Data Management, and has helped finance teams replace spreadsheets and slow month-end processes with systems they can trust.\n\nAt A&M, Anusha sets the company’s direction and leads EPM delivery. She stays hands-on in client projects, including the company’s first Oracle EPM engagement, an ESG emissions reporting build for a US automotive company. Her focus is simple: senior expertise on every project, and finance systems that keep working long after go-live.",
+        [Locales.ARABIC]: "أنوشا أنالا هي المؤسِّسة والرئيسة التنفيذية لشركة A&M الدولية. تمتلك 16 عامًا من الخبرة العملية في Oracle EPM في مجالات التخطيط والموازنة (Planning and Budgeting)، والتجميع المالي والإقفال (Financial Consolidation and Close)، وإدارة البيانات (Data Management)، وقد ساعدت الفرق المالية على استبدال جداول البيانات وعمليات إقفال نهاية الشهر البطيئة بأنظمة يمكنها الوثوق بها.\n\nفي A&M، تحدد أنوشا توجّه الشركة وتقود تنفيذ مشاريع EPM. وتبقى منخرطة بنفسها في مشاريع العملاء، بما في ذلك أول مشروع Oracle EPM للشركة، وهو بناء نظام لتقارير انبعاثات ESG لشركة سيارات أمريكية. وتركيزها بسيط: خبرة رفيعة المستوى في كل مشروع، وأنظمة مالية تواصل العمل بكفاءة لفترة طويلة بعد بدء التشغيل.",
       },
     },
     leader2Name: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "SIJITH MATHEW",
-        [Locales.ARABIC]: "سيجيث ماثيو",
+        [Locales.ENGLISH]: "SIJITH MATHEWS",
+        [Locales.ARABIC]: "سيجيث ماثيوز",
       },
     },
     leader2CardDescription: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "Driving innovation and operational excellence.",
-        [Locales.ARABIC]: "دفع عجلة الابتكار والتميز التشغيلي.",
+        [Locales.ENGLISH]: "Building the business, and the AI behind it.",
+        [Locales.ARABIC]: "يبني الأعمال، والذكاء الاصطناعي الذي يقف خلفها.",
       },
     },
     leader2PositionBadge: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "Founder",
-        [Locales.ARABIC]: "المؤسس",
+        [Locales.ENGLISH]: "Founder & President",
+        [Locales.ARABIC]: "المؤسِّس والرئيس",
       },
     },
     leader2RoleLine: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "Founder, The A&M Internationals",
-        [Locales.ARABIC]: "المؤسس، A&M الدولية",
+        [Locales.ENGLISH]: "Founder & President",
+        [Locales.ARABIC]: "المؤسِّس والرئيس",
       },
     },
     leader2FullBio: {
       nodeType: "translation",
       translation: {
-        [Locales.ENGLISH]: "A dynamic innovator at the intersection of AI, sales excellence, and digital marketing, Mathew propels the A&M Internationals growth strategy with bold vision and execution. Despite being only in his early 20s, he has already launched and scaled multiple startups, bringing a rare combination of entrepreneurial instinct, technical insight, and real-world market understanding. With deep expertise in AI-driven business models, revenue acceleration, and modern marketing ecosystems, Mathew transforms ideas into scalable growth engines—helping organizations reach new markets, sharpen brand impact, and unlock measurable results. His leadership blends fast-paced innovation with strategic clarity, positioning the A&M Internationals as a forward-thinking partner for global enterprises.",
-        [Locales.ARABIC]: "مبتكر ديناميكي يجمع بين الذكاء الاصطناعي، والتميز في المبيعات، والتسويق الرقمي، يقود ماثيو استراتيجية نمو A&M الدولية برؤية وتنفيذ جريء. على الرغم من كونه في أوائل العشرينات من عمره، فقد أطلق وقام بتوسيع العديد من الشركات الناشئة، مما جلب مزيجاً نادراً من الغريزة الريادية، والرؤية الفنية، والفهم الواقعي للسوق. بفضل خبرته العميقة في نماذج الأعمال القائمة على الذكاء الاصطناعي، وتسريع الإيرادات، وأنظمة التسويق الحديثة، يحول ماثيو الأفكار إلى محركات نمو قابلة للتوسع—مما يساعد المؤسسات على الوصول إلى أسواق جديدة، وتعزيز تأثير العلامة التجارية، وتحقيق نتائج قابلة للقياس. تمزج قيادته بين الابتكار السريع والوضوح الاستراتيجي، مما يضع A&M الدولية كشريك ذي تفكير مستقبلي للمؤسسات العالمية.",
+        [Locales.ENGLISH]: "Sijith Mathews is the Founder and President of The A&M Internationals. He brings around three years of Oracle EPM consulting experience in Financial Consolidation and Close, together with eight years on the business side, a mix that lets him speak the language of both finance teams and the people who build their systems.\n\nAt A&M, Sijith leads business development, client relationships and operations, and drove the company’s membership of the Oracle PartnerNetwork. He also leads A&M’s work in AI, including the EPM Build Agent, an AI assistant designed to take on repetitive Oracle EPM build work so consultants can focus on design and the business.",
+        [Locales.ARABIC]: "سيجيث ماثيوز هو المؤسِّس ورئيس شركة A&M الدولية. يمتلك نحو ثلاث سنوات من الخبرة الاستشارية في Oracle EPM في مجال التجميع المالي والإقفال (Financial Consolidation and Close)، إلى جانب ثماني سنوات في الجانب التجاري، وهو مزيج يمكّنه من التحدث بلغة الفرق المالية ولغة من يبنون أنظمتها على حدٍّ سواء.\n\nفي A&M، يقود سيجيث تطوير الأعمال وعلاقات العملاء والعمليات، وقد قاد انضمام الشركة إلى Oracle PartnerNetwork. كما يقود أعمال A&M في مجال الذكاء الاصطناعي، بما في ذلك EPM Build Agent، وهو مساعد بالذكاء الاصطناعي مصمَّم لتولّي أعمال البناء المتكررة في Oracle EPM، ليتمكّن الاستشاريون من التركيز على التصميم والأعمال.",
       },
     },
   },

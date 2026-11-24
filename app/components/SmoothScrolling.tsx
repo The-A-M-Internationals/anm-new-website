@@ -1,155 +1,127 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+/**
+ * THE one smooth-scroll engine for the whole site.
+ * Replaces BOTH the old SmoothScrolling.tsx and the SmoothScroll.tsx that came with
+ * OurClients — two Lenis instances fighting over window.scrollTo is the #1 cause of
+ * "stutter when scrolling past sections". Mount it once in app/layout.tsx.
+ *
+ * • Lenis is driven by GSAP's ticker (autoRaf: false) → one clock for scroll + ScrollTrigger.
+ * • Exposes the instance via useLenis() and window.__lenis for anchor links / back-to-top.
+ * • Re-measures ScrollTrigger once fonts and images have loaded (late layout shifts
+ *   otherwise make triggers fire in the wrong place and cause jumps).
+ */
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import Lenis from "lenis";
-import { usePathname } from "next/navigation";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "lenis/dist/lenis.css";
 
-export default function SmoothScrolling({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const pathname = usePathname();
-  const lenisRef = useRef<Lenis | null>(null);
+const LenisContext = createContext<Lenis | null>(null);
+export const useLenis = () => useContext(LenisContext);
 
-  // 1. Core Lenis Initialization
+declare global { interface Window { __lenis?: Lenis } }
+
+/**
+ * Scroll feel, adapted from Framer's Lenis component. Test overrides (remembered per tab):
+ * - ?scroll=glide: duration-based glide (the old default); length = intensity / 10 s (Framer default 12 → 1.2 s)
+ * - ?intensity=1–100: tune the glide live, like Framer's Intensity slider · ?speed=0.3–2: distance per wheel click
+ * - ?scroll=snappy (default): frame-based lerp that follows the wheel, smooth but never drags · ?scroll=native: browser scrolling
+ */
+type ScrollMode = "glide" | "snappy" | "native";
+const MODES: ScrollMode[] = ["glide", "snappy", "native"];
+function setting(key: string, valid: (v: string) => boolean, fallback: string) {
+  const q = new URLSearchParams(window.location.search).get(key);
+  try {
+    if (q && valid(q)) sessionStorage.setItem(`anm-${key}`, q);
+    const saved = sessionStorage.getItem(`anm-${key}`);
+    if (saved && valid(saved)) return saved;
+  } catch {}
+  return q && valid(q) ? q : fallback;
+}
+const scrollMode = () => setting("scroll", (v) => MODES.includes(v as ScrollMode), "snappy") as ScrollMode;
+const intensity = () => Number(setting("intensity", (v) => +v >= 1 && +v <= 100, "12"));
+const wheelSpeed = () => Number(setting("speed", (v) => +v >= 0.3 && +v <= 2, "0.9"));
+
+/** Framer "disable/enable smooth" tweak: e.g. turn smoothing off while a modal or map is open. */
+export function setSmoothWheel(on: boolean) {
+  if (window.__lenis) window.__lenis.options.smoothWheel = on;
+}
+
+export default function SmoothScrolling({ children }: { children: ReactNode }) {
+  const [lenis, setLenis] = useState<Lenis | null>(null);
+
   useEffect(() => {
-    console.log("Lenis initializing...");
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });   // no re-layout when the mobile URL bar shows/hides
+
+    if (window.__lenis) return;                            // guard against a second mount (Strict Mode / duplicate providers)
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mode = scrollMode();
+    document.documentElement.dataset.scroll = mode;
+    if (mode === "native") return;                         // consumers fall back to window.scrollTo
+
+    const feel = mode === "snappy"
+      ? { lerp: 0.1 }                                   // eases ~10% of the way each frame: smooth, responsive
+      : { duration: intensity() / 10, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) };
+    const l = new Lenis({
+      autoRaf: false,                                      // GSAP's ticker drives it (below) — never two rAF loops
+      ...feel,
+      smoothWheel: !reduce,
+      wheelMultiplier: wheelSpeed(),                     // distance per wheel click (lower = calmer)
+      touchMultiplier: 1,
+      syncTouch: false,                                    // native momentum on touch devices = smoothest on phones
     });
-    lenisRef.current = lenis;
-    (window as any).lenis = lenis;
-    (window as any).__lenis = lenis;
+    window.__lenis = l;
+    l.on("scroll", ScrollTrigger.update);
 
-    // FORCE INJECT LENIS CLASSES (Failsafe for v1.3.x)
-    document.documentElement.classList.add('lenis', 'lenis-smooth');
+    // html[data-gliding] = the page is really moving (hover effects are paused, see globals.css).
+    // Lenis's own .lenis-scrolling class stays on through the long, barely-moving tail of the glide,
+    // which left cards ignoring the mouse for about a second after the page had visibly stopped.
+    let gliding = false, glideEnd = 0;
+    const setGliding = (on: boolean) => { if (on !== gliding) { gliding = on; document.documentElement.toggleAttribute("data-gliding", on); } };
+    l.on("scroll", () => {
+      setGliding(Math.abs(l.velocity) > 1.2);                // px per frame; below this the page looks still
+      window.clearTimeout(glideEnd);
+      glideEnd = window.setTimeout(() => setGliding(false), 140);   // scroll events stopped: never stay stuck
+    });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    const rafId = requestAnimationFrame(raf);
+    const tick = (time: number) => l.raf(time * 1000);
+    // Prioritized: Lenis moves the page BEFORE GSAP writes this frame's animation styles. The other
+    // way round, scrollTo() had to flush those fresh styles first, a second style pass every frame.
+    gsap.ticker.add(tick, false, true);
+    gsap.ticker.lagSmoothing(0);
 
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    document.fonts?.ready.then(refresh);
+
+    // Late content (fetched events, lazy sections) changes the page height after triggers were
+    // measured. Re-measure once things settle — and only while Lenis is idle, so the wheel never hitches.
+    let settle = 0, lastH = document.body.scrollHeight;
+    const refreshWhenIdle = () => {
+      if (l.isScrolling === "smooth") { settle = window.setTimeout(refreshWhenIdle, 200); return; }
+      const h = document.body.scrollHeight;
+      if (h === lastH) return;                             // width-only / no-op changes: nothing to re-measure
+      lastH = h;
+      l.resize();
+      ScrollTrigger.refresh();
+    };
+    const ro = new ResizeObserver(() => { window.clearTimeout(settle); settle = window.setTimeout(refreshWhenIdle, 250); });
+    ro.observe(document.body);
+
+    setLenis(l);
     return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-      lenisRef.current = null;
-      document.documentElement.classList.remove('lenis', 'lenis-smooth');
+      ro.disconnect();
+      window.clearTimeout(settle);
+      window.clearTimeout(glideEnd);
+      setGliding(false);
+      window.removeEventListener("load", refresh);
+      gsap.ticker.remove(tick);
+      l.destroy();
+      if (window.__lenis === l) delete window.__lenis;
     };
   }, []);
 
-  // 2. Hash Scrolling Support
-  useEffect(() => {
-    if (!lenisRef.current) return;
-
-    let scrollAttempts = 0;
-    let scrollInterval: NodeJS.Timeout | null = null;
-
-    const tryScroll = () => {
-      if (!lenisRef.current) return false;
-      const hash = window.location.hash;
-      if (hash) {
-        try {
-          const target = document.querySelector(hash);
-          if (target) {
-            lenisRef.current.scrollTo(target as HTMLElement);
-            if (scrollInterval) clearInterval(scrollInterval);
-            return true;
-          }
-        } catch (e) {}
-      } else if (scrollAttempts === 0) {
-        lenisRef.current.scrollTo(0, { immediate: true });
-        if (scrollInterval) clearInterval(scrollInterval);
-        return true;
-      }
-      return false;
-    };
-
-    const handleScroll = () => {
-      scrollAttempts = 0;
-      if (scrollInterval) clearInterval(scrollInterval);
-      if (!tryScroll()) {
-        scrollInterval = setInterval(() => {
-          scrollAttempts++;
-          if (tryScroll() || scrollAttempts >= 20) {
-            if (scrollInterval) clearInterval(scrollInterval);
-          }
-        }, 100);
-      }
-    };
-
-    window.addEventListener('hashchange', handleScroll);
-    window.addEventListener('popstate', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('hashchange', handleScroll);
-      window.removeEventListener('popstate', handleScroll);
-      if (scrollInterval) clearInterval(scrollInterval);
-    };
-  }, [pathname]);
-
-  // 3. The Global Bottom-to-Top Reveal Effect
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const observer = new IntersectionObserver((entries) => {
-      const visibleEntries = entries.filter(entry => entry.isIntersecting);
-      let delayIndex = 0;
-      
-      visibleEntries.forEach(entry => {
-        const el = entry.target as HTMLElement;
-        el.style.transitionDelay = `${delayIndex * 0.2}s`;
-        
-        requestAnimationFrame(() => {
-          el.style.opacity = '1';
-          el.style.transform = 'translate3d(0, 0, 0)';
-        });
-
-        el.addEventListener('transitionend', function cleanup(e) {
-          if (e.propertyName === 'transform') {
-            el.style.willChange = 'auto';
-            el.style.transitionDelay = '0s';
-            el.removeEventListener('transitionend', cleanup);
-          }
-        });
-        
-        delayIndex++;
-        observer.unobserve(el);
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    const timer = setTimeout(() => {
-      if (lenisRef.current) {
-        lenisRef.current.resize();
-      }
-
-      const sections = document.querySelectorAll('section:not(.no-global-reveal)');
-      
-      sections.forEach((section) => {
-        if (section.getBoundingClientRect().top < window.innerHeight * 0.3) return;
-
-        const children = section.querySelectorAll(':scope > div > *, .reveal-up');
-        
-        children.forEach((child) => {
-          const el = child as HTMLElement;
-          el.style.opacity = '0';
-          el.style.transform = 'translate3d(0, 100px, 0)';
-          el.style.willChange = 'opacity, transform';
-          el.style.transition = 'opacity 1.7s cubic-bezier(0.16, 1, 0.3, 1), transform 1.7s cubic-bezier(0.16, 1, 0.3, 1)';
-          observer.observe(el);
-        });
-      });
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
-  }, [pathname]);
-
-  return <>{children}</>;
+  return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }

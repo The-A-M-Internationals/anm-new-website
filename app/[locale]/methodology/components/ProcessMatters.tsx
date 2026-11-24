@@ -44,7 +44,7 @@ const ProcessMatters = () => {
                         {benefits.map((benefit, index) => (
                             <div
                                 key={index}
-                                className="group rounded-2xl p-6 transition-all duration-300 transform hover:-translate-y-1 "
+                                className="group rounded-2xl p-6 transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300 transform hover:-translate-y-1 "
                             >
                                 <div className="flex items-start gap-5">
                                     {/* Icon Container */}

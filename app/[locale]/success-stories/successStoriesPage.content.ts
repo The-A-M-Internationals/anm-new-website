@@ -5,16 +5,16 @@ const successStoriesPageContent = {
   key: "successstories-page",
   content: {
     heroTitle: t({
-      en: "Success Stories That Inspire",
-      ar: "قصص نجاح ملهمة",
+      en: "Our Work",
+      ar: "أعمالنا",
     }),
     heroTitle2: t({
       en: "",
       ar: "",
     }),
     heroDescription: t({
-      en: "Real challenges. Real solutions. Real results. Discover how we've helped organizations across industries achieve measurable transformation.",
-      ar: "تحديات حقيقية. حلول حقيقية. نتائج حقيقية. اكتشف كيف ساعدنا المنظمات عبر الصناعات في تحقيق تحول قابل للقياس.",
+      en: "Real projects we’ve delivered, and the Oracle EPM experience our team brings to every client.",
+      ar: "مشاريع حقيقية أنجزناها، وخبرة Oracle EPM التي يقدّمها فريقنا لكل عميل.",
     }),
     heroButton: t({
       en: "Schedule a Consultation",

@@ -1,67 +1,52 @@
 import { t } from "intlayer";
 
+// EPM Build Agent: what it's being built to do (title + one line per card)
 const featuresListContent = {
   key: "featuresList",
   content: {
+    statusTag: t({
+      en: "In development · Preview at GITEX Global 2026",
+      ar: "قيد التطوير · عرض تمهيدي في GITEX Global 2026",
+    }),
     titlePrefix: t({
-      en: "Comprehensive",
-      ar: "شامل",
+      en: "What it's being",
+      ar: "ما الذي",
     }),
     titleHighlight: t({
-      en: "Features",
-      ar: "الميزات",
-    }),
-    subtitle: t({
-      en: "Everything you need to monitor, analyze, and optimize business performance",
-      ar: "كل ما تحتاجه لمراقبة وتحليل وتحسين أداء الأعمال",
+      en: "built to do",
+      ar: "يُبنى ليقوم به",
     }),
     feature1Title: t({
-      en: "Real-Time Analytics",
-      ar: "تحليلات في الوقت الفعلي",
+      en: "Turn requirements into build steps",
+      ar: "تحويل المتطلبات إلى خطوات بناء",
     }),
-    feature1Description: t({
-      en: "Monitor KPIs and performance metrics across your entire organization with live dashboards.",
-      ar: "راقب مؤشرات الأداء الرئيسية ومقاييس الأداء عبر مؤسستك بالكامل من خلال لوحات المعلومات الحية.",
+    feature1Text: t({
+      en: "Describe what you need in plain language, and the agent turns it into a step-by-step Oracle EPM build plan.",
+      ar: "صِف ما تحتاجه بلغة بسيطة، وسيحوّله الوكيل إلى خطة بناء في Oracle EPM خطوة بخطوة.",
     }),
     feature2Title: t({
-      en: "Predictive Modeling",
-      ar: "النمذجة التنبؤية",
+      en: "Set up dimensions, forms and rules faster",
+      ar: "إعداد الأبعاد والنماذج والقواعد بشكل أسرع",
     }),
-    feature2Description: t({
-      en: "AI-powered forecasting helps you anticipate trends and make proactive decisions.",
-      ar: "يساعدك التنبؤ المدعوم بالذكاء الاصطناعي على توقع الاتجاهات واتخاذ قرارات استباقية.",
+    feature2Text: t({
+      en: "The agent creates the repetitive parts from that plan, so consultants spend their time on design and the business.",
+      ar: "ينشئ الوكيل الأجزاء المتكررة انطلاقًا من تلك الخطة، ليتفرّغ الاستشاريون للتصميم واحتياجات الأعمال.",
     }),
     feature3Title: t({
-      en: "Unified Data Hub",
-      ar: "مركز بيانات موحد",
+      en: "Check builds for common mistakes",
+      ar: "فحص عمليات البناء بحثًا عن الأخطاء الشائعة",
     }),
-    feature3Description: t({
-      en: "Consolidate data from all systems into one centralized platform for complete visibility.",
-      ar: "دمج البيانات من جميع الأنظمة في منصة مركزية واحدة لرؤية كاملة.",
+    feature3Text: t({
+      en: "It checks what it built against the plan and flags gaps before the build reaches testing.",
+      ar: "يطابق ما بناه مع الخطة وينبّه إلى الثغرات قبل أن يصل البناء إلى مرحلة الاختبار.",
     }),
     feature4Title: t({
-      en: "Workflow Automation",
-      ar: "أتمتة سير العمل",
+      en: "Keep a clear record of what was built",
+      ar: "الاحتفاظ بسجل واضح لما تم بناؤه",
     }),
-    feature4Description: t({
-      en: "Automate reporting, approvals, and routine processes to save time and reduce errors.",
-      ar: "أتمتة التقارير والموافقات والعمليات الروتينية لتوفير الوقت وتقليل الأخطاء.",
-    }),
-    feature5Title: t({
-      en: "Enterprise Security",
-      ar: "أمن المؤسسات",
-    }),
-    feature5Description: t({
-      en: "Bank-grade security with role-based access controls and compliance features.",
-      ar: "أمان من الدرجة المصرفية مع ضوابط وصول قائمة على الأدوار وميزات الامتثال.",
-    }),
-    feature6Title: t({
-      en: "Performance Tracking",
-      ar: "تتبع الأداء",
-    }),
-    feature6Description: t({
-      en: "Track team, department, and company-wide performance against strategic goals.",
-      ar: "تتبع أداء الفريق والقسم والشركة مقابل الأهداف الاستراتيجية.",
+    feature4Text: t({
+      en: "Every change is recorded automatically, so handovers and reviews are simple.",
+      ar: "يُسجَّل كل تغيير تلقائيًا، لتصبح عمليات التسليم والمراجعة سهلة.",
     }),
   },
 };

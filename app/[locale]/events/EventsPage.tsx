@@ -5,8 +5,9 @@ import PastEvents from "./PastEvents";
 import UpcomingEvents from "./UpcomingEvents";
 import NewsLetter from "./NewsLetterSection";
 import { useIntlayer, useLocale } from "next-intlayer";
+import type { CmsDoc } from "@/lib/cms/shared";
 
-const EventsPage = () => {
+const EventsPage = ({ events }: { events?: CmsDoc[] }) => {
     const content = useIntlayer("eventsPage");
     const { locale } = useLocale();
 
@@ -35,8 +36,8 @@ const EventsPage = () => {
                 buttonImage={heroButtonImage}
             />
 
-            <UpcomingEvents />
-            <PastEvents />
+            <UpcomingEvents docs={events} />
+            <PastEvents docs={events} />
             <NewsLetter />
         </div>
     );

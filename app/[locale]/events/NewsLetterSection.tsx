@@ -52,7 +52,7 @@ const NewsLetter = () => {
 
             <input
                 type="email"
-                placeholder={content.newsletter.emailPlaceholder.value}
+                placeholder={content.newsletter.emailPlaceholder.value} aria-label={content.newsletter.emailPlaceholder.value}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}

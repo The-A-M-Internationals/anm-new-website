@@ -2,19 +2,23 @@
 
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
-import Image from 'next/image';
-import { useIntlayer } from "next-intlayer";
+import OfficeLocationMap from './OfficeLocationMap';
+import { useIntlayer, useLocale } from "next-intlayer";
+import { useContactInfo, useContactText } from "../../components/ContactInfo";
 
 export default function OurOffices() {
   const content = useIntlayer("offices");
+  const { locale } = useLocale();
+  const contact = useContactInfo();
+  const contactText = useContactText(locale);
 
   const offices = [
     {
       location: content.dubaiLocation.value,
-      phone: '+971 564783478',
-      email: 'am@theaminternationals.com',
-      address: content.dubaiAddress.value,
-      link: 'https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8'
+      phone: contact.phone,
+      email: contact.email,
+      address: contactText.office || content.dubaiAddress.value,
+      link: contact.mapLink
     }
   ];
 
@@ -24,9 +28,9 @@ export default function OurOffices() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-3">
+          <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-3">
             {content.titlePrefix.value} <span className="text-[#D4AF37]">{content.titleHighlight.value}</span>
-          </h1>
+          </h2>
           <p className="text-gray-600 text-xl">
             {content.subtitle.value}
           </p>
@@ -35,16 +39,9 @@ export default function OurOffices() {
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-8 items-start">
 
-          {/* Image FIRST on mobile, SECOND on desktop */}
+          {/* Office map FIRST on mobile, SECOND on desktop */}
           <div className="h-full order-1 lg:order-2">
-            <div className="rounded-3xl overflow-hidden w-full h-full shadow-2xl min-h-[300px] relative">
-              <Image
-                src="/offices.jpg"
-                fill
-                alt="map image"
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
+            <OfficeLocationMap mapLink={contact.mapLink} address={offices[0].address} />
           </div>
 
           {/* Cards SECOND on mobile, FIRST on desktop */}
@@ -63,13 +60,13 @@ export default function OurOffices() {
                   {/* Phone */}
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-[#D4AF37]" />
-                    <span>{office.phone}</span>
+                    <span dir="ltr">{office.phone}</span>
                   </div>
 
                   {/* Email */}
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-[#D4AF37]" />
-                    <span>{office.email}</span>
+                    <span dir="ltr">{office.email}</span>
                   </div>
 
                   {/* Address */}

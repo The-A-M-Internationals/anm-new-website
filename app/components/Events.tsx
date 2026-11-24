@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../lib/firebaseConfig";
+import RollLabel from "./RollLabel";
+import { useMemo, useState } from "react";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { ArrowRight } from "lucide-react";
 import LiveEvents from "./LiveEvents";
 import { useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
 import "./events.content";
 import { handleHashLink } from "@/lib/handleHashLink";
+import { eventCta, openEventCta } from "./eventCta";
 
 interface EventType {
     id: string;
@@ -24,22 +26,22 @@ interface EventType {
     timeRange: string;
     timeRangeAr?: string;
     imageSrc: string;
+    buttonText?: string;
+    buttonTextAr?: string;
+    buttonLink?: string;
 }
 
-const Events = () => {
+/** `docs` comes from the server (EventsSection), so the events are in the page HTML */
+const Events = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const content = useIntlayer("events");
     const { locale } = useLocale();
     const router = useRouter();
 
-    const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
-    const [liveEvent, setLiveEvent] = useState<EventType | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const { docs, loading, failed } = useCmsDocs("events", serverDocs);
 
-    useEffect(() => {
-        const fetchEvents = async () => {
+    const { liveEvent, upcomingEvents, broken } = useMemo(() => {
             try {
-                const snapshot = await getDocs(collection(db, "events"));
+                const snapshot = asSnapshot(docs);
 
                 const parseEventDateRange = (dateRange: string, month: string) => {
                     const days = dateRange.match(/\d{1,2}/g);
@@ -85,6 +87,9 @@ const Events = () => {
                         timeRange: data.timeRange,
                         timeRangeAr: data.timeRangeAr,
                         imageSrc: data.imageSrc,
+                        buttonText: data.buttonText,
+                        buttonTextAr: data.buttonTextAr,
+                        buttonLink: data.buttonLink,
                     };
 
                     if (today >= range.startDate && today <= range.endDate) {
@@ -100,18 +105,13 @@ const Events = () => {
                     return r1.startDate.getTime() - r2.startDate.getTime();
                 });
 
-                setLiveEvent(detectedLiveEvent);
-                setUpcomingEvents(upcoming);
+                return { liveEvent: detectedLiveEvent as EventType | null, upcomingEvents: upcoming, broken: false };
             } catch (err) {
                 console.error(err);
-                setError("Failed to load events");
-            } finally {
-                setLoading(false);
+                return { liveEvent: null, upcomingEvents: [] as EventType[], broken: true };
             }
-        };
-
-        fetchEvents();
-    }, [locale]); // re-run when language changes
+    }, [docs]);
+    const error = failed || broken ? "Failed to load events" : null;
 
     /* PAGINATION */
     const [page, setPage] = useState(0);
@@ -127,24 +127,24 @@ const Events = () => {
         return <div className="w-full flex justify-center py-10">Loading events...</div>;
     }
 
-    if (error) {
-        return <div className="w-full flex justify-center py-10 text-red-500">{error}</div>;
-    }
+    // No live or upcoming event (or they couldn't be loaded): hide the whole Events section
+    if (error || (!liveEvent && upcomingEvents.length === 0)) return null;
 
     return (
         <div className="bg-gradient-to-r from-[#EED689]/10 to-white py-12 md:py-16">
+            {/* Live block only when something is live; otherwise the section starts at Upcoming Events */}
+            {liveEvent && (
             <div className="max-w-7xl mx-auto w-full">
                 {/* HEADER */}
                 <h2 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[48px] text-center">
                     {content?.header?.value}
                 </h2>
-                <p className="font-semibold text-[#6B7280] text-xs sm:text-sm md:text-base text-center px-4 lg:mb-10">
+                <p className="font-semibold text-[#6B7280] text-sm md:text-base text-center px-4 mt-2 mb-6 lg:mb-10">
                     {content?.subHeader?.value}
                 </p>
 
                 {/* LIVE EVENT */}
-                {liveEvent ? (
-                    <LiveEvents
+                <LiveEvents
                         {...{
                             ...liveEvent,
                             title: locale === "ar" ? liveEvent.titleAr || liveEvent.title : liveEvent.title,
@@ -154,15 +154,12 @@ const Events = () => {
                             timeRange: locale === "ar" ? liveEvent.timeRangeAr || liveEvent.timeRange : liveEvent.timeRange,
                         }}
                     />
-                ) : (
-                    <div className="w-full text-center text-gray-500 text-lg font-medium mb-6">
-                        {content?.noLiveEvents?.value}
-                    </div>
-                )}
+
             </div>
+            )}
 
             {/* UPCOMING EVENTS */}
-            <div className="max-w-7xl mx-auto px-4 mt-8 flex flex-col gap-6 pb-5 md:pb-12">
+            <div className={`max-w-7xl mx-auto px-4 ${liveEvent ? "mt-8" : ""} flex flex-col gap-6 pb-5 md:pb-12`}>
                 <div className="text-center">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">
                         {content?.upcomingHeader?.value}
@@ -174,7 +171,7 @@ const Events = () => {
                         {content?.noUpcomingEvents?.value}
                     </p>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className={`grid grid-cols-1 gap-6 ${visibleEvents.length === 1 ? "md:w-1/2 md:mx-auto w-full" : "md:grid-cols-2"}`}>
                         {visibleEvents.map((event) => {
                             const title = locale === "ar" ? event.titleAr || event.title : event.title;
                             const description = locale === "ar" ? event.descriptionAr || event.description : event.description;
@@ -204,10 +201,10 @@ const Events = () => {
                                     </p>
 
                                     <button
-                                        onClick={() => router.push(`/${locale}/register?eventId=${event.id}`)}
+                                        onClick={(e) => openEventCta(e, eventCta(event, locale, content?.registerNow?.value), router)}
                                         className="text-[#D4AF37] hover:text-yellow-700 cursor-pointer font-semibold flex items-center gap-2"
                                     >
-                                        {content?.registerNow?.value}
+                                        {eventCta(event, locale, content?.registerNow?.value).label}
                                         <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                                     </button>
                                 </div>
@@ -228,7 +225,7 @@ const Events = () => {
                             }}
                             className="bg-[#D4AF37] cursor-pointer text-sm sm:text-base font-semibold px-8 py-3 rounded-full hover:scale-105 transition shadow-md"
                         >
-                            {content?.viewAll?.value}
+                            <RollLabel>{content?.viewAll?.value}</RollLabel>
                         </button>
                     </div>
                 )}

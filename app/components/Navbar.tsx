@@ -1,7 +1,11 @@
 'use client'
+import RollLabel from "./RollLabel";
+import { announceLeave } from "./PageLeave";
 import { useState, useRef } from 'react'
 import NavbarModal from './NavbarModal'
 import Link from 'next/link'
+import Image from 'next/image'
+import OraclePartnerBadge from "./OraclePartnerBadge";
 import { useRouter } from 'next/navigation'
 import { useIntlayer, useLocale } from "next-intlayer";
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
@@ -48,12 +52,6 @@ const Navbar = () => {
           textKey: 'financeTransformation',
           type: 'primary' as const,
           link: getLocalizedLink('/finance-transformation')
-        },
-        {
-          icon: '/services/digital.svg',
-          textKey: 'digitalTransformation',
-          type: 'outline' as const,
-          link: getLocalizedLink('/digital-transformation')
         },
         {
           icon: '/services/ai.svg',
@@ -112,7 +110,7 @@ const Navbar = () => {
           icon: '/tick.svg',
           textKey: 'contactUs',
           type: 'outline' as const,
-          link: '#contact'
+          link: getLocalizedLink('/contact')
         },
       ]
     },
@@ -161,7 +159,7 @@ const Navbar = () => {
     const hasDropdown = navItems[navKey].rightSideButtons.length > 0;
     if (!hasDropdown) {
       const link = directLinks[navKey];
-      if (link) router.push(link, { scroll: false });
+      if (link) { announceLeave(link); router.push(link, { scroll: false }); }
       setIsMobileMenuOpen(false);
       return;
     }
@@ -191,11 +189,12 @@ const Navbar = () => {
       <nav className="bg-white shadow-sm w-full z-50 lg:relative">
         <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            <Link href={getLocalizedLink('/')} className="shrink-0 flex items-center">
-              <img src="/new-logo.png" alt="Logo" className="h-14 md:h-[76px] w-auto object-contain py-1" />
-            </Link>
+            <Link href={getLocalizedLink('/')} className="shrink-0 flex items-center"><Image src="/new-logo.png" alt="Logo" width={890} height={280} priority sizes="242px" className="h-14 md:h-[76px] w-auto object-contain py-1" /></Link>
 
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden xl:flex items-center gap-1">
+              {/* Oracle Partner logo, right before Services (a little smaller on 1280–1399px screens so the menu fits) */}
+              <OraclePartnerBadge tone="light" className="h-8 min-[1400px]:h-10 w-auto" />
+              <span className="mx-2 min-[1400px]:mx-3 h-5 w-px bg-gray-200" aria-hidden />
               {(Object.keys(navItems) as NavKey[]).map((key) => (
                 <DesktopNavButton
                   key={key}
@@ -217,28 +216,30 @@ const Navbar = () => {
               <Link
                 href={getLocalizedLink("/contact#form")}
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
-                className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-white px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
+                className="ml-2 bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-5 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-150 whitespace-nowrap flex items-center justify-center"
               >
-                {content.bookConsultation.value}
+                <RollLabel>{content.bookConsultation.value}</RollLabel>
               </Link>
             </div>
 
-            <div className="lg:hidden flex items-center gap-3">
+            <div className="xl:hidden flex items-center gap-3">
+              {/* Oracle Partner logo on tablets (phones: the bar is too narrow, it shows in the footer) */}
+              <OraclePartnerBadge tone="light" className="hidden sm:block h-8 w-auto" />
               <Link
                 href={getLocalizedLink("/contact#form")}
                 onClick={(e) => handleHashLink(e, getLocalizedLink("/contact#form"), router)}
-                className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-colors duration-150"
+                className="hidden md:flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-4 py-2 rounded-full text-sm font-semibold xl:whitespace-nowrap transition-colors duration-150"
               >
-                {content.bookConsultation.value}
+                <RollLabel>{content.bookConsultation.value}</RollLabel>
               </Link>
 
-              <div className="md:block lg:hidden">
+              <div className="md:block xl:hidden">
                 <LanguageSwitcher />
               </div>
 
               <button
                 onClick={toggleMobileMenu}
-                className="text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700"
+                className="-m-2.5 cursor-pointer p-2.5 text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700"
                 aria-label="Toggle menu"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -253,7 +254,7 @@ const Navbar = () => {
           </div>
 
           {isMobileMenuOpen && (
-            <div className="lg:hidden pb-4 border-t border-gray-100 mt-1">
+            <div className="xl:hidden pb-4 border-t border-gray-100 mt-1">
               <div className="flex flex-col divide-y divide-gray-100">
                 {(Object.keys(navItems) as NavKey[]).map((key) => (
                   <MobileNavButton
@@ -276,9 +277,9 @@ const Navbar = () => {
                       setIsMobileMenuOpen(false);
                     }
                   }}
-                  className="w-full flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-white px-4 py-3 rounded-full text-sm font-semibold transition-colors duration-150"
+                  className="w-full flex items-center justify-center bg-[#C9A84C] hover:bg-[#b8963e] text-[#050E30] px-4 py-3 rounded-full text-sm font-semibold transition-colors duration-150"
                 >
-                  {content.bookConsultation.value}
+                  <RollLabel>{content.bookConsultation.value}</RollLabel>
                 </Link>
               </div>
             </div>
@@ -330,7 +331,7 @@ const DesktopNavButton = ({
         onMouseEnter={() => handleNavMouseEnter(navKey)}
         onMouseLeave={() => scheduleClose(300)}
         className={`
-          text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold
+          text-[#4B5563] cursor-pointer px-2.5 2xl:px-3 py-2 text-sm font-semibold xl:whitespace-nowrap
           transition-colors duration-150 hover:text-gray-900
           ${isActive ? 'border-b-2 border-[#C9A84C] text-gray-900' : ''}
         `}
@@ -352,10 +353,11 @@ const DesktopNavButton = ({
     <button
       onClick={(e) => {
         if (!handleHashLink(e, directLinks[navKey]!, router)) {
+          announceLeave(directLinks[navKey]!);
           router.push(directLinks[navKey]!, { scroll: false })
         }
       }}
-      className="text-[#4B5563] cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:text-gray-900"
+      className="text-[#4B5563] cursor-pointer px-2.5 2xl:px-3 py-2 text-sm font-semibold xl:whitespace-nowrap transition-colors duration-150 hover:text-gray-900"
     >
       {(content as any)?.[navItems[navKey].labelKey]?.value || (content as any)?.[navItems[navKey].labelKey] || navKey}
     </button>

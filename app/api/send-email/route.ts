@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer, { type Transporter } from "nodemailer";
 import { db } from "@/lib/firebaseConfig";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { esc, isEmail, oneLine, rateLimited, sameOrigin, text } from "@/lib/email/guard";
+import { newsEmail } from "@/lib/email/newsEmail";
+import { welcomeEmail } from "@/lib/email/newsItems";
+import { addSubscriber, resendReady, sendOne } from "@/lib/email/resend";
 
 interface ConsultationData {
   name: string;
@@ -15,8 +19,27 @@ interface ConsultationData {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { type, email, data } = body;
+    if (!sameOrigin(request)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    if (rateLimited(request)) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
+    const body = await request.json().catch(() => null);
+    if (!body || typeof body !== "object") return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    const { type } = body;
+    // Every value below is validated, length-capped and HTML-escaped before it reaches a template
+    const rawEmail = type === "subscribe" ? body.email : body.data?.email;
+    if (!isEmail(rawEmail)) return NextResponse.json({ error: "A valid email is required" }, { status: 400 });
+    const sendTo = rawEmail.trim();                             // plain address for the mail "to" field
+    const email = esc(sendTo);
+    const d = body.data ?? {};
+    const data: ConsultationData = {
+      name: esc(text(d.name, 100)),
+      company: esc(text(d.company, 150)),
+      email,
+      phone: esc(text(d.phone, 40)),
+      service: esc(text(d.service, 120)),
+      vision: esc(text(d.vision, 5000)),
+      howHeard: esc(text(d.howHeard, 120)),
+    };
 
     const smtpHost = process.env.SMTP_HOST || "smtp.office365.com";
     const smtpPort = Number(process.env.SMTP_PORT) || 587;
@@ -54,32 +77,12 @@ export async function POST(request: NextRequest) {
 
       const subscriberSubject =
         "Welcome to The A&M Internationals Newsletter";
-      const subscriberHtml = `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0D1B3E; color: #ffffff; border-radius: 12px; overflow: hidden;">
-          <div style="padding: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <h1 style="color: #C9A84C; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: 1px;">THE A&M INTERNATIONALS</h1>
-            <p style="color: #ffffff; font-size: 13px; margin-top: 6px; opacity: 0.8;">Elevating the World, Elegantly</p>
-          </div>
-          <div style="padding: 35px 30px; background-color: #ffffff; color: #1F2937;">
-            <h2 style="color: #0D1B3E; font-size: 20px; margin-top: 0;">Thank You for Subscribing!</h2>
-            <p style="font-size: 15px; line-height: 1.6; color: #4B5563;">
-              We are delighted to welcome you to <strong>The A&M Internationals</strong> community. You are now subscribed to receive our latest enterprise insights, industry analysis, and corporate updates.
-            </p>
-            <div style="margin: 25px 0; padding: 20px; background-color: #FFFBED; border-left: 4px solid #C9A84C; border-radius: 4px;">
-              <p style="margin: 0; font-size: 14px; color: #78350F; font-weight: 500;">
-                Subscribed Email: <strong>${email}</strong>
-              </p>
-            </div>
-            <p style="font-size: 14px; line-height: 1.6; color: #6B7280;">
-              If you ever have any questions or would like to explore our advisory services, feel free to reply directly to this email or contact us at <a href="mailto:am@theaminternationals.com" style="color: #C9A84C; text-decoration: none; font-weight: bold;">am@theaminternationals.com</a>.
-            </p>
-          </div>
-          <div style="padding: 20px 30px; text-align: center; background-color: #09132B; font-size: 12px; color: #9CA3AF;">
-            <p style="margin: 0;">&copy; ${new Date().getFullYear()} The A&M Internationals. All rights reserved.</p>
-            <p style="margin: 5px 0 0 0;">Ajman Free Zone C1 Building, Ajman Free Zone, UAE</p>
-          </div>
-        </div>
-      `;
+      // Same design as every other subscriber email
+      const subscriberHtml = newsEmail(welcomeEmail());
+
+      // Put them on the list that project / job / article / event emails go to (Resend keeps it)
+      const listed = await addSubscriber(sendTo);
+      if (!listed.ok && listed.status !== 0) console.warn("[subscribe] could not add to the Resend list:", listed.status, listed.message);
 
       const adminSubject = `New Newsletter Subscriber: ${email}`;
       const adminHtml = `
@@ -93,9 +96,9 @@ export async function POST(request: NextRequest) {
       // Fallback: Also save to Firestore 'mail' collection (triggers Firebase Trigger Email extension if installed)
       try {
         await addDoc(collection(db, "mail"), {
-          to: [email],
+          to: [sendTo],
           message: {
-            subject: subscriberSubject,
+            subject: oneLine(subscriberSubject),
             html: subscriberHtml,
           },
           createdAt: Timestamp.now(),
@@ -109,26 +112,30 @@ export async function POST(request: NextRequest) {
         try {
           await transporter.sendMail({
             from: fromAddress,
-            to: email,
-            subject: subscriberSubject,
+            to: sendTo,
+            subject: oneLine(subscriberSubject),
             html: subscriberHtml,
           });
 
           await transporter.sendMail({
             from: fromAddress,
             to: adminEmail,
-            subject: adminSubject,
+            subject: oneLine(adminSubject),
             html: adminHtml,
           });
           return NextResponse.json({ success: true, method: "smtp" });
         } catch (mailError) {
-          console.error("SMTP error sending newsletter email:", mailError);
-          return NextResponse.json({
-            success: true,
-            method: "firestore_fallback",
-            warning: "SMTP send failed, queued in Firestore",
-          });
+          console.error("SMTP error sending newsletter email:", mailError);   // fall through to Resend below
         }
+      }
+
+      // No SMTP account: send through Resend instead
+      if (resendReady()) {
+        const sent = await sendOne({ to: sendTo, subject: oneLine(subscriberSubject), html: subscriberHtml });
+        if (!sent.ok) console.error("[subscribe] Resend did not send the welcome email:", sent.status, sent.message);
+        const told = await sendOne({ to: adminEmail, subject: oneLine(adminSubject), html: adminHtml });
+        if (!told.ok) console.warn("[subscribe] Resend did not send the admin notice:", told.status, told.message);
+        if (sent.ok) return NextResponse.json({ success: true, method: "resend" });
       }
 
       return NextResponse.json({
@@ -140,7 +147,7 @@ export async function POST(request: NextRequest) {
 
     // 2. CONSULTATION / INQUIRY BOOKING EMAIL
     if (type === "consultation") {
-      const consultData = data as ConsultationData;
+      const consultData = data;
       if (!consultData || !consultData.email || !consultData.name) {
         return NextResponse.json(
           { error: "Name and email are required for consultation" },
@@ -207,9 +214,9 @@ export async function POST(request: NextRequest) {
       // Fallback: Also save to Firestore 'mail' collection
       try {
         await addDoc(collection(db, "mail"), {
-          to: [consultData.email],
+          to: [sendTo],
           message: {
-            subject: clientSubject,
+            subject: oneLine(clientSubject),
             html: clientHtml,
           },
           createdAt: Timestamp.now(),
@@ -223,26 +230,30 @@ export async function POST(request: NextRequest) {
         try {
           await transporter.sendMail({
             from: fromAddress,
-            to: consultData.email,
-            subject: clientSubject,
+            to: sendTo,
+            subject: oneLine(clientSubject),
             html: clientHtml,
           });
 
           await transporter.sendMail({
             from: fromAddress,
             to: adminEmail,
-            subject: adminSubject,
+            subject: oneLine(adminSubject),
             html: adminHtml,
           });
           return NextResponse.json({ success: true, method: "smtp" });
         } catch (mailError) {
-          console.error("SMTP error sending consultation email:", mailError);
-          return NextResponse.json({
-            success: true,
-            method: "firestore_fallback",
-            warning: "SMTP send failed, queued in Firestore",
-          });
+          console.error("SMTP error sending consultation email:", mailError);   // fall through to Resend below
         }
+      }
+
+      // No SMTP account: send through Resend instead
+      if (resendReady()) {
+        const sent = await sendOne({ to: sendTo, subject: oneLine(clientSubject), html: clientHtml });
+        if (!sent.ok) console.error("[consultation] Resend did not send the confirmation:", sent.status, sent.message);
+        const told = await sendOne({ to: adminEmail, subject: oneLine(adminSubject), html: adminHtml });
+        if (!told.ok) console.error("[consultation] Resend did not send the enquiry to the office:", told.status, told.message);
+        if (sent.ok || told.ok) return NextResponse.json({ success: true, method: "resend" });
       }
 
       return NextResponse.json({
@@ -256,6 +267,6 @@ export async function POST(request: NextRequest) {
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : "Internal server error";
     console.error("Email route error:", errorMsg);
-    return NextResponse.json({ error: errorMsg }, { status: 500 });
+    return NextResponse.json({ error: "Could not send email" }, { status: 500 });
   }
 }

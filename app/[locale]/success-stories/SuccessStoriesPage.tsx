@@ -2,8 +2,10 @@
 import PageHero from '../../components/PageHero';
 import SuccessStories from './SuccessStories';
 import { useIntlayer, useLocale } from 'next-intlayer';
+import type { CmsDoc } from '@/lib/cms/shared';
 
-const SuccessStoriesPage = () => {
+/** docs: Our Work projects loaded on the server (undefined = load in the browser) */
+const SuccessStoriesPage = ({ docs }: { docs?: CmsDoc[] }) => {
     const content = useIntlayer("successstories-page");
     const { locale } = useLocale();
 
@@ -29,7 +31,7 @@ const SuccessStoriesPage = () => {
                 image3={heroImageTablet}
                 buttonImage={heroButtonImage}
             />
-            <SuccessStories />
+            <SuccessStories docs={docs} />
         </div>
     );
 };

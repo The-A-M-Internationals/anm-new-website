@@ -36,8 +36,8 @@ const servicesContent = {
       ar: "التخطيط والميزانية",
     }),
     financeCapability2: t({
-      en: "Financial Consolidation",
-      ar: "الدمج المالي",
+      en: "Financial Consolidation & Close",
+      ar: "الدمج المالي والإقفال",
     }),
     financeCapability3: t({
       en: "Account Reconciliation",
@@ -47,29 +47,13 @@ const servicesContent = {
       en: "Managed Services",
       ar: "الخدمات المدارة",
     }),
-    financeMetric1Value: t({
-      en: "40%",
-      ar: "٤٠٪",
-    }),
-    financeMetric1Label: t({
-      en: "faster close",
-      ar: "إغلاق أسرع",
-    }),
-    financeMetric2Value: t({
-      en: "150+",
-      ar: "١٥٠+",
-    }),
-    financeMetric2Label: t({
-      en: "implementations",
-      ar: "تنفيذ",
-    }),
     financeTag1: t({
       en: "Oracle EPM",
       ar: "أوراكل EPM",
     }),
     financeTag2: t({
-      en: "SAP",
-      ar: "ساب",
+      en: "EPM Cloud",
+      ar: "سحابة EPM",
     }),
     digitalCategory: t({
       en: "Digital Transformation",
@@ -128,56 +112,40 @@ const servicesContent = {
       ar: "أتمتة الذكاء الاصطناعي",
     }),
     aiTitle: t({
-      en: "Intelligent Automation at Scale",
-      ar: "الأتمتة الذكية على نطاق واسع",
+      en: "AI for Oracle EPM",
+      ar: "الذكاء الاصطناعي لـ Oracle EPM",
     }),
     aiDescription: t({
-      en: "RPA, generative AI and machine learning that eliminate manual effort and create competitive advantage.",
-      ar: "أتمتة العمليات الروبوتية والذكاء الاصطناعي التوليدي والتعلم الآلي الذي يلغي الجهد اليدوي ويخلق ميزة تنافسية.",
+      en: "We build AI and automation tools that take repetitive work off finance teams.",
+      ar: "نطوّر أدوات ذكاء اصطناعي وأتمتة تُعفي فرق المالية من الأعمال المتكررة.",
     }),
     aiCapability1: t({
-      en: "Robotic Process Automation",
-      ar: "أتمتة العمليات الروبوتية",
+      en: "EPM Build Agent (coming soon)",
+      ar: "وكيل بناء EPM (قريبًا)",
     }),
     aiCapability2: t({
-      en: "Generative AI Integration",
-      ar: "تكامل الذكاء الاصطناعي التوليدي",
+      en: "EPM Automation Tools",
+      ar: "أدوات أتمتة EPM",
     }),
     aiCapability3: t({
-      en: "AI-Powered Analytics",
-      ar: "التحليلات المدعومة بالذكاء الاصطناعي",
-    }),
-    aiCapability4: t({
-      en: "Intelligent Doc Processing",
-      ar: "معالجة المستندات الذكية",
-    }),
-    aiMetric1Value: t({
-      en: "70%",
-      ar: "٧٠٪",
-    }),
-    aiMetric1Label: t({
-      en: "faster processing",
-      ar: "معالجة أسرع",
-    }),
-    aiMetric2Value: t({
-      en: "90%",
-      ar: "٩٠٪",
-    }),
-    aiMetric2Label: t({
-      en: "fewer errors",
-      ar: "أخطاء أقل",
+      en: "AI on Oracle Cloud",
+      ar: "الذكاء الاصطناعي على Oracle Cloud",
     }),
     aiTag1: t({
-      en: "RPA",
-      ar: "RPA",
+      en: "AI",
+      ar: "AI",
     }),
     aiTag2: t({
-      en: "GenAI",
-      ar: "الذكاء الاصطناعي التوليدي",
+      en: "Oracle Cloud",
+      ar: "Oracle Cloud",
     }),
     explore: t({
-      en: "Explore",
-      ar: "استكشف",
+      en: "Explore AI Solutions",
+      ar: "استكشف حلول الذكاء الاصطناعي",
+    }),
+    financeExplore: t({
+      en: "Explore EPM Solutions",
+      ar: "استكشف حلول EPM",
     }),
     cloudLabel: t({
       en: "Cloud",

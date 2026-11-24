@@ -19,7 +19,7 @@ export default function MethodologyPage() {
         locale === "ar" ? "/methodology-ar.png" : "/methodology.png";
 
     const heroImageTablet =
-        locale === "ar" ? "/business/tab-hero-ar.png" : "/business/tab-hero.png";
+        locale === "ar" ? "/business/tab-hero.png" : "/business/tab-hero.png";
 
     const heroButtonImage =
         locale === "ar" ? "/business/button-ar.png" : "/business/button.png";
@@ -32,7 +32,7 @@ export default function MethodologyPage() {
                     title2={content.heroTitle2.value}
                     description={content.heroDescription.value}
                     button={content.heroButton.value}
-                    link={`/${locale}/features#epm-suites`}
+                    link={`/${locale}/contact#form`}
                     image={heroImage}
                     image2={heroImageMobile}
                     image3={heroImageTablet}

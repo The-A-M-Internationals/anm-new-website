@@ -2,16 +2,34 @@
 'use client';
 
 import Image from 'next/image';
+import { UserRound } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
-import { useIntlayer } from "next-intlayer";
+import { useIntlayer, useLocale } from "next-intlayer";
 import "./leadershipTeam.content";
+import type { CmsDoc } from '@/lib/cms/shared';
+import { tr } from '@/lib/cms/siteContent';
 
-const LeadershipTeam = () => {
+/** Desktop column a card sits in (for the staggered offsets); the centered last row keeps the middle columns' offsets */
+const staggerCol = (idx: number, n: number) => {
+    const r = n % 4, lastStart = n - r;
+    if (!r || idx < lastStart) return idx % 4;
+    return Math.min(3, Math.floor((4 - r) / 2) + (idx - lastStart));
+};
+
+/** founders / team: from the admin portal; without them the built-in people show */
+const LeadershipTeam = ({ founders, team }: { founders?: CmsDoc[]; team?: CmsDoc[] }) => {
     const content = useIntlayer("businessLeadershipTeam");
+    const { locale } = useLocale();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
 
-    const Services = [
+    const Services = founders ? founders.map(({ data: d }) => ({
+        title: tr(d, 'name', locale),
+        image: String(d.imageSrc || ''),
+        description: tr(d, 'tagline', locale),
+        fullBio: tr(d, 'bio', locale),
+        role: tr(d, 'role', locale),
+    })).filter((f) => f.image) : [
         {
             title: content.leader1Name.value,
             image: '/business/anusha.jpg',
@@ -28,12 +46,16 @@ const LeadershipTeam = () => {
         }
     ];
 
-    const Employees = [
-        { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.png" },
+    const Employees = team ? team.map(({ data: d }) => ({
+        name: tr(d, 'name', locale),
+        role: tr(d, 'role', locale),
+        image: String(d.imageSrc || ''),
+    })).filter((e) => e.name) : [
         { name: "Rudra Prakash", role: "EPM Consultant", image: "/business/rudra-prakash.jpg" },
         { name: "Sanjana R R", role: "UI Designer - Pixel Alchemist", image: "/business/sanjana.jpg" },
         { name: "Gobika Babu", role: "UI Designer - Pixel Perfectionist", image: "/business/gobika.png" },
-        { name: "Sri Varsha", role: "Developer - Chief Bug Slayer", image: "/business/sri-varsha.jpg" },
+        { name: "Sri Varsha", role: "Technical Lead - Chief Bug Slayer", image: "/business/sri-varsha.jpg" },
+        { name: "Nehaa C", role: "EPM Consultant - Forecast Fixer", image: "/business/nehaa.png" },
         { name: "Narayanan", role: "Software Engineer - Backend Beast", image: "/business/surya.png" }
     ];
 
@@ -43,6 +65,7 @@ const LeadershipTeam = () => {
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
+    const foundersRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Clean, un-hijacked entrance observer
@@ -56,10 +79,9 @@ const LeadershipTeam = () => {
             });
         }, { threshold: 0.1 });
 
-        if (gridRef.current) {
-            const cards = gridRef.current.querySelectorAll('.team-card');
-            cards.forEach(card => observer.observe(card));
-        }
+        [foundersRef.current, gridRef.current].forEach((group) => {
+            group?.querySelectorAll('.team-card').forEach(card => observer.observe(card));
+        });
 
         return () => observer.disconnect();
     }, []);
@@ -84,23 +106,28 @@ const LeadershipTeam = () => {
             </div>
 
             {/* IMAGES WITH TEXT OVERLAY */}
-            <div className="flex flex-col sm:flex-row justify-center gap-10 flex-wrap w-full items-center">
+            <div ref={foundersRef} className="flex flex-col sm:flex-row justify-center gap-10 flex-wrap w-full items-center">
                 {Services.map((service, idx) => (
                     <div
                         key={idx}
-                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transition-transform duration-500"
+                        className="team-card w-full max-w-[370px] transition-[opacity,translate,transform] duration-1000 ease-out will-change-transform opacity-0 translate-y-32"
+                        style={{ transitionDelay: `${idx * 150}ms` }}
+                    >
+                    <div
+                        className="relative w-full max-w-[370px] lg:h-[500px] rounded-2xl overflow-visible cursor-pointer group hover:-translate-y-2 transition-[translate] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
                         onClick={() => handleMobileClick(idx)}
                     >
                         {/* IMAGE CONTAINER */}
-                        <div className="relative w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg">
+                        <div className="relative w-full aspect-[37/50] max-h-[500px] rounded-2xl overflow-hidden shadow-lg">
                             <Image
                                 src={service.image}
                                 alt={service.title}
                                 fill
-                                priority
-                                className="object-cover rounded-2xl transition-transform duration-300 lg:group-hover:scale-105"
+                                loading="eager"
+                                sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
+                                className="object-cover rounded-2xl transition-[scale] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform lg:group-hover:scale-[1.04]"
                             />
 
                             {/* POSITION BADGE (Removed for common title) */}
@@ -119,7 +146,7 @@ const LeadershipTeam = () => {
                                 <p className="text-sm text-gray-600 font-semibold mb-3">
                                     {service.role}
                                 </p>
-                                <p className="text-sm text-gray-700 leading-relaxed overflow-y-auto max-h-[70%]">
+                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line overflow-y-auto max-h-[70%]">
                                     {service.fullBio}
                                 </p>
                                 <button className="mt-4 text-[#D4AF37] text-sm font-bold border-b border-[#D4AF37] pb-0.5">
@@ -131,7 +158,7 @@ const LeadershipTeam = () => {
                         {/* HOVER POPUP - Desktop only */}
                         {hoveredIndex === idx && (
                             <div
-                                className={`absolute top-0 ${idx === 0 ? 'end-full me-4' : 'start-full ms-4'
+                                className={`absolute top-0 ${(Services.length <= 2 ? idx === 0 : idx >= Services.length / 2) ? 'end-full me-4' : 'start-full ms-4'
                                     } w-80 bg-white shadow-2xl rounded-xl p-6 border border-gray-200 z-50 hidden lg:block animate-fadeIn`}
                             >
                                 <h4 className="text-xl font-bold text-[#D4AF37] mb-1">
@@ -140,11 +167,12 @@ const LeadershipTeam = () => {
                                 <p className="text-sm text-gray-600 font-semibold mb-3">
                                     {service.role}
                                 </p>
-                                <p className="text-sm text-gray-700 leading-relaxed">
+                                <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
                                     {service.fullBio}
                                 </p>
                             </div>
                         )}
+                    </div>
                     </div>
                 ))}
             </div>
@@ -164,36 +192,38 @@ const LeadershipTeam = () => {
                 </div>
 
                 {/* EMPLOYEES SPACE / GRID PLACEHOLDER */}
-                <div id="employees-space" ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 w-full items-start mt-10 pb-32">
+                {/* Rows of 4 (2 on mobile); an unfinished last row is centered, whatever the team size */}
+                <div id="employees-space" ref={gridRef} className="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-10 sm:gap-y-16 w-full items-start mt-10 pb-16 sm:pb-32">
                 {Employees.map((emp, idx) => (
-                    <div 
-                        key={idx} 
-                        className={`team-card flex flex-col w-full group cursor-pointer transition-all duration-1000 ease-out will-change-transform opacity-0 translate-y-32
-                            ${(idx === 0) ? 'lg:mt-0' : ''}
-                            ${(idx === 1) ? 'lg:mt-10' : ''}
-                            ${(idx === 2) ? 'lg:mt-20' : ''}
-                            ${(idx === 3) ? 'lg:mt-4' : ''}
-                            ${(idx === 4) ? 'lg:mt-10 lg:col-start-2' : ''}
-                            ${(idx === 5) ? 'lg:mt-20' : ''}
+                    <div
+                        key={idx}
+                        className={`team-card flex flex-col w-[calc((100%-0.75rem)/2)] sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4.5rem)/4)] group cursor-pointer transition-[opacity,translate,transform] duration-1000 ease-out will-change-transform opacity-0 translate-y-32
+                            ${['lg:mt-0', 'lg:mt-10', 'lg:mt-20', 'lg:mt-4'][staggerCol(idx, Employees.length)]}
                         `}
                         style={{ transitionDelay: `${(idx % 4) * 150}ms` }}
                     >
                         {/* IMAGE - Sharp corners like the video */}
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#f3f4f6]">
-                            <Image 
+                            {emp.image ? <Image
                                 src={emp.image}
                                 alt={emp.name}
                                 fill
-                                priority={idx < 4}
+                                loading="eager"
                                 decoding="async"
-                                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                            />
+                                sizes="(min-width: 1024px) 330px, 50vw"
+                                className="object-cover transition-[scale] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.04]"
+                            /> : (
+                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-[#9CA3AF]" aria-label={`${emp.name} (photo coming soon)`}>
+                                    <UserRound className="w-1/3 h-1/3" strokeWidth={1.25} />
+                                    <span className="text-xs md:text-sm">Photo coming soon</span>
+                                </div>
+                            )}
                         </div>
                         
                         {/* TEXT - Name left, Role right */}
-                        <div className="mt-3 flex flex-row justify-between items-center w-full">
+                        <div className="mt-3 flex flex-row flex-wrap justify-between items-baseline gap-x-3 gap-y-0.5 w-full">
                             <h5 className="text-gray-900 font-medium text-sm md:text-[15px]">{emp.name}</h5>
-                            <p className="text-[#9CA3AF] text-xs md:text-sm font-light">{emp.role}</p>
+                            <p className="text-[#6B7280] text-xs md:text-sm">{emp.role}</p>
                         </div>
                     </div>
                 ))}

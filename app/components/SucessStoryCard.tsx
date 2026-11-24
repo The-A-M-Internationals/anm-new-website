@@ -3,6 +3,8 @@ import React from 'react'
 
 interface SucessStoryCardProps {
     image: string;
+    /** Client name, shown above the title (only when the client has approved it) */
+    client?: string;
     title: string;
     description: string;
     badge?: string;
@@ -10,14 +12,15 @@ interface SucessStoryCardProps {
     onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, description, badge, industry, onClick }) => {
+const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, client, title, description, badge, industry, onClick }) => {
     return (
         <div 
             onClick={onClick}
-            className='hover:scale-105 transition relative h-[450px] md:h-[480px] lg:h-[500px] w-[330px] mx-auto md:w-[380px] lg:w-[400px] mt-2 cursor-pointer'
+            data-cursor={onClick ? "view" : undefined}
+            className='hover:scale-105 transition relative h-[450px] md:h-[480px] lg:h-[500px] w-[330px] mx-auto md:mx-0 md:w-[380px] lg:w-[400px] mt-2 cursor-pointer'
         >
             <div className='absolute top-1 end-0 md:top-1 lg:top-0 lg:end-2 z-10'>
-                <h2 className='px-1 py-0.5 md:px-2 md:py-1 rounded-full text-[17px] md:text-[16px] bg-[#FFFBED] border border-[#D4AF37] text-[#897122]'>
+                <h2 title={industry} className='max-w-[150px] md:max-w-[170px] truncate px-1 py-0.5 md:px-2 md:py-1 rounded-full text-[17px] md:text-[16px] bg-[#FFFBED] border border-[#D4AF37] text-[#897122]'>
                     {industry}
                 </h2>
             </div>
@@ -27,13 +30,17 @@ const SucessStoryCard: React.FC<SucessStoryCardProps> = ({ image, title, descrip
                     src={image}
                     alt={title}
                     fill
+                    sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
                     className='object-cover rounded-xl'
                 />
 
                 <div className='absolute bottom-3 w-full px-4 sm:px-6 py-3 sm:py-5'>
-                    <h3 className='text-lg sm:text-xl md:text-2xl font-semibold text-white'>{title}</h3>
+                    {client && (
+                        <p className='text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-white mb-1 truncate [text-shadow:0_1px_8px_rgba(0,0,0,0.85)]'>{client}</p>
+                    )}
+                    <h3 className='text-lg sm:text-xl md:text-2xl font-semibold text-white line-clamp-2'>{title}</h3>
 
-                    <p className='text-white mt-1 sm:mt-2 text-xs sm:text-sm md:text-base'>
+                    <p className='text-white mt-1 sm:mt-2 text-xs sm:text-sm md:text-base line-clamp-3'>
                         {description}
                     </p>
 

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Clock, ArrowRight } from 'lucide-react';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../../lib/firebaseConfig";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from "next-intlayer";
+import { articleLink } from "../articleFields";
 
 // Article Interface
 export interface Article {
@@ -22,11 +23,13 @@ export interface Article {
     tags: string[];
     tagsAr?: string[];
     externalLink: string;
+    /** Markdown body: when set, "Read more" opens the article's own page on the site */
+    body?: string;
     featureArticle: boolean;
     createdAt?: { seconds: number; nanoseconds: number };
 }
 
-const BlogArticleList = () => {
+const BlogArticleList = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const content = useIntlayer("blogsArticleList");
     const { locale } = useLocale();
     const [activeFilter, setActiveFilter] = useState<string>('All Post');
@@ -34,19 +37,16 @@ const BlogArticleList = () => {
     const [showMobileTags, setShowMobileTags] = useState(false);
 
     // Define filters with fixed keys for matching and localized labels
-    const filterOptions = [
+    // Keys must match the article's "tags" in Firebase (English)
+    const allFilterOptions = [
         { key: "All Post", label: content.filters.allPost.value },
-        { key: "EPM Strategy", label: content.filters.epmStrategy.value },
-        { key: "Cloud", label: content.filters.cloud.value },
-        { key: "Data Analytics", label: content.filters.dataAnalytics.value },
-        { key: "Cybersecurity", label: content.filters.cybersecurity.value },
-        { key: "AI & Machine Learning", label: content.filters.aiMl.value },
-        { key: "CSR", label: content.filters.csr.value },
+        { key: "Oracle EPM", label: content.filters.oracleEpm.value },
+        { key: "ESG Reporting", label: content.filters.esgReporting.value },
+        { key: "AI for EPM", label: content.filters.aiForEpm.value },
         { key: "Company News", label: content.filters.companyNews.value },
     ];
 
-    const [articles, setArticles] = useState<Article[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const { docs, loading } = useCmsDocs("articles", serverDocs);
 
     // ⭐ Static Popular Tags
     // const popularTags: string[] = [
@@ -59,11 +59,10 @@ const BlogArticleList = () => {
     //     "Developers",
     // ];
 
-    // 🔥 Fetch Articles From Firestore
-    useEffect(() => {
-        const fetchData = async () => {
+    // Articles from Firestore (loaded on the server)
+    const articles = useMemo(() => {
             try {
-                const articleSnap = await getDocs(collection(db, "articles"));
+                const articleSnap = asSnapshot(docs);
                 const articleList: Article[] = articleSnap.docs.map((doc) => {
                     const data = doc.data();
                     return {
@@ -81,6 +80,7 @@ const BlogArticleList = () => {
                         tags: data.tags || [],
                         tagsAr: data.tagsAr,
                         externalLink: data.externalLink,
+                        body: data.body,
                         featureArticle: data.featureArticle,
                         createdAt: data.createdAt,
                     };
@@ -91,24 +91,26 @@ const BlogArticleList = () => {
                     const bTime = (b as Article).createdAt?.seconds || 0;
                     return bTime - aTime;
                 });
-                setArticles(sortedList);
-                console.log("Fetched Articles: ", articleList);
-
+                return sortedList;
             } catch (err) {
                 console.error("Error fetching data: ", err);
-            } finally {
-                setLoading(false);
+                return [] as Article[];
             }
-        };
+    }, [docs]);
 
-        fetchData();
-    }, []);
+    // An article belongs to a filter when it has that tag (or that category)
+    const hasTag = (a: Article, key: string) => !!a.tags?.includes(key) || a.category === key;
+
+    // Only show tags that have at least one article
+    const filterOptions = allFilterOptions.filter(
+        (f) => f.key === "All Post" || articles.some((a) => hasTag(a, f.key))
+    );
 
     // Filter Articles
     const filteredArticles: Article[] =
         activeFilter === "All Post"
             ? articles
-            : articles.filter((article) => article.tags?.includes(activeFilter));
+            : articles.filter((article) => hasTag(article, activeFilter));
 
 
     return (
@@ -117,9 +119,9 @@ const BlogArticleList = () => {
 
                 {/* HEADING */}
                 <div className="text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12">
                         {content.headingPrefix.value} <span className="text-[#D4AF37]">{content.headingHighlight.value}</span>
-                    </h1>
+                    </h2>
                 </div>
 
 
@@ -245,6 +247,7 @@ const BlogArticleList = () => {
                                 const description = isArabic ? article.descriptionAr || article.description : article.description;
                                 const authors = isArabic ? article.authorsAr || article.authors : article.authors;
                                 const readTime = isArabic ? article.readTimeAr || article.readTime : article.readTime;
+                                const link = articleLink(article.id, article, locale);
 
                                 return (
                                     <div
@@ -295,11 +298,11 @@ const BlogArticleList = () => {
                                         {/* READ MORE BUTTON */}
                                         <div className="mt-4 flex items-center justify-center">
                                             <a
-                                                href={article.externalLink || undefined}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                                href={link?.href}
+                                                target={link?.external ? "_blank" : undefined}
+                                                rel={link?.external ? "noopener noreferrer" : undefined}
                                                 className="bg-[#D4AF37] text-black px-8 py-3 rounded-full font-medium w-full flex items-center justify-center gap-2 hover:scale-105 transition cursor-pointer text-center"
-                                                style={{ pointerEvents: article.externalLink ? 'auto' : 'none', opacity: article.externalLink ? 1 : 0.5 }}
+                                                style={{ pointerEvents: link ? 'auto' : 'none', opacity: link ? 1 : 0.5 }}
                                             >
                                                 {content.readMoreButton.value}
                                                 <ArrowRight size={18} className={`${locale === 'ar' ? 'rotate-180' : ''}`} />

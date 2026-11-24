@@ -1,123 +1,67 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import LiveEvents from '../../components/LiveEvents';
-import { db } from "../../../lib/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from 'next-intlayer';
+import { parseEventRange, startOfToday } from './eventDates';
 
 type EventType = {
     id: string;
     dateRange: string;
     month: string;
     title: string;
-    titleAr?: string;
     description: string;
-    descriptionAr?: string;
     location: string;
-    locationAr?: string;
-    monthAr?: string;
     timeRange: string;
-    timeRangeAr?: string;
     imageSrc: string;
+    buttonText?: string;
+    buttonTextAr?: string;
+    buttonLink?: string;
+    detailsText?: string;
+    detailsTextAr?: string;
+    detailsLink?: string;
 };
 
-const UpcomingEvents = () => {
+const UpcomingEvents = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const content = useIntlayer("eventsPage");
     const { locale } = useLocale();
-    const [events, setEvents] = useState<EventType[]>([]);
-    const [loading, setLoading] = useState(true);
+    const { docs, loading } = useCmsDocs("events", serverDocs);
 
-    useEffect(() => {
-        const fetchEvents = async () => {
-            setLoading(true);
+    const events = useMemo(() => {
             try {
-                const snapshot = await getDocs(collection(db, 'events'));
-
+                const snapshot = asSnapshot(docs);
                 const isArabic = locale?.toLowerCase().startsWith('ar');
+                const today = startOfToday();
+                const pick = (en?: string, ar?: string) => (isArabic ? ar ?? en : en) ?? '';
 
-                const parseEventStartDate = (dateRange: string, month: string): Date | null => {
-                    const days = dateRange.match(/\d{1,2}/g);
-                    if (!days || days.length === 0) return null;
-
-                    const startDay = days[0];
-                    const [mon, yr] = month.split(',');
-                    const year = `20${yr.trim()}`;
-
-                    const date = new Date(`${mon} ${startDay}, ${year}`);
-                    date.setHours(0, 0, 0, 0);
-                    return date;
-                };
-
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-
-                const upcomingEvents: EventType[] = snapshot.docs
-                    .map(doc => {
-                        const data = doc.data();
-                        return {
-                            id: doc.id,
-                            dateRange: data.dateRange ?? '',
-                            month: data.month ?? '',
-                            title: data.title ?? '',
-                            titleAr: data.titleAr,
-                            description: data.description ?? '',
-                            descriptionAr: data.descriptionAr,
-                            location: data.location ?? '',
-                            locationAr: data.locationAr,
-                            monthAr: data.monthAr,
-                            timeRange: data.timeRange ?? '',
-                            timeRangeAr: data.timeRangeAr,
-                            imageSrc: data.imageSrc ?? '',
-                        };
-                    })
-                    .filter(event => {
-                        const startDate = parseEventStartDate(event.dateRange, event.month);
-                        return startDate !== null && startDate > today;
-                    })
-                    .sort((a, b) => {
-                        const d1 = parseEventStartDate(a.dateRange, a.month);
-                        const d2 = parseEventStartDate(b.dateRange, b.month);
-                        return (d1?.getTime() ?? 0) - (d2?.getTime() ?? 0);
-                    });
-
-                const localizedEvents = upcomingEvents.map((event) => {
-                    if (!isArabic) {
-                        return {
-                            id: event.id,
-                            title: event.title,
-                            description: event.description,
-                            location: event.location,
-                            dateRange: event.dateRange,
-                            month: event.month,
-                            timeRange: event.timeRange,
-                            imageSrc: event.imageSrc,
-                        };
-                    }
-
-                    return {
-                        id: event.id,
-                        title: event.titleAr ?? event.title,
-                        description: event.descriptionAr ?? event.description,
-                        location: event.locationAr ?? event.location,
-                        dateRange: event.dateRange,
-                        month: event.monthAr ?? event.month,
-                        timeRange: event.timeRangeAr ?? event.timeRange,
-                        imageSrc: event.imageSrc,
-                    };
-                });
-
-                setEvents(localizedEvents);
+                // Same date rules as Past Events: an event stays here until its last day is over
+                return snapshot.docs
+                    .map(doc => ({ id: doc.id, data: doc.data(), range: parseEventRange(doc.data().dateRange, doc.data().month) }))
+                    .filter(({ range }) => range !== null && range.end >= today)
+                    .sort((a, b) => a.range!.start.getTime() - b.range!.start.getTime())
+                    .map(({ id, data }): EventType => ({
+                        id,
+                        title: pick(data.title, data.titleAr),
+                        description: pick(data.description, data.descriptionAr),
+                        location: pick(data.location, data.locationAr),
+                        dateRange: data.dateRange ?? '',
+                        month: pick(data.month, data.monthAr),
+                        timeRange: pick(data.timeRange, data.timeRangeAr),
+                        imageSrc: data.imageSrc ?? '',
+                        buttonText: data.buttonText,
+                        buttonTextAr: data.buttonTextAr,
+                        buttonLink: data.buttonLink,
+                        detailsText: data.detailsText,
+                        detailsTextAr: data.detailsTextAr,
+                        detailsLink: data.detailsLink,
+                    }));
             } catch (error) {
                 console.error("Failed to load upcoming events", error);
-                setEvents([]);
-            } finally {
-                setLoading(false);
+                return [] as EventType[];
             }
-        };
-
-        fetchEvents();
-    }, [locale]);
+    }, [docs, locale]);
 
     return (
         <div id="upcoming-events" className="flex flex-col gap-2">

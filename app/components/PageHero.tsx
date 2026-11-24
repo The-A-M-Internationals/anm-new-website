@@ -1,11 +1,14 @@
 'use client';
 
+import RollLabel from "./RollLabel";
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import { getImageProps } from 'next/image'
+import React, { useRef } from 'react'
 import { useLocale } from "next-intlayer";
 import { handleHashLink } from '@/lib/handleHashLink'
+import HeroRevealText from './HeroRevealText'
+import { useHeroTextReveal } from './useHeroTextReveal'
 
 interface PageHeroProps {
    badge?: string
@@ -36,23 +39,13 @@ const PageHero: React.FC<PageHeroProps> = ({
 }) => {
    const { locale } = useLocale();
    const router = useRouter();
-   const [isZoomed, setIsZoomed] = useState(false);
-
-   useEffect(() => {
-      // Trigger zoom every 10 seconds
-      const interval = setInterval(() => {
-         setIsZoomed(true);
-
-         // Remove zoom after 700ms (match transition duration)
-         const timeout = setTimeout(() => {
-            setIsZoomed(false);
-         }, 700);
-
-         return () => clearTimeout(timeout);
-      }, 3000);
-
-      return () => clearInterval(interval);
-   }, []);
+   const heroCommon = { alt: 'Hero', fill: true, sizes: '100vw', loading: 'eager' as const, fetchPriority: 'high' as const };
+   const { props: { srcSet: d } } = getImageProps({ ...heroCommon, src: image });
+   const { props: { srcSet: t } } = getImageProps({ ...heroCommon, src: image3 });
+   const { props: mobileImg } = getImageProps({ ...heroCommon, src: image2 });
+   const desktopSrc = { srcSet: d }, tabletSrc = { srcSet: t };
+   const textRef = useRef<HTMLDivElement>(null);
+   useHeroTextReveal(textRef);   // title lines rise out of a mask on load
 
    return (
       <div className='relative w-[90%] mx-auto'>
@@ -64,53 +57,30 @@ const PageHero: React.FC<PageHeroProps> = ({
     lg:h-[670px]
   "
          >
-            {/* Desktop Image */}
-            <div className="hidden md:hidden lg:block absolute inset-0">
-               <Image
-                  src={image}
-                  alt="Hero Desktop"
-                  fill
-               />
-            </div>
-
-            {/* Tablet Image */}
-            <div className="hidden sm:block lg:hidden absolute inset-0">
-               <Image
-                  src={image3}
-                  alt="Hero Tablet"
-                  fill
-                  className='object-contain'
-               />
-            </div>
-
-            {/* Mobile Image */}
-            <div className="block sm:hidden md:hidden absolute inset-0">
-               <Image
-                  src={image2}
-                  alt="Hero Mobile"
-                  fill
-               />
-            </div>
+            {/* Hero image: one <picture>, so each screen downloads only its own size, straight away
+                (desktop >= 1024px, tablet >= 640px, phone below). Same images and fit as before. */}
+            <picture>
+               <source media="(min-width: 1024px)" srcSet={desktopSrc.srcSet} sizes="100vw" />
+               <source media="(min-width: 640px)" srcSet={tabletSrc.srcSet} sizes="100vw" />
+               {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
+               <img {...mobileImg} className="absolute inset-0 h-full w-full object-fill sm:object-contain lg:object-fill" />
+            </picture>
 
             {/* Text */}
-            <div className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 flex w-[95%] flex-col gap-2 md:gap-1 lg:gap-2'>
+            <div ref={textRef} className='absolute bottom-25 md:bottom-10 lg:bottom-6 start-2 sm:start-3 md:start-4 flex w-[95%] flex-col gap-2 md:gap-1 lg:gap-2'>
                {badge && (
-                  <h4 className='w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
+                  <h4 data-hero-soft className='motion-safe:opacity-0 w-fit rounded-3xl px-4 py-1 md:px-5 md:py-1.5 lg:px-6 lg:py-2 text-[#D4AF37] bg-[#FFFBED] border border-[#D4AF37] text-[16px] md:text-base lg:text-lg font-medium'>
                      {badge}
                   </h4>
                )}
 
-               <h3 className={`font-bold text-white leading-[1.2] ${titleClassName || 'w-[80%] md:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
-                  {title}
-               </h3>
+               <HeroRevealText as="h1" text={title} className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`} />
 
                {title2 && (
-                  <h3 className={`font-bold text-white leading-[1.2] ${titleClassName || 'w-[80%] md:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`}>
-                     {title2}
-                  </h3>
+                  <HeroRevealText text={title2} className={`font-bold text-white leading-[1.2] [text-shadow:0_2px_18px_rgba(0,0,0,0.55)] ${titleClassName || 'w-[80%] md:w-[62%] xl:w-[75%] text-[24px] md:text-[32px] lg:text-[48px]'}`} />
                )}
 
-               <p className='text-[18px] md:text-base lg:text-[19px] text-white w-[70%] md:w-[60%] lg:w-[65%] leading-relaxed'>
+               <p data-hero-soft className='motion-safe:opacity-0 text-[18px] md:text-base lg:text-[19px] text-white [text-shadow:0_1px_12px_rgba(0,0,0,0.6)] w-[70%] md:w-[60%] lg:w-[65%] leading-relaxed'>
                   {description}
                </p>
             </div>
@@ -136,7 +106,7 @@ const PageHero: React.FC<PageHeroProps> = ({
                }}
                className='cursor-pointer text-xs md:text-sm lg:text-base bg-[#D4AF37] rounded-full px-4 py-2 md:px-3 md:py-1 lg:px-6 lg:py-3 flex items-center gap-2 text-black font-semibold whitespace-nowrap hover:scale-105 transition-transform'
             >
-               {button}
+               <RollLabel>{button}</RollLabel>
                <ArrowRight strokeWidth={1.5} className='w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 rtl:rotate-180' />
             </button>
          </div>

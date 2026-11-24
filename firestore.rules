@@ -1,0 +1,82 @@
+rules_version = '2';
+
+// Website rules: visitors may READ published content and ADD form entries — nothing else.
+// Admins (signed-in users whose email has a document in /admins) edit content from /admin.
+// Publish: Firebase console → Firestore Database → Rules (paste) → Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function str(v, max) { return v is string && v.size() <= max; }
+    function optStr(field, max) { return !(field in request.resource.data) || str(request.resource.data[field], max); }
+    function only(fields) { return request.resource.data.keys().hasOnly(fields); }
+    function email(v) { return str(v, 254) && v.matches('^[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,24}$'); }
+    function signedInEmail() { return request.auth != null && request.auth.token.email is string ? request.auth.token.email.lower() : ''; }
+    function isAdmin() { return signedInEmail() != '' && exists(/databases/$(database)/documents/admins/$(signedInEmail())); }
+
+    // ---- Published content: anyone can read; only admins (the /admin portal) can change it ----
+    match /events/{id}      { allow read: if true; allow write: if isAdmin(); }
+    match /articles/{id}    { allow read: if true; allow write: if isAdmin(); }
+    match /jobs/{id}        { allow read: if true; allow write: if isAdmin(); }
+    match /siteContent/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /ourWork/{id}     { allow read: if true; allow write: if isAdmin(); }
+    match /founders/{id}    { allow read: if true; allow write: if isAdmin(); }
+    match /team/{id}        { allow read: if true; allow write: if isAdmin(); }
+    match /clientLogos/{id} { allow read: if true; allow write: if isAdmin(); }
+
+    // ---- Admin list: document ID = the admin's email in lower case. Added by the owner in the
+    //      Firebase console only. A signed-in user may check their own entry; nobody can write it.
+    match /admins/{adminEmail} { allow get: if signedInEmail() == adminEmail; }
+
+    // ---- Form submissions: create only, validated; never readable, editable or deletable ----
+    match /customers/{id} {
+      allow create: if only(['name','company','email','countryCode','phone','service','vision','howHeard','submittedAt'])
+        && str(request.resource.data.name, 100) && email(request.resource.data.email)
+        && optStr('company', 150) && optStr('countryCode', 10) && optStr('phone', 40)
+        && optStr('service', 120) && optStr('vision', 5000) && optStr('howHeard', 120) && optStr('submittedAt', 40);
+    }
+    match /EPM/{id} {
+      allow create: if only(['name','email','company','phone','epm','submittedAt'])
+        && str(request.resource.data.name, 100) && email(request.resource.data.email)
+        && optStr('company', 150) && optStr('phone', 40) && optStr('epm', 120) && optStr('submittedAt', 40);
+    }
+    match /eventRegistrations/{id} {
+      allow create: if only(['eventId','name','email','phone','registeredAt'])
+        && str(request.resource.data.eventId, 128) && str(request.resource.data.name, 100)
+        && email(request.resource.data.email) && optStr('phone', 40)
+        && request.resource.data.registeredAt is timestamp;
+    }
+    match /applications/{id} {
+      allow create: if only(['name','email','phone','experience','resumeUrl','jobId','jobTitle','submittedAt'])
+        && str(request.resource.data.name, 100) && email(request.resource.data.email)
+        && optStr('phone', 40) && optStr('experience', 2000) && optStr('jobId', 128) && optStr('jobTitle', 200)
+        && optStr('submittedAt', 40)
+        && str(request.resource.data.resumeUrl, 500) && request.resource.data.resumeUrl.matches('^https://[^/]+\\.amazonaws\\.com/uploads/.*');
+    }
+    // Newsletter: the document ID is the lower-cased email, so "already subscribed" is a single-document
+    // check — the subscriber list itself can never be listed or read in bulk.
+    match /newsletters/{emailId} {
+      allow get: if true;
+      allow create: if only(['email','subscribedAt']) && email(request.resource.data.email)
+        && emailId == request.resource.data.email.lower() && request.resource.data.subscribedAt is timestamp;
+    }
+
+    // ---- Email queue used by the site's email route (Trigger Email extension) ----
+    // One recipient, subject + html only. NOTE: still writable by anyone until the email route
+    // uses a server (Admin SDK) key — see the hand-over notes.
+    match /mail/{id} {
+      allow create: if only(['to','message','createdAt'])
+        && request.resource.data.to is list && request.resource.data.to.size() == 1
+        && email(request.resource.data.to[0])
+        && request.resource.data.message.keys().hasOnly(['subject','html'])
+        && str(request.resource.data.message.subject, 300) && str(request.resource.data.message.html, 20000);
+    }
+
+    // ---- Admins may read form submissions (for a future inbox in the portal) ----
+    match /customers/{id}          { allow read: if isAdmin(); }
+    match /EPM/{id}                { allow read: if isAdmin(); }
+    match /eventRegistrations/{id} { allow read: if isAdmin(); }
+    match /applications/{id}       { allow read: if isAdmin(); }
+
+    // Everything else is closed.
+  }
+}

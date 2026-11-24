@@ -3,16 +3,21 @@
 import React, { useState } from 'react';
 import { db } from '@/lib/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
-import { Mail, MapPin, Clock } from 'lucide-react';
+import { withTimeout } from "@/lib/withTimeout";
+import { Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import { useRouter } from 'next/navigation';
 import { useIntlayer, useLocale } from "next-intlayer";
 import { useEffect } from 'react';
 import { handleHashLink } from '@/lib/handleHashLink';
+import { useContactInfo, useContactText } from '../../components/ContactInfo';
+import { digits } from '@/lib/cms/siteContent';
 
 const ContactForm: React.FC = () => {
   const content = useIntlayer("contactFormDetails");
   const { locale } = useLocale();
   const router = useRouter();
+  const contact = useContactInfo();
+  const contactText = useContactText(locale);
 
   useEffect(() => {
     // Check if there is a hash in the URL on mount and manually scroll if Next.js missed it
@@ -97,11 +102,11 @@ const ContactForm: React.FC = () => {
     setSubmitting(true);
     try {
       const fullPhone = formData.phone.trim() ? `${formData.countryCode} ${formData.phone}` : '';
-      await addDoc(collection(db, 'customers'), {
+      await withTimeout(addDoc(collection(db, 'customers'), {
         ...formData,
         phone: fullPhone,
         submittedAt: new Date().toISOString()
-      });
+      }));
 
       // Dispatch confirmation email to client and alert to admin
       try {
@@ -145,15 +150,16 @@ const ContactForm: React.FC = () => {
             <div className="bg-white border border-gray-300 rounded-[20px] md:rounded-[40px] p-4 md:p-8 shadow-sm">
               <p className="text-xl md:text-2xl font-bold text-gray-900 mb-6">{content.formTitle.value}</p>
 
-              <div className="space-y-5">
+              <form className="space-y-5" onSubmit={handleSubmit} noValidate>
 
                 {/* Your Name */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-name" className="block text-sm font-medium  mb-2">
                     {content.fullName.value} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
+                    id="cf-name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -164,11 +170,12 @@ const ContactForm: React.FC = () => {
 
                 {/* Company Name */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-company" className="block text-sm font-medium  mb-2">
                     {content.companyName.value}
                   </label>
                   <input
                     type="text"
+                    id="cf-company"
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
@@ -179,11 +186,12 @@ const ContactForm: React.FC = () => {
 
                 {/* Work Email */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-email" className="block text-sm font-medium  mb-2">
                     {content.workEmail.value} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
+                    id="cf-email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -194,12 +202,13 @@ const ContactForm: React.FC = () => {
 
                 {/* Phone Number */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-phone" className="block text-sm font-medium  mb-2">
                     {content.phoneNumber.value}
                   </label>
                   <div className="flex gap-2">
                     <select
                       name="countryCode"
+                      aria-label="Country code"
                       value={formData.countryCode}
                       onChange={handleChange}
                       className="w-1/3 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white"
@@ -217,6 +226,7 @@ const ContactForm: React.FC = () => {
                     </select>
                     <input
                       type="tel"
+                      id="cf-phone"
                       name="phone"
                       dir="ltr"
                       value={formData.phone}
@@ -229,30 +239,33 @@ const ContactForm: React.FC = () => {
 
                 {/* I'm interested in */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-service" className="block text-sm font-medium  mb-2">
                     {content.interestedIn.value} <span className="text-red-500">*</span>
                   </label>
                   <select
+                    id="cf-service"
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl cursor-pointer border border-gray-200 bg-white"
                   >
                     <option value="">{content.services.placeholder.value}</option>
+                    <option value="epm-implementation">{content.services.epmImplementation.value}</option>
+                    <option value="epm-support">{content.services.epmSupport.value}</option>
+                    <option value="epm-staffing">{content.services.epmStaffing.value}</option>
+                    <option value="website-uiux-design">{content.services.webDesign.value}</option>
                     <option value="digital-marketing">{content.services.digitalMarketing.value}</option>
-                    <option value="uiux">{content.services.uiux.value}</option>
-                    <option value="web-dev">{content.services.webDev.value}</option>
-                    <option value="epm">{content.services.epm.value}</option>
                     <option value="other">{content.services.other.value}</option>
                   </select>
                 </div>
 
                 {/* Tell us about your vision */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-vision" className="block text-sm font-medium  mb-2">
                     {content.vision.value} <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="cf-vision"
                     name="vision"
                     value={formData.vision}
                     onChange={handleChange}
@@ -264,10 +277,11 @@ const ContactForm: React.FC = () => {
 
                 {/* How did you hear about us */}
                 <div>
-                  <label className="block text-sm font-medium  mb-2">
+                  <label htmlFor="cf-howHeard" className="block text-sm font-medium  mb-2">
                     {content.howHeard.value}
                   </label>
                   <select
+                    id="cf-howHeard"
                     name="howHeard"
                     value={formData.howHeard}
                     onChange={handleChange}
@@ -284,36 +298,33 @@ const ContactForm: React.FC = () => {
 
                 {/* Submit Button */}
                 <button
-                  onClick={handleSubmit}
+                  type="submit"
                   disabled={submitting}
                   className="w-full bg-[#D4AF37] hover:scale-105 transition cursor-pointer text-black font-semibold py-3 px-6 rounded-full duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? content.submitting.value : content.submit.value}
                 </button>
-                {formError && <p className="text-center text-sm text-red-600 mt-2">{formError}</p>}
-                {successMsg && <p className="text-center text-sm text-green-600 mt-2">{successMsg}</p>}
+                {formError && <p role="alert" className="text-center text-sm text-red-600 mt-2">{formError}</p>}
+                {successMsg && <p role="status" className="text-center text-sm text-green-600 mt-2">{successMsg}</p>}
                 <p className="text-center text-sm text-gray-500">
                   {content.footerNote.value}
                 </p>
-              </div>
+              </form>
             </div>
 
-            {/* Request Demo Section */}
-            <div className="bg-white rounded-[40px] border border-gray-300 p-8 shadow-sm mt-6">
-              <h2 className="text-2xl font-medium text-gray-900 mb-3">{content.demoTitle.value}</h2>
-              <p className="text-gray-600 mb-6 text-xl w-[90%]">
-                {content.demoDesc.value}
-              </p>
-              <button 
-                onClick={(e) => {
-                  const link = `/${locale}/features#epm-suites`;
-                  if (!handleHashLink(e, link, router)) {
-                    router.push(link);
-                  }
-                }} 
-                className="w-[80%] md:w-[50%] bg-[#D4AF37] text-black font-semibold py-3 px-6 rounded-full hover:scale-105 transition cursor-pointer"
+            {/* Discovery call: the invitation on one side, a compact button on the other (stacked on phones) */}
+            <div className="bg-white rounded-[28px] sm:rounded-[36px] border border-gray-300 p-6 sm:p-8 shadow-sm mt-6 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+              <div className="min-w-0">
+                <h2 className="text-xl sm:text-2xl font-medium text-gray-900">{content.demoTitle.value}</h2>
+                <p className="mt-2 text-base sm:text-lg text-gray-600">{content.demoDesc.value}</p>
+              </div>
+              <button
+                type="button"
+                onClick={(e) => handleHashLink(e, '#form', router)}
+                className="group inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#D4AF37] px-7 py-3 font-semibold text-black cursor-pointer transition-all duration-150 ease-in-out hover:bg-[#C9A13B]"
               >
                 {content.scheduleDemo.value}
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden />
               </button>
             </div>
           </div>
@@ -328,8 +339,8 @@ const ContactForm: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.emailUs.value}</h3>
-                  <a href="mailto:am@theaminternationals.com" className="text-sm sm:text-base block text-gray-800 hover:text-[#D4AF37] transition-colors break-all">am@theaminternationals.com</a>
-                  <p className="text-gray-500 text-xs sm:text-sm">{content.responseTime.value}</p>
+                  <a href={`mailto:${contact.email}`} className="text-sm sm:text-base block text-gray-800 hover:text-[#D4AF37] transition-colors break-all">{contact.email}</a>
+                  <p className="text-gray-500 text-sm">{content.responseTime.value}</p>
                 </div>
               </div>
             </div>
@@ -338,7 +349,7 @@ const ContactForm: React.FC = () => {
             <div className="bg-white w-full border border-gray-300 rounded-[28px] sm:rounded-[36px] p-5 sm:p-6 shadow-sm">
               <div className="flex items-start gap-4">
                 <a 
-                  href="https://wa.me/971564783478" 
+                  href={`https://wa.me/${digits(contact.whatsapp).replace("+", "")}`}
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="bg-[#FFFBED] p-3 rounded-2xl flex-shrink-0 hover:scale-105 transition-transform mt-0.5"
@@ -358,11 +369,11 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.callUs.value}</h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    <a href="tel:+971564783478" className="text-sm sm:text-base font-medium text-gray-800 hover:text-[#D4AF37] transition-colors" dir="ltr">
-                      {locale === 'ar' ? '\u200E+971 564783478' : '+971 564783478'}
+                    <a href={`tel:${digits(contact.phone)}`} className="text-sm sm:text-base font-medium text-gray-800 hover:text-[#D4AF37] transition-colors" dir="ltr">
+                      {locale === 'ar' ? `\u200E${contact.phone}` : contact.phone}
                     </a>
                   </div>
-                  <p className="text-gray-500 text-xs sm:text-sm">{content.callTime.value}</p>
+                  <p className="text-gray-500 text-sm">{content.callTime.value}</p>
                 </div>
               </div>
             </div>
@@ -371,7 +382,7 @@ const ContactForm: React.FC = () => {
             <div className="bg-white w-full border border-gray-300 rounded-[28px] sm:rounded-[36px] p-5 sm:p-6 shadow-sm">
               <div className="flex items-start gap-4">
                 <a 
-                  href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                  href={contact.mapLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#FFFBED] p-3 rounded-2xl flex-shrink-0 mt-0.5 hover:scale-105 transition-transform"
@@ -382,20 +393,20 @@ const ContactForm: React.FC = () => {
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.visitOffice.value}</h3>
                   <a 
-                    href="https://www.google.com/maps/search/?api=1&query=Ajman+Free+Zone&query_place_id=ChIJU3HJp4RXXz4Rs7x2839vey8"
+                    href={contact.mapLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm sm:text-base text-gray-800 hover:text-[#D4AF37] block whitespace-pre-line leading-relaxed transition-colors"
                     title="View on Google Maps"
                   >
-                    {content.office.value}
+                    {contactText.office || content.office.value}
                   </a>
                   <button 
                     onClick={(e) => {
                       e.preventDefault();
                       document.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
                     }}
-                    className="text-gray-500 text-xs sm:text-sm hover:text-[#D4AF37] transition-colors pt-1 block cursor-pointer"
+                    className="text-gray-500 text-sm hover:text-[#D4AF37] transition-colors pt-1 block cursor-pointer"
                   >
                     {content.appointment.value}
                   </button>
@@ -412,8 +423,8 @@ const ContactForm: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0 space-y-1">
                   <h3 className="font-semibold text-lg sm:text-xl text-gray-900">{content.businessHours.value}</h3>
-                  <p className="text-sm sm:text-base font-medium text-gray-800">{content.businessHoursTime.value}</p>
-                  <p className="text-gray-500 text-xs sm:text-sm">{content.workingDays.value}</p>
+                  <p className="text-sm sm:text-base font-medium text-gray-800">{contactText.hours || content.businessHoursTime.value}</p>
+                  {!contactText.hours && <p className="text-gray-500 text-sm">{content.workingDays.value}</p>}
                 </div>
               </div>
             </div>

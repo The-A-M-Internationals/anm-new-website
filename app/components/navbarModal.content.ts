@@ -4,8 +4,8 @@ export const navbarModalContent = {
   key: "navbarModal",
   content: {
     masterclassTitle: t({
-      en: "EPM Implementation Masterclass",
-      ar: "دورة تنفيذ إدارة أداء المؤسسة",
+      en: "Meet us at GITEX Global 2026 — Dubai, 8–11 Dec",
+      ar: "التقِ بنا في جيتكس جلوبال 2026 — دبي، 8–11 ديسمبر",
     }),
     masterclassDateMain: t({
       en: "15 – 18",
@@ -20,12 +20,13 @@ export const navbarModalContent = {
       ar: "٩ صباحًا – ٦ مساءً",
     }),
     masterclassRegisterBtn: t({
-      en: "Register Now",
-      ar: "سجل الآن",
+      en: "Book a meeting",
+      ar: "احجز اجتماعًا",
     }),
+    // Internal page (locale prefix added in NavbarModal)
     masterclassRegisterUrl: t({
-      en: "https://search.oracle.com/events?q=&lang=english",
-      ar: "https://search.oracle.com/events?q=&lang=arabic",
+      en: "/contact#form",
+      ar: "/contact#form",
     }),
     signsTitle: t({
       en: "5 Signs Your Business Needs EPM",

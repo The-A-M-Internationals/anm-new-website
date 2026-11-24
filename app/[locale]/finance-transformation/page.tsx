@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import FinanceTransformationPage from "./FinanceTransformationPage";
 
 export const metadata: Metadata = {
-    title: "Services | The A&M internationals",
-    description: "Discover our comprehensive range of services. From enterprise performance management to cloud transformation.",
+    title: "Services | The A&M Internationals",
+    description: "Oracle EPM services that make finance run smoother, from first implementation to month-end support.",
 }
 
 export default function ServicePage() {

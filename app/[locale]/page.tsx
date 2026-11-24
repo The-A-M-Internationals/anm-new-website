@@ -1,19 +1,28 @@
-import Services from "../components/Services";
+import ServicesShowcase from "../components/services/showcase/ServicesShowcase";
 import AboutUs from "../components/AboutUs";
 import PartnerShipCard from "../components/PartnerShipCard";
+import LogoStrip from "../components/LogoStrip";
 import SuccessStory from "../components/SuccessStory";
-import Events from "../components/Events";
+import EventsSection from "../components/EventsSection";
 import Innovation from "../components/Innovation";
 import HomeHero from "../components/homePageComponents/HomeHero";
+import { getCollection, getEntry } from "@/lib/cms/server";
+import { byOrder, toCounters } from "@/lib/cms/siteContent";
+import { toLogos } from "../components/logos-data";
 
-export default function Home() {
+export default async function Home() {
+  // Admin-edited: banner numbers, Our Work cards and client logos (built-in content if none saved)
+  const [home, ourWork, clientLogos] = await Promise.all([
+    getEntry("siteContent", "home"), getCollection("ourWork"), getCollection("clientLogos"),
+  ]);
+  const logos = toLogos(clientLogos ? byOrder(clientLogos) : []);
   return (
     <div className="flex flex-col">
       <section className="snap-section">
-        <HomeHero />
+        <HomeHero counters={toCounters(home?.data)} />
       </section>
       <section className="snap-section">
-        <Services />
+        <ServicesShowcase />
       </section>
       <section className="snap-section">
         <AboutUs />
@@ -22,10 +31,13 @@ export default function Home() {
         <PartnerShipCard />
       </section> */}
       <section className="snap-section">
-        <SuccessStory />
+        <LogoStrip logos={logos.length ? logos : undefined} />
+      </section>
+      <section id="success-stories" className="snap-section">
+        <SuccessStory docs={ourWork?.length ? byOrder(ourWork) : undefined} />
       </section>
       <section className="snap-section">
-        <Events />
+        <EventsSection />
       </section>
       {/* <section className="snap-section">
         <Innovation />
@@ -33,3 +45,6 @@ export default function Home() {
     </div>
   );
 }
+
+// Events come from Firebase: rebuild this page at most once a minute so new posts show up
+export const revalidate = 60;

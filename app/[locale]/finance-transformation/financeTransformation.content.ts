@@ -14,8 +14,8 @@ const financeTransformationContent = {
     }),
 
     heroDescription: t({
-      en: "From enterprise performance management to cloud transformation, we deliver comprehensive solutions that drive measurable results and create lasting impact.",
-      ar: "من إدارة أداء المؤسسات إلى التحول السحابي، نقدم حلولًا شاملة تحقق نتائج قابلة للقياس وتخلق أثرًا مستدامًا.",
+      en: "Oracle EPM services that make finance run smoother, from first implementation to month-end support.",
+      ar: "خدمات Oracle EPM تجعل عمل المالية أكثر سلاسة، من التنفيذ الأول إلى دعم نهاية الشهر.",
     }),
 
     heroButton: t({

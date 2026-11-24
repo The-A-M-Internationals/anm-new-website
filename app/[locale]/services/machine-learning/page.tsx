@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
-import { t } from "intlayer";
+import { getTranslation } from "intlayer";
 import MachineLearningClient from "./MachineLearningClient";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
 
     return {
-        title: (t({
-            en: "Machine Learning | The A&M internationals",
+        title: getTranslation({
+            en: "Machine Learning | The A&M Internationals",
             ar: "تعلم الآلة | A&M الدولية",
-        }) as any)[locale],
-        description: (t({
+        }, locale),
+        description: getTranslation({
             en: "Advanced machine learning models and predictive analytics to drive business intelligence.",
             ar: "نماذج تعلم الآلة المتقدمة والتحليلات التنبؤية لتعزيز ذكاء الأعمال.",
-        }) as any)[locale],
+        }, locale),
     };
 }
 

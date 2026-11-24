@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { db } from "@/lib/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useIntlayer, useLocale } from "next-intlayer";
@@ -23,19 +23,16 @@ type Job = {
     descriptionAr?: string;
 };
 
-const Open = () => {
+const Open = ({ docs: serverDocs }: { docs?: CmsDoc[] }) => {
     const router = useRouter();
     const content = useIntlayer("careersOpenPositions");
     const { locale } = useLocale();
 
-    const [jobs, setJobs] = useState<Job[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const { docs, loading, failed } = useCmsDocs("jobs", serverDocs);
+    const error = failed ? content.loadError.value : null;
 
-    useEffect(() => {
-        const fetchJobs = async () => {
-            try {
-                const snap = await getDocs(collection(db, "jobs"));
+    const jobs = useMemo(() => {
+                const snap = asSnapshot(docs);
                 const list: Job[] = snap.docs.map((doc) => {
                     const data = doc.data();
                     return {
@@ -52,16 +49,8 @@ const Open = () => {
                         descriptionAr: data.descriptionAr,
                     };
                 });
-                setJobs(list);
-            } catch {
-                setError(content.loadError.value);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchJobs();
-    }, [locale]);
+                return list;
+    }, [docs]);
 
     const hasJobs = !loading && jobs.length > 0;
 
@@ -92,13 +81,11 @@ const Open = () => {
                         />
                         <p className="text-black text-sm md:text-base max-w-2xl">
                             {content.emptyLine1.value}
-                            <br className="hidden md:block" />
-                            {content.emptyLine2.value}
                         </p>
                     </div>
                     </>
                     )}            {hasJobs && (
-                <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+                <div className="mt-4 flex flex-wrap justify-center gap-6 w-full max-w-6xl">
                     {jobs.map((job) => {
                         const title = locale === "ar" ? job.titleAr || job.title : job.title;
                         const department = locale === "ar" ? job.departmentAr || job.department : job.department;
@@ -108,7 +95,7 @@ const Open = () => {
                         return (
                             <div
                                 key={job.id}
-                                className="border border-gray-300 rounded-2xl p-5 text-left rtl:text-right shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                                className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] border border-gray-300 rounded-2xl p-5 text-start shadow-sm hover:shadow-md transition flex flex-col justify-between"
                             >
                                 <div>
                                     <p className="font-semibold text-xl">{title}</p>

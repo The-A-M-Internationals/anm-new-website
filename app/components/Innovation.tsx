@@ -1,4 +1,5 @@
 "use client";
+import RollLabel from "./RollLabel";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useIntlayer, useLocale } from "next-intlayer";
@@ -6,6 +7,7 @@ import "./innovation.content";
 
 import { handleHashLink } from "@/lib/handleHashLink";
 
+/** Closing banner with one action: Book a Consultation */
 const Innovation = () => {
     const router = useRouter();
     const path = usePathname();
@@ -19,32 +21,22 @@ const Innovation = () => {
                     src="/left.svg"
                     alt="Left Decorative Icon"
                     fill
+                    sizes="192px"
                     className="opacity-50 sm:opacity-60 md:opacity-80 object-contain rtl:-scale-x-100"
                 />
             </div>
 
             {/* Main content */}
             <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
                     {content?.heading?.value}
-                </h1>
+                </h2>
 
-                <p className="text-xs sm:text-sm md:text-base text-white font-semibold mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto">
+                <p className="text-sm md:text-base text-white font-semibold mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto">
                     {content?.description?.value}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-                    <button 
-                        onClick={(e) => {
-                            const link = `/${locale}/features#epm-suites`;
-                            if (!handleHashLink(e, link, router)) {
-                                router.push(link);
-                            }
-                        }} 
-                        className="px-6 py-2.5 sm:px-8 sm:py-3 bg-[#D4AF37] cursor-pointer hover:scale-105 text-[#000000] text-sm sm:text-base font-semibold rounded-full transition-all duration-200 w-full sm:w-auto"
-                    >
-                        {content?.epmButton?.value}
-                    </button>
                     <button 
                         onClick={(e) => {
                             const link = `/${locale}/contact#form`;
@@ -52,9 +44,9 @@ const Innovation = () => {
                                 router.push(link);
                             }
                         }} 
-                        className="px-6 py-2.5 sm:px-8 sm:py-3 bg-white text-[#897122] text-sm sm:text-base font-semibold cursor-pointer hover:scale-105 rounded-full transition-all duration-200 w-full sm:w-auto"
+                        className="px-6 py-2.5 sm:px-8 sm:py-3 bg-[#D4AF37] cursor-pointer hover:scale-105 text-[#000000] text-sm sm:text-base font-semibold rounded-full transition-all duration-200 w-full sm:w-auto"
                     >
-                        {content?.contactButton?.value}
+                        <RollLabel>{content?.epmButton?.value}</RollLabel>
                     </button>
                 </div>
             </div>
@@ -65,6 +57,7 @@ const Innovation = () => {
                     src="/right.svg"
                     alt="Right Decorative Icon"
                     fill
+                    sizes="160px"
                     className="opacity-50 sm:opacity-60 md:opacity-80 object-contain rtl:-scale-x-100"
                 />
             </div>

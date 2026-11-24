@@ -56,6 +56,7 @@ const EmpoweringSection = () => {
                                 src="/business/business.jpg"
                                 alt="Team collaboration"
                                 fill
+                                sizes="(min-width: 1024px) 45vw, 100vw"
                                 className="object-cover"
                             />
                         </div>
@@ -66,7 +67,7 @@ const EmpoweringSection = () => {
                         {values.map((value, index) => (
                             <div
                                 key={index}
-                                className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex items-start gap-4"
+                                className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300 flex items-start gap-4"
                             >
                                 <div className="flex-shrink-0 w-16 h-20 bg-gradient-to-br  rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                     <Image

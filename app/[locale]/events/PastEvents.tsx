@@ -1,114 +1,60 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../lib/firebaseConfig";
+import { asSnapshot, type CmsDoc } from "@/lib/cms/shared";
+import { useCmsDocs } from "@/lib/cms/useCmsDocs";
 import { useIntlayer, useLocale } from "next-intlayer";
+import { parseEventRange, startOfToday } from "./eventDates";
 
 interface EventType {
   id: string;
   title: string;
-  titleAr?: string;
   description: string;
-  descriptionAr?: string;
   dateRange: string;
   month: string;
-  monthAr?: string;
+  /** Optional small label from Firebase (`tag` / `tagAr`), e.g. "Attended" */
+  tag: string;
   externalLink: string;
 }
 
 const ITEMS_PER_PAGE = 2;
 
-const PastEvents: React.FC = () => {
+const PastEvents: React.FC<{ docs?: CmsDoc[] }> = ({ docs: serverDocs }) => {
   const content = useIntlayer("eventsPage");
   const { locale } = useLocale();
-  const [events, setEvents] = useState<EventType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { docs, loading } = useCmsDocs("events", serverDocs);
   const [page, setPage] = useState(0);
+  // Back to the first page when the list or language changes
+  const [listKey, setListKey] = useState({ docs, locale });
+  if (listKey.docs !== docs || listKey.locale !== locale) { setListKey({ docs, locale }); setPage(0); }
 
-  useEffect(() => {
-    const fetchPastEvents = async () => {
-      setLoading(true);
-      setPage(0);
+  const events = useMemo(() => {
       try {
-        const snapshot = await getDocs(collection(db, "events"));
-
+        const snapshot = asSnapshot(docs);
         const isArabic = locale?.toLowerCase().startsWith("ar");
+        const today = startOfToday();
+        const pick = (en?: string, ar?: string) => (isArabic ? ar ?? en : en) ?? "";
 
-        const parseEventEndDate = (dateRange: string, month: string): Date | null => {
-          const days = dateRange.match(/\d{1,2}/g);
-          if (!days || days.length === 0) return null;
-
-          const endDay = days[days.length - 1];
-          const [mon, yr] = month.split(",");
-          const year = `20${yr.trim()}`;
-
-          const endDate = new Date(`${mon} ${endDay}, ${year}`);
-          endDate.setHours(23, 59, 59, 999);
-          return endDate;
-        };
-
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        const pastEvents: EventType[] = snapshot.docs
-          .map((doc) => {
-            const data = doc.data();
-            return {
-              id: doc.id,
-              title: data.title ?? "",
-              titleAr: data.titleAr,
-              description: data.description ?? "",
-              descriptionAr: data.descriptionAr,
-              dateRange: data.dateRange ?? "",
-              month: data.month ?? "",
-              monthAr: data.monthAr,
-              externalLink: data.externalLink ?? "",
-            };
-          })
-          .filter((event) => {
-            const endDate = parseEventEndDate(event.dateRange, event.month);
-            return endDate !== null && endDate < today;
-          })
-          .sort((a, b) => {
-            const d1 = parseEventEndDate(a.dateRange, a.month);
-            const d2 = parseEventEndDate(b.dateRange, b.month);
-            return (d2?.getTime() ?? 0) - (d1?.getTime() ?? 0);
-          });
-
-        const localizedEvents = pastEvents.map((event) => {
-          if (!isArabic) {
-            return {
-              id: event.id,
-              title: event.title,
-              description: event.description,
-              dateRange: event.dateRange,
-              month: event.month,
-              externalLink: event.externalLink,
-            };
-          }
-
-          return {
-            id: event.id,
-            title: event.titleAr ?? event.title,
-            description: event.descriptionAr ?? event.description,
-            dateRange: event.dateRange,
-            month: event.monthAr ?? event.month,
-            externalLink: event.externalLink,
-          };
-        });
-
-        setEvents(localizedEvents);
+        // Month-only events (no day numbers) end on the last day of their month
+        return snapshot.docs
+          .map((doc) => ({ id: doc.id, data: doc.data(), range: parseEventRange(doc.data().dateRange, doc.data().month) }))
+          .filter(({ range }) => range !== null && range.end < today)
+          .sort((a, b) => b.range!.end.getTime() - a.range!.end.getTime())
+          .map(({ id, data }): EventType => ({
+            id,
+            title: pick(data.title, data.titleAr),
+            description: pick(data.description, data.descriptionAr),
+            dateRange: data.dateRange ?? "",
+            month: pick(data.month, data.monthAr),
+            tag: pick(data.tag, data.tagAr),
+            externalLink: data.externalLink ?? "",
+          }));
       } catch (error) {
         console.error("Failed to load past events", error);
-      } finally {
-        setLoading(false);
+        return [] as EventType[];
       }
-    };
-
-    fetchPastEvents();
-  }, [locale]);
+  }, [docs, locale]);
 
   const totalPages = Math.ceil(events.length / ITEMS_PER_PAGE);
   const visibleEvents = events.slice(
@@ -116,12 +62,15 @@ const PastEvents: React.FC = () => {
     page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
   );
 
+  // Nothing past to show: hide the whole section instead of an empty heading
+  if (!loading && events.length === 0) return null;
+
   return (
     <div className="py-4 px-4">
       <div className="w-[90%] mx-auto">
         {/* Header - Fixed with .value */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {locale?.toLowerCase().startsWith("ar") ? (
               <>
                 <span className="text-[#D4AF37]">{content.eventsWord.value}</span>{" "}
@@ -133,7 +82,7 @@ const PastEvents: React.FC = () => {
                 <span className="text-[#D4AF37]">{content.eventsWord.value}</span>
               </>
             )}
-          </h1>
+          </h2>
           <p className="text-[#6B7280] text-xl md:text-[21px]">
             {content.past.subheading.value}
           </p>
@@ -154,13 +103,17 @@ const PastEvents: React.FC = () => {
         {/* Events Grid */}
         {!loading && events.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
               {visibleEvents.map((event) => (
                 <div
                   key={event.id}
-                  className="bg-white rounded-[20px] md:rounded-[40px] border border-gray-300 p-6 md:p-8 shadow-md hover:shadow-md transition-shadow duration-300"
+                  className="w-full lg:w-[calc(50%-0.75rem)] bg-white rounded-[20px] md:rounded-[40px] border border-gray-300 p-6 md:p-8 shadow-md hover:shadow-md transition-shadow duration-300"
                 >
-                  {/* REMOVED: Date Badge section was here */}
+                  {event.tag && (
+                    <span className="inline-block bg-[#FFFBED] text-[#D4AF37] px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3">
+                      {event.tag}
+                    </span>
+                  )}
 
                   <h2 className="text-2xl font-medium text-gray-900 mb-4">
                     {event.title}
@@ -169,15 +122,17 @@ const PastEvents: React.FC = () => {
                     {event.description}
                   </p>
 
-                  <button
-                    onClick={() =>
-                      window.open(event.externalLink, "_blank", "noopener,noreferrer")
-                    }
-                    className="inline-flex cursor-pointer items-center text-[#D4AF37] font-semibold hover:text-yellow-600 transition-colors group"
-                  >
-                    {content.past.watchRecording.value}
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
-                  </button>
+                  {event.externalLink && (
+                    <button
+                      onClick={() =>
+                        window.open(event.externalLink, "_blank", "noopener,noreferrer")
+                      }
+                      className="inline-flex cursor-pointer items-center text-[#D4AF37] font-semibold hover:text-yellow-600 transition-colors group"
+                    >
+                      {content.past.watchRecording.value}
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

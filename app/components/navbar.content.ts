@@ -17,7 +17,7 @@ export const navbarContent = {
     // Submenu items
     contactUs: t({ en: "Contact Us", ar: "تواصل معنا" }),
     amCommunity: t({
-      en: "The A&M internationals community",
+      en: "The A&M Internationals community",
       ar: "مجتمع A&M الدولي",
     }),
     events: t({ en: "Events", ar: "أحداث" }),

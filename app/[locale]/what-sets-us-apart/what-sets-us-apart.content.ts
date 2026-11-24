@@ -4,20 +4,16 @@ const whatSetsUsApartContent = {
   key: "whatSetsUsApartPage",
   content: {
     heroTitle: t({
-      en: "What Sets",
-      ar: "ما",
-    }),
-    heroTitle2: t({
-      en: "Us Apart",
-      ar: "يُميِّزنا",
+      en: "What sets us apart",
+      ar: "ما يُميِّزنا",
     }),
     heroDescription: t({
-      en: "Six reasons brands choose The A&M internationals.",
-      ar: "ستة أسباب تجعل العلامات التجارية تختار A&M الدولية.",
+      en: "Senior Oracle EPM expertise and an in-house digital team, with the attention of a boutique firm.",
+      ar: "خبرة متقدمة في Oracle EPM وفريق رقمي داخلي، مع الاهتمام الشخصي الذي تقدّمه الشركات المتخصصة.",
     }),
     heroButton: t({
-      en: "Explore Our Values",
-      ar: "استكشف قيمنا",
+      en: "Book a Consultation",
+      ar: "احجز استشارة",
     }),
   },
 };

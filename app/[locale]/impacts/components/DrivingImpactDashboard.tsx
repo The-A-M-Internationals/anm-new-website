@@ -12,9 +12,9 @@ export default function DrivingImpactDashboard() {
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                         {content.header.value}
-                    </h2>
+                    </h1>
                     <p className="text-[#C9A84C] font-semibold text-xl mb-8">
                         {content.subheader.value}
                     </p>
@@ -25,11 +25,11 @@ export default function DrivingImpactDashboard() {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
                     {content.stats.map((stat: { value: { value: string }; label: { value: string } }, index: number) => (
                         <div 
                             key={index} 
-                            className="group bg-[#FFFBED] border border-gray-200 rounded-3xl p-6 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer"
+                            className="group bg-[#FFFBED] border border-gray-200 rounded-3xl p-6 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-xl transform-gpu transition-[transform,opacity,box-shadow,border-color] duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer"
                         >
                             <div className="text-3xl md:text-4xl font-bold text-[#C9A84C] mb-2">
                                 {stat.value.value}
