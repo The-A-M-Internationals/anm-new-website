@@ -28,8 +28,12 @@ export default function VideoLayer({ scene, active, flip, motion }: Props) {
     if (!el) return;
     const rtl = getComputedStyle(el).direction === "rtl";
     const side = (flip ? -1 : 1) * (rtl ? -1 : 1) > 0 ? "r" : "l";
-    const phone = window.matchMedia("(max-width: 639.98px)").matches;
-    setSrc(`/showcase/${scene}-${phone ? "m" : side}`);
+    const phone = window.matchMedia("(max-width: 639.98px)");
+    const pick = () => setSrc(`/showcase/${scene}-${phone.matches ? "m" : side}`);
+    pick();
+    // a rotated phone or a resized window crosses the breakpoint: switch to the film framed for that shape
+    phone.addEventListener("change", pick);
+    return () => phone.removeEventListener("change", pick);
   }, [scene, flip]);
 
   useVideoPlayback(ref, src, active && motion);

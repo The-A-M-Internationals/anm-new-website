@@ -20,14 +20,17 @@ export default function RollingNumber({ value, suffix = "", delay = 0, className
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const strips = gsap.utils.toArray<HTMLElement>("[data-roll]", el);
-      // on the first page of a visit the opening intro covers the hero for about five seconds
-      const intro = document.documentElement.dataset.intro;
-      const tl = gsap.timeline({ delay: delay + (intro === "skip" || intro === "done" ? 0 : 5.2) });
+      // while the opening intro covers the hero the count waits, and starts as the intro lifts away
+      const html = document.documentElement, covered = () => html.dataset.intro !== "skip" && html.dataset.intro !== "done";
+      const tl = gsap.timeline({ delay, paused: covered() });
+      const go = () => tl.play();
+      const giveUp = covered() ? window.setTimeout(go, 14000) : 0;
+      window.addEventListener("intro:reveal", go, { once: true });
       strips.forEach((strip, i) => {
         tl.fromTo(strip, { yPercent: 0 }, { yPercent: Number(strip.dataset.roll), duration: 1.5 + i * 0.35, ease: "expo.out" }, i * 0.1);
       });
       if (el.querySelector("[data-roll-suffix]")) tl.fromTo("[data-roll-suffix]", { autoAlpha: 0, scale: 0.3, yPercent: 30 }, { autoAlpha: 1, scale: 1, yPercent: 0, duration: 0.6, ease: "back.out(2.6)" }, "-=0.75");
-      return () => tl.kill();
+      return () => { window.clearTimeout(giveUp); window.removeEventListener("intro:reveal", go); tl.kill(); };
     }, el);
     return () => mm.revert();
   }, [value, delay]);

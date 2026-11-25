@@ -23,6 +23,8 @@ export function useVideoPlayback(ref: RefObject<HTMLVideoElement | null>, src: s
   useEffect(() => {
     const el = ref.current;
     if (!el || !src) return;
+    // the film was swapped for another framing (screen shape changed): drop the old one
+    if (el.currentSrc && !el.currentSrc.endsWith(`${src}.mp4`)) el.load();
     const fetchNow = () => {
       el.preload = "auto";
       // Never load() over a play() that already started fetching: that reset leaves it frozen

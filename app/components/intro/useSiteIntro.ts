@@ -68,6 +68,7 @@ export function useSiteIntro(rootRef: RefObject<HTMLElement | null>) {
         scale: () => (dockTarget().h / rect().height) * Number(gsap.getProperty(icon, "scale")),
       }, 5.8)
       .to(q("[data-intro-bg]"), { opacity: 0, duration: 1.1, ease: "power2.inOut" }, 5.95)
+      .call(() => { window.dispatchEvent(new Event("intro:reveal")); }, [], 6.35)   // the page is showing through: its own opening can start
       .to(icon, { opacity: 0, duration: 0.35 }, 7);
 
     // start when the page has loaded, the logo lettering has its font and the browser has a free moment
