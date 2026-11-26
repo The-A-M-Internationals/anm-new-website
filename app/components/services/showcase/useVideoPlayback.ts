@@ -3,16 +3,15 @@
 import { useCallback, useEffect, useRef, type RefObject } from "react";
 
 /**
- * Loads a scene video one screen ahead, plays it only while `play` is true, and heals itself:
+ * Loads a scene video one screen ahead, plays it while `play` is true (scrolling does not pause it), and heals itself:
  * if the browser pauses or drops the video while it should be playing (tab switch, power saving,
  * network blip, server restart), it is restarted, so a refresh is never needed.
  */
 export function useVideoPlayback(ref: RefObject<HTMLVideoElement | null>, src: string | null, play: boolean) {
   const want = useRef(false);
-  const hold = useRef(false);   // true while the page is moving: the video rests so scrolling stays smooth
   const kick = useCallback(() => {
     const el = ref.current;
-    if (!el || !want.current || hold.current) return;
+    if (!el || !want.current) return;
     // Failed or dropped source: fetch it again
     if (el.error || el.networkState === el.NETWORK_NO_SOURCE) el.load();
     if (el.paused) el.play().catch(() => {});
@@ -56,21 +55,6 @@ export function useVideoPlayback(ref: RefObject<HTMLVideoElement | null>, src: s
     if (!el || !src) return;
     if (want.current) kick(); else el.pause();
   }, [ref, src, play, kick]);
-
-  // Decoding a large video while the page scrolls competes with the scroll itself for the graphics
-  // card. Rest on the current frame while the page moves, carry on as soon as it settles.
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    let settle = 0;
-    const onScroll = () => {
-      if (!hold.current) { hold.current = true; if (!el.paused) el.pause(); }
-      clearTimeout(settle);
-      settle = window.setTimeout(() => { hold.current = false; kick(); }, 160);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => { clearTimeout(settle); hold.current = false; window.removeEventListener("scroll", onScroll); };
-  }, [ref, kick]);
 
   // Self-heal: restart if the browser pauses or drops the video while it should play
   useEffect(() => {

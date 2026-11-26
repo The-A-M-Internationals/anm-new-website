@@ -6,7 +6,11 @@ import { useVideoPlayback } from "./useVideoPlayback";
 import { SCENE_CAPTIONS } from "./sceneCaptions";
 import type { SceneCaption as Caption } from "../webgl/types";
 
-type Props = { scene: "epm" | "ai"; active: boolean; flip: boolean; motion: boolean };
+type Props = {
+  scene: "epm" | "ai"; active: boolean; flip: boolean; motion: boolean;
+  /** Always use the centred cut, so the animation sits in the middle of the box */
+  centred?: boolean;
+};
 
 /**
  * The service scene as a pre-rendered loop (baked from the WebGL scenes at 1440p):
@@ -16,7 +20,7 @@ type Props = { scene: "epm" | "ai"; active: boolean; flip: boolean; motion: bool
  * Files: /showcase/<scene>-<l|r>.mp4 (desktop/tablet, subject left/right of the copy) and
  * /showcase/<scene>-m.mp4 (phones, centred); each has a matching .jpg first frame.
  */
-export default function VideoLayer({ scene, active, flip, motion }: Props) {
+export default function VideoLayer({ scene, active, flip, motion, centred = false }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [src, setSrc] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
@@ -29,12 +33,12 @@ export default function VideoLayer({ scene, active, flip, motion }: Props) {
     const rtl = getComputedStyle(el).direction === "rtl";
     const side = (flip ? -1 : 1) * (rtl ? -1 : 1) > 0 ? "r" : "l";
     const phone = window.matchMedia("(max-width: 639.98px)");
-    const pick = () => setSrc(`/showcase/${scene}-${phone.matches ? "m" : side}`);
+    const pick = () => setSrc(`/showcase/${scene}-${centred || phone.matches ? "m" : side}`);
     pick();
     // a rotated phone or a resized window crosses the breakpoint: switch to the film framed for that shape
     phone.addEventListener("change", pick);
     return () => phone.removeEventListener("change", pick);
-  }, [scene, flip]);
+  }, [scene, flip, centred]);
 
   useVideoPlayback(ref, src, active && motion);
 
